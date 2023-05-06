@@ -1,0 +1,1685 @@
+[
+    {
+        "comments": [],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "stcheng"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "thanks for fixing this",
+                "submittedAt": "2019-04-29T16:26:34Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 865,
+        "reviews": [
+            {
+                "author": {
+                    "login": "stcheng"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "thanks for fixing this",
+                "submittedAt": "2019-04-29T16:26:34Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "baiwei0427"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@jipanyang @stcheng  I guess the memory leak bug is due to the reallocation of link cache when interface name cannot be resolved. Is this bug first introduced on https://github.com/Azure/sonic-swss/commit/142673ad6cddf37286ab097c982b31f25c61358c#diff-4a3ea7752832ebd49f989cc95ae042e1? ",
+                "createdAt": "2019-04-29T11:01:58Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "stcheng"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "@baiwei0427 yes, this pull request #61 is the place that introduced the function `rtnl_link_alloc_cache` in `onMsg` function. Thanks for narrowing down the issue.\r\n\r\nOne question I have here is that, since you replaced the function `rtnl_link_alloc_cache` with `nl_cache_refill`, do we need to re-allocate socket and cache every time we want to get the interface name, or could it be done during the initialization time and only do the `nl_cache_refill` in getIfName function?\r\n\r\nIn this case, the memory leak issue could also be addressed, is that correct?",
+                "createdAt": "2019-04-29T15:58:28Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "Jipan-Yang"
+                },
+                "authorAssociation": "NONE",
+                "body": "Could you check https://github.com/Azure/sonic-swss-common/blob/master/common/linkcache.cpp ? It might be more efficient to allocate cache once and reuse it with nl_cache_refill().",
+                "submittedAt": "2019-04-28T22:42:56Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "stcheng"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "thanks for the update!",
+                "submittedAt": "2019-04-29T17:02:22Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-29T17:48:58Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "jipanyang"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2019-04-29T20:12:14Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 864,
+        "reviews": [
+            {
+                "author": {
+                    "login": "stcheng"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2019-04-28T18:25:04Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "stcheng"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2019-04-28T19:18:03Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "Jipan-Yang"
+                },
+                "authorAssociation": "NONE",
+                "body": "Could you check https://github.com/Azure/sonic-swss-common/blob/master/common/linkcache.cpp ? It might be more efficient to allocate cache once and reuse it with nl_cache_refill().",
+                "submittedAt": "2019-04-28T22:42:56Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [
+                    {
+                        "content": "THUMBS_UP",
+                        "users": {
+                            "totalCount": 1
+                        }
+                    }
+                ],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "jipanyang"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2019-04-29T15:57:31Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "baiwei0427"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-29T16:12:47Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "stcheng"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "thanks for the update!",
+                "submittedAt": "2019-04-29T17:02:22Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-29T17:48:58Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "jipanyang"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2019-04-29T20:12:14Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [],
+        "latestReviews": [],
+        "number": 863,
+        "reviews": [],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@jipanyang to review.",
+                "createdAt": "2019-04-24T07:25:08Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-24T07:26:38Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 855,
+        "reviews": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-24T07:26:38Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-22T17:30:27Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 849,
+        "reviews": [
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-22T17:30:27Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [],
+        "latestReviews": [],
+        "number": 846,
+        "reviews": [],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2019-04-16T17:08:25Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "stcheng"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "you could remove the extra empty trailing spaces as well",
+                "createdAt": "2019-04-23T21:09:46Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "jipanyang"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "This change causes fpmsyncd being OOM killed all the time on vsonic testbed.\r\n\r\nFurther check shows the problem was firs introduced with https://github.com/Azure/sonic-swss/pull/772 \r\nhttps://github.com/Azure/sonic-swss/commit/52de963fe817dbb0b43f724a901fee22a87e36a5#diff-4a3ea7752832ebd49f989cc95ae042e1R279\r\n\r\nNow bool RouteSync::getIfName(int if_index, char *if_name, size_t name_len)  is used for regular route too, it has netlink memory leak.\r\n\r\n```\r\nApr 28 10:01:44.976347 sonic NOTICE swss#orchagent: :- addNextHopGroup: Create next hop group 10.0.0.57,10.0.0.59,10.0.0.63\r\nApr 28 10:01:47.872797 sonic NOTICE swss#orchagent: :- addNextHopGroup: Create next hop group fc00::72,fc00::76,fc00::7e\r\nApr 28 10:03:13.234479 vlab-01 WARNING kernel: [ 2046.202501] jbd2/vda3-8 invoked oom-killer: gfp_mask=0x2420848(GFP_NOFS|__GFP_NOFAIL|__GFP_HARDWALL|__GFP_MOVABLE), nodemask=0, order=0, oom_score_adj=0\r\nApr 28 10:03:13.279051 vlab-01 INFO kernel: [ 2046.202502] jbd2/vda3-8 cpuset=/ mems_allowed=0\r\nApr 28 10:03:13.279057 vlab-01 WARNING kernel: [ 2046.202505] CPU: 1 PID: 172 Comm: jbd2/vda3-8 Not tainted 4.9.0-8-2-amd64 #1 Debian 4.9.110-3+deb9u6\r\nApr 28 10:03:13.279058 vlab-01 WARNING kernel: [ 2046.202505] Hardware name: Bochs Bochs, BIOS Bochs 01/01/2011\r\nApr 28 10:03:13.279059 vlab-01 WARNING kernel: [ 2046.202507]  0000000000000000 ffffffff849312c4 ffffae0c4058faa8 ffff901c79036e40\r\nApr 28 10:03:13.279059 vlab-01 WARNING kernel: [ 2046.202509]  ffffffff848046f0 0000000000000000 0000000000000000 ffffae0c4058fb28\r\nApr 28 10:03:13.279060 vlab-01 WARNING kernel: [ 2046.202510]  ffff901cbcff7cd0 ffffffff84789297 ffffffffc03296a5 00000000ffffffff\r\nApr 28 10:03:13.279061 vlab-01 WARNING kernel: [ 2046.202511] Call Trace:\r\nApr 28 10:03:13.279061 vlab-01 WARNING kernel: [ 2046.202516]  [<ffffffff849312c4>] ? dump_stack+0x5c/0x78\r\nApr 28 10:03:13.279062 vlab-01 WARNING kernel: [ 2046.202518]  [<ffffffff848046f0>] ? dump_header+0x78/0x1fd\r\nApr 28 10:03:13.279063 vlab-01 WARNING kernel: [ 2046.202520]  [<ffffffff84789297>] ? get_page_from_freelist+0x3f7/0xb20\r\nApr 28 10:03:13.279063 vlab-01 WARNING kernel: [ 2046.202522]  [<ffffffffc03296a5>] ? virtballoon_oom_notify+0x25/0x70 [virtio_balloon]\r\nApr 28 10:03:13.279064 vlab-01 WARNING kernel: [ 2046.202523]  [<ffffffff8478520a>] ? oom_kill_process+0x21a/0x3e0\r\nApr 28 10:03:13.279064 vlab-01 WARNING kernel: [ 2046.202524]  [<ffffffff84784e8d>] ? oom_badness+0xed/0x170\r\nApr 28 10:03:13.279065 vlab-01 WARNING kernel: [ 2046.202525]  [<ffffffff847856a1>] ? out_of_memory+0x111/0x470\r\nApr 28 10:03:13.279066 vlab-01 WARNING kernel: [ 2046.202526]  [<ffffffff8478a7eb>] ? __alloc_pages_slowpath+0xa8b/0xbf0\r\nApr 28 10:03:13.279066 vlab-01 WARNING kernel: [ 2046.202528]  [<ffffffff8478ab51>] ? __alloc_pages_nodemask+0x201/0x260\r\nApr 28 10:03:13.279067 vlab-01 WARNING kernel: [ 2046.202529]  [<ffffffff847dbe11>] ? alloc_pages_current+0x91/0x140\r\nApr 28 10:03:13.279068 vlab-01 WARNING kernel: [ 2046.202530]  [<ffffffff847813a4>] ? pagecache_get_page+0xb4/0x2a0\r\nApr 28 10:03:13.279068 vlab-01 WARNING kernel: [ 2046.202532]  [<ffffffff84840b61>] ? __getblk_gfp+0x101/0x310\r\nApr 28 10:03:13.279069 vlab-01 WARNING kernel: [ 2046.202536]  [<ffffffffc01f8006>] ? jbd2_journal_get_descriptor_buffer+0x56/0xe0 [jbd2]\r\nApr 28 10:03:13.279069 vlab-01 WARNING kernel: [ 2046.202538]  [<ffffffffc01f0a85>] ? jbd2_journal_commit_transaction+0x9f5/0x17b0 [jbd2]\r\nApr 28 10:03:13.279070 vlab-01 WARNING kernel: [ 2046.202540]  [<ffffffff84c16124>] ? __switch_to_asm+0x34/0x70\r\nApr 28 10:03:13.279071 vlab-01 WARNING kernel: [ 2046.202541]  [<ffffffff84c16130>] ? __switch_to_asm+0x40/0x70\r\nApr 28 10:03:13.279071 vlab-01 WARNING kernel: [ 2046.202542]  [<ffffffff84c16130>] ? __switch_to_asm+0x40/0x70\r\nApr 28 10:03:13.279072 vlab-01 WARNING kernel: [ 2046.202543]  [<ffffffff84c16124>] ? __switch_to_asm+0x34/0x70\r\nApr 28 10:03:13.279073 vlab-01 WARNING kernel: [ 2046.202543]  [<ffffffff84c16130>] ? __switch_to_asm+0x40/0x70\r\nApr 28 10:03:13.279073 vlab-01 WARNING kernel: [ 2046.202544]  [<ffffffff84c16130>] ? __switch_to_asm+0x40/0x70\r\nApr 28 10:03:13.279074 vlab-01 WARNING kernel: [ 2046.202547]  [<ffffffffc01f5c62>] ? kjournald2+0xc2/0x260 [jbd2]\r\nApr 28 10:03:13.279075 vlab-01 WARNING kernel: [ 2046.202548]  [<ffffffff846bb4e0>] ? prepare_to_wait_event+0xf0/0xf0\r\nApr 28 10:03:13.279076 vlab-01 WARNING kernel: [ 2046.202550]  [<ffffffffc01f5ba0>] ? commit_timeout+0x10/0x10 [jbd2]\r\nApr 28 10:03:13.279076 vlab-01 WARNING kernel: [ 2046.202552]  [<ffffffff84698859>] ? kthread+0xd9/0xf0\r\nApr 28 10:03:13.279077 vlab-01 WARNING kernel: [ 2046.202553]  [<ffffffff84c16124>] ? __switch_to_asm+0x34/0x70\r\nApr 28 10:03:13.279078 vlab-01 WARNING kernel: [ 2046.202554]  [<ffffffff84698780>] ? kthread_park+0x60/0x60\r\nApr 28 10:03:13.279078 vlab-01 WARNING kernel: [ 2046.202555]  [<ffffffff84c161b7>] ? ret_from_fork+0x57/0x70\r\nApr 28 10:03:13.279079 vlab-01 WARNING kernel: [ 2046.202555] Mem-Info:\r\nApr 28 10:03:13.279080 vlab-01 WARNING kernel: [ 2046.202558] active_anon:449428 inactive_anon:2089 isolated_anon:0\r\nApr 28 10:03:13.279080 vlab-01 WARNING kernel: [ 2046.202558]  active_file:42 inactive_file:43 isolated_file:6\r\nApr 28 10:03:13.279081 vlab-01 WARNING kernel: [ 2046.202558]  unevictable:0 dirty:0 writeback:0 unstable:0\r\nApr 28 10:03:13.279082 vlab-01 WARNING kernel: [ 2046.202558]  slab_reclaimable:4373 slab_unreclaimable:14362\r\nApr 28 10:03:13.279083 vlab-01 WARNING kernel: [ 2046.202558]  mapped:462 shmem:2374 pagetables:3788 bounce:0\r\nApr 28 10:03:13.279083 vlab-01 WARNING kernel: [ 2046.202558]  free:13152 free_pcp:55 free_cma:0\r\nApr 28 10:03:13.279084 vlab-01 WARNING kernel: [ 2046.202560] Node 0 active_anon:1797712kB inactive_anon:8356kB active_file:168kB inactive_file:172kB unevictable:0kB isolated(anon):0kB isolated(file):24kB mapped:1848kB dirty:0kB writeback:0kB shmem:9496kB shmem_thp: 0kB shmem_pmdmapped: 0kB anon_thp: 0kB writeback_tmp:0kB unstable:0kB pages_scanned:9425 all_unreclaimable? yes\r\nApr 28 10:03:13.279085 vlab-01 WARNING kernel: [ 2046.202561] Node 0 DMA free:8000kB min:360kB low:448kB high:536kB active_anon:7892kB inactive_anon:0kB active_file:0kB inactive_file:0kB unevictable:0kB writepending:0kB present:15992kB managed:15908kB mlocked:0kB slab_reclaimable:0kB slab_unreclaimable:0kB kernel_stack:0kB pagetables:16kB bounce:0kB free_pcp:0kB local_pcp:0kB free_cma:0kB\r\nApr 28 10:03:13.279086 vlab-01 WARNING kernel: [ 2046.202563] lowmem_reserve[]: 0 1914 1914 1914 1914\r\nApr 28 10:03:13.279086 vlab-01 WARNING kernel: [ 2046.202565] Node 0 DMA32 free:44608kB min:44692kB low:55864kB high:67036kB active_anon:1789820kB inactive_anon:8356kB active_file:168kB inactive_file:172kB unevictable:0kB writepending:0kB present:2031596kB managed:1987232kB mlocked:0kB slab_reclaimable:17492kB slab_unreclaimable:57448kB kernel_stack:8480kB pagetables:15136kB bounce:0kB free_pcp:220kB local_pcp:120kB free_cma:0kB\r\nApr 28 10:03:13.279087 vlab-01 WARNING kernel: [ 2046.202567] lowmem_reserve[]: 0 0 0 0 0\r\nApr 28 10:03:13.279088 vlab-01 WARNING kernel: [ 2046.202569] Node 0 DMA: 2*4kB (UM) 1*8kB (M) 1*16kB (U) 1*32kB (M) 2*64kB (U) 1*128kB (U) 2*256kB (UM) 0*512kB 1*1024kB (U) 1*2048kB (M) 1*4096kB (E) = 8000kB\r\nApr 28 10:03:13.279088 vlab-01 WARNING kernel: [ 2046.202576] Node 0 DMA32: 1357*4kB (UME) 710*8kB (UME) 436*16kB (UME) 244*32kB (UME) 115*64kB (UE) 37*128kB (UME) 6*256kB (UME) 2*512kB (ME) 0*1024kB 0*2048kB 1*4096kB (M) = 44644kB\r\nApr 28 10:03:13.279089 vlab-01 INFO kernel: [ 2046.202583] Node 0 hugepages_total=0 hugepages_free=0 hugepages_surp=0 hugepages_size=2048kB\r\nApr 28 10:03:13.279090 vlab-01 WARNING kernel: [ 2046.202584] 2473 total pagecache pages\r\nApr 28 10:03:13.279091 vlab-01 WARNING kernel: [ 2046.202584] 0 pages in swap cache\r\nApr 28 10:03:13.279091 vlab-01 WARNING kernel: [ 2046.202585] Swap cache stats: add 0, delete 0, find 0/0\r\nApr 28 10:03:13.279092 vlab-01 WARNING kernel: [ 2046.202585] Free swap  = 0kB\r\nApr 28 10:03:13.279092 vlab-01 WARNING kernel: [ 2046.202586] Total swap = 0kB\r\nApr 28 10:03:13.279092 vlab-01 WARNING kernel: [ 2046.202586] 511897 pages RAM\r\nApr 28 10:03:13.279093 vlab-01 WARNING kernel: [ 2046.202586] 0 pages HighMem/MovableOnly\r\nApr 28 10:03:13.279093 vlab-01 WARNING kernel: [ 2046.202587] 11112 pages reserved\r\nApr 28 10:03:13.279094 vlab-01 WARNING kernel: [ 2046.202587] 0 pages hwpoisoned\r\nApr 28 10:03:13.279094 vlab-01 INFO kernel: [ 2046.202588] [ pid ]   uid  tgid total_vm      rss nr_ptes nr_pmds swapents oom_score_adj name\r\nApr 28 10:03:13.279094 vlab-01 INFO kernel: [ 2046.202591] [  254]     0   254    11075      597      24       3        0             0 systemd-journal\r\nApr 28 10:03:13.279095 vlab-01 INFO kernel: [ 2046.202592] [  277]     0   277    11496      310      21       3        0         -1000 systemd-udevd\r\nApr 28 10:03:13.279095 vlab-01 INFO kernel: [ 2046.202594] [  368]   105   368    11282      107      27       3        0          -900 dbus-daemon\r\nApr 28 10:03:13.279096 vlab-01 INFO kernel: [ 2046.202595] [  396]     0   396     9495      120      22       3        0             0 systemd-logind\r\nApr 28 10:03:13.279096 vlab-01 INFO kernel: [ 2046.202596] [  398]     0   398     7565       69      20       3        0             0 cron\r\nApr 28 10:03:13.279097 vlab-01 INFO kernel: [ 2046.202597] [  406]     0   406   279240     4848      80       6        0             0 containerd\r\nApr 28 10:03:13.279097 vlab-01 INFO kernel: [ 2046.202598] [  421]     0   421    17488      191      39       3        0         -1000 sshd\r\nApr 28 10:03:13.279097 vlab-01 INFO kernel: [ 2046.202599] [  427]     0   427   178700     9128      93       6        0          -500 dockerd\r\nApr 28 10:03:13.279098 vlab-01 INFO kernel: [ 2046.202600] [  446]     0   446    10227      143      24       3        0             0 monit\r\nApr 28 10:03:13.279098 vlab-01 INFO kernel: [ 2046.202602] [  619]     0   619     3780       32      12       3        0             0 agetty\r\nApr 28 10:03:13.279099 vlab-01 INFO kernel: [ 2046.202603] [  809]     0   809     2946      207      10       5        0          -999 containerd-shim\r\nApr 28 10:03:13.279099 vlab-01 INFO kernel: [ 2046.202604] [  826]     0   826    14515     3246      34       3        0             0 supervisord\r\nApr 28 10:03:13.279099 vlab-01 INFO kernel: [ 2046.202605] [  980]     0   980    62534      106      28       3        0             0 rsyslogd\r\nApr 28 10:03:13.279100 vlab-01 INFO kernel: [ 2046.202606] [  981]     0   981    13899     3487      24       3        0             0 redis-server\r\nApr 28 10:03:13.279100 vlab-01 INFO kernel: [ 2046.202607] [ 1102]     0  1102     2958       56      11       3        0             0 database.sh\r\nApr 28 10:03:13.279101 vlab-01 INFO kernel: [ 2046.202608] [ 1103]     0  1103    70187     4914      58       7        0             0 docker\r\nApr 28 10:03:13.279101 vlab-01 INFO kernel: [ 2046.202610] [ 4765]     0  4765    16915      119      38       3        0             0 login\r\nApr 28 10:03:13.279101 vlab-01 INFO kernel: [ 2046.202611] [ 6294]   106  6294    24486      160      21       3        0             0 ntpd\r\nApr 28 10:03:13.279102 vlab-01 INFO kernel: [ 2046.202612] [ 6304]     0  6304    80524      276      32       4        0             0 rsyslogd\r\nApr 28 10:03:13.279102 vlab-01 INFO kernel: [ 2046.202613] [ 6906]     0  6906     2946      237      11       5        0          -999 containerd-shim\r\nApr 28 10:03:13.279103 vlab-01 INFO kernel: [ 2046.202614] [ 6924]     0  6924    14701     3418      33       3        0             0 supervisord\r\nApr 28 10:03:13.279103 vlab-01 INFO kernel: [ 2046.202616] [ 7064]     0  7064     2960       78      12       3        0             0 swss.sh\r\nApr 28 10:03:13.279103 vlab-01 INFO kernel: [ 2046.202617] [ 7375]     0  7375     2682      156      10       5        0          -999 containerd-shim\r\nApr 28 10:03:13.279104 vlab-01 INFO kernel: [ 2046.202618] [ 7406]     0  7406     1084       22       8       3        0             0 sh\r\nApr 28 10:03:13.279104 vlab-01 INFO kernel: [ 2046.202619] [ 7477]  1000  7477     2953       56      11       3        0             0 bgp.sh\r\nApr 28 10:03:13.279105 vlab-01 INFO kernel: [ 2046.202620] [ 7481]  1000  7481    88356     4884      58       6        0             0 docker\r\nApr 28 10:03:13.279105 vlab-01 INFO kernel: [ 2046.202621] [ 7648]     0  7648    63588      132      30       4        0             0 rsyslogd\r\nApr 28 10:03:13.279106 vlab-01 INFO kernel: [ 2046.202623] [ 7672]     0  7672     2682      186      10       5        0          -999 containerd-shim\r\nApr 28 10:03:13.279154 vlab-01 INFO kernel: [ 2046.202624] [ 7689]     0  7689    14551     3289      35       3        0             0 supervisord\r\nApr 28 10:03:13.279156 vlab-01 INFO kernel: [ 2046.202625] [ 7714]  1000  7714     2953       56      11       3        0             0 teamd.sh\r\nApr 28 10:03:13.279157 vlab-01 INFO kernel: [ 2046.202626] [ 7718]  1000  7718    72236     4911      59       6        0             0 docker\r\nApr 28 10:03:13.279157 vlab-01 INFO kernel: [ 2046.202627] [ 7743]     0  7743     2682      196      10       5        0          -999 containerd-shim\r\nApr 28 10:03:13.279158 vlab-01 INFO kernel: [ 2046.202628] [ 7760]     0  7760    14071     2407      32       3        0             0 supervisord\r\nApr 28 10:03:13.279159 vlab-01 INFO kernel: [ 2046.202629] [ 7770]     0  7770    48681     2989      32       4        0             0 orchagent\r\nApr 28 10:03:13.279160 vlab-01 INFO kernel: [ 2046.202631] [ 7816]     0  7816     2967       55      10       3        0             0 syncd.sh\r\nApr 28 10:03:13.279161 vlab-01 INFO kernel: [ 2046.202632] [ 7818]     0  7818     2954       56      11       3        0             0 syncd.sh\r\nApr 28 10:03:13.279161 vlab-01 INFO kernel: [ 2046.202633] [ 7819]     0  7819     2958       55      11       3        0             0 swss.sh\r\nApr 28 10:03:13.279162 vlab-01 INFO kernel: [ 2046.202634] [ 7820]     0  7820    71972     4877      59       6        0             0 docker\r\nApr 28 10:03:13.279163 vlab-01 INFO kernel: [ 2046.202635] [ 7821]     0  7821    67874     4921      56       5        0             0 docker\r\nApr 28 10:03:13.279164 vlab-01 INFO kernel: [ 2046.202636] [ 7885]     0  7885    63588      127      30       3        0             0 rsyslogd\r\nApr 28 10:03:13.279164 vlab-01 INFO kernel: [ 2046.202637] [ 7887]     0  7887     2330      176       9       5        0          -999 containerd-shim\r\nApr 28 10:03:13.279165 vlab-01 INFO kernel: [ 2046.202638] [ 7906]     0  7906    14555     3325      33       3        0             0 supervisord\r\nApr 28 10:03:13.279166 vlab-01 INFO kernel: [ 2046.202639] [ 7964]     0  7964    65724      127      30       3        0             0 rsyslogd\r\nApr 28 10:03:13.279167 vlab-01 INFO kernel: [ 2046.202641] [ 7973]  1000  7973     2955       55      11       3        0             0 pmon.sh\r\nApr 28 10:03:13.279167 vlab-01 INFO kernel: [ 2046.202642] [ 7976]  1000  7976    70187     4952      56       5        0             0 docker\r\nApr 28 10:03:13.279168 vlab-01 INFO kernel: [ 2046.202643] [ 8005]     0  8005    25085       99      20       3        0             0 portsyncd\r\nApr 28 10:03:13.279173 vlab-01 INFO kernel: [ 2046.202644] [ 8097]     0  8097    25118       91      19       4        0             0 teammgrd\r\nApr 28 10:03:13.279174 vlab-01 INFO kernel: [ 2046.202645] [ 8103]     0  8103    12079      134      27       3        0             0 teamd\r\nApr 28 10:03:13.279175 vlab-01 INFO kernel: [ 2046.202646] [ 8128]     0  8128    12079      133      26       3        0             0 teamd\r\nApr 28 10:03:13.279175 vlab-01 INFO kernel: [ 2046.202647] [ 8151]     0  8151    12079      133      26       3        0             0 teamd\r\nApr 28 10:03:13.279176 vlab-01 INFO kernel: [ 2046.202649] [ 8168]     0  8168    12079      133      26       3        0             0 teamd\r\nApr 28 10:03:13.279177 vlab-01 INFO kernel: [ 2046.202650] [ 8212]     0  8212   541530     4305     126       5        0             0 syncd\r\nApr 28 10:03:13.279177 vlab-01 INFO kernel: [ 2046.202651] [ 8226]     0  8226     2682      230      10       5        0          -999 containerd-shim\r\nApr 28 10:03:13.279178 vlab-01 INFO kernel: [ 2046.202652] [ 8248]     0  8248    14553     3319      32       3        0             0 supervisord\r\nApr 28 10:03:13.279179 vlab-01 INFO kernel: [ 2046.202653] [ 8272]  1000  8272     2954       56      11       3        0             0 lldp.sh\r\nApr 28 10:03:13.279179 vlab-01 INFO kernel: [ 2046.202654] [ 8276]  1000  8276    67458     4877      55       5        0             0 docker\r\nApr 28 10:03:13.279180 vlab-01 INFO kernel: [ 2046.202655] [ 8302]     0  8302    25106      119      19       3        0             0 neighsyncd\r\nApr 28 10:03:13.279181 vlab-01 INFO kernel: [ 2046.202656] [ 8316]     0  8316    27285      196      23       3        0             0 teamsyncd\r\nApr 28 10:03:13.279182 vlab-01 INFO kernel: [ 2046.202658] [ 8403]     0  8403    63588      114      29       3        0             0 rsyslogd\r\nApr 28 10:03:13.279183 vlab-01 INFO kernel: [ 2046.202659] [ 8424]     0  8424     2682      147      10       5        0          -999 containerd-shim\r\nApr 28 10:03:13.279183 vlab-01 INFO kernel: [ 2046.202660] [ 8449]     0  8449    14553     3297      32       3        0             0 supervisord\r\nApr 28 10:03:13.279184 vlab-01 INFO kernel: [ 2046.202661] [ 8621]     0  8621     5067       65      15       3        0             0 snmp.sh\r\nApr 28 10:03:13.279185 vlab-01 INFO kernel: [ 2046.202662] [ 8624]     0  8624    69507     4907      56       5        0             0 docker\r\nApr 28 10:03:13.279185 vlab-01 INFO kernel: [ 2046.202663] [ 8703]     0  8703    63588      112      30       3        0             0 rsyslogd\r\nApr 28 10:03:13.279186 vlab-01 INFO kernel: [ 2046.202664] [ 8718]     0  8718    25114       94      18       3        0             0 vrfmgrd\r\nApr 28 10:03:13.279187 vlab-01 INFO kernel: [ 2046.202665] [ 8762]     0  8762     2330      145      10       5        0          -999 containerd-shim\r\nApr 28 10:03:13.279188 vlab-01 INFO kernel: [ 2046.202667] [ 8779]     0  8779    14071     2424      30       3        0             0 supervisord\r\nApr 28 10:03:13.279188 vlab-01 INFO kernel: [ 2046.202668] [ 8811]     0  8811    15145      151      33       3        0             0 lldpd\r\nApr 28 10:03:13.279189 vlab-01 INFO kernel: [ 2046.202669] [ 8813]   101  8813    14656      179      29       3        0             0 lldpd\r\nApr 28 10:03:13.279190 vlab-01 INFO kernel: [ 2046.202670] [ 8818]  1000  8818     2953       55      11       3        0             0 dhcp_relay.sh\r\nApr 28 10:03:13.279190 vlab-01 INFO kernel: [ 2046.202671] [ 8820]  1000  8820    88620     4940      60       6        0             0 docker\r\nApr 28 10:03:13.279191 vlab-01 INFO kernel: [ 2046.202672] [ 8853]     0  8853    62534      107      28       4        0             0 rsyslogd\r\nApr 28 10:03:13.279192 vlab-01 INFO kernel: [ 2046.202673] [ 8854]     0  8854    25123       89      20       3        0             0 vlanmgrd\r\nApr 28 10:03:13.279193 vlab-01 INFO kernel: [ 2046.202674] [ 8981]   101  8981    13756      628      32       3        0             0 snmpd\r\nApr 28 10:03:13.279193 vlab-01 INFO kernel: [ 2046.202675] [ 8982]     0  8982    25080       88      18       3        0             0 intfmgrd\r\nApr 28 10:03:13.279194 vlab-01 INFO kernel: [ 2046.202677] [ 9005]     0  9005    65724      128      30       3        0             0 rsyslogd\r\nApr 28 10:03:13.279195 vlab-01 INFO kernel: [ 2046.202678] [ 9013]     0  9013    21344     4808      46       3        0             0 python3.6\r\nApr 28 10:03:13.279195 vlab-01 INFO kernel: [ 2046.202679] [ 9014]     0  9014    25112       93      19       3        0             0 portmgrd\r\nApr 28 10:03:13.279196 vlab-01 INFO kernel: [ 2046.202680] [ 9204]     0  9204     6247     1633      16       3        0             0 dhcrelay\r\nApr 28 10:03:13.279197 vlab-01 INFO kernel: [ 2046.202681] [ 9209]     0  9209    25118       93      20       3        0             0 buffermgrd\r\nApr 28 10:03:13.279197 vlab-01 INFO kernel: [ 2046.202682] [ 9215]     0  9215    25094       81      20       3        0             0 nbrmgrd\r\nApr 28 10:03:13.279198 vlab-01 INFO kernel: [ 2046.202683] [ 9221]     0  9221    25085       86      19       3        0             0 vxlanmgrd\r\nApr 28 10:03:13.279199 vlab-01 INFO kernel: [ 2046.202684] [ 9282]     0  9282    65724      145      30       3        0             0 rsyslogd\r\nApr 28 10:03:13.279200 vlab-01 INFO kernel: [ 2046.202685] [ 9312]     0  9312    20025      138      33       4        0             0 watchfrr\r\nApr 28 10:03:13.279200 vlab-01 INFO kernel: [ 2046.202686] [ 9330]   300  9330   103856     3476      54       4        0             0 zebra\r\nApr 28 10:03:13.279201 vlab-01 INFO kernel: [ 2046.202688] [ 9333]   300  9333    82005     8503      61       3        0             0 bgpd\r\nApr 28 10:03:13.279202 vlab-01 INFO kernel: [ 2046.202689] [ 9340]   300  9340    20134      249      31       3        0             0 staticd\r\nApr 28 10:03:13.279202 vlab-01 INFO kernel: [ 2046.202690] [ 9364]     0  9364     5061       78      14       3        0             0 bash\r\nApr 28 10:03:13.279203 vlab-01 INFO kernel: [ 2046.202691] [ 9391]     0  9391    12473     1008      28       3        0             0 python\r\nApr 28 10:03:13.279204 vlab-01 INFO kernel: [ 2046.202692] [ 9498]  1000  9498     5389      412      17       3        0             0 bash\r\nApr 28 10:03:13.279204 vlab-01 INFO kernel: [ 2046.202693] [ 9509]  1000  9509    10852      169      26       3        0             0 top\r\nApr 28 10:03:13.279205 vlab-01 INFO kernel: [ 2046.202694] [ 9531]     0  9531    23181      233      50       3        0             0 sshd\r\nApr 28 10:03:13.279206 vlab-01 INFO kernel: [ 2046.202695] [ 9537]  1000  9537    23214      240      49       3        0             0 sshd\r\nApr 28 10:03:13.279206 vlab-01 INFO kernel: [ 2046.202696] [ 9538]  1000  9538     5397      416      16       3        0             0 bash\r\nApr 28 10:03:13.279207 vlab-01 INFO kernel: [ 2046.202697] [ 9549]     0  9549    11361      113      28       3        0             0 sudo\r\nApr 28 10:03:13.279207 vlab-01 INFO kernel: [ 2046.202698] [ 9550]     0  9550    12278       91      30       3        0             0 su\r\nApr 28 10:03:13.279208 vlab-01 INFO kernel: [ 2046.202699] [ 9551]     0  9551     5385      410      15       3        0             0 bash\r\nApr 28 10:03:13.279208 vlab-01 INFO kernel: [ 2046.202701] [ 9559]     0  9559    23181      233      48       3        0             0 sshd\r\nApr 28 10:03:13.279209 vlab-01 INFO kernel: [ 2046.202702] [ 9565]  1000  9565    23247      273      46       3        0             0 sshd\r\nApr 28 10:03:13.279209 vlab-01 INFO kernel: [ 2046.202703] [ 9566]  1000  9566     5397      416      16       3        0             0 bash\r\nApr 28 10:03:13.279209 vlab-01 INFO kernel: [ 2046.202704] [ 9577]     0  9577    11361      113      28       3        0             0 sudo\r\nApr 28 10:03:13.279210 vlab-01 INFO kernel: [ 2046.202705] [ 9578]     0  9578    12278       91      28       3        0             0 su\r\nApr 28 10:03:13.279210 vlab-01 INFO kernel: [ 2046.202706] [ 9579]     0  9579     5389      413      17       3        0             0 bash\r\nApr 28 10:03:13.279211 vlab-01 INFO kernel: [ 2046.202707] [11035]     0 11035     4494       78      14       3        0             0 arp_update\r\nApr 28 10:03:13.279211 vlab-01 INFO kernel: [ 2046.202708] [11165]     0 11165     1615       16       9       3        0             0 tail\r\nApr 28 10:03:13.279211 vlab-01 INFO kernel: [ 2046.202709] [11220]     0 11220     1046       15       9       3        0             0 sleep\r\nApr 28 10:03:13.279217 vlab-01 INFO kernel: [ 2046.202711] [11633]     0 11633   123173     4865      62       5        0             0 docker\r\nApr 28 10:03:13.279218 vlab-01 INFO kernel: [ 2046.202712] [11657]     0 11657     5061      120      15       3        0             0 bash\r\nApr 28 10:03:13.279218 vlab-01 INFO kernel: [ 2046.202713] [11673]     0 11673   356964   315863     637       4        0             0 fpmsyncd\r\nApr 28 10:03:13.279219 vlab-01 ERR kernel: [ 2046.202714] Out of memory: Kill process 11673 (fpmsyncd) score 613 or sacrifice child\r\nApr 28 10:03:13.279219 vlab-01 ERR kernel: [ 2046.204326] Killed process 11673 (fpmsyncd) total-vm:1427856kB, anon-rss:1263452kB, file-rss:0kB, shmem-rss:0kB\r\nApr 28 10:03:13.279220 vlab-01 INFO kernel: [ 2046.255532] oom_reaper: reaped process 11673 (fpmsyncd), now anon-rss:0kB, file-rss:0kB, shmem-rss:0kB\r\n\r\n```",
+                "createdAt": "2019-04-28T10:24:21Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "baiwei0427"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@jipanyang I am fixing it now. You can check the PR https://github.com/Azure/sonic-swss/pull/864",
+                "createdAt": "2019-04-28T15:15:12Z",
+                "includesCreatedEdit": true,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-19T19:48:05Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 838,
+        "reviews": [
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-15T17:54:41Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "baiwei0427"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-16T00:10:51Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "baiwei0427"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-16T00:17:21Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "baiwei0427"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-19T15:19:03Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-19T19:48:05Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "jleveque"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2019-04-11T00:03:51Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-12T00:03:54Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "zhenggen-xu"
+                },
+                "authorAssociation": "COLLABORATOR",
+                "body": "",
+                "submittedAt": "2019-04-11T21:44:48Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-11T23:59:10Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 834,
+        "reviews": [
+            {
+                "author": {
+                    "login": "jleveque"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2019-04-11T00:03:51Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "zhenggen-xu"
+                },
+                "authorAssociation": "COLLABORATOR",
+                "body": "",
+                "submittedAt": "2019-04-11T21:44:48Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-11T23:59:10Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-12T00:03:54Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-24T07:53:10Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 832,
+        "reviews": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-24T07:53:10Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "yxieca"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "Did you build with and without optimization turned on? Do you need to change any caller?",
+                "createdAt": "2019-04-10T23:34:24Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "stepanblyschak"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "@yxieca Yes, I built with SONIC_PROFILING_ON=y and without this option.\r\nThe caller is in fpmsyncd.cpp code and it uses default port number https://github.com/Azure/sonic-swss/blob/master/fpmsyncd/fpmsyncd.cpp#L36",
+                "createdAt": "2019-04-11T01:04:14Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "yxieca"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "I see. the caller is always using the default value :-)",
+                "createdAt": "2019-04-11T01:09:13Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "yxieca"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-10T23:33:16Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 831,
+        "reviews": [
+            {
+                "author": {
+                    "login": "yxieca"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-10T23:33:16Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-08T17:32:23Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 828,
+        "reviews": [
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-08T17:32:23Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "stcheng"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "Updated with new design",
+                "createdAt": "2019-04-23T00:38:26Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "stcheng"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "TODO:\r\n1. will update the unit test both both Broadcom and Mellanox scenarios\r\n2. will remove deprecated code in swss for virtual switch platform\r\n\r\nDONE",
+                "createdAt": "2019-04-23T01:27:09Z",
+                "includesCreatedEdit": true,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "jleveque"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2019-03-29T20:33:48Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-03-30T00:00:12Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-24T15:55:36Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 825,
+        "reviews": [
+            {
+                "author": {
+                    "login": "jleveque"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2019-03-29T20:33:48Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-03-30T00:00:12Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-01T18:57:57Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "stcheng"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2019-04-02T16:26:16Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-23T17:42:54Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-23T17:43:07Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-23T17:43:40Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-24T08:14:50Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-24T09:45:51Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "stcheng"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2019-04-24T15:31:00Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "stcheng"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2019-04-24T15:33:57Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-24T15:55:36Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "volodymyrsamotiy"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2019-03-29T12:39:52Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2019-04-06T00:04:29Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2019-04-08T18:06:52Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-18T18:17:12Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 820,
+        "reviews": [
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-13T00:29:47Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "volodymyrsamotiy"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-18T12:30:15Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "volodymyrsamotiy"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-18T12:30:32Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "volodymyrsamotiy"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-18T12:30:49Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "volodymyrsamotiy"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-18T12:31:27Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "volodymyrsamotiy"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-18T12:39:54Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-18T18:17:12Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "leoli-nps"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "Hi lguohan, according to your suggestion, I created this PR separately for pfc-wd, please take a moment to deal with it, thanks.\r\n@lguohan @shine4chen",
+                "createdAt": "2019-03-18T14:06:44Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "wendani"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "Does it pass the pfcwd test in mgmt. repo?",
+                "createdAt": "2019-03-18T18:03:49Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "leoli-nps"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "Hi wendani, thanks for your reminder, I have updated the corresponding channel name from 'PFC_WD' to 'PFC_WD_ACTION'. In addition, regarding 'pfcwd test in mgmt. repo', our mgmt.repo environment does not support pfcwd test temporarily. However, the pfc-wd function tested in mgmt.repo, we have performed corresponding manual tests in our own environment, and have passed.\r\n@wendani ",
+                "createdAt": "2019-04-09T06:32:57Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "wendani"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2019-04-09T07:02:27Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 817,
+        "reviews": [
+            {
+                "author": {
+                    "login": "wendani"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2019-04-02T20:28:13Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "wendani"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2019-04-09T07:02:27Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "kcudnik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-03-16T19:33:30Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "yxieca"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-03-19T16:40:26Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 815,
+        "reviews": [
+            {
+                "author": {
+                    "login": "kcudnik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-03-16T19:33:30Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "yxieca"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-03-19T16:40:26Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2019-04-11T15:36:06Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-22T17:38:37Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 807,
+        "reviews": [
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "We must have the changes in VxlanOrch.h (Line 140 and 201)  to have the separator as `: `instead of `|`",
+                "submittedAt": "2019-03-26T01:40:06Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-16T01:28:30Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-19T22:07:19Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "Pterosaur"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-22T03:45:29Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-22T17:36:33Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-22T17:38:37Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-01T22:37:14Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 794,
+        "reviews": [
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-02-17T02:40:31Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-02-17T02:41:02Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-02-17T02:53:13Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-02-17T02:54:09Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-02-17T03:04:57Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-02-17T03:08:25Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "As comments",
+                "submittedAt": "2019-02-17T03:09:02Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "DISMISSED"
+            },
+            {
+                "author": {
+                    "login": "wendani"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2019-02-25T23:19:39Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "wendani"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2019-02-25T23:28:50Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-02-26T00:41:21Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-02-26T01:01:46Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-02-26T01:18:39Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "wendani"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2019-02-27T07:58:08Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "wendani"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2019-03-01T17:45:30Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-03-01T22:26:23Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-03-23T01:12:05Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-03-23T01:12:20Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "wendani"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2019-03-23T01:27:43Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "wendani"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2019-03-26T03:01:40Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-04-01T22:37:14Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-02-18T10:58:17Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "jleveque"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2019-02-16T00:29:53Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 793,
+        "reviews": [
+            {
+                "author": {
+                    "login": "jleveque"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2019-02-16T00:29:53Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-02-18T10:58:17Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "There are some failures for the Vnet bitmap test, can you check?",
+                "createdAt": "2019-02-15T17:47:49Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "volodymyrsamotiy"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "There are failures because implementation of \"bitmap VNET\" is not merged yet and also it depends on some other PRs.\r\nIn PR description there is a list of PRs that should be merged first:\r\n> Depends on the following PRs:\r\n>* #773\r\n>* [Azure/sonic-buildimage#2571](https://github.com/Azure/sonic-buildimage/pull/2571)\r\n>* [Azure/sonic-sairedis#424](https://github.com/Azure/sonic-sairedis/pull/424)",
+                "createdAt": "2019-02-15T17:51:59Z",
+                "includesCreatedEdit": true,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2019-03-07T01:42:15Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2019-03-13T20:57:01Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2019-03-24T11:14:55Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2019-04-08T18:04:09Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2019-04-11T15:31:51Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-03-06T23:50:47Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 792,
+        "reviews": [
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-02-15T17:46:42Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "volodymyrsamotiy"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-02-15T17:57:46Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-02-15T18:06:51Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "volodymyrsamotiy"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-02-15T18:35:45Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-02-15T18:50:48Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "volodymyrsamotiy"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-02-18T14:47:38Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2019-03-06T23:50:47Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    }
+]

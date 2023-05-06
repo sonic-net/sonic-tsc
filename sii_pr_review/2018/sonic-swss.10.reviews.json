@@ -1,0 +1,1709 @@
+[
+    {
+        "comments": [],
+        "latestReviews": [],
+        "number": 664,
+        "reviews": [],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "stcheng"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2018-10-31T18:11:00Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 663,
+        "reviews": [
+            {
+                "author": {
+                    "login": "stcheng"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2018-10-31T18:11:00Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [],
+        "latestReviews": [],
+        "number": 662,
+        "reviews": [],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-23T04:47:38Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 654,
+        "reviews": [
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-23T04:47:38Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "jipanyang"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "The existing implementation was targeting swss docker warm restart assuming stateDB and host netdev not touched.\r\n\r\nAs to system warm reboot,  for going up path, we need to make sure syncd/libsai/SDK have finished their tasks ( one of tasks is to recreate host interfaces), probably syncd should set a flag in stateDB (maybe reuse WARM_RESTART_TABLE, state=reconciled).  Then swss starts it tasks.\r\n\r\nSince no real order control between portsyncd/portmgrd and orchagent,  we should not re-apply the default config in port config file which may cause port state flapping and other unwanted consequence.  While portmgrd has all up to date data for all config it had applied before shutdown, it is ok for it to replay the data. \r\n\r\nAs to portState in StateDB,  it is an indication that netdev has been created.  During warm reboot, libsai/SDK/syncd should have guaranteed that state,  the easy way is to save and restore it during reboot.  Note, swss needs the state reconciled signal from syncd in stateDB to proceed.\r\n\r\nJust my 2cents about port state restore during system warm reboot.  Of course there are other alternatives to the problem.\r\n  #Resolved",
+                "createdAt": "2018-10-23T04:47:55Z",
+                "includesCreatedEdit": true,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "host interface admin state (up or down) is not owned by sai/syncd/sdk, they cannot recover that. They will creates those interfaces in the kernel, but it is portmgrd's job to make sure they are in the correct admin state. #Resolved",
+                "createdAt": "2018-10-23T09:15:27Z",
+                "includesCreatedEdit": true,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@jipanyang , I am not sure we need a flag to indicate syncd has finished it job. \r\n\r\nafter system reboot, syncd will start and wait for orchagent to all create_switch(). orchagent will start and call create_switch(). once create_switch is finished, SAI is finishing the warm reboot process. All SAI states are recovered and all host interfaces are created (not bring up). Then, portsyncd will enumerate all ports and put them into state db. portmgrd will bring them up.\r\n\r\nIn the code, bring the port down is an issue, I think he needs to figure out how to properly solve this one. But other than that, I think this is what you described, i do not see it is different from what qi propose.  #Resolved",
+                "createdAt": "2018-10-23T09:33:23Z",
+                "includesCreatedEdit": true,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "jipanyang"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "@lguohan @qiluo-msft \r\nFor the two processes: portsyncd and portmgrd,  when they are up,  logically we don't know whether libsai create_switch() has been finished or not,  .  There is `no order control`. Some mechanism is necessary to ensure that netdevs have been created,  either some flag set by syncd or orchagent,  or you check the existence of each netdev specifically.\r\n\r\nAgain, the default setting in port config file should not be applied again (as in portsyncd), it could cause ASIC port state flapping.  We'll want to add more and more incremental update support for port attribute config in portmgrd process.\r\n\r\nFor port state in stateDB, either `save and restore` if we want to rely on the flag from lower layer,  or portsyncd check the existence of each netdev and set the state again.  Personally I prefer the first alternative, second alternative is unnecessarily complex and does't bring any extra benefit. \r\n #Resolved",
+                "createdAt": "2018-10-23T18:53:14Z",
+                "includesCreatedEdit": true,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "I fixed \"the default setting in port config file should not be applied again\". The only left one is admin_status, which I think it is safe.\r\n\r\n---\r\nIn reply to: [432374478](https://github.com/Azure/sonic-swss/pull/653#issuecomment-432374478) [](ancestors = 432374478)",
+                "createdAt": "2018-10-27T02:47:18Z",
+                "includesCreatedEdit": true,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "jipanyang"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "How is it fixed?\r\n\r\nTake autoneg as example:  if its value is true in port_config.ini,   and it was changed to false and applied to ASIC.   After warm restart,  with this change, autoneg may be enabled again in ASIC. #Resolved",
+                "createdAt": "2018-10-27T06:53:26Z",
+                "includesCreatedEdit": true,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "jipanyang"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "Also there is possible race condition:  since the RTM_NEWLINK message is triggered by libsai/SDK and you are relying on it to populated port state in stateDB, portsyncd may miss the message (`no order control` between syncd and portsyncd exists).   #Resolved",
+                "createdAt": "2018-10-27T07:06:40Z",
+                "includesCreatedEdit": true,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "Good point. I refine the code, and bypass processing port_config.ini.\r\n\r\n---\r\nIn reply to: [433596747](https://github.com/Azure/sonic-swss/pull/653#issuecomment-433596747) [](ancestors = 433596747)",
+                "createdAt": "2018-10-30T06:13:26Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "Good point. I add netlink.dumpRequest in portsyncd to prevent any missing.\r\n~~I may need a timing control to let portsyncd get PortInitDone, then let orchagent warm start (TBD).~~\r\n\r\n---\r\nIn reply to: [433597472](https://github.com/Azure/sonic-swss/pull/653#issuecomment-433597472) [](ancestors = 433597472)",
+                "createdAt": "2018-10-30T06:17:36Z",
+                "includesCreatedEdit": true,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "Existing implementation lacks one feature: Although we restore ConfigDB, containing admin_status up for all ports, after whole system reboot, portmgrd doesn't bring up the netdev.\r\n\r\n---\r\nIn reply to: [432090516](https://github.com/Azure/sonic-swss/pull/653#issuecomment-432090516) [](ancestors = 432090516)",
+                "createdAt": "2018-10-30T06:25:03Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "jipanyang"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "> Existing implementation lacks one feature: Although we restore ConfigDB, containing admin_status up for all ports, after whole system reboot, portmgrd doesn't bring up the netdev.\r\n\r\nThe existing code \"https://github.com/Azure/sonic-swss/blob/master/cfgmgr/portmgr.cpp#L122 \" should work?\r\n\r\nI think we do need to move the regular port config https://github.com/Azure/sonic-swss/blob/65b015b17a42013c988b871654f9b4edfb75e749/portsyncd/portsyncd.cpp#L149 to portmgrd,  it could be done in separate PR. #Resolved",
+                "createdAt": "2018-10-30T06:53:18Z",
+                "includesCreatedEdit": true,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "jipanyang"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "> Good point. I add netlink.dumpRequest in portsyncd to prevent any missing.\r\n> I may need a timing control to let portsyncd get PortInitDone, then let orchagent warm start (TBD).\r\n\r\nWe had that at the very initial portsyncd/orchagent warm restart implementation, the conclusion at that time is we don't want to couple portsyncd and orchagent.  Why is it needed now? Orchagent has all the data and is self consistent at least for state restore phase.\r\n\r\nI remember seeing some issue with netlink.dumpRequest() for cold restart (probably with swss only cold restart),  but could not recall the exact problem.  We may keep an eye on it.\r\n #Resolved",
+                "createdAt": "2018-10-30T07:01:32Z",
+                "includesCreatedEdit": true,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "The code you mentioned is working if ConfigDB has admin_status, set it in ApplDB. However, in portsycnd, code will remove ConfigDB.\r\ncheck code block under /* clear the init port config buffer */.\r\n\r\n---\r\nIn reply to: [434191133](https://github.com/Azure/sonic-swss/pull/653#issuecomment-434191133) [](ancestors = 434191133)",
+                "createdAt": "2018-10-30T16:46:36Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "Currently portsyncd is designed with responsible for waiting all port 'state ok', in both cold start or warm start. Here no new couple coming. Orchagent need to wait all port 'state ok' to begin the warm start logic.\r\n\r\n> I remember seeing some issue with netlink.dumpRequest() for cold restart\r\n\r\nLet me know if you recall, thanks!\r\n\r\n---\r\nIn reply to: [434192623](https://github.com/Azure/sonic-swss/pull/653#issuecomment-434192623) [](ancestors = 434192623)",
+                "createdAt": "2018-10-30T16:51:40Z",
+                "includesCreatedEdit": true,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "jipanyang"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "During warm reboot, orchagent doesn't need the port ok signal from portsyncd.  The way orchagent communicates with syncd and the timing of switch create in syncd (at the very begining https://github.com/Azure/sonic-sairedis/blob/d655d20f9ae1b9918fc17317a203046299eba19a/syncd/syncd_hard_reinit.cpp#L1259) has  guaranteed the existence of host netdev.   \r\n\r\nIt is preferred that portsyncd is able to warm restart independently (it is now) without bothering orchagent.   #Resolved",
+                "createdAt": "2018-10-30T18:35:32Z",
+                "includesCreatedEdit": true,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "> During warm reboot, orchagent doesn't need the port ok signal from portsyncd.  The way orchagent communicates with syncd and the timing of switch create in syncd (at the very begining [https://github.com/Azure/sonic-sairedis/blob/d655d20f9ae1b9918fc17317a203046299eba19a/syncd/syncd_hard_reinit.cpp#L1259](https://github.com/Azure/sonic-sairedis/blob/d655d20f9ae1b9918fc17317a203046299eba19a/syncd/syncd_hard_reinit.cpp#L1259)) has  guaranteed the existence of host netdev.   \r\n\r\nYou are exactly correct!\r\nSo this PR is good, I strikethrough previous wrong statements, thanks!\r\nAnd it is true that\r\n\r\n> portsyncd is able to warm restart independently (it is now) without bothering orchagent.  \r\n\r\n---\r\nIn reply to: [434419903](https://github.com/Azure/sonic-swss/pull/653#issuecomment-434419903) [](ancestors = 434419903)",
+                "createdAt": "2018-10-30T23:17:10Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "jipanyang"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "Looks good to me.",
+                "submittedAt": "2018-10-31T21:30:13Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 653,
+        "reviews": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-23T09:12:15Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-23T09:25:11Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-24T00:00:26Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "jipanyang"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "Looks good to me.",
+                "submittedAt": "2018-10-31T21:30:13Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [],
+        "latestReviews": [],
+        "number": 652,
+        "reviews": [],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [],
+        "latestReviews": [],
+        "number": 650,
+        "reviews": [],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "Why change so many sleep?",
+                "createdAt": "2018-10-20T04:45:09Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "https://sonic-jenkins.westus2.cloudapp.azure.com/job/vs/job/sonic-swss-build-pr/1189/artifact/sonic-swss/tests/log/syslog/*view*/\r\n\r\naccording to here, teamsyncd crashed ",
+                "createdAt": "2018-10-20T23:23:26Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2018-10-21T03:41:25Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2018-10-21T03:48:50Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2018-10-21T03:58:00Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2018-10-21T04:06:46Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2018-10-21T04:20:50Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2018-10-21T08:35:24Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2018-10-21T16:06:49Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2018-10-21T16:06:58Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2018-10-21T18:06:02Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2018-10-21T18:07:26Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2018-10-21T20:10:56Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2018-10-22T07:14:19Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "stcheng"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2018-10-20T02:21:36Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-20T01:53:36Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 649,
+        "reviews": [
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-20T01:53:36Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "stcheng"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2018-10-20T02:21:36Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "test failure.",
+                "createdAt": "2018-10-19T20:44:32Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2018-10-22T08:09:10Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2018-10-22T08:10:09Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2018-10-22T08:29:49Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2018-10-22T08:30:52Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2018-10-22T08:31:30Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2018-10-22T08:33:46Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2018-10-22T09:01:12Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2018-10-22T15:41:15Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2018-10-22T15:46:02Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2018-10-22T19:08:06Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-19T19:47:55Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 648,
+        "reviews": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-19T19:47:55Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-19T01:33:05Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            }
+        ],
+        "number": 646,
+        "reviews": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-19T01:30:29Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-19T01:31:33Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-19T01:33:05Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "stcheng"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2018-10-19T07:32:18Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-18T02:26:14Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "jipanyang"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2018-10-19T03:53:39Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 645,
+        "reviews": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-18T01:34:09Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-18T01:53:50Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-18T02:26:14Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "jipanyang"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2018-10-19T03:53:39Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-15T21:57:29Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 642,
+        "reviews": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-15T21:57:29Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "wendani"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2018-10-14T00:11:16Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 639,
+        "reviews": [
+            {
+                "author": {
+                    "login": "wendani"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2018-10-14T00:11:16Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "yxieca"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "I didn't see code change to include warm-restart.h from the new common path. Will this create problem?",
+                "createdAt": "2018-10-10T19:14:04Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "jipanyang"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "@yxieca Since we didn't change the header file name, and they will be available in swss-common library, no code change to include warm-restart.h is needed.",
+                "createdAt": "2018-10-10T21:00:34Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "yxieca"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-10T19:09:12Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 637,
+        "reviews": [
+            {
+                "author": {
+                    "login": "yxieca"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-10T19:09:12Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "jipanyang"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2018-10-09T00:03:33Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 636,
+        "reviews": [
+            {
+                "author": {
+                    "login": "jipanyang"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2018-10-08T22:50:00Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-08T22:59:15Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "jipanyang"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2018-10-09T00:03:33Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-09-29T17:40:50Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 634,
+        "reviews": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-09-29T17:40:50Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2018-10-02T21:14:05Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2018-10-09T21:38:56Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2018-10-10T01:53:31Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "jipanyang"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2018-10-05T02:35:01Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "nikos-github"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2018-10-04T23:59:44Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-09T21:39:41Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "jleveque"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2018-10-04T20:22:11Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 632,
+        "reviews": [
+            {
+                "author": {
+                    "login": "nikos-github"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2018-10-02T22:26:31Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "jleveque"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2018-10-03T03:27:44Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "CHANGES_REQUESTED"
+            },
+            {
+                "author": {
+                    "login": "jleveque"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2018-10-04T20:22:11Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-04T22:50:55Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "nikos-github"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2018-10-04T23:59:44Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-05T00:25:52Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-05T00:26:39Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-05T00:29:07Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-05T00:45:04Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-05T00:46:05Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-05T00:48:45Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-05T00:51:02Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-05T00:51:38Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "jipanyang"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2018-10-05T02:06:56Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "jipanyang"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2018-10-05T02:21:54Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "jipanyang"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2018-10-05T02:33:32Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "jipanyang"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2018-10-05T02:35:01Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-09T03:26:04Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-09T03:27:39Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-09T03:28:28Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-09T03:29:39Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-09T03:30:25Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-09T21:39:41Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2018-09-21T05:12:49Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "stcheng"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "Sadly, the current virtual switch test will not pass due to the lack of teammgrd.\r\nThe test will fail because portmgrd is no longer responsible for the port channel MTU changes, and the failure of the test case leads to the failure of clean up previous states and it causes more tests to fail. I have added the pull request: https://github.com/Azure/sonic-buildimage/pull/2064 in buildimage to update the submodule as well as update the virtual switch so that it will pass after both commits are merged.",
+                "createdAt": "2018-09-21T06:44:02Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "test failure.",
+                "createdAt": "2018-09-21T07:15:03Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "stcheng"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "![image](https://user-images.githubusercontent.com/2702699/47192371-b468df80-d301-11e8-9629-890c0919ef10.png)",
+                "createdAt": "2018-10-19T01:14:57Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "stcheng"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "this is tested with the pull request https://github.com/Azure/sonic-buildimage/pull/2064",
+                "createdAt": "2018-10-19T01:15:48Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "jipanyang"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "One general comment:\r\nare the changes warm restart compatible?  It looks to me those lag/lag member  add operations will interrupt existing lag status.\r\n",
+                "submittedAt": "2018-09-21T19:01:21Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-19T01:17:34Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 626,
+        "reviews": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-09-21T07:58:29Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "stcheng"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2018-09-21T08:15:37Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-09-21T08:36:49Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-09-21T08:38:53Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-09-21T09:00:50Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-09-21T09:05:54Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-09-21T09:08:24Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-09-21T09:11:03Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-09-21T09:11:21Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-09-21T09:17:16Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-09-21T09:18:51Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-09-21T09:19:28Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-09-21T09:21:20Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "jipanyang"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "One general comment:\r\nare the changes warm restart compatible?  It looks to me those lag/lag member  add operations will interrupt existing lag status.\r\n",
+                "submittedAt": "2018-09-21T19:01:21Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "stcheng"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2018-09-21T22:15:05Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-19T00:58:44Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "stcheng"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2018-10-19T01:16:01Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2018-10-19T01:17:34Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    }
+]

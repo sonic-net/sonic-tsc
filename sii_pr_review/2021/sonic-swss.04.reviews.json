@@ -1,0 +1,3930 @@
+[
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "venkatmahalingam"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "@prsunny @dgsudharsan Please review this PR.",
+                "createdAt": "2021-04-27T05:54:44Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@venkatmahalingam can you please verify if this can be taken to 202012?\r\nThe idea is to have sflow fully qualified as part of 202012 so if this is a bug fix we should consider it to be included. \r\nBut this can be done only if you can confirm it is cleanly cherry picked and working as expected. 10x",
+                "createdAt": "2021-04-27T06:22:21Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "venkatmahalingam"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "> @venkatmahalingam can you please verify if this can be taken to 202012?\r\n> The idea is to have sflow fully qualified as part of 202012 so if this is a bug fix we should consider it to be included.\r\n> But this can be done only if you can confirm it is cleanly cherry picked and working as expected. 10x\r\n\r\n@liat-grozovik Cherry-pick to 202012 works fine if we do it in the PR merge order i.e first Vivek's commit and then this PR commit.\r\n```\r\nbuild:~/202012/sonic-swss$ git cherry-pick d9f28b6\r\n[202012 f6d4dfc] [SflowMgr] SamplingRate Update by Speed Change Added (#1721)\r\n Author: Vivek Reddy <vivekreddykarri98@gmail.com>\r\n Date: Sun Apr 25 00:43:15 2021 -0400\r\n 2 files changed, 57 insertions(+), 4 deletions(-)\r\nbuild:~/202012/sonic-swss$\r\nbuild:~/202012/sonic-swss$\r\nbuild:~/202012/sonic-swss$ git cherry-pick 77f6c59\r\n[202012 ecce87d] Fixed incorrect interface admin-status when 'all' interface is disabled but there are local sampling-rate configurations.\r\n Date: Mon Apr 26 23:57:29 2021 +0000\r\n 3 files changed, 67 insertions(+), 11 deletions(-)\r\nbuild:~/202012/sonic-swss$ git cherry-pick bd9ce69\r\n[202012 878f194] UT done\r\n Date: Tue Apr 27 05:50:57 2021 +0000\r\n 1 file changed, 14 insertions(+), 12 deletions(-)\r\nbuild:~/202012/sonic-swss$ git cherry-pick 2efe415\r\n[202012 f3c49ea] Added new testcase.\r\n Date: Tue Apr 27 17:38:48 2021 +0000\r\n 1 file changed, 36 insertions(+), 1 deletion(-)\r\nbuild:~/202012/sonic-swss$\r\n```",
+                "createdAt": "2021-04-27T16:52:39Z",
+                "includesCreatedEdit": true,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lgtm-com"
+                },
+                "authorAssociation": "NONE",
+                "body": "This pull request **introduces 1 alert** when merging 2efe4151ae0225c4ce3a789e14700663b1e6a58d into b962a60ed90aa6bafe778a22a0fc3c3489d8273c - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-swss/rev/pr-1feebfb9d1cd33cd3a0fef7ad5649c0e7227cd79)\n\n**new alerts:**\n\n* 1 for Unused local variable",
+                "createdAt": "2021-04-27T18:34:29Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@dgsudharsan, please review",
+                "createdAt": "2021-04-27T23:35:36Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "The PR is failing on VS test \r\n\r\n` AssertionError: Did not expect field/values to match, but they did: provided={'sample_rate': '256', 'admin_state': 'up'}, received={'sample_rate': '256', 'admin_state': 'up'}, key=\"Ethernet0\", table=\"SFLOW_SESSION_TABLE\"`\r\n",
+                "createdAt": "2021-04-27T23:36:01Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "venkatmahalingam"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "> The PR is failing on VS test\r\n> \r\n> ` AssertionError: Did not expect field/values to match, but they did: provided={'sample_rate': '256', 'admin_state': 'up'}, received={'sample_rate': '256', 'admin_state': 'up'}, key=\"Ethernet0\", table=\"SFLOW_SESSION_TABLE\"`\r\n\r\nYes, looking into the failures.",
+                "createdAt": "2021-04-27T23:52:01Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "venkatmahalingam"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "@prsunny @dgsudharsan @vivekreddynv This PR is ready to merge, please review and approve the same.\r\n\r\nAlso, the below PRs for SONiC CLI & HLD changes.\r\nhttps://github.com/Azure/sonic-utilities/pull/845/files\r\nhttps://github.com/Azure/SONiC/pull/755\r\n",
+                "createdAt": "2021-04-30T03:50:59Z",
+                "includesCreatedEdit": true,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "dgsudharsan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@prsunny @venkatmahalingam  Request for cherry-pick to 202012",
+                "createdAt": "2021-08-23T23:53:48Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "vivekrnv"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-28T00:17:18Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "dgsudharsan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-30T20:44:49Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-30T21:03:36Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 1728,
+        "reviews": [
+            {
+                "author": {
+                    "login": "vivekrnv"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-28T00:17:18Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "venkatmahalingam"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-28T01:40:24Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "dgsudharsan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-28T04:14:46Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "DISMISSED"
+            },
+            {
+                "author": {
+                    "login": "dgsudharsan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-30T20:44:49Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-30T21:03:36Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "shlomibitton"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "@shi-su seems like this PR broke this branch can you please check?",
+                "createdAt": "2021-05-19T15:13:18Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "shi-su"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "> @shi-su seems like this PR broke this branch can you please check?\r\n\r\nAck. I will fix this in 202012.",
+                "createdAt": "2021-05-19T16:03:38Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-27T05:16:47Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 1723,
+        "reviews": [
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-26T22:31:33Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "shi-su"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-26T23:50:37Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "shi-su"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-26T23:55:03Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-27T02:45:16Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "shi-su"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-27T02:56:22Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-27T05:16:47Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@prsunny , please submit the schema change to yang model as well.",
+                "createdAt": "2021-04-24T19:50:44Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "abdosi"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@prsunny please create pr for 201911. Cherry-pick has conflict.",
+                "createdAt": "2021-05-05T02:21:24Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "abdosi"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@prsunny have resolve the conflict manually. DVS test is not there in 201911 for this feature as previous PR we skipped dvs test as part of conflict ",
+                "createdAt": "2021-05-05T02:34:05Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": [
+                    {
+                        "content": "THUMBS_UP",
+                        "users": {
+                            "totalCount": 1
+                        }
+                    }
+                ]
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "sumukhatv"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-23T21:50:34Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 1722,
+        "reviews": [
+            {
+                "author": {
+                    "login": "sumukhatv"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-23T21:45:47Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-23T21:48:19Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "sumukhatv"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-23T21:50:34Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "dgsudharsan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "This Change is required for 202012",
+                "createdAt": "2021-04-23T19:27:46Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@dgsudharsan to sign/off",
+                "createdAt": "2021-04-23T21:46:49Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "dgsudharsan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-23T22:37:00Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-23T23:59:14Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 1721,
+        "reviews": [
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "lgtm, minor comment",
+                "submittedAt": "2021-04-23T21:46:16Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "vivekrnv"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-23T22:13:43Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-23T22:17:04Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "dgsudharsan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-23T22:37:00Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-23T23:59:14Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@Pterosaur , please review.",
+                "createdAt": "2021-04-24T19:51:46Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-22T20:53:09Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 1719,
+        "reviews": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-22T20:53:09Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-19T22:20:10Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "gechiang"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-19T23:42:59Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 1711,
+        "reviews": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-19T22:20:10Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "gechiang"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-19T23:42:59Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "jleveque"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-16T02:06:45Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 1710,
+        "reviews": [
+            {
+                "author": {
+                    "login": "jleveque"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-16T02:06:45Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "neethajohn"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@stephenxs , can you describe what conditions were missed earlier? I am not clear on what this PR tries to address",
+                "createdAt": "2021-04-13T16:24:14Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "stephenxs"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "> @stephenxs , can you describe what conditions were missed earlier? I am not clear on what this PR tries to address\r\n\r\n@neethajohn if the port is admin down, it will also try to recalculate the pool size. Description updated.",
+                "createdAt": "2021-04-13T22:39:32Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "/azp run",
+                "createdAt": "2021-04-15T14:47:28Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "azure-pipelines"
+                },
+                "authorAssociation": "NONE",
+                "body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>",
+                "createdAt": "2021-04-15T14:47:44Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-27T06:18:06Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "neethajohn"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-27T00:58:31Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 1708,
+        "reviews": [
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-15T16:23:01Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "neethajohn"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-15T17:14:31Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "stephenxs"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-16T00:22:18Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "neethajohn"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-27T00:58:31Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-27T06:18:06Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-15T16:21:03Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "neethajohn"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-13T16:53:05Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 1706,
+        "reviews": [
+            {
+                "author": {
+                    "login": "neethajohn"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-13T16:53:05Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-15T16:21:03Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "dgsudharsan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "This needs to be back ported to 202012",
+                "createdAt": "2021-04-13T03:23:16Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "can you check the test failure, it seems related to the auto neg feature.",
+                "createdAt": "2021-04-13T20:06:13Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "jleveque"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "> This needs to be back ported to 202012\r\n\r\n@dgsudharsan: FYI, the autoneg values have changed to on/off in master, but they are still 0/1 in 202012. Therefore, you will need to open a separate PR against 202012 once this is reviewed/merged.",
+                "createdAt": "2021-04-13T21:58:57Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "dgsudharsan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "> > This needs to be back ported to 202012\r\n> \r\n> @dgsudharsan: FYI, the autoneg values have changed to on/off in master, but they are still 0/1 in 202012. Therefore, you will need to open a separate PR against 202012 once this is reviewed/merged.\r\n\r\nSure Joe. I will raise a separate PR after this.",
+                "createdAt": "2021-04-13T22:24:09Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "jleveque"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "/azp run",
+                "createdAt": "2021-04-14T17:19:54Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "azure-pipelines"
+                },
+                "authorAssociation": "NONE",
+                "body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>",
+                "createdAt": "2021-04-14T17:20:10Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "jleveque"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-15T16:40:21Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 1705,
+        "reviews": [
+            {
+                "author": {
+                    "login": "jleveque"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-15T16:40:21Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@venkatmahalingam to review",
+                "createdAt": "2021-04-13T16:30:04Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@venkatmahalingam , can you please sign-off?",
+                "createdAt": "2021-04-20T18:51:59Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "venkatmahalingam"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "> @venkatmahalingam , can you please sign-off?\r\n\r\nSure.",
+                "createdAt": "2021-04-20T20:05:47Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lolyu"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "Hi @prsunny, @shi-su, can we include this patch in the `202012` branch so we could have test case `test_static_route` run on dualtor testbed?",
+                "createdAt": "2021-05-13T07:09:30Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": [
+                    {
+                        "content": "THUMBS_UP",
+                        "users": {
+                            "totalCount": 1
+                        }
+                    }
+                ]
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@shi-su The 202012 cherry-pick is not clean. Please submit another PR.",
+                "createdAt": "2021-05-18T23:35:35Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-20T18:51:21Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "venkatmahalingam"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-20T20:05:24Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 1704,
+        "reviews": [
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-13T16:28:36Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "venkatmahalingam"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-14T00:01:08Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "venkatmahalingam"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-14T00:05:09Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "venkatmahalingam"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-14T04:00:35Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "Please add vs tests",
+                "submittedAt": "2021-04-14T22:23:10Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "venkatmahalingam"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-16T05:34:03Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "venkatmahalingam"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-16T05:41:41Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "venkatmahalingam"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-16T05:45:19Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "venkatmahalingam"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-16T05:46:59Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "shi-su"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-16T22:17:36Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "shi-su"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-16T22:17:58Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "shi-su"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-16T22:19:36Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "shi-su"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-16T22:20:50Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "shi-su"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-16T22:26:39Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "shi-su"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-16T22:27:06Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "shi-su"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-16T22:27:10Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "shi-su"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-16T22:31:38Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "venkatmahalingam"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-17T00:25:21Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "venkatmahalingam"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-17T00:25:28Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "venkatmahalingam"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-17T00:25:41Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "venkatmahalingam"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-17T00:25:59Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "venkatmahalingam"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-17T00:26:08Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "venkatmahalingam"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-17T00:28:04Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "venkatmahalingam"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-17T00:42:12Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-17T00:52:12Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "venkatmahalingam"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-17T01:15:47Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "shi-su"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-17T04:15:33Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-20T18:51:21Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "venkatmahalingam"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-20T20:05:24Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@yxieca please note that this PR is against 202012 as cherry pick to 202012 was not possible: https://github.com/Azure/sonic-swss/pull/1695",
+                "createdAt": "2021-04-12T13:46:11Z",
+                "includesCreatedEdit": true,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-12T23:43:18Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "yxieca"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-12T14:59:20Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 1703,
+        "reviews": [
+            {
+                "author": {
+                    "login": "yxieca"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-12T14:59:20Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-12T23:43:18Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@prsunny to look",
+                "createdAt": "2021-04-09T06:36:02Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "qbdwlr"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "@prsunny: What is the ETA for moving sonic-swss pointer forward in sonic-buildimage to include this PR?  ",
+                "createdAt": "2021-04-12T17:31:20Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "> @prsunny: What is the ETA for moving sonic-swss pointer forward in sonic-buildimage to include this PR?\r\n\r\n@qbdwlr , you can raise a submodule update PR to buildimage similar to https://github.com/Azure/sonic-buildimage/pull/7263\r\n",
+                "createdAt": "2021-04-12T18:18:42Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-09T06:35:38Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-09T14:21:39Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "abdosi"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-09T15:15:33Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 1699,
+        "reviews": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-09T06:35:38Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-09T14:21:39Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "abdosi"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-09T15:15:33Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@srj102 , @tapashdas , @nkelapur to review",
+                "createdAt": "2021-04-06T15:50:18Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@stepanblyschak , @nkelapur , this is required for 202012 branch, correct?",
+                "createdAt": "2021-04-07T15:37:12Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "nkelapur"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "> @stepanblyschak , @nkelapur , this is required for 202012 branch, correct?\r\n\r\nYes, this should be required for passing the sanity tests as mentioned by Stepan. However as I understand, in practical usage there will not be a scenario where there are no interfaces in the system, and hence the reported issue should not occur. ",
+                "createdAt": "2021-04-07T15:41:07Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "stepanblyschak"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "@nkelapur @prsunny This is required for 202012.\r\nThere can be a L2 config only deployment where there are no L3 interfaces in INTERFACE table, so it  might be  a production issue, not just a sanity check issue.",
+                "createdAt": "2021-04-07T17:48:19Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "dprital"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@daall - Can you please merge to 202012 ?",
+                "createdAt": "2021-04-07T22:15:25Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "yxieca"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@volodymyrsamotiy please create PR for 202012 branch as this change cannot be cherry-picked cleanly.",
+                "createdAt": "2021-04-08T18:28:14Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "nkelapur"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "Overall changes look good",
+                "submittedAt": "2021-04-06T16:59:26Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "stepanblyschak"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-07T10:21:08Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-07T15:48:07Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 1695,
+        "reviews": [
+            {
+                "author": {
+                    "login": "nkelapur"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-06T16:58:56Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "nkelapur"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "Overall changes look good",
+                "submittedAt": "2021-04-06T16:59:26Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "stepanblyschak"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-07T10:21:08Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-07T15:48:07Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "since 1519 is not merge, isn't this new test supposed to be fail?",
+                "createdAt": "2021-04-06T18:19:20Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": [
+                    {
+                        "content": "THUMBS_UP",
+                        "users": {
+                            "totalCount": 1
+                        }
+                    }
+                ]
+            },
+            {
+                "author": {
+                    "login": "daall"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "> since 1519 is not merge, isn't this new test supposed to be fail?\r\n\r\nI am trying to figure out if the underlying issue has been resolved in the master branch or if there is some weird discrepancy between the physical device and the virtual switch. Will update shortly.",
+                "createdAt": "2021-04-07T16:30:37Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "daall"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "> > since 1519 is not merge, isn't this new test supposed to be fail?\r\n> \r\n> I am trying to figure out if the underlying issue has been resolved in the master branch or if there is some weird discrepancy between the physical device and the virtual switch. Will update shortly.\r\n\r\nThe underlying issue seems to have been fixed in the master branch, so let me track down the change and see if this is a bugfix we can also grab for 201911.",
+                "createdAt": "2021-04-12T20:03:11Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "daall"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "> > > since 1519 is not merge, isn't this new test supposed to be fail?\r\n> > \r\n> > \r\n> > I am trying to figure out if the underlying issue has been resolved in the master branch or if there is some weird discrepancy between the physical device and the virtual switch. Will update shortly.\r\n> \r\n> The underlying issue seems to have been fixed in the master branch, so let me track down the change and see if this is a bugfix we can also grab for 201911.\r\n\r\nThis is the reason for the difference: Azure/sonic-utilities#1392 It seems like the bug exists in swsssdk but not swss-common. I think we should still merge this test case just to prevent any similar regressions in the future. @lguohan do you agree?",
+                "createdAt": "2021-04-14T22:43:20Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "This is interesting. How confident are you that https://github.com/Azure/sonic-utilities/pull/1392 fixed the bug? It is expected as refactoring. If you know the detail, could you explain your API call sequence into swss-common or swsssdk? I can help check the sequence to make sure it is fixed.",
+                "createdAt": "2021-04-15T04:31:01Z",
+                "includesCreatedEdit": true,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "daall"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "> This is interesting. How confident are you that [Azure/sonic-utilities#1392](https://github.com/Azure/sonic-utilities/pull/1392) fixed the bug? It is expected as refactoring. If you know the detail, could you explain your API call sequence into swss-common or swsssdk? I can help check the sequence to make sure it is fixed.\r\n\r\nThey're both calling `set_entry` from ConfigDBConnector. When ConfigDBConnector is imported from `swsscommon`, everything works as expected and we can call `set_entry` with `ports@` without issue. When ConfigDBConnector is imported from `swsssdk`, then the first call to `set_entry` works as expected, but the second call deletes the `ports@` field from config DB.\r\n\r\n---\r\nIn reply to: [820805641](https://github.com/Azure/sonic-swss/pull/1694#issuecomment-820805641) [](http://example.com/codeflow?ancestors=820805641)",
+                "createdAt": "2021-04-15T23:42:23Z",
+                "includesCreatedEdit": true,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "test looks good to me, please proceed to merge.",
+                "createdAt": "2021-04-16T07:18:51Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "I analyze this flow, and everything you observed is expected. In old swsssdk, `set_entry` expected array field in `data` must have no trailing `@`, and array value must be an array. If you gave the other way, it unfortunately remove the field at 2nd call.\r\nHowever, swsscommon could handle both styles, so it's more tolerable.\r\n\r\n---\r\nIn reply to: [820805641](https://github.com/Azure/sonic-swss/pull/1694#issuecomment-820805641) [](http://example.com/codeflow?ancestors=820805641,820805641)",
+                "createdAt": "2021-04-19T20:08:03Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-16T07:18:33Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-06T01:09:04Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 1694,
+        "reviews": [
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-06T01:09:04Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-16T07:18:33Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "lgtm-com"
+                },
+                "authorAssociation": "NONE",
+                "body": "This pull request **fixes 10 alerts** when merging 5ca47bfc3085c1d67efd641d52ec2036344adf01 into 637e8d08f7b593585c55d6dc35b040861c6da26d - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-swss/rev/pr-112f2dbaaf75d33476a071e2c0e4466a7e68bc3e)\n\n**fixed alerts:**\n\n* 10 for Unused import",
+                "createdAt": "2021-04-06T01:41:28Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-06T11:40:32Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "neethajohn"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-06T16:38:32Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 1693,
+        "reviews": [
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-06T11:40:32Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "neethajohn"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-06T16:38:32Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "thank you.",
+                "createdAt": "2021-04-09T06:37:24Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-09T06:36:45Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 1692,
+        "reviews": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-09T06:36:45Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "yxieca"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@lguohan I think you need to create the change for 202012 branch directly. This change cannot be cherry-picked cleanly.",
+                "createdAt": "2021-04-08T18:27:18Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "xumia"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@lguohan , can we simple copy all the yaml files to the branch 202012?\r\nI want to enable the PR checker for the branch 202012 of sonic-utilities, it has dependency on this PR.\r\nSee https://github.com/Azure/sonic-utilities/pull/1649.",
+                "createdAt": "2021-05-31T09:42:42Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [],
+        "number": 1690,
+        "reviews": [],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-03T16:17:31Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 1689,
+        "reviews": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-03T16:17:31Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "abdosi"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "cc @Pterosaur ",
+                "createdAt": "2021-04-03T01:30:41Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "lgtm-com"
+                },
+                "authorAssociation": "NONE",
+                "body": "This pull request **fixes 1 alert** when merging 2126025bef909193deb2259be5b5137577a15775 into cba65760393d2380785c407158609f4782777718 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-swss/rev/pr-f7f6e25b846e94b4ef00dd2901cb2ecd5c28e0e1)\n\n**fixed alerts:**\n\n* 1 for Unused import",
+                "createdAt": "2021-04-03T01:34:04Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "abdosi"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "/azp run",
+                "createdAt": "2021-04-03T14:38:06Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "azure-pipelines"
+                },
+                "authorAssociation": "NONE",
+                "body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>",
+                "createdAt": "2021-04-03T14:38:20Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "abdosi"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@lguohan can you review/approve this.",
+                "createdAt": "2021-04-05T02:43:01Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-05T21:01:10Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "Pterosaur"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-05T01:11:56Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 1688,
+        "reviews": [
+            {
+                "author": {
+                    "login": "Pterosaur"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-05T01:11:56Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-05T21:01:10Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "dprital"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@daall  - Can you please merge into 202012 ?",
+                "createdAt": "2021-04-07T22:47:48Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-03-30T18:59:58Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "neethajohn"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-01T01:38:29Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 1685,
+        "reviews": [
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-03-30T18:59:58Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "neethajohn"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-01T01:38:29Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "neethajohn"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@stephenxs, does any of the existing vs tests cover this scenario? ",
+                "createdAt": "2021-03-22T20:06:47Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "stephenxs"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "> @stephenxs, does any of the existing vs tests cover this scenario?\r\n\r\nFor the \r\n\r\n> @stephenxs, does any of the existing vs tests cover this scenario?\r\n\r\nWe do have test to cover the case for adding correct Profiles but we don’t have one for adding wrong profiles. Typically we do vstest by checking the dbs. But for this bug there is not anything wrong in db and only an message with an incorrect pool reference is observed. So I think it doesn’t make sense to add the case for it.",
+                "createdAt": "2021-03-22T23:53:54Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "neethajohn"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "> > @stephenxs, does any of the existing vs tests cover this scenario?\r\n> \r\n> For the\r\n> \r\n> > @stephenxs, does any of the existing vs tests cover this scenario?\r\n> \r\n> We do have test to cover the case for adding correct Profiles but we don’t have one for adding wrong profiles. Typically we do vstest by checking the dbs. But for this bug there is not anything wrong in db and only an message with an incorrect pool reference is observed. So I think it doesn’t make sense to add the case for it.\r\n\r\nAs discussed offline, since this error is seen by buffermgr, we cannot add a test for this",
+                "createdAt": "2021-03-23T01:45:16Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "stephenxs"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "azp /run",
+                "createdAt": "2021-03-24T00:35:23Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "stephenxs"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "The vs test failed by `test_TunnelDecap_v6`, `test_TunnelSymmetric_v4`, and `test_TunnelSymmetric_v6` which are not related to dynamic buffer calculation.",
+                "createdAt": "2021-03-24T00:36:59Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@lguohan is there anyone working on these failed tests?",
+                "createdAt": "2021-03-30T08:43:18Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "neethajohn"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "/azp run",
+                "createdAt": "2021-04-01T01:40:07Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "azure-pipelines"
+                },
+                "authorAssociation": "NONE",
+                "body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>",
+                "createdAt": "2021-04-01T01:40:28Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "dprital"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@neethajohn  - Can you please merge it ?",
+                "createdAt": "2021-04-01T05:04:12Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "neethajohn"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-03-23T01:45:50Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 1678,
+        "reviews": [
+            {
+                "author": {
+                    "login": "neethajohn"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-03-23T01:45:50Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "AkhileshSamineni"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "@rlhui @arlakshm Please review the changes.",
+                "createdAt": "2021-03-10T16:41:18Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "AkhileshSamineni"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": " @arlakshm  Please review and merge the changes.",
+                "createdAt": "2021-04-05T08:39:14Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "arlakshm"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@kperumalbfn, can you please help review this change",
+                "createdAt": "2021-04-06T18:51:53Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "yxieca"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@AkhileshSamineni does this PR address https://github.com/Azure/sonic-buildimage/issues/7126?",
+                "createdAt": "2021-04-07T01:40:54Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "AkhileshSamineni"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "> @AkhileshSamineni does this PR address [Azure/sonic-buildimage#7126](https://github.com/Azure/sonic-buildimage/issues/7126)?\r\n\r\n@yxieca I don't think this PR changes will address the issue.",
+                "createdAt": "2021-04-07T10:46:22Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-09T06:39:17Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "kperumalbfn"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-07T18:20:55Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 1655,
+        "reviews": [
+            {
+                "author": {
+                    "login": "kperumalbfn"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-07T18:20:50Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "kperumalbfn"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-07T18:20:55Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "AkhileshSamineni"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-07T18:36:22Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-09T06:39:17Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@stepanblyschak  could u please help to review?",
+                "createdAt": "2021-03-02T13:39:45Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "/AzurePipelines run",
+                "createdAt": "2021-03-02T17:41:27Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "azure-pipelines"
+                },
+                "authorAssociation": "NONE",
+                "body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>",
+                "createdAt": "2021-03-02T17:41:41Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "/AzurePipelines run",
+                "createdAt": "2021-03-07T17:15:03Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "azure-pipelines"
+                },
+                "authorAssociation": "NONE",
+                "body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>",
+                "createdAt": "2021-03-07T17:15:15Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@shlomibitton  please check test failure on PG counters. this is the only test i think relevant to your changes.",
+                "createdAt": "2021-03-23T09:21:47Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "/AzurePipleines run",
+                "createdAt": "2021-03-29T15:16:12Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@stepanblyschak any comments?",
+                "createdAt": "2021-03-30T11:13:12Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@stepanblyschak kindly please review. your approval is needed for such change.",
+                "createdAt": "2021-04-04T06:24:11Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "/azp run",
+                "createdAt": "2021-04-06T06:58:16Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "azure-pipelines"
+                },
+                "authorAssociation": "NONE",
+                "body": "<samp>\nCommenter does not have sufficient privileges for PR 1646 in repo Azure/sonic-swss<br>\r\n\n</samp>",
+                "createdAt": "2021-04-06T06:58:21Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "/azp run",
+                "createdAt": "2021-04-06T07:14:05Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "azure-pipelines"
+                },
+                "authorAssociation": "NONE",
+                "body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>",
+                "createdAt": "2021-04-06T07:14:19Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@judyjoseph and @yxieca would you like to review this PR as well?\r\nwe would recommend to have it as part of 202012 to reduce time on boot which can definitely help for fastboot as well.",
+                "createdAt": "2021-04-07T05:11:03Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@yxieca and @judyjoseph can you please review?",
+                "createdAt": "2021-04-19T08:03:42Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "daall"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "@shlomibitton there are merge conflicts w/ the 202012 branch, please submit a PR against 202012 for this change.",
+                "createdAt": "2021-04-29T17:20:19Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "shlomibitton"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "> @shlomibitton there are merge conflicts w/ the 202012 branch, please submit a PR against 202012 for this change.\r\n\r\n@daall I have created a new PR against 202012 https://github.com/Azure/sonic-swss/pull/1736",
+                "createdAt": "2021-05-02T11:40:05Z",
+                "includesCreatedEdit": true,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "yxieca"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-27T18:03:56Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "stepanblyschak"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-05T11:47:18Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-04T14:55:44Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "DISMISSED"
+            }
+        ],
+        "number": 1646,
+        "reviews": [
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-02-21T07:44:51Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "shlomibitton"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-02-22T09:10:24Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "shlomibitton"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-02-22T09:16:34Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "stepanblyschak"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-03-02T13:45:07Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "DISMISSED"
+            },
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-03-07T17:15:26Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "DISMISSED"
+            },
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-04T06:28:03Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "CHANGES_REQUESTED"
+            },
+            {
+                "author": {
+                    "login": "shlomibitton"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-04T07:24:59Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-04T14:55:44Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "DISMISSED"
+            },
+            {
+                "author": {
+                    "login": "stepanblyschak"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-05T09:30:17Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "CHANGES_REQUESTED"
+            },
+            {
+                "author": {
+                    "login": "shlomibitton"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-05T11:42:07Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "shlomibitton"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-05T11:42:12Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "shlomibitton"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-05T11:42:15Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "stepanblyschak"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-05T11:47:18Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "yxieca"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-08T15:40:59Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "shlomibitton"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-08T15:44:18Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "shlomibitton"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-14T06:58:07Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "yxieca"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-27T18:03:56Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "lguohan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "missing pytest",
+                "createdAt": "2021-02-18T07:06:15Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": [
+                    {
+                        "content": "THUMBS_UP",
+                        "users": {
+                            "totalCount": 1
+                        }
+                    }
+                ]
+            },
+            {
+                "author": {
+                    "login": "volodymyrsamotiy"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "In order for VS test to pass first need to merge the following PR for \"vslib\": https://github.com/Azure/sonic-sairedis/pull/804",
+                "createdAt": "2021-03-04T16:14:14Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@prsunny can you please review?",
+                "createdAt": "2021-03-29T10:11:28Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "> In order for VS test to pass first need to merge the following PR for \"vslib\": [Azure/sonic-sairedis#804](https://github.com/Azure/sonic-sairedis/pull/804)\r\n\r\n@volodymyrsamotiy  it was merged. please check that submodule is updated and then retest.",
+                "createdAt": "2021-04-04T07:26:34Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "retest this please",
+                "createdAt": "2021-04-06T00:10:22Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "/azp run",
+                "createdAt": "2021-04-06T00:10:57Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "azure-pipelines"
+                },
+                "authorAssociation": "NONE",
+                "body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>",
+                "createdAt": "2021-04-06T00:11:10Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@volodymyrsamotiy , can you please take a look at the test failures?",
+                "createdAt": "2021-04-07T16:02:17Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "/azp run",
+                "createdAt": "2021-04-07T17:40:20Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "azure-pipelines"
+                },
+                "authorAssociation": "NONE",
+                "body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>",
+                "createdAt": "2021-04-07T17:40:35Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "volodymyrsamotiy"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "Fixed last review comments and test failure",
+                "createdAt": "2021-04-08T11:09:34Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "abdosi"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "Need pr for 201911. cherry-pick has conflict.\r\n\r\n@prsunny @volodymyrsamotiy ",
+                "createdAt": "2021-04-08T16:44:38Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "abdosi"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "Included without dvs test. Please create new pr for dvs test in 201911.",
+                "createdAt": "2021-04-08T22:51:24Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "abdosi"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@volodymyrsamotiy we should optimize the PR to use addHostIntfs() as this can support VLAN based Host router interface. There should not be need of new set of create/remove API's().\r\n\r\nWe can just add this check\r\n\r\n```\r\n    if (port.m_type == Port::VLAN)\r\n    {\r\n        attr.value.oid = port.m_vlan_info.vlan_oid;\r\n    }\r\n    else\r\n    {\r\n        attr.value.oid = port.m_port_id;\r\n    }\r\n```\r\n\r\n@prsunny ",
+                "createdAt": "2021-04-10T00:28:18Z",
+                "includesCreatedEdit": true,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-08T15:29:38Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 1645,
+        "reviews": [
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-03-04T05:52:49Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "volodymyrsamotiy"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-03-04T16:40:29Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "volodymyrsamotiy"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-03-04T16:41:02Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-06T19:36:44Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "volodymyrsamotiy"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-08T11:09:00Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "volodymyrsamotiy"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-08T11:09:07Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-08T15:29:38Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@dgsudharsan , @padmanarayana to review ",
+                "createdAt": "2021-02-03T02:08:06Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "/azp run",
+                "createdAt": "2021-03-26T18:07:43Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "azure-pipelines"
+                },
+                "authorAssociation": "NONE",
+                "body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>",
+                "createdAt": "2021-03-26T18:07:56Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@fredyu190011 , can you please do a force-push?",
+                "createdAt": "2021-03-26T18:09:02Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "fredyu190011"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "Hi @prsunny , I solve the conflict through merge. Is it okay?",
+                "createdAt": "2021-03-30T05:47:35Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "/AzurePipelines run",
+                "createdAt": "2021-03-30T15:36:57Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "azure-pipelines"
+                },
+                "authorAssociation": "NONE",
+                "body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>",
+                "createdAt": "2021-03-30T15:37:13Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "dgsudharsan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@fredyu190011 Please address my latest comments.",
+                "createdAt": "2021-03-30T18:13:33Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "fredyu190011"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "Hi @dgsudharsan , I cannot see your latest comment.\r\nI fixed some merging mistake to pass the auto test.",
+                "createdAt": "2021-03-31T09:59:51Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "dgsudharsan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@prsunny Can we merge this?",
+                "createdAt": "2021-04-01T19:55:37Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "dgsudharsan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "Please add it for 202012 branch.",
+                "createdAt": "2021-04-01T19:57:22Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "dgsudharsan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-01T19:54:37Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-01T20:42:14Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "padmanarayana"
+                },
+                "authorAssociation": "NONE",
+                "body": "",
+                "submittedAt": "2021-02-03T15:36:28Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "DISMISSED"
+            }
+        ],
+        "number": 1623,
+        "reviews": [
+            {
+                "author": {
+                    "login": "dgsudharsan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-02-03T02:10:30Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "DISMISSED"
+            },
+            {
+                "author": {
+                    "login": "padmanarayana"
+                },
+                "authorAssociation": "NONE",
+                "body": "",
+                "submittedAt": "2021-02-03T02:35:01Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "DISMISSED"
+            },
+            {
+                "author": {
+                    "login": "dgsudharsan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-02-03T14:46:01Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "DISMISSED"
+            },
+            {
+                "author": {
+                    "login": "padmanarayana"
+                },
+                "authorAssociation": "NONE",
+                "body": "",
+                "submittedAt": "2021-02-03T15:36:28Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "DISMISSED"
+            },
+            {
+                "author": {
+                    "login": "dgsudharsan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-01T19:54:37Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "prsunny"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-01T20:42:14Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    },
+    {
+        "comments": [
+            {
+                "author": {
+                    "login": "anshuv-mfst"
+                },
+                "authorAssociation": "NONE",
+                "body": "@eswaran (Arista), @abdosi - could you please review the PR, thanks. ",
+                "createdAt": "2021-01-27T17:10:34Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "vganesan-nokia"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "retest this please",
+                "createdAt": "2021-02-23T15:54:24Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "vganesan-nokia"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "retest vs please",
+                "createdAt": "2021-02-23T16:05:17Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "vganesan-nokia"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "@lguohan, would you please help restarting the Azure-sonic-swss(Test vstes)? It seems there is some cleanup issue.  \"retest this\" is not responding. I do not have sufficient permission to start \"AzurePipeline run\"",
+                "createdAt": "2021-02-23T16:08:02Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "vganesan-nokia"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "Azurepipelines run",
+                "createdAt": "2021-03-07T21:31:53Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "vganesan-nokia"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "/Azurepipelines run",
+                "createdAt": "2021-03-07T21:32:12Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "azure-pipelines"
+                },
+                "authorAssociation": "NONE",
+                "body": "<samp>\nCommenter does not have sufficient privileges for PR 1602 in repo Azure/sonic-swss<br>\r\n\n</samp>",
+                "createdAt": "2021-03-07T21:32:17Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "abdosi"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "/Azurepipelines run",
+                "createdAt": "2021-03-07T21:33:15Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "azure-pipelines"
+                },
+                "authorAssociation": "NONE",
+                "body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>",
+                "createdAt": "2021-03-07T21:33:26Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "vganesan-nokia"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "@abdosi, thanks for starting the Azurepipelines. Would you please review and approve so that we can proceed to merge?",
+                "createdAt": "2021-03-09T19:03:09Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "abdosi"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "reviewing this. ",
+                "createdAt": "2021-03-15T02:35:22Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "skeesara-nokia"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-16T19:53:30Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "abdosi"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-20T02:09:24Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "ysmanman"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-02-24T16:56:53Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "DISMISSED"
+            }
+        ],
+        "number": 1602,
+        "reviews": [
+            {
+                "author": {
+                    "login": "ysmanman"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-02-03T04:23:02Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "vganesan-nokia"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-02-03T04:29:16Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "ysmanman"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-02-10T05:23:38Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "ysmanman"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-02-10T05:54:06Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "ysmanman"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-02-10T05:55:38Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "ysmanman"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-02-10T06:05:25Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "vganesan-nokia"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-02-11T16:24:56Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "vganesan-nokia"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-02-11T16:37:00Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "vganesan-nokia"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-02-11T16:41:44Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "vganesan-nokia"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-02-11T16:44:21Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "vganesan-nokia"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-02-12T16:13:46Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "vganesan-nokia"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-02-17T18:48:04Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "ysmanman"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-02-24T16:56:53Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "DISMISSED"
+            },
+            {
+                "author": {
+                    "login": "abdosi"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-03-31T01:12:00Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "vganesan-nokia"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-03-31T02:20:10Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "abdosi"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-01T23:05:44Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "abdosi"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-01T23:10:51Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "abdosi"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-01T23:11:39Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "vganesan-nokia"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-01T23:52:00Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "vganesan-nokia"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-02T00:24:09Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "abdosi"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-02T01:23:08Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "vganesan-nokia"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-02T02:29:39Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "skeesara-nokia"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-02T14:43:18Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "skeesara-nokia"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-02T19:19:01Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "abdosi"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-09T18:32:01Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "vganesan-nokia"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-09T19:11:51Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "abdosi"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-09T22:01:36Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "skeesara-nokia"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "",
+                "submittedAt": "2021-04-16T19:53:30Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "COMMENTED"
+            },
+            {
+                "author": {
+                    "login": "abdosi"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2021-04-20T02:09:24Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "repo": "sonic-swss"
+    }
+]

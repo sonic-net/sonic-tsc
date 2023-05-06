@@ -1,0 +1,210 @@
+.drop table issues
+
+.create table prs(
+    additions:      string,
+    author:         string,
+    baseRefName:    string,
+    mergedAt:       datetime,
+    number:         string,
+    title_:         string,
+    repo:           string 
+)
+
+.drop table issues ingestion csv  mapping "mapping1"
+
+.create table prs ingestion json mapping "mapping1"
+'['
+'  {"Properties": { "Path": "$.additions" },    "column": "additions",      "datatype": "string"},'
+'  {"Properties": { "Path": "$.author"},        "column": "author",         "datatype": "string"},'
+'  {"Properties": { "Path": "$.baseRefName"},   "column": "baseRefName",    "datatype": "string"},'
+'  {"Properties": { "Path": "$.mergedAt"},      "column": "mergedAt",       "datatype": "datetime"},'
+'  {"Properties": { "Path": "$.number"},        "column": "number",         "datatype": "string"},'
+'  {"Properties": { "Path": "$.title"},         "column": "title_",         "datatype": "string" },'
+'  {"Properties": { "Path": "$.repo"},          "column": "repo",           "datatype": "string" }'
+']'
+
+.drop table prComments
+
+.create table prComments(
+    comment_author:         string,
+    comment_body:           string ,
+    comment_at:             datetime ,
+    latestReview_author:    string ,
+    latestReview_state:     string ,
+    latestReview_at:        datetime ,
+    review_author:          string ,
+    review_at:              datetime,
+    number:                 string,
+    repo:                   string 
+)
+
+.drop table prComments ingestion json mapping "mapping1"
+
+.create table prComments ingestion json mapping "mapping1"
+'['
+'  {"Properties": { "Path": "$.comment_author" },       "column": "comment_author",         "datatype": "string"},'
+'  {"Properties": { "Path": "$.comment_body"},          "column": "comment_body",           "datatype": "string"},'
+'  {"Properties": { "Path": "$.comment_at"},            "column": "comment_at",             "datatype": "datetime"},'
+'  {"Properties": { "Path": "$.latestReview_author"},   "column": "latestReview_author",    "datatype": "string"},'
+'  {"Properties": { "Path": "$.latestReview_state"},    "column": "latestReview_state",     "datatype": "string"},'
+'  {"Properties": { "Path": "$.latestReview_at"},       "column": "latestReview_at",        "datatype": "datetime"},'
+'  {"Properties": { "Path": "$.review_author"},         "column": "review_author",          "datatype": "string"},'
+'  {"Properties": { "Path": "$.review_at"},             "column": "review_at",              "datatype": "datetime"},'
+'  {"Properties": { "Path": "$.number"},                "column": "number",                 "datatype": "string"},'
+'  {"Properties": { "Path": "$.repo"},                  "column": "repo",                   "datatype": "string"},'
+']'
+
+
+.clear table author data 
+
+.clear table prComments data 
+
+.clear table highLevelDisign data 
+
+.create table highLevelDisign(
+    repo:       string,
+    file:       string,
+    author:     string,
+    created_at: datetime
+)
+
+.create table highLevelDisign ingestion csv mapping "mapping1"
+```
+[
+    {"Column": "repo", "Properties": {"Ordinal": "0"}},
+    {"Column": "file", "Properties": {"Ordinal": "1"}},
+    {"Column": "author", "Properties": {"Ordinal": "2"}},
+    {"Column": "created_at", "Properties": {"Ordinal": "3"}}
+]
+```
+
+.create table author(
+    id:             string,
+    name:           string,
+    organization:   string
+)
+
+.create table author ingestion csv mapping "mapping1"
+```
+[
+    {"Column": "id", "Properties": {"Ordinal": "0"}},
+    {"Column": "name", "Properties": {"Ordinal": "1"}},
+    {"Column": "organization", "Properties": {"Ordinal": "2"}}
+]
+```
+
+.create table issues(
+    author:             string,
+    createdAt:          datetime,
+    labels:             string,
+    number:             string,
+    state:              string 
+)
+
+.create table issues ingestion json mapping "mapping1"
+```
+[
+  {"Properties": { "Path": "$.author" },    "column": "author",     "datatype": "string"},
+  {"Properties": { "Path": "$.createdAt"},  "column": "createdAt",  "datatype": "datetime"},
+  {"Properties": { "Path": "$.labels"},     "column": "labels",     "datatype": "string"},
+  {"Properties": { "Path": "$.number"},     "column": "number",     "datatype": "string"},
+  {"Properties": { "Path": "$.state"},      "column": "state",      "datatype": "string"}
+]
+```
+
+author | take 10 
+
+// author input microsoft info
+author
+| join kind=leftouter cluster('1es.kusto.windows.net').database('GitHub').githubemployeelink on $left.id==$right.githubUserName
+| extend organization=iff(organization contains "null",iff(githubUserName != '', 'Microsoft', "null"),organization)
+| extend organization=replace_string(organization,'@','')
+| extend organization=iff(organization contains "microsoft", 'Microsoft',organization)
+| extend organization=iff(organization contains "nvidia", 'Nvidia',organization)
+| extend organization=iff(organization contains "dell", 'Dell',organization)
+| extend organization=iff(organization contains "azure", 'Microsoft',organization)
+| extend organization=iff(organization contains "cisco", 'Cisco',organization)
+| extend organization=iff(organization contains "broadcom", 'Broadcom',organization)
+| extend organization=iff(organization contains "arista", 'Broadcom',organization)
+| extend organization=iff(organization contains "intel", 'Intel',organization)
+| extend organization=iff(organization contains "barefoot", 'Barefoot',organization)
+| extend organization=iff(organization contains "centec", 'Centec',organization)
+| extend organization=iff(organization contains "cavium", 'Cavium',organization)
+| extend organization=iff(organization contains "celestica", 'Celestica',organization)
+| extend organization=iff(organization contains "edgecore", 'Edgecore',organization)
+| extend organization=iff(organization contains "marvell", 'Marvell',organization)
+| project github_id=id,github_name=name,organization;
+
+
+// author map
+let authorMap=author;
+// 2. Merged PR [2] Count (S/M/L)
+let pr =
+prs
+| extend year=getyear(mergedAt)
+| extend score=iff( (toint(additions)>300) , 50 , iff( (toint(additions)>50) , 20 , 10))
+| extend score_i=iff( year == 2022, 0.3*score, iff(year == 2021, 0.25*score, iff(year == 2020, 0.2*score,iff(year == 2019, 0.15*score,iff(year == 2018, 0.1*score,0.0)))));
+// 1. Merged HLD [1] Count
+// 5. Documentations (Release Notes/Meeting Minutes)
+let hld=
+highLevelDisign
+| extend score=50
+| extend year=getyear(created_at)
+| extend score_i=iff( year == 2022, 0.3*score, iff(year == 2021, 0.25*score, iff(year == 2020, 0.2*score,iff(year == 2019, 0.15*score,iff(year == 2018, 0.1*score,0.0)))));
+// 7. Issues Opened Count
+let issue=
+issues
+| extend score=5
+| extend year=getyear(createdAt)
+| extend score_i=iff( year == 2022, 0.3*score, iff(year == 2021, 0.25*score, iff(year == 2020, 0.2*score,iff(year == 2019, 0.15*score,iff(year == 2018, 0.1*score,0.0)))));
+union pr,hld,issue
+| summarize sum(score_i) by author
+| where author != 'mssonicbld'
+| sort by sum_score_i desc
+| join kind=leftouter authorMap on $left.author==$right.id
+| extend organization=iff(organization == '', iff(author contains "microsoft", "Microsoft", organization) , organization)
+| extend organization=iff(organization == '', iff(author contains "mellanox", "Mellanox", organization) , organization)
+| extend organization=iff(organization == '', iff(author contains "alibaba", "Alibaba", organization) , organization)
+| extend organization=iff(organization == '', iff(author contains "dell", "Dell", organization) , organization)
+| extend organization=iff(organization == '', iff(author contains "broadcom", "Broadcom", organization) , organization)
+| summarize sum(sum_score_i) by organization
+| sort by sum_sum_score_i desc 
+
+author
+| join kind=leftouter cluster('1es.kusto.windows.net').database('GitHub').githubemployeelink on $left.id==$right.githubUserName
+| extend organization=iff(organization contains "null",iff(githubUserName != '', 'Microsoft', "null"),organization)
+| extend organization=replace_string(organization,'@','')
+| extend organization=iff(organization contains "microsoft", 'Microsoft',organization)
+| extend organization=iff(organization contains "nvidia", 'Nvidia',organization)
+| extend organization=iff(organization contains "dell", 'Dell',organization)
+| extend organization=iff(organization contains "azure", 'Microsoft',organization)
+| extend organization=iff(organization contains "cisco", 'Cisco',organization)
+| extend organization=iff(organization contains "broadcom", 'Broadcom',organization)
+| extend organization=iff(organization contains "arista", 'Broadcom',organization)
+| extend organization=iff(organization contains "intel", 'Intel',organization)
+| extend organization=iff(organization contains "barefoot", 'Barefoot',organization)
+| extend organization=iff(organization contains "centec", 'Centec',organization)
+| extend organization=iff(organization contains "cavium", 'Cavium',organization)
+| extend organization=iff(organization contains "celestica", 'Celestica',organization)
+| extend organization=iff(organization contains "edgecore", 'Edgecore',organization)
+| extend organization=iff(organization contains "marvell", 'Marvell',organization)
+| project github_id=id,github_name=name,organization;
+
+// comments
+let comment=
+prComments
+| extend year=iff(review_at > ago(10000d), getyear(review_at), iff(comment_at > ago(10000d), getyear(comment_at), getyear(latestReview_at)))
+| extend timestamp=iff(review_at > ago(10000d), review_at, iff(comment_at > ago(10000d), comment_at, latestReview_at))
+| extend author=iff(review_at > ago(10000d), review_author, iff(comment_at > ago(10000d), comment_author, latestReview_author))
+| where author != "mssonicbld"
+| sort by timestamp desc
+| take 10;
+
+# query review comment potential way.
+database('internal').GitHubEvents
+| sort by Timestamp asc 
+| where Name contains "pull_re"
+| extend payload_json = parse_json(Payload)
+| project Name,Action, payload_json.pull_request.html_url, payload_json
+| where payload_json_pull_request_html_url startswith "https://github.com/sonic-net/sonic-buildimage/pull/14632"
+| where payload_json contains "why do we need this"
