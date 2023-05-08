@@ -1,0 +1,255 @@
+[
+    {
+        "number": 15,
+        "repo": "sonic-telemetry",
+        "comment_at": "2018-09-05T21:22:57Z",
+        "comment_author": "chaliu",
+        "comment_body": "And here are the unit tests results:\r\n\r\n```\r\ncchliu@cchliu-vm:~/Work/go/src/test/sonic-telemetry-pfcwd$ go test -v ./gnmi_server/\r\n=== RUN   TestGnmiGet\r\n=== RUN   TestGnmiGet/Test_non-existing_path_Target\r\n=== RUN   TestGnmiGet/Test_empty_path_target\r\n=== RUN   TestGnmiGet/Get_valid_but_non-existing_node\r\n=== RUN   TestGnmiGet/Get_COUNTERS_PORT_NAME_MAP\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet68\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet68_SAI_PORT_STAT_PFC_7_RX_PKTS\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet68_Pfcwd\r\n=== RUN   TestGnmiGet/get_COUNTERS_(use_vendor_alias):Ethernet68/1\r\n=== RUN   TestGnmiGet/get_COUNTERS_(use_vendor_alias):Ethernet68/1_SAI_PORT_STAT_PFC_7_RX_PKTS\r\n=== RUN   TestGnmiGet/get_COUNTERS_(use_vendor_alias):Ethernet68/1_Pfcwd\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet*\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet*_SAI_PORT_STAT_PFC_7_RX_PKTS\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet*_Pfcwd\r\n--- PASS: TestGnmiGet (5.11s)\r\n    --- PASS: TestGnmiGet/Test_non-existing_path_Target (0.02s)\r\n    --- PASS: TestGnmiGet/Test_empty_path_target (0.00s)\r\n    --- PASS: TestGnmiGet/Get_valid_but_non-existing_node (0.00s)\r\n    --- PASS: TestGnmiGet/Get_COUNTERS_PORT_NAME_MAP (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet68 (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet68_SAI_PORT_STAT_PFC_7_RX_PKTS (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet68_Pfcwd (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS_(use_vendor_alias):Ethernet68/1 (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS_(use_vendor_alias):Ethernet68/1_SAI_PORT_STAT_PFC_7_RX_PKTS (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS_(use_vendor_alias):Ethernet68/1_Pfcwd (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet* (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet*_SAI_PORT_STAT_PFC_7_RX_PKTS (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet*_Pfcwd (0.00s)\r\n=== RUN   TestGnmiSubscribe\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_COUNTERS_PORT_NAME_MAP_with_new_test_field_field\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_key_Ethernet68_with_new_test_field_field\r\n=== RUN   TestGnmiSubscribe/(use_vendor_alias)_stream_query_for_table_key_Ethernet68/1_with_new_test_field_field\r\n=== RUN   TestGnmiSubscribe/stream_query_for_COUNTERS/Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_with_update_of_filed_value\r\n=== RUN   TestGnmiSubscribe/(use_vendor_alias)_stream_query_for_COUNTERS/[Ethernet68/1]/SAI_PORT_STAT_PFC_7_RX_PKTS_with_update_of_filed_value\r\n=== RUN   TestGnmiSubscribe/stream_query_for_COUNTERS/Ethernet68/Pfcwd_with_update_of_filed_value\r\n=== RUN   TestGnmiSubscribe/(use_vendor_alias)_stream_query_for_COUNTERS/[Ethernet68/1]/Pfcwd_with_update_of_filed_value\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_key_Ethernet*_with_new_test_field_field_on_Ethernet68\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_key_Ethernet*/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_update\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_key_Ethernet*/Pfcwd_with_field_value_update\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_COUNTERS_PORT_NAME_MAP_with_new_field_test_field\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_COUNTERS_PORT_NAME_MAP_with_test_field_delete\r\n=== RUN   TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_change\r\n=== RUN   TestGnmiSubscribe/(use_vendor_alias)_poll_query_for_COUNTERS/[Ethernet68/1]/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_change\r\n=== RUN   TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/Pfcwd_with_field_value_change\r\n=== RUN   TestGnmiSubscribe/(use_vendor_alias)_poll_query_for_COUNTERS/[Ethernet68/1]/Pfcwd_with_field_value_change\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_key_Ethernet*_with_Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_field_value_change\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_key_field_Ethernet*/SAI_PORT_STAT_PFC_7_RX_PKTS_with_Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_field_value_change\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_key_filed_Etherenet*/Pfcwd_with_Ethernet68:3/PFC_WD_QUEUE_STATS_DEADLOCK_DETECTED_field_value_change\r\n=== RUN   TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet*/Queues\r\n=== RUN   TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/Queues_with_field_value_change\r\n=== RUN   TestGnmiSubscribe/(use_vendor_alias)_poll_query_for_COUNTERS/Ethernet68/Queues_with_field_value_change\r\n--- PASS: TestGnmiSubscribe (74.99s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_table_COUNTERS_PORT_NAME_MAP_with_new_test_field_field (2.01s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_table_key_Ethernet68_with_new_test_field_field (3.01s)\r\n    --- PASS: TestGnmiSubscribe/(use_vendor_alias)_stream_query_for_table_key_Ethernet68/1_with_new_test_field_field (3.01s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_COUNTERS/Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_with_update_of_filed_value (3.01s)\r\n    --- PASS: TestGnmiSubscribe/(use_vendor_alias)_stream_query_for_COUNTERS/[Ethernet68/1]/SAI_PORT_STAT_PFC_7_RX_PKTS_with_update_of_filed_value (3.01s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_COUNTERS/Ethernet68/Pfcwd_with_update_of_filed_value (3.01s)\r\n    --- PASS: TestGnmiSubscribe/(use_vendor_alias)_stream_query_for_COUNTERS/[Ethernet68/1]/Pfcwd_with_update_of_filed_value (3.01s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_table_key_Ethernet*_with_new_test_field_field_on_Ethernet68 (3.02s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_table_key_Ethernet*/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_update (2.00s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_table_key_Ethernet*/Pfcwd_with_field_value_update (2.01s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_table_COUNTERS_PORT_NAME_MAP_with_new_field_test_field (2.01s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_table_COUNTERS_PORT_NAME_MAP_with_test_field_delete (2.02s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_change (2.00s)\r\n    --- PASS: TestGnmiSubscribe/(use_vendor_alias)_poll_query_for_COUNTERS/[Ethernet68/1]/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_change (2.01s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/Pfcwd_with_field_value_change (2.03s)\r\n    --- PASS: TestGnmiSubscribe/(use_vendor_alias)_poll_query_for_COUNTERS/[Ethernet68/1]/Pfcwd_with_field_value_change (2.01s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_table_key_Ethernet*_with_Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_field_value_change (2.01s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_table_key_field_Ethernet*/SAI_PORT_STAT_PFC_7_RX_PKTS_with_Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_field_value_change (2.02s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_table_key_filed_Etherenet*/Pfcwd_with_Ethernet68:3/PFC_WD_QUEUE_STATS_DEADLOCK_DETECTED_field_value_change (2.02s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet*/Queues (1.05s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/Queues_with_field_value_change (2.04s)\r\n    --- PASS: TestGnmiSubscribe/(use_vendor_alias)_poll_query_for_COUNTERS/Ethernet68/Queues_with_field_value_change (2.01s)\r\nPASS\r\nok      test/sonic-telemetry-pfcwd/gnmi_server  80.107s\r\n```\r\n\r\n```\r\ncchliu@cchliu-vm:~/Work/go/src/test/sonic-telemetry-pfcwd$ go test -v ./dialout/dialout_client\r\n=== RUN   TestGNMIDialOutPublish\r\n=== RUN   TestGNMIDialOutPublish/DialOut_to_first_collector_in_stream_mode_and_synced\r\n=== RUN   TestGNMIDialOutPublish/DialOut_to_second_collector_in_stream_mode_upon_failure_of_first_collector\r\n--- PASS: TestGNMIDialOutPublish (17.76s)\r\n    --- PASS: TestGNMIDialOutPublish/DialOut_to_first_collector_in_stream_mode_and_synced (0.51s)\r\n    --- PASS: TestGNMIDialOutPublish/DialOut_to_second_collector_in_stream_mode_upon_failure_of_first_collector (7.51s)\r\nPASS\r\nok      test/sonic-telemetry-pfcwd/dialout/dialout_client       17.799s\r\n```"
+    },
+    {
+        "number": 15,
+        "repo": "sonic-telemetry",
+        "review_at": "2018-09-05T22:02:01Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 15,
+        "repo": "sonic-telemetry",
+        "review_at": "2018-09-05T22:16:02Z",
+        "review_author": "chaliu"
+    },
+    {
+        "number": 15,
+        "repo": "sonic-telemetry",
+        "review_at": "2018-09-06T06:08:28Z",
+        "review_author": "jipanyang"
+    },
+    {
+        "number": 15,
+        "repo": "sonic-telemetry",
+        "review_at": "2018-09-06T17:32:40Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 15,
+        "repo": "sonic-telemetry",
+        "review_at": "2018-09-06T18:11:00Z",
+        "review_author": "jipanyang"
+    },
+    {
+        "number": 15,
+        "repo": "sonic-telemetry",
+        "review_at": "2018-09-06T18:13:16Z",
+        "review_author": "hui-ma"
+    },
+    {
+        "number": 15,
+        "repo": "sonic-telemetry",
+        "latestReview_at": "2018-09-06T17:32:40Z",
+        "latestReview_author": "jleveque",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 15,
+        "repo": "sonic-telemetry",
+        "latestReview_at": "2018-09-06T18:13:16Z",
+        "latestReview_author": "hui-ma",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 15,
+        "repo": "sonic-telemetry",
+        "latestReview_at": "2018-09-06T18:11:00Z",
+        "latestReview_author": "jipanyang",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 13,
+        "repo": "sonic-telemetry",
+        "comment_at": "2018-08-23T22:47:30Z",
+        "comment_author": "chaliu",
+        "comment_body": "The unit test cases for alias translation are added. Please review the code."
+    },
+    {
+        "number": 13,
+        "repo": "sonic-telemetry",
+        "comment_at": "2018-08-23T23:41:13Z",
+        "comment_author": "jipanyang",
+        "comment_body": "@chaliu thanks for the updates. Since we don't have auto test check available for this repo yet, could you paste your local test result here, for test cases under both gnmi_server and dialout/dialout_client?"
+    },
+    {
+        "number": 13,
+        "repo": "sonic-telemetry",
+        "comment_at": "2018-08-24T01:02:10Z",
+        "comment_author": "chaliu",
+        "comment_body": "Hi, Jipan,\r\n\r\nI haven\u2019t tested dialout module.\r\n\r\nFor gnmi_server test, I found that original code fails beginning from first \u201cTestGnmiSubscribe\u201d test, as you can see below\r\n=== RUN   TestGnmiGet\r\n=== RUN   TestGnmiGet/Test_non-existing_path_Target\r\n=== RUN   TestGnmiGet/Test_empty_path_target\r\n=== RUN   TestGnmiGet/Get_valid_but_non-existing_node\r\n=== RUN   TestGnmiGet/Get_COUNTERS_PORT_NAME_MAP\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet68\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet68_SAI_PORT_STAT_PFC_7_RX_PKTS\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet*\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet*_SAI_PORT_STAT_PFC_7_RX_PKTS\r\n--- PASS: TestGnmiGet (1.58s)\r\n    --- PASS: TestGnmiGet/Test_non-existing_path_Target (0.02s)\r\n    --- PASS: TestGnmiGet/Test_empty_path_target (0.00s)\r\n    --- PASS: TestGnmiGet/Get_valid_but_non-existing_node (0.00s)\r\n    --- PASS: TestGnmiGet/Get_COUNTERS_PORT_NAME_MAP (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet68 (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet68_SAI_PORT_STAT_PFC_7_RX_PKTS (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet* (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet*_SAI_PORT_STAT_PFC_7_RX_PKTS (0.00s)\r\n=== RUN   TestGnmiSubscribe\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_COUNTERS_PORT_NAME_MAP_with_new_test_field_field\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_key_Ethernet68_with_new_test_field_field\r\n=== RUN   TestGnmiSubscribe/stream_query_for_COUNTERS/Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_with_update_of_filed_value\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_key_Ethernet*_with_new_test_field_field_on_Ethernet68\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_key_Ethernet*/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_update\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_COUNTERS_PORT_NAME_MAP_with_new_field_test_field\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_COUNTERS_PORT_NAME_MAP_with_test_field_delete\r\n=== RUN   TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_change\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_key_Ethernet*_with_Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_field_value_change\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_key_field_Ethernet*/SAI_PORT_STAT_PFC_7_RX_PKTS_with_Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_field_value_change\r\n=== RUN   TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet*/Queues\r\n=== RUN   TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/Queues_with_field_value_change\r\n--- FAIL: TestGnmiSubscribe (41.50s)\r\n    --- FAIL: TestGnmiSubscribe/stream_query_for_table_COUNTERS_PORT_NAME_MAP_with_new_test_field_field (2.01s)\r\n\r\n\r\nI added unit test in the \u201cTestGnmiGet\u201d section, and they passed the test:\r\n=== RUN   TestGnmiGet\r\n=== RUN   TestGnmiGet/Test_non-existing_path_Target\r\n=== RUN   TestGnmiGet/Test_empty_path_target\r\n=== RUN   TestGnmiGet/Get_valid_but_non-existing_node\r\n=== RUN   TestGnmiGet/Get_COUNTERS_PORT_NAME_MAP\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet68\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet68_SAI_PORT_STAT_PFC_7_RX_PKTS\r\n=== RUN   TestGnmiGet/use_vendor_alias:_get_COUNTERS:Ethernet68/1\r\n=== RUN   TestGnmiGet/use_vendor_alias:_get_COUNTERS:Ethernet68/1_SAI_PORT_STAT_PFC_7_RX_PKTS\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet*\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet*_SAI_PORT_STAT_PFC_7_RX_PKTS\r\n--- PASS: TestGnmiGet (2.57s)\r\n    --- PASS: TestGnmiGet/Test_non-existing_path_Target (0.01s)\r\n    --- PASS: TestGnmiGet/Test_empty_path_target (0.00s)\r\n    --- PASS: TestGnmiGet/Get_valid_but_non-existing_node (0.00s)\r\n    --- PASS: TestGnmiGet/Get_COUNTERS_PORT_NAME_MAP (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet68 (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet68_SAI_PORT_STAT_PFC_7_RX_PKTS (0.00s)\r\n    --- PASS: TestGnmiGet/use_vendor_alias:_get_COUNTERS:Ethernet68/1 (0.00s)\r\n    --- PASS: TestGnmiGet/use_vendor_alias:_get_COUNTERS:Ethernet68/1_SAI_PORT_STAT_PFC_7_RX_PKTS (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet* (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet*_SAI_PORT_STAT_PFC_7_RX_PKTS (0.00s)\r\n\r\nNeed your help or Liuqu to fix the Subscribe bug in the original code.\r\n\r\nThanks\r\nChang\r\n\r\nFrom: Jipan Yang <notifications@github.com>\r\nSent: Thursday, August 23, 2018 4:41 PM\r\nTo: Azure/sonic-telemetry <sonic-telemetry@noreply.github.com>\r\nCc: Chang Liu <t-chaliu@microsoft.com>; Mention <mention@noreply.github.com>\r\nSubject: Re: [Azure/sonic-telemetry] Add ability to translate between SONiC interface name and vendor alias (#13)\r\n\r\n\r\n@chaliu<https://na01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fgithub.com%2Fchaliu&data=02%7C01%7Ct-chaliu%40microsoft.com%7Cb25d3f08458a4a3b601808d60951ea42%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C636706644764194592&sdata=Mh9WufeVRzhdAUzSLpRzdOgCJ4PGJz1GGapLfWCFb2k%3D&reserved=0> thanks for the updates. Since we don't have auto test check available for this repo yet, could you paste your local test result here, for test cases under both gnmi_server and dialout/dialout_client?\r\n\r\n\u2014\r\nYou are receiving this because you were mentioned.\r\nReply to this email directly, view it on GitHub<https://na01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fgithub.com%2FAzure%2Fsonic-telemetry%2Fpull%2F13%23issuecomment-415606789&data=02%7C01%7Ct-chaliu%40microsoft.com%7Cb25d3f08458a4a3b601808d60951ea42%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C636706644764194592&sdata=Ji%2FngXRBC8JK5jXcAMDgvUdZTXBlRm8LRp6qOEH%2BMLk%3D&reserved=0>, or mute the thread<https://na01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fgithub.com%2Fnotifications%2Funsubscribe-auth%2FAnuV4xbZjVG4MxhdhvLYMyu558idHZOMks5uTz2agaJpZM4WGxu-&data=02%7C01%7Ct-chaliu%40microsoft.com%7Cb25d3f08458a4a3b601808d60951ea42%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C636706644764204600&sdata=rj2dWdnOg43aGoFDmOx7qmwIZ0pQdemUjfDQdUqH4mI%3D&reserved=0>.\r\n"
+    },
+    {
+        "number": 13,
+        "repo": "sonic-telemetry",
+        "comment_at": "2018-08-24T01:45:16Z",
+        "comment_author": "chaliu",
+        "comment_body": "I added unit test cases in dial-out mode. \r\n\r\nAgain, the original code fails in the first test and passes the second test, as shown:\r\n=== RUN   TestGNMIDialOutPublish\r\n=== RUN   TestGNMIDialOutPublish/DialOut_to_first_collector_in_stream_mode_and_synced\r\n=== RUN   TestGNMIDialOutPublish/DialOut_to_second_collector_in_stream_mode_upon_failure_of_first_collector\r\n--- FAIL: TestGNMIDialOutPublish (19.83s)\r\n    --- FAIL: TestGNMIDialOutPublish/DialOut_to_first_collector_in_stream_mode_and_synced (0.51s)\r\n    --- PASS: TestGNMIDialOutPublish/DialOut_to_second_collector_in_stream_mode_upon_failure_of_first_collector (7.51s)\r\n\r\n\r\n\r\nAfter alias translation is added, I got the same result: the first test case fails and the second passes:\r\n=== RUN   TestGNMIDialOutPublish\r\n=== RUN   TestGNMIDialOutPublish/DialOut_to_first_collector_in_stream_mode_and_synced\r\n=== RUN   TestGNMIDialOutPublish/DialOut_to_second_collector_in_stream_mode_upon_failure_of_first_collector\r\n--- FAIL: TestGNMIDialOutPublish (19.03s)\r\n    --- FAIL: TestGNMIDialOutPublish/DialOut_to_first_collector_in_stream_mode_and_synced (0.50s)\r\n    --- PASS: TestGNMIDialOutPublish/DialOut_to_second_collector_in_stream_mode_upon_failure_of_first_collector (7.51s)\r\n\r\n\r\nNeed Jipan or Liuqu's help to fix the bug in the original code.\r\n\r\nThanks\r\nChang"
+    },
+    {
+        "number": 13,
+        "repo": "sonic-telemetry",
+        "comment_at": "2018-08-24T03:05:47Z",
+        "comment_author": "jipanyang",
+        "comment_body": "The unit test works for me.  maybe you could try \"go get -u all\" to get the latest package then run it again.\r\n\r\nBut I hit the problem that go test didn't exit automatically after test finish, not sure if it is the issue with latest golang.\r\n\r\n \r\n\r\n```\r\nUS-70998M:sonic-telemetry jipanyang$ git status\r\nOn branch master\r\nYour branch is up-to-date with 'origin/master'.\r\nnothing to commit, working tree clean\r\nUS-70998M:sonic-telemetry jipanyang$ git log -n 2\r\ncommit 174649414301082dad363196d069a34b503e07ae\r\nAuthor: Jipan Yang <jipan.yang@alibaba-inc.com>\r\nDate:   Tue Aug 21 02:52:02 2018 -0700\r\n\r\n    Add debian package support (#11)\r\n    \r\n    Signed-off-by: Jipan Yang <jipan.yang@alibaba-inc.com>\r\n\r\ncommit a1407aa919737c77b9876f2e80ef1a2516ec7071\r\nAuthor: Jipan Yang <jipan.yang@alibaba-inc.com>\r\nDate:   Sat Mar 24 18:47:07 2018 -0700\r\n\r\n    Add basic installing and running instructions in README (#10)\r\n    \r\n    Signed-off-by: Jipan Yang <jipan.yang@alibaba-inc.com>\r\nUS-70998M:sonic-telemetry jipanyang$ go test -v ./dialout/dialout_client/ \r\n=== RUN   TestGNMIDialOutPublish\r\n=== RUN   TestGNMIDialOutPublish/DialOut_to_first_collector_in_stream_mode_and_synced\r\n=== RUN   TestGNMIDialOutPublish/DialOut_to_second_collector_in_stream_mode_upon_failure_of_first_collector\r\n--- PASS: TestGNMIDialOutPublish (25.98s)\r\n    --- PASS: TestGNMIDialOutPublish/DialOut_to_first_collector_in_stream_mode_and_synced (0.53s)\r\n    --- PASS: TestGNMIDialOutPublish/DialOut_to_second_collector_in_stream_mode_upon_failure_of_first_collector (7.53s)\r\nPASS\r\nok  \tsonic-telemetry/dialout/dialout_client\t26.007s\r\n\r\n\r\n\r\n\r\n\r\n\r\n^C^Z\r\n[4]+  Stopped                 go test -v ./dialout/dialout_client/\r\nUS-70998M:sonic-telemetry jipanyang$ go test -v ./gnmi_server/\r\n=== RUN   TestGnmiGet\r\n=== RUN   TestGnmiGet/Test_non-existing_path_Target\r\n=== RUN   TestGnmiGet/Test_empty_path_target\r\n=== RUN   TestGnmiGet/Get_valid_but_non-existing_node\r\n=== RUN   TestGnmiGet/Get_COUNTERS_PORT_NAME_MAP\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet68\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet68_SAI_PORT_STAT_PFC_7_RX_PKTS\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet*\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet*_SAI_PORT_STAT_PFC_7_RX_PKTS\r\n--- PASS: TestGnmiGet (4.93s)\r\n    --- PASS: TestGnmiGet/Test_non-existing_path_Target (0.10s)\r\n    --- PASS: TestGnmiGet/Test_empty_path_target (0.00s)\r\n    --- PASS: TestGnmiGet/Get_valid_but_non-existing_node (0.00s)\r\n    --- PASS: TestGnmiGet/Get_COUNTERS_PORT_NAME_MAP (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet68 (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet68_SAI_PORT_STAT_PFC_7_RX_PKTS (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet* (0.01s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet*_SAI_PORT_STAT_PFC_7_RX_PKTS (0.01s)\r\n=== RUN   TestGnmiSubscribe\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_COUNTERS_PORT_NAME_MAP_with_new_test_field_field\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_key_Ethernet68_with_new_test_field_field\r\n=== RUN   TestGnmiSubscribe/stream_query_for_COUNTERS/Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_with_update_of_filed_value\r\n12077:M 23 Aug 19:58:50.020 * 100 changes in 300 seconds. Saving...\r\n12077:M 23 Aug 19:58:50.021 * Background saving started by pid 12201\r\n12201:C 23 Aug 19:58:50.026 * DB saved on disk\r\n12077:M 23 Aug 19:58:50.125 * Background saving terminated with success\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_key_Ethernet*_with_new_test_field_field_on_Ethernet68\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_key_Ethernet*/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_update\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_COUNTERS_PORT_NAME_MAP_with_new_field_test_field\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_COUNTERS_PORT_NAME_MAP_with_test_field_delete\r\n=== RUN   TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_change\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_key_Ethernet*_with_Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_field_value_change\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_key_field_Ethernet*/SAI_PORT_STAT_PFC_7_RX_PKTS_with_Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_field_value_change\r\n=== RUN   TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet*/Queues\r\n=== RUN   TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/Queues_with_field_value_change\r\n--- PASS: TestGnmiSubscribe (41.77s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_table_COUNTERS_PORT_NAME_MAP_with_new_test_field_field (2.01s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_table_key_Ethernet68_with_new_test_field_field (3.01s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_COUNTERS/Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_with_update_of_filed_value (3.00s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_table_key_Ethernet*_with_new_test_field_field_on_Ethernet68 (3.01s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_table_key_Ethernet*/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_update (2.01s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_table_COUNTERS_PORT_NAME_MAP_with_new_field_test_field (2.02s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_table_COUNTERS_PORT_NAME_MAP_with_test_field_delete (2.01s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_change (2.01s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_table_key_Ethernet*_with_Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_field_value_change (2.03s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_table_key_field_Ethernet*/SAI_PORT_STAT_PFC_7_RX_PKTS_with_Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_field_value_change (2.03s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet*/Queues (1.12s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/Queues_with_field_value_change (2.01s)\r\nPASS\r\nok  \tsonic-telemetry/gnmi_server\t46.733s\r\n```\r\n\r\n```\r\nUS-70998M:sonic-telemetry jipanyang$ go version\r\ngo version go1.10.3 darwin/amd64\r\n```\r\n"
+    },
+    {
+        "number": 13,
+        "repo": "sonic-telemetry",
+        "comment_at": "2018-08-25T01:14:45Z",
+        "comment_author": "chaliu",
+        "comment_body": "@jipanyang I fixed the bugs in the unit tests, now everything passes. Please review the code.\r\n\r\n```\r\ncchliu@cchliu-vm:~/Work/go/src/test/sonic-telemetry-backup$ go test -v ./gnmi_server/\r\n=== RUN   TestGnmiGet\r\n=== RUN   TestGnmiGet/Test_non-existing_path_Target\r\n=== RUN   TestGnmiGet/Test_empty_path_target\r\n=== RUN   TestGnmiGet/Get_valid_but_non-existing_node\r\n=== RUN   TestGnmiGet/Get_COUNTERS_PORT_NAME_MAP\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet68\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet68_SAI_PORT_STAT_PFC_7_RX_PKTS\r\n=== RUN   TestGnmiGet/use_vendor_alias:_get_COUNTERS:Ethernet68/1\r\n=== RUN   TestGnmiGet/use_vendor_alias:_get_COUNTERS:Ethernet68/1_SAI_PORT_STAT_PFC_7_RX_PKTS\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet*\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet*_SAI_PORT_STAT_PFC_7_RX_PKTS\r\n--- PASS: TestGnmiGet (0.75s)\r\n    --- PASS: TestGnmiGet/Test_non-existing_path_Target (0.02s)\r\n    --- PASS: TestGnmiGet/Test_empty_path_target (0.00s)\r\n    --- PASS: TestGnmiGet/Get_valid_but_non-existing_node (0.00s)\r\n    --- PASS: TestGnmiGet/Get_COUNTERS_PORT_NAME_MAP (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet68 (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet68_SAI_PORT_STAT_PFC_7_RX_PKTS (0.00s)\r\n    --- PASS: TestGnmiGet/use_vendor_alias:_get_COUNTERS:Ethernet68/1 (0.00s)\r\n    --- PASS: TestGnmiGet/use_vendor_alias:_get_COUNTERS:Ethernet68/1_SAI_PORT_STAT_PFC_7_RX_PKTS (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet* (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet*_SAI_PORT_STAT_PFC_7_RX_PKTS (0.00s)\r\n=== RUN   TestGnmiSubscribe\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_COUNTERS_PORT_NAME_MAP_with_new_test_field_field\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_key_Ethernet68_with_new_test_field_field\r\n=== RUN   TestGnmiSubscribe/use_vendor_alias:_stream_query_for_table_key_Ethernet68/1_with_new_test_field_field\r\n=== RUN   TestGnmiSubscribe/stream_query_for_COUNTERS/Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_with_update_of_filed_value\r\n=== RUN   TestGnmiSubscribe/use_vendor_alias:_stream_query_for_COUNTERS/[Ethernet68/1]/SAI_PORT_STAT_PFC_7_RX_PKTS_with_update_of_filed_value\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_key_Ethernet*_with_new_test_field_field_on_Ethernet68\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_key_Ethernet*/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_update\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_COUNTERS_PORT_NAME_MAP_with_new_field_test_field\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_COUNTERS_PORT_NAME_MAP_with_test_field_delete\r\n=== RUN   TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_change\r\n=== RUN   TestGnmiSubscribe/use_vendor_alias:_poll_query_for_COUNTERS/[Ethernet68/1]/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_change\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_key_Ethernet*_with_Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_field_value_change\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_key_field_Ethernet*/SAI_PORT_STAT_PFC_7_RX_PKTS_with_Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_field_value_change\r\n=== RUN   TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet*/Queues\r\n=== RUN   TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/Queues_with_field_value_change\r\n=== RUN   TestGnmiSubscribe/use_vendor_alias:_poll_query_for_COUNTERS/Ethernet68/Queues_with_field_value_change\r\n--- PASS: TestGnmiSubscribe (56.04s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_table_COUNTERS_PORT_NAME_MAP_with_new_test_field_field (2.01s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_table_key_Ethernet68_with_new_test_field_field (3.01s)\r\n    --- PASS: TestGnmiSubscribe/use_vendor_alias:_stream_query_for_table_key_Ethernet68/1_with_new_test_field_field (3.01s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_COUNTERS/Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_with_update_of_filed_value (3.01s)\r\n    --- PASS: TestGnmiSubscribe/use_vendor_alias:_stream_query_for_COUNTERS/[Ethernet68/1]/SAI_PORT_STAT_PFC_7_RX_PKTS_with_update_of_filed_value (3.01s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_table_key_Ethernet*_with_new_test_field_field_on_Ethernet68 (3.02s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_table_key_Ethernet*/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_update (2.00s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_table_COUNTERS_PORT_NAME_MAP_with_new_field_test_field (2.02s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_table_COUNTERS_PORT_NAME_MAP_with_test_field_delete (2.02s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_change (2.01s)\r\n    --- PASS: TestGnmiSubscribe/use_vendor_alias:_poll_query_for_COUNTERS/[Ethernet68/1]/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_change (2.01s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_table_key_Ethernet*_with_Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_field_value_change (2.08s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_table_key_field_Ethernet*/SAI_PORT_STAT_PFC_7_RX_PKTS_with_Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_field_value_change (2.05s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet*/Queues (1.11s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/Queues_with_field_value_change (2.01s)\r\n    --- PASS: TestGnmiSubscribe/use_vendor_alias:_poll_query_for_COUNTERS/Ethernet68/Queues_with_field_value_change (2.03s)\r\nPASS\r\nok      test/sonic-telemetry-backup/gnmi_server (cached)\r\n```\r\n-----------------------------------------------------------------\r\n\r\n```\r\ncchliu@cchliu-vm:~/Work/go/src/test/sonic-telemetry-backup$ go test -v ./dialout/dialout_client/\r\n=== RUN   TestGNMIDialOutPublish\r\n=== RUN   TestGNMIDialOutPublish/DialOut_to_first_collector_in_stream_mode_and_synced\r\n=== RUN   TestGNMIDialOutPublish/DialOut_to_second_collector_in_stream_mode_upon_failure_of_first_collector\r\n--- PASS: TestGNMIDialOutPublish (18.75s)\r\n    --- PASS: TestGNMIDialOutPublish/DialOut_to_first_collector_in_stream_mode_and_synced (0.51s)\r\n    --- PASS: TestGNMIDialOutPublish/DialOut_to_second_collector_in_stream_mode_upon_failure_of_first_collector (7.51s)\r\nPASS\r\nok      test/sonic-telemetry-backup/dialout/dialout_client      (cached)\r\n\r\n```\r\n"
+    },
+    {
+        "number": 13,
+        "repo": "sonic-telemetry",
+        "review_at": "2018-08-22T05:44:51Z",
+        "review_author": "jipanyang"
+    },
+    {
+        "number": 13,
+        "repo": "sonic-telemetry",
+        "review_at": "2018-08-25T01:33:06Z",
+        "review_author": "jipanyang"
+    },
+    {
+        "number": 13,
+        "repo": "sonic-telemetry",
+        "review_at": "2018-08-27T04:46:59Z",
+        "review_author": "jipanyang"
+    },
+    {
+        "number": 13,
+        "repo": "sonic-telemetry",
+        "review_at": "2018-08-27T21:06:03Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 13,
+        "repo": "sonic-telemetry",
+        "review_at": "2018-08-27T21:09:19Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 13,
+        "repo": "sonic-telemetry",
+        "review_at": "2018-08-27T21:10:36Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 13,
+        "repo": "sonic-telemetry",
+        "review_at": "2018-08-27T21:11:39Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 13,
+        "repo": "sonic-telemetry",
+        "review_at": "2018-08-27T21:15:45Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 13,
+        "repo": "sonic-telemetry",
+        "review_at": "2018-08-27T21:15:58Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 13,
+        "repo": "sonic-telemetry",
+        "review_at": "2018-08-27T21:16:19Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 13,
+        "repo": "sonic-telemetry",
+        "review_at": "2018-08-27T21:17:36Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 13,
+        "repo": "sonic-telemetry",
+        "review_at": "2018-08-27T21:26:11Z",
+        "review_author": "chaliu"
+    },
+    {
+        "number": 13,
+        "repo": "sonic-telemetry",
+        "review_at": "2018-08-27T23:31:11Z",
+        "review_author": "chaliu"
+    },
+    {
+        "number": 13,
+        "repo": "sonic-telemetry",
+        "review_at": "2018-08-27T23:32:41Z",
+        "review_author": "chaliu"
+    },
+    {
+        "number": 13,
+        "repo": "sonic-telemetry",
+        "review_at": "2018-08-29T00:48:12Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 13,
+        "repo": "sonic-telemetry",
+        "review_at": "2018-08-29T00:52:28Z",
+        "review_author": "chaliu"
+    },
+    {
+        "number": 13,
+        "repo": "sonic-telemetry",
+        "review_at": "2018-08-29T00:52:36Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 13,
+        "repo": "sonic-telemetry",
+        "review_at": "2018-08-29T01:48:24Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 13,
+        "repo": "sonic-telemetry",
+        "review_at": "2018-08-29T03:47:04Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 13,
+        "repo": "sonic-telemetry",
+        "review_at": "2018-08-29T03:47:16Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 13,
+        "repo": "sonic-telemetry",
+        "review_at": "2018-08-29T15:41:12Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 13,
+        "repo": "sonic-telemetry",
+        "latestReview_at": "2018-08-29T03:47:16Z",
+        "latestReview_author": "jleveque",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 13,
+        "repo": "sonic-telemetry",
+        "latestReview_at": "2018-08-29T15:41:12Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 13,
+        "repo": "sonic-telemetry",
+        "latestReview_at": "2018-08-27T04:46:59Z",
+        "latestReview_author": "jipanyang",
+        "latestReview_state": "APPROVED"
+    }
+]

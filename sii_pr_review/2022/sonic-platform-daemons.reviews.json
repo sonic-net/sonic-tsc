@@ -1,0 +1,4390 @@
+[
+    {
+        "number": 325,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-12-13T11:54:35Z",
+        "review_author": "liat-grozovik"
+    },
+    {
+        "number": 325,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-12-13T11:54:35Z",
+        "latestReview_author": "liat-grozovik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 320,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-12-01T17:10:46Z",
+        "comment_author": "shyam77git",
+        "comment_body": "@mihirpat1 \r\nLooked into the UT logs.\r\nDon't see output/display for 'show int transceiver eeprom' CLIs with this change.\r\nCould you add them?"
+    },
+    {
+        "number": 320,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-12-01T18:14:20Z",
+        "comment_author": "mihirpat1",
+        "comment_body": "> @mihirpat1 Looked into the UT logs. Don't see output/display for 'show int transceiver eeprom' CLIs with this change. Could you add them?\r\n\r\nThe current PR is only for supporting the state DB related changes. I have filed https://github.com/sonic-net/sonic-buildimage/issues/12911 to track the CLI support for the same."
+    },
+    {
+        "number": 320,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-12-01T21:25:01Z",
+        "comment_author": "jaganbal-a",
+        "comment_body": "I see the o/p of \"sfpshow eeprom -d -p port_name\" have \"ModuleThresholdValues:\" and looks incomplete. \r\nDo you want to keep the CLI o/p this way until https://github.com/sonic-net/sonic-buildimage/issues/12911 fix commit?\r\n         ModuleMonitorValues:\r\n\t                Temperature: 73.91C\r\n\t                Vcc: 3.347Volts\r\n\t        ModuleThresholdValues:\r\n\t\r\n\troot@sonic:/home/admin# "
+    },
+    {
+        "number": 320,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-12-01T21:33:29Z",
+        "comment_author": "mihirpat1",
+        "comment_body": "> I see the o/p of \"sfpshow eeprom -d -p port_name\" have \"ModuleThresholdValues:\" and looks incomplete. Do you want to keep the CLI o/p this way until [sonic-net/sonic-buildimage#12911](https://github.com/sonic-net/sonic-buildimage/issues/12911) fix commit? ModuleMonitorValues: Temperature: 73.91C Vcc: 3.347Volts ModuleThresholdValues:\r\n> \r\n> ```\r\n> root@sonic:/home/admin# \r\n> ```\r\n\r\nYes, the corresponding changes will be done with the issue mentioned above"
+    },
+    {
+        "number": 320,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-12-01T22:45:13Z",
+        "comment_author": "jaganbal-a",
+        "comment_body": "> > I see the o/p of \"sfpshow eeprom -d -p port_name\" have \"ModuleThresholdValues:\" and looks incomplete. Do you want to keep the CLI o/p this way until [sonic-net/sonic-buildimage#12911](https://github.com/sonic-net/sonic-buildimage/issues/12911) fix commit? ModuleMonitorValues: Temperature: 73.91C Vcc: 3.347Volts ModuleThresholdValues:\r\n> > ```\r\n> > root@sonic:/home/admin# \r\n> > ```\r\n> \r\n> Yes, the corresponding changes will be done with the issue mentioned above\r\n\r\nthe show int trans CLI o/p will have the Module threshold values right? \r\notherwise it will be difficult to debug any signal out of range scenario."
+    },
+    {
+        "number": 320,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-12-02T18:12:12Z",
+        "comment_author": "mihirpat1",
+        "comment_body": "> > > I see the o/p of \"sfpshow eeprom -d -p port_name\" have \"ModuleThresholdValues:\" and looks incomplete. Do you want to keep the CLI o/p this way until [sonic-net/sonic-buildimage#12911](https://github.com/sonic-net/sonic-buildimage/issues/12911) fix commit? ModuleMonitorValues: Temperature: 73.91C Vcc: 3.347Volts ModuleThresholdValues:\r\n> > > ```\r\n> > > root@sonic:/home/admin# \r\n> > > ```\r\n> > \r\n> > \r\n> > Yes, the corresponding changes will be done with the issue mentioned above\r\n> \r\n> the show int trans CLI o/p will have the Module threshold values right? otherwise it will be difficult to debug any signal out of range scenario.\r\n\r\nNeed access since part of SONiC teamI have now raised https://github.com/sonic-net/sonic-utilities/pull/2535 to ensure that the CLI output remains unchanged with the current changes. We plan to commit both this and https://github.com/sonic-net/sonic-utilities/pull/2535 at the same time to avoid running into dependency issues."
+    },
+    {
+        "number": 320,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-12-05T18:01:46Z",
+        "comment_author": "shyam77git",
+        "comment_body": "@mihirpat1 \r\nHave added comment to PR https://github.com/sonic-net/sonic-utilities/pull/2535. Please take care of it.\r\nApproving this one"
+    },
+    {
+        "number": 320,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-12-05T19:57:54Z",
+        "comment_author": "mihirpat1",
+        "comment_body": "> @mihirpat1 Have added comment to PR [sonic-net/sonic-utilities#2535](https://github.com/sonic-net/sonic-utilities/pull/2535). Please take care of it. Approving this one\r\n\r\nI have added the requested UT enclosure to this PR now."
+    },
+    {
+        "number": 320,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-12-05T18:01:58Z",
+        "review_author": "shyam77git"
+    },
+    {
+        "number": 320,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-12-05T18:10:55Z",
+        "review_author": "jaganbal-a"
+    },
+    {
+        "number": 320,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-12-06T03:35:16Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 320,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-12-06T03:35:16Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 320,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-12-05T18:01:58Z",
+        "latestReview_author": "shyam77git",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 320,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-12-05T18:10:55Z",
+        "latestReview_author": "jaganbal-a",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 319,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-29T11:06:29Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 0aa6521ae791e7fe65d8eddf2932e0c6a0a05f53 into f784ad71f1763b97a441df2a081bd96e12d0de2a - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-745c1de89c67d6abd225e478ec8792e028a7917b)\n\n**new alerts:**\n\n* 1 for Unreachable code\n---\n\n**Heads-up: LGTM.com's PR analysis will be disabled on the 5th of December**, and LGTM.com will be shut down \u23fb completely on the 16th of December 2022. Please enable GitHub code scanning, which uses the same CodeQL engine :gear: that powers LGTM.com. For more information, please check out [our post on the GitHub blog](https://github.blog/2022-08-15-the-next-step-for-lgtm-com-github-code-scanning/)."
+    },
+    {
+        "number": 319,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-29T11:32:04Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 967d7f5b7e3828b22e46ba11a9095d22da00ad3b into f784ad71f1763b97a441df2a081bd96e12d0de2a - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-2ed85361ed8b49ddd0cc9cef93d0c13d91032b4f)\n\n**new alerts:**\n\n* 1 for Unreachable code\n---\n\n**Heads-up: LGTM.com's PR analysis will be disabled on the 5th of December**, and LGTM.com will be shut down \u23fb completely on the 16th of December 2022. Please enable GitHub code scanning, which uses the same CodeQL engine :gear: that powers LGTM.com. For more information, please check out [our post on the GitHub blog](https://github.blog/2022-08-15-the-next-step-for-lgtm-com-github-code-scanning/)."
+    },
+    {
+        "number": 319,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-30T17:52:58Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 319,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-11-30T17:52:58Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 318,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-29T22:53:58Z",
+        "comment_author": "prgeor",
+        "comment_body": "@vivekrnv port_change_event_handler() is called for any configuration change on the PORT table of CONFIG_DB not just for breakout scenarios, so I am not sure where the extra 3rd argument is coming."
+    },
+    {
+        "number": 318,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-29T23:01:40Z",
+        "comment_author": "vivekrnv",
+        "comment_body": "> @vivekrnv port_change_event_handler() is called for any configuration change on the PORT table of CONFIG_DB not just for breakout scenarios, so I am not sure where the extra 3rd argument is coming.\r\n\r\n```\r\nport_change_event_handler = functools.partial(self.on_port_config_change, stopping_event)\r\n```\r\n Whenever the port_change_event_handler wrapper is invoked the first argument will be stopping_event."
+    },
+    {
+        "number": 318,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-30T00:55:36Z",
+        "comment_author": "prgeor",
+        "comment_body": "> > @vivekrnv port_change_event_handler() is called for any configuration change on the PORT table of CONFIG_DB not just for breakout scenarios, so I am not sure where the extra 3rd argument is coming.\r\n> \r\n> ```\r\n> port_change_event_handler = functools.partial(self.on_port_config_change, stopping_event)\r\n> ```\r\n> \r\n> Whenever the port_change_event_handler wrapper is invoked the first argument will be stopping_event.\r\n\r\n@vivekrnv so the crash seen only in some cases? not always i.e whenever port_change_event_handler() is invoked?"
+    },
+    {
+        "number": 318,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-30T01:01:43Z",
+        "comment_author": "vivekrnv",
+        "comment_body": "> > > @vivekrnv port_change_event_handler() is called for any configuration change on the PORT table of CONFIG_DB not just for breakout scenarios, so I am not sure where the extra 3rd argument is coming.\r\n> > \r\n> > \r\n> > ```\r\n> > port_change_event_handler = functools.partial(self.on_port_config_change, stopping_event)\r\n> > ```\r\n> > \r\n> > \r\n> >     \r\n> >       \r\n> >     \r\n> > \r\n> >       \r\n> >     \r\n> > \r\n> >     \r\n> >   \r\n> > Whenever the port_change_event_handler wrapper is invoked the first argument will be stopping_event.\r\n> \r\n> @vivekrnv so the crash seen only in some cases? not always i.e whenever port_change_event_handler() is invoked?\r\n\r\nNo, it will be seen whenever PORT table of CONFIG_DB has updates and the port_change_event_handler is invoked except init. i.e. only during breakout.  \r\n\r\nDuring init, by the time the logic reaches the task_worker for SfpStateUpdateTask. init has already happened and the port_mapping is already populated and that is used for whatever SfpStateUpdateTask does. \r\n\r\n\r\n\r\n\r\n"
+    },
+    {
+        "number": 318,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-30T05:29:10Z",
+        "comment_author": "vivekrnv",
+        "comment_body": "@aravindmani-1 I don't see this log and this seems to be coming from CmisManagerTask (and not SfpStateUpdateTask) and this is not what i'm trying to fix here (Nor i'm trying to fix all the DPB <-> xcvrd incompatibilty problems, and so i can't add a UT for DPB). Raise a separate issue for this. "
+    },
+    {
+        "number": 318,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-12-01T13:56:21Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@vivekrnv can you please check if it cleanly cherry pickedable? if not, please create a separate PR against 202205"
+    },
+    {
+        "number": 318,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-30T00:19:29Z",
+        "review_author": "Junchao-Mellanox"
+    },
+    {
+        "number": 318,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-30T05:16:59Z",
+        "review_author": "aravindmani-1"
+    },
+    {
+        "number": 318,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-30T05:38:59Z",
+        "review_author": "aravindmani-1"
+    },
+    {
+        "number": 318,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-12-01T13:54:52Z",
+        "review_author": "liat-grozovik"
+    },
+    {
+        "number": 318,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-12-01T13:54:52Z",
+        "latestReview_author": "liat-grozovik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 318,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-11-30T05:38:59Z",
+        "latestReview_author": "aravindmani-1",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 318,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-11-30T00:19:29Z",
+        "latestReview_author": "Junchao-Mellanox",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 317,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-29T00:15:36Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 317,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-11-29T00:15:36Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 316,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-29T04:27:04Z",
+        "comment_author": "liushilongbuaa",
+        "comment_body": "![image](https://user-images.githubusercontent.com/25922744/204438856-3bfd4add-b7ba-4af7-b9f9-b860ac3cb1fc.png)\r\n"
+    },
+    {
+        "number": 316,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-29T16:49:47Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 316,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-11-29T16:49:47Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 315,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-23T01:34:15Z",
+        "comment_author": "prgeor",
+        "comment_body": "@vdahiya12 could you update\r\n```\r\nDescription\r\nMotivation and Context\r\nHow Has This Been Tested?\r\n```"
+    },
+    {
+        "number": 315,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-25T05:55:37Z",
+        "comment_author": "Junchao-Mellanox",
+        "comment_body": "Please add new unit test case and fix the existing test case failure."
+    },
+    {
+        "number": 315,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-12-08T21:24:22Z",
+        "comment_author": "prgeor",
+        "comment_body": "@Junchao-Mellanox any more comments.? LGTM"
+    },
+    {
+        "number": 315,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-23T01:53:20Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 315,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-23T01:59:18Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 315,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-25T05:58:15Z",
+        "review_author": "Junchao-Mellanox"
+    },
+    {
+        "number": 315,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-28T12:25:16Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 315,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-12-05T15:23:38Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 315,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-12-05T15:23:53Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 315,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-12-09T00:59:39Z",
+        "review_author": "Junchao-Mellanox"
+    },
+    {
+        "number": 315,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-12-09T01:16:27Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 315,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-12-09T01:16:27Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 315,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-12-09T00:59:39Z",
+        "latestReview_author": "Junchao-Mellanox",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 313,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-07T17:17:49Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 313,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-11-07T17:17:49Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 312,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-02T22:08:42Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 4 alerts** when merging bf9881fa251bdd198c425df31645354c4783955c into aacb772914b383ce1a6064f7ec386a082826bb63 - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-81c1bb58539dafddce71110da53905d309e626cf)\n\n**new alerts:**\n\n* 4 for Illegal raise"
+    },
+    {
+        "number": 312,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-07T18:36:04Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 4 alerts** when merging ebd7d4f85639c0f527f30878072b0eeba2b4fda4 into 3d5470d193410ae36fa1c267501b7a1253a17995 - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-5664d70c026ed314b871f36e946010f5b4d96c3a)\n\n**new alerts:**\n\n* 4 for Illegal raise"
+    },
+    {
+        "number": 312,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-07T21:06:18Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 4 alerts** when merging b1b40eb59cdef6a926a10c5977ca3205f1e33142 into 3d5470d193410ae36fa1c267501b7a1253a17995 - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-3762a841515043339e62e10dbaf4b9fc49a6ef92)\n\n**new alerts:**\n\n* 4 for Illegal raise"
+    },
+    {
+        "number": 312,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-09T00:48:44Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 4 alerts** when merging 35a83453b22c3bf2c288e2c66e11b896e3a289c9 into 3d5470d193410ae36fa1c267501b7a1253a17995 - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-95bde1d55667cd3160c61ca0314a90fbd4fb8e07)\n\n**new alerts:**\n\n* 4 for Illegal raise"
+    },
+    {
+        "number": 312,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-09T01:22:00Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 4 alerts** when merging 8480ff3aa65310abb99502f88263ab63949e345a into 3d5470d193410ae36fa1c267501b7a1253a17995 - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-48e40c34c954d6116bbfb0627a04f607896c3ee9)\n\n**new alerts:**\n\n* 4 for Illegal raise"
+    },
+    {
+        "number": 312,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-10T22:03:40Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 4 alerts** when merging 57626c881301b2c9b1885831caf31f3e43c35b79 into 3d5470d193410ae36fa1c267501b7a1253a17995 - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-8f74848bd02e0f746b1d77f29258b249c7244625)\n\n**new alerts:**\n\n* 4 for Illegal raise"
+    },
+    {
+        "number": 312,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-11T21:45:13Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 312,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-11-11T21:45:13Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 311,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-09T19:17:39Z",
+        "comment_author": "prgeor",
+        "comment_body": "@bmridul ++"
+    },
+    {
+        "number": 311,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-11T16:31:50Z",
+        "comment_author": "abdosi",
+        "comment_body": "@arlakshm can you please paste the output of STATE_DB before and after this change in the PR description. Will be good for reference."
+    },
+    {
+        "number": 311,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-15T19:59:18Z",
+        "comment_author": "arlakshm",
+        "comment_body": "> @arlakshm can you please paste the output of STATE_DB before and after this change in the PR description. Will be good for reference.\r\n\r\n@abdosi  Updated the description with output after the change"
+    },
+    {
+        "number": 311,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-15T20:00:10Z",
+        "comment_author": "arlakshm",
+        "comment_body": "@abdosi , @prgeor can you please approve this pr if no other comments"
+    },
+    {
+        "number": 311,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-27T00:12:31Z",
+        "comment_author": "arlakshm",
+        "comment_body": "Hi @yxieca please merge this pr in 202205 https://github.com/sonic-net/sonic-buildimage/pull/12780 after cherry-picking this PR"
+    },
+    {
+        "number": 311,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-11T16:25:47Z",
+        "review_author": "abdosi"
+    },
+    {
+        "number": 311,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-15T19:59:37Z",
+        "review_author": "arlakshm"
+    },
+    {
+        "number": 311,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-15T20:49:15Z",
+        "review_author": "abdosi"
+    },
+    {
+        "number": 311,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-11-15T20:49:15Z",
+        "latestReview_author": "abdosi",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 310,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-01T19:18:36Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 294ecb519b275c48d0da50a1cad3a3dbcacbc436 into aacb772914b383ce1a6064f7ec386a082826bb63 - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-c055a77f59f7eb4fa81cb5f865123c44221a17ae)\n\n**new alerts:**\n\n* 1 for Syntax error"
+    },
+    {
+        "number": 310,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-01T19:48:22Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging c055d3a1d3c38b75f8ccea099da90a49ea47cd00 into aacb772914b383ce1a6064f7ec386a082826bb63 - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-6b76db88b40eea13e98d783b47b2c4cf3c7ca2e8)\n\n**new alerts:**\n\n* 1 for Wrong number of arguments in a call"
+    },
+    {
+        "number": 310,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-02T21:42:48Z",
+        "comment_author": "prgeor",
+        "comment_body": "@vdahiya12 can you attach the test results for sonic-mgmt test pass?"
+    },
+    {
+        "number": 310,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-02T23:55:29Z",
+        "comment_author": "vdahiya12",
+        "comment_body": "> @vdahiya12 can you attach the test results for sonic-mgmt test pass?\r\n\r\nupdated in combined PR\r\n\r\nhttps://github.com/sonic-net/sonic-platform-daemons/pull/312"
+    },
+    {
+        "number": 310,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-05T00:13:31Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 310,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-11-05T00:13:31Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 309,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-10-28T01:02:35Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 309,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-10-28T01:02:35Z",
+        "latestReview_author": "zjswhhh",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 308,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-10-24T21:07:09Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 308,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-10-24T21:07:09Z",
+        "latestReview_author": "zjswhhh",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 307,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-10-27T23:56:28Z",
+        "comment_author": "prgeor",
+        "comment_body": "@yxieca could you help cherry-pick to 202205\r\n"
+    },
+    {
+        "number": 307,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-10-25T19:41:14Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 307,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-10-25T22:30:02Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 307,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-10-25T22:37:56Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 307,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-10-27T23:55:58Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 307,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-10-27T23:55:58Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 306,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-10-19T23:19:59Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 2 alerts** when merging e3cd1a008573e5a099bb0b1100f36094438a84af into 23b6970b52b8b9f9947e4109370695cb5d05704a - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-87823dbbb00b7c62c8afa76ad52919f9acd7ce39)\n\n**new alerts:**\n\n* 1 for Too few arguments in formatting call\n* 1 for Syntax error"
+    },
+    {
+        "number": 306,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-10-19T23:34:24Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 68e9412a92afbc553f4162acf82fffa2ad6147b2 into 23b6970b52b8b9f9947e4109370695cb5d05704a - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-d8fc939b21f8e3f37e8c297f44b4e5469d714e44)\n\n**new alerts:**\n\n* 1 for Too few arguments in formatting call"
+    },
+    {
+        "number": 306,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-10-20T22:54:57Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 2 alerts** when merging cc961449d03786f45ec02c07e59ca0d89825f1c4 into 4ea12cf0649c1986ef825ce2ceee6162cc7ecc7c - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-e299731f03382c51878ae9f238b6e230e1f6c70f)\n\n**new alerts:**\n\n* 2 for Illegal raise"
+    },
+    {
+        "number": 306,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-10-21T01:13:39Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 3 alerts** when merging 81cf7ca8fb8645fee817553fb70cf16c5aa74989 into 4ea12cf0649c1986ef825ce2ceee6162cc7ecc7c - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-bc7f8ce5528dccd03a60ea7779d1f6d7793c6980)\n\n**new alerts:**\n\n* 3 for Illegal raise"
+    },
+    {
+        "number": 306,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-10-21T01:58:07Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 4 alerts** when merging b898ffafcbaf74c54e5dd1cd3584e016b92a6c04 into 4ea12cf0649c1986ef825ce2ceee6162cc7ecc7c - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-cdf0132fc3faefdda09f23688fcefa52ee48986d)\n\n**new alerts:**\n\n* 4 for Illegal raise"
+    },
+    {
+        "number": 306,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-10-21T02:22:22Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 4 alerts** when merging 2807278c1cf3275da73db85b0ef00a1be550fc2c into 4ea12cf0649c1986ef825ce2ceee6162cc7ecc7c - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-9c9b561f1b5736b6421c13cac18a85fca3f61c1a)\n\n**new alerts:**\n\n* 4 for Illegal raise"
+    },
+    {
+        "number": 306,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-10-21T02:58:23Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 4 alerts** when merging 3cfc033cf2a59779696df604aa7a64b178ad9ae5 into 4ea12cf0649c1986ef825ce2ceee6162cc7ecc7c - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-8e7ffef1dee3a069872c57ccf132c3c307469dfa)\n\n**new alerts:**\n\n* 4 for Illegal raise"
+    },
+    {
+        "number": 306,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-10-21T18:20:09Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 4 alerts** when merging 2c1479132926189c8b40d9e34cec9fcf55ec77ed into 4ea12cf0649c1986ef825ce2ceee6162cc7ecc7c - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-e31e96c582de8ffb9d132392fec44fd69e05fb6f)\n\n**new alerts:**\n\n* 4 for Illegal raise"
+    },
+    {
+        "number": 306,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-01T23:36:52Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 4 alerts** when merging a71b11bbc98fecb0e3c16b5f15a95ee6e4c909a3 into 9ae551fd6c57465b8f2f30896c8327233c69a47d - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-bf520eced0d75b43b94c9264d9b3b8e0521870bd)\n\n**new alerts:**\n\n* 4 for Illegal raise"
+    },
+    {
+        "number": 306,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-01T23:53:54Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 4 alerts** when merging e92c74fb08f29e87e6624bd2a18d1e4613714287 into 9ae551fd6c57465b8f2f30896c8327233c69a47d - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-213581f4ee0042fbd42245af0162d3a1a92da3c3)\n\n**new alerts:**\n\n* 4 for Illegal raise"
+    },
+    {
+        "number": 306,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-02T22:54:38Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 4 alerts** when merging 9745e6ae396ec8646af6606d8b36b39ec39f9446 into 9ae551fd6c57465b8f2f30896c8327233c69a47d - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-f45f97205d1c149c0f39039758f0dabc838760b9)\n\n**new alerts:**\n\n* 4 for Illegal raise"
+    },
+    {
+        "number": 306,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-02T23:18:48Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 4 alerts** when merging 03c43d16ad96fe08e8c87eb8d584790a60d3248b into 9ae551fd6c57465b8f2f30896c8327233c69a47d - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-bb27219252fecdc96438fe622282e01a16e327f5)\n\n**new alerts:**\n\n* 4 for Illegal raise"
+    },
+    {
+        "number": 306,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-07T18:54:56Z",
+        "comment_author": "prgeor",
+        "comment_body": "@vdahiya12 can you test a case where two threads of a y-cabled crash almost simultaneously \r\nfor such a case, it was tested before\r\n\r\nNov  7 19:43:17.308812 sonic ERR pmon#ycable[257359]: Exception occured at child thread YCableTableUpdateTask due to Exception('exception from thread 1') Traceback (most recent call last):#012  File \"/usr/local/lib/python3.7/dist-packages/ycable/ycable_utilities/y_cable_helper.py\", line 2685, in run#012    self.task_worker()#012  File \"/usr/local/lib/python3.7/dist-packages/ycable/ycable_utilities/y_cable_helper.py\", line 2570, in task_worker#012    raise Exception(\"exception from thread 1\")#012**Exception: exception from thread 1**\r\nNov  7 19:43:17.381012 sonic ERR pmon#ycable[257359]: Exception occured at child thread YcableCliUpdateTask due to Exception('exception from thread 2') Traceback (most recent call last):#012  File \"/usr/local/lib/python3.7/dist-packages/ycable/ycable_utilities/y_cable_helper.py\", line 2915, in run#012    self.task_cli_worker()#012  File \"/usr/local/lib/python3.7/dist-packages/ycable/ycable_utilities/y_cable_helper.py\", line 2713, in task_cli_worker#012    raise Exception(\"exception from thread 2\")#012### **Exception: exception from thread 2**\r\nNov  7 19:43:20.407215 sonic INFO pmon#supervisord 2022-11-07 19:43:20,406 INFO success: ycabled entered RUNNING state, process has stayed up for > than 10 seconds (startsecs)\r\nNov  7 19:44:15.379067 sonic ERR pmon#ycable[257359]: **Exception occured at child thread Thread-3 to Exception('exception from thread 1')**\r\nNov  7 19:44:15.379067 sonic ERR pmon#ycable[257359]: thread id Thread-3 is not running, exiting main loop\r\nNov  7 19:44:15.393054 sonic INFO pmon#supervisord 2022-11-07 19:44:15,392 INFO exited: ycabled (terminated by SIGKILL; not expected)\r\n\r\noutcome is same, main thread exits"
+    },
+    {
+        "number": 306,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-07T18:55:49Z",
+        "comment_author": "prgeor",
+        "comment_body": "@vdahiya12 there are 4 new LGTM alerts. could you fix?"
+    },
+    {
+        "number": 306,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-07T22:38:01Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 4 alerts** when merging 1ac2a2b95e900839404205f2ade370dbe1e14323 into 905874d88daabcb5060b707c7aad93e9fdf8b2ca - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-a6f2c93780ecae27aa1539ff9f72252142407761)\n\n**new alerts:**\n\n* 4 for Illegal raise"
+    },
+    {
+        "number": 306,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-08T22:50:36Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 4 alerts** when merging 56c48efd9d5df520fa73244d2180f10dc12c3e51 into 905874d88daabcb5060b707c7aad93e9fdf8b2ca - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-f41d5d8feb035a5101eab6cfd504561e448a52ef)\n\n**new alerts:**\n\n* 4 for Illegal raise"
+    },
+    {
+        "number": 306,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-08T23:24:54Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 4 alerts** when merging 2e19b16f3c6176be31838f03954c47558c7d06d2 into 905874d88daabcb5060b707c7aad93e9fdf8b2ca - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-ba82c4985f3c6f51fb8313eac56b2157da578108)\n\n**new alerts:**\n\n* 4 for Illegal raise"
+    },
+    {
+        "number": 306,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-08T23:43:21Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 4 alerts** when merging e23540c549985a9728ac8863dfcf1aa654745af2 into 905874d88daabcb5060b707c7aad93e9fdf8b2ca - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-e8f2423e23a4dcad661e54d5dc15bb1c5f1cfd6e)\n\n**new alerts:**\n\n* 4 for Illegal raise"
+    },
+    {
+        "number": 306,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-09T00:18:41Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 4 alerts** when merging 0bd7cfb1a372d1201ac1d151633e4c0623bd75a3 into 905874d88daabcb5060b707c7aad93e9fdf8b2ca - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-b0e29ed9bc829da0d16a3c8cce095e641ba13140)\n\n**new alerts:**\n\n* 4 for Illegal raise"
+    },
+    {
+        "number": 306,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-09T00:35:45Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 4 alerts** when merging 2061ab152b8ec0fccac2f0f088cc7d56d8498b13 into 905874d88daabcb5060b707c7aad93e9fdf8b2ca - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-d7e4e3f1245834b44f9694b71a6bcb7a61773de0)\n\n**new alerts:**\n\n* 4 for Illegal raise"
+    },
+    {
+        "number": 306,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-10T22:08:35Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 4 alerts** when merging 419e742240dee7ca9ae0f5b15dfe18f00279fb51 into 905874d88daabcb5060b707c7aad93e9fdf8b2ca - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-dc3d05147de3d81bd0d1931303de463a5396e24d)\n\n**new alerts:**\n\n* 4 for Illegal raise"
+    },
+    {
+        "number": 306,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-07T20:45:03Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 306,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-08T22:49:07Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 306,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-09T22:53:10Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 306,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-09T23:07:08Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 306,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-09T23:08:10Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 306,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-11T01:21:32Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 306,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-11-11T01:21:32Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-10-18T00:34:33Z",
+        "comment_author": "linux-foundation-easycla",
+        "comment_body": "<a href=\"https://easycla.lfx.linuxfoundation.org/#/?version=2\"><img src=\"https://s3.amazonaws.com/cla-project-logo-prod/cla-signed.svg\" alt=\"CLA Signed\" align=\"left\" height=\"28\" width=\"328\" ></a><br/><br />The committers listed above are authorized under a signed CLA.<ul><li>:white_check_mark: login: longhuan-cisco  (172255fc8ad49c4fd0f6bf542896a58d9d8b9404, 6e7e83895a74af8c39e8e45bb5f56afb9ff953d4, ed0a9f18f21751e83d8e213cb7da0dbc1fc5993a)</li></ul>"
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-10-19T22:24:39Z",
+        "comment_author": "longhuan-cisco",
+        "comment_body": "@prgeor please review  (couldn't add to reviewers list directly, thus add here) \r\n"
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-10-29T00:59:21Z",
+        "comment_author": "longhuan-cisco",
+        "comment_body": "> Can you please also test restarting xcvrd to ensure that the table gets deleted and updated accordingly\r\n\r\nYea Attached restart test log in description."
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-03T03:01:00Z",
+        "comment_author": "longhuan-cisco",
+        "comment_body": "@prgeor @mihirpat1 I took care of the existing comments, can you please review? "
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-08T05:28:01Z",
+        "comment_author": "longhuan-cisco",
+        "comment_body": "Added pm table related change, to use this PR to track changes for all three tables: status/dom_sensor/pm. (Since they all touch the similar flow in xcvrd, and some is dependent on another, it would be good to combine them together.)\r\n@prgeor @mihirpat1 Could you please take another look?"
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-12-06T22:28:28Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 4e308504c934f046100c3fa11c7141db59c5be02 into adcd69beb637aaf109573582a96bdeca82c8d1f0 - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-695894c6d87e1b46f794737f83e3965d8c3e4f19)\n\n**new alerts:**\n\n* 1 for Mismatch in multiple assignment\n---\n\n**Heads-up: LGTM.com's PR analysis will be disabled on the 5th of December**, and LGTM.com will be shut down \u23fb completely on the 16th of December 2022. Please enable GitHub code scanning, which uses the same CodeQL engine :gear: that powers LGTM.com. For more information, please check out [our post on the GitHub blog](https://github.blog/2022-08-15-the-next-step-for-lgtm-com-github-code-scanning/)."
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2023-01-18T19:42:27Z",
+        "comment_author": "prgeor",
+        "comment_body": "@yxieca please cherry-pick to 202205"
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2023-01-19T18:35:31Z",
+        "comment_author": "yxieca",
+        "comment_body": "@longhuan-cisco this change cannot be cherry-picked to 202205 cleanly. Please raise separate PR. Thanks!"
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2023-01-19T23:30:47Z",
+        "comment_author": "prgeor",
+        "comment_body": "@StormLiangMS please help cherry-pick to 202211"
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2023-02-04T14:49:05Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@prgeor I suppose you want to have this one in 202211 other than 202111"
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-10-27T18:49:11Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-10-29T00:56:42Z",
+        "review_author": "longhuan-cisco"
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-22T02:33:16Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-22T02:46:44Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-22T03:11:13Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-22T03:14:02Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-22T12:30:23Z",
+        "review_author": "keboliu"
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-23T10:27:11Z",
+        "review_author": "longhuan-cisco"
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-23T10:27:18Z",
+        "review_author": "longhuan-cisco"
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-23T10:27:24Z",
+        "review_author": "longhuan-cisco"
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-23T10:27:43Z",
+        "review_author": "longhuan-cisco"
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-24T06:09:30Z",
+        "review_author": "keboliu"
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-24T08:53:27Z",
+        "review_author": "longhuan-cisco"
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-28T19:54:32Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-28T19:55:46Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-30T03:12:15Z",
+        "review_author": "keboliu"
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-12-05T20:35:06Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-12-05T22:31:40Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-12-05T22:44:45Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-12-06T09:42:04Z",
+        "review_author": "keboliu"
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-12-07T01:07:37Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-12-06T09:42:04Z",
+        "latestReview_author": "keboliu",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-12-07T01:07:37Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 304,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-12-05T20:35:06Z",
+        "latestReview_author": "mihirpat1",
+        "latestReview_state": "DISMISSED"
+    },
+    {
+        "number": 303,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-10-11T00:34:31Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 3924d75b2fd0eec071fbfbbcc369507ec4c16f28 into 23b6970b52b8b9f9947e4109370695cb5d05704a - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-6ab714cef65b902871280ae01e6abc52ade6b70d)\n\n**new alerts:**\n\n* 1 for Unused local variable"
+    },
+    {
+        "number": 303,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-10-24T18:58:25Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 2 alerts** when merging 7556185c8439816e6a7f73535ab3aedcbf8513cd into 4ea12cf0649c1986ef825ce2ceee6162cc7ecc7c - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-4912ed609d049591986b4b7afa68ffe82e388ac5)\n\n**new alerts:**\n\n* 2 for Unused local variable"
+    },
+    {
+        "number": 303,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-10-24T19:06:39Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 2 alerts** when merging ac2888d19da94440582b4c1bd4753f444a875d92 into 4ea12cf0649c1986ef825ce2ceee6162cc7ecc7c - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-88f9aed1e607e114ff524618957c6ab9dba35601)\n\n**new alerts:**\n\n* 2 for Unused local variable"
+    },
+    {
+        "number": 303,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-10-24T19:28:14Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 2 alerts** when merging 717e599bfb1d12e9c0e1cf54a4bf966ec66a084a into 4ea12cf0649c1986ef825ce2ceee6162cc7ecc7c - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-feebdaf4b1966c0f0f34f6073dab1f929398f1e0)\n\n**new alerts:**\n\n* 2 for Unused local variable"
+    },
+    {
+        "number": 303,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-11-07T22:24:03Z",
+        "comment_author": "vdahiya12",
+        "comment_body": "https://github.com/sonic-net/sonic-platform-daemons/pull/310 added in 202012"
+    },
+    {
+        "number": 303,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-10-07T22:35:42Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 303,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-10-07T22:36:08Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 303,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-10-12T20:33:00Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 303,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-10-12T22:51:41Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 303,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-10-12T23:12:01Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 303,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-10-13T20:04:17Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 303,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-10-13T20:04:25Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 303,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-10-30T16:03:29Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 303,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-07T21:31:30Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 303,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-11-07T21:31:30Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 303,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-10-12T23:12:01Z",
+        "latestReview_author": "zjswhhh",
+        "latestReview_state": "DISMISSED"
+    },
+    {
+        "number": 302,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-10-03T21:21:06Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 302,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-10-03T21:21:06Z",
+        "latestReview_author": "zjswhhh",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 301,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-09-29T17:59:38Z",
+        "comment_author": "zjswhhh",
+        "comment_body": "What is this fix for? Is it for the \"toggles fail while probes work\" issue? Can you please provide more details? "
+    },
+    {
+        "number": 301,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-09-29T18:27:01Z",
+        "comment_author": "vdahiya12",
+        "comment_body": "> What is this fix for? Is it for the \"toggles fail while probes work\" issue? Can you please provide more details?\r\n\r\nThis PR just adds some exception logic for API's that were not covered, but mostly it wont fix the \r\n\"toggles fail while probes work\""
+    },
+    {
+        "number": 301,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-09-29T22:46:34Z",
+        "comment_author": "zjswhhh",
+        "comment_body": "> only in case it is not known we try to re read it gain\r\n\r\nHi @vdahiya12  - One more question, will this re-read writes the response to DBs? \r\nnot really only if initially the read_side was found to be -1 only then this logic will take place, where during a toggle logic it will try to find the read_side again, and see if a good value is found(1,2), but rest toggle will take place the same way"
+    },
+    {
+        "number": 301,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-29T18:02:40Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 301,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-29T18:22:33Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 301,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-29T18:25:20Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 301,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-29T18:28:04Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 301,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-09-29T18:28:04Z",
+        "latestReview_author": "zjswhhh",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 300,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-09-27T16:37:00Z",
+        "comment_author": "prgeor",
+        "comment_body": "@maipbui please fix the code coverage"
+    },
+    {
+        "number": 300,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-27T05:16:39Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 300,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-27T16:36:22Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 300,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-09-27T05:16:39Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 300,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-09-27T16:36:22Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 299,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-23T22:50:57Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 299,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-09-23T22:50:57Z",
+        "latestReview_author": "zjswhhh",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 298,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-09-23T23:03:42Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging ee1e109b829e75b7e041d45f2137f1026aa781fc into 143422b1700142ac42d56f1d5f6a3a8d3d2fe781 - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-3920f1502eadad39d565e6d1e5585fff163e2c8f)\n\n**new alerts:**\n\n* 1 for Variable defined multiple times"
+    },
+    {
+        "number": 298,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-09-27T04:35:55Z",
+        "comment_author": "vdahiya12",
+        "comment_body": "> One more question, do we need to store this credential information in `CONFIG_DB`? Can we simply read/use only inside `ycabled`?\r\n\r\nany reason why to omit the info from `CONFIG_DB` ?"
+    },
+    {
+        "number": 298,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-26T02:55:09Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 298,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-26T03:16:35Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 298,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-26T17:58:47Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 298,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-26T18:43:15Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 298,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-26T18:43:17Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 298,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-26T18:43:34Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 298,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-26T22:13:28Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 298,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-27T16:05:27Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 298,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-27T17:53:14Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 298,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-09-26T03:16:35Z",
+        "latestReview_author": "lolyu",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 298,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-09-27T17:53:14Z",
+        "latestReview_author": "zjswhhh",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 297,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2023-02-02T02:12:41Z",
+        "comment_author": "liuh-80",
+        "comment_body": "202012c branch PR merged: https://github.com/sonic-net/sonic-platform-daemons/pull/299\r\nSubmodule in sonic-buildimage still not update."
+    },
+    {
+        "number": 297,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2023-02-06T05:50:15Z",
+        "comment_author": "liuh-80",
+        "comment_body": "@vdahiya12, this PR need a submodule update in sonic-buildimage repo, please check."
+    },
+    {
+        "number": 297,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-23T19:59:02Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 297,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-09-23T19:59:02Z",
+        "latestReview_author": "zjswhhh",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 295,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-09-20T18:28:15Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 2 alerts** when merging 4f00c33e9bf756b8b54b8145cdc7e8a60ee8ae9f into 8ff5f37e3325c8ee3a98df38ee054086c6d7460e - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-511ba03459924c9a166f91ffe345187345c719b8)\n\n**new alerts:**\n\n* 2 for Variable defined multiple times"
+    },
+    {
+        "number": 295,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-20T18:21:58Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 295,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-21T20:02:23Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 295,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-09-21T20:02:23Z",
+        "latestReview_author": "zjswhhh",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-09-16T06:24:01Z",
+        "comment_author": "abohanyang",
+        "comment_body": "@arlakshm"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-09-16T23:03:40Z",
+        "comment_author": "prgeor",
+        "comment_body": "@abohanyang can you please check if on_port_update_event() is triggered even after this PR [https://github.com/sonic-net/sonic-platform-daemons/pull/285](https://github.com/sonic-net/sonic-platform-daemons/pull/285). If so please share the syslog file."
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-10-17T20:15:26Z",
+        "comment_author": "shyam77git",
+        "comment_body": "@abohanyang \r\ncould you update on the plan to merge this changeset/PR?\r\nAwaiting on this for last 1-2 weeks. This is required to be part of repository for proper validation of 400G ZR optics (instead of adding and trying with workarounds etc.)\r\n\r\ncould you update on UT/IT? all done or anything still pending etc.? If so, whats the ETA.\r\nAlso, please do validate on 400G non-ZR optics to ensure they are not impacted with this changeset.\r\n\r\nFYI: For 400G ZR optics, you may get in touch with 'Mihir Patel (MSFT)' as he validated 400G ZR optics with this changeset on his setup \r\n"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-10-18T21:46:51Z",
+        "comment_author": "abohanyang",
+        "comment_body": "Hi @shyam77git - The code is pending review. I am waiting for @prgeor  comments/approval on my latest commit."
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-10-18T22:05:05Z",
+        "comment_author": "prgeor",
+        "comment_body": "> Fix Xcvrd code to support 400G DR and 400G ZR optics\r\n> \r\n> #### Description\r\n> 1. Increase the initialization timeout value for the 400GBASE-ZR module as 400GBASE-ZR may take more than 60 sec to come up. Based on the spec,  ZR may take up to 200 sec to become ready.\r\n> 2. on_port_update_event is triggered when 400G optics enter the ready state. To avoid the infinite initialization loop, in on_port_update_event, call force_cmis_reinit only when port configuration changes.\r\n> 3. on_port_config_change takes three arguments, not two. This issue is found when the port breakout mode changes.\r\n> \r\n> #### Motivation and Context\r\n> * Item 1 and Item 2  are needed to bring up 400G ZR/DR optics.\r\n> * Item 3 fixes a potential issue during dynamic breakout mode change.\r\n> \r\n> #### How Has This Been Tested?\r\n> * These changes are tested against arista_7800r3a_36d2_lc and arista_7280cr3_32p4 platforms.\r\n\r\n@abohanyang can you check the description. I think you are addressing only #1"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-10-20T23:22:17Z",
+        "comment_author": "prgeor",
+        "comment_body": "@yxieca can you help cherry-pick to 202205?\r\n"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-16T23:07:27Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-19T21:02:00Z",
+        "review_author": "abohanyang"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-19T22:54:53Z",
+        "review_author": "abohanyang"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-20T19:09:14Z",
+        "review_author": "shyam77git"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-26T18:08:39Z",
+        "review_author": "abohanyang"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-26T18:58:06Z",
+        "review_author": "shyam77git"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-26T19:57:27Z",
+        "review_author": "abohanyang"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-27T02:41:36Z",
+        "review_author": "shyam77git"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-27T17:06:24Z",
+        "review_author": "shyam77git"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-27T17:45:23Z",
+        "review_author": "shyam77git"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-29T20:48:15Z",
+        "review_author": "abohanyang"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-29T20:49:42Z",
+        "review_author": "abohanyang"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-29T21:03:09Z",
+        "review_author": "abohanyang"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-30T18:14:36Z",
+        "review_author": "shyam77git"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-30T18:17:48Z",
+        "review_author": "shyam77git"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-30T18:33:55Z",
+        "review_author": "shyam77git"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-30T18:38:27Z",
+        "review_author": "shyam77git"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-30T22:43:52Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-10-01T00:25:44Z",
+        "review_author": "abohanyang"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-10-01T01:15:56Z",
+        "review_author": "abohanyang"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-10-04T18:39:13Z",
+        "review_author": "abohanyang"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-10-04T19:14:31Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-10-04T22:43:33Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-10-04T22:44:40Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-10-05T17:05:11Z",
+        "review_author": "shyam77git"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-10-10T18:47:36Z",
+        "review_author": "abohanyang"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-10-18T22:06:28Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-10-18T22:09:36Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-10-19T19:13:18Z",
+        "review_author": "abohanyang"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-10-19T19:17:03Z",
+        "review_author": "abohanyang"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-10-20T16:39:27Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-10-05T17:05:11Z",
+        "latestReview_author": "shyam77git",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-10-20T16:39:27Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 292,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-20T19:39:04Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 292,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-09-20T19:39:04Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 289,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-09-02T00:44:08Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 2 alerts** when merging 4229dd6bd47a04b62e5489ea76729c31afc5db26 into 7c0a326e1dcd2be74a80f6d3a2d7c4af084c2035 - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-aaab6ba5feb6f8f732a4912c00c71bfebd3614fd)\n\n**new alerts:**\n\n* 2 for Variable defined multiple times"
+    },
+    {
+        "number": 289,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-09-06T23:43:07Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 2 alerts** when merging 2681dbfab1ad1082ab38f28759f636f71db70198 into ce3b6db4b60ca606ff0da2042d7edce6e8a7fcb5 - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-980bbbb434e05e033cc63e2db6a0a79d40e56c3b)\n\n**new alerts:**\n\n* 2 for Variable defined multiple times"
+    },
+    {
+        "number": 289,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-02T01:32:17Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 289,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-06T23:39:26Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 289,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-07T01:22:13Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 289,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-09-02T01:32:17Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 289,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-09-07T01:22:13Z",
+        "latestReview_author": "lolyu",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 288,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-08-29T01:22:15Z",
+        "review_author": "Junchao-Mellanox"
+    },
+    {
+        "number": 288,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-02T03:14:32Z",
+        "review_author": "keboliu"
+    },
+    {
+        "number": 288,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-12T18:37:41Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 288,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-12T18:46:21Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 288,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-12T18:46:32Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 288,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-12T18:47:58Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 288,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-12T19:08:04Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 288,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-13T00:56:06Z",
+        "review_author": "stephenxs"
+    },
+    {
+        "number": 288,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-13T00:56:27Z",
+        "review_author": "stephenxs"
+    },
+    {
+        "number": 288,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-13T00:57:17Z",
+        "review_author": "stephenxs"
+    },
+    {
+        "number": 288,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-17T01:02:14Z",
+        "review_author": "stephenxs"
+    },
+    {
+        "number": 288,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-11-21T15:01:00Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 288,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-11-21T15:01:00Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 288,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-09-02T03:14:32Z",
+        "latestReview_author": "keboliu",
+        "latestReview_state": "DISMISSED"
+    },
+    {
+        "number": 288,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-08-29T01:22:15Z",
+        "latestReview_author": "Junchao-Mellanox",
+        "latestReview_state": "DISMISSED"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-08-31T07:53:26Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging faa772ebda82724761452c9e55cc1dd830c5e792 into 7c0a326e1dcd2be74a80f6d3a2d7c4af084c2035 - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-3bfc01925e2f02031ef4845036d80be9217c63ce)\n\n**new alerts:**\n\n* 1 for Use of the return value of a procedure"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-02T00:39:39Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-09-02T00:39:39Z",
+        "latestReview_author": "zjswhhh",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 286,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-08-23T21:24:32Z",
+        "comment_author": "anamehra",
+        "comment_body": "@prgeor , @abdosi , please review."
+    },
+    {
+        "number": 286,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-08-25T05:31:32Z",
+        "comment_author": "prgeor",
+        "comment_body": "@anamehra can you please check your minigraph why 'admin_status' is missing for some ports? "
+    },
+    {
+        "number": 286,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-08-25T05:41:02Z",
+        "comment_author": "anamehra",
+        "comment_body": "> @anamehra can you please check your minigraph why 'admin_status' is missing for some ports?\r\n\r\n@abdosi , could you please comment on minigraph?\r\n@prgeor , a config db json with Ethernet ports missing admin_status should be a valid config. If admin_status is not defined, its assumed as down. It has been the case always. In the fix, I am just handling the same scenario.  If a dictionary entry is missing, use the default instead of crashing.\r\n\r\n"
+    },
+    {
+        "number": 286,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-09-20T15:23:38Z",
+        "comment_author": "abdosi",
+        "comment_body": "> > @anamehra can you please check your minigraph why 'admin_status' is missing for some ports?\r\n> \r\n> @abdosi , could you please comment on minigraph? @prgeor , a config db json with Ethernet ports missing admin_status should be a valid config. If admin_status is not defined, its assumed as down. It has been the case always. In the fix, I am just handling the same scenario. If a dictionary entry is missing, use the default instead of crashing.\r\n\r\n@prgeor i checked for the ports that do not have any neighbor associated minigraph parser do not assign `admin_status` attribute in port table. We can fix minigraph parser to always have `admin_status`  attribute but I think this PR change is good and is independent of minigraph parser change"
+    },
+    {
+        "number": 286,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-20T15:21:39Z",
+        "review_author": "abdosi"
+    },
+    {
+        "number": 286,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-09-20T15:21:39Z",
+        "latestReview_author": "abdosi",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 285,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-08-18T19:03:32Z",
+        "comment_author": "prgeor",
+        "comment_body": "@jaganbal-a please review"
+    },
+    {
+        "number": 285,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-09-02T16:44:24Z",
+        "comment_author": "shyam77git",
+        "comment_body": "@prgeor Please update the 'Description' section with following info\r\nBesides the list above in 'Description' section, xcvrd would be listening to following events too from these DBs:\r\nadmin up, down events from CONFIG_DB\r\nhost tx_ready from STATE_DB"
+    },
+    {
+        "number": 285,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-09-07T18:58:58Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging db73f4a5fc18760d4813908739bf5f939c88a53a into 3acb17159a3d08773fca1034a239dec72e31a66f - [view on LGTM.com](https://lgtm.com/projects/g/sonic-net/sonic-platform-daemons/rev/pr-4b761e7c7db6230a92d336de1050389029b47d21)\n\n**new alerts:**\n\n* 1 for Too few arguments in formatting call"
+    },
+    {
+        "number": 285,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-09-07T18:59:43Z",
+        "comment_author": "prgeor",
+        "comment_body": "> @prgeor Please update the 'Description' section with following info Besides the list above in 'Description' section, xcvrd would be listening to following events too from these DBs: admin up, down events from CONFIG_DB host tx_ready from STATE_DB\r\n\r\n@shyam77git updated now"
+    },
+    {
+        "number": 285,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-09-07T19:06:31Z",
+        "comment_author": "prgeor",
+        "comment_body": "This PR should fix this issue [https://github.com/sonic-net/sonic-buildimage/issues/11953](https://github.com/sonic-net/sonic-buildimage/issues/11953)"
+    },
+    {
+        "number": 285,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-09-13T18:25:37Z",
+        "comment_author": "snider-nokia",
+        "comment_body": "Aside from the misaligned ')' in port_mapp.py line 133/134, the only problem remaining here is that these changes do not build under 2205 (build target target/python-wheels/bullseye/sonic_xcvrd-1.0-py3-none-any.whl fails).  Building of the aforementioned target needs to be fixed."
+    },
+    {
+        "number": 285,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-09-14T02:04:43Z",
+        "comment_author": "prgeor",
+        "comment_body": "> Aside from the misaligned ')' in port_mapp.py line 133/134, the only problem remaining here is that these changes do not build under 2205 (build target target/python-wheels/bullseye/sonic_xcvrd-1.0-py3-none-any.whl fails). Building of the aforementioned target needs to be fixed.\r\n\r\n@snider-nokia please check now."
+    },
+    {
+        "number": 285,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-09-14T13:49:31Z",
+        "comment_author": "snider-nokia",
+        "comment_body": "> > Aside from the misaligned ')' in port_mapp.py line 133/134, the only problem remaining here is that these changes do not build under 2205 (build target target/python-wheels/bullseye/sonic_xcvrd-1.0-py3-none-any.whl fails). Building of the aforementioned target needs to be fixed.\r\n> \r\n> @snider-nokia please check now.\r\n\r\nYes, confirmed that target now builds properly under 2205."
+    },
+    {
+        "number": 285,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-09-16T01:03:52Z",
+        "comment_author": "prgeor",
+        "comment_body": "@yxieca please pick to 202205. Added the label."
+    },
+    {
+        "number": 285,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-07T22:17:54Z",
+        "review_author": "arpp93"
+    },
+    {
+        "number": 285,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-13T18:24:09Z",
+        "review_author": "snider-nokia"
+    },
+    {
+        "number": 285,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-14T02:04:20Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 285,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-15T16:03:47Z",
+        "review_author": "arpp93"
+    },
+    {
+        "number": 285,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-09-15T16:05:33Z",
+        "review_author": "snider-nokia"
+    },
+    {
+        "number": 285,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-09-15T16:05:33Z",
+        "latestReview_author": "snider-nokia",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 285,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-09-15T16:03:47Z",
+        "latestReview_author": "arpp93",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 284,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-08-17T23:17:19Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 284,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-08-17T23:17:19Z",
+        "latestReview_author": "zjswhhh",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 282,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-08-10T19:00:03Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 282,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-08-10T19:00:03Z",
+        "latestReview_author": "zjswhhh",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 281,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-08-10T13:05:16Z",
+        "comment_author": "lolyu",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 281,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-08-10T13:05:24Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 281,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-08-10T16:10:34Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 281,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-08-10T16:10:34Z",
+        "latestReview_author": "vdahiya12",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 280,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-08-10T00:14:46Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 280,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-08-10T17:11:19Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 280,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-08-10T19:00:49Z",
+        "comment_author": "zjswhhh",
+        "comment_body": "/azp run "
+    },
+    {
+        "number": 280,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-08-10T19:00:57Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 280,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-08-10T19:01:45Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 280,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-08-10T19:01:45Z",
+        "latestReview_author": "zjswhhh",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 279,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-08-05T20:13:57Z",
+        "comment_author": "linux-foundation-easycla",
+        "comment_body": "<a href=\"https://easycla.lfx.linuxfoundation.org/#/?version=2\"><img src=\"https://s3.amazonaws.com/cla-project-logo-prod/cla-signed.svg\" alt=\"CLA Signed\" align=\"left\" height=\"28\" width=\"328\" ></a><br/><br />The committers listed above are authorized under a signed CLA.<ul><li>:white_check_mark: login: vdahiya12  (37e541c1f2518d86772e988efe2fab0c5c18bc54)</li></ul>"
+    },
+    {
+        "number": 279,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-08-11T20:51:31Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "Please add \"Request for 202012 Branch\" label after the dependence is merged."
+    },
+    {
+        "number": 279,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-08-08T20:03:04Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 279,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-08-08T20:03:04Z",
+        "latestReview_author": "zjswhhh",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 276,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-07-21T12:14:16Z",
+        "comment_author": "microsoft-cla-retired",
+        "comment_body": "[![CLA assistant check](https://cla.opensource.microsoft.com/pull/badge/signed)](https://cla.opensource.microsoft.com/Azure/sonic-platform-daemons?pullRequest=276) <br/>All CLA requirements met."
+    },
+    {
+        "number": 276,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-08-10T12:26:54Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "/easycla"
+    },
+    {
+        "number": 276,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-08-01T19:11:08Z",
+        "review_author": "assrinivasan"
+    },
+    {
+        "number": 276,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-08-01T19:15:19Z",
+        "review_author": "assrinivasan"
+    },
+    {
+        "number": 276,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-08-01T19:22:40Z",
+        "review_author": "orfar1994"
+    },
+    {
+        "number": 276,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-08-01T19:48:01Z",
+        "review_author": "assrinivasan"
+    },
+    {
+        "number": 276,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-08-02T05:14:26Z",
+        "review_author": "orfar1994"
+    },
+    {
+        "number": 276,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-08-08T14:41:21Z",
+        "review_author": "stephenxs"
+    },
+    {
+        "number": 276,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-08-01T19:48:01Z",
+        "latestReview_author": "assrinivasan",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 276,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-08-08T14:41:21Z",
+        "latestReview_author": "stephenxs",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 275,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-07-21T02:30:26Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging e6a09fc06432823d5139148e9f559c0c27b26922 into 005ec302783c6d31a31e89e2e98bbafa717f770d - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-b591893f51b6b44a22c271515488b43c802594ef)\n\n**new alerts:**\n\n* 1 for Syntax error"
+    },
+    {
+        "number": 275,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-22T08:49:03Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 275,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-22T17:39:50Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 275,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-22T17:40:08Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 275,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-22T20:33:01Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 275,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-07-22T08:49:03Z",
+        "latestReview_author": "lolyu",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 275,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-07-22T20:33:01Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 274,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-18T15:51:36Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 274,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-07-18T15:51:36Z",
+        "latestReview_author": "zjswhhh",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 271,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-06T18:33:32Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 271,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-07-06T18:33:32Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-07-12T18:24:09Z",
+        "comment_author": "prgeor",
+        "comment_body": "@snider-nokia can you review?"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-07-12T18:26:52Z",
+        "comment_author": "prgeor",
+        "comment_body": "@jaganbal-a @shyam77git please review"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-07-12T18:28:17Z",
+        "comment_author": "prgeor",
+        "comment_body": "@qinchuanares please review"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-07-27T03:00:31Z",
+        "comment_author": "prgeor",
+        "comment_body": "[ZR-log.txt](https://github.com/Azure/sonic-platform-daemons/files/9194690/ZR-log.txt)\r\n@jaganbal-a added the log"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-07-27T05:47:51Z",
+        "comment_author": "qinchuanares",
+        "comment_body": "@prgeor I checked the test log. For TX power configuration, we would not want data path to be reinitialized. It should be done when data path is always activated and tx is enabled."
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-07-27T15:11:26Z",
+        "comment_author": "jaganbal-a",
+        "comment_body": "> [ZR-log.txt](https://github.com/Azure/sonic-platform-daemons/files/9194690/ZR-log.txt) @jaganbal-a added the log\r\n\r\nCan you please capture show interface transceiver eeprom -d for the interfaces having ZR with tx and freq configuration?"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-07-27T18:49:05Z",
+        "comment_author": "prgeor",
+        "comment_body": "> @prgeor I checked the test log. For TX power configuration, we would not want data path to be reinitialized. It should be done when data path is always activated and tx is enabled.\r\n\r\n@qinchuanares can you point me to the CMIS reference where you find this requirement. Here is what I in section 7.5.2. There is no strict requirement to program TX power in datapath activated state. At CMIS_STATE_INSERTED, module is either in Low power mode or in High power mode.\r\n\r\n![image](https://user-images.githubusercontent.com/45705344/181348906-d5d5abe4-b1a2-4c97-8a31-d564befea888.png)\r\n"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-07-27T19:30:16Z",
+        "comment_author": "prgeor",
+        "comment_body": "> > [ZR-log.txt](https://github.com/Azure/sonic-platform-daemons/files/9194690/ZR-log.txt) @jaganbal-a added the log\r\n> \r\n> Can you please capture show interface transceiver eeprom -d for the interfaces having ZR with tx and freq configuration?\r\n\r\nAdded the log in the description. please check"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-07-28T01:48:22Z",
+        "comment_author": "jaganbal-a",
+        "comment_body": "Frequency should be displayed as part of show int transceiver CLI. Please raise a git issue."
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-07-28T21:22:41Z",
+        "comment_author": "prgeor",
+        "comment_body": "@rlhui @lguohan please merge"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-07T03:38:49Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-18T17:17:40Z",
+        "review_author": "jaganbal-a"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-21T17:59:10Z",
+        "review_author": "qinchuanares"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-21T18:00:25Z",
+        "review_author": "qinchuanares"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-21T18:09:11Z",
+        "review_author": "qinchuanares"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-21T18:10:09Z",
+        "review_author": "qinchuanares"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-21T18:14:05Z",
+        "review_author": "qinchuanares"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-21T18:15:11Z",
+        "review_author": "qinchuanares"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-22T23:27:25Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-23T05:02:34Z",
+        "review_author": "qinchuanares"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-23T05:06:47Z",
+        "review_author": "qinchuanares"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-23T05:08:43Z",
+        "review_author": "qinchuanares"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-23T05:10:18Z",
+        "review_author": "qinchuanares"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-23T05:11:10Z",
+        "review_author": "qinchuanares"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-25T22:01:13Z",
+        "review_author": "jaganbal-a"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-27T02:12:13Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-27T02:17:29Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-27T03:04:44Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-27T15:04:26Z",
+        "review_author": "jaganbal-a"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-27T15:09:39Z",
+        "review_author": "jaganbal-a"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-27T15:12:25Z",
+        "review_author": "jaganbal-a"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-27T23:40:54Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-27T23:42:51Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-27T23:43:22Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-27T23:59:23Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-28T01:44:00Z",
+        "review_author": "jaganbal-a"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-28T01:46:14Z",
+        "review_author": "jaganbal-a"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-28T18:26:59Z",
+        "review_author": "qinchuanares"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-28T20:46:00Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-28T21:47:40Z",
+        "review_author": "lizhuhuams"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-28T21:49:49Z",
+        "review_author": "lizhuhuams"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-07-29T02:42:20Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-08-01T23:02:49Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-08-01T23:02:49Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-07-28T18:26:59Z",
+        "latestReview_author": "qinchuanares",
+        "latestReview_state": "DISMISSED"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-07-29T02:42:20Z",
+        "latestReview_author": "judyjoseph",
+        "latestReview_state": "DISMISSED"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-07-28T20:46:00Z",
+        "latestReview_author": "vdahiya12",
+        "latestReview_state": "DISMISSED"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-07-28T01:46:14Z",
+        "latestReview_author": "jaganbal-a",
+        "latestReview_state": "DISMISSED"
+    },
+    {
+        "number": 270,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-07-28T21:49:49Z",
+        "latestReview_author": "lizhuhuams",
+        "latestReview_state": "DISMISSED"
+    },
+    {
+        "number": 269,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-06-30T04:04:44Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 269,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-06-30T05:04:02Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 269,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-06-30T04:04:44Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 269,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-06-30T05:04:02Z",
+        "latestReview_author": "lolyu",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 266,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-06-22T19:52:47Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 2 alerts** when merging 60cc9eb20aa92ee1f60802c2eeeef59a1cf94037 into ec84af4a5adfeac65b4d87d7c0dc9d24ef1459af - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-a758106e191bca96cc9346ceeb49432d44602e3e)\n\n**new alerts:**\n\n* 2 for Variable defined multiple times"
+    },
+    {
+        "number": 266,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-06-22T23:43:40Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 266,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-06-22T23:43:40Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 264,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-06-16T13:54:01Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 264,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-06-16T19:09:20Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 264,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-06-16T19:09:20Z",
+        "latestReview_author": "zjswhhh",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 264,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-06-16T13:54:01Z",
+        "latestReview_author": "lolyu",
+        "latestReview_state": "DISMISSED"
+    },
+    {
+        "number": 263,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-05-27T18:49:41Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 263,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-05-27T18:49:41Z",
+        "latestReview_author": "zjswhhh",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 260,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-05-03T00:17:20Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 260,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-05-03T00:56:41Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 260,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-05-03T02:37:32Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 260,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-05-03T04:06:08Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 260,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-05-03T04:26:22Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 260,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-05-03T17:20:28Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 260,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-05-03T17:20:43Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 260,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-05-04T21:19:50Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 260,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-05-04T21:20:00Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 260,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-05-03T04:26:22Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 260,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-05-04T21:20:00Z",
+        "latestReview_author": "prsunny",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 257,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-05-01T21:01:25Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 4 alerts** when merging a848b52b7e877c58093a7c693c92aa9523acfaf4 into ce217c09b0eee6e484360087347fc6746de57c68 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-035ab38ad0e07a7b38fe156635521a65d95fb558)\n\n**new alerts:**\n\n* 3 for Variable defined multiple times\n* 1 for Unreachable code"
+    },
+    {
+        "number": 257,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-05-24T18:42:01Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 257,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-05-24T18:42:09Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 257,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-05-24T18:44:15Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 257,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-05-24T22:16:50Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 257,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-05-24T22:16:50Z",
+        "latestReview_author": "zjswhhh",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 256,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-22T08:51:30Z",
+        "review_author": "keboliu"
+    },
+    {
+        "number": 256,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-04-22T08:51:30Z",
+        "latestReview_author": "keboliu",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 255,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-04-15T01:54:12Z",
+        "comment_author": "stephenxs",
+        "comment_body": "We also need this PR to go to 202111 but it can not be cherry-picked. I will open new PR to back port it once this has been approved."
+    },
+    {
+        "number": 255,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-04-19T05:44:02Z",
+        "comment_author": "prgeor",
+        "comment_body": "Thanks @stephenxs for finding the bug and fixing it!"
+    },
+    {
+        "number": 255,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-04-21T04:15:06Z",
+        "comment_author": "stephenxs",
+        "comment_body": "> Can we also remove the global reference to 'xcvr_table_helper' in Main task 'init' function?\r\n\r\nDone. All global `xcvr_table_helper` has been moved to class scope."
+    },
+    {
+        "number": 255,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-19T05:43:28Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 255,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-21T16:47:27Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 255,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-04-21T16:47:27Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-04-19T23:24:32Z",
+        "comment_author": "prgeor",
+        "comment_body": "@ds952811 can you review"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-06-25T00:41:48Z",
+        "comment_author": "jaganbal-a",
+        "comment_body": "[Link_bring_up_xcvrd_unit_test_log.txt](https://github.com/Azure/sonic-platform-daemons/files/8983598/Link_bring_up_xcvrd_unit_test_log.txt)\r\n"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-12T04:58:07Z",
+        "review_author": "sacnaik"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-12T05:01:00Z",
+        "review_author": "sacnaik"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-12T05:03:36Z",
+        "review_author": "sacnaik"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-13T19:54:08Z",
+        "review_author": "shyam77git"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-14T03:54:14Z",
+        "review_author": "shyam77git"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-14T07:22:33Z",
+        "review_author": "jaganbal-a"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-14T23:53:47Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-15T05:14:15Z",
+        "review_author": "jaganbal-a"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-15T05:54:33Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-15T06:21:04Z",
+        "review_author": "shyam77git"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-19T23:08:28Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-19T23:16:04Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-19T23:17:00Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-19T23:21:26Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-19T23:26:22Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-20T15:30:50Z",
+        "review_author": "stephenxs"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-20T15:34:30Z",
+        "review_author": "stephenxs"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-21T19:22:10Z",
+        "review_author": "jaganbal-a"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-21T20:49:41Z",
+        "review_author": "jaganbal-a"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-21T23:40:44Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-22T00:29:46Z",
+        "review_author": "ds952811"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-22T00:35:16Z",
+        "review_author": "ds952811"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-22T00:38:28Z",
+        "review_author": "ds952811"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-22T00:42:24Z",
+        "review_author": "ds952811"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-22T01:13:25Z",
+        "review_author": "ds952811"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-05-07T09:38:58Z",
+        "review_author": "keboliu"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-05-09T23:24:34Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-05-09T23:48:33Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-05-09T23:52:27Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-05-09T23:56:57Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-05-10T00:39:58Z",
+        "review_author": "stephenxs"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-05-18T03:06:57Z",
+        "review_author": "jaganbal-a"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-05-18T22:02:25Z",
+        "review_author": "jaganbal-a"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-05-20T17:29:07Z",
+        "review_author": "jaganbal-a"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-06-04T15:52:11Z",
+        "review_author": "jaganbal-a"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-06-09T02:18:59Z",
+        "review_author": "jaganbal-a"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-06-13T22:25:02Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-06-13T22:53:54Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-06-20T22:53:30Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-06-20T23:03:42Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-06-20T23:08:05Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-06-23T18:10:24Z",
+        "review_author": "shyam77git"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-06-23T18:49:34Z",
+        "review_author": "jaganbal-a"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-06-24T13:09:11Z",
+        "review_author": "keboliu"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-06-24T16:49:22Z",
+        "review_author": "shyam77git"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-06-25T00:42:39Z",
+        "review_author": "jaganbal-a"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-06-27T18:48:31Z",
+        "review_author": "sujinmkang"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-05-10T00:39:58Z",
+        "latestReview_author": "stephenxs",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-04-12T05:03:36Z",
+        "latestReview_author": "sacnaik",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-04-22T01:13:25Z",
+        "latestReview_author": "ds952811",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-06-24T13:09:11Z",
+        "latestReview_author": "keboliu",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-06-27T18:48:31Z",
+        "latestReview_author": "sujinmkang",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-06-24T16:49:22Z",
+        "latestReview_author": "shyam77git",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 254,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-06-25T00:42:39Z",
+        "latestReview_author": "jaganbal-a",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 253,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-04-07T18:33:10Z",
+        "comment_author": "prgeor",
+        "comment_body": "@aravindmani-1 @keboliu  please review"
+    },
+    {
+        "number": 253,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-04-07T18:33:39Z",
+        "comment_author": "prgeor",
+        "comment_body": "@andywongarista please review"
+    },
+    {
+        "number": 253,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-04-12T04:46:56Z",
+        "comment_author": "qinchuanares",
+        "comment_body": "> @qinchuanares I don't see ZR specific info in the table? Am i m missing something?\r\n> \r\n> ```\r\n> supported_max_tx_power       = FLOAT                            ; support maximum tx power\r\n> supported_min_tx_power       = FLOAT                            ; support minimum tx power\r\n> supported_max_laser_freq     = FLOAT                            ; support maximum laser frequency\r\n> supported_min_laser_freq     = FLOAT                            ; support minimum laser frequency\r\n> ```\r\n\r\nGood catch. I fixed it in the next commit."
+    },
+    {
+        "number": 253,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-08T05:02:35Z",
+        "review_author": "aravindmani-1"
+    },
+    {
+        "number": 253,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-08T17:49:31Z",
+        "review_author": "andywongarista"
+    },
+    {
+        "number": 253,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-11T19:23:51Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 253,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-11T20:48:37Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 253,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-12T04:47:23Z",
+        "review_author": "qinchuanares"
+    },
+    {
+        "number": 253,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-04-25T19:02:34Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 253,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-04-25T19:02:34Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 253,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-04-08T05:02:35Z",
+        "latestReview_author": "aravindmani-1",
+        "latestReview_state": "DISMISSED"
+    },
+    {
+        "number": 253,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-04-08T17:49:31Z",
+        "latestReview_author": "andywongarista",
+        "latestReview_state": "DISMISSED"
+    },
+    {
+        "number": 249,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-03-25T20:33:52Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 249,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-03-26T01:38:56Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 249,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-03-28T15:56:42Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 249,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-03-29T00:41:55Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 249,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-03-29T00:41:55Z",
+        "latestReview_author": "zjswhhh",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 248,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-03-21T17:22:51Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 8 alerts** when merging 81753fe63544877de276567c7f71436a459a26da into f09bd311a1c51d487c6588a4e5039a2f7e4059e3 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-ca493d89ba45cc19b8ece7f026d830f883877e92)\n\n**new alerts:**\n\n* 5 for Unused local variable\n* 3 for Unused import"
+    },
+    {
+        "number": 248,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-04-12T08:52:12Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 3 alerts** when merging ffcaf35d063d18ff06f309b4019adcb5fb8c0ce6 into 9ac12bfb406416b0fb3b03a084d8179bdc53f3a6 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-458c179f4d8fedec70bdf7fa9bf133a3e76f0cd8)\n\n**new alerts:**\n\n* 2 for Unused import\n* 1 for Syntax error"
+    },
+    {
+        "number": 248,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-04-21T20:42:21Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 38 alerts** when merging 3a496fbf7efa52568343fc482c4ec98ae552f76c into e0f8a357c43807e7a3bf66e14b385c2d243f05c6 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-fe30da78a91fe4927e4e7587fb7da5cca584c3c9)\n\n**new alerts:**\n\n* 30 for Unused local variable\n* 4 for Unused import\n* 2 for Variable defined multiple times\n* 1 for Non\\-callable called\n* 1 for Unreachable code"
+    },
+    {
+        "number": 248,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-04-22T22:38:11Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 3 alerts** when merging 67d9408d49c7a93f7a58347e1509b2f9989161fc into e0f8a357c43807e7a3bf66e14b385c2d243f05c6 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-277decfb54d996f96bc2350e6b48a89ce244e8c9)\n\n**new alerts:**\n\n* 2 for Unused import\n* 1 for Syntax error"
+    },
+    {
+        "number": 248,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-04-22T22:51:31Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 771ca4014dabfdd4484fc50b5fa446b2aaf8dc78 into e0f8a357c43807e7a3bf66e14b385c2d243f05c6 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-3b08d82a66707aebabd46af21b7c170b502ecbdc)\n\n**new alerts:**\n\n* 1 for Syntax error"
+    },
+    {
+        "number": 248,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-04-29T20:48:31Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 2d821621b23697bc15aea7a215257e191a2da99d into ce217c09b0eee6e484360087347fc6746de57c68 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-5602e7f29fdc2c15e9304283d4a58c36b1dc6337)\n\n**new alerts:**\n\n* 1 for Syntax error"
+    },
+    {
+        "number": 248,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-04-29T22:22:31Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 812a76855bf2954aa03e53d663c975aad8d27879 into ce217c09b0eee6e484360087347fc6746de57c68 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-db654fa4acdeecb791a9d7c056f3cf8596a01def)\n\n**new alerts:**\n\n* 1 for Syntax error"
+    },
+    {
+        "number": 248,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-04-30T21:36:53Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 8d1007f090cd53521ed355f07f87c5abbc5801a4 into ce217c09b0eee6e484360087347fc6746de57c68 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-e8bbf9c7671ce969644220040783041a0df8402a)\n\n**new alerts:**\n\n* 1 for Syntax error"
+    },
+    {
+        "number": 248,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-04-30T21:53:48Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 2 alerts** when merging 51862c4e7e51d8022fea7a8525619c029400cae3 into ce217c09b0eee6e484360087347fc6746de57c68 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-1aa32a1ce677ac83ac968ce9f895c2a4a69b6209)\n\n**new alerts:**\n\n* 2 for Syntax error"
+    },
+    {
+        "number": 248,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-05-05T00:48:42Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 25 alerts** when merging 7e12750679dc7b4012cdd75628d8cb068e6fddf9 into ce217c09b0eee6e484360087347fc6746de57c68 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-71a29b9ad4bdf47e161abda52d9f31a5c260c0bd)\n\n**new alerts:**\n\n* 21 for Unused local variable\n* 2 for Unused import\n* 1 for Unreachable code\n* 1 for Variable defined multiple times"
+    },
+    {
+        "number": 248,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-05-06T20:57:10Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 12 alerts** when merging 420c25f1adeceef8f1d451bf81ccaeb0ed2c951c into ce217c09b0eee6e484360087347fc6746de57c68 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-fa62a1e4331f146add663bb6710ca013332264e6)\n\n**new alerts:**\n\n* 10 for Unused local variable\n* 2 for Unreachable code"
+    },
+    {
+        "number": 248,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-05-06T23:17:14Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 6 alerts** when merging 23e53a948f351d5696a561215ffbe9f1fb36c36f into ce217c09b0eee6e484360087347fc6746de57c68 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-f554b6dbf22c0c81b37b1a2a719fdc9908db652c)\n\n**new alerts:**\n\n* 5 for Unused local variable\n* 1 for Unreachable code"
+    },
+    {
+        "number": 248,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-05-11T00:22:08Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging dc3459817d80207a1362a7dd6c387d1c66bb5323 into ce217c09b0eee6e484360087347fc6746de57c68 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-bf11c9abe4d1a6343cee07932add8770ea33f847)\n\n**new alerts:**\n\n* 1 for Syntax error"
+    },
+    {
+        "number": 248,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-05-12T20:16:56Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 1f669c42c8cfc758bebe49ef14332564aaceb093 into ce217c09b0eee6e484360087347fc6746de57c68 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-c6cca2c005d95a5a31c50f323a8dc9e396c98e10)\n\n**new alerts:**\n\n* 1 for Unused import"
+    },
+    {
+        "number": 248,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-05-17T19:47:37Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 3 alerts** when merging 337155ef34212163a98573a86d69a0697e888d7a into ce217c09b0eee6e484360087347fc6746de57c68 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-0e16064d91c321ffee297095626612478767be20)\n\n**new alerts:**\n\n* 2 for Variable defined multiple times\n* 1 for Unused import"
+    },
+    {
+        "number": 248,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-05-17T23:13:25Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 3 alerts** when merging 3d568d2323daa88c972762870c91404cff2c5805 into ce217c09b0eee6e484360087347fc6746de57c68 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-82416202c341e5b59713e2e18d13bbe3ff2c4730)\n\n**new alerts:**\n\n* 2 for Variable defined multiple times\n* 1 for Unused import"
+    },
+    {
+        "number": 248,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-05-19T01:33:18Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 4 alerts** when merging 93174e707dc2fe59e90fd5bd63774e8d99e3d7a6 into ce217c09b0eee6e484360087347fc6746de57c68 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-eff675ed88eb73408cac4697f7e623edb5a73e2a)\n\n**new alerts:**\n\n* 2 for Unused import\n* 2 for Variable defined multiple times"
+    },
+    {
+        "number": 248,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-05-24T06:49:31Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 248,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-05-25T01:07:20Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 248,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-05-27T14:46:11Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 248,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-05-28T13:11:55Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 248,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-05-28T13:11:55Z",
+        "latestReview_author": "lolyu",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 247,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-03-15T23:47:47Z",
+        "comment_author": "judyjoseph",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 247,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-03-15T23:47:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 247,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-03-30T00:34:41Z",
+        "comment_author": "judyjoseph",
+        "comment_body": "@sujinmkang, please take a look thanks"
+    },
+    {
+        "number": 247,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-03-31T15:55:43Z",
+        "review_author": "sujinmkang"
+    },
+    {
+        "number": 247,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-03-31T15:55:43Z",
+        "latestReview_author": "sujinmkang",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 246,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-02-28T08:27:43Z",
+        "comment_author": "liuh-80",
+        "comment_body": "Code in this PR will be test in another PR:\r\n    https://github.com/Azure/sonic-buildimage/pull/10099"
+    },
+    {
+        "number": 246,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-03-11T23:49:51Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "Could you add \"UT failed\" message into PR description?"
+    },
+    {
+        "number": 246,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-03-14T03:27:18Z",
+        "comment_author": "liuh-80",
+        "comment_body": "> Could you add \"UT failed\" message into PR description?\r\n\r\nFixed, Add UT error message to PR description.\r\n\r\nThe original error log can be found here:\r\nhttps://dev.azure.com/mssonic/be1b070f-be15-4154-aade-b1d3bfb17054/_apis/build/builds/81153/logs/27"
+    },
+    {
+        "number": 246,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-03-15T07:48:07Z",
+        "comment_author": "liuh-80",
+        "comment_body": "Will push a update later, the UT issue is:\r\nIn current UT, we implement swsscommon mock class under sonic-pcied/tests/mocked_libs/swsscommon and load these mock libs by add the mock path in front of real swsscommon lib path with following code: \r\n\r\n    # Add mocked_libs path so that the file under test can load mocked modules from there\r\n    mocked_libs_path = os.path.join(tests_path, \"mocked_libs\")\r\n    sys.path.insert(0, mocked_libs_path)\r\n\r\nHowever, because we change sonic_py_common to use swsscommon, so real version of swsscommon been load before we load mock lib. then the UT break.\r\n\r\nSo will check if can load mock lib first by change the code orider."
+    },
+    {
+        "number": 246,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-03-17T01:12:16Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 246,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-03-17T01:47:20Z",
+        "review_author": "liuh-80"
+    },
+    {
+        "number": 246,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-03-17T05:49:33Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 246,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-03-17T05:49:33Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 244,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-02-10T04:56:18Z",
+        "review_author": "xumia"
+    },
+    {
+        "number": 244,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-02-10T04:56:18Z",
+        "latestReview_author": "xumia",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 243,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-02-09T10:33:50Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 2c8a722b9a3b0ba29755c92e700c21758f04e10f into 7195dcceadc59d98e5e53e2c8623f1b307350084 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-e5b35e3edef0885e3512d44386c687f0887e67c6)\n\n**new alerts:**\n\n* 1 for Wrong number of arguments in a class instantiation"
+    },
+    {
+        "number": 243,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-02-09T20:09:50Z",
+        "comment_author": "assrinivasan",
+        "comment_body": "@sujinmkang not sure how to handle the LGTM issue, because I didn't make any changes to it."
+    },
+    {
+        "number": 243,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-03-04T00:06:53Z",
+        "review_author": "sujinmkang"
+    },
+    {
+        "number": 243,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-03-04T00:06:53Z",
+        "latestReview_author": "sujinmkang",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 242,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-02-08T16:42:38Z",
+        "review_author": "sujinmkang"
+    },
+    {
+        "number": 242,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-02-08T16:42:38Z",
+        "latestReview_author": "sujinmkang",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 238,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-02-07T18:10:43Z",
+        "review_author": "assrinivasan"
+    },
+    {
+        "number": 238,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-02-07T18:10:43Z",
+        "latestReview_author": "assrinivasan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 237,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-28T04:44:03Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging bc3bed5156e61f1beff8de400f982ef6a9a4149d into 9acb2f9b5d6c2a0744657b424ff2610c3d614061 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-186f672ae06c330e02a90acfe0e6b944a72327f5)\n\n**new alerts:**\n\n* 1 for Unused local variable"
+    },
+    {
+        "number": 237,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-28T19:36:42Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging b1138baab0afc1d708a679119d3e00ec295942d4 into 9acb2f9b5d6c2a0744657b424ff2610c3d614061 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-7fce9da5e8336433ee17c5f23d8ace73ea244ade)\n\n**new alerts:**\n\n* 1 for Unused local variable"
+    },
+    {
+        "number": 237,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-28T20:55:29Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 44cfe62747822b1a34ec3561c01051320a835026 into 9acb2f9b5d6c2a0744657b424ff2610c3d614061 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-4ffa363560b1b7d9e16d479479a54a78b84d6d29)\n\n**new alerts:**\n\n* 1 for Unused local variable"
+    },
+    {
+        "number": 237,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-01-29T13:20:16Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 237,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-01-29T13:20:16Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 236,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-25T15:49:19Z",
+        "comment_author": "mlok-nokia",
+        "comment_body": "@judyjoseph Per your request, I have created this PR for porting the PR 233. Please review it. Thanks"
+    },
+    {
+        "number": 236,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-02-08T12:30:27Z",
+        "comment_author": "prgeor",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 236,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-02-08T12:30:36Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 236,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-02-09T02:11:24Z",
+        "comment_author": "prgeor",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 236,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-02-09T02:11:33Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 236,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-02-09T14:21:38Z",
+        "comment_author": "prgeor",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 236,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-02-09T14:21:47Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 236,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-02-10T05:41:18Z",
+        "comment_author": "judyjoseph",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 236,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-02-10T05:41:27Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 236,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-02-08T12:30:13Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 236,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-02-10T05:41:36Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 236,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-02-08T12:30:13Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 236,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-02-10T05:41:36Z",
+        "latestReview_author": "judyjoseph",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 235,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-06T05:23:27Z",
+        "comment_author": "Junchao-Mellanox",
+        "comment_body": "Hi @sujinmkang and @prgeor , could you please review?"
+    },
+    {
+        "number": 235,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-13T09:49:15Z",
+        "comment_author": "Junchao-Mellanox",
+        "comment_body": "Hi @prgeor , could you help review?"
+    },
+    {
+        "number": 235,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-16T06:38:51Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@aravindmani-1 is it ok to go ahead and merge?"
+    },
+    {
+        "number": 235,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-21T03:32:18Z",
+        "comment_author": "Junchao-Mellanox",
+        "comment_body": "Hi @judyjoseph could you please cherry-pick to 202111?\r\n\r\n"
+    },
+    {
+        "number": 235,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-22T02:27:39Z",
+        "review_author": "keboliu"
+    },
+    {
+        "number": 235,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-01-06T17:22:23Z",
+        "review_author": "sujinmkang"
+    },
+    {
+        "number": 235,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-01-13T10:04:25Z",
+        "review_author": "aravindmani-1"
+    },
+    {
+        "number": 235,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-01-14T10:06:24Z",
+        "review_author": "Junchao-Mellanox"
+    },
+    {
+        "number": 235,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-01-14T10:09:50Z",
+        "review_author": "Junchao-Mellanox"
+    },
+    {
+        "number": 235,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-01-17T09:43:56Z",
+        "review_author": "aravindmani-1"
+    },
+    {
+        "number": 235,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-01-17T09:43:56Z",
+        "latestReview_author": "aravindmani-1",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 235,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2021-12-22T02:27:39Z",
+        "latestReview_author": "keboliu",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 235,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-01-06T17:22:23Z",
+        "latestReview_author": "sujinmkang",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 233,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2021-12-11T01:49:21Z",
+        "comment_author": "mlok-nokia",
+        "comment_body": "@abdosi @judyjoseph @minionatwork Please review this PR which address the backtrace on the Xcvrd process in PMON in the latest code. "
+    },
+    {
+        "number": 233,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-06T20:41:04Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 589d6ad6b1fb3d5ccdf2f1d8746d5891e9b1255d into 3e432e7e40223e6a4b3c679c655cc579d3a6fbb5 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-9ec0b5c19d801b93cc8cb65104f922ff0948d1dc)\n\n**new alerts:**\n\n* 1 for Syntax error"
+    },
+    {
+        "number": 233,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-06T20:56:34Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 621ea701759ac8719f820c353560606bd3aaa758 into 3e432e7e40223e6a4b3c679c655cc579d3a6fbb5 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-4e841de86c545ad00f4421591bf976d95431f3b1)\n\n**new alerts:**\n\n* 1 for Syntax error"
+    },
+    {
+        "number": 233,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-06T21:27:35Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging b4ce2a56560e46585e7071d31cc5fd9195b8783c into 3e432e7e40223e6a4b3c679c655cc579d3a6fbb5 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-9505dfbacd7389534fe898aa978c5453d1b384b9)\n\n**new alerts:**\n\n* 1 for Syntax error"
+    },
+    {
+        "number": 233,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-23T06:20:56Z",
+        "comment_author": "judyjoseph",
+        "comment_body": "@mlok-nokia  Please raise a separate PR for 202111 branch as there are conflicts."
+    },
+    {
+        "number": 233,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-01-05T21:11:26Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 233,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-01-06T20:36:29Z",
+        "review_author": "mlok-nokia"
+    },
+    {
+        "number": 233,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-01-07T08:10:14Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 233,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-01-07T20:22:47Z",
+        "review_author": "mlok-nokia"
+    },
+    {
+        "number": 233,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-01-07T20:27:55Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 233,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-01-07T21:09:05Z",
+        "review_author": "abdosi"
+    },
+    {
+        "number": 233,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-01-07T20:27:55Z",
+        "latestReview_author": "judyjoseph",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 233,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-01-07T21:09:05Z",
+        "latestReview_author": "abdosi",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2021-10-18T18:18:34Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 2 alerts** when merging 6f2c77869c4045f436019534cbe26135f0640e21 into 1565a23f56f7a574d56ce602263ef1f9ae29c29b - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-1f6b5b8d8f729a158445defe4883cc94627c123f)\n\n**new alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;\n* 1 for Syntax error"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2021-11-02T00:44:15Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 8 alerts** and **fixes 1** when merging 742236581e007adb5264067bdae840c1efe2ed5b into ddb22b9d1ed579a80963bd9ab2e7b5952f6924e5 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-b16c170c322e8266fd3d635e0cda549c0098c4fd)\n\n**new alerts:**\n\n* 6 for Unused local variable\n* 2 for Unused import\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2021-11-07T06:56:14Z",
+        "comment_author": "prgeor",
+        "comment_body": "@vdahiya12 can yo fix LGTM warnings?"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2021-11-09T08:04:48Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 12 alerts** and **fixes 1** when merging f4d160c067fc3b8eb7b2deacb58936897b4abe23 into 1fd3d169561b6ca23fdfc1130773a47ce0f29747 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-7624ca82703106a51c1898d53809792a74f647ae)\n\n**new alerts:**\n\n* 9 for Unused local variable\n* 2 for Unused import\n* 1 for Except block handles &#39;BaseException&#39;\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2021-11-14T22:10:59Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 12 alerts** and **fixes 1** when merging c2e15fbac9aa17d313458d0bbd41d9522e5cae9b into 7b952116cc4e44dfc499b0ec7fa2948ba51f9271 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-336a22029bdc2e6829c6e7c2aed92c5f205a25b7)\n\n**new alerts:**\n\n* 9 for Unused local variable\n* 2 for Unused import\n* 1 for Except block handles &#39;BaseException&#39;\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2021-11-14T22:43:10Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 5 alerts** and **fixes 1** when merging abfc6f0cc509aadb849e8e7eacef8bb50a2de6d8 into 7b952116cc4e44dfc499b0ec7fa2948ba51f9271 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-debdc5263740e10e736b48477f04d581ee391f6b)\n\n**new alerts:**\n\n* 5 for Unused local variable\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2021-11-14T22:52:21Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** and **fixes 1** when merging e082871db031d98b6f940143d80c677c61896f51 into 7b952116cc4e44dfc499b0ec7fa2948ba51f9271 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-ddcf7b08b4f9161555169ec830a551e1c5f0fc9a)\n\n**new alerts:**\n\n* 1 for Unused local variable\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2021-11-14T23:26:45Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **fixes 1 alert** when merging 37e1a50c3348cc962156a566c42e8f485fdc43e2 into 7b952116cc4e44dfc499b0ec7fa2948ba51f9271 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-bd41fe0b6c52c510a7816b37e646d805133102df)\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2021-11-17T03:21:22Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **fixes 1 alert** when merging b898a778440b09601bf10bdc8624a1e46d8c40ac into e53ff268a2952aebd2b8e99a2589e47c267d33c0 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-293ef21ee3291ba02a308ae240fd6ff1bae6f9ca)\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2021-11-18T01:02:51Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **fixes 1 alert** when merging 912b80fdb6ab1a6a5a9cd714308b02231a727485 into e53ff268a2952aebd2b8e99a2589e47c267d33c0 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-c839cfefed691a7e797545ecd41f6bb67530c177)\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2021-11-18T22:55:15Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **fixes 1 alert** when merging c65f5133fdd9760ba643750555f316c11c4f6307 into e53ff268a2952aebd2b8e99a2589e47c267d33c0 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-d42a7515906ec44d4631e21d981b30356059d932)\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2021-11-28T12:05:06Z",
+        "comment_author": "prgeor",
+        "comment_body": "@Junchao-Mellanox could you also review the changes?"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2021-12-06T19:11:24Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 2 alerts** and **fixes 1** when merging 8116373119f3df9ddbc0c14919d31753a8a12ff1 into 8bad10a7ca04055a56894d13c8cf56f529daa1e6 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-e0522a214825ec3f1d0d086716148c37971e91ed)\n\n**new alerts:**\n\n* 2 for Unused import\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2021-12-06T20:06:21Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 2 alerts** and **fixes 1** when merging 1b523c8b120a7d198132467e18748aa0f4173850 into 8bad10a7ca04055a56894d13c8cf56f529daa1e6 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-bef98e8696ff9140d5f0cd3eb713f1836d204f79)\n\n**new alerts:**\n\n* 2 for Unused import\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2021-12-06T20:27:15Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **fixes 1 alert** when merging e4f5bcc170eeea79d6b7ac22f46012f1bc9d5abc into 8bad10a7ca04055a56894d13c8cf56f529daa1e6 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-a91b3682b7d7be6e7bb0db805e236d543e52f2c6)\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2021-12-07T23:41:37Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **fixes 1 alert** when merging 421c491b88ea099ba0f555d0a367e2436c025342 into 59bc31557c99ede23b3c9a937c7ebf77e7917e3c - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-d10da1de4fd62d092db3317d571d96747559c50f)\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2021-12-07T23:54:01Z",
+        "comment_author": "vdahiya12",
+        "comment_body": "code coverage through this PR\r\nhttps://github.com/Azure/sonic-platform-daemons/pull/229"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2021-12-14T18:16:14Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **fixes 1 alert** when merging 7faafbcb3cca2842408726901203fde1424edf53 into 2b0acfbdc48089acf9224113bbf9a61030314e87 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-1db251f28ac558949ea794bb11ac0e9b0ba74b12)\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2021-12-15T06:12:09Z",
+        "comment_author": "sujinmkang",
+        "comment_body": "/azp run Azure.sonic-platform-daemons"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2021-12-15T06:12:19Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2021-12-16T06:50:42Z",
+        "comment_author": "prgeor",
+        "comment_body": "@vdahiya12 code coverage is failing because the minimum coverage expected is >= 50%. your coverage is \r\n\r\nTotal: 717 lines\r\nMissing: 595 lines\r\nCoverage: 17%\r\nThreshold: 50%"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2021-12-16T07:01:49Z",
+        "comment_author": "vdahiya12",
+        "comment_body": "> @vdahiya12 code coverage is failing because the minimum coverage expected is >= 50%. your coverage is\r\n> \r\n> Total: 717 lines Missing: 595 lines Coverage: 17% Threshold: 50%\r\n\r\nthe PR for coverage is this\r\nhttps://github.com/Azure/sonic-platform-daemons/pull/229"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2021-12-24T17:40:52Z",
+        "comment_author": "vdahiya12",
+        "comment_body": "/azp run Azure.sonic-platform-daemons"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2021-12-24T17:40:56Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nPull request contains merge conflicts.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-07T23:54:11Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **fixes 1 alert** when merging f38e86838be87aedd1f41f0a7590a018682056d0 into 07542cb2c39320ba7e76743b4d728610d3753177 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-0d9292cee43873e77378dcc4aa9191a4d17a1b64)\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-08T00:43:19Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **fixes 1 alert** when merging de78ae4fc05f1d22358269cf7dc9d5c78cf69bcb into 07542cb2c39320ba7e76743b4d728610d3753177 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-90cbfd8c4433f3c8f0f1ebf905ca00b471eb4a45)\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-08T00:58:31Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **fixes 1 alert** when merging cc5ee486f3448a6aa78387e700227da60da2ab88 into 07542cb2c39320ba7e76743b4d728610d3753177 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-76f37da8dfe13dbb46c6d81f98fef622790dd6c5)\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-08T01:14:27Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **fixes 1 alert** when merging 978151fc756a1d13456cae34f1291501c197944f into 07542cb2c39320ba7e76743b4d728610d3753177 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-c87518f4d1b3a945e04c767c46889cf69f077054)\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-08T01:31:33Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **fixes 1 alert** when merging 2eaf13d75da4866609cbc127619aed517049b2f0 into 07542cb2c39320ba7e76743b4d728610d3753177 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-2edff6c8a0ffc996fee72a61b4cf74005be42d2f)\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-08T01:50:55Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **fixes 1 alert** when merging a89b05df88fbbf5a2110841ecbf71f625762009b into 07542cb2c39320ba7e76743b4d728610d3753177 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-c2d9552a8c3f70fbc848b1bae2b2ba7325708e96)\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-10T06:37:24Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **fixes 1 alert** when merging ff1457b6b47730e648b96bd8f3eca335d559f409 into 07542cb2c39320ba7e76743b4d728610d3753177 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-aff0fe23f156dd751e4737d856eb257d0514ac8e)\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-10T20:38:33Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **fixes 1 alert** when merging 45fd671bfece06f9e6c1260472ebfe6eda85e231 into 07542cb2c39320ba7e76743b4d728610d3753177 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-d6573074beb23691c888e0f20f8885c6f68cf4ca)\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-12T01:28:44Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **fixes 1 alert** when merging 482b44f355154826d8200b76db45d9ef69998bae into 07542cb2c39320ba7e76743b4d728610d3753177 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-7873fd2172865b1491781f81e8017873dd9f39a2)\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-12T06:59:13Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **fixes 1 alert** when merging 85cde0302c80eab0f40ab19b5a9bbac9bfe43f3b into 07542cb2c39320ba7e76743b4d728610d3753177 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-d90f51ef2eec2092bbae8c8b9a6c0ed0c9c5c36c)\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-12T22:11:20Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **fixes 1 alert** when merging 528abd6c732ca49bf17b0d5caae75741754c5832 into 07542cb2c39320ba7e76743b4d728610d3753177 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-8237d6481afc4185d1f0a1c1d0b28bfce4e61922)\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-14T21:32:57Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **fixes 1 alert** when merging 7187e1314005ce27d835b700e4fbe07b285bdb1a into 07542cb2c39320ba7e76743b4d728610d3753177 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-0bfeb57bd11414a9c80e2a1a19823ee243839d03)\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-15T01:42:34Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **fixes 1 alert** when merging 6138ca7cff1eeebc34b070a0d17f23667de9f73c into 07542cb2c39320ba7e76743b4d728610d3753177 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-ab7b72f3f4cee12d1d904fd8451de0ca4985003b)\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-15T03:21:59Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 5 alerts** and **fixes 1** when merging a2ee7b8113f498bbcfdf05074824488e629a4ae7 into 07542cb2c39320ba7e76743b4d728610d3753177 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-63ff65deb4b4370dc34f65cf04cd2efee280fa6b)\n\n**new alerts:**\n\n* 4 for Unreachable code\n* 1 for Unused local variable\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-18T02:11:19Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** and **fixes 1** when merging c73c5089209c2b08d8871652b3d1027c4017101c into c4127c28ada0cbc7fd8cb730320cbc65ef78ead8 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-e702907dbd2d3e5fb5dd6f156af9cca8a9c949dc)\n\n**new alerts:**\n\n* 1 for Unused local variable\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-18T02:36:14Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** and **fixes 1** when merging 9ee55b217fd9d2ae6e04f4528c5417ceb0635cef into c4127c28ada0cbc7fd8cb730320cbc65ef78ead8 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-4548d5dc389cfd27e39e97ce5c017365d2d903cd)\n\n**new alerts:**\n\n* 1 for Unused local variable\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-18T07:09:34Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **fixes 1 alert** when merging c34bea78c1d1cf27aab87781c3b875171a577059 into c4127c28ada0cbc7fd8cb730320cbc65ef78ead8 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-0412744f521308379389ac91979db9a8e3c3d9ed)\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-18T21:21:24Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **fixes 1 alert** when merging fd6e5203b255165bac9e4a5c6bbf81e3a579b5a2 into c4127c28ada0cbc7fd8cb730320cbc65ef78ead8 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-752e127455571d29d51f82214ecc9fbdbcc15119)\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-19T01:46:03Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **fixes 1 alert** when merging 519307dd3c45821273f643ee90e4118dc48e6f8a into c4127c28ada0cbc7fd8cb730320cbc65ef78ead8 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-37d3b6f162e997ddc5e0537e1196cac9b2e45205)\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-19T18:55:59Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **fixes 1 alert** when merging 73a82bc444c29e2440dc31300eed03ded00df477 into c4127c28ada0cbc7fd8cb730320cbc65ef78ead8 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-aeb89df597fbba8c7cde8c43eb0e2a215664bacd)\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-20T00:52:01Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **fixes 1 alert** when merging 067c5890f089c5ceda16eb4eb1acdc8ed2fdce67 into c4127c28ada0cbc7fd8cb730320cbc65ef78ead8 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-platform-daemons/rev/pr-b35507ed958b071d193e12cd221832b98088e988)\n\n**fixed alerts:**\n\n* 1 for Except block handles &#39;BaseException&#39;"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-01-27T06:08:56Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "This commit could not be cleanly cherry-picked to 202012. Please submit another PR."
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-11-28T12:49:42Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-06T19:03:18Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-06T19:03:32Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-06T19:03:44Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-06T19:48:56Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-06T19:49:02Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-06T19:49:24Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-06T19:56:05Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-06T19:56:12Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-06T19:56:24Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-06T19:56:50Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-06T19:56:58Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-06T19:57:10Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-06T19:57:19Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-06T20:11:34Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-07T23:35:08Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-14T01:12:21Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-14T17:43:02Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-14T17:44:41Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-14T17:44:56Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-14T17:57:06Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-14T18:04:28Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-14T18:05:04Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-14T18:06:51Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-14T18:07:15Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-14T18:08:29Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-14T18:09:51Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-14T18:09:57Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-14T18:10:09Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-14T18:10:17Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-14T18:10:34Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-14T18:10:44Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-14T18:10:50Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-14T18:10:57Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-12-14T18:16:00Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-01-19T16:14:56Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-01-19T18:42:02Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-01-20T05:48:28Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 219,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-01-20T05:48:28Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 206,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2021-08-02T05:15:11Z",
+        "comment_author": "mprabhu-nokia",
+        "comment_body": "@judyjoseph Please review when you get a chance or add the component owner as reviewer."
+    },
+    {
+        "number": 206,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2021-08-04T09:59:06Z",
+        "comment_author": "liushilongbuaa",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 206,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2021-08-04T09:59:15Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 206,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2021-08-04T16:27:29Z",
+        "comment_author": "anshuv-mfst",
+        "comment_body": "@lguohan - could you please assign reviewer to this PR (Platform daemon related), thanks "
+    },
+    {
+        "number": 206,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2021-09-08T16:13:11Z",
+        "comment_author": "anshuv-mfst",
+        "comment_body": "Hi @ysmanman - could you please review and approve as well, thanks. "
+    },
+    {
+        "number": 206,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-02-08T12:47:41Z",
+        "comment_author": "prgeor",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 206,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-02-08T12:47:50Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 206,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2022-02-08T12:48:09Z",
+        "comment_author": "prgeor",
+        "comment_body": "@sujinmkang could you review?"
+    },
+    {
+        "number": 206,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2021-09-08T17:43:26Z",
+        "review_author": "Staphylo"
+    },
+    {
+        "number": 206,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2022-02-11T02:37:49Z",
+        "review_author": "sujinmkang"
+    },
+    {
+        "number": 206,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2021-09-08T17:43:26Z",
+        "latestReview_author": "Staphylo",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 206,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2022-02-11T02:37:49Z",
+        "latestReview_author": "sujinmkang",
+        "latestReview_state": "APPROVED"
+    }
+]

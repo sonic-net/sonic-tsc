@@ -1,0 +1,262 @@
+[
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "comment_at": "2022-05-26T06:41:55Z",
+        "comment_author": "geans-pin",
+        "comment_body": "PDE PYTEST UT\r\n\r\nroot@sonic:~# pde-test -v\r\n============================= test session starts ==============================\r\nplatform linux -- Python 3.9.2, pytest-7.1.2, pluggy-1.0.0 -- /usr/bin/python3\r\ncachedir: .pytest_cache\r\nrootdir: /usr/local/sonic_pde_tests\r\ncollecting ... collecting 65 items                                                            collected 91 items                                                             \r\n\r\ntest_bmc.py::test_for_bmc SKIPPED (Not supported)                        [  1%]\r\ntest_config.py::test_for_required_bcm_config_file PASSED                 [  2%]\r\ntest_config.py::test_for_required_bcm_config_settings PASSED             [  3%]\r\ntest_cpld.py::test_for_num_cpld SKIPPED (Skip the testing due to the...) [  4%]\r\ntest_cpld.py::test_for_cpld_read SKIPPED (Skip the testing due to th...) [  5%]\r\ntest_eeprom.py::test_for_eeprom_read PASSED                              [  6%]\r\ntest_eeprom.py::test_for_eeprom_has_mac PASSED                           [  7%]\r\ntest_eeprom.py::test_for_eeprom_mac PASSED                               [  8%]\r\ntest_eeprom.py::test_for_eeprom_has_sn PASSED                            [  9%]\r\ntest_eeprom.py::test_for_eeprom_sn PASSED                                [ 10%]\r\ntest_eeprom.py::test_for_eeprom_model PASSED                             [ 12%]\r\ntest_eeprom.py::test_for_platform_id PASSED                              [ 13%]\r\ntest_eeprom.py::test_for_eeprom_junk_characters PASSED                   [ 14%]\r\ntest_fan.py::test_for_num_fans PASSED                                    [ 15%]\r\ntest_fan.py::test_for_fans_dir PASSED                                    [ 16%]\r\ntest_fan.py::test_for_fans_status PASSED                                 [ 17%]\r\ntest_fan.py::test_for_fans_present PASSED                                [ 18%]\r\ntest_fan.py::test_for_fans_duty SKIPPED (Skip the testing due to the...) [ 19%]\r\ntest_leds.py::test_for_set_fan_sysled SKIPPED (Skip the testing due ...) [ 20%]\r\ntest_leds.py::test_for_set_fantray_sysled SKIPPED (Skip the testing ...) [ 21%]\r\ntest_leds.py::test_for_set_psu_sysled SKIPPED (Skip the testing due ...) [ 23%]\r\ntest_leds.py::test_for_set_sys_sysled SKIPPED (Skip the testing due ...) [ 24%]\r\ntest_leds.py::test_for_set_loc_sysled SKIPPED (Skip the testing due ...) [ 25%]\r\ntest_os.py::test_for_service_port_presence PASSED                        [ 26%]\r\ntest_os.py::test_for_service_port_dhcp PASSED                            [ 27%]\r\ntest_os.py::test_for_flooding_dmesg PASSED                               [ 28%]\r\ntest_os.py::test_for_flooding_syslog PASSED                              [ 29%]\r\ntest_os.py::test_for_fstrim SKIPPED ('sda' is not a SSD)                 [ 30%]\r\ntest_os.py::test_for_cpuload PASSED                                      [ 31%]\r\ntest_platform.py::test_for_cpld_driver_loading PASSED                    [ 32%]\r\ntest_platform.py::test_for_psu_driver_loading PASSED                     [ 34%]\r\ntest_platform.py::test_for_psu_driver_unloading PASSED                   [ 35%]\r\ntest_platform.py::test_for_fan_driver_loading PASSED                     [ 36%]\r\ntest_platform.py::test_for_fan_driver_unloading PASSED                   [ 37%]\r\ntest_platform.py::test_for_sfp_driver_loading PASSED                     [ 38%]\r\ntest_platform.py::test_for_sfp_driver_unloading PASSED                   [ 39%]\r\ntest_platform.py::test_for_temp_driver_loading PASSED                    [ 40%]\r\ntest_platform.py::test_for_temp_driver_unloading PASSED                  [ 41%]\r\ntest_platform.py::test_for_led_driver_loading PASSED                     [ 42%]\r\ntest_platform.py::test_for_led_driver_unloading PASSED                   [ 43%]\r\ntest_platform.py::test_for_eeprom_driver_loading PASSED                  [ 45%]\r\ntest_platform.py::test_for_eeprom_driver_unloading PASSED                [ 46%]\r\ntest_platform.py::test_for_mac_driver_loading PASSED                     [ 47%]\r\ntest_platform.py::test_for_mac_driver_unloading PASSED                   [ 48%]\r\ntest_platform.py::test_for_ethernet_mac_address PASSED                   [ 49%]\r\ntest_port.py::test_for_port SKIPPED (Not supported)                      [ 50%]\r\ntest_psu.py::test_for_num_psus PASSED                                    [ 51%]\r\ntest_psu.py::test_for_psu_present PASSED                                 [ 52%]\r\ntest_psu.py::test_for_psu_notpresent PASSED                              [ 53%]\r\ntest_psu.py::test_for_psu_status PASSED                                  [ 54%]\r\ntest_psu.py::test_for_psu_serial_num PASSED                              [ 56%]\r\ntest_psu.py::test_for_psu_model PASSED                                   [ 57%]\r\ntest_psu.py::test_for_psu_voltage PASSED                                 [ 58%]\r\ntest_psu.py::test_for_psu_current PASSED                                 [ 59%]\r\ntest_psu.py::test_for_psu_power PASSED                                   [ 60%]\r\ntest_psu.py::test_for_psu_input_voltage PASSED                           [ 61%]\r\ntest_psu.py::test_for_psu_input_current FAILED                           [ 62%]\r\ntest_psu.py::test_for_psu_capacity PASSED                                [ 63%]\r\ntest_psu.py::test_for_psu_type PASSED                                    [ 64%]\r\ntest_rtc.py::test_for_rtc_read PASSED                                    [ 65%]\r\ntest_rtc.py::test_for_rtc_write PASSED                                   [ 67%]\r\ntest_sai.py::test_for_switch_port_enumeration PASSED                     [ 68%]\r\ntest_sai.py::test_for_switch_port_loopback PASSED                        [ 69%]\r\ntest_sai.py::test_for_switch_port_traffic PASSED                         [ 70%]\r\ntest_sai.py::test_for_switch_media_setting_json PASSED                   [ 71%]\r\ntest_sfp.py::test_for_sfp_number PASSED                                  [ 72%]\r\ntest_sfp.py::test_for_sfp_present PASSED                                 [ 73%]\r\ntest_sfp.py::test_for_sfp_eeprom PASSED                                  [ 74%]\r\ntest_sfp.py::test_for_sfp_lpmode PASSED                                  [ 75%]\r\ntest_sfp.py::test_for_sfp_reset PASSED                                   [ 76%]\r\ntest_thermal.py::test_for_num_temp PASSED                                [ 78%]\r\ntest_thermal.py::test_for_temp_read PASSED                               [ 79%]\r\ntest_thermal.py::test_for_temp_high_threshold_read PASSED                [ 80%]\r\ntest_thermal.py::test_for_temp_high_critical_threshold_read PASSED       [ 81%]\r\ntest_thermal.py::test_for_thermal_daemon SKIPPED (Skip the testing d...) [ 82%]\r\ntest_thermal.py::test_for_thermal_policy SKIPPED (Skip the testing d...) [ 83%]\r\ntest_thermal.py::test_for_thermal_policy_fan_removed SKIPPED (Skip t...) [ 84%]\r\ntest_thermal.py::test_for_pmon_daemon FAILED                             [ 85%]\r\ntest_thermal.py::test_for_pmon_fan_removed_event_log SKIPPED (Skip t...) [ 86%]\r\ntest_thermal.py::test_for_pmon_psu_removed_event_log SKIPPED (Skip t...) [ 87%]\r\ntest_usb.py::test_for_usb_storage PASSED                                 [ 89%]\r\ntest_usb.py::test_for_usb_fat PASSED                                     [ 90%]\r\ntest_usb.py::test_for_usb_ntfs FAILED                                    [ 91%]\r\ntest_usb.py::test_for_usb_ext4 PASSED                                    [ 92%]\r\ntest_usb.py::test_for_usb_presence PASSED                                [ 93%]\r\ntest_usb.py::test_for_usb_mount PASSED                                   [ 94%]\r\ntest_watchdog.py::test_for_get_watchdog_dev PASSED                       [ 95%]\r\ntest_watchdog.py::test_for_arm_watchdog FAILED                           [ 96%]\r\ntest_watchdog.py::test_for_get_watchdog_remaining_time PASSED            [ 97%]\r\ntest_watchdog.py::test_for_remaining_time_changed FAILED                 [ 98%]\r\ntest_watchdog.py::test_for_disarm_watchdog PASSED                        [100%]"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "comment_at": "2022-06-15T04:21:31Z",
+        "comment_author": "geans-pin",
+        "comment_body": "All,\r\n\r\nThe migration is tested and verified on the ODM platform. See the UT below. I posted on 5/26.\r\n\r\nSo far all the ODM platforms we have are moved to API 2.0, we still keep 1.0 testing but not able to do the test .. \r\nFor 2.0 we have tested and verified which can be run and tested.  If 1.0 is out of supported, we can remove them\r\nin our testing code. \r\n\r\n\r\n\r\nPDE PYTEST UT\r\n\r\nroot@sonic:~# pde-test -v\r\n============================= test session starts ==============================\r\nplatform linux -- Python 3.9.2, pytest-7.1.2, pluggy-1.0.0 -- /usr/bin/python3\r\ncachedir: .pytest_cache\r\nrootdir: /usr/local/sonic_pde_tests\r\ncollecting ... collecting 65 items collected 91 items\r\n\r\ntest_bmc.py::test_for_bmc SKIPPED (Not supported) [ 1%]\r\ntest_config.py::test_for_required_bcm_config_file PASSED [ 2%]\r\ntest_config.py::test_for_required_bcm_config_settings PASSED [ 3%]\r\ntest_cpld.py::test_for_num_cpld SKIPPED (Skip the testing due to the...) [ 4%]\r\ntest_cpld.py::test_for_cpld_read SKIPPED (Skip the testing due to th...) [ 5%]\r\ntest_eeprom.py::test_for_eeprom_read PASSED [ 6%]\r\ntest_eeprom.py::test_for_eeprom_has_mac PASSED [ 7%]\r\ntest_eeprom.py::test_for_eeprom_mac PASSED [ 8%]\r\ntest_eeprom.py::test_for_eeprom_has_sn PASSED [ 9%]\r\ntest_eeprom.py::test_for_eeprom_sn PASSED [ 10%]\r\ntest_eeprom.py::test_for_eeprom_model PASSED [ 12%]\r\ntest_eeprom.py::test_for_platform_id PASSED [ 13%]\r\ntest_eeprom.py::test_for_eeprom_junk_characters PASSED [ 14%]\r\ntest_fan.py::test_for_num_fans PASSED [ 15%]\r\ntest_fan.py::test_for_fans_dir PASSED [ 16%]\r\ntest_fan.py::test_for_fans_status PASSED [ 17%]\r\ntest_fan.py::test_for_fans_present PASSED [ 18%]\r\ntest_fan.py::test_for_fans_duty SKIPPED (Skip the testing due to the...) [ 19%]\r\ntest_leds.py::test_for_set_fan_sysled SKIPPED (Skip the testing due ...) [ 20%]\r\ntest_leds.py::test_for_set_fantray_sysled SKIPPED (Skip the testing ...) [ 21%]\r\ntest_leds.py::test_for_set_psu_sysled SKIPPED (Skip the testing due ...) [ 23%]\r\ntest_leds.py::test_for_set_sys_sysled SKIPPED (Skip the testing due ...) [ 24%]\r\ntest_leds.py::test_for_set_loc_sysled SKIPPED (Skip the testing due ...) [ 25%]\r\ntest_os.py::test_for_service_port_presence PASSED [ 26%]\r\ntest_os.py::test_for_service_port_dhcp PASSED [ 27%]\r\ntest_os.py::test_for_flooding_dmesg PASSED [ 28%]\r\ntest_os.py::test_for_flooding_syslog PASSED [ 29%]\r\ntest_os.py::test_for_fstrim SKIPPED ('sda' is not a SSD) [ 30%]\r\ntest_os.py::test_for_cpuload PASSED [ 31%]\r\ntest_platform.py::test_for_cpld_driver_loading PASSED [ 32%]\r\ntest_platform.py::test_for_psu_driver_loading PASSED [ 34%]\r\ntest_platform.py::test_for_psu_driver_unloading PASSED [ 35%]\r\ntest_platform.py::test_for_fan_driver_loading PASSED [ 36%]\r\ntest_platform.py::test_for_fan_driver_unloading PASSED [ 37%]\r\ntest_platform.py::test_for_sfp_driver_loading PASSED [ 38%]\r\ntest_platform.py::test_for_sfp_driver_unloading PASSED [ 39%]\r\ntest_platform.py::test_for_temp_driver_loading PASSED [ 40%]\r\ntest_platform.py::test_for_temp_driver_unloading PASSED [ 41%]\r\ntest_platform.py::test_for_led_driver_loading PASSED [ 42%]\r\ntest_platform.py::test_for_led_driver_unloading PASSED [ 43%]\r\ntest_platform.py::test_for_eeprom_driver_loading PASSED [ 45%]\r\ntest_platform.py::test_for_eeprom_driver_unloading PASSED [ 46%]\r\ntest_platform.py::test_for_mac_driver_loading PASSED [ 47%]\r\ntest_platform.py::test_for_mac_driver_unloading PASSED [ 48%]\r\ntest_platform.py::test_for_ethernet_mac_address PASSED [ 49%]\r\ntest_port.py::test_for_port SKIPPED (Not supported) [ 50%]\r\ntest_psu.py::test_for_num_psus PASSED [ 51%]\r\ntest_psu.py::test_for_psu_present PASSED [ 52%]\r\ntest_psu.py::test_for_psu_notpresent PASSED [ 53%]\r\ntest_psu.py::test_for_psu_status PASSED [ 54%]\r\ntest_psu.py::test_for_psu_serial_num PASSED [ 56%]\r\ntest_psu.py::test_for_psu_model PASSED [ 57%]\r\ntest_psu.py::test_for_psu_voltage PASSED [ 58%]\r\ntest_psu.py::test_for_psu_current PASSED [ 59%]\r\ntest_psu.py::test_for_psu_power PASSED [ 60%]\r\ntest_psu.py::test_for_psu_input_voltage PASSED [ 61%]\r\ntest_psu.py::test_for_psu_input_current FAILED [ 62%]\r\ntest_psu.py::test_for_psu_capacity PASSED [ 63%]\r\ntest_psu.py::test_for_psu_type PASSED [ 64%]\r\ntest_rtc.py::test_for_rtc_read PASSED [ 65%]\r\ntest_rtc.py::test_for_rtc_write PASSED [ 67%]\r\ntest_sai.py::test_for_switch_port_enumeration PASSED [ 68%]\r\ntest_sai.py::test_for_switch_port_loopback PASSED [ 69%]\r\ntest_sai.py::test_for_switch_port_traffic PASSED [ 70%]\r\ntest_sai.py::test_for_switch_media_setting_json PASSED [ 71%]\r\ntest_sfp.py::test_for_sfp_number PASSED [ 72%]\r\ntest_sfp.py::test_for_sfp_present PASSED [ 73%]\r\ntest_sfp.py::test_for_sfp_eeprom PASSED [ 74%]\r\ntest_sfp.py::test_for_sfp_lpmode PASSED [ 75%]\r\ntest_sfp.py::test_for_sfp_reset PASSED [ 76%]\r\ntest_thermal.py::test_for_num_temp PASSED [ 78%]\r\ntest_thermal.py::test_for_temp_read PASSED [ 79%]\r\ntest_thermal.py::test_for_temp_high_threshold_read PASSED [ 80%]\r\ntest_thermal.py::test_for_temp_high_critical_threshold_read PASSED [ 81%]\r\ntest_thermal.py::test_for_thermal_daemon SKIPPED (Skip the testing d...) [ 82%]\r\ntest_thermal.py::test_for_thermal_policy SKIPPED (Skip the testing d...) [ 83%]\r\ntest_thermal.py::test_for_thermal_policy_fan_removed SKIPPED (Skip t...) [ 84%]\r\ntest_thermal.py::test_for_pmon_daemon FAILED [ 85%]\r\ntest_thermal.py::test_for_pmon_fan_removed_event_log SKIPPED (Skip t...) [ 86%]\r\ntest_thermal.py::test_for_pmon_psu_removed_event_log SKIPPED (Skip t...) [ 87%]\r\ntest_usb.py::test_for_usb_storage PASSED [ 89%]\r\ntest_usb.py::test_for_usb_fat PASSED [ 90%]\r\ntest_usb.py::test_for_usb_ntfs FAILED [ 91%]\r\ntest_usb.py::test_for_usb_ext4 PASSED [ 92%]\r\ntest_usb.py::test_for_usb_presence PASSED [ 93%]\r\ntest_usb.py::test_for_usb_mount PASSED [ 94%]\r\ntest_watchdog.py::test_for_get_watchdog_dev PASSED [ 95%]\r\ntest_watchdog.py::test_for_arm_watchdog FAILED [ 96%]\r\ntest_watchdog.py::test_for_get_watchdog_remaining_time PASSED [ 97%]\r\ntest_watchdog.py::test_for_remaining_time_changed FAILED [ 98%]\r\ntest_watchdog.py::test_for_disarm_watchdog PASSED [100%]"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "comment_at": "2022-06-15T15:34:53Z",
+        "comment_author": "lizhuhuams",
+        "comment_body": "How come the test didn\u2019t catch those mistakes?\n\nFrom: \u8cd3\u5c11\u923a ***@***.***>\nSent: Tuesday, June 14, 2022 9:22 PM\nTo: Azure/sonic-platform-pdk-pde ***@***.***>\nCc: Lizhu Hua ***@***.***>; Review requested ***@***.***>\nSubject: Re: [Azure/sonic-platform-pdk-pde] PDE migration to bullseye (PR #30)\n\n\nAll,\n\nThe migration is tested and verified on the ODM platform. See the UT below. I posted on 5/26.\n\nSo far all the ODM platforms we have are moved to API 2.0, we still keep 1.0 testing but not able to do the test ..\nFor 2.0 we have tested and verified which can be run and tested. If 1.0 is out of supported, we can remove them\nin our testing code.\n\nPDE PYTEST UT\n\n***@***.***:~# pde-test -v\n============================= test session starts ==============================\nplatform linux -- Python 3.9.2, pytest-7.1.2, pluggy-1.0.0 -- /usr/bin/python3\ncachedir: .pytest_cache\nrootdir: /usr/local/sonic_pde_tests\ncollecting ... collecting 65 items collected 91 items\n\ntest_bmc.py::test_for_bmc SKIPPED (Not supported) [ 1%]\ntest_config.py::test_for_required_bcm_config_file PASSED [ 2%]\ntest_config.py::test_for_required_bcm_config_settings PASSED [ 3%]\ntest_cpld.py::test_for_num_cpld SKIPPED (Skip the testing due to the...) [ 4%]\ntest_cpld.py::test_for_cpld_read SKIPPED (Skip the testing due to th...) [ 5%]\ntest_eeprom.py::test_for_eeprom_read PASSED [ 6%]\ntest_eeprom.py::test_for_eeprom_has_mac PASSED [ 7%]\ntest_eeprom.py::test_for_eeprom_mac PASSED [ 8%]\ntest_eeprom.py::test_for_eeprom_has_sn PASSED [ 9%]\ntest_eeprom.py::test_for_eeprom_sn PASSED [ 10%]\ntest_eeprom.py::test_for_eeprom_model PASSED [ 12%]\ntest_eeprom.py::test_for_platform_id PASSED [ 13%]\ntest_eeprom.py::test_for_eeprom_junk_characters PASSED [ 14%]\ntest_fan.py::test_for_num_fans PASSED [ 15%]\ntest_fan.py::test_for_fans_dir PASSED [ 16%]\ntest_fan.py::test_for_fans_status PASSED [ 17%]\ntest_fan.py::test_for_fans_present PASSED [ 18%]\ntest_fan.py::test_for_fans_duty SKIPPED (Skip the testing due to the...) [ 19%]\ntest_leds.py::test_for_set_fan_sysled SKIPPED (Skip the testing due ...) [ 20%]\ntest_leds.py::test_for_set_fantray_sysled SKIPPED (Skip the testing ...) [ 21%]\ntest_leds.py::test_for_set_psu_sysled SKIPPED (Skip the testing due ...) [ 23%]\ntest_leds.py::test_for_set_sys_sysled SKIPPED (Skip the testing due ...) [ 24%]\ntest_leds.py::test_for_set_loc_sysled SKIPPED (Skip the testing due ...) [ 25%]\ntest_os.py::test_for_service_port_presence PASSED [ 26%]\ntest_os.py::test_for_service_port_dhcp PASSED [ 27%]\ntest_os.py::test_for_flooding_dmesg PASSED [ 28%]\ntest_os.py::test_for_flooding_syslog PASSED [ 29%]\ntest_os.py::test_for_fstrim SKIPPED ('sda' is not a SSD) [ 30%]\ntest_os.py::test_for_cpuload PASSED [ 31%]\ntest_platform.py::test_for_cpld_driver_loading PASSED [ 32%]\ntest_platform.py::test_for_psu_driver_loading PASSED [ 34%]\ntest_platform.py::test_for_psu_driver_unloading PASSED [ 35%]\ntest_platform.py::test_for_fan_driver_loading PASSED [ 36%]\ntest_platform.py::test_for_fan_driver_unloading PASSED [ 37%]\ntest_platform.py::test_for_sfp_driver_loading PASSED [ 38%]\ntest_platform.py::test_for_sfp_driver_unloading PASSED [ 39%]\ntest_platform.py::test_for_temp_driver_loading PASSED [ 40%]\ntest_platform.py::test_for_temp_driver_unloading PASSED [ 41%]\ntest_platform.py::test_for_led_driver_loading PASSED [ 42%]\ntest_platform.py::test_for_led_driver_unloading PASSED [ 43%]\ntest_platform.py::test_for_eeprom_driver_loading PASSED [ 45%]\ntest_platform.py::test_for_eeprom_driver_unloading PASSED [ 46%]\ntest_platform.py::test_for_mac_driver_loading PASSED [ 47%]\ntest_platform.py::test_for_mac_driver_unloading PASSED [ 48%]\ntest_platform.py::test_for_ethernet_mac_address PASSED [ 49%]\ntest_port.py::test_for_port SKIPPED (Not supported) [ 50%]\ntest_psu.py::test_for_num_psus PASSED [ 51%]\ntest_psu.py::test_for_psu_present PASSED [ 52%]\ntest_psu.py::test_for_psu_notpresent PASSED [ 53%]\ntest_psu.py::test_for_psu_status PASSED [ 54%]\ntest_psu.py::test_for_psu_serial_num PASSED [ 56%]\ntest_psu.py::test_for_psu_model PASSED [ 57%]\ntest_psu.py::test_for_psu_voltage PASSED [ 58%]\ntest_psu.py::test_for_psu_current PASSED [ 59%]\ntest_psu.py::test_for_psu_power PASSED [ 60%]\ntest_psu.py::test_for_psu_input_voltage PASSED [ 61%]\ntest_psu.py::test_for_psu_input_current FAILED [ 62%]\ntest_psu.py::test_for_psu_capacity PASSED [ 63%]\ntest_psu.py::test_for_psu_type PASSED [ 64%]\ntest_rtc.py::test_for_rtc_read PASSED [ 65%]\ntest_rtc.py::test_for_rtc_write PASSED [ 67%]\ntest_sai.py::test_for_switch_port_enumeration PASSED [ 68%]\ntest_sai.py::test_for_switch_port_loopback PASSED [ 69%]\ntest_sai.py::test_for_switch_port_traffic PASSED [ 70%]\ntest_sai.py::test_for_switch_media_setting_json PASSED [ 71%]\ntest_sfp.py::test_for_sfp_number PASSED [ 72%]\ntest_sfp.py::test_for_sfp_present PASSED [ 73%]\ntest_sfp.py::test_for_sfp_eeprom PASSED [ 74%]\ntest_sfp.py::test_for_sfp_lpmode PASSED [ 75%]\ntest_sfp.py::test_for_sfp_reset PASSED [ 76%]\ntest_thermal.py::test_for_num_temp PASSED [ 78%]\ntest_thermal.py::test_for_temp_read PASSED [ 79%]\ntest_thermal.py::test_for_temp_high_threshold_read PASSED [ 80%]\ntest_thermal.py::test_for_temp_high_critical_threshold_read PASSED [ 81%]\ntest_thermal.py::test_for_thermal_daemon SKIPPED (Skip the testing d...) [ 82%]\ntest_thermal.py::test_for_thermal_policy SKIPPED (Skip the testing d...) [ 83%]\ntest_thermal.py::test_for_thermal_policy_fan_removed SKIPPED (Skip t...) [ 84%]\ntest_thermal.py::test_for_pmon_daemon FAILED [ 85%]\ntest_thermal.py::test_for_pmon_fan_removed_event_log SKIPPED (Skip t...) [ 86%]\ntest_thermal.py::test_for_pmon_psu_removed_event_log SKIPPED (Skip t...) [ 87%]\ntest_usb.py::test_for_usb_storage PASSED [ 89%]\ntest_usb.py::test_for_usb_fat PASSED [ 90%]\ntest_usb.py::test_for_usb_ntfs FAILED [ 91%]\ntest_usb.py::test_for_usb_ext4 PASSED [ 92%]\ntest_usb.py::test_for_usb_presence PASSED [ 93%]\ntest_usb.py::test_for_usb_mount PASSED [ 94%]\ntest_watchdog.py::test_for_get_watchdog_dev PASSED [ 95%]\ntest_watchdog.py::test_for_arm_watchdog FAILED [ 96%]\ntest_watchdog.py::test_for_get_watchdog_remaining_time PASSED [ 97%]\ntest_watchdog.py::test_for_remaining_time_changed FAILED [ 98%]\ntest_watchdog.py::test_for_disarm_watchdog PASSED [100%]\n\n-\nReply to this email directly, view it on GitHub<https://nam06.safelinks.protection.outlook.com/?url=https%3A%2F%2Fgithub.com%2FAzure%2Fsonic-platform-pdk-pde%2Fpull%2F30%23issuecomment-1155967996&data=05%7C01%7Clizhuhua%40microsoft.com%7C723b527a098146d8df0708da4e868d86%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C637908637065097833%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=6%2Fa%2Bli%2BI0Vg8HWwYmlFVVmwlYU6Wbzt3dOhRiLOKjmw%3D&reserved=0>, or unsubscribe<https://nam06.safelinks.protection.outlook.com/?url=https%3A%2F%2Fgithub.com%2Fnotifications%2Funsubscribe-auth%2FAYV7AKQLMKNTPN533KRR6LTVPFK5PANCNFSM5WFIBA7A&data=05%7C01%7Clizhuhua%40microsoft.com%7C723b527a098146d8df0708da4e868d86%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C637908637065097833%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=N220thDUZomUerOeycVpus03vsivFTwDDk8y%2FeXh7BQ%3D&reserved=0>.\nYou are receiving this because your review was requested.Message ID: ***@***.******@***.***>>\n"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "comment_at": "2022-06-15T19:46:02Z",
+        "comment_author": "prgeor",
+        "comment_body": "@geans-pin can your platform use SFP-refactor? Can we reuse these test for your platform:-\r\n[https://github.com/Azure/sonic-platform-common/tree/master/tests/sonic_xcvr](https://github.com/Azure/sonic-platform-common/tree/master/tests/sonic_xcvr)"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "comment_at": "2022-06-16T07:42:54Z",
+        "comment_author": "geans-pin",
+        "comment_body": "All the API 1.0 test code are removed "
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "comment_at": "2022-06-16T07:48:02Z",
+        "comment_author": "geans-pin",
+        "comment_body": "> How come the test didn\u2019t catch those mistakes? From: \u8cd3\u5c11\u923a ***@***.***> Sent: Tuesday, June 14, 2022 9:22 PM To: Azure/sonic-platform-pdk-pde ***@***.***> Cc: Lizhu Hua ***@***.***>; Review requested ***@***.***> Subject: Re: [Azure/sonic-platform-pdk-pde] PDE migration to bullseye (PR #30) All, The migration is tested and verified on the ODM platform. See the UT below. I posted on 5/26. So far all the ODM platforms we have are moved to API 2.0, we still keep 1.0 testing but not able to do the test .. For 2.0 we have tested and verified which can be run and tested. If 1.0 is out of supported, we can remove them in our testing code. PDE PYTEST UT ***@***.***:~# pde-test -v ============================= test session starts ============================== platform linux -- Python 3.9.2, pytest-7.1.2, pluggy-1.0.0 -- /usr/bin/python3 cachedir: .pytest_cache rootdir: /usr/local/sonic_pde_tests collecting ... collecting 65 items collected 91 items test_bmc.py::test_for_bmc SKIPPED (Not supported) [ 1%] test_config.py::test_for_required_bcm_config_file PASSED [ 2%] test_config.py::test_for_required_bcm_config_settings PASSED [ 3%] test_cpld.py::test_for_num_cpld SKIPPED (Skip the testing due to the...) [ 4%] test_cpld.py::test_for_cpld_read SKIPPED (Skip the testing due to th...) [ 5%] test_eeprom.py::test_for_eeprom_read PASSED [ 6%] test_eeprom.py::test_for_eeprom_has_mac PASSED [ 7%] test_eeprom.py::test_for_eeprom_mac PASSED [ 8%] test_eeprom.py::test_for_eeprom_has_sn PASSED [ 9%] test_eeprom.py::test_for_eeprom_sn PASSED [ 10%] test_eeprom.py::test_for_eeprom_model PASSED [ 12%] test_eeprom.py::test_for_platform_id PASSED [ 13%] test_eeprom.py::test_for_eeprom_junk_characters PASSED [ 14%] test_fan.py::test_for_num_fans PASSED [ 15%] test_fan.py::test_for_fans_dir PASSED [ 16%] test_fan.py::test_for_fans_status PASSED [ 17%] test_fan.py::test_for_fans_present PASSED [ 18%] test_fan.py::test_for_fans_duty SKIPPED (Skip the testing due to the...) [ 19%] test_leds.py::test_for_set_fan_sysled SKIPPED (Skip the testing due ...) [ 20%] test_leds.py::test_for_set_fantray_sysled SKIPPED (Skip the testing ...) [ 21%] test_leds.py::test_for_set_psu_sysled SKIPPED (Skip the testing due ...) [ 23%] test_leds.py::test_for_set_sys_sysled SKIPPED (Skip the testing due ...) [ 24%] test_leds.py::test_for_set_loc_sysled SKIPPED (Skip the testing due ...) [ 25%] test_os.py::test_for_service_port_presence PASSED [ 26%] test_os.py::test_for_service_port_dhcp PASSED [ 27%] test_os.py::test_for_flooding_dmesg PASSED [ 28%] test_os.py::test_for_flooding_syslog PASSED [ 29%] test_os.py::test_for_fstrim SKIPPED ('sda' is not a SSD) [ 30%] test_os.py::test_for_cpuload PASSED [ 31%] test_platform.py::test_for_cpld_driver_loading PASSED [ 32%] test_platform.py::test_for_psu_driver_loading PASSED [ 34%] test_platform.py::test_for_psu_driver_unloading PASSED [ 35%] test_platform.py::test_for_fan_driver_loading PASSED [ 36%] test_platform.py::test_for_fan_driver_unloading PASSED [ 37%] test_platform.py::test_for_sfp_driver_loading PASSED [ 38%] test_platform.py::test_for_sfp_driver_unloading PASSED [ 39%] test_platform.py::test_for_temp_driver_loading PASSED [ 40%] test_platform.py::test_for_temp_driver_unloading PASSED [ 41%] test_platform.py::test_for_led_driver_loading PASSED [ 42%] test_platform.py::test_for_led_driver_unloading PASSED [ 43%] test_platform.py::test_for_eeprom_driver_loading PASSED [ 45%] test_platform.py::test_for_eeprom_driver_unloading PASSED [ 46%] test_platform.py::test_for_mac_driver_loading PASSED [ 47%] test_platform.py::test_for_mac_driver_unloading PASSED [ 48%] test_platform.py::test_for_ethernet_mac_address PASSED [ 49%] test_port.py::test_for_port SKIPPED (Not supported) [ 50%] test_psu.py::test_for_num_psus PASSED [ 51%] test_psu.py::test_for_psu_present PASSED [ 52%] test_psu.py::test_for_psu_notpresent PASSED [ 53%] test_psu.py::test_for_psu_status PASSED [ 54%] test_psu.py::test_for_psu_serial_num PASSED [ 56%] test_psu.py::test_for_psu_model PASSED [ 57%] test_psu.py::test_for_psu_voltage PASSED [ 58%] test_psu.py::test_for_psu_current PASSED [ 59%] test_psu.py::test_for_psu_power PASSED [ 60%] test_psu.py::test_for_psu_input_voltage PASSED [ 61%] test_psu.py::test_for_psu_input_current FAILED [ 62%] test_psu.py::test_for_psu_capacity PASSED [ 63%] test_psu.py::test_for_psu_type PASSED [ 64%] test_rtc.py::test_for_rtc_read PASSED [ 65%] test_rtc.py::test_for_rtc_write PASSED [ 67%] test_sai.py::test_for_switch_port_enumeration PASSED [ 68%] test_sai.py::test_for_switch_port_loopback PASSED [ 69%] test_sai.py::test_for_switch_port_traffic PASSED [ 70%] test_sai.py::test_for_switch_media_setting_json PASSED [ 71%] test_sfp.py::test_for_sfp_number PASSED [ 72%] test_sfp.py::test_for_sfp_present PASSED [ 73%] test_sfp.py::test_for_sfp_eeprom PASSED [ 74%] test_sfp.py::test_for_sfp_lpmode PASSED [ 75%] test_sfp.py::test_for_sfp_reset PASSED [ 76%] test_thermal.py::test_for_num_temp PASSED [ 78%] test_thermal.py::test_for_temp_read PASSED [ 79%] test_thermal.py::test_for_temp_high_threshold_read PASSED [ 80%] test_thermal.py::test_for_temp_high_critical_threshold_read PASSED [ 81%] test_thermal.py::test_for_thermal_daemon SKIPPED (Skip the testing d...) [ 82%] test_thermal.py::test_for_thermal_policy SKIPPED (Skip the testing d...) [ 83%] test_thermal.py::test_for_thermal_policy_fan_removed SKIPPED (Skip t...) [ 84%] test_thermal.py::test_for_pmon_daemon FAILED [ 85%] test_thermal.py::test_for_pmon_fan_removed_event_log SKIPPED (Skip t...) [ 86%] test_thermal.py::test_for_pmon_psu_removed_event_log SKIPPED (Skip t...) [ 87%] test_usb.py::test_for_usb_storage PASSED [ 89%] test_usb.py::test_for_usb_fat PASSED [ 90%] test_usb.py::test_for_usb_ntfs FAILED [ 91%] test_usb.py::test_for_usb_ext4 PASSED [ 92%] test_usb.py::test_for_usb_presence PASSED [ 93%] test_usb.py::test_for_usb_mount PASSED [ 94%] test_watchdog.py::test_for_get_watchdog_dev PASSED [ 95%] test_watchdog.py::test_for_arm_watchdog FAILED [ 96%] test_watchdog.py::test_for_get_watchdog_remaining_time PASSED [ 97%] test_watchdog.py::test_for_remaining_time_changed FAILED [ 98%] test_watchdog.py::test_for_disarm_watchdog PASSED [100%] - Reply to this email directly, view it on GitHub<https://nam06.safelinks.protection.outlook.com/?url=https%3A%2F%2Fgithub.com%2FAzure%2Fsonic-platform-pdk-pde%2Fpull%2F30%23issuecomment-1155967996&data=05%7C01%7Clizhuhua%40microsoft.com%7C723b527a098146d8df0708da4e868d86%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C637908637065097833%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=6%2Fa%2Bli%2BI0Vg8HWwYmlFVVmwlYU6Wbzt3dOhRiLOKjmw%3D&reserved=0>, or unsubscribe<https://nam06.safelinks.protection.outlook.com/?url=https%3A%2F%2Fgithub.com%2Fnotifications%2Funsubscribe-auth%2FAYV7AKQLMKNTPN533KRR6LTVPFK5PANCNFSM5WFIBA7A&data=05%7C01%7Clizhuhua%40microsoft.com%7C723b527a098146d8df0708da4e868d86%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C637908637065097833%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=N220thDUZomUerOeycVpus03vsivFTwDDk8y%2FeXh7BQ%3D&reserved=0>. You are receiving this because your review was requested.Message ID: ***@***.******@***.***>>\r\n\r\nThe platform we verified are all migrated to 2.0 API.\r\nSince 1.0 API is not supported by ODM,  we removed all API 1.0 old test code to prevent from confusion. "
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "comment_at": "2022-06-16T07:50:10Z",
+        "comment_author": "geans-pin",
+        "comment_body": "> @geans-pin can your platform use SFP-refactor? Can we reuse these test for your platform:- https://github.com/Azure/sonic-platform-common/tree/master/tests/sonic_xcvr\r\n\r\nThe test case in PDE is to focus on low level basic platform driver HW related testing for ODM HWQ. The test in sonic_xcvr is different with our test purpose.  "
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-15T01:34:23Z",
+        "review_author": "lizhuhuams"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-15T01:34:23Z",
+        "review_author": "lizhuhuams"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-15T02:05:51Z",
+        "review_author": "lizhuhuams"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-15T02:05:52Z",
+        "review_author": "lizhuhuams"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-15T03:03:12Z",
+        "review_author": "geans-pin"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-15T03:06:50Z",
+        "review_author": "geans-pin"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-15T03:29:04Z",
+        "review_author": "lizhuhuams"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-15T03:38:28Z",
+        "review_author": "geans-pin"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-15T17:44:54Z",
+        "review_author": "lizhuhuams"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-15T17:47:44Z",
+        "review_author": "lizhuhuams"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-15T17:52:26Z",
+        "review_author": "lizhuhuams"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-15T17:52:53Z",
+        "review_author": "lizhuhuams"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-15T17:55:04Z",
+        "review_author": "lizhuhuams"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-15T17:56:50Z",
+        "review_author": "lizhuhuams"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-15T18:26:53Z",
+        "review_author": "lizhuhuams"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-15T18:32:30Z",
+        "review_author": "lizhuhuams"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-15T18:35:06Z",
+        "review_author": "lizhuhuams"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-15T18:38:46Z",
+        "review_author": "lizhuhuams"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-15T18:40:24Z",
+        "review_author": "lizhuhuams"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-16T07:50:44Z",
+        "review_author": "geans-pin"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-16T07:51:11Z",
+        "review_author": "geans-pin"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-16T08:12:01Z",
+        "review_author": "geans-pin"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-16T08:13:01Z",
+        "review_author": "geans-pin"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-16T08:16:45Z",
+        "review_author": "geans-pin"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-16T09:03:22Z",
+        "review_author": "geans-pin"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-16T09:05:43Z",
+        "review_author": "geans-pin"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-16T17:37:32Z",
+        "review_author": "lizhuhuams"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-22T01:50:53Z",
+        "review_author": "lizhuhuams"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-22T03:55:33Z",
+        "review_author": "geans-pin"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-22T04:07:10Z",
+        "review_author": "geans-pin"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-22T04:12:57Z",
+        "review_author": "geans-pin"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-22T04:32:13Z",
+        "review_author": "lizhuhuams"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-22T04:39:12Z",
+        "review_author": "lizhuhuams"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "review_at": "2022-06-22T15:12:34Z",
+        "review_author": "lizhuhuams"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-platform-pdk-pde",
+        "latestReview_at": "2022-06-22T15:12:34Z",
+        "latestReview_author": "lizhuhuams",
+        "latestReview_state": "APPROVED"
+    }
+]

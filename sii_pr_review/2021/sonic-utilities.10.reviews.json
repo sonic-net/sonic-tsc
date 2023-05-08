@@ -1,0 +1,2980 @@
+[
+    {
+        "number": 1904,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-29T15:59:33Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "Required for 202012 and 202106"
+    },
+    {
+        "number": 1904,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-29T16:01:06Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "@yxieca FYI"
+    },
+    {
+        "number": 1904,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-29T16:41:51Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "Verified the flow through warmboot too. Below are the logs \r\nOct 29 16:05:20.836944 r-anaconda-15 NOTICE admin: Pausing orchagent ...\r\nOct 29 16:05:20.994356 r-anaconda-15 NOTICE admin: Collecting logs to check ssd health before fastfast-reboot...\r\nOct 29 16:05:21.151082 r-anaconda-15 NOTICE admin: smartctl 6.6 2017-11-05 r4594 [x86_64-linux-4.19.0-12-2-amd64] (local build)\r\nOct 29 16:05:21.151440 r-anaconda-15 NOTICE admin: Copyright (C) 2002-17, Bruce Allen, Christian Franke, www.smartmontools.org\r\nOct 29 16:05:21.151707 r-anaconda-15 NOTICE admin:\r\nOct 29 16:05:21.151963 r-anaconda-15 NOTICE admin: === START OF INFORMATION SECTION ===\r\nOct 29 16:05:21.152203 r-anaconda-15 NOTICE admin: Device Model:     StorFly VSFBM4XC030G-MLX1\r\nOct 29 16:05:21.152442 r-anaconda-15 NOTICE admin: Serial Number:    P1T13004870812030294\r\nOct 29 16:05:21.152689 r-anaconda-15 NOTICE admin: Firmware Version: 0202-000\r\nOct 29 16:05:21.152950 r-anaconda-15 NOTICE admin: User Capacity:    30,016,659,456 bytes [30.0 GB]\r\nOct 29 16:05:21.153191 r-anaconda-15 NOTICE admin: Sector Size:      512 bytes logical/physical\r\nOct 29 16:05:21.153489 r-anaconda-15 NOTICE admin: Rotation Rate:    Solid State Device\r\nOct 29 16:05:21.153786 r-anaconda-15 NOTICE admin: Device is:        Not in smartctl database [for details use: -P showall]\r\nOct 29 16:05:21.154117 r-anaconda-15 NOTICE admin: ATA Version is:   ACS-2 (minor revision not indicated)\r\nOct 29 16:05:21.154394 r-anaconda-15 NOTICE admin: SATA Version is:  SATA 3.1, 6.0 Gb/s (current: 6.0 Gb/s)\r\nOct 29 16:05:21.154484 r-anaconda-15 NOTICE admin: Local Time is:    Fri Oct 29 16:05:21 2021 UTC\r\nOct 29 16:05:21.154568 r-anaconda-15 NOTICE admin: SMART support is: Available - device has SMART capability.\r\nOct 29 16:05:21.154650 r-anaconda-15 NOTICE admin: SMART support is: Enabled\r\nOct 29 16:05:21.154732 r-anaconda-15 NOTICE admin:\r\nOct 29 16:05:21.154815 r-anaconda-15 NOTICE admin: === START OF READ SMART DATA SECTION ===\r\nOct 29 16:05:21.154902 r-anaconda-15 NOTICE admin: SMART overall-health self-assessment test result: PASSED\r\nOct 29 16:05:21.154985 r-anaconda-15 NOTICE admin:\r\nOct 29 16:05:21.155066 r-anaconda-15 NOTICE admin: General SMART Values:\r\nOct 29 16:05:21.155147 r-anaconda-15 NOTICE admin: Offline data collection status:  (0x00)#011Offline data collection activity\r\nOct 29 16:05:21.155229 r-anaconda-15 NOTICE admin: #011#011#011#011#011was never started.\r\nOct 29 16:05:21.155310 r-anaconda-15 NOTICE admin: #011#011#011#011#011Auto Offline Data Collection: Disabled.\r\nOct 29 16:05:21.155391 r-anaconda-15 NOTICE admin: Self-test execution status:      (   0)#011The previous self-test routine completed\r\nOct 29 16:05:21.155472 r-anaconda-15 NOTICE admin: #011#011#011#011#011without error or no self-test has ever\r\nOct 29 16:05:21.155555 r-anaconda-15 NOTICE admin: #011#011#011#011#011been run.\r\nOct 29 16:05:21.155635 r-anaconda-15 NOTICE admin: Total time to complete Offline\r\nOct 29 16:05:21.155723 r-anaconda-15 NOTICE admin: data collection: #011#011(    0) seconds.\r\nOct 29 16:05:21.155805 r-anaconda-15 NOTICE admin: Offline data collection\r\nOct 29 16:05:21.155886 r-anaconda-15 NOTICE admin: capabilities: #011#011#011 (0x71) SMART execute Offline immediate.\r\nOct 29 16:05:21.155971 r-anaconda-15 NOTICE admin: #011#011#011#011#011No Auto Offline data collection support.\r\nOct 29 16:05:21.156062 r-anaconda-15 NOTICE admin: #011#011#011#011#011Suspend Offline collection upon new\r\nOct 29 16:05:21.156144 r-anaconda-15 NOTICE admin: #011#011#011#011#011command.\r\nOct 29 16:05:21.156227 r-anaconda-15 NOTICE admin: #011#011#011#011#011No Offline surface scan supported.\r\nOct 29 16:05:21.156307 r-anaconda-15 NOTICE admin: #011#011#011#011#011Self-test supported.\r\nOct 29 16:05:21.156388 r-anaconda-15 NOTICE admin: #011#011#011#011#011Conveyance Self-test supported.\r\nOct 29 16:05:21.156470 r-anaconda-15 NOTICE admin: #011#011#011#011#011Selective Self-test supported.\r\nOct 29 16:05:21.156553 r-anaconda-15 NOTICE admin: SMART capabilities:            (0x0002)#011Does not save SMART data before\r\nOct 29 16:05:21.156635 r-anaconda-15 NOTICE admin: #011#011#011#011#011entering power-saving mode.\r\nOct 29 16:05:21.156717 r-anaconda-15 NOTICE admin: #011#011#011#011#011Supports SMART auto save timer.\r\nOct 29 16:05:21.156798 r-anaconda-15 NOTICE admin: Error logging capability:        (0x01)#011Error logging supported.\r\nOct 29 16:05:21.156879 r-anaconda-15 NOTICE admin: #011#011#011#011#011General Purpose Logging supported.\r\nOct 29 16:05:21.156960 r-anaconda-15 NOTICE admin: Short self-test routine\r\nOct 29 16:05:21.157043 r-anaconda-15 NOTICE admin: recommended polling time: #011 (   1) minutes.\r\nOct 29 16:05:21.157127 r-anaconda-15 NOTICE admin: Extended self-test routine\r\nOct 29 16:05:21.157209 r-anaconda-15 NOTICE admin: recommended polling time: #011 (   1) minutes.\r\nOct 29 16:05:21.157289 r-anaconda-15 NOTICE admin: Conveyance self-test routine\r\nOct 29 16:05:21.157371 r-anaconda-15 NOTICE admin: recommended polling time: #011 (   1) minutes.\r\nOct 29 16:05:21.157452 r-anaconda-15 NOTICE admin:\r\nOct 29 16:05:21.157534 r-anaconda-15 NOTICE admin: SMART Attributes Data Structure revision number: 1\r\nOct 29 16:05:21.157614 r-anaconda-15 NOTICE admin: Vendor Specific SMART Attributes with Thresholds:\r\nOct 29 16:05:21.157695 r-anaconda-15 NOTICE admin: ID# ATTRIBUTE_NAME          FLAG     VALUE WORST THRESH TYPE      UPDATED  WHEN_FAILED RAW_VALUE\r\nOct 29 16:05:21.157777 r-anaconda-15 NOTICE admin:   1 Raw_Read_Error_Rate     0x0000   100   100   070    Old_age   Offline      -       0\r\nOct 29 16:05:21.157880 r-anaconda-15 NOTICE admin:   5 Reallocated_Sector_Ct   0x0000   100   100   000    Old_age   Offline      -       0\r\nOct 29 16:05:21.157965 r-anaconda-15 NOTICE admin:   9 Power_On_Hours          0x0000   100   100   000    Old_age   Offline      -       1142\r\nOct 29 16:05:21.158052 r-anaconda-15 NOTICE admin:  12 Power_Cycle_Count       0x0000   100   100   000    Old_age   Offline      -       3947\r\nOct 29 16:05:21.158151 r-anaconda-15 NOTICE admin: 160 Unknown_Attribute       0x0000   100   100   000    Old_age   Offline      -       0\r\nOct 29 16:05:21.158232 r-anaconda-15 NOTICE admin: 161 Unknown_Attribute       0x0000   100   100   000    Old_age   Offline      -       262\r\nOct 29 16:05:21.158313 r-anaconda-15 NOTICE admin: 163 Unknown_Attribute       0x0000   100   100   000    Old_age   Offline      -       21\r\nOct 29 16:05:21.158393 r-anaconda-15 NOTICE admin: 164 Unknown_Attribute       0x0000   100   100   000    Old_age   Offline      -       1843067\r\nOct 29 16:05:21.158474 r-anaconda-15 NOTICE admin: 165 Unknown_Attribute       0x0000   100   100   000    Old_age   Offline      -       1054\r\nOct 29 16:05:21.158554 r-anaconda-15 NOTICE admin: 166 Unknown_Attribute       0x0000   100   100   000    Old_age   Offline      -       861\r\nOct 29 16:05:21.158635 r-anaconda-15 NOTICE admin: 167 Unknown_Attribute       0x0000   100   100   000    Old_age   Offline      -       887\r\nOct 29 16:05:21.158716 r-anaconda-15 NOTICE admin: 168 Unknown_Attribute       0x0000   100   100   000    Old_age   Offline      -       20000\r\nOct 29 16:05:21.158796 r-anaconda-15 NOTICE admin: 177 Wear_Leveling_Count     0x0000   100   100   050    Old_age   Offline      -       11065\r\nOct 29 16:05:21.158877 r-anaconda-15 NOTICE admin: 178 Used_Rsvd_Blk_Cnt_Chip  0x0000   100   100   000    Old_age   Offline      -       0\r\nOct 29 16:05:21.158960 r-anaconda-15 NOTICE admin: 181 Program_Fail_Cnt_Total  0x0000   100   100   000    Old_age   Offline      -       0\r\nOct 29 16:05:21.159041 r-anaconda-15 NOTICE admin: 182 Erase_Fail_Count_Total  0x0000   100   100   000    Old_age   Offline      -       0\r\nOct 29 16:05:21.159123 r-anaconda-15 NOTICE admin: 187 Reported_Uncorrect      0x0000   100   100   000    Old_age   Offline      -       0\r\nOct 29 16:05:21.159205 r-anaconda-15 NOTICE admin: 192 Power-Off_Retract_Count 0x0000   100   100   000    Old_age   Offline      -       1182\r\nOct 29 16:05:21.159327 r-anaconda-15 NOTICE admin: 194 Temperature_Celsius     0x0000   100   100   000    Old_age   Offline      -       36\r\nOct 29 16:05:21.159416 r-anaconda-15 NOTICE admin: 195 Hardware_ECC_Recovered  0x0000   100   100   000    Old_age   Offline      -       0\r\nOct 29 16:05:21.159498 r-anaconda-15 NOTICE admin: 196 Reallocated_Event_Count 0x0000   100   100   016    Old_age   Offline      -       0\r\nOct 29 16:05:21.159581 r-anaconda-15 NOTICE admin: 198 Offline_Uncorrectable   0x0000   100   100   000    Old_age   Offline      -       0\r\nOct 29 16:05:21.159661 r-anaconda-15 NOTICE admin: 199 UDMA_CRC_Error_Count    0x0000   100   100   050    Old_age   Offline      -       1\r\nOct 29 16:05:21.159741 r-anaconda-15 NOTICE admin: 232 Available_Reservd_Space 0x0000   100   100   000    Old_age   Offline      -       100\r\nOct 29 16:05:21.159826 r-anaconda-15 NOTICE admin: 241 Total_LBAs_Written      0x0000   100   100   000    Old_age   Offline      -       455796\r\nOct 29 16:05:21.159908 r-anaconda-15 NOTICE admin: 242 Total_LBAs_Read         0x0000   100   100   000    Old_age   Offline      -       3921978\r\nOct 29 16:05:21.159989 r-anaconda-15 NOTICE admin: 248 Unknown_Attribute       0x0000   100   100   000    Old_age   Offline      -       96\r\nOct 29 16:05:21.160070 r-anaconda-15 NOTICE admin: 249 Unknown_Attribute       0x0000   100   100   000    Old_age   Offline      -       100\r\nOct 29 16:05:21.160153 r-anaconda-15 NOTICE admin:\r\nOct 29 16:05:21.160235 r-anaconda-15 NOTICE admin: SMART Error Log Version: 1\r\nOct 29 16:05:21.160315 r-anaconda-15 NOTICE admin: No Errors Logged\r\nOct 29 16:05:21.160396 r-anaconda-15 NOTICE admin:\r\nOct 29 16:05:21.160477 r-anaconda-15 NOTICE admin: SMART Self-test log structure revision number 1\r\nOct 29 16:05:21.160557 r-anaconda-15 NOTICE admin: No self-tests have been logged.  [To run self-tests, use: smartctl -t]\r\nOct 29 16:05:21.160641 r-anaconda-15 NOTICE admin:\r\nOct 29 16:05:21.160722 r-anaconda-15 NOTICE admin: SMART Selective self-test log data structure revision number 1\r\nOct 29 16:05:21.160803 r-anaconda-15 NOTICE admin:  SPAN  MIN_LBA  MAX_LBA  CURRENT_TEST_STATUS\r\nOct 29 16:05:21.160883 r-anaconda-15 NOTICE admin:     1        0        0  Not_testing\r\nOct 29 16:05:21.160963 r-anaconda-15 NOTICE admin:     2        0        0  Not_testing\r\nOct 29 16:05:21.161044 r-anaconda-15 NOTICE admin:     3        0        0  Not_testing\r\nOct 29 16:05:21.161125 r-anaconda-15 NOTICE admin:     4        0        0  Not_testing\r\nOct 29 16:05:21.161206 r-anaconda-15 NOTICE admin:     5        0        0  Not_testing\r\nOct 29 16:05:21.161287 r-anaconda-15 NOTICE admin:     6        0    65535  Read_scanning was never started\r\nOct 29 16:05:21.161371 r-anaconda-15 NOTICE admin: Selective self-test flags (0x0):\r\nOct 29 16:05:21.161457 r-anaconda-15 NOTICE admin:   After scanning selected spans, do NOT read-scan remainder of disk.\r\nOct 29 16:05:21.161539 r-anaconda-15 NOTICE admin: If Selective self-test is pending on power-up, resume after 0 minute delay.\r\nOct 29 16:05:21.161623 r-anaconda-15 NOTICE admin:\r\nOct 29 16:05:21.161826 r-anaconda-15 NOTICE admin: Stopping nat ...\r\n"
+    },
+    {
+        "number": 1904,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-29T16:52:15Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 1904,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-29T16:52:15Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1903,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-28T20:47:57Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 1903,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-28T20:47:57Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1888,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-20T08:58:15Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1888,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-20T08:58:15Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1886,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-21T03:08:29Z",
+        "comment_author": "liuh-80",
+        "comment_body": "azp /run"
+    },
+    {
+        "number": 1886,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-21T03:09:12Z",
+        "comment_author": "liuh-80",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1886,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-21T03:09:37Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1886,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-22T02:15:21Z",
+        "comment_author": "lguohan",
+        "comment_body": "need to back port this to 202012, 202006, 201911"
+    },
+    {
+        "number": 1886,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-22T05:15:28Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "There is no 202006 branch. Is it a typo or do you really want creating that branch and backport?\r\n\r\n---\r\nIn reply to: [949225407](https://github.com/Azure/sonic-utilities/pull/1886#issuecomment-949225407) [](http://example.com/codeflow?ancestors=949225407,949225407)"
+    },
+    {
+        "number": 1886,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-26T02:40:06Z",
+        "comment_author": "liuh-80",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1886,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-26T02:40:19Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1886,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-28T02:58:18Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "Could you add some test cases in sonic-mgmt? I see some files in tests/show_techsupport/"
+    },
+    {
+        "number": 1886,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-11-05T00:50:00Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "This commit could not be cleanly cherry-picked to 202012. Please submit another PR."
+    },
+    {
+        "number": 1886,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-22T05:03:38Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1886,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-22T05:09:02Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1886,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-22T05:10:33Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1886,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-22T05:13:23Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1886,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-22T14:53:18Z",
+        "review_author": "liuh-80"
+    },
+    {
+        "number": 1886,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-22T14:53:24Z",
+        "review_author": "liuh-80"
+    },
+    {
+        "number": 1886,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-22T14:53:28Z",
+        "review_author": "liuh-80"
+    },
+    {
+        "number": 1886,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-22T14:55:55Z",
+        "review_author": "liuh-80"
+    },
+    {
+        "number": 1886,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-26T02:40:37Z",
+        "review_author": "liuh-80"
+    },
+    {
+        "number": 1886,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-27T09:08:19Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1886,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-27T09:08:19Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1882,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-14T20:09:27Z",
+        "comment_author": "rajendra-dendukuri",
+        "comment_body": "@dgsudharsan Please review"
+    },
+    {
+        "number": 1882,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-14T20:18:42Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 3 alerts** when merging b59ba2f2639f83079d121df373541147c298dac7 into 9bc650097f866a744bae200ceaf390a364dc22ad - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-0c2e80f537161cbc75c28c60d8d1247d9d98dfa4)\n\n**new alerts:**\n\n* 3 for Unused local variable"
+    },
+    {
+        "number": 1882,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-14T21:02:32Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "@lguohan  Can you please review and merge?"
+    },
+    {
+        "number": 1882,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-14T21:02:08Z",
+        "review_author": "dgsudharsan"
+    },
+    {
+        "number": 1882,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-14T21:02:08Z",
+        "latestReview_author": "dgsudharsan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1881,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-20T21:10:41Z",
+        "comment_author": "abdosi",
+        "comment_body": "has this been verify on 201911 ?"
+    },
+    {
+        "number": 1881,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-20T22:44:36Z",
+        "comment_author": "sujinmkang",
+        "comment_body": "@abdosi  I verified the reboot and soft-reboot script on top of 20191130.78. "
+    },
+    {
+        "number": 1881,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-18T15:44:40Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 1881,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-26T15:39:59Z",
+        "review_author": "abdosi"
+    },
+    {
+        "number": 1881,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-18T15:44:40Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1881,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-26T15:39:59Z",
+        "latestReview_author": "abdosi",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1880,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-14T16:06:27Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 1880,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-14T16:06:27Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1879,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-14T16:06:57Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 1879,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-14T16:06:57Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1873,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-12T00:36:48Z",
+        "comment_author": "yxieca",
+        "comment_body": "@renukamanavalan please elaborate how your tested this change?"
+    },
+    {
+        "number": 1873,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-12T18:21:27Z",
+        "comment_author": "renukamanavalan",
+        "comment_body": "Manually copied the disk_check.py onto device running 201811 at /usr/local/bin/.\r\nUpdated /etc/monit/conf.d/sonic-host as in PR 8951 (buildimage)\r\nRestarted monit service\r\nEnsured the switch has TACACS confgured \r\nMake disk read-only\r\nAfter a pause, tested to login using a remote user credentials of a user who has not logged in before into this device.\r\nIn other words, ensure that this created entry in /etc/passwd & created home dir for this user\r\nIt worked as expected\r\nDid a device reboot\r\nConfirmed that there is no trace of that user in device (as the updates were done on tmpfs)"
+    },
+    {
+        "number": 1873,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-15T20:09:45Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 1873,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-15T20:09:45Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1869,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-12T01:41:45Z",
+        "comment_author": "prsunny",
+        "comment_body": "AFAIK, Loopback interface is always admin up. What is the use-case here? Also can you check where all this function is being called and ensure those commands can work for Loopback as well?"
+    },
+    {
+        "number": 1869,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-12T02:02:56Z",
+        "comment_author": "Pterosaur",
+        "comment_body": "> AFAIK, Loopback interface is always admin up. What is the use-case here? Also can you check where all this function is being called and ensure those commands can work for Loopback as well?\r\n\r\nIn sonic-mgmt testbed with SONiC neighbor devices, the testbed will try to startup all interfaces no matter Loopback interface or not. The behavior to startup or shutdown a loopback interface is acceptable to EOS (Arista Switch VM OS). So, I guess SONiC should also accept this behavior."
+    },
+    {
+        "number": 1869,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-12T06:00:20Z",
+        "comment_author": "Pterosaur",
+        "comment_body": "Add unitest"
+    },
+    {
+        "number": 1869,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-12T02:23:01Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 1869,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-13T21:41:32Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 1869,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-13T21:41:32Z",
+        "latestReview_author": "prsunny",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1864,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-07T18:44:02Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 5 alerts** when merging b56fbde0b7b5bac8e7056ceb1ee80260c823bd3d into d13955a3ee0691f2e90c58e50c345323fc658041 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-9644f8c0ca91488d9bcae8a6071bb61ce80c4c0a)\n\n**new alerts:**\n\n* 4 for Wrong number of arguments in a call\n* 1 for First parameter of a method is not named &#39;self&#39;"
+    },
+    {
+        "number": 1864,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-12T06:30:00Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1864,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-12T06:40:33Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1864,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-12T06:43:03Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1864,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-12T06:43:33Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1864,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-12T06:44:30Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1864,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-12T06:46:49Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1864,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-12T20:17:22Z",
+        "review_author": "ghooo"
+    },
+    {
+        "number": 1864,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-12T20:21:40Z",
+        "review_author": "ghooo"
+    },
+    {
+        "number": 1864,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-12T20:26:38Z",
+        "review_author": "ghooo"
+    },
+    {
+        "number": 1864,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-12T20:27:54Z",
+        "review_author": "ghooo"
+    },
+    {
+        "number": 1864,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-12T20:37:55Z",
+        "review_author": "ghooo"
+    },
+    {
+        "number": 1864,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-13T00:34:13Z",
+        "review_author": "ghooo"
+    },
+    {
+        "number": 1864,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-13T00:34:48Z",
+        "review_author": "ghooo"
+    },
+    {
+        "number": 1864,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-13T00:35:22Z",
+        "review_author": "ghooo"
+    },
+    {
+        "number": 1864,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-13T00:35:51Z",
+        "review_author": "ghooo"
+    },
+    {
+        "number": 1864,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-13T00:36:24Z",
+        "review_author": "ghooo"
+    },
+    {
+        "number": 1864,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-13T10:56:07Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1864,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-13T17:17:03Z",
+        "review_author": "ghooo"
+    },
+    {
+        "number": 1864,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-14T01:00:54Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1864,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-14T01:01:38Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1864,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-14T01:02:06Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1864,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-14T01:02:20Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1864,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-14T01:18:02Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1864,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-14T01:18:02Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1862,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-13T01:11:27Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 1862,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-13T01:11:27Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1861,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-06T23:59:52Z",
+        "comment_author": "gechiang",
+        "comment_body": "> Can the neighbor_advertiser be skipped while invoking warmboot instead of modifying the script?\r\n\r\nReason I am doing it inside the script is because the setup for warmboot and finalizer are two seperate files and I think it is easier to  have this inside the script which is called by both cases instead of spread out to multiple files.\r\n"
+    },
+    {
+        "number": 1861,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-07T00:06:36Z",
+        "comment_author": "prsunny",
+        "comment_body": "> > Can the neighbor_advertiser be skipped while invoking warmboot instead of modifying the script?\r\n> \r\n> Reason I am doing it inside the script is because the setup for warmboot and finalizer are two seperate files and I think it is easier to have this inside the script which is called by both cases instead of spread out to multiple files.\r\n\r\nIf you fix this in setup for warmboot, isn't finalizer a no-op? As in, even if it try to remove the entries in finalizer, it will not trigger anything since its non-existent, right?"
+    },
+    {
+        "number": 1861,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-07T00:13:55Z",
+        "comment_author": "gechiang",
+        "comment_body": "> > > Can the neighbor_advertiser be skipped while invoking warmboot instead of modifying the script?\r\n> > \r\n> > \r\n> > Reason I am doing it inside the script is because the setup for warmboot and finalizer are two seperate files and I think it is easier to have this inside the script which is called by both cases instead of spread out to multiple files.\r\n> \r\n> If you fix this in setup for warmboot, isn't finalizer a no-op? As in, even if it try to remove the entries in finalizer, it will not trigger anything since its non-existent, right?\r\n\r\nInteresting idea.  Let me give it a try just on the setup for warmboot to see if that works.  If so, I will create a new PULL request.\r\nThanks!"
+    },
+    {
+        "number": 1861,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-07T23:35:48Z",
+        "comment_author": "gechiang",
+        "comment_body": "@prsunny I have modified the code per your comment.  Please help review the new changes.\r\nThanks!"
+    },
+    {
+        "number": 1861,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-08T01:31:21Z",
+        "comment_author": "gechiang",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1861,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-08T01:31:31Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1861,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-08T18:05:41Z",
+        "comment_author": "vaibhavhd",
+        "comment_body": "The failures seem to be coming due to a sonic-swss dvs switch creation error.\r\nYesterday this was supposedly fixed on sonic-swss - https://github.com/Azure/sonic-swss/pull/1949\r\n\r\nBuildimage update is in progress - https://github.com/Azure/sonic-buildimage/pull/8915\r\n\r\nI suggest to retry after buildimage PR is merged."
+    },
+    {
+        "number": 1861,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-08T18:53:14Z",
+        "comment_author": "gechiang",
+        "comment_body": "> The failures seem to be coming due to a sonic-swss dvs switch creation error. Yesterday this was supposedly fixed on sonic-swss - [Azure/sonic-swss#1949](https://github.com/Azure/sonic-swss/pull/1949)\r\n> \r\n> Buildimage update is in progress - [Azure/sonic-buildimage#8915](https://github.com/Azure/sonic-buildimage/pull/8915)\r\n> \r\n> I suggest to retry after buildimage PR is merged.\r\n\r\nThanks!  I was about to ask how to address the tests failure which are unrelated to my changes...\r\nWill wait for that swss PR pulled into sonic-buildimage before attempting restart azp run."
+    },
+    {
+        "number": 1861,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-11T04:25:42Z",
+        "comment_author": "gechiang",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1861,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-11T04:25:54Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1861,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-06T23:58:01Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 1861,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-08T00:02:57Z",
+        "review_author": "vaibhavhd"
+    },
+    {
+        "number": 1861,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-08T00:29:35Z",
+        "review_author": "gechiang"
+    },
+    {
+        "number": 1861,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-08T00:29:53Z",
+        "review_author": "gechiang"
+    },
+    {
+        "number": 1861,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-08T18:03:32Z",
+        "review_author": "vaibhavhd"
+    },
+    {
+        "number": 1861,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-11T03:15:09Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 1861,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-11T03:15:09Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1861,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-08T18:03:32Z",
+        "latestReview_author": "vaibhavhd",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1859,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-06T17:50:25Z",
+        "comment_author": "rajendra-dendukuri",
+        "comment_body": "Fixes https://github.com/Azure/sonic-buildimage/issues/8888"
+    },
+    {
+        "number": 1859,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-06T17:57:36Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 3 alerts** when merging 9cd7e6c80b7e204957015f10eb44030c81615eea into 88baf3db16b4266bad5ecddd7d8df23dd57d0e25 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-fa6935fdcf25b629f38c6a4ba608d7557a26c268)\n\n**new alerts:**\n\n* 3 for Unused local variable"
+    },
+    {
+        "number": 1859,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-06T20:20:11Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 3 alerts** when merging c85a159ed9e0d1a67198da7d413dfd4a9524df6e into 88baf3db16b4266bad5ecddd7d8df23dd57d0e25 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-7f8caaedb347432f2403e8e0061f9a715c8106da)\n\n**new alerts:**\n\n* 3 for Unused local variable"
+    },
+    {
+        "number": 1859,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-06T21:20:08Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "@rajendra-dendukuri  The changes look good to me. Can you please handle the lgtm alert?"
+    },
+    {
+        "number": 1859,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-07T15:59:59Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "@lguohan Required for 202106"
+    },
+    {
+        "number": 1859,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-14T22:22:52Z",
+        "comment_author": "judyjoseph",
+        "comment_body": "@rajendra-dendukuri the PR has conflicts in 202106, Can you raise a separate PR for 202106 "
+    },
+    {
+        "number": 1859,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-14T22:29:56Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "> @rajendra-dendukuri the PR has conflicts in 202106, Can you raise a separate PR for 202106\r\n\r\n@judyjoseph Already raised. Can you please review? https://github.com/Azure/sonic-utilities/pull/1882/"
+    },
+    {
+        "number": 1859,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-06T21:19:27Z",
+        "review_author": "dgsudharsan"
+    },
+    {
+        "number": 1859,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-07T15:57:24Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 1859,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-07T15:57:24Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1859,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-06T21:19:27Z",
+        "latestReview_author": "dgsudharsan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-04T22:09:39Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 84f493bdb280cf3bb358f70c9082f15e6faadfee into bed8f722986b1f964e9ca929d43c41330f96998a - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-8a0430e6621b3ed92a6e637ecfd638db22a8cc63)\n\n**new alerts:**\n\n* 1 for Unused import"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-11T18:36:39Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 5 alerts** when merging 6e0bba0e50327ca1614accc7e4b90a3dcc8a5dfc into 112b44e3be4a83480dce4c69f7382ea40ba9d5d1 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-210a591fb81e9129978b80fc33f0f576d3bfc4d8)\n\n**new alerts:**\n\n* 2 for First parameter of a method is not named &#39;self&#39;\n* 2 for Unused import\n* 1 for Testing equality to None"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-19T16:50:11Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 4 alerts** when merging bd7781c8defafcb2534d5a9092ee2f2dcd8bd796 into e600e1c04b78f997454e7c7e856bd6dcec79d57e - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-c9dcb9344f26815e585cf0419b085bf1915fafc7)\n\n**new alerts:**\n\n* 2 for First parameter of a method is not named &#39;self&#39;\n* 1 for Testing equality to None\n* 1 for Unused import"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-20T17:29:39Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging f839e53f85c5ef52e763591a2dc18a7fa24d2f6b into 6595ad45d3ab5b3f18209a24203de530a8478ae3 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-ab2c07726b67842daa45b2852daa9ac6d27f3c8f)\n\n**new alerts:**\n\n* 1 for Unused import"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-12T00:37:02Z",
+        "review_author": "ghooo"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-12T01:11:02Z",
+        "review_author": "ghooo"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-12T01:19:02Z",
+        "review_author": "ghooo"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-12T01:20:15Z",
+        "review_author": "ghooo"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-12T07:09:07Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-12T07:34:19Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-12T07:40:18Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-12T07:44:33Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-12T07:51:16Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-19T16:17:15Z",
+        "review_author": "renukamanavalan"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-19T16:17:30Z",
+        "review_author": "renukamanavalan"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-19T16:17:46Z",
+        "review_author": "renukamanavalan"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-19T16:20:36Z",
+        "review_author": "renukamanavalan"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-19T16:20:48Z",
+        "review_author": "renukamanavalan"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-19T16:21:20Z",
+        "review_author": "renukamanavalan"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-19T17:14:37Z",
+        "review_author": "renukamanavalan"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-19T17:20:21Z",
+        "review_author": "renukamanavalan"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-21T04:09:22Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-21T07:07:09Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-21T07:09:08Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-21T14:34:43Z",
+        "review_author": "renukamanavalan"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-21T14:37:58Z",
+        "review_author": "renukamanavalan"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-25T17:48:04Z",
+        "review_author": "ghooo"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-25T18:00:15Z",
+        "review_author": "ghooo"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-25T18:26:35Z",
+        "review_author": "ghooo"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-25T21:52:28Z",
+        "review_author": "ghooo"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-25T23:26:46Z",
+        "review_author": "renukamanavalan"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-25T23:27:37Z",
+        "review_author": "renukamanavalan"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-26T14:59:16Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-26T15:46:59Z",
+        "review_author": "renukamanavalan"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-27T04:09:40Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-27T16:44:57Z",
+        "review_author": "renukamanavalan"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-27T16:47:24Z",
+        "review_author": "renukamanavalan"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-29T06:29:47Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-29T06:29:47Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 1856,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-25T21:52:28Z",
+        "latestReview_author": "ghooo",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1852,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-08T16:08:51Z",
+        "review_author": "sujinmkang"
+    },
+    {
+        "number": 1852,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-09T02:01:41Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 1852,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-09T02:01:41Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1852,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-08T16:08:51Z",
+        "latestReview_author": "sujinmkang",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1847,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-01T04:53:24Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 1847,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-01T04:53:24Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1843,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-28T05:21:12Z",
+        "comment_author": "yxieca",
+        "comment_body": "Please don't merge until ready to cherry-pick https://github.com/Azure/sonic-utilities/pull/1844 right after merging this PR."
+    },
+    {
+        "number": 1843,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-28T05:23:23Z",
+        "comment_author": "yxieca",
+        "comment_body": "@vivekreddynv it would be great if you could test your change with https://github.com/Azure/sonic-mgmt/tree/master/tests/show_techsupport."
+    },
+    {
+        "number": 1843,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-29T06:17:04Z",
+        "comment_author": "vivekrnv",
+        "comment_body": "> Please take #1844, #1846 as example, fixing the code before check in. Make sure your code passes sonic-mgmt show_techsupport tests.\r\n\r\nHi @yxieca, \r\n\r\nThanks for pointing out these false positive cases. \r\n\r\nChanges, for this PR were merged in master and 202012. pending in 202106.\r\nThe fix1 you've raised, is in master and 202012, pending in 202106. \r\nThe fix2 is pending in all 3. \r\n\r\nI would suggest, merging this PR in 202106, followed by fix1 and fix2. \r\n\r\nI will see what other sections of the code has the false positives issue and will verify the fixes by running the techsupport test. Will raise separate PR's after this?\r\n\r\nWhat do you think?  "
+    },
+    {
+        "number": 1843,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-29T16:07:07Z",
+        "comment_author": "yxieca",
+        "comment_body": "@vivekredynv, what I noticed from making change for 202012 branch is that that branch is different from master branch, therefore more changes are needed. If you could make these  changes and making sure they are complete, that would be better than missing a few and having to come back change again."
+    },
+    {
+        "number": 1843,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-29T21:35:21Z",
+        "comment_author": "vivekrnv",
+        "comment_body": "Okay, it seems https://github.com/Azure/sonic-utilities/pull/1846 can't be cleanly cherry-picked to 202012. I'll manually port #1846 (any other fixes required) for 202012. \r\n\r\nBut both the #1844 & #1846 can be cleanly cherry-picked for **202106**. Thus i would suggest to merge this PR,  followed by 1844 & 1846. That'll put master & 202106 in a consistent state. \r\n\r\nAnd if i have to make any changes to these two branches, it'll be easy to cherry-pick to both of them\r\n\r\n\r\n"
+    },
+    {
+        "number": 1843,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-05T16:05:48Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@vivekreddynv is it ok to take it to 202106 or something else is missing?\r\n"
+    },
+    {
+        "number": 1843,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-21T01:41:36Z",
+        "comment_author": "judyjoseph",
+        "comment_body": "> Please don't merge until ready to cherry-pick #1844 right after merging this PR.\r\n\r\n@vivekreddynv I see the above comment from Ying, is this PR ready to be merged ?"
+    },
+    {
+        "number": 1843,
+        "repo": "sonic-utilities",
+        "review_at": "2021-09-29T05:39:10Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 1843,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-18T15:53:44Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 1843,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-18T15:53:44Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1842,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-17T16:27:19Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@yxieca could you please help to review or suggest assignee?"
+    },
+    {
+        "number": 1842,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-14T00:29:50Z",
+        "review_author": "keboliu"
+    },
+    {
+        "number": 1842,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-18T16:01:43Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 1842,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-18T16:01:43Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1842,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-14T00:29:50Z",
+        "latestReview_author": "keboliu",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1841,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-27T10:39:12Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 533cd37021b59c526be7bf970063645dc92ed141 into 0d538d3db650807482117f240027c9ce6885dbc2 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-8bc826b2f66fd1f916bbcc874b150b8100d63a71)\n\n**new alerts:**\n\n* 1 for Unmatchable dollar in regular expression"
+    },
+    {
+        "number": 1841,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-27T14:24:46Z",
+        "comment_author": "lolyu",
+        "comment_body": "```\r\ntests/sku_create_test.py::TestSkuCreate::test_sku_from_xml_file PASSED                                                                                                                                                                                                 [ 20%]\r\ntests/sku_create_test.py::TestSkuCreate::test_sku_from_minigraph_file PASSED                                                                                                                                                                                           [ 40%]\r\ntests/sku_create_test.py::TestSkuCreate::test_sku_from_config_db_file PASSED                                                                                                                                                                                           [ 60%]\r\ntests/sku_create_test.py::TestSkuCreate::test_sku_port_split PASSED                                                                                                                                                                                                    [ 80%]\r\ntests/sku_create_test.py::TestSkuCreate::test_sku_port_unsplit PASSED                                                                                                                                                                                                  [100%]\r\n```"
+    },
+    {
+        "number": 1841,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-27T14:46:22Z",
+        "comment_author": "yxieca",
+        "comment_body": "@lolyu can you try this change against 7260? 7260 has 2 ports Ethernet256 and Ethernet260 that are not used. Would these 2 ports create any issue?"
+    },
+    {
+        "number": 1841,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-28T01:26:40Z",
+        "comment_author": "lolyu",
+        "comment_body": "> @lolyu can you try this change against 7260? 7260 has 2 ports Ethernet256 and Ethernet260 that are not used. Would these 2 ports create any issue?\r\n\r\n@yxieca, sure, will add unittest to cover 7260."
+    },
+    {
+        "number": 1841,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-29T09:33:54Z",
+        "comment_author": "lolyu",
+        "comment_body": "/AZP run"
+    },
+    {
+        "number": 1841,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-29T09:34:05Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1841,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-11-09T23:24:24Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "This commit could not be cleanly cherry-picked to 202012. Please submit another PR."
+    },
+    {
+        "number": 1841,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-11-10T05:50:15Z",
+        "comment_author": "lolyu",
+        "comment_body": "> This commit could not be cleanly cherry-picked to 202012. Please submit another PR.\r\n\r\nSure, will do, thanks!"
+    },
+    {
+        "number": 1841,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-05T16:48:32Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 1841,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-05T16:48:32Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1836,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-23T09:49:30Z",
+        "comment_author": "wen587",
+        "comment_body": "To make this PR functional, it requires https://github.com/Azure/sonic-buildimage/pull/8814 to work.\r\nBut it can also be merged alone. Because it works backward compatible."
+    },
+    {
+        "number": 1836,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-27T11:41:31Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "Regarding the PR description, you can move \"Check by devices list instead of machine.conf\" into the section \"How I did it\".\r\n\r\nPlease give more explanation on the question \"What I did\". This PR actually changes behavior.\r\n\r\n---\r\nIn reply to: [927791388](https://github.com/Azure/sonic-utilities/pull/1836#issuecomment-927791388) [](http://example.com/codeflow?ancestors=927791388)"
+    },
+    {
+        "number": 1836,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-11T08:16:11Z",
+        "comment_author": "wen587",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1836,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-11T08:16:22Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1836,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-15T05:44:11Z",
+        "comment_author": "wen587",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1836,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-15T05:44:22Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1836,
+        "repo": "sonic-utilities",
+        "review_at": "2021-09-27T11:23:21Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1836,
+        "repo": "sonic-utilities",
+        "review_at": "2021-09-27T11:28:42Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1836,
+        "repo": "sonic-utilities",
+        "review_at": "2021-09-27T11:30:18Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1836,
+        "repo": "sonic-utilities",
+        "review_at": "2021-09-27T11:34:19Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1836,
+        "repo": "sonic-utilities",
+        "review_at": "2021-09-27T11:39:06Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1836,
+        "repo": "sonic-utilities",
+        "review_at": "2021-09-27T11:39:40Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1836,
+        "repo": "sonic-utilities",
+        "review_at": "2021-09-27T11:40:05Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1836,
+        "repo": "sonic-utilities",
+        "review_at": "2021-09-28T00:11:33Z",
+        "review_author": "wen587"
+    },
+    {
+        "number": 1836,
+        "repo": "sonic-utilities",
+        "review_at": "2021-09-28T00:11:41Z",
+        "review_author": "wen587"
+    },
+    {
+        "number": 1836,
+        "repo": "sonic-utilities",
+        "review_at": "2021-09-28T00:12:18Z",
+        "review_author": "wen587"
+    },
+    {
+        "number": 1836,
+        "repo": "sonic-utilities",
+        "review_at": "2021-09-28T00:14:24Z",
+        "review_author": "wen587"
+    },
+    {
+        "number": 1836,
+        "repo": "sonic-utilities",
+        "review_at": "2021-09-28T00:14:38Z",
+        "review_author": "wen587"
+    },
+    {
+        "number": 1836,
+        "repo": "sonic-utilities",
+        "review_at": "2021-09-28T00:14:50Z",
+        "review_author": "wen587"
+    },
+    {
+        "number": 1836,
+        "repo": "sonic-utilities",
+        "review_at": "2021-09-28T02:22:01Z",
+        "review_author": "wen587"
+    },
+    {
+        "number": 1836,
+        "repo": "sonic-utilities",
+        "review_at": "2021-09-28T07:48:36Z",
+        "review_author": "wen587"
+    },
+    {
+        "number": 1836,
+        "repo": "sonic-utilities",
+        "review_at": "2021-09-30T06:56:50Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1836,
+        "repo": "sonic-utilities",
+        "review_at": "2021-09-30T07:16:31Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1836,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-09T05:45:25Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1836,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-19T08:20:58Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1836,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-19T08:20:58Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1832,
+        "repo": "sonic-utilities",
+        "review_at": "2021-09-27T15:33:27Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 1832,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-04T18:00:20Z",
+        "review_author": "liat-grozovik"
+    },
+    {
+        "number": 1832,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-09-27T15:33:27Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1832,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-04T18:00:20Z",
+        "latestReview_author": "liat-grozovik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1831,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-28T00:45:47Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "You mentioned \"TODO: add unit-tests\". Will it happen in this PR?"
+    },
+    {
+        "number": 1831,
+        "repo": "sonic-utilities",
+        "review_at": "2021-09-22T09:56:59Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1831,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-09-22T09:56:59Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1825,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-18T12:04:37Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1825,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-18T12:04:47Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1825,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-20T01:08:53Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "> Since the queue parameter is also used in span, I suggest adding a test for it with the config mirror-session span add command.\r\n\r\nThanks. Updated"
+    },
+    {
+        "number": 1825,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-20T15:00:06Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1825,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-20T15:00:25Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1825,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-22T00:50:25Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1825,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-22T00:50:36Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1825,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-30T00:34:35Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "@raphaelt-nvidia  Hi, could you help to take a look again? Thanks"
+    },
+    {
+        "number": 1825,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-30T06:22:38Z",
+        "comment_author": "raphaelt-nvidia",
+        "comment_body": "Question about how the test works: If the test runs only in the mock environment, then LGTM.  If it calls real SAI, then whether trying to configure queue=100 produces errors in the log is platform-dependent, and how it is dependent should change soon when I submit a PR to check the actual maximum queue value via SAI."
+    },
+    {
+        "number": 1825,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-08T00:40:41Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "> Question about how the test works: If the test runs only in the mock environment, then LGTM. If it calls real SAI, then whether trying to configure queue=100 produces errors in the log is platform-dependent, and how it is dependent should change soon when I submit a PR to check the actual maximum queue value via SAI.\r\n\r\nThe UT is only running in mocked environment, and there is no orchagent and no syncd, and so there is no SAI. The verification is on CLI level."
+    },
+    {
+        "number": 1825,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-10T05:50:29Z",
+        "comment_author": "raphaelt-nvidia",
+        "comment_body": "SO LGTM.   Should someone else review?"
+    },
+    {
+        "number": 1825,
+        "repo": "sonic-utilities",
+        "comment_at": "2022-02-23T14:32:22Z",
+        "comment_author": "raphaelt-nvidia",
+        "comment_body": "Our QA has noticed that the new range checking for gre requires the value to be entered in decimal.  The command reference https://github.com/Azure/sonic-utilities/blob/master/doc/Command-Reference.md#mirroring-config-commands doesn't define it explicitly, but the following text suggests that hex format should at least be allowed, if not preferred:\r\n\r\noptional - GRE Type in case if user wants to send the packet via GRE tunnel. GRE type could be anything; it could also be left as empty; by default, it is 0x8949 for Mellanox; and 0x88be for the rest of the chips.\r\n\r\n@bingwang-ms , what do you think?"
+    },
+    {
+        "number": 1825,
+        "repo": "sonic-utilities",
+        "review_at": "2021-09-19T06:38:03Z",
+        "review_author": "raphaelt-nvidia"
+    },
+    {
+        "number": 1825,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-12T02:20:37Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 1825,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-12T02:28:53Z",
+        "review_author": "bingwang-ms"
+    },
+    {
+        "number": 1825,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-14T00:12:45Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 1825,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-09-19T06:38:03Z",
+        "latestReview_author": "raphaelt-nvidia",
+        "latestReview_state": "CHANGES_REQUESTED"
+    },
+    {
+        "number": 1825,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-14T00:12:45Z",
+        "latestReview_author": "prsunny",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1810,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-13T18:03:12Z",
+        "comment_author": "neethajohn",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1810,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-13T18:03:23Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1810,
+        "repo": "sonic-utilities",
+        "review_at": "2021-09-13T18:02:29Z",
+        "review_author": "neethajohn"
+    },
+    {
+        "number": 1810,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-09-13T18:02:29Z",
+        "latestReview_author": "neethajohn",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1805,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-08T10:53:01Z",
+        "comment_author": "stepanblyschak",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1805,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-08T10:53:02Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1805,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-08T10:53:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1805,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-09T08:02:52Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@stepanblyschak required for 202106?"
+    },
+    {
+        "number": 1805,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-09T11:23:26Z",
+        "comment_author": "stepanblyschak",
+        "comment_body": "@liat-grozovik Yes"
+    },
+    {
+        "number": 1805,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-10T14:45:59Z",
+        "comment_author": "stepanblyschak",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1805,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-10T14:46:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1805,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-10T14:46:11Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1805,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-12T13:41:55Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1805,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-12T13:42:06Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1805,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-04T21:34:15Z",
+        "review_author": "renukamanavalan"
+    },
+    {
+        "number": 1805,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-04T21:34:15Z",
+        "latestReview_author": "renukamanavalan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-07T13:27:36Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 127e7730ecbeeb7e42b7ca0747d12a0fe5415bb8 into 171eb4f4c3dff0c75e38c9f4dfbdbeb72a8eeb5a - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-e0caed410800e052e0a29ca8a0ab5c7324805620)\n\n**new alerts:**\n\n* 1 for Unused local variable"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-07T23:50:37Z",
+        "comment_author": "stepanblyschak",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-07T23:50:38Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-07T23:50:47Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-09T08:03:36Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@stepanblyschak required for 202106"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-09T11:23:12Z",
+        "comment_author": "stepanblyschak",
+        "comment_body": "@liat-grozovik Yes, this change was taken from https://github.com/Azure/sonic-utilities/pull/1650"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-05T16:13:39Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-05T16:13:51Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-17T16:29:04Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-17T16:29:14Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-25T08:21:11Z",
+        "comment_author": "stepanblyschak",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-25T08:21:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-25T08:21:26Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-25T08:31:10Z",
+        "comment_author": "stepanblyschak",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-25T08:31:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-25T08:31:23Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-26T14:48:24Z",
+        "comment_author": "stepanblyschak",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-26T14:48:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-26T14:48:42Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-27T13:03:18Z",
+        "comment_author": "stepanblyschak",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-27T13:03:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-27T13:03:30Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-28T07:33:35Z",
+        "comment_author": "stepanblyschak",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-28T07:33:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-28T07:33:47Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-04T21:32:27Z",
+        "review_author": "renukamanavalan"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-05T13:07:06Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-05T13:07:22Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-05T13:07:40Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-05T13:11:05Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-05T14:01:20Z",
+        "review_author": "renukamanavalan"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-28T16:38:05Z",
+        "review_author": "renukamanavalan"
+    },
+    {
+        "number": 1803,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-28T16:38:05Z",
+        "latestReview_author": "renukamanavalan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1802,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-07T23:50:26Z",
+        "comment_author": "stepanblyschak",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1802,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-07T23:50:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1802,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-07T23:50:37Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1802,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-09T08:04:16Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@stepanblyschak required for 202106"
+    },
+    {
+        "number": 1802,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-09T11:22:50Z",
+        "comment_author": "stepanblyschak",
+        "comment_body": "@liat-grozovik Yes, this change was taken from https://github.com/Azure/sonic-utilities/pull/1650"
+    },
+    {
+        "number": 1802,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-17T16:29:40Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@renukamanavalan kindly reminder to review this PR"
+    },
+    {
+        "number": 1802,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-17T23:19:04Z",
+        "comment_author": "renukamanavalan",
+        "comment_body": "> @renukamanavalan kindly reminder to review this PR\r\n\r\nAlready reviewed. Waiting for resolve for a open comment."
+    },
+    {
+        "number": 1802,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-26T14:49:24Z",
+        "comment_author": "stepanblyschak",
+        "comment_body": "@renukamanavalan Which comment are you refering to? I can't see any."
+    },
+    {
+        "number": 1802,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-26T15:49:10Z",
+        "comment_author": "renukamanavalan",
+        "comment_body": "Sorry! I missed to submit. It shows up for me still (as pending)."
+    },
+    {
+        "number": 1802,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-05T16:13:09Z",
+        "review_author": "liat-grozovik"
+    },
+    {
+        "number": 1802,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-26T15:48:11Z",
+        "review_author": "renukamanavalan"
+    },
+    {
+        "number": 1802,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-26T16:22:29Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 1802,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-27T16:15:13Z",
+        "review_author": "renukamanavalan"
+    },
+    {
+        "number": 1802,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-05T16:13:09Z",
+        "latestReview_author": "liat-grozovik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1802,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-27T16:15:13Z",
+        "latestReview_author": "renukamanavalan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1801,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-07T07:39:01Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 2 alerts** when merging dec2a042fcd7e1ac7fa9b4580a7d505f1b3595f2 into 171eb4f4c3dff0c75e38c9f4dfbdbeb72a8eeb5a - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-60cf1ddc4524bd705dae2ede526dd151e4b53fb6)\n\n**new alerts:**\n\n* 2 for Unused import"
+    },
+    {
+        "number": 1801,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-09T08:08:11Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@stepanblyschak required for 202106? "
+    },
+    {
+        "number": 1801,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-09T11:22:43Z",
+        "comment_author": "stepanblyschak",
+        "comment_body": "@liat-grozovik Yes, this change was taken from https://github.com/Azure/sonic-utilities/pull/1650"
+    },
+    {
+        "number": 1801,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-05T13:42:10Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 6f5bd3b50f54352023b11e373157f26047ed39be into bed8f722986b1f964e9ca929d43c41330f96998a - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-15ae9b33aa74804809fcedbdb0da848929971a06)\n\n**new alerts:**\n\n* 1 for Unused import"
+    },
+    {
+        "number": 1801,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-15T09:03:53Z",
+        "comment_author": "stepanblyschak",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1801,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-15T09:03:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1801,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-15T09:04:06Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1801,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-04T20:17:45Z",
+        "review_author": "renukamanavalan"
+    },
+    {
+        "number": 1801,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-05T13:30:25Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 1801,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-14T15:22:14Z",
+        "review_author": "renukamanavalan"
+    },
+    {
+        "number": 1801,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-14T15:22:14Z",
+        "latestReview_author": "renukamanavalan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1799,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-29T07:44:46Z",
+        "comment_author": "Cosmin-Jinga-MS",
+        "comment_body": "/azpw run\r\n"
+    },
+    {
+        "number": 1799,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-29T07:44:47Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1799,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-29T07:44:57Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1799,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-30T20:43:16Z",
+        "comment_author": "smaheshm",
+        "comment_body": "@Cosmin-Jinga-MS Can you also add unit test for your code. You can use the following as an example:\r\nhttps://github.com/Azure/sonic-utilities/blob/280dd290acfa4bdbb09a92e908cce6d40fa7e79e/tests/config_test.py#L132\r\n\r\nIn case you are not familiar with creating a test environment, here's the link:\r\nhttps://github.com/Azure/sonic-utilities/#setting-up-a-buildtest-environment"
+    },
+    {
+        "number": 1799,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-05T12:36:36Z",
+        "comment_author": "Cosmin-Jinga-MS",
+        "comment_body": "Requested UT added.\r\n@smaheshm  Can you please have another look?"
+    },
+    {
+        "number": 1799,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-14T05:42:09Z",
+        "comment_author": "Cosmin-Jinga-MS",
+        "comment_body": "Pushed new commit addressing the latest review comments."
+    },
+    {
+        "number": 1799,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-12T18:17:13Z",
+        "review_author": "smaheshm"
+    },
+    {
+        "number": 1799,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-12T18:18:19Z",
+        "review_author": "smaheshm"
+    },
+    {
+        "number": 1799,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-12T18:20:06Z",
+        "review_author": "smaheshm"
+    },
+    {
+        "number": 1799,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-12T18:22:25Z",
+        "review_author": "smaheshm"
+    },
+    {
+        "number": 1799,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-14T05:40:57Z",
+        "review_author": "Cosmin-Jinga-MS"
+    },
+    {
+        "number": 1799,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-14T05:41:20Z",
+        "review_author": "Cosmin-Jinga-MS"
+    },
+    {
+        "number": 1799,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-14T05:41:35Z",
+        "review_author": "Cosmin-Jinga-MS"
+    },
+    {
+        "number": 1799,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-20T21:43:47Z",
+        "review_author": "smaheshm"
+    },
+    {
+        "number": 1799,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-21T08:39:34Z",
+        "review_author": "Cosmin-Jinga-MS"
+    },
+    {
+        "number": 1799,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-28T16:36:59Z",
+        "review_author": "smaheshm"
+    },
+    {
+        "number": 1799,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-28T16:36:59Z",
+        "latestReview_author": "smaheshm",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1798,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-08T16:27:23Z",
+        "comment_author": "anshuv-mfst",
+        "comment_body": "@prsunny could you please take a look, thanks."
+    },
+    {
+        "number": 1798,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-12T20:09:43Z",
+        "comment_author": "smaheshm",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1798,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-12T20:09:54Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1798,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-14T00:33:32Z",
+        "comment_author": "smaheshm",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1798,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-14T00:33:42Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1798,
+        "repo": "sonic-utilities",
+        "review_at": "2021-09-15T00:14:25Z",
+        "review_author": "smaheshm"
+    },
+    {
+        "number": 1798,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-11T21:53:43Z",
+        "review_author": "mlok-nokia"
+    },
+    {
+        "number": 1798,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-14T16:01:19Z",
+        "review_author": "smaheshm"
+    },
+    {
+        "number": 1798,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-14T16:01:19Z",
+        "latestReview_author": "smaheshm",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1781,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-08-30T22:14:31Z",
+        "comment_author": "arlakshm",
+        "comment_body": "> > ```\r\n> > if filename is not None:\r\n> > ```\r\n> \r\n> `if filename is not None`\r\n> ->\r\n> `if not filename`\r\n> \r\n> Refers to: config/main.py:1063 in [75f8d18](https://github.com/Azure/sonic-utilities/commit/75f8d18ca090b05300c0674c14a93deddeff23d1). [](commit_id = [75f8d18](https://github.com/Azure/sonic-utilities/commit/75f8d18ca090b05300c0674c14a93deddeff23d1), deletion_comment = False)\r\n\r\nThe existing code is fine, the check `if not filename` doesnt work\r\n```\r\nadmin@vlab-01:/usr/local/lib/python3.7/dist-packages/config$ python3\r\nPython 3.7.3 (default, Jan 22 2021, 20:04:44)\r\n[GCC 8.3.0] on linux\r\nType \"help\", \"copyright\", \"credits\" or \"license\" for more information.\r\n>>> filename=None\r\n>>> if not filename:\r\n...   cfg_files  = filename.split(',')\r\n...\r\nTraceback (most recent call last):\r\n  File \"<stdin>\", line 2, in <module>\r\nAttributeError: 'NoneType' object has no attribute 'split'\r\n>>>\r\n```"
+    },
+    {
+        "number": 1781,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-08-31T21:20:38Z",
+        "comment_author": "arlakshm",
+        "comment_body": "/Azp run"
+    },
+    {
+        "number": 1781,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-08-31T21:20:53Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1781,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-01T00:23:17Z",
+        "comment_author": "arlakshm",
+        "comment_body": "the swss test `test_PerfAddRemoveRoute` is failing consistently. The test doesn't seem to be related to this change. These failures seen on other PRs as well.\r\n\r\nRetrying again.."
+    },
+    {
+        "number": 1781,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-01T00:24:52Z",
+        "comment_author": "arlakshm",
+        "comment_body": "/Azp run"
+    },
+    {
+        "number": 1781,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-01T00:25:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1781,
+        "repo": "sonic-utilities",
+        "review_at": "2021-08-26T04:02:29Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1781,
+        "repo": "sonic-utilities",
+        "review_at": "2021-08-26T04:02:40Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1781,
+        "repo": "sonic-utilities",
+        "review_at": "2021-08-26T04:10:25Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1781,
+        "repo": "sonic-utilities",
+        "review_at": "2021-08-26T04:13:45Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1781,
+        "repo": "sonic-utilities",
+        "review_at": "2021-08-26T04:14:10Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1781,
+        "repo": "sonic-utilities",
+        "review_at": "2021-08-26T04:14:57Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1781,
+        "repo": "sonic-utilities",
+        "review_at": "2021-08-26T04:15:36Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1781,
+        "repo": "sonic-utilities",
+        "review_at": "2021-08-26T04:16:57Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1781,
+        "repo": "sonic-utilities",
+        "review_at": "2021-08-26T04:17:21Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1781,
+        "repo": "sonic-utilities",
+        "review_at": "2021-08-30T20:31:34Z",
+        "review_author": "arlakshm"
+    },
+    {
+        "number": 1781,
+        "repo": "sonic-utilities",
+        "review_at": "2021-08-30T20:31:54Z",
+        "review_author": "arlakshm"
+    },
+    {
+        "number": 1781,
+        "repo": "sonic-utilities",
+        "review_at": "2021-08-30T20:32:39Z",
+        "review_author": "arlakshm"
+    },
+    {
+        "number": 1781,
+        "repo": "sonic-utilities",
+        "review_at": "2021-08-30T22:09:34Z",
+        "review_author": "arlakshm"
+    },
+    {
+        "number": 1781,
+        "repo": "sonic-utilities",
+        "review_at": "2021-09-01T01:46:28Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1781,
+        "repo": "sonic-utilities",
+        "review_at": "2021-09-01T01:54:24Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1781,
+        "repo": "sonic-utilities",
+        "review_at": "2021-09-01T04:03:11Z",
+        "review_author": "arlakshm"
+    },
+    {
+        "number": 1781,
+        "repo": "sonic-utilities",
+        "review_at": "2021-09-01T04:45:43Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1781,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-15T09:27:12Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1781,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-15T10:02:42Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1781,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-18T17:28:34Z",
+        "review_author": "arlakshm"
+    },
+    {
+        "number": 1781,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-18T17:29:27Z",
+        "review_author": "arlakshm"
+    },
+    {
+        "number": 1781,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-19T02:53:16Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1781,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-19T02:53:16Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-08-07T05:10:45Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 4 alerts** when merging 19fff554bc410e538b6759df3fe36f4d8ace0715 into 30907c46ea38f29401403819b399dbc75e221544 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-126537afd3bef24f1f4b9e3a569a96e7a52ac6c4)\n\n**new alerts:**\n\n* 2 for Unused import\n* 1 for Variable defined multiple times\n* 1 for Clear\\-text logging of sensitive information"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-08-07T18:41:12Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 7a12c0f0cfb62d20d1aa94f7dd19fc3fdaa1b5c8 into 30907c46ea38f29401403819b399dbc75e221544 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-2dddea0bbb2c043ee33df4a7604f98415d5f1ff9)\n\n**new alerts:**\n\n* 1 for Unused import"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-08-07T18:42:28Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "> This pull request **introduces 1 alert** when merging [7a12c0f](https://github.com/Azure/sonic-utilities/commit/7a12c0f0cfb62d20d1aa94f7dd19fc3fdaa1b5c8) into [30907c4](https://github.com/Azure/sonic-utilities/commit/30907c46ea38f29401403819b399dbc75e221544) - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-2dddea0bbb2c043ee33df4a7604f98415d5f1ff9)\r\n> \r\n> **new alerts:**\r\n> \r\n> * 1 for Unused import\r\n\r\nThis lgtm is for using mock table dbconnector and its by the existing design. We should ignore this lgtm."
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-16T03:47:32Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 3 alerts** when merging d5f82f3e6a34f06e506ad049a62629acca46500c into d8ee5e9068afa751342526d56cafff5dd7cdac68 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-d968b6f54d336739f020578d4be7b2e3f4cc2e89)\n\n**new alerts:**\n\n* 2 for Variable defined multiple times\n* 1 for Unused import"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-16T04:52:23Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 2f93cb11d267ffceb27a7b9a2d516599f90dad5d into d8ee5e9068afa751342526d56cafff5dd7cdac68 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-7bebe5b1fc07b96def3c7ab168ff91031c754da6)\n\n**new alerts:**\n\n* 1 for Unused import"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-16T05:11:55Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging c97e1597b609a27c683fe00f40a28e86546cd37a into d8ee5e9068afa751342526d56cafff5dd7cdac68 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-15133c984cee2a5c95cc9382dcf446ea1f8d79c6)\n\n**new alerts:**\n\n* 1 for Unused import"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-21T05:04:42Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 165546bce5a0180a24c86dc9977d46561bd486e5 into 9017d99f8dc67883c03a13e6c96c9a3e48d0c7f5 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-555e8a8d621eb1ce74202f85b70ac02fefe47b9a)\n\n**new alerts:**\n\n* 1 for Unused import"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-22T03:50:41Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 2 alerts** when merging 91c96c4efc61076554489c091b7b17c057b52c93 into 9017d99f8dc67883c03a13e6c96c9a3e48d0c7f5 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-74b00a7b0175a7bd4c92a98cf32d0568c4637bc8)\n\n**new alerts:**\n\n* 2 for Unused import"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-22T05:30:24Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 2 alerts** when merging 5d0c0589e5fff52f72fcf243477afc05fce693c3 into 9017d99f8dc67883c03a13e6c96c9a3e48d0c7f5 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-0589dec2fea6c002d4f42bb6884bc8733b23f9ae)\n\n**new alerts:**\n\n* 2 for Unused import"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-22T05:42:56Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging fe622b20ff339b465125195d48cced5868d5f560 into 9017d99f8dc67883c03a13e6c96c9a3e48d0c7f5 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-cab54ab5538a2a77263729d414329a178893d3aa)\n\n**new alerts:**\n\n* 1 for Unused import"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-22T16:22:51Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-22T16:22:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-22T16:23:04Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-22T17:00:16Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 81df07d093c2ee860fd3200cb1802837d078328a into 9017d99f8dc67883c03a13e6c96c9a3e48d0c7f5 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-3f7e9f626b6830bb3aa22c1418cf4ded8dae088e)\n\n**new alerts:**\n\n* 1 for Unused import"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-23T03:21:04Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-23T03:21:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-23T03:21:16Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-25T02:06:40Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-25T02:06:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-25T02:06:52Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-25T05:05:12Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-25T05:05:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-25T05:05:27Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-25T14:08:14Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 45d9a478252e918b8f8dddc42cadf1ec17466965 into 8ea834b979dc35d79b15c433bd4d9559205f412e - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-c704b2d8d5c91b8d27c94c6a65b12124c8f854d8)\n\n**new alerts:**\n\n* 1 for Unused import"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-25T22:01:54Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-25T22:01:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-25T22:02:11Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-26T14:34:56Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-26T14:34:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-26T14:35:12Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-22T04:17:11Z",
+        "review_author": "srj102"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-22T05:25:05Z",
+        "review_author": "dgsudharsan"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-22T05:29:16Z",
+        "review_author": "srj102"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-29T22:11:14Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-29T22:11:14Z",
+        "latestReview_author": "prsunny",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1748,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-22T05:29:16Z",
+        "latestReview_author": "srj102",
+        "latestReview_state": "DISMISSED"
+    },
+    {
+        "number": 1730,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-08-08T15:24:57Z",
+        "comment_author": "pettershao-ragilenetworks",
+        "comment_body": "@Praveen-Brcm @qiluo-msft help mege this, thanks!"
+    },
+    {
+        "number": 1730,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-08-17T03:02:05Z",
+        "comment_author": "pettershao-ragilenetworks",
+        "comment_body": "@lguohan help merge this, thanks!"
+    },
+    {
+        "number": 1730,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-07T07:45:49Z",
+        "comment_author": "pettershao-ragilenetworks",
+        "comment_body": "@lguohan @qiluo-msft help merge this, thanks!"
+    },
+    {
+        "number": 1730,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-08T01:25:56Z",
+        "comment_author": "pettershao-ragilenetworks",
+        "comment_body": "@lguohan @qiluo-msft help forward this, thanks!"
+    },
+    {
+        "number": 1730,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-08T09:55:57Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1730,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-08T09:56:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1730,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-10-20T02:50:56Z",
+        "comment_author": "pettershao-ragilenetworks",
+        "comment_body": "@lguohan @qiluo-msft help forward this, thanks!"
+    },
+    {
+        "number": 1730,
+        "repo": "sonic-utilities",
+        "review_at": "2021-08-09T06:01:05Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1730,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-08-09T06:01:05Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1707,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-07-07T16:26:58Z",
+        "comment_author": "anshuv-mfst",
+        "comment_body": "Hi @mlorrillere - could you please review, thanks."
+    },
+    {
+        "number": 1707,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-14T18:04:45Z",
+        "comment_author": "judyjoseph",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1707,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-14T18:04:57Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1707,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-14T23:49:07Z",
+        "comment_author": "judyjoseph",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1707,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-14T23:49:17Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1707,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-17T18:18:35Z",
+        "comment_author": "vganesan-nokia",
+        "comment_body": "@judyjoseph, would you please re-start the azure pipeline again? The build is still not picking up the dependednt changes from Azure/sonic-buildimage#8065. Thanks"
+    },
+    {
+        "number": 1707,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-17T18:47:26Z",
+        "comment_author": "judyjoseph",
+        "comment_body": "/azp run\r\n\r\n"
+    },
+    {
+        "number": 1707,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-09-17T18:47:36Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1707,
+        "repo": "sonic-utilities",
+        "review_at": "2021-07-12T23:38:34Z",
+        "review_author": "mlorrillere"
+    },
+    {
+        "number": 1707,
+        "repo": "sonic-utilities",
+        "review_at": "2021-08-31T19:39:45Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 1707,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-12T05:23:39Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 1707,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-12T05:23:39Z",
+        "latestReview_author": "judyjoseph",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1707,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-07-12T23:38:34Z",
+        "latestReview_author": "mlorrillere",
+        "latestReview_state": "DISMISSED"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "comment_at": "2020-11-16T08:13:22Z",
+        "comment_author": "sujinmkang",
+        "comment_body": "@rkdevi27 and @padmanarayana please review this new PR."
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "comment_at": "2020-11-16T08:15:54Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 6d6633fc01469c29c09932774e6fd73f386a74f7 into f46c27e92a22c361457563fdb111dbf440b897c4 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-b8dd633e94be9216453f509df4f42a1a0a863ff0)\n\n**new alerts:**\n\n* 1 for Unused import"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "comment_at": "2020-11-17T06:11:03Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 53ec476d380479154413fa3cd6980f4259e0d472 into 1c45ca1f5d60fa9b88f5b1647cea62eb23439302 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-c16bc409d5772df0cfe53217c40d63a50383cc40)\n\n**new alerts:**\n\n* 1 for Unused import"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "comment_at": "2020-11-23T08:17:09Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 2 alerts** when merging f4574c962c3d2de5341931f316db1d2fdf211e88 into f9eb739fa238284c10ecb7c00b07094ac90b27db - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-a3417831a17352cbf0a61a904fc89d4c583bf9fd)\n\n**new alerts:**\n\n* 1 for Unused import\n* 1 for Wrong number of arguments in a call"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "comment_at": "2020-11-24T08:15:05Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 2 alerts** when merging 7efd058f3bb223e308900c3bc385b77dbf71cc9b into 9dc58eaa76d38a40f33d534b13442284f598852a - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-25394d995f82d6f492dbfca45fe62a9d417b7aac)\n\n**new alerts:**\n\n* 1 for Unused import\n* 1 for Wrong number of arguments in a call"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "comment_at": "2020-11-24T23:52:37Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 2 alerts** when merging f29a5b4c249675d3d528b60146cff5f12f610967 into 5b8da561b8712e9785622a53a2898671ada9c76e - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-47ef8b529c21a0ac09ba142e425b1fcd286ed52a)\n\n**new alerts:**\n\n* 1 for Unused import\n* 1 for Wrong number of arguments in a call"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "comment_at": "2020-11-25T09:23:29Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 15cb89d1ad083a90c11d9d9e8d4b4a21901448a3 into 5b8da561b8712e9785622a53a2898671ada9c76e - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-1143c74b227f479130f3a88df8b36fec96b05a1f)\n\n**new alerts:**\n\n* 1 for Unused import"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "comment_at": "2020-11-27T00:14:25Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging a2ac11c6ec326f39032ff3f09935ab85b09304dc into 8f3b22ed11e166ed24dcd2fb1ac61e227140c2af - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-5c4a95f80beaacbcc5822ec0eac341f84ca63ae8)\n\n**new alerts:**\n\n* 1 for Unused import"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "comment_at": "2020-11-30T08:28:40Z",
+        "comment_author": "sujinmkang",
+        "comment_body": "@rkdevi27 @nazariig @padmanarayana can you please help review this PR?"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "comment_at": "2020-11-30T18:07:15Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 393fc1835fb8abec00daee04fd4e0d76050882c6 into a5b78cf968e4e5c49b764f5a76bdea6d6532c8d3 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-44aa2c2b7f3b95d854edc95718075352aad72d22)\n\n**new alerts:**\n\n* 1 for Unused import"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-04-22T19:07:49Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 68cdb1e56cfe438036d441a12f39a0b6ea9452a0 into 59ed6f399de8af29fa6f3ffb50e07d23f215feff - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-fea1f0556b0262ee1fb7749672918c0ce47cb08e)\n\n**new alerts:**\n\n* 1 for Unused import"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-04-27T18:16:12Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging f46a3b4c973be87761ab125ee3d5b7dfe2a38e1e into 9dba93fd96194d70ee181ed48f439bc4f3c00b82 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-bd1d97fddc6dc82f624b2e7c62062b47fa7d34b4)\n\n**new alerts:**\n\n* 1 for Unused import"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-05-04T22:11:31Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 228e47ff09034849b5724e8cb6686c9c1f109b5d into 9492eabcf09161a5f4410eb51eb740f70570c605 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-7267e9f355a3428842e84672dfe1ccfa8f1dd88a)\n\n**new alerts:**\n\n* 1 for Unused import"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-05-18T21:24:22Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 42615703883f0da3dc19b4255d8f15c2365c1518 into ad801bfb81633812b4aa25f45bdd555a27121845 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-d02123fea7b3cfd7bde03318fd447e9d5a7d3fa8)\n\n**new alerts:**\n\n* 1 for Unused import"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-07-02T22:44:41Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging da1e4ef7426edad14be23e5808f45049a576e39d into 4818360d7d9f5460169bce9a9f87f44311647a64 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-e015762edeb20aa9dc2889dbcc1adad376de1b97)\n\n**new alerts:**\n\n* 1 for Unused import"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-08-22T22:55:37Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging dd59beae94a761551511bce9fa8a069a60fdd48d into cd3ee788d14a5395f4797b1d8092e372dacead26 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-a5cfbfe0cf6003b86902854266ae114fbf5da06f)\n\n**new alerts:**\n\n* 1 for Unused import"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "comment_at": "2021-08-31T07:24:07Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 9c6436a6779e3e1c09aa31bf7852e802d9f3d01c into 720b650f8effa7b397db70bd4b9aa8d5952b2fb0 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-utilities/rev/pr-32043b0facbddd43a857b7a716877b6fdef969c1)\n\n**new alerts:**\n\n* 1 for Unused local variable"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "review_at": "2020-11-24T09:38:26Z",
+        "review_author": "nazariig"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "review_at": "2020-11-30T11:14:46Z",
+        "review_author": "nazariig"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "review_at": "2020-11-30T11:17:07Z",
+        "review_author": "nazariig"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "review_at": "2021-08-25T13:18:24Z",
+        "review_author": "ArunSaravananBalachandran"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "review_at": "2021-08-25T13:30:51Z",
+        "review_author": "ArunSaravananBalachandran"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "review_at": "2021-08-25T13:55:05Z",
+        "review_author": "ArunSaravananBalachandran"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "review_at": "2021-09-07T14:37:37Z",
+        "review_author": "ArunSaravananBalachandran"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "review_at": "2021-09-07T14:44:53Z",
+        "review_author": "ArunSaravananBalachandran"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "review_at": "2021-09-07T14:46:08Z",
+        "review_author": "ArunSaravananBalachandran"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "review_at": "2021-09-14T06:33:05Z",
+        "review_author": "sujinmkang"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-19T16:56:42Z",
+        "review_author": "ArunSaravananBalachandran"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-26T08:18:28Z",
+        "review_author": "ArunSaravananBalachandran"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "review_at": "2021-10-27T19:13:24Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2020-11-30T11:17:07Z",
+        "latestReview_author": "nazariig",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-26T08:18:28Z",
+        "latestReview_author": "ArunSaravananBalachandran",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1242,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2021-10-27T19:13:24Z",
+        "latestReview_author": "vdahiya12",
+        "latestReview_state": "APPROVED"
+    }
+]

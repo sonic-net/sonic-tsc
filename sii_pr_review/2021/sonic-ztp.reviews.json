@@ -1,0 +1,67 @@
+[
+    {
+        "number": 29,
+        "repo": "sonic-ztp",
+        "comment_at": "2021-06-21T16:42:13Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "@rajendra-dendukuri Can you please review this?"
+    },
+    {
+        "number": 29,
+        "repo": "sonic-ztp",
+        "comment_at": "2021-06-21T20:09:51Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "> Don't we want to validate if the \"config reload\" command did what it was supposed to do and all the services are operational, before we declare success in the ZTP step. Adding -f in ztp defeats the purpose of adding these checks. Isn't it?\r\n\r\nThe purpose of the check is to perform system checks before the 'config reload' command is executed and not after. In the scenarios where user explicitly gives config reload, when services are starting up (immediately after config reload or reboot of the device) there are some issues as some services have problems being partially initialized during processing of configurations. Hence to restrict the user from giving 'config reload' command when the system has had one recently, these checks were introduced. However, from ZTP point of view since we are internally issuing the 'config reload' on receiving a config file, and before receiving the configuration file there isn't not much configuration to be processed (except the interface configs which I believe would have been processed and the links are up), I would prefer we do a force. The reason I want force here is if there are some failed services (like say reboot determination service) or the delayed services have not started up(like snmp), It shouldn't stop ZTP from happening. So I wanted to retain the current behavior of ZTP. If there are any issues faced during config reload execution part of ZTP prior, it would be good to consider this but without any issues I don't want to change ZTP behavior."
+    },
+    {
+        "number": 29,
+        "repo": "sonic-ztp",
+        "review_at": "2021-06-21T19:45:26Z",
+        "review_author": "rajendra-dendukuri"
+    },
+    {
+        "number": 29,
+        "repo": "sonic-ztp",
+        "review_at": "2021-06-22T00:26:04Z",
+        "review_author": "rajendra-dendukuri"
+    },
+    {
+        "number": 29,
+        "repo": "sonic-ztp",
+        "latestReview_at": "2021-06-22T00:26:04Z",
+        "latestReview_author": "rajendra-dendukuri",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 28,
+        "repo": "sonic-ztp",
+        "review_at": "2021-06-24T20:11:30Z",
+        "review_author": "rajendra-dendukuri"
+    },
+    {
+        "number": 28,
+        "repo": "sonic-ztp",
+        "review_at": "2021-06-28T14:51:47Z",
+        "review_author": "rajendra-dendukuri"
+    },
+    {
+        "number": 28,
+        "repo": "sonic-ztp",
+        "latestReview_at": "2021-06-28T14:51:47Z",
+        "latestReview_author": "rajendra-dendukuri",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 25,
+        "repo": "sonic-ztp",
+        "review_at": "2021-04-03T16:40:59Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 25,
+        "repo": "sonic-ztp",
+        "latestReview_at": "2021-04-03T16:40:59Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    }
+]

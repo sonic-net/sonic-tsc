@@ -1,0 +1,239 @@
+[
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2020-11-19T05:51:56Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "> class SwssSyncClient(mockredis.MockRedis):\r\n\r\nPlease check [https://github.com/Azure/sonic-utilities/pull/1238/files](https://github.com/Azure/sonic-utilities/pull/1238/files)\r\nI think you need similar change to make it support `decode_responses` option #Closed\r\n\r\n---\r\nRefers to: tests/mock_tables/dbconnector.py:37 in 4d0963a. [](commit_id = 4d0963a670cd4e5eba44e9b08d2c490bb70eb888, deletion_comment = False)"
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2020-11-23T17:47:05Z",
+        "comment_author": "abdosi",
+        "comment_body": "> > class SwssSyncClient(mockredis.MockRedis):\r\n> \r\n> Please check https://github.com/Azure/sonic-utilities/pull/1238/files\r\n> I think you need similar change to make it support `decode_responses` option\r\n> \r\n> Refers to: tests/mock_tables/dbconnector.py:37 in [4d0963a](https://github.com/Azure/sonic-dbsyncd/commit/4d0963a670cd4e5eba44e9b08d2c490bb70eb888). [](commit_id = [4d0963a](https://github.com/Azure/sonic-dbsyncd/commit/4d0963a670cd4e5eba44e9b08d2c490bb70eb888), deletion_comment = False)\r\n\r\n@qiluo-msft Updated. Modified function to do first _encode (by calling base class function) and if dcode_response == True then decode it back.  Works for both python2 and python3."
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2020-11-24T01:33:16Z",
+        "comment_author": "abdosi",
+        "comment_body": "> Need to modify setup.py to acknowledge Python 3 support: https://github.com/Azure/sonic-dbsyncd/blob/master/setup.py#L38. LGTM tool also uses this to determine what version of Python to check code with.\r\n> \r\n> Also, do we need to continue supporting Python 2 with this package? If not we should remove Python 2 from that list.\r\n> \r\n> Also, please ensure the dependencies in setup.py are correct and complete. One thing that stands out to me is `'enum34>=1.1.6'` [here](https://github.com/Azure/sonic-dbsyncd/blob/master/setup.py#L5). This package should _only_ be installed for Python 2, if installed for Python 3, it will break the `enum` module in the standard library. If we need to continue supporting Python 2, you can do something like I did [here](https://github.com/Azure/sonic-platform-daemons/blob/master/sonic-xcvrd/setup.py#L21).\r\n\r\n@jleveque Updated setup.py. Also I have updated jekin pr build of this repo  to to just  compile/build/install/test python3 wheel. \r\nAs part of submodule-update PR for sonic-buildimage will update the Makefile and make lldp docker to start using this python3 package and other corresponding changes.\r\n\r\nJenkin Config Change for PR Job:\r\n![image](https://user-images.githubusercontent.com/58047199/100035096-3e71b500-2db2-11eb-9077-8f23d54c30a4.png)\r\n"
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2020-11-24T01:35:47Z",
+        "comment_author": "abdosi",
+        "comment_body": "retest this please"
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2020-11-24T01:35:52Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "> \r\n\r\nRemove extra line? no need to change this file.\r\n\r\n@qiluo-msft Done #Closed\r\n\r\n---\r\nRefers to: tests/mock_tables/LLDP_ENTRY_TABLE.json:474 in 67d4206. [](commit_id = 67d42068d00da93cd56a515115a35e23b2c19bbf, deletion_comment = False)"
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2020-11-24T02:17:54Z",
+        "comment_author": "abdosi",
+        "comment_body": "@jleveque /@qiluo-msft Any idea on this failure ? Do we need to update something on jenkins.\r\nIt is working fine in local enviroment.\r\n\r\nhttps://sonic-jenkins.westus2.cloudapp.azure.com/job/common/job/sonic-dbsyncd-build-pr/50/console"
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2020-11-24T17:00:17Z",
+        "comment_author": "abdosi",
+        "comment_body": "retest this please"
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2020-11-24T17:10:30Z",
+        "comment_author": "abdosi",
+        "comment_body": "retest this please"
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2020-11-24T17:47:48Z",
+        "comment_author": "abdosi",
+        "comment_body": "@jleveque and @qiluo-msft. Can you please review the PR. All the comments are addressed.\r\n\r\nJenkins job was failing when I reverted Jenkin to not to do pip-install for dependency package and rely on setup.py.\r\nThat looks to be Jenkin machine issue. Eg:(https://sonic-jenkins.westus2.cloudapp.azure.com/job/common/job/sonic-dbsyncd-build-pr/50/console)\r\n\r\nAs of now Jenkin job is same as previous and move all commands from python to python3.\r\npython2 package is removed and we are building python3 package.\r\n\r\nRest of changes to start using python3 package will come as part of submodule update PR."
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2020-11-24T17:51:07Z",
+        "comment_author": "abdosi",
+        "comment_body": "retest this please"
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2021-02-04T00:07:07Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "@abdosi will you remove https://github.com/Azure/sonic-buildimage/blob/master/rules/dbsyncd-py2.mk ?\r\n\r\nyes @qiluo-msft "
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2020-11-19T00:36:32Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2020-11-19T00:50:32Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2020-11-19T05:48:48Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2020-11-19T05:52:18Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2020-11-19T05:52:32Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2020-11-23T17:47:31Z",
+        "review_author": "abdosi"
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2020-11-23T17:47:38Z",
+        "review_author": "abdosi"
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2020-11-23T17:47:56Z",
+        "review_author": "abdosi"
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2020-11-23T17:48:00Z",
+        "review_author": "abdosi"
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2020-11-23T17:48:26Z",
+        "review_author": "abdosi"
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2020-11-23T17:48:32Z",
+        "review_author": "abdosi"
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2020-11-23T17:48:37Z",
+        "review_author": "abdosi"
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2020-11-23T17:48:42Z",
+        "review_author": "abdosi"
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2020-11-23T17:48:47Z",
+        "review_author": "abdosi"
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2020-11-23T17:48:54Z",
+        "review_author": "abdosi"
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2020-11-23T20:33:46Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2020-11-23T20:38:58Z",
+        "review_author": "abdosi"
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2020-11-24T01:30:56Z",
+        "review_author": "abdosi"
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2020-11-24T18:04:09Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2020-11-24T19:32:26Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "latestReview_at": "2020-11-24T18:04:09Z",
+        "latestReview_author": "jleveque",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 32,
+        "repo": "sonic-dbsyncd",
+        "latestReview_at": "2020-11-24T19:32:26Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2020-11-12T20:05:24Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 30,
+        "repo": "sonic-dbsyncd",
+        "latestReview_at": "2020-11-12T20:05:24Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 28,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2020-06-16T01:51:56Z",
+        "review_author": "pavel-shirshov"
+    },
+    {
+        "number": 28,
+        "repo": "sonic-dbsyncd",
+        "latestReview_at": "2020-06-16T01:51:56Z",
+        "latestReview_author": "pavel-shirshov",
+        "latestReview_state": "APPROVED"
+    }
+]

@@ -1,0 +1,357 @@
+[
+    {
+        "number": 12,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2018-09-26T07:58:19Z",
+        "comment_author": "lguohan",
+        "comment_body": "what i can see is that if the lldpd is not started then we can get such output. could this be the case?\r\n\r\nin case of root causing the issue, i would suggest to instrumenting scrap_output function so that we know what the output is from lldpcli.\r\n\r\n```\r\nroot@str-s6000-on-4:/# lldpcli -f json show chassis\r\n2018-09-26T07:36:54 [WARN/control] unable to connect to socket /var/run/lldpd.socket: No such file or directory\r\n{\r\n  \"local-chassis\": {\r\n    \"chassis\": {\r\n      \"id\": {\r\n        \"type\": \"\",\r\n        \"value\": \"\"\r\n      },\r\n      \"capability\": [\r\n        {\r\n          \"type\": \"Other\",\r\n          \"enabled\": true\r\n        },\r\n        {\r\n          \"type\": \"Wlan\",\r\n          \"enabled\": true\r\n        }\r\n      ]\r\n    }\r\n  }\r\n}\r\n```"
+    },
+    {
+        "number": 12,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2018-09-26T20:37:46Z",
+        "comment_author": "taoyl-ms",
+        "comment_body": "As you showed, even if lldpd is not running, `lldpcli` will give an empty json response and the key shouldn't be missing there. I do agree we need to add some instrumenting to root cause it."
+    },
+    {
+        "number": 12,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-09-26T00:46:03Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 12,
+        "repo": "sonic-dbsyncd",
+        "latestReview_at": "2018-09-26T00:46:03Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 8,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2018-07-20T17:36:15Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": ">     def parse_update(self, lldp_json):\r\n\r\nCould you add or update test cases? #Closed\r\n\r\n---\r\nRefers to: src/lldp_syncd/daemon.py:192 in 7fcf58c. [](commit_id = 7fcf58cb378b0ef44f2299ce344a78e82c12b768, deletion_comment = False)"
+    },
+    {
+        "number": 8,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2018-07-26T17:10:26Z",
+        "comment_author": "mykolaf",
+        "comment_body": "Hi @qiluo-msft , I handled previous comments, can you take a look?"
+    },
+    {
+        "number": 8,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2018-08-01T22:31:55Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "> SONIC_ETHERNET_RE_PATTERN = r'^(Ethernet(\\d+)|eth0)$'\r\n\r\nIt's normal practice to include management port in the LLDP. We checked at least on one vendor switch OS. #Closed\r\n\r\n---\r\nRefers to: src/lldp_syncd/daemon.py:19 in 4a61ab8. [](commit_id = 4a61ab848e4af5ddccad6b8c3eafc4b95d31d5ee, deletion_comment = True)"
+    },
+    {
+        "number": 8,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-07-20T17:33:27Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 8,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-07-20T17:34:32Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 8,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-07-20T17:35:07Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 8,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-07-20T17:35:32Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 8,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-07-20T17:35:56Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 8,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-07-20T17:36:28Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 8,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-07-26T17:32:05Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 8,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-08-01T22:32:07Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 8,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-08-02T16:07:22Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 8,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-08-11T01:14:01Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 8,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-08-13T15:04:27Z",
+        "review_author": "mykolaf"
+    },
+    {
+        "number": 8,
+        "repo": "sonic-dbsyncd",
+        "latestReview_at": "2018-08-11T01:14:01Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 7,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-07-13T00:44:54Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 7,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-07-13T01:20:02Z",
+        "review_author": "pavel-shirshov"
+    },
+    {
+        "number": 7,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-07-13T18:34:58Z",
+        "review_author": "pavel-shirshov"
+    },
+    {
+        "number": 7,
+        "repo": "sonic-dbsyncd",
+        "latestReview_at": "2018-07-13T00:44:54Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 7,
+        "repo": "sonic-dbsyncd",
+        "latestReview_at": "2018-07-13T18:34:58Z",
+        "latestReview_author": "pavel-shirshov",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 6,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-07-12T15:45:35Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 6,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-07-12T18:38:02Z",
+        "review_author": "tombo315"
+    },
+    {
+        "number": 6,
+        "repo": "sonic-dbsyncd",
+        "latestReview_at": "2018-07-12T15:45:35Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 6,
+        "repo": "sonic-dbsyncd",
+        "latestReview_at": "2018-07-12T18:38:02Z",
+        "latestReview_author": "tombo315",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 5,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2018-07-10T08:17:05Z",
+        "comment_author": "andriymoroz-mlnx",
+        "comment_body": "Hi @qiluo-msft,\r\n could you please review this PR too?\r\nit is related to https://github.com/Azure/sonic-snmpagent/pull/70 #Closed"
+    },
+    {
+        "number": 5,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2018-07-11T16:48:15Z",
+        "comment_author": "lguohan",
+        "comment_body": "@pavel-shirshov , can you also review it."
+    },
+    {
+        "number": 5,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2018-07-16T21:12:07Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "Could you help resolve the conflict first? Be aware there is changes on test data, which we found in prod environment. #Closed"
+    },
+    {
+        "number": 5,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-07-16T21:27:13Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 5,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-07-16T21:31:00Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 5,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-07-16T21:34:55Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 5,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-07-16T21:48:06Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 5,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-07-17T17:41:10Z",
+        "review_author": "mykolaf"
+    },
+    {
+        "number": 5,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-07-17T17:43:32Z",
+        "review_author": "mykolaf"
+    },
+    {
+        "number": 5,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-07-17T18:06:56Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 5,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-07-17T18:15:34Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 5,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-07-17T18:19:05Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 5,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-07-17T22:18:36Z",
+        "review_author": "pavel-shirshov"
+    },
+    {
+        "number": 5,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-07-18T11:32:27Z",
+        "review_author": "mykolaf"
+    },
+    {
+        "number": 5,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-07-18T11:33:04Z",
+        "review_author": "mykolaf"
+    },
+    {
+        "number": 5,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-07-18T16:18:02Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 5,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-07-18T16:51:44Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 5,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-07-18T18:47:07Z",
+        "review_author": "pavel-shirshov"
+    },
+    {
+        "number": 5,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-07-18T19:27:25Z",
+        "review_author": "mykolaf"
+    },
+    {
+        "number": 5,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-07-18T20:12:18Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 5,
+        "repo": "sonic-dbsyncd",
+        "latestReview_at": "2018-07-18T20:12:18Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 5,
+        "repo": "sonic-dbsyncd",
+        "latestReview_at": "2018-07-18T18:47:07Z",
+        "latestReview_author": "pavel-shirshov",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-02-21T20:24:03Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 4,
+        "repo": "sonic-dbsyncd",
+        "latestReview_at": "2018-02-21T20:24:03Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-02-06T23:46:49Z",
+        "review_author": "stcheng"
+    },
+    {
+        "number": 3,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2018-02-07T15:58:49Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 3,
+        "repo": "sonic-dbsyncd",
+        "latestReview_at": "2018-02-07T15:58:49Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3,
+        "repo": "sonic-dbsyncd",
+        "latestReview_at": "2018-02-06T23:46:49Z",
+        "latestReview_author": "stcheng",
+        "latestReview_state": "APPROVED"
+    }
+]

@@ -1,0 +1,1883 @@
+[
+    {
+        "number": 95,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-12-13T07:25:26Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "could you add some links for this timeout and how to config in the PR comment?\r\nAlso we need to add syslog alert on similar errors."
+    },
+    {
+        "number": 95,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-12-13T07:36:16Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "Maybe we could improve it by some kind of pre-cache or prediction. Pipeline reading Redis will be much more efficient"
+    },
+    {
+        "number": 95,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-12-13T07:42:39Z",
+        "comment_author": "zhenggen-xu",
+        "comment_body": "> could you add some links for this timeout and how to config in the PR comment?\r\n> Also we need to add syslog alert on similar errors.\r\n\r\nThe link was added in the comment.  The snmp-subagent already prints the errors/exceptions to syslog like below:\r\nINFO supervisord: snmp-subagent socket.send() raised exception.\r\nERR snmp-subagent [ax_interface] ERROR: [Errno 32] Broken pipe\r\n\r\nIf we we need add the syslog for snmpd,  we may need patch snmpd itself in another PR for different repo. "
+    },
+    {
+        "number": 95,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-12-13T07:47:03Z",
+        "comment_author": "zhenggen-xu",
+        "comment_body": "> Maybe we could improve it by some kind of pre-cache or prediction. Pipeline reading Redis will be much more efficient\r\n\r\nYes, there are always chances to improve things especially for performance. The approach in the PR is basically a local cache for the particular table, but we could think about a general improvement for any Redis access, that requires some more discussion. "
+    },
+    {
+        "number": 95,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-12-13T07:20:50Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 95,
+        "repo": "sonic-snmpagent",
+        "review_at": "2022-11-13T01:20:46Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 95,
+        "repo": "sonic-snmpagent",
+        "review_at": "2022-11-13T02:39:28Z",
+        "review_author": "zhenggen-xu"
+    },
+    {
+        "number": 95,
+        "repo": "sonic-snmpagent",
+        "review_at": "2022-11-13T04:44:29Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 95,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2022-11-13T04:44:29Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-11-19T23:34:26Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "Could you refine the PR title, with at least one verb? #Closed"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-11-19T23:55:24Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "May I ask if vanilla quagga also has the capability? Not limited to FRR? #Closed"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-11-20T02:13:11Z",
+        "comment_author": "MichelMoriniaux",
+        "comment_body": "> May I ask if vanilla quagga also has the capability? Not limited to FRR?\r\n\r\nI wasn't able to make it work on Quagga, even though documentation says it should work. I was not able to compile a working snmp version of Quagga. #Resolved"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-11-20T02:14:24Z",
+        "comment_author": "MichelMoriniaux",
+        "comment_body": "> Could you refine the PR title, with at least one verb?\r\n\r\nChanged #Resolved"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-11-20T23:32:03Z",
+        "comment_author": "MichelMoriniaux",
+        "comment_body": "changes addressed and commits done"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2019-05-09T02:42:25Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "> Once the frr container is built with snmp support, the addition of a /etc/snmp/frr.conf with a single line containing \"agenXSocket tcp:localhost:705\" does the trick and BGP information can be polled from the switch via the BGPv4 MIB.\r\n\r\n@MichelMoriniaux  Since FRR is the default routing stack on master branch, would you like continue the integration?"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2019-05-09T04:49:15Z",
+        "comment_author": "MichelMoriniaux",
+        "comment_body": "I think we'll need to create a build option in rules/config as I believe\nthere is a licencing issue that prevents to distribute binary frr packages\nwith snmp support built-in. So we would need to put that option in so that\nthe images available on the Azure Jenkins don't get you in trouble.\nWhat do you think?\n\n\nOn Wed, May 8, 2019, 19:42 Qi Luo <notifications@github.com> wrote:\n\n> Once the frr container is built with snmp support, the addition of a\n> /etc/snmp/frr.conf with a single line containing \"agenXSocket\n> tcp:localhost:705\" does the trick and BGP information can be polled from\n> the switch via the BGPv4 MIB.\n>\n> @MichelMoriniaux <https://github.com/MichelMoriniaux> Since FRR is the\n> default routing stack on master branch, would you like continue the\n> integration?\n>\n> \u2014\n> You are receiving this because you were mentioned.\n> Reply to this email directly, view it on GitHub\n> <https://github.com/Azure/sonic-snmpagent/pull/92#issuecomment-490721744>,\n> or mute the thread\n> <https://github.com/notifications/unsubscribe-auth/ADBS7WSV5EL5XP34HYKDUS3PUOFRHANCNFSM4GBR6L6Q>\n> .\n>\n"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2019-05-13T19:14:01Z",
+        "comment_author": "pavel-shirshov",
+        "comment_body": "Hi Michel,\r\n\r\nCan you please elaborate on the licensing issues here?\r\nIs there a special license for frr - snmp integration?\r\n\r\nThanks\r\n"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2019-05-13T20:00:03Z",
+        "comment_author": "MichelMoriniaux",
+        "comment_body": "The following is extracted from: sonic-frr/frr/debianpkg/README.Debian\n\n* Why has SNMP support been disabled?\n=====================================\nFRR used to link against the NetSNMP libraries to provide SNMP\nsupport. Those libraries sadly link against the OpenSSL libraries\nto provide crypto support for SNMPv3 among others.\nOpenSSL now is not compatible with the GNU GENERAL PUBLIC LICENSE (GPL)\nlicence that FRR is distributed under. For more explanation read:\n  http://www.gnome.org/~markmc/openssl-and-the-gpl.html\n  http://www.gnu.org/licenses/gpl-faq.html#GPLIncompatibleLibs\nUpdating the licence to explecitly allow linking against OpenSSL\nwould requite the affirmation of all people that ever contributed\na significant part to Zebra / Quagga or FRR and thus are the collective\n\"copyright holder\". That's too much work. Using a shrinked down\nversion of NetSNMP without OpenSSL or convincing the NetSNMP people\nto change to GnuTLS are maybe good solutions but not reachable\nduring the last days before the Sarge release :-(\n\n        *BUT*\n\nIt is allowed by the used licence mix that you fetch the sources and\nbuild FRR yourself with SNMP with\n        <remove the \"grep ^smux\" block at the end of debian/frr.preinst>\n        # export WANT_SNMP=1\n        # apt-get -b source frr\nJust distributing it in binary form, linked against OpenSSL, is forbidden.\n\n\nbest regards,\nMichel\n\nOn Mon, May 13, 2019 at 12:14 PM pavel-shirshov <notifications@github.com>\nwrote:\n\n> Hi Michel,\n>\n> Can you please elaborate on the licensing issues here?\n> Is there a special license for frr - snmp integration?\n>\n> Thanks\n>\n> \u2014\n> You are receiving this because you were mentioned.\n> Reply to this email directly, view it on GitHub\n> <https://github.com/Azure/sonic-snmpagent/pull/92?email_source=notifications&email_token=ADBS7WTOA5LXKKMR5SLPQT3PVG4XXA5CNFSM4GBR6L62YY3PNVWWK3TUL52HS4DFVREXG43VMVBW63LNMVXHJKTDN5WW2ZLOORPWSZGODVJI5KQ#issuecomment-491949738>,\n> or mute the thread\n> <https://github.com/notifications/unsubscribe-auth/ADBS7WVYD33G532CTWKMJZLPVG4XXANCNFSM4GBR6L6Q>\n> .\n>\n"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2019-05-13T20:47:45Z",
+        "comment_author": "pavel-shirshov",
+        "comment_body": "Hi Michel,\r\n\r\nThank you for the valuable information.\r\n\r\nThanks"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2019-05-13T21:26:00Z",
+        "comment_author": "MichelMoriniaux",
+        "comment_body": "I will start implementation on the rules/config option next week, that way\nwe will have choice\n\nOn Mon, May 13, 2019 at 1:47 PM pavel-shirshov <notifications@github.com>\nwrote:\n\n> Hi Michel,\n>\n> Thank you for the valuable information.\n>\n> Thanks\n>\n> \u2014\n> You are receiving this because you were mentioned.\n> Reply to this email directly, view it on GitHub\n> <https://github.com/Azure/sonic-snmpagent/pull/92?email_source=notifications&email_token=ADBS7WSS5BNC6P3IM5A3SQDPVHHXHA5CNFSM4GBR6L62YY3PNVWWK3TUL52HS4DFVREXG43VMVBW63LNMVXHJKTDN5WW2ZLOORPWSZGODVJQL3A#issuecomment-491980268>,\n> or mute the thread\n> <https://github.com/notifications/unsubscribe-auth/ADBS7WT3ALPOXEVDE42K5TLPVHHXHANCNFSM4GBR6L6Q>\n> .\n>\n"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2019-05-14T06:28:22Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "Thanks @MichelMoriniaux!\r\nI notice that https://github.com/FRRouting/frr/releases/tag/frr-6.0.2 isolated frr-snmp from frr. This is also the case of debian packages:\r\nhttps://packages.debian.org/buster/frr\r\nhttps://packages.debian.org/buster/frr-snmp\r\n\r\nSeems a workable solution we could follow."
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2019-05-14T06:40:02Z",
+        "comment_author": "MichelMoriniaux",
+        "comment_body": "Agreed, I will still implement the current solution as we have only\nrecently moved to FRR 4.0 and Stretch. so it might take some time before we\ngo to 6.0 and Buster\n\nOn Mon, May 13, 2019 at 11:28 PM Qi Luo <notifications@github.com> wrote:\n\n> Thanks @MichelMoriniaux <https://github.com/MichelMoriniaux>!\n> I notice that https://github.com/FRRouting/frr/releases/tag/frr-6.0.2\n> isolated frr-snmp from frr. This is also the case of debian packages:\n> https://packages.debian.org/buster/frr\n> https://packages.debian.org/buster/frr-snmp\n>\n> Seems a workable solution we could follow.\n>\n> \u2014\n> You are receiving this because you were mentioned.\n> Reply to this email directly, view it on GitHub\n> <https://github.com/Azure/sonic-snmpagent/pull/92?email_source=notifications&email_token=ADBS7WX7QIXZLONBD2R6NVDPVJLYRA5CNFSM4GBR6L62YY3PNVWWK3TUL52HS4DFVREXG43VMVBW63LNMVXHJKTDN5WW2ZLOORPWSZGODVKMXZI#issuecomment-492096485>,\n> or mute the thread\n> <https://github.com/notifications/unsubscribe-auth/ADBS7WXJESD6IU4XGYCIU73PVJLYRANCNFSM4GBR6L6Q>\n> .\n>\n"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2019-05-14T20:34:05Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "Just to clarify, the master branch of sonic-buildimage is building frr 6.0.2-0 into a stretch docker image. I do see frr-snmp_6.0.2-0_amd64.deb in Jenkins workspace, but I have never tested it."
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2019-05-14T20:45:42Z",
+        "comment_author": "MichelMoriniaux",
+        "comment_body": "oooh nice! I must've missed the last train. OK I'll add investigating all\nthat to my sprint next week and come up with the most standard non\ndisruptive way of doing it\n\nOn Tue, May 14, 2019 at 1:34 PM Qi Luo <notifications@github.com> wrote:\n\n> Just to clarify, the master branch of sonic-buildimage is building frr\n> 6.0.2-0 into a stretch docker image. I do see frr-snmp_6.0.2-0_amd64.deb in\n> Jenkins workspace, but I have never tested it.\n>\n> \u2014\n> You are receiving this because you were mentioned.\n> Reply to this email directly, view it on GitHub\n> <https://github.com/Azure/sonic-snmpagent/pull/92?email_source=notifications&email_token=ADBS7WXQNZW4BMYDLIK5XK3PVMO4BA5CNFSM4GBR6L62YY3PNVWWK3TUL52HS4DFVREXG43VMVBW63LNMVXHJKTDN5WW2ZLOORPWSZGODVMWTPA#issuecomment-492399036>,\n> or mute the thread\n> <https://github.com/notifications/unsubscribe-auth/ADBS7WUM6ISTEXMTT3ORV43PVMO4BANCNFSM4GBR6L6Q>\n> .\n>\n"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2019-05-16T19:56:45Z",
+        "comment_author": "pavel-shirshov",
+        "comment_body": "Now we have frr-7.0 in sonic-master"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2019-05-16T21:50:43Z",
+        "comment_author": "MichelMoriniaux",
+        "comment_body": "Shiny! do we have an idea of when we will be getting 6.0 or 7.0 in the\n\"stable\" branches? I'm right now moving my org to 201904 but we are still\nheavily invested in 201811\n\nOn Thu, May 16, 2019 at 12:56 PM pavel-shirshov <notifications@github.com>\nwrote:\n\n> Now we have frr-7.0 in sonic-master\n>\n> \u2014\n> You are receiving this because you were mentioned.\n> Reply to this email directly, view it on GitHub\n> <https://github.com/Azure/sonic-snmpagent/pull/92?email_source=notifications&email_token=ADBS7WWODHKPY4JINI4YKO3PVW377A5CNFSM4GBR6L62YY3PNVWWK3TUL52HS4DFVREXG43VMVBW63LNMVXHJKTDN5WW2ZLOORPWSZGODVS4TPA#issuecomment-493210044>,\n> or mute the thread\n> <https://github.com/notifications/unsubscribe-auth/ADBS7WROXGYBM4YUZPS5HHDPVW377ANCNFSM4GBR6L6Q>\n> .\n>\n"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2019-06-07T23:57:00Z",
+        "comment_author": "MichelMoriniaux",
+        "comment_body": "please see sonic-buildimage PR 2981"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-11-19T23:21:24Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-11-19T23:22:45Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-11-19T23:24:30Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-11-19T23:26:36Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-11-19T23:29:21Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-11-19T23:30:10Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-11-19T23:31:51Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-11-19T23:33:28Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-11-19T23:33:52Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-11-20T01:57:50Z",
+        "review_author": "MichelMoriniaux"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-11-20T02:11:21Z",
+        "review_author": "MichelMoriniaux"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-11-20T21:03:10Z",
+        "review_author": "MichelMoriniaux"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-11-20T21:03:36Z",
+        "review_author": "MichelMoriniaux"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-11-20T21:05:13Z",
+        "review_author": "MichelMoriniaux"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-11-20T21:09:47Z",
+        "review_author": "MichelMoriniaux"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-11-20T22:01:20Z",
+        "review_author": "MichelMoriniaux"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-11-20T22:35:40Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-11-20T22:44:46Z",
+        "review_author": "MichelMoriniaux"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-11-20T22:44:50Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-11-20T22:47:31Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-11-20T23:45:49Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-11-20T23:46:37Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-11-21T00:56:21Z",
+        "review_author": "MichelMoriniaux"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-11-21T05:41:01Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-11-21T05:41:01Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-10-22T19:06:23Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "This fix could not be directly apply to 201803 branch."
+    },
+    {
+        "number": 91,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-10-22T16:27:12Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-10-22T16:27:12Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 90,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-10-03T16:01:26Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 90,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-10-03T16:01:26Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 89,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-09-27T19:34:32Z",
+        "review_author": "wendani"
+    },
+    {
+        "number": 89,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-09-27T19:34:32Z",
+        "latestReview_author": "wendani",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-09-26T09:18:17Z",
+        "comment_author": "stepanblyschak",
+        "comment_body": "Tests failed, since need to use latest swsssdk from master. #Closed"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-09-27T01:59:15Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": ">     def get_oper_status(self, sub_id):\r\n\r\nDo you implement it for mgmt port? #Closed\r\n\r\n---\r\nRefers to: src/sonic_ax_impl/mibs/ietf/rfc1213.py:346 in 2b32dc1. [](commit_id = 2b32dc16e9d3723a86c789d9129a7d7f22397632, deletion_comment = False)"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-09-27T01:59:18Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": ">     def get_admin_status(self, sub_id):\r\n\r\nDo you implement it for mgmt port? #Closed\r\n\r\n---\r\nRefers to: src/sonic_ax_impl/mibs/ietf/rfc1213.py:339 in 2b32dc1. [](commit_id = 2b32dc16e9d3723a86c789d9129a7d7f22397632, deletion_comment = False)"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-09-27T10:51:49Z",
+        "comment_author": "stepanblyschak",
+        "comment_body": "> > ```\r\n> > def get_oper_status(self, sub_id):\r\n> > ```\r\n> \r\n> Do you implement it for mgmt port?\r\n> \r\n> Refers to: src/sonic_ax_impl/mibs/ietf/rfc1213.py:346 in [02c6c11](https://github.com/Azure/sonic-snmpagent/commit/02c6c11efa50b8b7e9c2bc3921c897886a548ef4). [](commit_id = [02c6c11](https://github.com/Azure/sonic-snmpagent/commit/02c6c11efa50b8b7e9c2bc3921c897886a548ef4), deletion_comment = False)\r\n\r\n```get_oper_status``` calls ```_get_if_entry(sub_id)``` which returns PORT_TABLE entry in case of front panel port OID or MGMT_PORT_TABLE entry in case of mgmt OID. The schema for both tables is the same, so no need to change anything in ```get_oper_status``` #Closed"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-09-27T10:52:07Z",
+        "comment_author": "stepanblyschak",
+        "comment_body": "> > ```\r\n> > def get_admin_status(self, sub_id):\r\n> > ```\r\n> \r\n> Do you implement it for mgmt port?\r\n> \r\n> Refers to: src/sonic_ax_impl/mibs/ietf/rfc1213.py:339 in [02c6c11](https://github.com/Azure/sonic-snmpagent/commit/02c6c11efa50b8b7e9c2bc3921c897886a548ef4). [](commit_id = [02c6c11](https://github.com/Azure/sonic-snmpagent/commit/02c6c11efa50b8b7e9c2bc3921c897886a548ef4), deletion_comment = False)\r\n\r\nSame as ```get_oper_status``` #Closed"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-09-27T16:15:14Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "Please push new commits instead of changing reviewed old commits, so we can compare between them and review incrementally. #Closed"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-09-27T16:21:48Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "One more question: what is the behavior of snmpagent, if both tables are missing? I am wondering how is it backward-compatible. #Closed"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-09-28T18:02:31Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "backward-compatible is required. The redis schema support will be implemented on 201803 branch first, so master branch will be postpone.\r\n\r\n---\r\nIn reply to: [425155456](https://github.com/Azure/sonic-snmpagent/pull/88#issuecomment-425155456) [](ancestors = 425155456)"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-10-01T09:06:45Z",
+        "comment_author": "stepanblyschak",
+        "comment_body": "> backward-compatible is required. The redis schema support will be implemented on 201803 branch first, so master branch will be postpone.\r\n> \r\n> In reply to: [425155456](https://github.com/Azure/sonic-snmpagent/pull/88#issuecomment-425155456) [](ancestors = 425155456)\r\n\r\nIt is backward compatible: If no MGMT_PORT_TABLE is present in DB, snmpagent will log a warning and continue working as previously with front panel ports only."
+    },
+    {
+        "number": 88,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-10-01T23:00:23Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "Do you plan to submit pull request on 201803?"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-09-27T01:46:43Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-09-27T01:47:43Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-09-27T01:48:25Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-09-27T01:48:46Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-09-27T01:50:28Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-09-27T01:54:23Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-09-27T02:02:44Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-09-27T10:53:23Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-09-27T10:55:44Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-09-27T12:17:59Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-09-27T16:06:10Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-09-27T16:10:24Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-09-27T16:13:19Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-09-27T16:15:37Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-09-28T17:51:05Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-09-28T18:01:14Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-09-28T18:03:58Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-10-01T21:30:47Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-10-02T06:02:50Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-10-02T15:33:52Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-10-02T15:33:52Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-10-15T22:58:00Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "Could you also remove unused file in buildimage repo?"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-09-22T23:39:06Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-09-22T23:40:02Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-09-24T12:16:56Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-09-26T01:32:02Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-09-26T01:32:02Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 86,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-09-17T07:21:20Z",
+        "comment_author": "mykolaf",
+        "comment_body": "The tests fail, because we rely on https://github.com/Azure/sonic-py-swsssdk/pull/35"
+    },
+    {
+        "number": 86,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-09-17T07:40:58Z",
+        "comment_author": "lguohan",
+        "comment_body": "unit test missing?"
+    },
+    {
+        "number": 86,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-09-18T09:13:04Z",
+        "comment_author": "mykolaf",
+        "comment_body": "@qiluo-msft  @lguohan Added the unittest "
+    },
+    {
+        "number": 86,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-09-14T21:42:45Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 86,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-09-17T07:19:56Z",
+        "review_author": "mykolaf"
+    },
+    {
+        "number": 86,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-09-17T15:43:26Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 86,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-09-18T19:25:32Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 86,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-09-18T19:25:32Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 82,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-21T18:37:53Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 82,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-08-21T18:37:53Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 80,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-13T18:24:46Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 80,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-13T18:27:16Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 80,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-13T21:30:15Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 80,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-08-13T21:30:15Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-08-10T15:42:00Z",
+        "comment_author": "mykolaf",
+        "comment_body": "hi @qiluo-msft, could you please take a look? #Resolved"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-08-11T00:19:31Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "> _rem_man_addr_updater = LLDPRemManAddrUpdater()\r\n\r\nCould you not use global variables? #Closed\r\n\r\n---\r\nRefers to: src/sonic_ax_impl/mibs/ieee802_1ab.py:584 in 829a5e5. [](commit_id = 829a5e578d535aab6b5aa5c6014b1b5fc316411e, deletion_comment = False)"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-08-11T00:34:09Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "In your first PR comment, could you give sample output before and after this PR so we can better understand the problem? #Closed"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-10T23:55:54Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-11T00:14:01Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-11T00:19:11Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-11T00:21:24Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-11T00:22:05Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-11T00:23:37Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-11T00:26:01Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-11T00:34:31Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-13T10:16:19Z",
+        "review_author": "mykolaf"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-13T12:20:24Z",
+        "review_author": "mykolaf"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-13T12:22:26Z",
+        "review_author": "mykolaf"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-14T10:04:03Z",
+        "review_author": "mykolaf"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-14T17:43:03Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-08-14T17:43:03Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 76,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-08T16:45:16Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 76,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-08-08T16:45:16Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 75,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-06T20:54:31Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 75,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-08-06T20:54:31Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 74,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-08-07T16:03:37Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "Could you please also resolve the conflicts? #Closed"
+    },
+    {
+        "number": 74,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-05T04:21:09Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 74,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-06T23:13:00Z",
+        "review_author": "MichelMoriniaux"
+    },
+    {
+        "number": 74,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-07T05:46:15Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 74,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-07T05:48:46Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 74,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-07T05:49:51Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 74,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-07T05:51:23Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 74,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-07T05:51:38Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 74,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-07T05:52:14Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 74,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-07T19:12:04Z",
+        "review_author": "MichelMoriniaux"
+    },
+    {
+        "number": 74,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-07T19:12:15Z",
+        "review_author": "MichelMoriniaux"
+    },
+    {
+        "number": 74,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-07T19:12:27Z",
+        "review_author": "MichelMoriniaux"
+    },
+    {
+        "number": 74,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-07T19:12:34Z",
+        "review_author": "MichelMoriniaux"
+    },
+    {
+        "number": 74,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-08T04:29:58Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 74,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-08-08T04:29:58Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 73,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-08-02T21:00:13Z",
+        "comment_author": "msftclas",
+        "comment_body": "[![CLA assistant check](https://cla.opensource.microsoft.com/pull/badge/signed)](https://cla.opensource.microsoft.com/Azure/sonic-snmpagent?pullRequest=73) <br/>All CLA requirements met."
+    },
+    {
+        "number": 73,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-08-06T23:45:26Z",
+        "comment_author": "MichelMoriniaux",
+        "comment_body": "changes done"
+    },
+    {
+        "number": 73,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-05T04:36:49Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 73,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-05T04:37:23Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 73,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-05T04:39:00Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 73,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-05T04:39:56Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 73,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-05T04:43:27Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 73,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-05T04:43:35Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 73,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-05T04:45:08Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 73,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-06T16:44:35Z",
+        "review_author": "MichelMoriniaux"
+    },
+    {
+        "number": 73,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-06T16:44:46Z",
+        "review_author": "MichelMoriniaux"
+    },
+    {
+        "number": 73,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-06T16:46:48Z",
+        "review_author": "MichelMoriniaux"
+    },
+    {
+        "number": 73,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-06T16:47:00Z",
+        "review_author": "MichelMoriniaux"
+    },
+    {
+        "number": 73,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-06T16:47:15Z",
+        "review_author": "MichelMoriniaux"
+    },
+    {
+        "number": 73,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-06T16:47:49Z",
+        "review_author": "MichelMoriniaux"
+    },
+    {
+        "number": 73,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-07T05:30:13Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 73,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-07T05:37:51Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 73,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-07T15:06:49Z",
+        "review_author": "MichelMoriniaux"
+    },
+    {
+        "number": 73,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-07T15:06:54Z",
+        "review_author": "MichelMoriniaux"
+    },
+    {
+        "number": 73,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-07T16:01:47Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 73,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-08-07T16:01:47Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 72,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-26T17:40:30Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 72,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-26T17:43:29Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 72,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-26T17:44:22Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 72,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-26T17:56:06Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 72,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-26T17:58:33Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 72,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-26T17:59:12Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 72,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-26T17:59:45Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 72,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-26T18:00:05Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 72,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-26T18:03:04Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 72,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-27T08:26:04Z",
+        "review_author": "mykolaf"
+    },
+    {
+        "number": 72,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-27T11:37:10Z",
+        "review_author": "mykolaf"
+    },
+    {
+        "number": 72,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-27T14:24:59Z",
+        "review_author": "mykolaf"
+    },
+    {
+        "number": 72,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-31T15:59:30Z",
+        "review_author": "mykolaf"
+    },
+    {
+        "number": 72,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-31T17:11:27Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 72,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-31T17:17:27Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 72,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-31T17:19:02Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 72,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-01T22:23:40Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 72,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-02T16:08:24Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 72,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-08-02T16:08:24Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 71,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-19T19:19:06Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 71,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-19T19:23:46Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 71,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-19T20:19:44Z",
+        "review_author": "mykolaf"
+    },
+    {
+        "number": 71,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-20T17:42:32Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 71,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-07-20T17:42:32Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 70,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-07T00:54:45Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 70,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-07T00:55:09Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 70,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-07T00:56:37Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 70,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-07T01:00:30Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 70,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-11T16:54:33Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 70,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-11T16:55:11Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 70,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-12T17:15:37Z",
+        "review_author": "mykolaf"
+    },
+    {
+        "number": 70,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-12T17:15:42Z",
+        "review_author": "mykolaf"
+    },
+    {
+        "number": 70,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-18T17:05:21Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 70,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-07-18T17:05:21Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-07-06T17:17:18Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "> CodeFlow for GitHub does not download executable files. If you trust this file and would like to run it, please download it yourself through GitHub.\r\n\r\nRemove this file?\r\n\r\n---\r\nRefers to: src/ax_interface/.pdu_implementations.py.swp:1 in 0d42d47. [](commit_id = 0d42d47afd4baa86d045c6a43bce2f660297d5e4, deletion_comment = False)"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-06T17:25:46Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-06T17:30:48Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-06T17:51:18Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-06T17:58:33Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-06T17:58:50Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-06T18:00:02Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-06T18:00:12Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-06T18:01:34Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-06T18:16:35Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-06T18:32:28Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-06T18:37:20Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-06T18:37:27Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-06T18:39:15Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-06T18:40:09Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-06T18:42:04Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-06T18:43:30Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-06T18:45:34Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-09T09:33:52Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-09T09:50:33Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-09T10:01:46Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-09T10:05:29Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-09T10:06:49Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-09T10:06:59Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-09T10:07:47Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-09T10:08:23Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-09T10:08:43Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-09T10:08:51Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-09T10:08:54Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-09T10:09:10Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-09T10:09:16Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-09T10:09:20Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-10T06:34:02Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-10T06:49:54Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-10T06:56:10Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-10T16:33:38Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-10T16:40:44Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-10T17:03:56Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-10T22:50:53Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-10T22:57:56Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-10T23:04:40Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-10T23:05:41Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-17T22:33:34Z",
+        "review_author": "pavel-shirshov"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-18T09:16:44Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-18T09:28:44Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-18T18:51:07Z",
+        "review_author": "pavel-shirshov"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-18T18:51:25Z",
+        "review_author": "pavel-shirshov"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-18T18:51:46Z",
+        "review_author": "pavel-shirshov"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-18T22:30:30Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-19T17:01:58Z",
+        "review_author": "pavel-shirshov"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-07-27T13:43:41Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-08-05T04:49:49Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-08-05T04:49:49Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-07-19T17:01:58Z",
+        "latestReview_author": "pavel-shirshov",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 68,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-05-21T21:59:24Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 68,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-05-22T18:45:45Z",
+        "review_author": "jiahua-wang"
+    },
+    {
+        "number": 68,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-05-22T18:45:45Z",
+        "latestReview_author": "jiahua-wang",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 68,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-05-21T21:59:24Z",
+        "latestReview_author": "jleveque",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 67,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-05-12T01:25:52Z",
+        "review_author": "pavel-shirshov"
+    },
+    {
+        "number": 67,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-05-12T01:25:52Z",
+        "latestReview_author": "pavel-shirshov",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 66,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-05-09T23:15:09Z",
+        "review_author": "stcheng"
+    },
+    {
+        "number": 66,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-05-10T02:12:36Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 66,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-05-10T02:12:36Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 66,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-05-09T23:15:09Z",
+        "latestReview_author": "stcheng",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-04-25T18:58:51Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-04-25T18:58:51Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-01-29T23:28:28Z",
+        "review_author": "stcheng"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-01-29T23:36:19Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-01-29T23:37:33Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-01-30T00:04:48Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-01-30T00:07:58Z",
+        "review_author": "stcheng"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-01-30T00:07:58Z",
+        "latestReview_author": "stcheng",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-01-30T00:04:48Z",
+        "latestReview_author": "jleveque",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 62,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-01-30T00:16:05Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 62,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-01-30T00:32:21Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 62,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-01-30T00:52:46Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 62,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-01-30T00:32:21Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 62,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-01-30T00:52:46Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 61,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-01-23T06:15:44Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "Thanks @tombo315 , understand your point.\r\nMy arguments are that there are different responsibility for caller and callee.\r\n1. Caller has the counter value, and know how to present a out-of-range integer value, either saturating or wrapping, depending on the semantics of the counter. A good caller has already pre-limit the integer before calling callee.\r\n2. Callee only cares about encoding, so it just protect itself from any exceptions. If caller provides out-of-range argument, the behavior is undefined. I simply choose 'wrapping' implementation in all possible behaviors. This is just prevent process crash, as we observed in production. Your proposal is also valid here.\r\n\r\nThe most callers implement wrapping logic. As more and more vendors contributing features coming, we need protection like this PR."
+    },
+    {
+        "number": 61,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-01-23T07:00:00Z",
+        "comment_author": "tombo315",
+        "comment_body": "Protection, sure. \r\n\r\nI agree, ideally, this would never be needed. If you're seeing this in production, wouldn't this hide platform bugs that are reporting out-of-precision counters? And, in retrospect, what I have is actually the behavior for gauges, not counters. Counters will roll, as you have written already."
+    },
+    {
+        "number": 61,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-01-23T07:11:31Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "We are still investigating the root cause and going to add unit test. The crash is super annoying than a bad represented counter in the production. We should rely on other measurement to expose the bug."
+    },
+    {
+        "number": 61,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-01-23T05:31:04Z",
+        "review_author": "tombo315"
+    },
+    {
+        "number": 61,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-01-23T18:33:33Z",
+        "review_author": "stcheng"
+    },
+    {
+        "number": 61,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-01-23T05:31:04Z",
+        "latestReview_author": "tombo315",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 61,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-01-23T18:33:33Z",
+        "latestReview_author": "stcheng",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 60,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-01-17T21:18:40Z",
+        "comment_author": "stcheng",
+        "comment_body": "thanks"
+    },
+    {
+        "number": 60,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-01-17T20:45:42Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 60,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-01-17T21:18:34Z",
+        "review_author": "stcheng"
+    },
+    {
+        "number": 60,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-01-17T20:45:42Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 60,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-01-17T21:18:34Z",
+        "latestReview_author": "stcheng",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 58,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-01-02T23:57:54Z",
+        "review_author": "stcheng"
+    },
+    {
+        "number": 58,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-01-02T23:57:54Z",
+        "latestReview_author": "stcheng",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2017-11-29T00:50:35Z",
+        "comment_author": "stcheng",
+        "comment_body": "[ieee802_1ab]: This message is not needed as the device could be isolated\r\n\r\nThe LLDP_ENTRY_TABLE could be empty when there is no neighbor at all.\r\nIt shall not be treated as a warning."
+    },
+    {
+        "number": 52,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2018-04-26T18:07:39Z",
+        "comment_author": "stcheng",
+        "comment_body": "@qiluo-msft could you check this?"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-04-26T02:39:20Z",
+        "review_author": "rodnymolina"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-snmpagent",
+        "review_at": "2018-04-26T18:25:44Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-04-26T18:25:44Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2018-04-26T02:39:20Z",
+        "latestReview_author": "rodnymolina",
+        "latestReview_state": "APPROVED"
+    }
+]

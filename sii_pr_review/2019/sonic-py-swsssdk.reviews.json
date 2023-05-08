@@ -1,0 +1,600 @@
+[
+    {
+        "number": 58,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2019-12-18T01:11:19Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "@qiluo-msft  we need this merged first and then we can move further on the replacement of redis-cli"
+    },
+    {
+        "number": 58,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2019-12-18T02:20:20Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": ">     print \"Example 3: sonic-db-cli APPL_DB HGET VLAN_TABLE:Vlan10 mtu\"\r\n\r\nCould you add one more example? And use python heredoc [https://en.wikipedia.org/wiki/Here_document#Python](https://en.wikipedia.org/wiki/Here_document#Python) ? #Closed\r\n\r\n---\r\nRefers to: src/swsssdk/scripts/sonic-db-cli:9 in 3ab2506. [](commit_id = 3ab2506fceb6caa6a33213cfcf16bc1198851c0a, deletion_comment = False)"
+    },
+    {
+        "number": 58,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2019-12-18T20:33:30Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "> > ```\r\n> > print \"Example 3: sonic-db-cli APPL_DB HGET VLAN_TABLE:Vlan10 mtu\"\r\n> > ```\r\n> \r\n> Could you add one more example? And use python heredoc https://en.wikipedia.org/wiki/Here_document#Python ?\r\n> \r\n> Refers to: src/swsssdk/scripts/sonic-db-cli:9 in [3ab2506](https://github.com/Azure/sonic-py-swsssdk/commit/3ab2506fceb6caa6a33213cfcf16bc1198851c0a). [](commit_id = [3ab2506](https://github.com/Azure/sonic-py-swsssdk/commit/3ab2506fceb6caa6a33213cfcf16bc1198851c0a), deletion_comment = False)\r\n\r\nDONE\r\n\r\n```\r\nadmin@ASW-7005:~$ /tmp/sonic-db-cli -h\r\n\r\nExample 1: sonic-db-cli CONFIG_DB keys *\r\nExample 2: sonic-db-cli APPL_DB HGETALL VLAN_TABLE:Vlan10\r\nExample 3: sonic-db-cli APPL_DB HGET VLAN_TABLE:Vlan10 mtu\r\nExample 4: sonic-db-cli APPL_DB EVAL \"return {KEYS[1],KEYS[2],ARGV[1],ARGV[2]}\" 2 k1 k2 v1 v2\r\n\r\nadmin@ASW-7005:~$ /tmp/sonic-db-cli CONFIG_DB keys *\r\n['ASPATH_ACCESS_LIST|as-filter20', 'PORT|Ethernet7', 'PORT|Ethernet27', 'PORTCHANNEL|PortChannel4', 'PORT|Ethernet33', 'PORT|Ethernet6', 'PORT|Ethernet28', 'ROUTE_MAP|SET_COMMUNITY|permit|10', 'PORTCHANNEL|PortChannel10', 'PORTCHANNEL|PortChannel5', 'PORT|Ethernet11', 'PORTCHANNEL_MEMBER|PortChannel1|Ethernet30', 'COMMUNITY_LIST|101', 'BGP_NEIGHBOR|up-group-v4', 'SNMP_USER|alimonitor2', 'ROUTE_MAP|ASW2PSW_OUT|permit|30', 'PORT|Ethernet29', 'PORT|Ethernet23', 'VLAN|Vlan10', 'PORTCHANNEL|PortChannel1', 'PORT|Ethernet100', 'PORT|Ethernet38', 'ROUTE_MAP|ASW2PSW_IN|permit|10', 'PORT|Ethernet9', 'PORT|Ethernet31', 'ASPATH_ACCESS_LIST|as-filter30', 'INTERFACE|Ethernet52|52.52.52.5/24', 'PORTCHANNEL_MEMBER|PortChannel7|Ethernet6', 'FLEX_COUNTER_TABLE|PFCWD', 'ROUTE_MAP|ASW2PSW_IN|permit|30', 'PORT|Ethernet108', 'TC_TO_PRIORITY_GROUP_MAP|ALI', 'PORT|Ethernet22', 'DEVICE_METADATA|localhost', 'PORT|Ethernet88', 'PORT|Ethernet13', 'PORT|Ethernet30', 'MGMT_INTERFACE|Management0|30.57.185.58/24', 'TC_TO_QUEUE_MAP|ALI', 'PORT|Ethernet46', 'BGP_NETWORK|11.163.117.192/26', 'VLAN_INTERFACE|Vlan10', 'INTERFACE|Ethernet0', 'BGP_NEIGHBOR|52.52.52.2', 'PORT|Ethernet8', 'VLAN_MEMBER|Vlan10|PortChannel5', 'PORT|Ethernet20', 'BGP_NETWORK|105.105.105.105/32', 'PORT|Ethernet42', 'PORT|Ethernet92', 'PORTCHANNEL_MEMBER|PortChannel8|Ethernet7', 'PORTCHANNEL|PortChannel6', 'SWITCH|SWITCH_ATTR', 'PORT|Ethernet40', 'VLAN_MEMBER|Vlan10|PortChannel1', 'PORT|Ethernet2', 'VLAN_MEMBER|Vlan10|PortChannel10', 'PORT|Ethernet16', 'INTERFACE|Ethernet52', 'PORT|Ethernet41', 'COMMUNITY_LIST|100', 'FLEX_COUNTER_TABLE|QUEUE_WATERMARK', 'BGP_REDIST|kernel', 'PORTCHANNEL|PortChannel8', 'ARP|arp2host', 'MAP_PFC_PRIORITY_TO_QUEUE|ALI', 'PORTCHANNEL_MEMBER|PortChannel3|Ethernet2', 'LOOPBACK_INTERFACE|Loopback0|105.105.105.105/32', 'PORT|Ethernet10', 'ARP|aging', 'TELEMETRY|gnmi', 'PORT|Ethernet47', 'PORT|Ethernet37', 'PORTCHANNEL_MEMBER|PortChannel10|Ethernet9', 'ROUTE_MAP|ASW2PSW_OUT|deny|20', 'LOOPBACK_INTERFACE|Loopback0', 'PORT|Ethernet12', 'PORT|Ethernet14', 'PORTCHANNEL|PortChannel2', 'PORT|Ethernet34', 'PORT|Ethernet104', 'SNMP_USER|alimonitor', 'PORT|Ethernet4', 'VLAN_MEMBER|Vlan10|PortChannel3', 'PORTCHANNEL_MEMBER|PortChannel9|Ethernet8', 'PORT|Ethernet56', 'PORTCHANNEL|PortChannel7', 'PORT|Ethernet44', 'VLAN_MEMBER|Vlan10|PortChannel8', 'PFC_WD|BUFFER_HANG_ENABLE', 'INTERFACE|Ethernet0|21.21.21.5/26', 'PORT|Ethernet0', 'PORT|Ethernet39', 'VLAN_MEMBER|Vlan10|PortChannel9', 'PORT|Ethernet21', 'PORT|Ethernet48', 'PORT|Ethernet1', 'PORT|Ethernet19', 'PORT|Ethernet26', 'VLAN_MEMBER|Vlan10|PortChannel6', 'VLAN_MEMBER|Vlan10|PortChannel4', 'CONFIG_DB_INITIALIZED', 'PORT|Ethernet68', 'PORTCHANNEL|PortChannel9', 'FLEX_COUNTER_TABLE|PORT', 'PORT|Ethernet64', 'PORT|Ethernet60', 'VLAN_INTERFACE|Vlan10|11.163.117.247/26', 'INTERFACE|Ethernet32|9.1.1.1/24', 'PORT|Ethernet24', 'PORT|Ethernet96', 'VERSIONS|DATABASE', 'PORT|Ethernet84', 'PORT|Ethernet5', 'PORT|Ethernet80', 'PORT|Ethernet18', 'INTERFACE|Ethernet32', 'PORTCHANNEL|PortChannel3', 'PORT|Ethernet32', 'PORT|Ethernet45', 'PORT|Ethernet36', 'PORTCHANNEL_MEMBER|PortChannel5|Ethernet4', 'PORT|Ethernet43', 'PORT|Ethernet15', 'FLEX_COUNTER_TABLE|PG_WATERMARK', 'BGP_NETWORK|52.52.52.0/24', 'PORT|Ethernet35', 'PORT|Ethernet52', 'ROUTE_MAP|ASW2PSW_IN|deny|20', 'PORTCHANNEL_MEMBER|PortChannel4|Ethernet3', 'BGP_PARAMETERS|65021', 'VLAN_MEMBER|Vlan10|PortChannel7', 'PORT|Ethernet76', 'FLEX_COUNTER_TABLE|QUEUE', 'PORT|Ethernet3', 'PORT|Ethernet25', 'BGP_NEIGHBOR|up-group-v6', 'PORT|Ethernet72', 'PORTCHANNEL_MEMBER|PortChannel6|Ethernet5', 'PORTCHANNEL_MEMBER|PortChannel2|Ethernet1', 'VLAN_MEMBER|Vlan10|PortChannel2', 'PORT|Ethernet17', 'LINK_DELAY_UP|global']\r\n\r\nadmin@ASW-7005:~$ /tmp/sonic-db-cli APPL_DB HGETALL VLAN_TABLE:Vlan10\r\n{'admin_status': 'up', 'mtu': '9100'}\r\n\r\nadmin@ASW-7005:~$ /tmp/sonic-db-cli APPL_DB HGET VLAN_TABLE:Vlan10 mtu\r\n9100\r\n\r\nadmin@ASW-7005:~$ /tmp/sonic-db-cli APPL_DB EVAL \"return {KEYS[1],KEYS[2],ARGV[1],ARGV[2]}\" 2 k1 k2 v1 v2\r\n['k1', 'k2', 'v1', 'v2']\r\n```"
+    },
+    {
+        "number": 58,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-12-18T02:18:18Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 58,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-12-18T02:20:44Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 58,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-12-18T20:32:53Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 58,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-12-18T21:47:03Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 58,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2019-12-18T21:47:03Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 57,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-12-09T23:44:11Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 57,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2019-12-09T23:44:11Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 54,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2019-10-22T04:52:22Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "@qiluo-msft move sonic-db-cli into swsssdk pkg"
+    },
+    {
+        "number": 54,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2019-10-23T18:04:28Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "BTW do we have any app using SonicV2Connector who has no root role? If the app is not executed via root, we cannot use  unix_socket_path by default since redis.sock requiring root access.  For safety purpose, do we want to make use_unix_socket_path to FALSE by default. There are too many scripts using SonicV2Connector(). And today, they are all using TCP + port mode. #Resolved"
+    },
+    {
+        "number": 54,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2019-10-23T23:14:23Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "All app using SonicV2Connector are running by root. Python/script could use TCP port as default, which is current situation. I believe if you use unixsocket, it is still working fine.\r\n\r\n---\r\nIn reply to: [545566509](https://github.com/Azure/sonic-py-swsssdk/pull/54#issuecomment-545566509) [](ancestors = 545566509)"
+    },
+    {
+        "number": 54,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-23T02:03:50Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 54,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-23T02:08:04Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 54,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-23T02:11:28Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 54,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-23T06:25:55Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 54,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-23T06:26:39Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 54,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-23T23:16:33Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 54,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-11-01T00:44:47Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 54,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-11-01T00:49:18Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 54,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-11-01T00:55:59Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 54,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-11-05T03:50:45Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 54,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-11-05T04:59:34Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 54,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-11-05T05:02:23Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 54,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-11-05T05:11:07Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 54,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-11-05T05:17:53Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 54,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-11-05T05:18:05Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 54,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-11-05T05:41:54Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 54,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-11-05T16:48:29Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 54,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2019-11-01T00:44:47Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 54,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2019-11-05T16:48:29Z",
+        "latestReview_author": "jleveque",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 54,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2019-11-05T05:41:54Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 53,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2019-10-07T22:20:52Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "@qiluo-msft    separating this PR for removing unused SonicV1Connector"
+    },
+    {
+        "number": 53,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-07T22:46:33Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 53,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2019-10-07T22:46:33Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2019-10-04T01:24:05Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "@qiluo-msft \r\nfor the other installing a default database_config.json via lib topic we discussed offline, I tired today. Looks python wheel distribute cannot copy file to location out of the dist-package directory. The config file in whl must be in dist-package itself. Below is the link for this 'issue':\r\nhttps://github.com/pypa/wheel/issues/92\r\n\r\nso in the codes , I made some changes, if /var/run/redis/sonic-db/database_config.json is not there, we use the config at /usr/local/lib/python2.7/swsssdk/config/database_config.josn. This case only happened for py test cases, it is safe.  "
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2019-10-04T21:48:04Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "BTW VS test passed as well. #Resolved"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2019-10-05T00:57:57Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": ">   }\r\n\r\nThe \"db\" fields are duplication with \"id\" fields in database_config.json. Some suggestions:\r\n\r\n1. remove SonicV1Connector code, not used (better in a standalone PR)\r\n2. remove this config file, and move separator info into database_config.json\r\n\r\n\r\n---\r\nRefers to: src/swsssdk/config/database.json:54 in a6aab64. [](commit_id = a6aab649dd7990af31a4b0b2317cc6bc034c5d4a, deletion_comment = False)"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2019-10-05T01:35:33Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "Even with the difficulty in python wheel, we should try workaround to achieve the goal we discussed. Please help explorer. At least I know `python setup.py sdist` works, and of course this solution need some makefile modification.\r\n\r\n---\r\nIn reply to: [538191085](https://github.com/Azure/sonic-py-swsssdk/pull/52#issuecomment-538191085) [](ancestors = 538191085)"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2019-10-09T06:17:50Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "Here having some root access issue as we discussed offline, I suggest keep the library  database_config.json file in the library domain , this won't affect anything on pyhsical machine. It helps solve the testing issue. For swss-common library, I suggest the same, with library there is a database_config.json file for testing only. Later when all the stuff are done, we can focus on how to solve the root access issue during building images and how to distribute the file to a single place. For now , to me it is OK, it doesn't affect any functionality .   \r\n\r\n> @qiluo-msft\r\n> for the other installing a default database_config.json via lib topic we discussed offline, I tired today. Looks python wheel distribute cannot copy file to location out of the dist-package directory. The config file in whl must be in dist-package itself. Below is the link for this 'issue':\r\n> [pypa/wheel#92](https://github.com/pypa/wheel/issues/92)\r\n> \r\n> so in the codes , I made some changes, if /var/run/redis/sonic-db/database_config.json is not there, we use the config at /usr/local/lib/python2.7/swsssdk/config/database_config.josn. This case only happened for py test cases, it is safe.\r\n\r\n"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2019-10-09T06:18:32Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "> > }\r\n> \r\n> The \"db\" fields are duplication with \"id\" fields in database_config.json. Some suggestions:\r\n> \r\n> 1. remove SonicV1Connector code, not used (better in a standalone PR)\r\n> 2. remove this config file, and move separator info into database_config.json\r\n> \r\n> Refers to: src/swsssdk/config/database.json:54 in [a6aab64](https://github.com/Azure/sonic-py-swsssdk/commit/a6aab649dd7990af31a4b0b2317cc6bc034c5d4a). [](commit_id = [a6aab64](https://github.com/Azure/sonic-py-swsssdk/commit/a6aab649dd7990af31a4b0b2317cc6bc034c5d4a), deletion_comment = False)\r\n\r\nDONE"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2019-10-09T06:23:18Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "@qiluo-msft redesign the codes, the changes is a little bit more, we can have a chat to explain what the idea is and how it works if possible. "
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2019-10-10T05:14:44Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "> Thanks! Minor issues remain.\r\n\r\nupdated"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-02T22:29:37Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-02T22:30:09Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-02T22:36:13Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-02T23:09:51Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-02T23:11:38Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-02T23:35:56Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-03T00:11:19Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-03T02:19:25Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-04T01:17:47Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-04T01:17:54Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-05T00:58:59Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-05T01:00:09Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-05T01:18:08Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-05T01:35:53Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-09T06:13:06Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-09T06:21:17Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-09T06:21:23Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-09T06:22:07Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-09T21:27:22Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-09T22:13:50Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-09T22:16:23Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-09T22:16:52Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-09T23:42:35Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-09T23:46:18Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-10T05:13:36Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-10T05:13:46Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-10T05:14:14Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-10T05:14:20Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-10T05:14:32Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-10T06:09:55Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-10-10T22:44:22Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2019-10-10T22:44:22Z",
+        "latestReview_author": "jleveque",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 52,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2019-10-10T06:09:55Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 51,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2019-11-19T01:47:32Z",
+        "comment_author": "prsunny",
+        "comment_body": "Awaiting on the merge of this PR - https://github.com/Azure/sonic-buildimage/pull/3770"
+    },
+    {
+        "number": 51,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2019-11-22T19:16:56Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "THis change cause build failure on master branch, please double check. @prsunny @stcheng @anilkpandey \r\n\r\nI got below error when using latest py-swsssdk submodule , when I move back one commit, then It passed.\r\n\r\ntests/test_nexthop.py:44: AssertionError\r\n----------------------------- Captured stdout call -----------------------------\r\n{'_trailing_bytes': b'', 'values': [ValueRepresentation(type_=<ValueType.NO_SUCH_INSTANCE: 129>, reserved=0, name=ObjectIdentifier(n_subid=14, prefix_=0, include=1, reserved=0, subids=(1, 3, 6, 1, 2, 1, 4, 21, 1, 7, 0, 0, 0, 0)), data=None)], 'error': <Errors.NO_AGENT_X_ERROR: 0>, 'index': 0, 'sys_up_time': 0, 'header': PDUHeader(version=1, type_=<PduTypes.RESPONSE: 18>, flags=16, reserved=0, session_id=42, transaction_id=0, packet_id=0, payload_length=72)}\r\n================ 13 failed, 45 passed, 80 error in 4.68 seconds ================\r\n[  FAIL LOG END  ] [ target/python-wheels/asyncsnmp-2.1.0-py3-none-any.whl ]\r\nslave.mk:444: recipe for target 'target/python-wheels/asyncsnmp-2.1.0-py3-none-any.whl' failed\r\nmake: *** [target/python-wheels/asyncsnmp-2.1.0-py3-none-any.whl] Error 1\r\nMakefile.work:193: recipe for target 'target/python-wheels/asyncsnmp-2.1.0-py3-none-any.whl' failed\r\nmake[1]: *** [target/python-wheels/asyncsnmp-2.1.0-py3-none-any.whl] Error 2\r\nmake[1]: Leaving directory '/home/dzhang/MS_DB/sonic-buildimage'\r\nMakefile:6: recipe for target 'target/python-wheels/asyncsnmp-2.1.0-py3-none-any.whl' failed\r\nmake: *** [target/python-wheels/asyncsnmp-2.1.0-py3-none-any.whl] Error 2\r\n"
+    },
+    {
+        "number": 51,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2019-11-22T19:27:13Z",
+        "comment_author": "anilkpandey",
+        "comment_body": "\r\n\r\n\r\n\r\n\r\n> THis change cause build failure on master branch, please double check. @prsunny @stcheng @anilkpandey\r\n> \r\n> I got below error when using latest py-swsssdk submodule , when I move back one commit, then It passed.\r\n> \r\n> tests/test_nexthop.py:44: AssertionError\r\n> ----------------------------- Captured stdout call -----------------------------\r\n> {'_trailing_bytes': b'', 'values': [ValueRepresentation(type_=<ValueType.NO_SUCH_INSTANCE: 129>, reserved=0, name=ObjectIdentifier(n_subid=14, prefix_=0, include=1, reserved=0, subids=(1, 3, 6, 1, 2, 1, 4, 21, 1, 7, 0, 0, 0, 0)), data=None)], 'error': <Errors.NO_AGENT_X_ERROR: 0>, 'index': 0, 'sys_up_time': 0, 'header': PDUHeader(version=1, type_=<PduTypes.RESPONSE: 18>, flags=16, reserved=0, session_id=42, transaction_id=0, packet_id=0, payload_length=72)}\r\n> ================ 13 failed, 45 passed, 80 error in 4.68 seconds ================\r\n> [ FAIL LOG END ] [ target/python-wheels/asyncsnmp-2.1.0-py3-none-any.whl ]\r\n> slave.mk:444: recipe for target 'target/python-wheels/asyncsnmp-2.1.0-py3-none-any.whl' failed\r\n> make: *** [target/python-wheels/asyncsnmp-2.1.0-py3-none-any.whl] Error 1\r\n> Makefile.work:193: recipe for target 'target/python-wheels/asyncsnmp-2.1.0-py3-none-any.whl' failed\r\n> make[1]: *** [target/python-wheels/asyncsnmp-2.1.0-py3-none-any.whl] Error 2\r\n> make[1]: Leaving directory '/home/dzhang/MS_DB/sonic-buildimage'\r\n> Makefile:6: recipe for target 'target/python-wheels/asyncsnmp-2.1.0-py3-none-any.whl' failed\r\n> make: *** [target/python-wheels/asyncsnmp-2.1.0-py3-none-any.whl] Error 2\r\n\r\nThe following PR needs to be merged as well\r\nhttps://github.com/Azure/sonic-snmpagent/pull/114"
+    },
+    {
+        "number": 51,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-02-13T21:51:07Z",
+        "comment_author": "jleveque",
+        "comment_body": "TODO: This PR needs to be cherry-picked into the 201911 branch after https://github.com/Azure/sonic-swss/pull/1124 is merged and cherry-picked."
+    },
+    {
+        "number": 51,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-03-05T04:51:50Z",
+        "comment_author": "jleveque",
+        "comment_body": "This PR was subsequently reverted. However, https://github.com/Azure/sonic-swss/pull/1124 has been merged to master. Thus, this PR should be able to be un-reverted from master and also cherry-picked into 201911."
+    },
+    {
+        "number": 51,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-09-26T23:20:32Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 51,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-09-26T23:37:21Z",
+        "review_author": "stcheng"
+    },
+    {
+        "number": 51,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-11-19T20:01:46Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 51,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2019-09-26T23:37:21Z",
+        "latestReview_author": "stcheng",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 51,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2019-11-19T20:01:46Z",
+        "latestReview_author": "prsunny",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 49,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2019-03-07T04:48:18Z",
+        "comment_author": "renukamanavalan",
+        "comment_body": "Tested the change using sonic-cfggen. Wrote another tool to compare APPL-DB & ASIC-DB  w.r.t routes and this tool uses this class to access either DB, which went successfully.\r\n\r\nCare is taken to ensure that there is no change in pre-existing behavior."
+    },
+    {
+        "number": 49,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-03-07T19:41:17Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 49,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2019-03-07T19:41:17Z",
+        "latestReview_author": "jleveque",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 48,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-02-14T01:44:48Z",
+        "review_author": "hui-ma"
+    },
+    {
+        "number": 48,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2019-02-14T01:44:48Z",
+        "latestReview_author": "hui-ma",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 46,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2019-01-31T02:03:24Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 46,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2019-01-31T02:03:24Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    }
+]

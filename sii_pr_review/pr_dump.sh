@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 years="2016 2017 2018 2019 2020 2021 2022 2023"
 repos="sonic-net/sonic-buildimage"
@@ -70,6 +70,9 @@ echo dump:    $dump_type
 delete_empty_file(){
     [ -n "$(find . -xtype f -name "*.json" -size -3c)" ] && rm $(find . -xtype f -name "*.json" -size -3c)
 }
+delete_zero_file(){
+    [ -n "$(find . -xtype f -name "*.json" -size -10c)" ] && rm $(find . -xtype f -name "*.json" -size -10c)
+}
 
 for year in $years
 do
@@ -80,8 +83,7 @@ do
         repo=$(echo $org_repo | awk -F/ '{print$2}')
         org=$(echo $org_repo | awk -F/ '{print$1}')
         echo "    " repo: $repo
-        if [[ "$bypass_year" == n ]];then
-            delete_empty_file
+        if [[ "$bypass_year" == n ]] && [ -z "$(ls $year/$repo.*.$dump_type.json 2>/dev/null)" ];then
             [ -f $year/$repo.$dump_type.json ] && continue
             eval $debug gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-01-01..$year-12-31" | jq --indent 4 ".[] += {repo: \"$repo\"}" > $year/$repo.$dump_type.json
             delete_empty_file
@@ -98,7 +100,13 @@ do
             # if the last day is not correct, download will fail.
             eval $debug gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-01..$year-$month-$days" | jq --indent 4 ".[] += {repo: \"$repo\"}" > $year/$repo.$month.$dump_type.json
             delete_empty_file
+            if ! ls $year/$repo.$month.$dump_type.json &>/dev/null;then
+                eval $debug gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-01..$year-$month-15" | jq --indent 4 ".[] += {repo: \"$repo\"}" > $year/$repo.$month.a.$dump_type.json
+                eval $debug gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-16..$year-$month-$days" | jq --indent 4 ".[] += {repo: \"$repo\"}" > $year/$repo.$month.b.$dump_type.json
+                jq -s 'add' $year/$repo.$month.a.$dump_type.json $year/$repo.$month.b.$dump_type.json > $year/$repo.$month.$dump_type.json
+            fi
             sleep $interval && continue
         done    
     done
 done
+delete_zero_file

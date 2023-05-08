@@ -1,0 +1,1428 @@
+[
+    {
+        "number": 303,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-11-29T17:42:27Z",
+        "comment_author": "linux-foundation-easycla",
+        "comment_body": "<a href=\"https://easycla.lfx.linuxfoundation.org/#/?version=2\"><img src=\"https://s3.amazonaws.com/cla-project-logo-prod/cla-signed.svg\" alt=\"CLA Signed\" align=\"left\" height=\"28\" width=\"328\" ></a><br/><br />The committers listed above are authorized under a signed CLA.<ul><li>:white_check_mark: login: msiddare  (18a0bf7d235530f17647dcc6c05b8b872a89df6f)</li></ul>"
+    },
+    {
+        "number": 303,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-12-06T21:57:53Z",
+        "comment_author": "bmridul",
+        "comment_body": "@kevinskwang @sachinv-msft , pls help review this PR. "
+    },
+    {
+        "number": 303,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-12-08T06:31:47Z",
+        "comment_author": "kevinskwang",
+        "comment_body": "@madhava28 Please authorize the EasyCLA to make it pass."
+    },
+    {
+        "number": 303,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-12-08T06:31:20Z",
+        "review_author": "kevinskwang"
+    },
+    {
+        "number": 303,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-12-09T01:57:21Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 303,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-12-09T02:06:58Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 303,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-12-12T23:34:05Z",
+        "review_author": "madhava28"
+    },
+    {
+        "number": 303,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-12-14T06:03:11Z",
+        "review_author": "kevinskwang"
+    },
+    {
+        "number": 303,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-12-14T19:48:52Z",
+        "review_author": "madhava28"
+    },
+    {
+        "number": 303,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-12-14T19:49:19Z",
+        "review_author": "madhava28"
+    },
+    {
+        "number": 303,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-12-15T03:28:48Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 303,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-12-14T06:03:11Z",
+        "latestReview_author": "kevinskwang",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 303,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-12-15T03:28:48Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 300,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-11-17T10:43:03Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "Thank you for the patch. Could you please split\r\n\r\n> Also support verifying the value of strings (and not just y/m/n settings).\r\n\r\ninto a separate patch?\r\n\r\nAlso, could you amend the commit message and give an example, that didn\u2019t work before, and works now?"
+    },
+    {
+        "number": 300,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-11-18T01:22:21Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "Commits have been split into two separate commits"
+    },
+    {
+        "number": 300,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-11-21T18:50:30Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "@davidpil2002 could you confirm that with this fix, you can overwrite `CONFIG_SYSTEM_TRUSTED_KEYS`?"
+    },
+    {
+        "number": 300,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-11-24T16:11:26Z",
+        "comment_author": "davidpil2002",
+        "comment_body": "@saiarcot895 its still not working so well, pls see the error below:\r\n```\r\nmake[2]: warning: jobserver unavailable: using -j1.  Add '+' to parent make rule.\r\n  GEN     Makefile\r\n#\r\n# configuration written to .config\r\n#\r\nmake[2]: Leaving directory '/sonic/src/sonic-linux-kernel/linux-5.10.140/debian/build/build_amd64_none_amd64'\r\n\r\nChecking removed kernel options...\r\nNo error\r\n\r\nChecking added kernel options...\r\nOption CONFIG_SECURITY_LOCKDOWN_LSM_EARLY should be set to [n] instead of [undef]\r\nOption CONFIG_LOCK_DOWN_KERNEL_FORCE_NONE should be set to [n] instead of [undef]\r\nOption CONFIG_LOCK_DOWN_IN_EFI_SECURE_BOOT should be set to [n] instead of [undef]\r\n\r\nmake[1]: *** [Makefile:62: /sonic/target/debs/bullseye/linux-headers-5.10.0-18-2-common_5.10.140-1_all.deb] Error 2\r\nmake[1]: Leaving directory '/sonic/src/sonic-linux-kernel'\r\n[  FAIL LOG END  ] [ target/debs/bullseye/linux-headers-5.10.0-18-2-common_5.10.140-1_all.deb ]\r\nmake[1]: *** [Makefile:62: /sonic/target/debs/bullseye/linux-headers-5.10.0-18-2-common_5.10.140-1_all.deb] Error 2\r\n```\r\nIn the kconfig-inclusion I add the follow values:\r\n\r\n```\r\n# Secure Boot\r\nCONFIG_MODULE_SIG_KEY=\"\"\r\nCONFIG_SYSTEM_TRUSTED_KEYS=\"debian/path_to_cert/certificate.pem\"\r\nCONFIG_MODULE_SIG_HASH=\"sha512\"\r\nCONFIG_MODULE_SIG_SHA512=y\r\nCONFIG_MODULE_SIG_SHA256=n\r\nCONFIG_SECURITY_LOCKDOWN_LSM=n\r\nCONFIG_SECURITY_LOCKDOWN_LSM_EARLY=n\r\nCONFIG_LOCK_DOWN_KERNEL_FORCE_NONE=n\r\nCONFIG_LOCK_DOWN_IN_EFI_SECURE_BOOT=n\r\nCONFIG_KEXEC_SIG_FORCE=y\r\n\r\n```\r\n\r\nNote: \r\nI think the issue, in this case, is that in general exists 2 ways to disable a kernel flag in Linux one by setting \r\n`CONFIG_KEXEC_SIG_FORCE=n\r\n`and the other by setting:\r\n`# CONFIG_KEXEC_SIG_FORCE is not set`\r\nMaybe the code is not parsing those examples as should.\r\n\r\nSo for now, I will not include your fix.\r\n\r\n"
+    },
+    {
+        "number": 300,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-12-06T09:48:05Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@davidpil2002 kindly reminder to review and confirm so we can merge this one."
+    },
+    {
+        "number": 300,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-12-06T09:57:53Z",
+        "comment_author": "davidpil2002",
+        "comment_body": "> @davidpil2002 kindly reminder to review and confirm so we can merge this one.\r\n\r\nHi @liat-grozovik ,\r\n\r\nI reviewed/tested locally the community fix, it's solved some config entries, but still had errors and not supported all the kernel configuration that required.\r\nI wrote a comment with all the details 12 days ago.\r\nThanks\r\nDavid"
+    },
+    {
+        "number": 300,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-12-06T17:24:46Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "For `CONFIG_SECURITY_LOCKDOWN_LSM_EARLY`, `CONFIG_LOCK_DOWN_KERNEL_FORCE_NONE`, and `CONFIG_LOCK_DOWN_IN_EFI_SECURE_BOOT`, you'll want to specify these in `patch/kconfig-exclusions` instead. That'll unset these configs.\r\n\r\nWith them in `patch/kconfig-inclusions`, you're seeing the error because these configs are either set with `y`, or they're unset (which is implied to mean `n`); they're never explicitly set with `n`."
+    },
+    {
+        "number": 300,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-12-08T15:36:23Z",
+        "comment_author": "davidpil2002",
+        "comment_body": "> For `CONFIG_SECURITY_LOCKDOWN_LSM_EARLY`, `CONFIG_LOCK_DOWN_KERNEL_FORCE_NONE`, and `CONFIG_LOCK_DOWN_IN_EFI_SECURE_BOOT`, you'll want to specify these in `patch/kconfig-exclusions` instead. That'll unset these configs.\r\n> \r\n> With them in `patch/kconfig-inclusions`, you're seeing the error because these configs are either set with `y`, or they're unset (which is implied to mean `n`); they're never explicitly set with `n`.\r\n\r\n\r\nwell in general Linux kernel config support setting `y` or `n`.\r\nBut, I tested now like you said using the sonic `patch/kconfig-exclusions`, and it's working well.\r\nSo, for my POV the fix works and you are welcome to merge\r\n\r\n@saiarcot895 \r\n@liat-grozovik "
+    },
+    {
+        "number": 300,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-12-11T15:11:38Z",
+        "comment_author": "davidpil2002",
+        "comment_body": "@saiarcot895 \r\nI see that the fix its merged, but pls can you update the pointer of sonic-buildimage to sonic-linux-kernel to include your fix, so I can remove my WA from my code and use your fix"
+    },
+    {
+        "number": 300,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-12-11T16:55:20Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "@davidpil2002 I can, but for using my fix, you don't need me to update the sonic-buildimage pointer. You should be able to rebase your private branch on top of the current master branch (or do a merge from the current master branch) and test your changes that way."
+    },
+    {
+        "number": 300,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-12-09T01:50:24Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 300,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-12-09T01:50:24Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 297,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-11-09T19:52:35Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 297,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-11-09T19:52:35Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 296,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-10-18T09:23:38Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@saiarcot895 please help to review"
+    },
+    {
+        "number": 296,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-10-21T23:57:18Z",
+        "comment_author": "vivekrnv",
+        "comment_body": " > Lastly, what do you mean by _upstream_? https://www.kernel.org? Please clarify.\r\n\r\nIt means patches that are not-yet or waiting to be upstreamed to mainline linux kernel. For a patch to be included in this repo, it has to be upstreamed in the mainline. This solution helps building the kernel with non-upstream patches (if any required)"
+    },
+    {
+        "number": 296,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-10-18T06:13:53Z",
+        "review_author": "paulmenzel"
+    },
+    {
+        "number": 296,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-10-18T15:29:48Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 296,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-10-26T00:04:03Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 296,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-10-26T00:07:13Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 296,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-10-26T00:09:50Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 296,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-10-26T00:10:46Z",
+        "review_author": "vivekrnv"
+    },
+    {
+        "number": 296,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-10-26T00:17:01Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 296,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-10-26T00:17:13Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 296,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-10-26T07:17:07Z",
+        "review_author": "vivekrnv"
+    },
+    {
+        "number": 296,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-10-26T21:34:38Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 296,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-10-27T00:22:13Z",
+        "review_author": "vivekrnv"
+    },
+    {
+        "number": 296,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-10-27T00:22:18Z",
+        "review_author": "vivekrnv"
+    },
+    {
+        "number": 296,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-10-27T00:29:45Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 296,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-10-18T06:13:53Z",
+        "latestReview_author": "paulmenzel",
+        "latestReview_state": "CHANGES_REQUESTED"
+    },
+    {
+        "number": 296,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-10-27T00:29:45Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 295,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-10-19T19:24:15Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 295,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-10-19T19:24:15Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-09-27T02:23:21Z",
+        "comment_author": "prsunny",
+        "comment_body": "@Ndancejic for viz. @lolyu , can you please link the issue here"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-11-14T01:53:31Z",
+        "comment_author": "liuh-80",
+        "comment_body": "@lolyu , the patch/0001-net-arp-introduce-arp_evict_nocarrier-sysctl-paramet.patch does not add to 202205 branch. I think that's why the UT failed."
+    },
+    {
+        "number": 293,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-09-27T18:01:52Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-09-27T18:01:52Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 292,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-09-01T01:12:15Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 292,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-09-01T01:12:15Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 291,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-09-01T00:00:50Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "Looks like this is only available on 5.19 and newer in the mainline kernel. I'm assuming this issue exists on the master branch and the 202205 branch? If so, can you create a PR for the master branch of sonic-linux-kernel as well?"
+    },
+    {
+        "number": 291,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-09-02T01:17:22Z",
+        "comment_author": "prsunny",
+        "comment_body": "cherry-pick from https://github.com/sonic-net/sonic-linux-kernel/pull/292"
+    },
+    {
+        "number": 291,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-09-01T03:48:16Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 291,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-09-01T03:48:16Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-07-27T06:43:23Z",
+        "comment_author": "liushilongbuaa",
+        "comment_body": "/azp run Azure.sonic-linux-kernel"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-07-27T06:43:28Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nCommenter does not have sufficient privileges for PR 287 in repo sonic-net/sonic-linux-kernel<br>\r\n\n</samp>"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-07-27T06:43:38Z",
+        "comment_author": "liushilongbuaa",
+        "comment_body": "/azpw run Azure.sonic-linux-kernel"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-07-28T11:42:56Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@saiarcot895 could you please help to review?"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-07-28T17:02:29Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@saiarcot895 could you please add a label for 202205? "
+    },
+    {
+        "number": 287,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-07-28T18:49:37Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "@liat-grozovik created the label for 202205"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-08-11T07:40:09Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "> @liat-grozovik created the label for 202205\r\n\r\n@saiarcot895  i dont see the label set and i am not able to add one to this repo. can you please add?\r\n@yxieca  please have it on 202205?"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-07-28T15:32:44Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-07-28T15:32:44Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 286,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-07-21T15:50:53Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "Please elaborate the problem. What Accton platform fails to boot, and what is the reason.\r\n\r\nWhat is now happening with the Cisco devices? Will they still work? Why was the value set to 32 in the first place?"
+    },
+    {
+        "number": 286,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-07-21T16:06:23Z",
+        "comment_author": "lguohan",
+        "comment_body": "here is the issue. https://github.com/Azure/sonic-buildimage/issues/11238\r\n\r\nthe plan is that cisco will revert this one, and then use kernel bootargs to set it up only for cisco platforms.\r\n\r\nnot sure why it breaks on accton platforms. "
+    },
+    {
+        "number": 286,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-07-20T20:02:07Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 286,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-07-21T15:51:34Z",
+        "review_author": "paulmenzel"
+    },
+    {
+        "number": 286,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-07-21T16:13:02Z",
+        "review_author": "paulmenzel"
+    },
+    {
+        "number": 286,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-07-28T15:33:28Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 286,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-07-21T16:13:02Z",
+        "latestReview_author": "paulmenzel",
+        "latestReview_state": "CHANGES_REQUESTED"
+    },
+    {
+        "number": 286,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-07-20T20:02:07Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 286,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-07-28T15:33:28Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 285,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-07-16T07:20:00Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "Thank you for the patch. Next time, it\u2019d be great, if you added a space after the tag *[202012]*."
+    },
+    {
+        "number": 285,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-07-16T00:06:43Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 285,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-07-16T07:23:21Z",
+        "review_author": "paulmenzel"
+    },
+    {
+        "number": 285,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-07-16T07:23:21Z",
+        "latestReview_author": "paulmenzel",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 285,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-07-16T00:06:43Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 283,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-07-05T21:20:38Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 283,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-07-05T21:20:38Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 282,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-07-06T09:28:48Z",
+        "comment_author": "stepanblyschak",
+        "comment_body": "@saiarcot895 Could you please also review this PR for 202012?"
+    },
+    {
+        "number": 282,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-07-06T17:43:17Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 282,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-07-06T17:43:17Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 281,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-06-22T12:16:59Z",
+        "comment_author": "vadymhlushko-mlnx",
+        "comment_body": "@saiarcot895 could you please review it?"
+    },
+    {
+        "number": 281,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-06-22T16:25:53Z",
+        "comment_author": "prsunny",
+        "comment_body": "I see that the buildimage PR depends on this. Since the other PR is already merged, does it break buildimage?"
+    },
+    {
+        "number": 281,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-06-23T07:57:49Z",
+        "comment_author": "vadymhlushko-mlnx",
+        "comment_body": "> I see that the buildimage PR depends on this. Since the other PR is already merged, does it break buildimage?\r\n\r\nYes, it brakes the buildimage"
+    },
+    {
+        "number": 281,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-06-24T08:32:47Z",
+        "comment_author": "vadymhlushko-mlnx",
+        "comment_body": "> Please also update the merge/pull request summary/title.\r\n\r\nDone"
+    },
+    {
+        "number": 281,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-22T12:22:56Z",
+        "review_author": "paulmenzel"
+    },
+    {
+        "number": 281,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-23T11:49:38Z",
+        "review_author": "vadymhlushko-mlnx"
+    },
+    {
+        "number": 281,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-23T11:49:44Z",
+        "review_author": "vadymhlushko-mlnx"
+    },
+    {
+        "number": 281,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-23T19:45:15Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 281,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-23T23:08:20Z",
+        "review_author": "paulmenzel"
+    },
+    {
+        "number": 281,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-06-23T23:08:20Z",
+        "latestReview_author": "paulmenzel",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 281,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-06-23T19:45:15Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 280,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-07-05T09:49:01Z",
+        "comment_author": "stepanblyschak",
+        "comment_body": "@keboliu Could you please cherry pick https://github.com/Azure/sonic-linux-kernel/pull/279/commits/8f31d6f7d4cac7c3e67a584aa7d4f92f8673fd63 ?"
+    },
+    {
+        "number": 280,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-07-05T21:09:38Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 280,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-07-05T21:09:38Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 279,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-07-05T20:42:54Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 279,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-07-05T20:42:54Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-06-13T09:22:14Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "Please dont merge yet.\r\nWe should run also fast and cold reboot tests to ensure these reboots are also clean with the fix.\r\nPlease wait for Nvidia/me confirmation on it.\r\n"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-06-14T01:15:22Z",
+        "comment_author": "vaibhavhd",
+        "comment_body": "> Please dont merge yet. We should run also fast and cold reboot tests to ensure these reboots are also clean with the fix. Please wait for Nvidia/me confirmation on it.\r\n\r\nPerhaps also add config-reload, load_minigraph or any other scenario (syncd cold reboot) which might trigger this."
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-06-14T07:40:50Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@roysr-nv , @stepanblyschak  once all tests are done and we are good to go with the fix please move it to ready for review."
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-06-17T10:07:57Z",
+        "comment_author": "stepanblyschak",
+        "comment_body": "@paulmenzel Updated per your request"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-06-20T11:59:04Z",
+        "comment_author": "stepanblyschak",
+        "comment_body": "Updated with latest patch from @vadimp-nvidia "
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-06-24T17:31:12Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@lguohan is there anything else open related this PR or we can approve and signoff?\r\nonce this is done we need to have it on all other branches. PRs are already avaialble."
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-06-27T20:55:11Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "Is the TMP tag needed in the patch name and the title (as in, will this bug fix be removed in the future), or is it expected to be permanent?"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-07-05T09:42:04Z",
+        "comment_author": "stepanblyschak",
+        "comment_body": "@paulmenzel @saiarcot895 @vadimp-nvidia  I removed the TMP tag from the commit message"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-02T16:01:19Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-02T16:10:34Z",
+        "review_author": "paulmenzel"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-03T00:16:47Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-03T19:27:08Z",
+        "review_author": "vaibhavhd"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-03T19:37:52Z",
+        "review_author": "vaibhavhd"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-06T05:42:25Z",
+        "review_author": "liat-grozovik"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-06T07:03:07Z",
+        "review_author": "vadimp-nvidia"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-06T07:03:13Z",
+        "review_author": "vadimp-nvidia"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-06T07:03:17Z",
+        "review_author": "vadimp-nvidia"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-06T10:25:16Z",
+        "review_author": "paulmenzel"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-06T10:53:07Z",
+        "review_author": "vadimp-nvidia"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-06T16:51:24Z",
+        "review_author": "vaibhavhd"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-07T08:03:13Z",
+        "review_author": "paulmenzel"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-14T08:47:13Z",
+        "review_author": "paulmenzel"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-17T11:24:48Z",
+        "review_author": "paulmenzel"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-17T11:46:33Z",
+        "review_author": "vadimp-nvidia"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-17T11:48:52Z",
+        "review_author": "paulmenzel"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-17T11:54:48Z",
+        "review_author": "vadimp-nvidia"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-17T12:03:49Z",
+        "review_author": "paulmenzel"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-24T20:30:16Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-27T21:10:37Z",
+        "review_author": "vadimp-nvidia"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-27T21:18:41Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-27T21:27:29Z",
+        "review_author": "vadimp-nvidia"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-28T04:16:28Z",
+        "review_author": "paulmenzel"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-28T12:44:18Z",
+        "review_author": "vadimp-nvidia"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-28T17:11:13Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-28T21:50:28Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-29T06:51:36Z",
+        "review_author": "paulmenzel"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-06-29T07:49:36Z",
+        "review_author": "vadimp-nvidia"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-06-28T21:50:28Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-06-29T06:51:36Z",
+        "latestReview_author": "paulmenzel",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-06-06T16:51:24Z",
+        "latestReview_author": "vaibhavhd",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-06-06T05:42:25Z",
+        "latestReview_author": "liat-grozovik",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-06-29T07:49:36Z",
+        "latestReview_author": "vadimp-nvidia",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 278,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-06-02T16:01:19Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 277,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-04-12T18:40:27Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "Why not the currently latest 5.10.110?"
+    },
+    {
+        "number": 277,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-04-12T18:44:41Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "Debian Bullseye has 5.10.103 as their latest packaged version, and we reuse Debian's packaging and patches for the kernel."
+    },
+    {
+        "number": 277,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-04-20T04:48:41Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 277,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-04-20T04:48:41Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 276,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-03-28T18:59:49Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "A few comments:\r\n\r\n1. Split the patch you have into two (or more) different patches: one that is backported from upstream (with the commit ID included in the patch), and one that includes any custom changes.\r\n2. In each patch file, describe what changes are being done, with a useful subject line.\r\n3. Is there a reason that the patch has to be conditionally included here, and why it can't be included always?"
+    },
+    {
+        "number": 276,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-04-12T07:34:31Z",
+        "comment_author": "vadymhlushko-mlnx",
+        "comment_body": "> A few comments:\r\n> \r\n> 1. Split the patch you have into two (or more) different patches: one that is backported from upstream (with the commit ID included in the patch), and one that includes any custom changes.\r\n> 2. In each patch file, describe what changes are being done, with a useful subject line.\r\n> 3. Is there a reason that the patch has to be conditionally included here, and why it can't be included always?\r\n\r\nFixed, could you please review"
+    },
+    {
+        "number": 276,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-04-18T12:38:55Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@saiarcot895 kindly reminder to review the changes following comments provided."
+    },
+    {
+        "number": 276,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-04-19T16:10:56Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "Please add the upstream commit ID in the description for `0001-psample-Encapsulate-packet-metadata-in-a-struct.patch` and `0002-psample-Add-additional-metadata-attributes.patch`."
+    },
+    {
+        "number": 276,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-04-20T08:43:19Z",
+        "comment_author": "vadymhlushko-mlnx",
+        "comment_body": "> Please add the upstream commit ID in the description for `0001-psample-Encapsulate-packet-metadata-in-a-struct.patch` and `0002-psample-Add-additional-metadata-attributes.patch`.\r\n\r\nFixed"
+    },
+    {
+        "number": 276,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-04-20T18:04:26Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 276,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-04-20T18:04:35Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 276,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-04-19T16:10:05Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 276,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-04-20T08:43:13Z",
+        "review_author": "vadymhlushko-mlnx"
+    },
+    {
+        "number": 276,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-04-19T16:10:05Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 275,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-03-24T18:29:18Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "@qiluo-msft Can you please review. This is for 202012 branch"
+    },
+    {
+        "number": 275,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-03-25T17:21:52Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "@lguohan Can you please review.\r\nOn a note these changes are already present in master and so a PR is not required there."
+    },
+    {
+        "number": 275,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-03-28T15:47:45Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "Can you add the upstream commit ID in the patch as well, for easier tracking?"
+    },
+    {
+        "number": 275,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-03-30T11:33:30Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@saiarcot895 can you please signoff? then @alexrallen to update submodule against 202012"
+    },
+    {
+        "number": 275,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-03-24T17:35:14Z",
+        "review_author": "dgsudharsan"
+    },
+    {
+        "number": 275,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-03-28T15:46:30Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 275,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-03-28T15:46:30Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 275,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-03-24T17:35:14Z",
+        "latestReview_author": "dgsudharsan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 269,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-02-18T16:25:35Z",
+        "comment_author": "prgeor",
+        "comment_body": "@Staphylo in which scenario  \"/var/log becomes un-writtable\" ?\r\n"
+    },
+    {
+        "number": 268,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-02-15T15:37:30Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "1.  Please document the corresponding master branch commit?\r\n2.  Are these patches from upstream? If not, where are they from?"
+    },
+    {
+        "number": 268,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-02-17T10:23:36Z",
+        "comment_author": "Staphylo",
+        "comment_body": "Hi Paul,\r\n\r\nThere are no corresponding master branch commits for these 2 patches yet, which is why there is no references to them.\r\nThe fixes for 4.9 (201811 / 201911) was different and more involved. It also had to be addressed in priority.\r\nThe fixes for 4.19 (202012 / 202106) and 5.10 (202111, master) are similar but I prefer patching them with dedicated PRs.\r\n\r\nOne of the patch adds an harmless cmdline parameter that allows configuring some extra sdhci quirks without overriding the ones autodetected.\r\nThe other one adds some quirks and quirks2 for older generation AMD CPUs.\r\n\r\nThese patches come from EosKernel which is the kernel used in EOS.\r\nThey have been thoroughly tested there and applied cleanly on sonic-linux-kernel.\r\n\r\nThanks,"
+    },
+    {
+        "number": 268,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-02-17T10:44:36Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "Thank you for the explanation. I do not know, what the EOS kernel is.\r\n\r\nNormally, I prefer the Linux policy, that all changes need to be in master first, before they get backported. Otherwise, it get\u2019s too complicated to keep track, what should work in what version."
+    },
+    {
+        "number": 268,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-02-17T11:29:09Z",
+        "comment_author": "Staphylo",
+        "comment_body": "EOS is Arista's operating system and EosKernel the kernel it uses.\r\nIt's a standard linux kernel with a few patches applied to it, similar to how sonic-linux-kernel works.\r\nWe aim to upstream/backport a maximum of patches to reduce the maintenance burden.\r\n\r\nI do agree with you and that's my preferred path as well. I made an exception in this case due to priority."
+    },
+    {
+        "number": 268,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-02-15T17:15:52Z",
+        "review_author": "sujinmkang"
+    },
+    {
+        "number": 268,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-02-15T17:15:52Z",
+        "latestReview_author": "sujinmkang",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 267,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-02-15T17:16:22Z",
+        "review_author": "sujinmkang"
+    },
+    {
+        "number": 267,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-02-15T17:16:22Z",
+        "latestReview_author": "sujinmkang",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 265,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-02-11T21:15:59Z",
+        "review_author": "sujinmkang"
+    },
+    {
+        "number": 265,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-02-11T21:15:59Z",
+        "latestReview_author": "sujinmkang",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 264,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-02-11T21:14:46Z",
+        "review_author": "sujinmkang"
+    },
+    {
+        "number": 264,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-02-11T21:14:46Z",
+        "latestReview_author": "sujinmkang",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 263,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-02-11T21:17:17Z",
+        "review_author": "sujinmkang"
+    },
+    {
+        "number": 263,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-02-11T21:17:17Z",
+        "latestReview_author": "sujinmkang",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 262,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-02-11T21:16:56Z",
+        "review_author": "sujinmkang"
+    },
+    {
+        "number": 262,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-02-11T21:16:56Z",
+        "latestReview_author": "sujinmkang",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 260,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-02-09T19:57:59Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "FYI @madhava28 \r\n\r\nThis will get backported to 202012 branch."
+    },
+    {
+        "number": 260,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-02-09T20:24:04Z",
+        "review_author": "wenyiz2021"
+    },
+    {
+        "number": 260,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-02-09T23:18:44Z",
+        "review_author": "paulmenzel"
+    },
+    {
+        "number": 260,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-02-09T23:20:17Z",
+        "review_author": "paulmenzel"
+    },
+    {
+        "number": 260,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-02-09T23:31:29Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 260,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-02-09T23:32:04Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 260,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-02-09T23:20:17Z",
+        "latestReview_author": "paulmenzel",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 260,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-02-09T20:24:04Z",
+        "latestReview_author": "wenyiz2021",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 259,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-01-31T07:48:25Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "hw mgmt can is public and can be found in https://github.com/Mellanox/hw-mgmt\r\nAs for the list of patches we are based on you can further look at https://github.com/Mellanox/hw-mgmt/tree/V.7.0020.1300_BR/recipes-kernel/linux/linux-5.10. It should be as closed as possible but we do have some changes to align to SONiC Linux Kernel asks.\r\nThe patches are aligned with the official list of patches. we can provide a feedback to the hw mgmt owner but I dont want to change the patches and dont have an alignment if this is possible. If need to extend the description we will do so.\r\n\r\nAlso, I don't quite understand what is a clean up pull/merge request? what is missing? @alexrallen is it clear to you on the request?"
+    },
+    {
+        "number": 259,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-01-31T23:55:44Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "One minor nitpick is that in the patches, the subject line is somewhat repeated (the first couple words are there, then it starts over). If it's easy to fix, then that would be appreciated.\r\n\r\nThis PR as a whole will be squash-merged as a single commit, so I'm fine with the individual commits here fixing things up. However, I did notice in 24b0956 that the write function call was commented out (which makes the changes done to `regval` in the preceding lines effectively a no-op). Is there a reason why it has to be commented out for SONiC?\r\n\r\nFor the kconfig changes, as Paul mentioned, at least for the sensor/hardware device additions, is it possible to add a comment saying what device they're for?"
+    },
+    {
+        "number": 259,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-02-01T03:47:03Z",
+        "comment_author": "vadimp-nvidia",
+        "comment_body": "In upstream line cards are powering and enabling happen automatically by \"mlxreg-lc\" driver. In Sonic OS these actions are commented out , because line cards powering and enabling in Sonic are performed in user space according to OS internal decision after relevant events are received through udev netlink. This is why access to hardware is commented out."
+    },
+    {
+        "number": 259,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-02-01T21:08:30Z",
+        "comment_author": "alexrallen",
+        "comment_body": "@saiarcot895 I'll try to fix it but its not trivial unfortunately with the tooling I have. \r\n\r\n@vadimp-nvidia would you be able to provide me with a list of associations for the kconfig for what sensors are intended for what platforms? "
+    },
+    {
+        "number": 259,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-02-01T22:49:29Z",
+        "comment_author": "vadimp-nvidia",
+        "comment_body": "Which kconfig options have been added in this pull request, excepting MLXREG_LC? @alexrallen, could you, please point me out?\r\nEach new config option, like MLXREG_LC, is coming with commit introducing new module, which is configured by this option:\r\nhttps://github.com/torvalds/linux/commit/62f9529b8d5c87b89c3d9698405014bc8f370fbd#diff-25eaae9d15cf1d1d828afba8843eb0bc19cc83f36cd60c7b645326250e9ae941R37"
+    },
+    {
+        "number": 259,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-02-01T23:01:47Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "[\u2026]\r\n\r\n> This PR as a whole will be squash-merged as a single commit, so I'm fine with the individual commits here fixing things up.\r\n\r\nPlease do not do that. Maybe the patches could be done in one commit, but the Kconfig changes definitely should be in a separate commit with understandable commit messages."
+    },
+    {
+        "number": 259,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-02-02T05:44:21Z",
+        "comment_author": "vadimp-nvidia",
+        "comment_body": "OK, I didn\u2019t realize that we are talking about changes in config file itself, and not about new kernel config options, added by new code.\r\nI see it in:\r\nhttps://github.com/Azure/sonic-linux-kernel/pull/259/commits/87425b60870630808d1790e0de86760307e65d14\r\nOf course, new added options to kconfig should be in separate patch.\r\nBelow is the purpose of added options.\r\n\r\nThe below pin control options are necessary for new Nvidia systems based on CoffeLake COME to allow GPIO configuration:\r\nCONFIG_PINCTRL_INTEL=m\r\nCONFIG_PINCTRL_CANNONLAKE=m\r\nCONFIG_PINCTRL_DENVERTON=m\r\n\r\nTheses options are used be new coming SN2201 system (48x1G, 4x1000G):\r\nCONFIG_I2C_MUX_PCA954x=m (I2C switch device, used to create mux infra)\r\nCONFIG_GPIO_PCA953X=m (I2C GPIO expander, provided access for LED control)\r\n\r\nPCIe switch ambient temperature sensor, used by SN4800 modular system\r\nCONFIG_SENSORS_TMP421=m:\r\n\r\nAmbient system sensor, used on several Spectrum-3 based systems as second source for TMP102 device: \r\nCONFIG_SENSORS_STTS751=m\r\n\r\nVoltage and power monitoring devices used for \r\nCONFIG_SENSORS_ADS1015=m\r\nCONFIG_SENSORS_POWR1220=m\r\nCONFIG_TI_ADS1015=m\r\n\r\nFan driver for SN2201 system\r\nCONFIG_SENSORS_EMC2305=m"
+    },
+    {
+        "number": 259,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-02-03T03:57:11Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "> \r\n\r\nIn SONiC all the commits are squashed and merged from a PR. I am not sure why is there is a specific request on this PR. If this is an overall policy change that is proposed please suggest it in the sonic community and make it as a standard methodology. We make our changes based on the fact that at the end there will be a single commit and this is the current process followed.\r\n\r\n"
+    },
+    {
+        "number": 259,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-02-03T10:07:03Z",
+        "comment_author": "alexrallen",
+        "comment_body": "@saiarcot895 @paulmenzel \r\n\r\nI have refactored this PR into three commits.\r\n\r\n1. Reformatting existing patches\r\n2. Adding newly backported patches\r\n3. Updating the kconfig (with justification in the commit message)\r\n\r\nI was also able to clean up the naming of the patches a bit, I hope this is now acceptable. "
+    },
+    {
+        "number": 259,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-02-03T23:42:09Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "That works for me.\r\n\r\nIf the commits are organized/logically separated, then I may do a regular merge; otherwise, the default for SONiC is to do a squash merge. In this case, a regular merge will be done here."
+    },
+    {
+        "number": 259,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-01-27T02:25:05Z",
+        "review_author": "dgsudharsan"
+    },
+    {
+        "number": 259,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-01-27T08:42:22Z",
+        "review_author": "paulmenzel"
+    },
+    {
+        "number": 259,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-01-31T20:54:08Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 259,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-01-31T22:37:48Z",
+        "review_author": "alexrallen"
+    },
+    {
+        "number": 259,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2022-02-01T03:39:10Z",
+        "review_author": "vadimp-nvidia"
+    },
+    {
+        "number": 259,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-01-31T20:54:08Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 259,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-02-01T03:39:10Z",
+        "latestReview_author": "vadimp-nvidia",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 259,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-01-27T08:42:22Z",
+        "latestReview_author": "paulmenzel",
+        "latestReview_state": "CHANGES_REQUESTED"
+    },
+    {
+        "number": 259,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2022-01-27T02:25:05Z",
+        "latestReview_author": "dgsudharsan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 258,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-01-26T00:49:33Z",
+        "comment_author": "sachinv-msft",
+        "comment_body": "@saiarcot895 please help with your review on this pR"
+    },
+    {
+        "number": 258,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-01-26T18:34:26Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "Are all of these sensors/devices used on Cisco hardware? Is it possible to narrow down to devices that are actually needed here?"
+    },
+    {
+        "number": 258,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-01-28T00:25:31Z",
+        "comment_author": "madhava28",
+        "comment_body": "> Are all of these sensors/devices used on Cisco hardware? Is it possible to narrow down to devices that are actually needed here?\r\n\r\nHi Saikrishna \r\nWe are looking into optimizing the list. Will send an updated patch once ready \r\n\r\nHi Saikrishna,\r\n\r\nPlease do not merge this PR yet, I am observing some issue during config apply stage. Will update you\r\n\r\nHi Saikrishna,\r\nBuild issues are resolved and patch is submitted for review.\r\nPlease review it when you get a chance.\r\n\r\nThanks\r\n"
+    },
+    {
+        "number": 258,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-02-03T18:59:49Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "Is it possible to add comments in `kconfig-inclusions` stating which platforms the drivers are enabled for?"
+    },
+    {
+        "number": 258,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-02-07T22:39:04Z",
+        "comment_author": "madhava28",
+        "comment_body": "> Is it possible to add comments in `kconfig-inclusions` stating which platforms the drivers are enabled for?\r\n\r\nkconfig-inclusion file updated to add comment for cisco platform supported \r\n"
+    },
+    {
+        "number": 257,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-01-11T20:53:36Z",
+        "comment_author": "microsoft-cla-retired",
+        "comment_body": "[![CLA assistant check](https://cla.opensource.microsoft.com/pull/badge/signed)](https://cla.opensource.microsoft.com/Azure/sonic-linux-kernel?pullRequest=257) <br/>All CLA requirements met."
+    },
+    {
+        "number": 257,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-01-12T16:13:27Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "I believe this PR should not be approved unless a proper description of all the changes are incorporated in the description"
+    },
+    {
+        "number": 257,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-01-19T00:17:17Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "@liat-grozovik Since this is a backport of patches from the master branch, and because the individual commits have a description, in my opinion, it is fine if the description for each patch isn't in the main PR description. Additionally, because each commit is for one patch, I'll be doing a regular merge instead of a squash, so that the commits (and their commit messages) are preserved."
+    }
+]

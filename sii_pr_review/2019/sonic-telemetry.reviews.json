@@ -1,0 +1,565 @@
+[
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-11-11T17:59:00Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "@qiluo-msft  #Resolved"
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-11-13T09:10:01Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "retest this please"
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-11-13T09:13:05Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "retest this please"
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-11-13T09:30:54Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "unit test failed . looks docker environment has problem , it cannot install redis related debs. Please help checking."
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-11-13T19:24:04Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "retest this please"
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-11-13T22:41:33Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "retest this please\r\n\r\n"
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-11-13T22:44:39Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "> Looks good to me. Please fix PR test.\r\n\r\nThanks for reviewing. Looks the PR test is failed due to slave docker environment issue. which is not caused by this PR. it is a general issue for all testing. I think Ying or someone else is looking at that. Probabaly we need to wait slave docker to be fixed and then have a try."
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-11-14T07:16:27Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "retest this please"
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-11-14T18:34:20Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "retest this please\r\n"
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-11-14T18:44:59Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "I am still see the build issue on Jenkis when installing redis-tools.\r\nThis works before at least last week. I see now many pr build has the same issue. e.g. sonic-sairedis-build-pr, sonic-telemetry-build-pr, sonic-swss-common-build-pr. All of them have the same issue.\r\n\r\nLooks the docker environment still has some issues. Could you confirm it is fixed or you guys are still working on it ?   @lguohan @yxieca @qiluo-msft \r\n\r\nBelow is the build error:\r\n```\r\n+ sudo dpkg -i buildimage/target/debs/stretch/redis-tools_5.0.3-3~bpo9+2_amd64.deb\r\nSelecting previously unselected package redis-tools.\r\n(Reading database ... 138346 files and directories currently installed.)\r\nPreparing to unpack .../redis-tools_5.0.3-3~bpo9+2_amd64.deb ...\r\nUnpacking redis-tools (5:5.0.3-3~bpo9+2) ...\r\ndpkg: dependency problems prevent configuration of redis-tools:\r\n redis-tools depends on liblua5.1-0; however:\r\n  Package liblua5.1-0 is not installed.\r\n redis-tools depends on lua-bitop; however:\r\n  Package lua-bitop is not installed.\r\n redis-tools depends on lua-cjson; however:\r\n  Package lua-cjson is not installed.\r\n\r\ndpkg: error processing package redis-tools (--install):\r\n dependency problems - leaving unconfigured\r\nProcessing triggers for man-db (2.7.6.1-2) ...\r\nErrors were encountered while processing:\r\n redis-tools\r\n[Pipeline] }\r\n[Pipeline] // stage\r\n[Pipeline] }\r\n[Pipeline] // withEnv\r\n[Pipeline] }\r\n[Pipeline] // node\r\n[Pipeline] End of Pipeline\r\n```"
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-11-20T06:21:19Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "@qiluo-msft   one question, I am hitting below error:\r\n\r\n/usr/local/go/bin/go mod init github.com/Azure/sonic-telemetry\r\ngo: unknown subcommand \"mod\"\r\nRun 'go help' for usage.\r\n\r\nI tried on local slave-docker, the go version is 1.11.5 and go mod subcmd is available.\r\n\r\nI checked the pr docker, I am not sure which sonic-docker it is using, looks the go version is not 1.11.5 as what we have in slave docker. Could you help comfirm ?\r\n\r\n\"Running on docker-001oaz053w8db on sonic-docker-stretch in /var/johnar/workspace/common/sonic-telemetry-build-pr\"\r\n\r\nwhere does  sonic-docker-stretch  come from\r\nis it the same as sonic-slave docker ?"
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-11-22T06:51:23Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "@dzhangalibaba Fixed in buildimage and also Jenkins config."
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-11T19:01:14Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-11T19:04:40Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-11T19:04:46Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-11T19:07:16Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-11T19:07:34Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-11T19:12:23Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-11T19:12:27Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-11T19:12:47Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-11T23:48:39Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-11T23:48:46Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-11T23:48:53Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-11T23:49:02Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-11T23:49:33Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-11T23:49:39Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-11T23:53:35Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-12T00:23:54Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-12T00:28:57Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-12T00:29:33Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-12T07:08:31Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-13T01:29:34Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-13T09:28:37Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-13T22:15:59Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 24,
+        "repo": "sonic-telemetry",
+        "latestReview_at": "2019-11-13T22:15:59Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-11-22T06:38:44Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "It is impossible to review such a large modification in one PR. It is better to split it into different sub features and submit many small PRs. I believe SONiC community won't accept such a big changes in one PR.  "
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-11-27T01:35:47Z",
+        "comment_author": "hui-ma",
+        "comment_body": "I am still reading this PR and design doc. I have one generic question about combing the config change and telemetry  together into the same gnmi agent. Could you please justify its motivation?\r\n\r\nFor me, I have two concerns:\r\n1.)\tThe config flow is usually  time sensitive. Telemetry traffic load can be very high and may affect the config flow. \r\n2.)\tThe security requirement for telemetry and config are different. We don\u2019t want to give telemetry application capability to change device.  Will you give different rights to different client based on their cert?   \r\n"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-11-27T01:42:29Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "multiDB changes is merged in sonic-telemetry, suggest have a try if this PR needs adjustment when multiDB introduced."
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-11-28T00:30:32Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "the current makefile is already changed which is using \"go mod\" to manage local source codes and able to build with local changes. You may want to pull the latest sonic-telementy module and see. I suggest using \"go modules\" instead of the changes in current PR."
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-11-28T01:20:47Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "from the online discussion, looks after the changes telemetry depends on sonic-mgmt-framework, this not good. telemetry as a independent feature should NOT have any dependency on other dockers.\r\n\r\n@dzhangalibaba  Could you please share more info about this dependency. It sounds not correct! - Hui Ma"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-12-02T20:43:26Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "> from the online discussion, looks after the changes telemetry depends on sonic-mgmt-framework, this not good. telemetry as a independent feature should NOT have any dependency on other dockers.\r\n> \r\n> @dzhangalibaba Could you please share more info about this dependency. It sounds not correct! - Hui Ma\r\n\r\nMy understanding is if sonic-mgmt is disabled , then sonic-telemetry will not work any more. Sonic-telemetry needs some lib from sonic-mgmt build."
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-12-16T16:40:37Z",
+        "comment_author": "seiferteric",
+        "comment_body": "@dzhangalibaba it isn't clear to me if go modules supports patching your dependencies before building them. We apply several patches to the dependencies we are using. Are you aware if this is supported?\r\n\r\n"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-12-16T19:14:19Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "> @dzhangalibaba it isn't clear to me if go modules supports patching your dependencies before building them. We apply several patches to the dependencies we are using. Are you aware if this is supported?\r\n\r\nMy understanding is patching whatever you want first and then \"go module\" will take all the local codes(original and patched) as source codes. I haven't tried this before, maybe my understanding is wrong."
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-12-16T23:19:25Z",
+        "comment_author": "seiferteric",
+        "comment_body": "@dzhangalibaba From my reading, there is a \"replace\" directive to point to a local copy, and there is a \"go mod vendor\" to allow for local vendoring, so I am experimenting with these. The other issue is that telemetry relies on sonic-mgmt-framework as a dependency which has also not converted to go modules. "
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-12-17T19:25:46Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "> @dzhangalibaba From my reading, there is a \"replace\" directive to point to a local copy, and there is a \"go mod vendor\" to allow for local vendoring, so I am experimenting with these. The other issue is that telemetry relies on sonic-mgmt-framework as a dependency which has also not converted to go modules.\r\n\r\nMy understanding is  telemetry should NOT relies on other submodule like sonic-mgmt-framework at source codes level, they can share library , but when building one submodule, why it is  needed to use other submodule's source code?\r\n\r\n"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-12-17T20:09:37Z",
+        "comment_author": "anand-kumar-subramanian",
+        "comment_body": "@dzhangalibaba making the dependency as library and putting that as a docker layer will be coming later as that will take longer time to implement. With this PR we agreed to remove the dependency of compiling the mgmt-framework to compile telemetry(That we have already incorporated). Also converting the mgmt-framework to use go modules will also be incorporated in the subsequent PRs. With this PR we will try to have the Go module changes incorporated into the telemetry PR changes. "
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-12-17T20:13:57Z",
+        "comment_author": "anand-kumar-subramanian",
+        "comment_body": "@dzhangalibaba Please do let us know your thoughts on the above plan."
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-12-17T21:47:45Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "> @dzhangalibaba Please do let us know your thoughts on the above plan.\r\n\r\nSounds good.  As I said before, two main stuff in this PR:\r\n1 . if the \"go module\" is taken care in sonic-telemetry, that's good\r\n2. try if any changes are need with the latest multi DB changes, most likely you don't need to change anything, just make sure telemetry works with the latest code base and pass UT.\r\n\r\nother stuff like converting the mgmt-framework to use go modules and making the dependency as library could be done in following PR later. "
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-12-17T22:53:41Z",
+        "comment_author": "anand-kumar-subramanian",
+        "comment_body": "@dzhangalibaba We will take care of the two things in this PR itself."
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-12-18T18:37:43Z",
+        "comment_author": "seiferteric",
+        "comment_body": "I have completed the conversion for our telemetry to use go modules. I also restored the location of all the files, so you can see only 19 files are reporting as changed now. I tested everything is building correctly with go modules. I will post tests results shortly."
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-12-18T21:35:06Z",
+        "comment_author": "seiferteric",
+        "comment_body": "The tests have exact json output matching, some of your original tests are failing because there are new fields in the interfaces for example. Are these tests passing for you currently?"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-12-18T22:33:46Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "> The tests have exact json output matching, some of your original tests are failing because there are new fields in the interfaces for example. Are these tests passing for you currently?\r\n\r\n@seiferteric  Yes, I got all cases passed . Below output for your reference.\r\n```\r\ndzhang@b7ec6ca60e82:/sonic/sonic-telemetry$ ../test_telemetry_MS_start_redis.sh\r\ndzhang@b7ec6ca60e82:/sonic/sonic-telemetry$ make check\r\nsudo mkdir -p /var/run/redis/sonic-db/\r\nsudo cp ./testdata/database_config.json /var/run/redis/sonic-db/\r\n/usr/local/go/bin/go test -v github.com/Azure/sonic-telemetry/gnmi_server\r\ngo: finding github.com/jipanyang/gnmi/client/gnmi latest\r\ngo: finding github.com/jipanyang/gnmi/client latest\r\ngo: finding github.com/jipanyang/gnmi latest\r\ngo: downloading github.com/jipanyang/gnmi v0.0.0-20180820232453-cb4d464fa018\r\n=== RUN   TestGnmiGet\r\n=== RUN   TestGnmiGet/Test_non-existing_path_Target\r\n=== RUN   TestGnmiGet/Test_empty_path_target\r\n=== RUN   TestGnmiGet/Get_valid_but_non-existing_node\r\n=== RUN   TestGnmiGet/Get_COUNTERS_PORT_NAME_MAP\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet68\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet68_SAI_PORT_STAT_PFC_7_RX_PKTS\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet68_Pfcwd\r\n=== RUN   TestGnmiGet/get_COUNTERS_(use_vendor_alias):Ethernet68/1\r\n=== RUN   TestGnmiGet/get_COUNTERS_(use_vendor_alias):Ethernet68/1_SAI_PORT_STAT_PFC_7_RX_PKTS\r\n=== RUN   TestGnmiGet/get_COUNTERS_(use_vendor_alias):Ethernet68/1_Pfcwd\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet*\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet*_SAI_PORT_STAT_PFC_7_RX_PKTS\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet*_Pfcwd\r\n--- PASS: TestGnmiGet (2.32s)\r\n    --- PASS: TestGnmiGet/Test_non-existing_path_Target (0.02s)\r\n    --- PASS: TestGnmiGet/Test_empty_path_target (0.00s)\r\n    --- PASS: TestGnmiGet/Get_valid_but_non-existing_node (0.00s)\r\n    --- PASS: TestGnmiGet/Get_COUNTERS_PORT_NAME_MAP (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet68 (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet68_SAI_PORT_STAT_PFC_7_RX_PKTS (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet68_Pfcwd (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS_(use_vendor_alias):Ethernet68/1 (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS_(use_vendor_alias):Ethernet68/1_SAI_PORT_STAT_PFC_7_RX_PKTS (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS_(use_vendor_alias):Ethernet68/1_Pfcwd (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet* (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet*_SAI_PORT_STAT_PFC_7_RX_PKTS (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet*_Pfcwd (0.01s)\r\n=== RUN   TestGnmiSubscribe\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_COUNTERS_PORT_NAME_MAP_with_new_test_field_field\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_key_Ethernet68_with_new_test_field_field\r\n=== RUN   TestGnmiSubscribe/(use_vendor_alias)_stream_query_for_table_key_Ethernet68/1_with_new_test_field_field\r\n=== RUN   TestGnmiSubscribe/stream_query_for_COUNTERS/Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_with_update_of_field_value\r\n=== RUN   TestGnmiSubscribe/(use_vendor_alias)_stream_query_for_COUNTERS/[Ethernet68/1]/SAI_PORT_STAT_PFC_7_RX_PKTS_with_update_of_field_value\r\n=== RUN   TestGnmiSubscribe/stream_query_for_COUNTERS/Ethernet68/Pfcwd_with_update_of_field_value\r\n=== RUN   TestGnmiSubscribe/(use_vendor_alias)_stream_query_for_COUNTERS/[Ethernet68/1]/Pfcwd_with_update_of_field_value\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_key_Ethernet*_with_new_test_field_field_on_Ethernet68\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_key_Ethernet*/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_update\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_key_Ethernet*/Pfcwd_with_field_value_update\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_COUNTERS_PORT_NAME_MAP_with_new_field_test_field\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_COUNTERS_PORT_NAME_MAP_with_test_field_delete\r\n=== RUN   TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_change\r\n=== RUN   TestGnmiSubscribe/(use_vendor_alias)_poll_query_for_COUNTERS/[Ethernet68/1]/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_change\r\n=== RUN   TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/Pfcwd_with_field_value_change\r\n=== RUN   TestGnmiSubscribe/(use_vendor_alias)_poll_query_for_COUNTERS/[Ethernet68/1]/Pfcwd_with_field_value_change\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_key_Ethernet*_with_Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_field_value_change\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_key_field_Ethernet*/SAI_PORT_STAT_PFC_7_RX_PKTS_with_Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_field_value_change\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_key_field_Etherenet*/Pfcwd_with_Ethernet68:3/PFC_WD_QUEUE_STATS_DEADLOCK_DETECTED_field_value_change\r\n=== RUN   TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet*/Queues\r\n=== RUN   TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/Queues_with_field_value_change\r\n=== RUN   TestGnmiSubscribe/(use_vendor_alias)_poll_query_for_COUNTERS/Ethernet68/Queues_with_field_value_change\r\n--- PASS: TestGnmiSubscribe (74.63s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_table_COUNTERS_PORT_NAME_MAP_with_new_test_field_field (2.00s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_table_key_Ethernet68_with_new_test_field_field (3.00s)\r\n    --- PASS: TestGnmiSubscribe/(use_vendor_alias)_stream_query_for_table_key_Ethernet68/1_with_new_test_field_field (3.00s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_COUNTERS/Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_with_update_of_field_value (3.00s)\r\n    --- PASS: TestGnmiSubscribe/(use_vendor_alias)_stream_query_for_COUNTERS/[Ethernet68/1]/SAI_PORT_STAT_PFC_7_RX_PKTS_with_update_of_field_value (3.00s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_COUNTERS/Ethernet68/Pfcwd_with_update_of_field_value (3.00s)\r\n    --- PASS: TestGnmiSubscribe/(use_vendor_alias)_stream_query_for_COUNTERS/[Ethernet68/1]/Pfcwd_with_update_of_field_value (3.00s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_table_key_Ethernet*_with_new_test_field_field_on_Ethernet68 (3.00s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_table_key_Ethernet*/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_update (2.00s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_table_key_Ethernet*/Pfcwd_with_field_value_update (2.00s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_table_COUNTERS_PORT_NAME_MAP_with_new_field_test_field (2.00s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_table_COUNTERS_PORT_NAME_MAP_with_test_field_delete (2.00s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_change (2.00s)\r\n    --- PASS: TestGnmiSubscribe/(use_vendor_alias)_poll_query_for_COUNTERS/[Ethernet68/1]/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_change (2.00s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/Pfcwd_with_field_value_change (2.00s)\r\n    --- PASS: TestGnmiSubscribe/(use_vendor_alias)_poll_query_for_COUNTERS/[Ethernet68/1]/Pfcwd_with_field_value_change (2.00s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_table_key_Ethernet*_with_Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_field_value_change (2.01s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_table_key_field_Ethernet*/SAI_PORT_STAT_PFC_7_RX_PKTS_with_Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_field_value_change (2.01s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_table_key_field_Etherenet*/Pfcwd_with_Ethernet68:3/PFC_WD_QUEUE_STATS_DEADLOCK_DETECTED_field_value_change (2.02s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet*/Queues (1.06s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/Queues_with_field_value_change (2.00s)\r\n    --- PASS: TestGnmiSubscribe/(use_vendor_alias)_poll_query_for_COUNTERS/Ethernet68/Queues_with_field_value_change (2.01s)\r\nPASS\r\nok  \tgithub.com/Azure/sonic-telemetry/gnmi_server\t76.958s\r\n/usr/local/go/bin/go test -v github.com/Azure/sonic-telemetry/dialout/dialout_client\r\ngo: finding github.com/google/gnxi/utils latest\r\ngo: finding github.com/google/gnxi latest\r\ngo: downloading github.com/google/gnxi v0.0.0-20191016182648-6697a080bc2d\r\n=== RUN   TestGNMIDialOutPublish\r\n=== RUN   TestGNMIDialOutPublish/DialOut_to_first_collector_in_stream_mode_and_synced\r\n=== RUN   TestGNMIDialOutPublish/DialOut_to_second_collector_in_stream_mode_upon_failure_of_first_collector\r\n--- PASS: TestGNMIDialOutPublish (15.98s)\r\n    --- PASS: TestGNMIDialOutPublish/DialOut_to_first_collector_in_stream_mode_and_synced (0.50s)\r\n    --- PASS: TestGNMIDialOutPublish/DialOut_to_second_collector_in_stream_mode_upon_failure_of_first_collector (7.51s)\r\nPASS\r\nok  \tgithub.com/Azure/sonic-telemetry/dialout/dialout_client\t15.982s \r\n```"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-12-19T00:11:50Z",
+        "comment_author": "seiferteric",
+        "comment_body": "Okay, the issue is that if I run the existing tests on a switch, the DB is not in a pristine state, so the output will have extra data. On my build host, all of the existing tests pass, but our new tests depend on being on the switch, so they fail on the build host. Below you can see all of the existing tests passing and our new tests failing because it is run on the build host:\r\n```\r\neseifert@gandalf:~/work/sonic/sonic-buildimage/src/sonic-telemetry$ make check \r\nsudo mkdir -p /var/run/redis/sonic-db/\r\n[sudo] password for eseifert: \r\nsudo cp ./testdata/database_config.json /var/run/redis/sonic-db/\r\nsudo mkdir -p /usr/models/yang || true\r\nsudo find /home/eseifert/work/sonic/sonic-buildimage/src/sonic-mgmt-framework/models -name '*.yang' -exec cp {} /usr/models/yang/ \\;\r\n/usr/local/go/bin/go test -mod=vendor -v github.com/Azure/sonic-telemetry/gnmi_server\r\nYang model List: [sonic-acl.yang sonic-common.yang sonic-extension.yang sonic-extensions.yang sonic-interface.yang sonic-port.yang]\r\nERROR: logging before flag.Parse: I1219 14:09:04.485068    6147 xspec.go:284] Module name(sonic-interface)\r\nERROR: logging before flag.Parse: I1219 14:09:04.485111    6147 xspec.go:261] xDbSpecOrdTblMap after appending map[sonic-interface:[INTERFACE]]\r\nERROR: logging before flag.Parse: I1219 14:09:04.485126    6147 xspec.go:284] Module name(sonic-port)\r\nERROR: logging before flag.Parse: I1219 14:09:04.485132    6147 xspec.go:261] xDbSpecOrdTblMap after appending map[sonic-interface:[INTERFACE] sonic-port:[PORT]]\r\nERROR: logging before flag.Parse: I1219 14:09:04.485150    6147 xspec.go:284] Module name(sonic-acl)\r\nERROR: logging before flag.Parse: I1219 14:09:04.485156    6147 xspec.go:261] xDbSpecOrdTblMap after appending map[sonic-acl:[ACL_TABLE ACL_RULE] sonic-interface:[INTERFACE] sonic-port:[PORT]]\r\nERROR: logging before flag.Parse: I1219 14:09:04.485188    6147 xspec.go:284] Module name(sonic-common)\r\nERROR: logging before flag.Parse: I1219 14:09:04.485196    6147 xspec.go:261] xDbSpecOrdTblMap after appending map[sonic-acl:[ACL_TABLE ACL_RULE] sonic-common:[operation] sonic-interface:[INTERFACE] sonic-port:[PORT]]\r\nERROR: logging before flag.Parse: I1219 14:09:04.486961    6147 app_interface.go:82] Registering for path =/openconfig-acl:acl\r\nERROR: logging before flag.Parse: I1219 14:09:04.486972    6147 app_interface.go:82] Registering for path =/sonic-\r\nERROR: logging before flag.Parse: I1219 14:09:04.486977    6147 app_interface.go:82] Registering for path =*\r\nERROR: logging before flag.Parse: I1219 14:09:04.486999    6147 intf_app.go:93] Init called for INTF module\r\nERROR: logging before flag.Parse: I1219 14:09:04.487008    6147 app_interface.go:82] Registering for path =/openconfig-interfaces:interfaces\r\nERROR: logging before flag.Parse: I1219 14:09:04.487013    6147 lldp_app.go:61] Init called for LLDP modules module\r\nERROR: logging before flag.Parse: I1219 14:09:04.487018    6147 app_interface.go:82] Registering for path =/openconfig-lldp:lldp\r\nERROR: logging before flag.Parse: I1219 14:09:04.487031    6147 pfm_app.go:44] Init called for Platform module\r\nERROR: logging before flag.Parse: I1219 14:09:04.487038    6147 app_interface.go:82] Registering for path =/openconfig-platform:components\r\nERROR: logging before flag.Parse: I1219 14:09:04.531228    6147 sys_app.go:47] SysApp: Init called for System module\r\nERROR: logging before flag.Parse: I1219 14:09:04.531256    6147 app_interface.go:82] Registering for path =/openconfig-system:system\r\n=== RUN   TestGnmiSet\r\n=== RUN   TestGnmiSet/Set_OC_Interface_MTU\r\n=== RUN   TestGnmiSet/Set_OC_Interface_IP\r\n=== RUN   TestGnmiSet/Delete_OC_Interface_IP\r\n--- PASS: TestGnmiSet (4.35s)\r\n    --- PASS: TestGnmiSet/Set_OC_Interface_MTU (0.02s)\r\n    --- PASS: TestGnmiSet/Set_OC_Interface_IP (0.00s)\r\n    --- PASS: TestGnmiSet/Delete_OC_Interface_IP (0.00s)\r\n=== RUN   TestGnmiGet\r\n=== RUN   TestGnmiGet/Test_non-existing_path_Target\r\nE1219 14:09:14.644170    6147 app_interface.go:143] Unsupported path=/MyCounters\r\n=== RUN   TestGnmiGet/Test_empty_path_target\r\n=== RUN   TestGnmiGet/Get_valid_but_non-existing_node\r\n=== RUN   TestGnmiGet/Get_COUNTERS_PORT_NAME_MAP\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet68\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet68_SAI_PORT_STAT_PFC_7_RX_PKTS\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet68_Pfcwd\r\n=== RUN   TestGnmiGet/get_COUNTERS_(use_vendor_alias):Ethernet68/1\r\n=== RUN   TestGnmiGet/get_COUNTERS_(use_vendor_alias):Ethernet68/1_SAI_PORT_STAT_PFC_7_RX_PKTS\r\n=== RUN   TestGnmiGet/get_COUNTERS_(use_vendor_alias):Ethernet68/1_Pfcwd\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet*\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet*_SAI_PORT_STAT_PFC_7_RX_PKTS\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet*_Pfcwd\r\n--- PASS: TestGnmiGet (5.78s)\r\n    --- PASS: TestGnmiGet/Test_non-existing_path_Target (0.02s)\r\n    --- PASS: TestGnmiGet/Test_empty_path_target (0.00s)\r\n    --- PASS: TestGnmiGet/Get_valid_but_non-existing_node (0.01s)\r\n    --- PASS: TestGnmiGet/Get_COUNTERS_PORT_NAME_MAP (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet68 (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet68_SAI_PORT_STAT_PFC_7_RX_PKTS (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet68_Pfcwd (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS_(use_vendor_alias):Ethernet68/1 (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS_(use_vendor_alias):Ethernet68/1_SAI_PORT_STAT_PFC_7_RX_PKTS (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS_(use_vendor_alias):Ethernet68/1_Pfcwd (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet* (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet*_SAI_PORT_STAT_PFC_7_RX_PKTS (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet*_Pfcwd (0.00s)\r\n=== RUN   TestGnmiGetTranslib\r\n=== RUN   TestGnmiGetTranslib/Get_OC_Interfaces\r\n=== RUN   TestGnmiGetTranslib/Get_OC_Interface\r\n=== RUN   TestGnmiGetTranslib/Get_OC_Interface_admin-status\r\n=== RUN   TestGnmiGetTranslib/Get_OC_Interface_ifindex\r\n=== RUN   TestGnmiGetTranslib/Get_OC_Interface_mtu\r\n--- PASS: TestGnmiGetTranslib (8.81s)\r\n    --- PASS: TestGnmiGetTranslib/Get_OC_Interfaces (0.18s)\r\n    --- PASS: TestGnmiGetTranslib/Get_OC_Interface (0.00s)\r\n    --- PASS: TestGnmiGetTranslib/Get_OC_Interface_admin-status (0.00s)\r\n    --- PASS: TestGnmiGetTranslib/Get_OC_Interface_ifindex (0.00s)\r\n    --- PASS: TestGnmiGetTranslib/Get_OC_Interface_mtu (0.00s)\r\n=== RUN   TestGnmiSubscribe\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_COUNTERS_PORT_NAME_MAP_with_new_test_field_field\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_key_Ethernet68_with_new_test_field_field\r\n=== RUN   TestGnmiSubscribe/(use_vendor_alias)_stream_query_for_table_key_Ethernet68/1_with_new_test_field_field\r\n=== RUN   TestGnmiSubscribe/stream_query_for_COUNTERS/Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_with_update_of_field_value\r\n=== RUN   TestGnmiSubscribe/(use_vendor_alias)_stream_query_for_COUNTERS/[Ethernet68/1]/SAI_PORT_STAT_PFC_7_RX_PKTS_with_update_of_field_value\r\n=== RUN   TestGnmiSubscribe/stream_query_for_COUNTERS/Ethernet68/Pfcwd_with_update_of_field_value\r\n=== RUN   TestGnmiSubscribe/(use_vendor_alias)_stream_query_for_COUNTERS/[Ethernet68/1]/Pfcwd_with_update_of_field_value\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_key_Ethernet*_with_new_test_field_field_on_Ethernet68\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_key_Ethernet*/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_update\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_key_Ethernet*/Pfcwd_with_field_value_update\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_COUNTERS_PORT_NAME_MAP_with_new_field_test_field\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_COUNTERS_PORT_NAME_MAP_with_test_field_delete\r\n=== RUN   TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_change\r\n=== RUN   TestGnmiSubscribe/(use_vendor_alias)_poll_query_for_COUNTERS/[Ethernet68/1]/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_change\r\n=== RUN   TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/Pfcwd_with_field_value_change\r\n=== RUN   TestGnmiSubscribe/(use_vendor_alias)_poll_query_for_COUNTERS/[Ethernet68/1]/Pfcwd_with_field_value_change\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_key_Ethernet*_with_Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_field_value_change\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_key_field_Ethernet*/SAI_PORT_STAT_PFC_7_RX_PKTS_with_Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_field_value_change\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_key_field_Etherenet*/Pfcwd_with_Ethernet68:3/PFC_WD_QUEUE_STATS_DEADLOCK_DETECTED_field_value_change\r\n=== RUN   TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet*/Queues\r\n=== RUN   TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/Queues_with_field_value_change\r\n=== RUN   TestGnmiSubscribe/(use_vendor_alias)_poll_query_for_COUNTERS/Ethernet68/Queues_with_field_value_change\r\n--- PASS: TestGnmiSubscribe (74.62s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_table_COUNTERS_PORT_NAME_MAP_with_new_test_field_field (2.00s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_table_key_Ethernet68_with_new_test_field_field (3.00s)\r\n    --- PASS: TestGnmiSubscribe/(use_vendor_alias)_stream_query_for_table_key_Ethernet68/1_with_new_test_field_field (3.00s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_COUNTERS/Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_with_update_of_field_value (3.00s)\r\n    --- PASS: TestGnmiSubscribe/(use_vendor_alias)_stream_query_for_COUNTERS/[Ethernet68/1]/SAI_PORT_STAT_PFC_7_RX_PKTS_with_update_of_field_value (3.00s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_COUNTERS/Ethernet68/Pfcwd_with_update_of_field_value (3.00s)\r\n    --- PASS: TestGnmiSubscribe/(use_vendor_alias)_stream_query_for_COUNTERS/[Ethernet68/1]/Pfcwd_with_update_of_field_value (3.00s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_table_key_Ethernet*_with_new_test_field_field_on_Ethernet68 (3.00s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_table_key_Ethernet*/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_update (2.00s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_table_key_Ethernet*/Pfcwd_with_field_value_update (2.00s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_table_COUNTERS_PORT_NAME_MAP_with_new_field_test_field (2.00s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_table_COUNTERS_PORT_NAME_MAP_with_test_field_delete (2.00s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_change (2.00s)\r\n    --- PASS: TestGnmiSubscribe/(use_vendor_alias)_poll_query_for_COUNTERS/[Ethernet68/1]/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_change (2.00s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/Pfcwd_with_field_value_change (2.00s)\r\n    --- PASS: TestGnmiSubscribe/(use_vendor_alias)_poll_query_for_COUNTERS/[Ethernet68/1]/Pfcwd_with_field_value_change (2.00s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_table_key_Ethernet*_with_Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_field_value_change (2.02s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_table_key_field_Ethernet*/SAI_PORT_STAT_PFC_7_RX_PKTS_with_Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_field_value_change (2.01s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_table_key_field_Etherenet*/Pfcwd_with_Ethernet68:3/PFC_WD_QUEUE_STATS_DEADLOCK_DETECTED_field_value_change (2.02s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet*/Queues (1.06s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/Queues_with_field_value_change (2.01s)\r\n    --- PASS: TestGnmiSubscribe/(use_vendor_alias)_poll_query_for_COUNTERS/Ethernet68/Queues_with_field_value_change (2.01s)\r\n=== RUN   TestCapabilities\r\n--- PASS: TestCapabilities (2.32s)\r\nPASS\r\nok  \tgithub.com/Azure/sonic-telemetry/gnmi_server\t96.020s\r\n/usr/local/go/bin/go test -mod=vendor -v github.com/Azure/sonic-telemetry/dialout/dialout_client\r\nYang model List: [sonic-acl.yang sonic-common.yang sonic-extension.yang sonic-extensions.yang sonic-interface.yang sonic-port.yang]\r\nERROR: logging before flag.Parse: I1219 14:10:42.298587    6350 xspec.go:284] Module name(sonic-common)\r\nERROR: logging before flag.Parse: I1219 14:10:42.298627    6350 xspec.go:261] xDbSpecOrdTblMap after appending map[sonic-common:[operation]]\r\nERROR: logging before flag.Parse: I1219 14:10:42.298637    6350 xspec.go:284] Module name(sonic-port)\r\nERROR: logging before flag.Parse: I1219 14:10:42.298645    6350 xspec.go:261] xDbSpecOrdTblMap after appending map[sonic-common:[operation] sonic-port:[PORT]]\r\nERROR: logging before flag.Parse: I1219 14:10:42.298667    6350 xspec.go:284] Module name(sonic-interface)\r\nERROR: logging before flag.Parse: I1219 14:10:42.298673    6350 xspec.go:261] xDbSpecOrdTblMap after appending map[sonic-common:[operation] sonic-interface:[INTERFACE] sonic-port:[PORT]]\r\nERROR: logging before flag.Parse: I1219 14:10:42.298686    6350 xspec.go:284] Module name(sonic-acl)\r\nERROR: logging before flag.Parse: I1219 14:10:42.298696    6350 xspec.go:261] xDbSpecOrdTblMap after appending map[sonic-acl:[ACL_TABLE ACL_RULE] sonic-common:[operation] sonic-interface:[INTERFACE] sonic-port:[PORT]]\r\nERROR: logging before flag.Parse: I1219 14:10:42.300554    6350 app_interface.go:82] Registering for path =/openconfig-acl:acl\r\nERROR: logging before flag.Parse: I1219 14:10:42.300567    6350 app_interface.go:82] Registering for path =/sonic-\r\nERROR: logging before flag.Parse: I1219 14:10:42.300571    6350 app_interface.go:82] Registering for path =*\r\nERROR: logging before flag.Parse: I1219 14:10:42.300579    6350 intf_app.go:93] Init called for INTF module\r\nERROR: logging before flag.Parse: I1219 14:10:42.300583    6350 app_interface.go:82] Registering for path =/openconfig-interfaces:interfaces\r\nERROR: logging before flag.Parse: I1219 14:10:42.300591    6350 lldp_app.go:61] Init called for LLDP modules module\r\nERROR: logging before flag.Parse: I1219 14:10:42.300596    6350 app_interface.go:82] Registering for path =/openconfig-lldp:lldp\r\nERROR: logging before flag.Parse: I1219 14:10:42.300601    6350 pfm_app.go:44] Init called for Platform module\r\nERROR: logging before flag.Parse: I1219 14:10:42.300608    6350 app_interface.go:82] Registering for path =/openconfig-platform:components\r\nERROR: logging before flag.Parse: I1219 14:10:42.348172    6350 sys_app.go:47] SysApp: Init called for System module\r\nERROR: logging before flag.Parse: I1219 14:10:42.348195    6350 app_interface.go:82] Registering for path =/openconfig-system:system\r\n=== RUN   TestGNMIDialOutPublish\r\n=== RUN   TestGNMIDialOutPublish/DialOut_to_first_collector_in_stream_mode_and_synced\r\n=== RUN   TestGNMIDialOutPublish/DialOut_to_second_collector_in_stream_mode_upon_failure_of_first_collector\r\n--- PASS: TestGNMIDialOutPublish (18.26s)\r\n    --- PASS: TestGNMIDialOutPublish/DialOut_to_first_collector_in_stream_mode_and_synced (0.50s)\r\n    --- PASS: TestGNMIDialOutPublish/DialOut_to_second_collector_in_stream_mode_upon_failure_of_first_collector (7.50s)\r\nPASS\r\nok  \tgithub.com/Azure/sonic-telemetry/dialout/dialout_client\t18.380s\r\n\r\n```"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-12-19T00:31:14Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "we should make new test cases passed on build host as well"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-12-19T20:58:10Z",
+        "comment_author": "seiferteric",
+        "comment_body": "@dzhangalibaba with my latest commit, all tests are passing.\r\n\r\n```\r\neseifert@gandalf:~/work/sonic/sonic-buildimage/src/sonic-telemetry$ CVL_SCHEMA_PATH=$PWD/../sonic-mgmt-framework/src/cvl/schema go test -mod=vendor -v github.com/Azure/sonic-telemetry/gnmi_server\r\nYang model List: [sonic-acl.yang sonic-common.yang sonic-extension.yang sonic-extensions.yang sonic-interface.yang sonic-port.yang]\r\nERROR: logging before flag.Parse: I1219 12:55:37.589062   19132 xspec.go:284] Module name(sonic-acl)\r\nERROR: logging before flag.Parse: I1219 12:55:37.589109   19132 xspec.go:261] xDbSpecOrdTblMap after appending map[sonic-acl:[ACL_TABLE ACL_RULE]]\r\nERROR: logging before flag.Parse: I1219 12:55:37.589156   19132 xspec.go:284] Module name(sonic-port)\r\nERROR: logging before flag.Parse: I1219 12:55:37.589163   19132 xspec.go:261] xDbSpecOrdTblMap after appending map[sonic-acl:[ACL_TABLE ACL_RULE] sonic-port:[PORT]]\r\nERROR: logging before flag.Parse: I1219 12:55:37.589194   19132 xspec.go:284] Module name(sonic-common)\r\nERROR: logging before flag.Parse: I1219 12:55:37.589203   19132 xspec.go:261] xDbSpecOrdTblMap after appending map[sonic-acl:[ACL_TABLE ACL_RULE] sonic-common:[operation] sonic-port:[PORT]]\r\nERROR: logging before flag.Parse: I1219 12:55:37.589226   19132 xspec.go:284] Module name(sonic-interface)\r\nERROR: logging before flag.Parse: I1219 12:55:37.589232   19132 xspec.go:261] xDbSpecOrdTblMap after appending map[sonic-acl:[ACL_TABLE ACL_RULE] sonic-common:[operation] sonic-interface:[INTERFACE] sonic-port:[PORT]]\r\nERROR: logging before flag.Parse: I1219 12:55:37.590914   19132 app_interface.go:82] Registering for path =/openconfig-acl:acl\r\nERROR: logging before flag.Parse: I1219 12:55:37.590924   19132 app_interface.go:82] Registering for path =/sonic-\r\nERROR: logging before flag.Parse: I1219 12:55:37.590930   19132 app_interface.go:82] Registering for path =*\r\nERROR: logging before flag.Parse: I1219 12:55:37.590948   19132 intf_app.go:93] Init called for INTF module\r\nERROR: logging before flag.Parse: I1219 12:55:37.590956   19132 app_interface.go:82] Registering for path =/openconfig-interfaces:interfaces\r\nERROR: logging before flag.Parse: I1219 12:55:37.590961   19132 lldp_app.go:61] Init called for LLDP modules module\r\nERROR: logging before flag.Parse: I1219 12:55:37.590966   19132 app_interface.go:82] Registering for path =/openconfig-lldp:lldp\r\nERROR: logging before flag.Parse: I1219 12:55:37.590972   19132 pfm_app.go:44] Init called for Platform module\r\nERROR: logging before flag.Parse: I1219 12:55:37.590990   19132 app_interface.go:82] Registering for path =/openconfig-platform:components\r\nERROR: logging before flag.Parse: I1219 12:55:37.631208   19132 sys_app.go:47] SysApp: Init called for System module\r\nERROR: logging before flag.Parse: I1219 12:55:37.631237   19132 app_interface.go:82] Registering for path =/openconfig-system:system\r\n=== RUN   TestGnmiSet\r\n=== RUN   TestGnmiSet/Set_OC_Interface_MTU\r\n=== RUN   TestGnmiSet/Set_OC_Interface_IP\r\n=== RUN   TestGnmiSet/Delete_OC_Interface_IP\r\n--- PASS: TestGnmiSet (1.47s)\r\n    --- PASS: TestGnmiSet/Set_OC_Interface_MTU (0.03s)\r\n    --- PASS: TestGnmiSet/Set_OC_Interface_IP (0.00s)\r\n    --- PASS: TestGnmiSet/Delete_OC_Interface_IP (0.00s)\r\n=== RUN   TestGnmiGet\r\n=== RUN   TestGnmiGet/Test_non-existing_path_Target\r\nE1219 12:55:43.939423   19132 app_interface.go:143] Unsupported path=/MyCounters\r\n=== RUN   TestGnmiGet/Test_empty_path_target\r\n=== RUN   TestGnmiGet/Get_valid_but_non-existing_node\r\n=== RUN   TestGnmiGet/Get_COUNTERS_PORT_NAME_MAP\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet68\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet68_SAI_PORT_STAT_PFC_7_RX_PKTS\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet68_Pfcwd\r\n=== RUN   TestGnmiGet/get_COUNTERS_(use_vendor_alias):Ethernet68/1\r\n=== RUN   TestGnmiGet/get_COUNTERS_(use_vendor_alias):Ethernet68/1_SAI_PORT_STAT_PFC_7_RX_PKTS\r\n=== RUN   TestGnmiGet/get_COUNTERS_(use_vendor_alias):Ethernet68/1_Pfcwd\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet*\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet*_SAI_PORT_STAT_PFC_7_RX_PKTS\r\n=== RUN   TestGnmiGet/get_COUNTERS:Ethernet*_Pfcwd\r\n--- PASS: TestGnmiGet (4.87s)\r\n    --- PASS: TestGnmiGet/Test_non-existing_path_Target (0.02s)\r\n    --- PASS: TestGnmiGet/Test_empty_path_target (0.00s)\r\n    --- PASS: TestGnmiGet/Get_valid_but_non-existing_node (0.00s)\r\n    --- PASS: TestGnmiGet/Get_COUNTERS_PORT_NAME_MAP (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet68 (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet68_SAI_PORT_STAT_PFC_7_RX_PKTS (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet68_Pfcwd (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS_(use_vendor_alias):Ethernet68/1 (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS_(use_vendor_alias):Ethernet68/1_SAI_PORT_STAT_PFC_7_RX_PKTS (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS_(use_vendor_alias):Ethernet68/1_Pfcwd (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet* (0.01s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet*_SAI_PORT_STAT_PFC_7_RX_PKTS (0.00s)\r\n    --- PASS: TestGnmiGet/get_COUNTERS:Ethernet*_Pfcwd (0.01s)\r\n=== RUN   TestGnmiGetTranslib\r\n=== RUN   TestGnmiGetTranslib/Get_OC_Interfaces\r\n=== RUN   TestGnmiGetTranslib/Get_OC_Interface\r\n=== RUN   TestGnmiGetTranslib/Get_OC_Interface_admin-status\r\n=== RUN   TestGnmiGetTranslib/Get_OC_Interface_ifindex\r\n=== RUN   TestGnmiGetTranslib/Get_OC_Interface_mtu\r\n--- PASS: TestGnmiGetTranslib (2.29s)\r\n    --- PASS: TestGnmiGetTranslib/Get_OC_Interfaces (0.17s)\r\n    --- PASS: TestGnmiGetTranslib/Get_OC_Interface (0.00s)\r\n    --- PASS: TestGnmiGetTranslib/Get_OC_Interface_admin-status (0.00s)\r\n    --- PASS: TestGnmiGetTranslib/Get_OC_Interface_ifindex (0.00s)\r\n    --- PASS: TestGnmiGetTranslib/Get_OC_Interface_mtu (0.00s)\r\n=== RUN   TestGnmiSubscribe\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_COUNTERS_PORT_NAME_MAP_with_new_test_field_field\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_key_Ethernet68_with_new_test_field_field\r\n=== RUN   TestGnmiSubscribe/(use_vendor_alias)_stream_query_for_table_key_Ethernet68/1_with_new_test_field_field\r\n=== RUN   TestGnmiSubscribe/stream_query_for_COUNTERS/Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_with_update_of_field_value\r\n=== RUN   TestGnmiSubscribe/(use_vendor_alias)_stream_query_for_COUNTERS/[Ethernet68/1]/SAI_PORT_STAT_PFC_7_RX_PKTS_with_update_of_field_value\r\n=== RUN   TestGnmiSubscribe/stream_query_for_COUNTERS/Ethernet68/Pfcwd_with_update_of_field_value\r\n=== RUN   TestGnmiSubscribe/(use_vendor_alias)_stream_query_for_COUNTERS/[Ethernet68/1]/Pfcwd_with_update_of_field_value\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_key_Ethernet*_with_new_test_field_field_on_Ethernet68\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_key_Ethernet*/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_update\r\n=== RUN   TestGnmiSubscribe/stream_query_for_table_key_Ethernet*/Pfcwd_with_field_value_update\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_COUNTERS_PORT_NAME_MAP_with_new_field_test_field\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_COUNTERS_PORT_NAME_MAP_with_test_field_delete\r\n=== RUN   TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_change\r\n=== RUN   TestGnmiSubscribe/(use_vendor_alias)_poll_query_for_COUNTERS/[Ethernet68/1]/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_change\r\n=== RUN   TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/Pfcwd_with_field_value_change\r\n=== RUN   TestGnmiSubscribe/(use_vendor_alias)_poll_query_for_COUNTERS/[Ethernet68/1]/Pfcwd_with_field_value_change\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_key_Ethernet*_with_Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_field_value_change\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_key_field_Ethernet*/SAI_PORT_STAT_PFC_7_RX_PKTS_with_Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_field_value_change\r\n=== RUN   TestGnmiSubscribe/poll_query_for_table_key_field_Etherenet*/Pfcwd_with_Ethernet68:3/PFC_WD_QUEUE_STATS_DEADLOCK_DETECTED_field_value_change\r\n=== RUN   TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet*/Queues\r\n=== RUN   TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/Queues_with_field_value_change\r\n=== RUN   TestGnmiSubscribe/(use_vendor_alias)_poll_query_for_COUNTERS/Ethernet68/Queues_with_field_value_change\r\n--- PASS: TestGnmiSubscribe (76.28s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_table_COUNTERS_PORT_NAME_MAP_with_new_test_field_field (2.00s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_table_key_Ethernet68_with_new_test_field_field (3.00s)\r\n    --- PASS: TestGnmiSubscribe/(use_vendor_alias)_stream_query_for_table_key_Ethernet68/1_with_new_test_field_field (3.00s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_COUNTERS/Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_with_update_of_field_value (3.00s)\r\n    --- PASS: TestGnmiSubscribe/(use_vendor_alias)_stream_query_for_COUNTERS/[Ethernet68/1]/SAI_PORT_STAT_PFC_7_RX_PKTS_with_update_of_field_value (3.00s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_COUNTERS/Ethernet68/Pfcwd_with_update_of_field_value (3.00s)\r\n    --- PASS: TestGnmiSubscribe/(use_vendor_alias)_stream_query_for_COUNTERS/[Ethernet68/1]/Pfcwd_with_update_of_field_value (3.00s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_table_key_Ethernet*_with_new_test_field_field_on_Ethernet68 (3.00s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_table_key_Ethernet*/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_update (2.00s)\r\n    --- PASS: TestGnmiSubscribe/stream_query_for_table_key_Ethernet*/Pfcwd_with_field_value_update (2.00s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_table_COUNTERS_PORT_NAME_MAP_with_new_field_test_field (2.01s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_table_COUNTERS_PORT_NAME_MAP_with_test_field_delete (2.00s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_change (2.00s)\r\n    --- PASS: TestGnmiSubscribe/(use_vendor_alias)_poll_query_for_COUNTERS/[Ethernet68/1]/SAI_PORT_STAT_PFC_7_RX_PKTS_with_field_value_change (2.00s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/Pfcwd_with_field_value_change (2.00s)\r\n    --- PASS: TestGnmiSubscribe/(use_vendor_alias)_poll_query_for_COUNTERS/[Ethernet68/1]/Pfcwd_with_field_value_change (2.00s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_table_key_Ethernet*_with_Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_field_value_change (2.02s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_table_key_field_Ethernet*/SAI_PORT_STAT_PFC_7_RX_PKTS_with_Ethernet68/SAI_PORT_STAT_PFC_7_RX_PKTS_field_value_change (2.01s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_table_key_field_Etherenet*/Pfcwd_with_Ethernet68:3/PFC_WD_QUEUE_STATS_DEADLOCK_DETECTED_field_value_change (2.02s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet*/Queues (1.05s)\r\n    --- PASS: TestGnmiSubscribe/poll_query_for_COUNTERS/Ethernet68/Queues_with_field_value_change (2.01s)\r\n    --- PASS: TestGnmiSubscribe/(use_vendor_alias)_poll_query_for_COUNTERS/Ethernet68/Queues_with_field_value_change (2.01s)\r\n=== RUN   TestCapabilities\r\n--- PASS: TestCapabilities (5.76s)\r\nPASS\r\nok  \tgithub.com/Azure/sonic-telemetry/gnmi_server\t90.791s\r\n```"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-12-20T02:42:44Z",
+        "comment_author": "seiferteric",
+        "comment_body": "Here is the build and test output. \r\n[output.txt](https://github.com/Azure/sonic-telemetry/files/3986450/output.txt)\r\n"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-12-23T18:28:17Z",
+        "comment_author": "renukamanavalan",
+        "comment_body": "retest this please."
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-12-23T18:55:05Z",
+        "comment_author": "seiferteric",
+        "comment_body": "> retest this please.\r\n\r\n[output.txt](https://github.com/Azure/sonic-telemetry/files/3995935/output.txt)\r\n@renukamanavalan Here you go."
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-12-23T20:21:43Z",
+        "comment_author": "renukamanavalan",
+        "comment_body": "Build can't succeed until this PR & corresponding buildimage PR #3488 gets checked-in, due to cross-dependencies.\r\n\r\nHence submitting to unblock."
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "comment_at": "2020-03-12T03:38:20Z",
+        "comment_author": "twtseng-tim",
+        "comment_body": "Hi,@PrabhuSreenivasan and @anand-kumar-subramanian \r\nAccording to [SONiC Management Framework HLD document](https://github.com/Azure/SONiC/blob/master/doc/mgmt/Management%20Framework.md), the GNMI should be verified by some ACL tests, but I can not find those tests in gnmi_server/server_test.go, where should I look for those tests?"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-19T18:29:57Z",
+        "review_author": "renukamanavalan"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-20T06:28:19Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-20T17:48:35Z",
+        "review_author": "renukamanavalan"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-22T23:37:11Z",
+        "review_author": "seiferteric"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-22T23:40:38Z",
+        "review_author": "seiferteric"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-22T23:41:40Z",
+        "review_author": "seiferteric"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-22T23:42:15Z",
+        "review_author": "seiferteric"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-22T23:43:13Z",
+        "review_author": "seiferteric"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-22T23:45:14Z",
+        "review_author": "seiferteric"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-27T01:41:13Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-28T00:08:04Z",
+        "review_author": "renukamanavalan"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-28T00:22:51Z",
+        "review_author": "renukamanavalan"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-11-28T01:25:37Z",
+        "review_author": "renukamanavalan"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-12-11T19:11:43Z",
+        "review_author": "seiferteric"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "review_at": "2022-07-01T21:20:20Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "latestReview_at": "2019-12-11T19:11:43Z",
+        "latestReview_author": "seiferteric",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "latestReview_at": "2019-11-20T06:28:19Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "latestReview_at": "2022-07-01T21:20:20Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "latestReview_at": "2019-11-27T01:41:13Z",
+        "latestReview_author": "dzhangalibaba",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-telemetry",
+        "latestReview_at": "2019-11-28T01:25:37Z",
+        "latestReview_author": "renukamanavalan",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 19,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-05-24T09:25:26Z",
+        "comment_author": "lguohan",
+        "comment_body": "retest this please"
+    },
+    {
+        "number": 19,
+        "repo": "sonic-telemetry",
+        "comment_at": "2019-05-24T09:29:04Z",
+        "comment_author": "lguohan",
+        "comment_body": "retest this please"
+    },
+    {
+        "number": 19,
+        "repo": "sonic-telemetry",
+        "review_at": "2019-05-24T21:15:42Z",
+        "review_author": "jipanyang"
+    },
+    {
+        "number": 19,
+        "repo": "sonic-telemetry",
+        "latestReview_at": "2019-05-24T21:15:42Z",
+        "latestReview_author": "jipanyang",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 17,
+        "repo": "sonic-telemetry",
+        "review_at": "2018-09-06T06:17:04Z",
+        "review_author": "jipanyang"
+    },
+    {
+        "number": 17,
+        "repo": "sonic-telemetry",
+        "latestReview_at": "2018-09-06T06:17:04Z",
+        "latestReview_author": "jipanyang",
+        "latestReview_state": "APPROVED"
+    }
+]

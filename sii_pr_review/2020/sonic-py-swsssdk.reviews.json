@@ -1,0 +1,2388 @@
+[
+    {
+        "number": 99,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-12-29T06:19:26Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **fixes 1 alert** when merging c8d3b55126f930d93ced289080ab1af805c1dbf1 into 6e42d58c15fc78977e59462bfc8cba2bb3017ae2 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-py-swsssdk/rev/pr-7f220bac0902cde094086a1cefd70636320b5786)\n\n**fixed alerts:**\n\n* 1 for Unused local variable #Resolved"
+    },
+    {
+        "number": 99,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-12-30T02:45:10Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **fixes 1 alert** when merging d0d08971ef070c76bcfa413782b680a3cb079a01 into 6e42d58c15fc78977e59462bfc8cba2bb3017ae2 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-py-swsssdk/rev/pr-22806a754d9038e345f756e06e5ab8598970194f)\n\n**fixed alerts:**\n\n* 1 for Unused local variable"
+    },
+    {
+        "number": 99,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-12-29T18:48:09Z",
+        "review_author": "renukamanavalan"
+    },
+    {
+        "number": 99,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-12-29T23:08:20Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 99,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-12-29T23:09:20Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 99,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-12-29T23:16:57Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 99,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-12-30T01:56:04Z",
+        "review_author": "renukamanavalan"
+    },
+    {
+        "number": 99,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-12-30T02:52:23Z",
+        "review_author": "renukamanavalan"
+    },
+    {
+        "number": 99,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-12-30T02:52:23Z",
+        "latestReview_author": "renukamanavalan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 96,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-11-18T20:21:35Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 96,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-11-18T20:50:26Z",
+        "review_author": "tahmed-dev"
+    },
+    {
+        "number": 96,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-11-18T20:21:35Z",
+        "latestReview_author": "jleveque",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 96,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-11-18T20:50:26Z",
+        "latestReview_author": "tahmed-dev",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 95,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-11-17T22:40:17Z",
+        "comment_author": "jleveque",
+        "comment_body": "@qiluo-msft to comment, as the issue appears to be due to swsssdk change."
+    },
+    {
+        "number": 95,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-11-20T10:42:49Z",
+        "comment_author": "dmytroxshevchuk",
+        "comment_body": "@qiluo-msft, please take a look to this PR"
+    },
+    {
+        "number": 95,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-11-21T00:54:38Z",
+        "comment_author": "prsunny",
+        "comment_body": "@qiluo, this is blocking some tests. Merging for now. "
+    },
+    {
+        "number": 95,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-11-21T07:25:38Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "~~Sorry for late. I don't quite understand why this fix works, could you explain?~~"
+    },
+    {
+        "number": 95,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-11-23T06:37:16Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "I spent some time in investigating this issue, and believe this fix will address the issue correctly.\r\nThe root cause for this issue is we use  ```SonicV2Connector``` from ```swsscommon.swsscommon``` in ```fdbshow``` master branch. The ```keys``` method is implemented in C++ and wrapped into a python interface.\r\n```\r\ndef keys(self, *args, **kwargs):\r\n        return _swsscommon.SonicV2Connector_keys(self, *args, **kwargs)\r\n\r\n```\r\nTherefore, a exception will be raised if we pass an unicode to the interface.\r\n```\r\nTypeError(\"in method 'SonicV2Connector_keys', argument 3 of type 'char const *'\",)\r\n```\r\nSo, a conversion to str will address the issue."
+    },
+    {
+        "number": 95,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-11-17T22:20:10Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 95,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-11-18T01:31:48Z",
+        "review_author": "bingwang-ms"
+    },
+    {
+        "number": 95,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-11-17T22:20:10Z",
+        "latestReview_author": "prsunny",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 95,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-11-18T01:31:48Z",
+        "latestReview_author": "bingwang-ms",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 94,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-11-12T18:03:28Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 94,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-11-12T18:35:36Z",
+        "review_author": "tahmed-dev"
+    },
+    {
+        "number": 94,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-11-12T18:03:28Z",
+        "latestReview_author": "jleveque",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 94,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-11-12T18:35:36Z",
+        "latestReview_author": "tahmed-dev",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 93,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-11-06T22:25:38Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 93,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-11-07T00:05:20Z",
+        "review_author": "tahmed-dev"
+    },
+    {
+        "number": 93,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-11-06T22:25:38Z",
+        "latestReview_author": "jleveque",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 93,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-11-07T00:05:20Z",
+        "latestReview_author": "tahmed-dev",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-10-30T00:32:02Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-10-30T00:33:36Z",
+        "review_author": "tahmed-dev"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-10-30T00:54:07Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-10-30T00:54:07Z",
+        "latestReview_author": "jleveque",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 92,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-10-30T00:33:36Z",
+        "latestReview_author": "tahmed-dev",
+        "latestReview_state": "DISMISSED"
+    },
+    {
+        "number": 90,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-10-27T22:50:26Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "@qiluo-msft "
+    },
+    {
+        "number": 90,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-10-28T04:03:01Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": ">     def get_instance(db_name, namespace=None):\r\n\r\nCould you use `get_instancename` to simplify this function?\r\n\r\n---\r\nRefers to: src/swsssdk/dbconnector.py:172 in f650d90. [](commit_id = f650d901a80472869fb6005c51ea1052c7e40d83, deletion_comment = False)"
+    },
+    {
+        "number": 90,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-10-28T05:25:23Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "> > ```\r\n> > def get_instance(db_name, namespace=None):\r\n> > ```\r\n> \r\n> Could you use `get_instancename` to simplify this function?\r\n> \r\n> Refers to: src/swsssdk/dbconnector.py:172 in [f650d90](https://github.com/Azure/sonic-py-swsssdk/commit/f650d901a80472869fb6005c51ea1052c7e40d83). [](commit_id = [f650d90](https://github.com/Azure/sonic-py-swsssdk/commit/f650d901a80472869fb6005c51ea1052c7e40d83), deletion_comment = False)\r\n\r\nupdated"
+    },
+    {
+        "number": 90,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-10-28T16:28:48Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 90,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-10-28T16:28:48Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 89,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-10-22T03:24:55Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **fixes 1 alert** when merging a0c66444d1b2f8598030fd066d8cd7c5589150d5 into 3461ae0578f415753978a5c5b33ad43e0a9b0cc5 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-py-swsssdk/rev/pr-969677ececef6d7e356e27c46a3004a4924aa68f)\n\n**fixed alerts:**\n\n* 1 for Unused import"
+    },
+    {
+        "number": 89,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-10-22T17:32:03Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 89,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-10-22T17:32:09Z",
+        "review_author": "tahmed-dev"
+    },
+    {
+        "number": 89,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-10-22T17:32:03Z",
+        "latestReview_author": "jleveque",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 89,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-10-22T17:32:09Z",
+        "latestReview_author": "tahmed-dev",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-10-01T06:49:45Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "@qiluo-msft "
+    },
+    {
+        "number": 88,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-10-01T17:35:06Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-10-01T19:50:43Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-10-01T19:57:59Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-10-01T20:54:22Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-10-01T21:27:14Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-10-01T21:27:21Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-10-01T21:27:21Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-09-29T06:23:54Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "@qiluo-msft "
+    },
+    {
+        "number": 87,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-09-29T23:24:08Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": ">             def keys(self, db_id):\r\n\r\ndb_name #Closed\r\n\r\n---\r\nRefers to: src/swsssdk/interface.py:21 in 00f0543. [](commit_id = 00f05432785dae4e8bdf6a0b43bfc2787699cb47, deletion_comment = False)"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-09-30T06:23:47Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "> > ```\r\n> >         def keys(self, db_id):\r\n> > ```\r\n> \r\n> db_name\r\n> \r\n> Refers to: src/swsssdk/interface.py:21 in [00f0543](https://github.com/Azure/sonic-py-swsssdk/commit/00f05432785dae4e8bdf6a0b43bfc2787699cb47). [](commit_id = [00f0543](https://github.com/Azure/sonic-py-swsssdk/commit/00f05432785dae4e8bdf6a0b43bfc2787699cb47), deletion_comment = False)\r\n\r\nUPDATED"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-09-29T23:23:16Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-09-29T23:25:33Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-09-30T06:25:24Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-09-30T06:28:21Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-10-01T00:49:47Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-10-01T00:49:47Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 86,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-08-28T17:29:42Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 86,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-08-28T21:00:09Z",
+        "review_author": "tahmed-dev"
+    },
+    {
+        "number": 86,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-08-28T17:29:42Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 86,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-08-28T21:00:09Z",
+        "latestReview_author": "tahmed-dev",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 84,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-08-03T19:49:24Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 84,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-08-03T19:49:24Z",
+        "latestReview_author": "judyjoseph",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 83,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-07-22T23:22:51Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 2 alerts** when merging fa9093c7182d38f5ea687ebfbd04c2c89462f86d into 2df4f40fcec2c5ddafe543aec964a6390d2a9a90 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-py-swsssdk/rev/pr-bef2e9280635dc7209b0817b5deb12e6c0aa5ed6)\n\n**new alerts:**\n\n* 2 for Testing equality to None"
+    },
+    {
+        "number": 83,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-07-23T00:24:15Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **fixes 4 alerts** when merging 2d2b7e1ae0031ccc77d0a1d6c4bfc77aab93df70 into 2df4f40fcec2c5ddafe543aec964a6390d2a9a90 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-py-swsssdk/rev/pr-20a2d1829643b635c19559dc71ec153d1209565e)\n\n**fixed alerts:**\n\n* 4 for Testing equality to None"
+    },
+    {
+        "number": 83,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-07-24T21:52:50Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **fixes 4 alerts** when merging 994851c8e95f143dfebc59c2e89878876bee225d into 2df4f40fcec2c5ddafe543aec964a6390d2a9a90 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-py-swsssdk/rev/pr-6856b96de209852a3c413b8bdd6b117233ebfe13)\n\n**fixed alerts:**\n\n* 4 for Testing equality to None"
+    },
+    {
+        "number": 83,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-07-27T17:33:15Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **fixes 4 alerts** when merging 198d14328bd096bd344197e554791af044931aaf into 2df4f40fcec2c5ddafe543aec964a6390d2a9a90 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-py-swsssdk/rev/pr-8dadf0c8478f8905a156584a4e891e018d4eb856)\n\n**fixed alerts:**\n\n* 4 for Testing equality to None"
+    },
+    {
+        "number": 83,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-07-23T00:18:13Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 83,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-07-23T00:18:56Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 83,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-07-24T21:38:29Z",
+        "review_author": "tahmed-dev"
+    },
+    {
+        "number": 83,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-07-24T21:38:39Z",
+        "review_author": "tahmed-dev"
+    },
+    {
+        "number": 83,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-07-24T22:12:37Z",
+        "review_author": "pavel-shirshov"
+    },
+    {
+        "number": 83,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-07-25T00:14:29Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 83,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-07-25T02:29:34Z",
+        "review_author": "tahmed-dev"
+    },
+    {
+        "number": 83,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-07-25T04:40:34Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 83,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-07-27T17:28:07Z",
+        "review_author": "tahmed-dev"
+    },
+    {
+        "number": 83,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-07-27T18:29:57Z",
+        "review_author": "pavel-shirshov"
+    },
+    {
+        "number": 83,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-07-25T04:40:34Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 83,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-07-27T18:29:57Z",
+        "latestReview_author": "pavel-shirshov",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 81,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-06-30T22:38:59Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 81,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-06-30T22:38:59Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 80,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-06-09T03:57:20Z",
+        "comment_author": "yxieca",
+        "comment_body": "Can you add some description regarding the motivation of upgrading?"
+    },
+    {
+        "number": 80,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-06-09T03:38:45Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 80,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-06-09T03:57:34Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 80,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-06-09T03:38:45Z",
+        "latestReview_author": "jleveque",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 80,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-06-09T03:57:34Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-06-01T18:23:08Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 2 alerts** when merging cabfb623e9e9dbc1efaca082c90863962a6f6820 into 132f8d5f1b00fb8a1b3cdbd7a5c69bb89cfff0e3 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-py-swsssdk/rev/pr-9796214f4ecbd0fcf65f8c223f52e994bb3152dd)\n\n**new alerts:**\n\n* 2 for Unused local variable"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-06-03T00:05:26Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-06-03T00:11:13Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-06-03T00:12:31Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-06-03T00:12:42Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-06-06T01:03:54Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-06-06T01:17:48Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-06-06T15:17:43Z",
+        "review_author": "mykolaf"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-06-06T15:20:21Z",
+        "review_author": "mykolaf"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-06-06T15:23:51Z",
+        "review_author": "mykolaf"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-06-06T23:54:51Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-06-23T14:27:54Z",
+        "review_author": "volodymyrsamotiy"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-06-23T23:44:37Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-06-06T01:17:48Z",
+        "latestReview_author": "prsunny",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-06-23T23:44:37Z",
+        "latestReview_author": "judyjoseph",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-06-06T23:54:51Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 78,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-06-23T14:27:54Z",
+        "latestReview_author": "volodymyrsamotiy",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 77,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-31T21:05:34Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 77,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-31T21:06:04Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 77,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-06-08T19:28:43Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 77,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-06-08T20:02:59Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 77,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-06-08T20:02:59Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 76,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-06-03T21:40:56Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 76,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-06-08T22:59:22Z",
+        "review_author": "daall"
+    },
+    {
+        "number": 76,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-06-03T21:40:56Z",
+        "latestReview_author": "dzhangalibaba",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 76,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-06-08T22:59:22Z",
+        "latestReview_author": "daall",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 74,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-05-22T23:44:45Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "@rajendra-dendukuri @qiluo-msft  Please help review"
+    },
+    {
+        "number": 74,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-05-22T23:48:29Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "Test\r\n\r\nWhen stop all dockers , retry connect until database is restarted and set/get works fine\r\n\r\n```\r\nadmin@ASW-7005:~$ cat /etc/sonic/testdb.py \r\n#!/usr/bin/env python2.7\r\nfrom swsssdk import SonicV2Connector\r\n\r\ndb = SonicV2Connector()\r\ndb.connect(db.CONFIG_DB,True)\r\n\r\ndb.set(\"CONFIG_DB\", \"hashhash\", \"kk\", \"vv\")\r\nprint(db.get_all(\"CONFIG_DB\", \"hashhash\"))\r\nadmin@ASW-7005:~$ /etc/sonic/testdb.py \r\n{'kk': 'vv'}\r\nadmin@ASW-7005:~$ \r\n\r\n\r\nadmin@ASW-7005:~$ docker stop $(docker ps -aq)\r\nedfd0e02be03\r\nb1a76602159b\r\nf16090b43b43\r\n9b67c63b2c8f\r\nbb2f217daea0\r\n4026b5e72382\r\nc090c9da180c\r\n7ddce00e4387\r\n23df59d0f92b\r\na7fc3d31a590\r\n4d142775e9b3\r\n5ee83628e713\r\n48a5d88bdf5e\r\n725d3b951e66\r\nadmin@ASW-7005:~$ /etc/sonic/testdb.py \r\n{'kk': 'vv'}\r\nadmin@ASW-7005:~$ \r\n\r\n```"
+    },
+    {
+        "number": 74,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-05-23T01:16:59Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "> class SonicV2Connector(DBInterface):\r\n\r\nCould it use composition instead of inheritance? #Closed\r\n\r\n---\r\nRefers to: src/swsssdk/dbconnector.py:226 in 4391266. [](commit_id = 4391266b4605e9c0339bcebf310f773928972d6f, deletion_comment = False)"
+    },
+    {
+        "number": 74,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-05-26T22:35:42Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "> > class SonicV2Connector(DBInterface):\r\n> \r\n> Could it use composition instead of inheritance?\r\n> \r\n> Refers to: src/swsssdk/dbconnector.py:226 in [ac457fb](https://github.com/Azure/sonic-py-swsssdk/commit/ac457fb90c0eb145a408fad3ce0bc6a2ed14518f). [](commit_id = [ac457fb](https://github.com/Azure/sonic-py-swsssdk/commit/ac457fb90c0eb145a408fad3ce0bc6a2ed14518f), deletion_comment = False)\r\n\r\nyes we can use it. Updated"
+    },
+    {
+        "number": 74,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-05-27T02:34:47Z",
+        "comment_author": "rajendra-dendukuri",
+        "comment_body": "Verified the patch and it looks good."
+    },
+    {
+        "number": 74,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-06-01T19:31:04Z",
+        "comment_author": "SuvarnaMeenakshi",
+        "comment_body": "@qiluo-msft , @dzhangalibaba is there a plan to merge this to 201911 branch? "
+    },
+    {
+        "number": 74,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-06-01T19:43:02Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "Yes. Added the label."
+    },
+    {
+        "number": 74,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-23T01:14:39Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 74,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-26T22:35:14Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 74,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-26T22:43:56Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 74,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-05-26T22:43:56Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 71,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-05-21T02:56:32Z",
+        "comment_author": "rajendra-dendukuri",
+        "comment_body": "@dzhangalibaba  Can you please review this change."
+    },
+    {
+        "number": 71,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-05-22T17:10:01Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "@qiluo-msft do you have other concern about this changes?  Looks I am not in reviewer list for this component as well.  I remembered I accept invitation before, please resend if possible. "
+    },
+    {
+        "number": 71,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-05-22T17:10:32Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "issue seen without this changes.   https://github.com/Azure/sonic-buildimage/issues/4632"
+    },
+    {
+        "number": 71,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-05-22T17:39:19Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": ">         resp = client.execute_command(*cmd)\r\n\r\n`redis.StrictRedis(decode_responses=True)` will handle the decoding in both python2 and python3. So suggest add extra parameter when contructing SonicV2Connector dbconn. #Closed\r\n\r\n---\r\nRefers to: src/swsssdk/scripts/sonic-db-cli:81 in a5ed19e. [](commit_id = a5ed19e887dbb8892105c90352c39bde369a1878, deletion_comment = False)"
+    },
+    {
+        "number": 71,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-05-22T18:21:15Z",
+        "comment_author": "rajendra-dendukuri",
+        "comment_body": "> > ```\r\n> >     resp = client.execute_command(*cmd)\r\n> > ```\r\n> \r\n> `redis.StrictRedis(decode_responses=True)` will handle the decoding in both python2 and python3. So suggest add extra parameter when contructing SonicV2Connector dbconn.\r\n> \r\n> Refers to: src/swsssdk/scripts/sonic-db-cli:81 in [a5ed19e](https://github.com/Azure/sonic-py-swsssdk/commit/a5ed19e887dbb8892105c90352c39bde369a1878). [](commit_id = [a5ed19e](https://github.com/Azure/sonic-py-swsssdk/commit/a5ed19e887dbb8892105c90352c39bde369a1878), deletion_comment = False)\r\n\r\nThanks @qiluo-msft  I finished my changes and pushed them. Below is the output with my changes.\r\n\r\nroot@sonic:/home/admin# ./test.sh\r\n++ sonic-db-cli CONFIG_DB 'KEYS PORT|Ethernet1*'\r\nPORT|Ethernet116\r\nPORT|Ethernet16\r\nPORT|Ethernet104\r\nPORT|Ethernet112\r\nPORT|Ethernet124\r\nPORT|Ethernet108\r\nPORT|Ethernet100\r\nPORT|Ethernet120\r\nPORT|Ethernet12\r\n++ sonic-db-cli CONFIG_DB 'HGETALL PORT|Ethernet0'\r\nindex\r\n0\r\nlanes\r\n1,2,3,4\r\nmtu\r\n9100\r\nalias\r\nEthernet1/0/1\r\nadmin_status\r\nup\r\nspeed\r\n40000\r\n++ sonic-db-cli CONFIG_DB 'hgetall PORT|Ethernet0'\r\nindex\r\n0\r\nlanes\r\n1,2,3,4\r\nmtu\r\n9100\r\nalias\r\nEthernet1/0/1\r\nadmin_status\r\nup\r\nspeed\r\n40000\r\n++ sonic-db-cli CONFIG_DB 'HGET PORT|Ethernet0 admin_status'\r\nup\r\nroot@sonic:/home/admin#\r\n\r\n\r\n"
+    },
+    {
+        "number": 71,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-05-23T23:53:36Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "@qiluo-msft @rajendra-dendukuri  do we need to add default decode_responses=True in library SonicV2Connector init() instead of the application setting it?  In future, if other application change to py3 codes, this may need to be add in the every application again. "
+    },
+    {
+        "number": 71,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-05-23T23:57:03Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "In future this is a good idea. This PR is just a quick bug fix, so it is enough now and well tested."
+    },
+    {
+        "number": 71,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-22T17:06:17Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 71,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-22T17:18:22Z",
+        "review_author": "rajendra-dendukuri"
+    },
+    {
+        "number": 71,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-22T17:23:20Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 71,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-22T17:23:29Z",
+        "review_author": "rajendra-dendukuri"
+    },
+    {
+        "number": 71,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-22T17:39:30Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 71,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-22T18:14:16Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 71,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-22T18:26:17Z",
+        "review_author": "rajendra-dendukuri"
+    },
+    {
+        "number": 71,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-22T18:29:02Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 71,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-22T18:33:19Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 71,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-05-22T18:33:19Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 71,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-05-22T18:14:16Z",
+        "latestReview_author": "dzhangalibaba",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 70,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-05T05:05:58Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 70,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-05-05T05:05:58Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-05-04T19:54:10Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "@qiluo-msft "
+    },
+    {
+        "number": 69,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-05-05T06:39:53Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "Also for the raising exception , return the exception msg which will make PING as a failure case similar to \"CANNOT connect to redis server\". The application won't catch exception which is not there in redis-cli. e.g , invalid namesapce case and missing/incomplete database_config.json case.\r\n\r\n```\r\nadmin@ASW-7005:~$ sonic-db-cli -n test PING\r\nAn exception of type RuntimeError occurred. Arguments:\r\n('test is not a valid namespace name in configuration file',)\r\nadmin@ASW-7005:~$ sonic-db-cli PING\r\nAn exception of type KeyError occurred. Arguments:\r\n('INSTANCES',)\r\n```\r\n\r\n "
+    },
+    {
+        "number": 69,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-04T20:04:47Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-04T20:06:50Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-04T20:09:45Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-04T20:11:27Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-04T20:24:39Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-04T20:26:02Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-04T20:26:19Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-05T06:35:39Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-05T06:35:51Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-05T06:35:56Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-05T06:36:01Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-05T06:36:07Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-05T06:36:44Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-05T07:13:46Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-05T09:02:26Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-05T18:42:17Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-05T18:48:20Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 69,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-05-05T18:48:20Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 68,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-28T21:27:16Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 68,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-28T21:30:34Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 68,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-28T21:32:42Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 68,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-28T21:32:52Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 68,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-28T21:57:44Z",
+        "review_author": "SuvarnaMeenakshi"
+    },
+    {
+        "number": 68,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-28T22:15:18Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 68,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-28T22:17:31Z",
+        "review_author": "SuvarnaMeenakshi"
+    },
+    {
+        "number": 68,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-29T00:56:57Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 68,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-29T17:36:48Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 68,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-05-05T02:27:23Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 68,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-05-05T02:27:23Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 68,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-04-29T00:56:57Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 68,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-04-29T17:36:48Z",
+        "latestReview_author": "prsunny",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 66,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-04-15T20:08:05Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "@dzhangalibaba Please help review."
+    },
+    {
+        "number": 66,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-15T20:06:01Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 66,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-15T20:06:41Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 66,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-15T20:27:55Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 66,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-04-15T20:27:55Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-04-07T06:49:04Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "@qiluo-msft "
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-04-08T07:37:14Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging ba8d1a254aa2f70a70e77bcc85d6cf82e368df3c into ee9ee1450b160bb7686a45478e7f75fbba0db910 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-py-swsssdk/rev/pr-8ec0e0b67257b164178c4ffb74fe9ea17455c724)\n\n**new alerts:**\n\n* 1 for Wrong name for an argument in a class instantiation"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-07T21:58:46Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-07T22:05:01Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-07T22:08:04Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-07T22:15:29Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-07T22:16:10Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-08T07:25:31Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-08T07:27:22Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-08T07:27:45Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-08T07:28:15Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-08T17:36:00Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-08T18:24:18Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-08T18:25:21Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-08T18:26:22Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-08T18:28:46Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-08T18:32:05Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-11T06:39:28Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-11T06:42:59Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-11T06:43:42Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-11T06:44:07Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-11T06:44:47Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-11T06:50:05Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-11T16:47:16Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-11T16:47:49Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-11T16:50:33Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-12T06:34:22Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-12T06:35:01Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-12T06:35:57Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-12T06:37:12Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-12T19:47:40Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-13T16:56:09Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-13T16:56:45Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-13T18:46:10Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-13T18:50:16Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-13T18:56:27Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-13T23:11:04Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-13T23:11:22Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-13T23:38:18Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 65,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-04-13T23:38:18Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 64,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-04-20T00:02:00Z",
+        "comment_author": "abdosi",
+        "comment_body": "@jleveque do we need this for 201911 ? \r\n\r\nWe are not taking this one yet : \r\nadd mock tables for LAG_NAME_MAP_TABLE in COUNTERS_DB #114\r\n\r\n"
+    },
+    {
+        "number": 64,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-04-20T16:40:02Z",
+        "comment_author": "jleveque",
+        "comment_body": "@abdosi: Good point. It appears we should first cherry-pick https://github.com/Azure/sonic-snmpagent/pull/114 into 201911. @qiluo-msft: Can you please confirm?\r\n\r\nAlso, it appears there are some issues updating the submodule with this commit in master. Let's wait for now."
+    },
+    {
+        "number": 64,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-04-20T23:52:25Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "@jleveque yes, I marked that PR as 201911 requested."
+    },
+    {
+        "number": 64,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-20T18:28:12Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 64,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-20T18:30:19Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 64,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-03-20T18:30:19Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 64,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-03-20T18:28:12Z",
+        "latestReview_author": "prsunny",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-03-13T01:12:42Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "> import swsssdk\r\n\r\nSuggest using argparse instead of reinvent the wheel. #Closed\r\n\r\n---\r\nRefers to: src/swsssdk/scripts/sonic-db-cli:3 in e61c5e6. [](commit_id = e61c5e6f6fd919bff3f3de9659b2fd83d95f43a4, deletion_comment = False)"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-03-17T00:31:52Z",
+        "comment_author": "judyjoseph",
+        "comment_body": "> import swsssdk\r\n> \r\n> Suggest using argparse instead of reinvent the wheel.\r\n> \r\n> Refers to: src/swsssdk/scripts/sonic-db-cli:3 in e61c5e6. [](commit_id = e61c5e6, deletion_comment = False)\r\n\r\nUpdated the sonic-db-cli implementation using argparse. "
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-04-03T19:44:16Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 3 alerts** when merging 87e6646c726b6fab0b51c2e4d689b79ce82a19d2 into df617345d807bc01e3f5740fdfdc4b9799f1cf63 - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-py-swsssdk/rev/pr-6524451fa6681ee206bd357a049f7e64dd0a67aa)\n\n**new alerts:**\n\n* 1 for Testing equality to None\n* 1 for Mismatch between signature and use of an overridden method\n* 1 for Wrong name for an argument in a class instantiation"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-04-08T20:14:22Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "@dzhangalibaba, could you help review?"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-04-10T23:24:10Z",
+        "comment_author": "judyjoseph",
+        "comment_body": "> load_sonic_global_db_config will try to read /var/run/redis/sonic-db/database_global.json, but the file in at this location is generated via database docker, how this python lib works without changing database docker first ?\r\n\r\nThe API load_sonic_global_db_config() doesn't have a strict check for the existence of database_global.json. If the file is present it parses it. I didn't want to enforce .. as this file is only present/generated in the host database docker alone, needn't be present in all namespaces. Hence it is ok -- we can go ahead with this change without changing the database docker first."
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-04-10T23:46:49Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "My understanding is if the global config is not there, actually it means there is no namespace introduced and the old load func will load whatever we have today. If the global config exists, it load each namespace with it own config, then based on the namespace to choose the config. \r\n\r\nWhat I noticed is with current changes in this PR, those get API accept namespace parameter, if the global config doesn't exist and the API with namespace parameter is called , it will crash , correct ? I understand for non-namespace case it is fine. \r\n\r\n> Yes, the program would crash with invalid namespace input. This is a indirect way of enforcing the existence of global config file -- if you need to access other namespaces and global_db json don't exist.\r\n\r\nAlso, if the global config exists, it load SonicDBConfig._sonic_db_config[''] twice ? one in load_sonic_db_config and other in load_sonic_global_db_config while doing namespace_validation ?\r\n\r\n> Yes the idea was to keep both global_db_config and load_sonic_db_config independent.  I have updated this logic now and added an additional check in load_sonic_global_db_config, to check (if SonicDBConfig._sonic_db_config_init == True) i.e if the load_sonic_db_config is already called . If so I don't load it again. \r\n"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-04-14T00:14:05Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "I added sonic-db-cli PING support and add one more get_instanceslist() API in SonicDBConfig.\r\nI tried to keep your argparse format in this PR to make your resolve conflicts easily. You may want to do a rebase. \r\n\r\nSure, I did a rebase. But for some reason the code differences for sonic-db-cli shown here in the PR includes your changes as well ?"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-04-14T14:13:30Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 745216e7acc39d1f9f910a5af18b51b89536e00b into d1a15124719872c415cdaec680016e0035110ffe - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-py-swsssdk/rev/pr-8efbb9adea121aced4bf308fd532e04b59068b4b)\n\n**new alerts:**\n\n* 1 for Unused local variable"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-04-16T21:01:40Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "my earlier comments was addressed, looks good now from my side. You may want to address Qi's comment. "
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-04-20T19:43:30Z",
+        "comment_author": "lgtm-com",
+        "comment_body": "This pull request **introduces 1 alert** when merging 56e057f9d1b1d08b578cb4cc3e87492ae244dcf4 into 154f3814077bdfe9b89dde00744c03180fa2bf2f - [view on LGTM.com](https://lgtm.com/projects/g/Azure/sonic-py-swsssdk/rev/pr-8c51b4138ce61013af094d09db3410601c9deb94)\n\n**new alerts:**\n\n* 1 for Module is imported with &#39;import&#39; and &#39;import from&#39;"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-05-04T05:27:59Z",
+        "comment_author": "rlhui",
+        "comment_body": "@judyjoseph , there's conflict cherry-picking.  Please raise a separate PR for 201911 branch for this. Thanks."
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-05-04T05:54:33Z",
+        "comment_author": "judyjoseph",
+        "comment_body": "> @judyjoseph , there's conflict cherry-picking. Please raise a separate PR for 201911 branch for this. Thanks.\r\n\r\nThis PR has dependencies with the changes done in the commits just before this (eg: https://github.com/Azure/sonic-py-swsssdk/commit/d1a15124719872c415cdaec680016e0035110ffe) , so cannot cherrypick this one alone... Is it possible to advance the sonic-py-swssdk submodule in 201911 ? I can raise a PR for advancing the submodule itself in 201911."
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-13T01:51:35Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-13T01:53:09Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-13T01:56:01Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-17T00:33:57Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-17T00:48:38Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-17T00:49:10Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-17T23:37:25Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-18T00:09:37Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-18T00:10:04Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-18T00:10:25Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-18T17:31:48Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-20T19:34:24Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-20T20:01:00Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-20T21:27:31Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-20T21:28:38Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-20T21:29:16Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-20T21:43:55Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-20T21:45:51Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-20T21:46:51Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-20T22:16:35Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-20T22:20:27Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-20T22:21:14Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-20T22:26:40Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-24T18:11:53Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-24T18:12:08Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-24T18:12:22Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-24T18:21:38Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-24T18:21:48Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-24T18:22:02Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-24T18:22:21Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-24T18:22:38Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-24T18:23:06Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-24T18:23:14Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-24T18:28:01Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-24T18:29:22Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-24T18:56:20Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-26T01:33:15Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-26T01:41:59Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-26T01:45:04Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-26T01:46:17Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-03-26T22:04:46Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-01T19:16:53Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-01T19:57:22Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-03T01:51:14Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-03T01:54:25Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-03T01:56:38Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-03T02:00:26Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-03T02:03:15Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-03T05:49:33Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-03T06:11:35Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-03T06:40:05Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-03T18:52:32Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-03T19:35:43Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-03T19:46:13Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-03T19:51:26Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-06T19:02:01Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-06T23:18:01Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-08T15:35:55Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-08T15:50:37Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-08T20:13:27Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-10T21:53:36Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-10T23:19:02Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-10T23:37:11Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-14T19:47:29Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-15T04:13:03Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-15T04:31:52Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-15T04:42:11Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-15T16:27:56Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-15T16:28:07Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-15T16:38:08Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-15T17:24:42Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-15T18:18:28Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-15T21:28:37Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-16T15:49:18Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-16T15:49:43Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-16T16:19:01Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-16T17:17:52Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-16T17:25:17Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-17T03:47:00Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-17T03:47:10Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-17T04:27:36Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-17T04:27:48Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-17T05:08:43Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-17T06:16:54Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-18T19:24:55Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-20T19:42:33Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-20T20:37:29Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-21T17:37:06Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-21T17:38:36Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-21T17:43:53Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-21T17:47:28Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-21T17:57:27Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-21T17:58:15Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-22T03:01:21Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-22T03:01:30Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-22T03:07:41Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-22T03:10:34Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-22T15:52:13Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-22T15:53:14Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-04-23T05:48:41Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-08-07T01:57:25Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-04-17T05:08:43Z",
+        "latestReview_author": "dzhangalibaba",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 63,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-04-23T06:02:30Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 62,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-02-06T21:34:22Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "@qiluo-msft "
+    },
+    {
+        "number": 62,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-02-20T19:23:43Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "could we make some progress on this? Other PRs depends on this one"
+    },
+    {
+        "number": 62,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-02-06T23:12:35Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 62,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-02-06T23:12:35Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 61,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-02-04T19:19:10Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 61,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-02-04T22:19:41Z",
+        "review_author": "vasant17"
+    },
+    {
+        "number": 61,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-02-12T01:30:02Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 61,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-02-04T19:19:10Z",
+        "latestReview_author": "jleveque",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 61,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-02-12T01:30:02Z",
+        "latestReview_author": "prsunny",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 61,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-02-04T22:19:41Z",
+        "latestReview_author": "vasant17",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 60,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-01-17T08:05:38Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "@qiluo-msft  I can do a quick chat with you. The official redis-cli output behavior is not designed well, caller should avoid to use some operation like \"keys\".  "
+    },
+    {
+        "number": 60,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-01-17T20:06:13Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "Could you refer the source code of redis-cli for similar logic?"
+    },
+    {
+        "number": 60,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-01-17T20:08:29Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 60,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-01-17T21:37:53Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 60,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-01-17T21:46:14Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 60,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-01-17T21:52:24Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 60,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-01-17T22:21:27Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 60,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-01-17T21:52:24Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 59,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-01-14T23:24:02Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "> #!/usr/bin/python\r\n\r\nCould you add code comment that the behavior is mimic redis-cli non-tty mode, which is different from redis-cli tty mode? #Closed\r\n\r\n---\r\nRefers to: src/swsssdk/scripts/sonic-db-cli:1 in 17bb905. [](commit_id = 17bb90566b1fbf33bf47fd80659a5f117ad38569, deletion_comment = False)"
+    },
+    {
+        "number": 59,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-01-14T23:55:19Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "> > #!/usr/bin/python\r\n> \r\n> Could you add code comment that the behavior is mimic redis-cli non-tty mode, which is different from redis-cli tty mode?\r\n> \r\n> Refers to: src/swsssdk/scripts/sonic-db-cli:1 in [17bb905](https://github.com/Azure/sonic-py-swsssdk/commit/17bb90566b1fbf33bf47fd80659a5f117ad38569). [](commit_id = [17bb905](https://github.com/Azure/sonic-py-swsssdk/commit/17bb90566b1fbf33bf47fd80659a5f117ad38569), deletion_comment = False)\r\n\r\nADDED"
+    },
+    {
+        "number": 59,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-01-15T19:54:45Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "@dzhangalibaba Please add some unit test for sonic-db-cli."
+    },
+    {
+        "number": 59,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-01-15T20:03:22Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "> @dzhangalibaba Please add some unit test for sonic-db-cli.\r\n\r\nOK. I'll add some test cases into vs tests later."
+    },
+    {
+        "number": 59,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-01-15T20:05:34Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "> > @dzhangalibaba Please add some unit test for sonic-db-cli.\r\n> \r\n> OK. I'll add some test cases into vs tests later.\r\n\r\nTo test this only, you'd better use googletest, like sonic-swss-common."
+    },
+    {
+        "number": 59,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-01-15T22:12:35Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "> > > @dzhangalibaba Please add some unit test for sonic-db-cli.\r\n> > \r\n> > \r\n> > OK. I'll add some test cases into vs tests later.\r\n> \r\n> To test this only, you'd better use googletest, like sonic-swss-common.\r\n\r\nThat will be a new project to add something like that. Currently,  pyswsssdk is not tested on real redis server, we only have some snmp py related unit tests based on the mock tables when building the .whl pkg in built environment. We don't have test framework which already set up redis server for testing like vs tests and sairedis tests did..  I suggest to investigate/discuss how to add py library related UT on real redis server in parallel, then we can find the best solution, this may be time consuming. To unblock the other work, I suggest go ahead with current PR and continue the sonic-db-cli replacement activities. These py lib related UT addition start in parallel."
+    },
+    {
+        "number": 59,
+        "repo": "sonic-py-swsssdk",
+        "comment_at": "2020-01-16T19:05:15Z",
+        "comment_author": "dzhangalibaba",
+        "comment_body": "@qiluo-msft can we merge this first , then I can sent out three other pending PRs depends on this."
+    },
+    {
+        "number": 59,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-01-14T23:22:06Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 59,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-01-14T23:37:25Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 59,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-01-14T23:55:11Z",
+        "review_author": "dzhangalibaba"
+    },
+    {
+        "number": 59,
+        "repo": "sonic-py-swsssdk",
+        "review_at": "2020-01-15T19:53:14Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 59,
+        "repo": "sonic-py-swsssdk",
+        "latestReview_at": "2020-01-15T19:53:14Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    }
+]

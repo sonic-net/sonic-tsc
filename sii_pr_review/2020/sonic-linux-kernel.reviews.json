@@ -1,0 +1,1831 @@
+[
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-01T06:04:59Z",
+        "comment_author": "antony-rheneus",
+        "comment_body": "Duplicate of PR 172 https://github.com/Azure/sonic-linux-kernel/pull/172, \r\nOpened this to addess the review comments, which I could not proceed in the same PR 172 due to multiple merge conflicts during git rebase."
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-03T20:48:18Z",
+        "comment_author": "lguohan",
+        "comment_body": "@paulmenzel, can you take a look at this pr?"
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-09T17:32:06Z",
+        "comment_author": "antony-rheneus",
+        "comment_body": "@paulmenzel , Would you please review the PR?"
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-09T17:36:39Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "Sorry, I thought, I replied in https://github.com/Azure/sonic-linux-kernel/pull/172 to keep discussion there."
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-09T17:59:05Z",
+        "comment_author": "antony-rheneus",
+        "comment_body": "> Sorry, I thought, I replied in #172 to keep discussion there.\r\n\r\nMarvell armhf requires configuration from \"sonic-linux-kernel/linux-4.19.118/arch/arm/configs/mvebu_v7_defconfig\" however it is not so when debian prepares the .config. "
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-09T19:31:10Z",
+        "comment_author": "carl-nokia",
+        "comment_body": "Paul - what is missing or required from Marvell/Nokia teams to merge this PR? -- we need to get this merged ASAP please"
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-09T19:54:22Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "> Paul - what is missing or required from Marvell/Nokia teams to merge this PR? -- we need to get this merged ASAP please\r\n\r\nPlease read the discussion in merge/pull request https://github.com/Azure/sonic-linux-kernel/pull/172."
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-09T21:03:40Z",
+        "comment_author": "carl-nokia",
+        "comment_body": "Please forgive my lack of clarity on this PR, but I did read PR 172 before asking you for help on this PR 176.   I just re-read it again.  I want to help resolve whatever is needed ASAP.    \r\n        The best I can tell is that you are still waiting for the PR description and  23 commit messages to follow **\"How to Write a Git Commit Message\"**  best practices properly.\r\n\r\nIs my understanding correct?  ... or are you also looking for a rebase to better define the list of commits for review?\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n"
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-09T21:26:42Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "Yes, your understanding is correct.\r\n\r\nThen for example, it might become clear, why you have to add certain configs to the inclusion file, and it\u2019s opposite configuration to the exclusion file at the same time (`CONFIG_KERNEL_GZIP=y` vs. `CONFIG_KERNEL_XZ`. Only one should be necessary, as it\u2019s a choice."
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-09T21:35:32Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "Having to merge/pull requests is now even more confusing, but so be it. For example https://github.com/Azure/sonic-linux-kernel/pull/176/commits/9976144f33fea5a946c5ca8f30aeae5081a7e609:\r\n\r\n>  [kernel] [marvell-armhf]\r\n>\r\n> Set cpu frequenc to 100HZ as per armada cpu\r\n> Enable periodic timer and not dynamic for better performance of a385 soc\r\n\r\nI asked several times to follow the guide on how to write commit messages. The summary belongs in the first line for example, and that\u2019s what it at the very beginning and also well seen in the [Linux kernel](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git) and [git project repository](https://git.kernel.org/pub/scm/git/git.git/).\r\n\r\nWhy the kernel tag? It\u2019s the *sonic-linux-kernel* repository. Maybe:\r\n\r\n> marvell-armhf: armada: Set CPU frequency to 100HZ and use periodic timer\r\n>\r\n>  Enable periodic timer and not dynamic for better performance of a385 soc.\r\n>\r\n> [Add explanation here, why 100 HZ increases the performance, how you tested it, and what the performance increase is.]"
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-10T15:57:13Z",
+        "comment_author": "antony-rheneus",
+        "comment_body": "@paulmenzel, @lguohan, \r\n We cleaned up all the commit messages to make them more descriptive, following established github guidelines. The \"Why\" of all the commits were carefully added. Please review and let us know if any additional changes are required."
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-10T20:27:25Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "Thank you, much better!\r\n\r\nSome nits:\r\n\r\n1.  Why is GZIP in the inclusions not enough? Does the script have an error, so that KERNEL_XZ has to be added to the excludes?\r\n2.  For the kernel image size reduction commit, can you please document what the old and new size is?\r\n3.  not appened \u2192 not appended in the last commit message."
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-11T12:18:53Z",
+        "comment_author": "antony-rheneus",
+        "comment_body": "> Thank you, much better!\r\n> \r\n> Some nits:\r\n> \r\n> 1. Why is GZIP in the inclusions not enough? Does the script have an error, so that KERNEL_XZ has to be added to the excludes?\r\n> 2. For the kernel image size reduction commit, can you please document what the old and new size is?\r\n> 3. not appened \u2192 not appended in the last commit message.\r\n\r\n\r\n@paulmenzel \r\nPlease review the update commits in the PR, Let us know if any additional changes required. \r\n\r\n#1 Since only one compression method can be selected,  added config to exclude XZ as it came as part of default config. The conf script didn't report any error. \r\n\r\n#2 Documented the file size in the commit description as suggested, please check and confirm if that is fine.\r\nBefore size: 6197760\r\nAfter  size: 5192480\r\n\r\n#3 Corrected the typo \"appened\" in commit description.\r\n\r\n"
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-13T08:57:14Z",
+        "comment_author": "lguohan",
+        "comment_body": "@antony-rheneus, it looks like this gz v.s xz issue has been brought up multiple times, and looks like xz is prefered over gz. since armhf maybe used for other sku in the future, can you change to xz instead of gz, so that in the future we won't need to discuss this option again."
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-15T07:13:37Z",
+        "comment_author": "antony-rheneus",
+        "comment_body": "> @antony-rheneus, it looks like this gz v.s xz issue has been brought up multiple times, and looks like xz is prefered over gz. since armhf maybe used for other sku in the future, can you change to xz instead of gz, so that in the future we won't need to discuss this option again.\r\n\r\n@lguohan, @paulmenzel , \r\nAs requested, I have reverted the GZIP compression, and tested the same in our platform with XZ compression method.\r\nAlso I hase rebased to master to resolve the conflicts with patch/series.\r\nPlease do review the recent changes.  \r\n"
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-15T16:41:22Z",
+        "comment_author": "lguohan",
+        "comment_body": "lgtm"
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-16T13:29:40Z",
+        "comment_author": "carl-nokia",
+        "comment_body": "Paul - I will set up a meeting with you - this merge is blocking many people - lets get on a call please to answer your questions - we need to wrap this up please. I will send you invite and cc Guohan now.\r\n"
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-16T14:47:43Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "> Paul - I will set up a meeting with you - this merge is blocking many people - lets get on a call please to answer your questions - we need to wrap this up please. I will send you invite and cc Guohan now.\r\n\r\nThanks. It would be nice though to get some written reply to my comments beforehand."
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-16T18:42:52Z",
+        "comment_author": "antony-rheneus",
+        "comment_body": "@paulmenzel , @lguohan ,\r\nI have reverted the configurations to be in sync with the upstreamed version for mvebu_def_config. Let us know if you have any comments."
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-16T18:44:35Z",
+        "comment_author": "antony-rheneus",
+        "comment_body": "Below are the recent commits under review.\r\n\r\n```\r\n$ git log --oneline -n 7\r\nbd6a99e armhf: Update linux debian image file name\r\n873ee9f Marvell-armhf: Disable uefi firmware for marvell\r\n305dc69 Marvell-armhf: Reduce kernel image size for u-boot\r\nb6ee695 Marvell-armhf: Enable optoe and i2c mux\r\nb78363e Marvell-armhf: armada: Set gpio and mtd platform specific configuration\r\n65f6779 Marvell-armhf: Enable platform specific kconfig\r\na3d548c Marvell-armhf: Remove obsolete patches applied for marvell arm\r\n\r\n```"
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-17T08:53:32Z",
+        "comment_author": "radha-danda",
+        "comment_body": "> > Paul - I will set up a meeting with you - this merge is blocking many people - lets get on a call please to answer your questions - we need to wrap this up please. I will send you invite and cc Guohan now.\r\n> \r\n> Thanks. It would be nice though to get some written reply to my comments beforehand.\r\n\r\n@paulmenzel, Antony addressed your comment and pushed the changes. Can you please review and let us know if you have any further comments"
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-17T15:39:47Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "Thank you for the last changes. In commit https://github.com/Azure/sonic-linux-kernel/pull/176/commits/305dc691085212b4c5f223b66bcfa420dc9f85b1 you cite the numbers below:\r\n\r\n> Testing:\r\n>  - Check kernel boots without any memory overlapping errors\r\n>  - kernel binary size before this commit : 6197760 bytes\r\n>  - kernel binary size after this commit  : 5192480 bytes\r\n\r\nIs that a hardware limitation? Or a U-Boot issue? Do you have an upstream bug report for that?\r\n\r\nSo as talked about in the conference, it would be great, if you documented the maximum allowed size, and what compression algorithm was used (if it actually plays a role). The merge/pull request description would be something like (just a made-up suggestion):\r\n\r\n> Add platform specific SOC kernel configuration.\r\n>\r\n> Marvell patches applied to Linux 4.19 are removed, and due to a platform limitation the (compressed) Linux kernel size can only be 6 MB, so the Linux kernel configuration is shrinked to reduce the size."
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-17T17:53:41Z",
+        "comment_author": "antony-rheneus",
+        "comment_body": "> Thank you for the last changes. In commit [305dc69](https://github.com/Azure/sonic-linux-kernel/commit/305dc691085212b4c5f223b66bcfa420dc9f85b1) you cite the numbers below:\r\n> \r\n> > Testing:\r\n> > \r\n> > * Check kernel boots without any memory overlapping errors\r\n> > * kernel binary size before this commit : 6197760 bytes\r\n> > * kernel binary size after this commit  : 5192480 bytes\r\n> \r\n> Is that a hardware limitation? Or a U-Boot issue? Do you have an upstream bug report for that?\r\n> \r\n> So as talked about in the conference, it would be great, if you documented the maximum allowed size, and what compression algorithm was used (if it actually plays a role). The merge/pull request description would be something like (just a made-up suggestion):\r\n> \r\n> > Add platform specific SOC kernel configuration.\r\n> > Marvell patches applied to Linux 4.19 are removed, and due to a platform limitation the (compressed) Linux kernel size can only be 6 MB, so the Linux kernel configuration is shrinked to reduce the size.\r\n\r\nSize constraint is hardware specific limitation for u-boot based platforms. "
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-17T17:58:27Z",
+        "comment_author": "antony-rheneus",
+        "comment_body": "@paulmenzel , I have updated the comment description, and also the PR description. Would you please review? "
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-17T18:11:14Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "> Size constraint is hardware specific limitation for u-boot based platforms.\r\n\r\nDo you have a reference for that?"
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-17T18:24:48Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "Nice, looks good.\r\n\r\nJust to be sure: I made up the number in \u201cLinux kernel size can only be 6 MB,\u201d. That is correct.\r\n\r\nAlso, just to be sure:\r\n\r\n> Testing:\r\n>  - Check kernel boots without any memory overlapping errors\r\n>  - kernel binary size before this commit : 6197760 bytes\r\n>  - kernel binary size after this commit  : 3600624 bytes\r\n\r\nThe 6.2 MB is really XZ compressed image or was it with GZIP? Because if you try XZ which results in smaller size, maybe you can use the default kernel configuration."
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-17T19:31:30Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "Just to be clear, although I am interested in the answers of the questions above, I do not want to hold anything up. So, if @lguohan wants to accept this, please go ahead."
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-17T20:13:11Z",
+        "comment_author": "lguohan",
+        "comment_body": "@paulmenzel , thanks for the reviewing. the pr is good. @antony-rheneus , please try to answer the questions, I am also curious to learn."
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-21T14:46:36Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "@antony-rheneus, it\u2019d be great if you replied to my questions."
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-21T18:33:06Z",
+        "comment_author": "antony-rheneus",
+        "comment_body": "> @antony-rheneus, it\u2019d be great if you replied to my questions.\r\n\r\n@paulmenzel , sure, I will test the kernel with the changes and reply back."
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-22T02:56:34Z",
+        "comment_author": "antony-rheneus",
+        "comment_body": "> > @antony-rheneus, it\u2019d be great if you replied to my questions.\r\n> \r\n> @paulmenzel , sure, I will test the kernel with the changes and reply back.\r\n\r\n@paulmenzel , \r\nAfter removing all the SOCs define in \"exclusion\" file, now the image is reduced to 4.2MB with xz compression\r\n```\r\nls -l linux-4.19.118/debian/build/build_armhf_none_armmp/arch/arm/boot/zImage\r\n-rwxr-xr-x 1 root root 4260352 Dec 21 23:10 linux-4.19.118/debian/build/build_armhf_none_armmp/arch/arm/boot/zImage\r\n\r\n```\r\nHowever, the kernel hangs, so there is some conflicting CONFIG variable when all SOCs are defined. I will require some more time to debug this to narrow down the invalid configuration.\r\n```\r\n\r\nStarting kernel ...\r\n\r\n<<<HUNG>>>\r\n```"
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2021-03-30T11:11:22Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "Over three months have passed. Were you able to fix the issue?"
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2021-03-30T12:59:50Z",
+        "comment_author": "antony-rheneus",
+        "comment_body": "> Over three months have passed. Were you able to fix the issue?\r\n\r\nNot yet, we will get back. "
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2021-06-07T06:16:45Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "@carl-nokia, could you (or the responsible project manager) please allocate time for @antony-rheneus or some other developer/engineer to work on this?"
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-03-12T07:36:23Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "Over a year has passed, and the *promised* work, convincing the reviewers to merge the changes, has not happened yet."
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-03-23T07:44:56Z",
+        "comment_author": "antony-rheneus",
+        "comment_body": "@paulmenzel, \r\nRedirecting the request to the Project Manager (@radha-danda)  "
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2022-03-24T13:58:56Z",
+        "comment_author": "radha-danda",
+        "comment_body": "@paulmenzel, If I recollect the issue, \r\n\r\n>>>> However, the kernel hangs, so there is some conflicting CONFIG variable when all SOCs are defined. I will require some more time to debug this to narrow down the invalid configuration. \r\n\r\nThis was the question remained unanswered. Please help me recollect the issue.\r\n\r\nAnd to add more details, if above was the issue that left unanswered, we had similar issue with Kernel hang due to image size\r\nand here is the rootcause https://github.com/Azure/sonic-buildimage/pull/10204 and we are planning to backport the PR to 202012 branch."
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-12-15T16:40:48Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-12-16T09:12:26Z",
+        "review_author": "paulmenzel"
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-12-16T18:37:05Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-12-16T18:38:23Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-12-16T18:39:49Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-12-16T09:12:26Z",
+        "latestReview_author": "paulmenzel",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 176,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-12-15T16:40:48Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 173,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-11-16T20:27:06Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "Nit: will be add*ed*\r\n\r\nI wondor if adding a directory `patch/internal` would be more beneficial, as then people just seeing the directory tree and not having looked at the file `patch/series` are able to categorize the patches."
+    },
+    {
+        "number": 173,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-11-17T18:02:15Z",
+        "comment_author": "lguohan",
+        "comment_body": "@paulmenzel , for all sonic repos, we have a unified way to introduce additional patch on those repro. The patch will first patch those repros, and then build those repo. In the internal repo, we will then first patch this series file, and then use the patches series file to patch the kernel build. "
+    },
+    {
+        "number": 173,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-11-17T20:55:15Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "> @paulmenzel, for all sonic repos, we have a unified way to introduce additional patch on those repro. The patch will first patch those repros, and then build those repo. In the internal repo, we will then first patch this series file, and then use the patches series file to patch the kernel build.\r\n\r\nSorry, I do not understand your comment. How does that contradict having a directory `patch/internal/\u2026`?\r\n\r\n"
+    },
+    {
+        "number": 173,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-11-17T21:35:38Z",
+        "comment_author": "lguohan",
+        "comment_body": "let me try again. so, if we change the sonic-linux-kernel build process and introduce a new directory `patch/internal`, yes that works. however, such scheme is per-repo basis. for a sonic image, we have other repos which also needs internal patch, and those repros have different build process, having a `patch/internal` for those repo may not be the best way. \r\n\r\nTherefore, we have design a unified way to patch each submodule in `sonic-buildimage` repo. The assumption of the unified way is not to change build process in each submodule. In this case, we will patch `patch/series` in `sonic-linux-kernel` repo. \r\n\r\nThe unified approach can be found here. https://github.com/Azure/sonic-buildimage/blob/master/slave.mk#L371"
+    },
+    {
+        "number": 173,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-11-16T16:12:57Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 173,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-11-16T16:12:57Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 170,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-11-06T16:37:36Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 170,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-11-06T16:37:36Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 168,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-11-10T10:45:47Z",
+        "comment_author": "keboliu",
+        "comment_body": "removed this redundant patch, it has already covered in 0020-mlxsw-core-Set-different-thermal-polling-time-based.patch\r\n- mlxsw: core: thermal: Enable thermal zones by default"
+    },
+    {
+        "number": 168,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-11-10T17:00:22Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@lguohan can you please approve? once done we will update submodule with prev fix as well."
+    },
+    {
+        "number": 165,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-10-30T21:41:15Z",
+        "comment_author": "microsoft-cla-retired",
+        "comment_body": "[![CLA assistant check](https://cla.opensource.microsoft.com/pull/badge/signed)](https://cla.opensource.microsoft.com/Azure/sonic-linux-kernel?pullRequest=165) <br/>All CLA requirements met."
+    },
+    {
+        "number": 165,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-11-04T14:08:05Z",
+        "comment_author": "lguohan",
+        "comment_body": "please identify the upstream commit id in https://github.com/torvalds/linux based on the policy 2 defined in READMD.md."
+    },
+    {
+        "number": 165,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-11-04T17:18:42Z",
+        "comment_author": "dflynn-Nokia",
+        "comment_body": "This patch includes the following upstream commits:\r\n\r\n    557c7ffa2f28 hwmon: (lm75) add support for PCT2075\r\n    985e225142cf dt-bindings: hwmon: Add missing documentation for lm75\r\n    be889be7785d dt-bindings: hwmon: Add tmp75b to lm75.txt\r\n    5ac6badc5aa0 device-tree: bindinds: add NXP PCT2075 as compatible device to LM75\r\n\r\ncheckpatch.pl has passed.\r\n"
+    },
+    {
+        "number": 165,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-11-04T18:54:43Z",
+        "comment_author": "lguohan",
+        "comment_body": "cannot find the commit in the above repo, can you check? https://github.com/torvalds/linux/search?q=985e225142cf"
+    },
+    {
+        "number": 165,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-11-04T20:41:38Z",
+        "comment_author": "dflynn-Nokia",
+        "comment_body": "I search for commits this way:\r\n    [https://github.com/torvalds/linux/commit/985e225142cf](url)\r\n"
+    },
+    {
+        "number": 165,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-11-04T20:43:12Z",
+        "comment_author": "dflynn-Nokia",
+        "comment_body": "Hmmm, the above URL seems to only work within github\r\n\r\nIt seems the github commit hash search feature is not working reliably?\r\nI see failures to find many other commits within Linus's repo. "
+    },
+    {
+        "number": 165,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-11-04T22:49:15Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 165,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-11-04T22:58:33Z",
+        "review_author": "dflynn-Nokia"
+    },
+    {
+        "number": 165,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-11-04T22:49:15Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 163,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-10-08T21:06:45Z",
+        "comment_author": "microsoft-cla-retired",
+        "comment_body": "[![CLA assistant check](https://cla.opensource.microsoft.com/pull/badge/signed)](https://cla.opensource.microsoft.com/Azure/sonic-linux-kernel?pullRequest=163) <br/>All CLA requirements met."
+    },
+    {
+        "number": 163,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-10-08T21:07:51Z",
+        "comment_author": "lguohan",
+        "comment_body": "can you sign CLA?"
+    },
+    {
+        "number": 163,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-11-10T22:19:19Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "Have you sent this upstream yet?"
+    },
+    {
+        "number": 163,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-10-11T00:43:50Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 163,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-10-11T00:43:50Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 162,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-10-06T17:32:13Z",
+        "comment_author": "lguohan",
+        "comment_body": "what is this commit id? 9bbd7efbc055b31b0e836936da94791c8890af4b\r\n\r\nI cannot find in the https://github.com/torvalds/linux"
+    },
+    {
+        "number": 162,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-10-12T06:21:00Z",
+        "comment_author": "keboliu",
+        "comment_body": "> what is this commit id? 9bbd7efbc055b31b0e836936da94791c8890af4b\r\n> \r\n> I cannot find in the https://github.com/torvalds/linux\r\n\r\nHi @lguohan\r\nas described in this PR description:\r\n\r\n> Patchset contians 'mlxsw: i2c: Add device info log', adding info log\r\n> to probe() routine to report firmware setting in 'dmesg'.\r\n> This is not upstream commit, but this code has been exist in Sonic from\r\n> day one and used for debug purposes.\r\n\r\nthis log is very useful for the issue debug, so we want to keep it although it's not in the upstream, of course, need your approval."
+    },
+    {
+        "number": 162,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-10-18T06:07:07Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@volodymyrsamotiy lets please divide the patch to 2: 1 fully aligned to upstream code, 1 with the extra patch which is not upstream and for debug purposes."
+    },
+    {
+        "number": 162,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-10-20T16:45:25Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@lguohan now it should be aligned to only upstream code. Please check"
+    },
+    {
+        "number": 162,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-10-28T10:51:43Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@lguohan kindly please check if this can be merged. we have broken image on master and this fix is a must."
+    },
+    {
+        "number": 162,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-10-30T15:33:31Z",
+        "comment_author": "lguohan",
+        "comment_body": "@liat-grozovik , i cannot find these commit id in the linux kernel tree.\r\n\r\nPatchset contians backport of the below commits:\r\ncommit 3dcfe179570550c888ecfcd3d443d4de90a2d855\r\ncommit 3029a693beda5bff599feccc3beb9df1e141c786\r\ncommit 6a986993e43f176e07c28df560b1cfc3e9b80505\r\ncommit 95b75cbd1bc57ec5898517a3fb2f7621f16b26cd\r\ncommit f43d9d9b4eb869b1c1513ce8b931389b64b92db1\r\ncommit 27758c801663d17eafcd4e45179e7294a9c290b8\r\n\r\nhttps://github.com/torvalds/linux/search?q=3dcfe179570550c888ecfcd3d443d4de90a2d855\r\n\r\ncan you please help tell me where to find the upstream commit id?"
+    },
+    {
+        "number": 162,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-11-02T12:01:58Z",
+        "comment_author": "keboliu",
+        "comment_body": "> @liat-grozovik , i cannot find these commit id in the linux kernel tree.\r\n> \r\n> Patchset contians backport of the below commits:\r\n> commit 3dcfe179570550c888ecfcd3d443d4de90a2d855\r\n> commit 3029a693beda5bff599feccc3beb9df1e141c786\r\n> commit 6a986993e43f176e07c28df560b1cfc3e9b80505\r\n> commit 95b75cbd1bc57ec5898517a3fb2f7621f16b26cd\r\n> commit f43d9d9b4eb869b1c1513ce8b931389b64b92db1\r\n> commit 27758c801663d17eafcd4e45179e7294a9c290b8\r\n> \r\n> https://github.com/torvalds/linux/search?q=3dcfe179570550c888ecfcd3d443d4de90a2d855\r\n> \r\n> can you please help tell me where to find the upstream commit id?\r\n\r\n@lguohan  I am not sure why the search is not working, but the commit hash is correct, I manually checked:\r\n\r\nmlxsw: i2c: Fix comment misspelling     27758c801663d17eafcd4e45179e7294a9c290b8    https://github.com/torvalds/linux/commit/27758c801663d17eafcd4e45179e7294a9c290b8\r\nmlxsw: i2c: Modify input parameter name in initialization API  f43d9d9b4eb869b1c1513ce8b931389b64b92db1  https://github.com/torvalds/linux/commit/f43d9d9b4eb869b1c1513ce8b931389b64b92db1\r\nmlxsw: i2c: Extend input parameters list of command API    95b75cbd1bc57ec5898517a3fb2f7621f16b26cd  https://github.com/torvalds/linux/commit/95b75cbd1bc57ec5898517a3fb2f7621f16b26cd \r\nmlxsw: i2c: Extend initialization by querying resources data      6a986993e43f176e07c28df560b1cfc3e9b80505 https://github.com/torvalds/linux/commit/6a986993e43f176e07c28df560b1cfc3e9b80505\r\nmlxsw: i2c: Extend initialization with querying firmware info     9bbd7efbc055b31b0e836936da94791c8890af4b  https://github.com/torvalds/linux/commit/9bbd7efbc055b31b0e836936da94791c8890af4b\r\nmlxsw: i2c: Allow flexible setting of I2C transactions size        3029a693beda5bff599feccc3beb9df1e141c786   https://github.com/torvalds/linux/commit/3029a693beda5bff599feccc3beb9df1e141c786\r\nmlxsw: core: Set different thermal polling time based on bus frequency capability    3dcfe179570550c888ecfcd3d443d4de90a2d855   https://github.com/torvalds/linux/commit/3dcfe179570550c888ecfcd3d443d4de90a2d855\r\n\r\n"
+    },
+    {
+        "number": 162,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-11-03T10:21:18Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@lguohan anything else is missing?"
+    },
+    {
+        "number": 162,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-11-04T17:15:47Z",
+        "comment_author": "lguohan",
+        "comment_body": "@liat-grozovik , can you check this pr? after i merged the other one, it seems there is some patch issue on this."
+    },
+    {
+        "number": 162,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-11-05T11:13:31Z",
+        "comment_author": "lguohan",
+        "comment_body": "retest this please"
+    },
+    {
+        "number": 161,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-10-18T06:06:19Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@keboliu please refer to the last comment. We need the upstream commit id in the patch message. once all is clear we can move forarward."
+    },
+    {
+        "number": 161,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-10-23T09:18:05Z",
+        "comment_author": "keboliu",
+        "comment_body": "@lguohan I removed the patch which not yet merged to linux kernel community yet(which is in next next), please check again."
+    },
+    {
+        "number": 161,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-10-30T09:36:41Z",
+        "comment_author": "keboliu",
+        "comment_body": "> @lguohan I removed the patch which not yet merged to linux kernel community yet(which is in next next), please check again.\r\n\r\n@lguohan the first patch has been already merged to linux upstream, the official commit ID is: 9306c4761912961dc228c32b0de99571c3932928, I also updated the PR description."
+    },
+    {
+        "number": 161,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-10-30T15:37:17Z",
+        "comment_author": "lguohan",
+        "comment_body": "i cannot find the 9306c4761912961dc228c32b0de99571c3932928 in this repo. https://github.com/torvalds/linux"
+    },
+    {
+        "number": 161,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-11-02T12:04:34Z",
+        "comment_author": "keboliu",
+        "comment_body": "> i cannot find the 9306c4761912961dc228c32b0de99571c3932928 in this repo. https://github.com/torvalds/linux\r\n\r\nsorry, typo, check this: c071afcea6ecf24a3c119f25ce9f71ffd55b5dc2    https://github.com/torvalds/linux/commit/c071afcea6ecf24a3c119f25ce9f71ffd55b5dc2"
+    },
+    {
+        "number": 161,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-11-03T10:20:31Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@lguohan anything else missing?"
+    },
+    {
+        "number": 161,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-09-12T07:28:51Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 161,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-09-14T09:38:05Z",
+        "review_author": "keboliu"
+    },
+    {
+        "number": 161,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-09-14T18:50:21Z",
+        "review_author": "liat-grozovik"
+    },
+    {
+        "number": 161,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-09-15T07:48:35Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 161,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-09-26T14:51:10Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 161,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-11-04T16:28:27Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 161,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-09-14T18:50:21Z",
+        "latestReview_author": "liat-grozovik",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 161,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-11-04T16:28:27Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 160,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-09-09T20:40:16Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 160,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-09-09T20:40:16Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 158,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-08-26T05:30:56Z",
+        "comment_author": "aravindmani-1",
+        "comment_body": "@jleveque Raised this PR for fixing ISMT issue."
+    },
+    {
+        "number": 158,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-08-26T16:32:27Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 158,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-08-26T16:56:49Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 158,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-08-26T16:32:27Z",
+        "latestReview_author": "jleveque",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 158,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-08-26T16:56:49Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 157,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-09-09T22:53:27Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 157,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-09-09T22:53:27Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 154,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-07-21T22:07:50Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 154,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-07-22T05:50:41Z",
+        "review_author": "padmanarayana"
+    },
+    {
+        "number": 154,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-07-22T19:58:47Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 154,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-07-21T22:07:50Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 154,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-07-22T19:58:47Z",
+        "latestReview_author": "prsunny",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 150,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-11-10T22:20:05Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "On what device did you test this?"
+    },
+    {
+        "number": 150,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-06-26T12:03:37Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 150,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-06-26T12:04:26Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 150,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-06-26T12:04:42Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 150,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-07-02T05:48:13Z",
+        "review_author": "keboliu"
+    },
+    {
+        "number": 150,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-07-02T05:48:13Z",
+        "latestReview_author": "keboliu",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-06-12T02:36:51Z",
+        "comment_author": "taocy001",
+        "comment_body": "@lguohan \r\nI moved all the options in the current inclusion file to [amd64], do you think that's ok? CENTEC arm64 ARCH depends none of them.\r\nOr do you need to keep the x86 and ARM kernel options as consistent as possible?"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-06-12T06:28:00Z",
+        "comment_author": "lguohan",
+        "comment_body": "you probably need the optoe driver, but I think we can move those later. i am signing off this pr. great!"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-06-10T12:25:48Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-06-11T01:01:05Z",
+        "review_author": "taocy001"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-06-12T06:28:10Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-06-12T06:28:10Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 145,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-06-08T01:50:34Z",
+        "comment_author": "lguohan",
+        "comment_body": "if we later merge your kernel configure change pr, will abi number change?"
+    },
+    {
+        "number": 145,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-06-08T18:19:42Z",
+        "comment_author": "rajendra-dendukuri",
+        "comment_body": "> if we later merge your kernel configure change pr, will abi number change?\r\n\r\nNo. There will be no need to bump the ABI one more time after the NAT patch is pushed."
+    },
+    {
+        "number": 145,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-06-12T16:11:30Z",
+        "comment_author": "lguohan",
+        "comment_body": "retest this please"
+    },
+    {
+        "number": 143,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-06-03T13:33:45Z",
+        "comment_author": "lguohan",
+        "comment_body": "@olivier-singla to review"
+    },
+    {
+        "number": 143,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-06-03T21:16:53Z",
+        "comment_author": "lguohan",
+        "comment_body": "I compare the kconfig between this one and current master, they are the same. so, this pr is good."
+    },
+    {
+        "number": 141,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-06-03T13:07:09Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-06-03T13:07:09Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 140,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-06-01T08:12:46Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 140,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-06-01T08:12:46Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 138,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-05-26T17:51:26Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 138,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-05-26T17:51:26Z",
+        "latestReview_author": "jleveque",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 137,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-05-25T06:25:03Z",
+        "comment_author": "lguohan",
+        "comment_body": "can you check the build failure?"
+    },
+    {
+        "number": 137,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-05-25T07:19:40Z",
+        "comment_author": "taocy001",
+        "comment_body": "> can you check the build failure?\r\n\r\nThese changes rely on updates to the sonic-slave-buster.\r\nin https://github.com/Azure/sonic-buildimage/pull/4639\r\nadd:\r\n```\r\n# For march kernel compile\r\nRUN apt-get install -y crossbuild-essential-amd64 \\\r\n        crossbuild-essential-arm64 \\\r\n        crossbuild-essential-armhf\r\n```"
+    },
+    {
+        "number": 137,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-05-26T12:21:30Z",
+        "comment_author": "taocy001",
+        "comment_body": "retest this please"
+    },
+    {
+        "number": 137,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-05-26T16:12:14Z",
+        "comment_author": "lguohan",
+        "comment_body": "the build image pr has been merged. can you check the build failure?"
+    },
+    {
+        "number": 137,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-05-27T07:18:25Z",
+        "comment_author": "lguohan",
+        "comment_body": "@antony-rheneus, can you take a look at this pr?"
+    },
+    {
+        "number": 137,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-05-27T13:18:15Z",
+        "comment_author": "antony-rheneus",
+        "comment_body": "> > can you check the build failure?\r\n> \r\n> These changes rely on updates to the sonic-slave-buster.\r\n> in [Azure/sonic-buildimage#4639](https://github.com/Azure/sonic-buildimage/pull/4639)\r\n> add:\r\n> \r\n> ```\r\n> # For march kernel compile\r\n> RUN apt-get install -y crossbuild-essential-amd64 \\\r\n>         crossbuild-essential-arm64 \\\r\n>         crossbuild-essential-armhf\r\n> ```\r\n\r\n multi-arch docker usage is to get rid of cross compilation. without cross building multi-arch uses native(ARM) (not the host) gcc tools "
+    },
+    {
+        "number": 137,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-05-27T13:43:43Z",
+        "comment_author": "antony-rheneus",
+        "comment_body": "I would rather propose below change.\r\n\r\n```\r\n@@ -74,13 +74,13 @@ $(addprefix $(DEST)/, $(MAIN_TARGET)): $(DEST)/% :\r\n        debian/bin/gencontrol.py\r\n\r\n        # generate linux build file for amd64_none_amd64\r\n-       # fakeroot make -f debian/rules.gen setup_armhf_none_armmp\r\n-       # fakeroot make -f debian/rules.gen setup_arm64_none\r\n-       fakeroot make -f debian/rules.gen setup_amd64_none_amd64\r\n+       fakeroot make -f debian/rules.gen DEB_HOST_ARCH=armhf setup_armhf_none_armmp\r\n+       fakeroot make -f debian/rules.gen DEB_HOST_ARCH=arm64 setup_arm64_none\r\n+       fakeroot make -f debian/rules.gen DEB_HOST_ARCH=amd64 setup_amd64_none_amd64\r\n\r\n        # Applying patches and configuration changes\r\n-       # git add debian/build/build_armhf_none_armmp/.config -f\r\n-       # git add debian/build/build_arm64_none_arm64/.config -f\r\n+       git add debian/build/build_armhf_none_armmp/.config -f\r\n+       git add debian/build/build_arm64_none_arm64/.config -f\r\n        git add debian/build/build_amd64_none_amd64/.config -f\r\n        git add debian/config.defines.dump -f\r\n        git add debian/control -f\r\n@@ -93,9 +93,9 @@ $(addprefix $(DEST)/, $(MAIN_TARGET)): $(DEST)/% :\r\n        stg import -s ../patch/series\r\n\r\n        # Building a custom kernel from Debian kernel source\r\n-       DO_DOCS=False fakeroot make -f debian/rules -j $(shell nproc) binary-indep\r\n+       DO_DOCS=False ARCH=$(CONFIGURED_ARCH) DEB_HOST_ARCH=$(CONFIGURED_ARCH) fakeroot make -f debian/rules -j $(shell nproc) binary-indep\r\n ifeq ($(CONFIGURED_ARCH), armhf)\r\n-       fakeroot make -f debian/rules.gen -j $(shell nproc) binary-arch_$(CONFIGURED_ARCH)_none_armmp\r\n+       ARCH=$(CONFIGURED_ARCH) DEB_HOST_ARCH=$(CONFIGURED_ARCH) fakeroot make -f debian/rules.gen -j $(shell nproc) binary-arch_$(CONFIGURED_ARCH)_none_armmp\r\n else\r\n-       fakeroot make -f debian/rules.gen -j $(shell nproc) binary-arch_$(CONFIGURED_ARCH)_none\r\n+\t\tARCH=$(CONFIGURED_ARCH) DEB_HOST_ARCH=$(CONFIGURED_ARCH) fakeroot make -f debian/rules.gen -j $(shell nproc) binary-arch_$(CONFIGURED_ARCH)_none\r\n\r\n endif\r\n```"
+    },
+    {
+        "number": 137,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-05-27T16:40:59Z",
+        "comment_author": "lguohan",
+        "comment_body": "@taocy001 , can you look at the suggestion from @antony-rheneus"
+    },
+    {
+        "number": 137,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-05-27T20:27:09Z",
+        "comment_author": "taocy001",
+        "comment_body": "> I would rather propose below change.\n> \n> \n> \n> ```\n> \n> @@ -74,13 +74,13 @@ $(addprefix $(DEST)/, $(MAIN_TARGET)): $(DEST)/% :\n> \n>         debian/bin/gencontrol.py\n> \n> \n> \n>         # generate linux build file for amd64_none_amd64\n> \n> -       # fakeroot make -f debian/rules.gen setup_armhf_none_armmp\n> \n> -       # fakeroot make -f debian/rules.gen setup_arm64_none\n> \n> -       fakeroot make -f debian/rules.gen setup_amd64_none_amd64\n> \n> +       fakeroot make -f debian/rules.gen DEB_HOST_ARCH=armhf setup_armhf_none_armmp\n> \n> +       fakeroot make -f debian/rules.gen DEB_HOST_ARCH=arm64 setup_arm64_none\n> \n> +       fakeroot make -f debian/rules.gen DEB_HOST_ARCH=amd64 setup_amd64_none_amd64\n> \n> \n> \n>         # Applying patches and configuration changes\n> \n> -       # git add debian/build/build_armhf_none_armmp/.config -f\n> \n> -       # git add debian/build/build_arm64_none_arm64/.config -f\n> \n> +       git add debian/build/build_armhf_none_armmp/.config -f\n> \n> +       git add debian/build/build_arm64_none_arm64/.config -f\n> \n>         git add debian/build/build_amd64_none_amd64/.config -f\n> \n>         git add debian/config.defines.dump -f\n> \n>         git add debian/control -f\n> \n> @@ -93,9 +93,9 @@ $(addprefix $(DEST)/, $(MAIN_TARGET)): $(DEST)/% :\n> \n>         stg import -s ../patch/series\n> \n> \n> \n>         # Building a custom kernel from Debian kernel source\n> \n> -       DO_DOCS=False fakeroot make -f debian/rules -j $(shell nproc) binary-indep\n> \n> +       DO_DOCS=False ARCH=$(CONFIGURED_ARCH) DEB_HOST_ARCH=$(CONFIGURED_ARCH) fakeroot make -f debian/rules -j $(shell nproc) binary-indep\n> \n>  ifeq ($(CONFIGURED_ARCH), armhf)\n> \n> -       fakeroot make -f debian/rules.gen -j $(shell nproc) binary-arch_$(CONFIGURED_ARCH)_none_armmp\n> \n> +       ARCH=$(CONFIGURED_ARCH) DEB_HOST_ARCH=$(CONFIGURED_ARCH) fakeroot make -f debian/rules.gen -j $(shell nproc) binary-arch_$(CONFIGURED_ARCH)_none_armmp\n> \n>  else\n> \n> -       fakeroot make -f debian/rules.gen -j $(shell nproc) binary-arch_$(CONFIGURED_ARCH)_none\n> \n> +\t\tARCH=$(CONFIGURED_ARCH) DEB_HOST_ARCH=$(CONFIGURED_ARCH) fakeroot make -f debian/rules.gen -j $(shell nproc) binary-arch_$(CONFIGURED_ARCH)_none\n> \n> \n> \n>  endif\n> \n> ```\n\n\nThis should be a better way to modify it."
+    },
+    {
+        "number": 137,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-05-27T20:28:10Z",
+        "comment_author": "lguohan",
+        "comment_body": "thanks, can you update the pr then?"
+    },
+    {
+        "number": 137,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-05-27T20:35:12Z",
+        "comment_author": "taocy001",
+        "comment_body": "> thanks, can you update the pr then?\n\n\nOk, I'll update the PR after reworking and testing."
+    },
+    {
+        "number": 137,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-05-30T10:11:19Z",
+        "comment_author": "taocy001",
+        "comment_body": "@lguohan @antony-rheneus \r\nupdated, please review."
+    },
+    {
+        "number": 137,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-05-27T08:59:53Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 137,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-05-27T11:49:09Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 137,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-05-27T11:57:26Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 137,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-05-27T11:57:26Z",
+        "latestReview_author": "antony-rheneus",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 137,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-05-27T08:59:53Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 136,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-05-25T02:57:15Z",
+        "review_author": "keboliu"
+    },
+    {
+        "number": 136,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-05-26T17:49:01Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 136,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-05-26T17:49:01Z",
+        "latestReview_author": "jleveque",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 136,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-05-25T02:57:15Z",
+        "latestReview_author": "keboliu",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-05-11T09:48:20Z",
+        "comment_author": "lguohan",
+        "comment_body": "thanks!"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-05-11T09:47:44Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-05-11T09:47:44Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-04-30T12:17:21Z",
+        "comment_author": "shlomibitton",
+        "comment_body": "@nazariig @stephenxs \r\nplease review"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-05-01T08:04:04Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@lguohan please help review and merge\r\nThis will come with new hw mgmt for supporting new platforms as well as bugs fixes for spc3 platforms"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-05-01T08:04:46Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "This should also go to 201911 but I have no permission to set labels"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-05-01T08:02:54Z",
+        "review_author": "liat-grozovik"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-05-01T12:12:09Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-05-01T12:12:09Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-05-01T08:02:54Z",
+        "latestReview_author": "liat-grozovik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 131,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-04-18T06:49:27Z",
+        "comment_author": "lguohan",
+        "comment_body": "included in upstream v5.3"
+    },
+    {
+        "number": 131,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-04-18T06:49:41Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 131,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-04-18T06:49:41Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 129,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-04-03T10:54:41Z",
+        "comment_author": "lguohan",
+        "comment_body": "can you resolve conflict?"
+    },
+    {
+        "number": 129,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-04-05T00:57:22Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 129,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-04-05T00:57:22Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-03-30T07:12:34Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "retest this please"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-03-30T17:44:30Z",
+        "comment_author": "lguohan",
+        "comment_body": "can you update the description, what is exactly not working?\r\n"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-03-31T19:51:46Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-03-31T19:51:46Z",
+        "latestReview_author": "jleveque",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 127,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-12-31T07:41:31Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "Just a note, this commit was backported to 4.19.102 and 5.4.18."
+    },
+    {
+        "number": 127,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-03-20T05:16:50Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 127,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-03-20T05:16:50Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 126,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-02-25T05:46:50Z",
+        "review_author": "stephenxs"
+    },
+    {
+        "number": 126,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-02-25T05:46:50Z",
+        "latestReview_author": "stephenxs",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 123,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-02-07T21:49:03Z",
+        "comment_author": "lguohan",
+        "comment_body": "please identify the upstream commit id and the start linux version that introduce this patch."
+    },
+    {
+        "number": 123,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-02-07T21:52:34Z",
+        "comment_author": "lguohan",
+        "comment_body": "use this for example. \r\n\r\nhttps://github.com/Azure/sonic-linux-kernel/blob/master/patch/linux-4.13-thermal-intel_pch_thermal-Fix-enable-check-on.patch"
+    },
+    {
+        "number": 123,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-02-10T04:23:05Z",
+        "comment_author": "aravindmani-1",
+        "comment_body": "Thanks @lguohan  for your comments.\r\nAdded the commit ID of the original patch.\r\nPlease let me know whether the new change looks fine."
+    },
+    {
+        "number": 122,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-11-03T14:33:30Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "@jostar-yang, thank you for adding the support. According to the criteria in https://github.com/Azure/sonic-linux-kernel/blob/master/README.md, patches have to be sent upstream.\r\n\r\n> Existing kernel modules need to be patched and those patches are available in upstream.\r\n\r\nHave you done that already? Please also add the tag `Cc: stable@vger.kernel.org`, so it will be also added to the stable and LTS series."
+    },
+    {
+        "number": 122,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-02-07T21:46:46Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-02-07T21:46:46Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-03-20T05:15:10Z",
+        "comment_author": "lguohan",
+        "comment_body": "@antony-rheneus, i ma having some issue to build arm kernel on 4.19. It seems something changed in the debian packaging. as you can see I commented the arm build line in the Makefile. Can you take a look at it?"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-03-20T05:27:03Z",
+        "comment_author": "antony-rheneus",
+        "comment_body": "> @antony-rheneus, i ma having some issue to build arm kernel on 4.19. It seems something changed in the debian packaging. as you can see I commented the arm build line in the Makefile. Can you take a look at it?\r\n\r\nOk sure."
+    },
+    {
+        "number": 121,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-03-20T23:12:25Z",
+        "comment_author": "antony-rheneus",
+        "comment_body": "> > @antony-rheneus, i ma having some issue to build arm kernel on 4.19. It seems something changed in the debian packaging. as you can see I commented the arm build line in the Makefile. Can you take a look at it?\r\n> \r\n> Ok sure.\r\n\r\n\r\nOverriding DEB_HOST_ARCH= to the target architecture, resolves the debian dh make. \r\n\r\n```\r\ndiff --git a/Makefile b/Makefile\r\n@@ -74,13 +74,13 @@ $(addprefix $(DEST)/, $(MAIN_TARGET)): $(DEST)/% :\r\n        debian/bin/gencontrol.py\r\n\r\n        # generate linux build file for amd64_none_amd64\r\n-       # fakeroot make -f debian/rules.gen setup_armhf_none_armmp\r\n-       # fakeroot make -f debian/rules.gen setup_arm64_none\r\n-       fakeroot make -f debian/rules.gen setup_amd64_none_amd64\r\n+       fakeroot make -f debian/rules.gen DEB_HOST_ARCH=armhf setup_armhf_none_armmp\r\n+       fakeroot make -f debian/rules.gen DEB_HOST_ARCH=arm64 setup_arm64_none\r\n+       fakeroot make -f debian/rules.gen DEB_HOST_ARCH=amd64 setup_amd64_none_amd64\r\n\r\n        # Applying patches and configuration changes\r\n-       # git add debian/build/build_armhf_none_armmp/.config -f\r\n-       # git add debian/build/build_arm64_none_arm64/.config -f\r\n+       git add debian/build/build_armhf_none_armmp/.config -f\r\n+       git add debian/build/build_arm64_none_arm64/.config -f\r\n        git add debian/build/build_amd64_none_amd64/.config -f\r\n```\r\n"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-04-12T00:14:42Z",
+        "comment_author": "lguohan",
+        "comment_body": "retest this please"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-04-12T00:16:42Z",
+        "comment_author": "lguohan",
+        "comment_body": "retest this please"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-04-12T00:26:03Z",
+        "comment_author": "lguohan",
+        "comment_body": "retest this please"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-04-12T00:26:36Z",
+        "comment_author": "lguohan",
+        "comment_body": "retest this please"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-04-12T01:23:44Z",
+        "comment_author": "lguohan",
+        "comment_body": "retest this please"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-04-12T03:39:16Z",
+        "comment_author": "lguohan",
+        "comment_body": "retest this please"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-01-31T00:20:13Z",
+        "review_author": "DhanaDell"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-01-31T00:20:13Z",
+        "latestReview_author": "DhanaDell",
+        "latestReview_state": "DISMISSED"
+    },
+    {
+        "number": 120,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-01-14T23:47:09Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 120,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-01-15T16:28:49Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 120,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-01-15T16:28:49Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 120,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-01-14T23:47:09Z",
+        "latestReview_author": "prsunny",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2019-10-08T15:10:19Z",
+        "comment_author": "lguohan",
+        "comment_body": "why build fails? is that expected?"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2019-10-09T06:34:09Z",
+        "comment_author": "antony-rheneus",
+        "comment_body": "> why build fails? is that expected?\r\n\r\nIt should not fail.\r\nBelow is the error, which failed in some git command.\r\nERROR: Build step failed with exception\r\njava.io.IOException: Cannot retrieve Git metadata for the build\r\nBuild step 'Set GitHub commit status (universal)' marked build as failure\r\n\r\nWill trigger build again to check it."
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2019-10-09T14:48:57Z",
+        "comment_author": "lguohan",
+        "comment_body": "can you not separate the config file for amd64 and arm? also for patch list, can you use same patch list?"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2019-10-09T15:39:06Z",
+        "comment_author": "antony-rheneus",
+        "comment_body": "> for kernel configuration change, I'd like to you distribute the patch into per feature instead of having an arch specific patch.\r\n\r\nThen we have to go with Approach 1 of https://github.com/Azure/sonic-linux-kernel/pull/102#discussion_r333076155"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2019-10-09T16:19:03Z",
+        "comment_author": "lguohan",
+        "comment_body": "agree with you approach 1 is better."
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-01-24T02:37:32Z",
+        "comment_author": "lguohan",
+        "comment_body": "retest this please"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-01-24T05:27:22Z",
+        "comment_author": "lguohan",
+        "comment_body": "retest this please"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2020-01-26T20:33:37Z",
+        "comment_author": "lguohan",
+        "comment_body": "retest this please"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-09T14:46:46Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-09T14:46:53Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-09T14:47:55Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-09T15:10:21Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-09T15:11:42Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-09T15:14:51Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-09T15:17:06Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-09T15:17:26Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-09T15:18:52Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-09T15:19:22Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-09T15:20:44Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-09T15:20:46Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-09T15:21:24Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-09T15:21:53Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-09T15:22:46Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-09T15:22:54Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-09T15:26:43Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-24T21:16:31Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-24T21:17:14Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-24T21:17:40Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-24T21:18:49Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-24T21:19:25Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-24T21:19:57Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-24T21:20:27Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-24T21:22:24Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-24T21:22:52Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-24T21:23:21Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-24T21:24:47Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-24T21:24:56Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-24T21:25:05Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-24T21:25:13Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-24T21:25:20Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-29T05:07:40Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-29T05:08:07Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-29T05:08:24Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-29T05:13:52Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-29T05:13:56Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-29T05:14:01Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-29T05:14:08Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-29T05:18:05Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-29T05:18:18Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-29T05:20:03Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-29T05:20:23Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-29T05:20:32Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-29T05:21:53Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-29T05:22:16Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-29T05:22:31Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-30T07:08:16Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-12-11T09:32:02Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-12-11T09:32:12Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-12-11T09:32:26Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-12-11T09:32:34Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-12-11T09:32:44Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-12-11T09:32:56Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-12-11T09:33:21Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-12-11T09:33:31Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-12-11T09:33:46Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-12-11T09:34:05Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-12-11T09:34:17Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-12-11T09:34:27Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-12-11T09:37:51Z",
+        "review_author": "antony-rheneus"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-01-26T22:49:44Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-01-26T22:49:44Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 100,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2019-09-16T17:34:52Z",
+        "comment_author": "lguohan",
+        "comment_body": "will this get into linux kernel main stream?"
+    },
+    {
+        "number": 100,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2019-11-27T06:43:46Z",
+        "comment_author": "kirankella",
+        "comment_body": "retest this please"
+    },
+    {
+        "number": 100,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2019-12-20T19:13:05Z",
+        "comment_author": "arlakshm",
+        "comment_body": "@AkhileshSamineni, @kirankella,\r\nPlease resolve the conflicts.\r\n\r\n"
+    },
+    {
+        "number": 100,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-10-28T23:06:25Z",
+        "review_author": "marian-pritsak"
+    },
+    {
+        "number": 100,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-11-12T22:39:22Z",
+        "review_author": "arlakshm"
+    },
+    {
+        "number": 100,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2019-12-02T16:18:47Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 100,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-01-17T00:41:44Z",
+        "review_author": "arlakshm"
+    },
+    {
+        "number": 100,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2020-01-17T07:24:38Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 100,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-01-17T07:24:38Z",
+        "latestReview_author": "stepanblyschak",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 100,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2020-01-17T00:41:44Z",
+        "latestReview_author": "arlakshm",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 100,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2019-10-28T23:06:25Z",
+        "latestReview_author": "marian-pritsak",
+        "latestReview_state": "DISMISSED"
+    }
+]

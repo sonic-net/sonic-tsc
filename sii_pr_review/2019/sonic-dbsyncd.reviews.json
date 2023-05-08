@@ -1,0 +1,288 @@
+[
+    {
+        "number": 25,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2019-09-11T20:12:51Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 25,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2019-09-11T20:13:17Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 25,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2019-09-11T20:17:58Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 25,
+        "repo": "sonic-dbsyncd",
+        "latestReview_at": "2019-09-11T20:17:58Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2019-05-08T09:49:31Z",
+        "comment_author": "chenkelly",
+        "comment_body": "Hi @qiluo-msft , please help to review this modification. Do you plan to support VLAN part (lldpXdot1RemoteData mib) ?  Current lldp_syncd don't parse and write remote vlan part to redis database, I just correct error format for future development . Thanks. "
+    },
+    {
+        "number": 23,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2019-05-09T17:59:32Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "> It is possible that lldp neighbor has multiple VLANs.\r\n\r\nThis use case is new to me. Could you elaborate this concept?"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2019-05-09T22:14:19Z",
+        "comment_author": "chenkelly",
+        "comment_body": "http://vincentbernat.github.io/lldpd/features.html\r\nThe device maybe send out VLAN ID and names TLV  (IEEE 802.1 organizationally specific TLVs)  in LLDPPDU.\r\nThe interface maybe join one or more VLANs. The VLAN format of the output json file by LLDPD use list whether one VLAN or multiple VLANs.\r\n\r\n\r\n"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2019-05-09T22:45:53Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "For one vlan case, this is my output.\r\n```\r\nroot@str-msn2700-04:/# dpkg -l | grep lldp                                                                                                                                                      [181/9659]\r\nii  lldpd                      0.9.6-0                  amd64        implementation of IEEE 802.1ab (LLDP)\r\nroot@str-msn2700-04:/# /usr/sbin/lldpctl -f json\r\n{\r\n  \"lldp\": {\r\n    \"interface\": [\r\n      {\r\n        \"eth0\": {\r\n          \"via\": \"LLDP\",\r\n          \"chassis\": {\r\n            \"<>\": {\r\n              \"id\": {\r\n                \"type\": \"mac\",\r\n                \"value\": \"<>\"\r\n              },\r\n              \"ttl\": \"90\",\r\n              \"descr\": \"<>\",\r\n              \"capability\": [\r\n                {\r\n                  \"type\": \"Bridge\",\r\n                  \"enabled\": true\r\n                },\r\n                {\r\n                  \"type\": \"Router\",\r\n                  \"enabled\": true\r\n                }\r\n              ]\r\n            }\r\n          },\r\n          \"vlan\": {\r\n            \"value\": \"ntp\",\r\n            \"vlan-id\": \"<>\",\r\n            \"pvid\": true\r\n          },\r\n```"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2019-05-09T23:03:17Z",
+        "comment_author": "chenkelly",
+        "comment_body": "OK, I will check again. Thanks."
+    },
+    {
+        "number": 23,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2019-05-20T08:36:04Z",
+        "comment_author": "chenkelly",
+        "comment_body": "Hi @qiluo-msft, had modified json format for single/multiple VLAN entry, please help to review again. Thanks."
+    },
+    {
+        "number": 23,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2019-05-09T17:58:44Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2019-05-20T17:22:19Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 23,
+        "repo": "sonic-dbsyncd",
+        "latestReview_at": "2019-05-20T17:22:19Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 22,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2019-04-30T10:05:05Z",
+        "comment_author": "chenkelly",
+        "comment_body": "Hi @qiluo-msft, could you help to review this modification? Thanks very much."
+    },
+    {
+        "number": 22,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2019-05-01T04:57:05Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "@nikos-github Could you help review?"
+    },
+    {
+        "number": 22,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2019-05-01T04:57:47Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 22,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2019-05-10T19:23:19Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 22,
+        "repo": "sonic-dbsyncd",
+        "latestReview_at": "2019-05-10T19:23:19Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 21,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2019-04-30T01:50:37Z",
+        "comment_author": "chenkelly",
+        "comment_body": "Hi @qiluo-msft, I made a mistake, please approve this modification. Thanks."
+    },
+    {
+        "number": 21,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2019-04-30T01:56:01Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "Could you improve the test case to cover this path? We should test both single IP and multiple IP."
+    },
+    {
+        "number": 21,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2019-04-30T03:42:40Z",
+        "comment_author": "chenkelly",
+        "comment_body": "Hi @qiluo-msft, had added 'test_multiple_mgmt_ip' and 'single_mgmt_ip', please help to review again. Thanks very much.\r\n> \r\n    sonic-dbsyncd$ pytest -v\r\n    ================================================= test session starts ==================================================platform linux2 -- Python 2.7.15rc1, pytest-3.3.2, py-1.5.2, pluggy-0.6.0 -- /usr/bin/python2\r\n    cachedir: .cache\r\n    rootdir: /mnt/d/lldp_syncd/sonic-dbsyncd, inifile:\r\n    collected 8 items   \r\n\r\n    tests/test_lldpSyncDaemon.py::TestLldpSyncDaemon::test_loc_chassis PASSED                                        [ 12%]\r\n    tests/test_lldpSyncDaemon.py::TestLldpSyncDaemon::test_multiple_mgmt_ip PASSED                                   [ 25%]\r\n    tests/test_lldpSyncDaemon.py::TestLldpSyncDaemon::test_parse_json PASSED                                         [ 37%]\r\n    tests/test_lldpSyncDaemon.py::TestLldpSyncDaemon::test_parse_short PASSED                                        [ 50%]\r\n    tests/test_lldpSyncDaemon.py::TestLldpSyncDaemon::test_parse_short_short PASSED                                  [ 62%]\r\n    tests/test_lldpSyncDaemon.py::TestLldpSyncDaemon::test_single_mgmt_ip PASSED                                     [ 75%]\r\n    tests/test_lldpSyncDaemon.py::TestLldpSyncDaemon::test_sync_roundtrip PASSED                                     [ 87%]\r\n    tests/test_lldpSyncDaemon.py::TestLldpSyncDaemon::test_timeparse PASSED                                          [100%]"
+    },
+    {
+        "number": 21,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2019-04-30T05:59:06Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 21,
+        "repo": "sonic-dbsyncd",
+        "latestReview_at": "2019-04-30T05:59:06Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 19,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2019-04-26T10:03:55Z",
+        "comment_author": "chenkelly",
+        "comment_body": "Hi @qiluo-msft , could you help to review this, too? Thanks."
+    },
+    {
+        "number": 19,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2019-04-26T16:57:52Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 19,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2019-04-26T23:54:45Z",
+        "review_author": "chenkelly"
+    },
+    {
+        "number": 19,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2019-04-27T00:05:27Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 19,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2019-04-29T08:23:36Z",
+        "review_author": "chenkelly"
+    },
+    {
+        "number": 19,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2019-04-29T15:56:03Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 19,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2019-04-29T15:57:36Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 19,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2019-04-29T18:00:06Z",
+        "review_author": "chenkelly"
+    },
+    {
+        "number": 19,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2019-04-29T18:01:01Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 19,
+        "repo": "sonic-dbsyncd",
+        "latestReview_at": "2019-04-29T18:01:01Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 18,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2019-04-24T09:12:08Z",
+        "comment_author": "chenkelly",
+        "comment_body": "Hi @qiluo-msft, please help to review code. Thanks."
+    },
+    {
+        "number": 18,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2019-04-24T17:31:23Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 18,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2019-04-24T17:31:47Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 18,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2019-04-25T01:17:46Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 18,
+        "repo": "sonic-dbsyncd",
+        "latestReview_at": "2019-04-25T01:17:46Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 17,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2019-04-25T10:01:27Z",
+        "comment_author": "chenkelly",
+        "comment_body": "Hi @qiluo-msft , could you help to review this, too? Thanks. "
+    },
+    {
+        "number": 17,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2019-04-25T18:22:23Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 17,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2019-04-26T00:30:55Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 17,
+        "repo": "sonic-dbsyncd",
+        "latestReview_at": "2019-04-26T00:30:55Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 15,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2019-02-07T18:58:01Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 15,
+        "repo": "sonic-dbsyncd",
+        "latestReview_at": "2019-02-07T18:58:01Z",
+        "latestReview_author": "jleveque",
+        "latestReview_state": "APPROVED"
+    }
+]
