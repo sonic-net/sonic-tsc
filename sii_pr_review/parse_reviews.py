@@ -20,7 +20,6 @@ def main():
 
     for file in sys.argv[1:]:
         data_p=[]
-        file_p = os.path.dirname(file) + '/parsed_' + os.path.basename(file)
         print("=================",file)
         with open(file) as f:
             data=json.load(f)
@@ -49,7 +48,7 @@ def main():
                     tem["latestReview_state"] = latest_review["state"]
                     data_p.append(tem)
 
-        with open(file_p, 'w', encoding='utf8') as f:
+        with open(file, 'w', encoding='utf8') as f:
             json.dump(data_p, f, indent=4)
 
 
