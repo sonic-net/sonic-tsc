@@ -1,0 +1,328 @@
+[
+    {
+        "number": 663,
+        "repo": "sonic-sairedis",
+        "review_at": "2020-09-28T21:55:24Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 663,
+        "repo": "sonic-sairedis",
+        "review_at": "2020-09-29T09:13:01Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 663,
+        "repo": "sonic-sairedis",
+        "review_at": "2020-09-29T09:16:26Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 663,
+        "repo": "sonic-sairedis",
+        "review_at": "2020-09-29T16:02:22Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 663,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2020-09-29T16:02:22Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 662,
+        "repo": "sonic-sairedis",
+        "comment_at": "2020-09-21T16:19:18Z",
+        "comment_author": "kcudnik",
+        "comment_body": "thanks for fixing that"
+    },
+    {
+        "number": 662,
+        "repo": "sonic-sairedis",
+        "comment_at": "2020-09-21T16:58:15Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "Should we backport to old release branches?"
+    },
+    {
+        "number": 662,
+        "repo": "sonic-sairedis",
+        "comment_at": "2020-09-21T17:24:47Z",
+        "comment_author": "kcudnik",
+        "comment_body": "yes"
+    },
+    {
+        "number": 662,
+        "repo": "sonic-sairedis",
+        "comment_at": "2020-09-22T07:08:27Z",
+        "comment_author": "Pterosaur",
+        "comment_body": "retest this please"
+    },
+    {
+        "number": 662,
+        "repo": "sonic-sairedis",
+        "comment_at": "2020-09-23T19:35:52Z",
+        "comment_author": "kcudnik",
+        "comment_body": "@Pterosaur  can you also backport this change to release branches ?"
+    },
+    {
+        "number": 662,
+        "repo": "sonic-sairedis",
+        "review_at": "2020-09-21T16:18:46Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 662,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2020-09-21T16:18:46Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 661,
+        "repo": "sonic-sairedis",
+        "comment_at": "2020-09-21T00:56:29Z",
+        "comment_author": "slogan621",
+        "comment_body": "@jleveque @lguohan "
+    },
+    {
+        "number": 661,
+        "repo": "sonic-sairedis",
+        "review_at": "2020-09-21T03:11:55Z",
+        "review_author": "jleveque"
+    },
+    {
+        "number": 661,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2020-09-21T03:11:55Z",
+        "latestReview_author": "jleveque",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 660,
+        "repo": "sonic-sairedis",
+        "review_at": "2020-09-17T16:14:26Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 660,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2020-09-17T16:14:26Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 654,
+        "repo": "sonic-sairedis",
+        "comment_at": "2020-08-30T17:48:06Z",
+        "comment_author": "kcudnik",
+        "comment_body": "Could you explain this more ? i dont understand this issue here"
+    },
+    {
+        "number": 654,
+        "repo": "sonic-sairedis",
+        "comment_at": "2020-08-30T18:00:26Z",
+        "comment_author": "kcudnik",
+        "comment_body": "@abdosi  when switch is created, there is discovery logic that discovers all the oids, it does not matter whether its cold or warm boot\r\nso at new instance 3.7 SAI_SWITCH_ATTR_DEFAULT_STP_INST_ID  will be discovered, as it was not present on 3.5\r\nand this should be done in different way, SAI_SWITCH_ATTR_DEFAULT_STP_INST_ID should be added to m_default_rid_map in SaiSwitch.cpp, and then when function isSwitchObjectDefaultRid() inside isNonRemovableRid(), and isNonRemovableRid is called in ComparisonLogic, then that object will not be removed, since that is default object"
+    },
+    {
+        "number": 654,
+        "repo": "sonic-sairedis",
+        "comment_at": "2020-08-31T15:09:22Z",
+        "comment_author": "lguohan",
+        "comment_body": "can we have some kinds of unit test for this?"
+    },
+    {
+        "number": 654,
+        "repo": "sonic-sairedis",
+        "comment_at": "2020-08-31T15:24:46Z",
+        "comment_author": "abdosi",
+        "comment_body": "> @abdosi when switch is created, there is discovery logic that discovers all the oids, it does not matter whether its cold or warm boot\r\n> so at new instance 3.7 SAI_SWITCH_ATTR_DEFAULT_STP_INST_ID will be discovered, as it was not present on 3.5\r\n> and this should be done in different way, SAI_SWITCH_ATTR_DEFAULT_STP_INST_ID should be added to m_default_rid_map in SaiSwitch.cpp, and then when function isSwitchObjectDefaultRid() inside isNonRemovableRid(), and isNonRemovableRid is called in ComparisonLogic, then that object will not be removed, since that is default object\r\n\r\n@kcudnik : Thanks looks like logic is different in master vs 201911. I will rework this PR for 201911 branch. Master looks fine. "
+    },
+    {
+        "number": 654,
+        "repo": "sonic-sairedis",
+        "comment_at": "2020-08-31T15:58:33Z",
+        "comment_author": "kcudnik",
+        "comment_body": "Ok, so master works fine without any issues? just 201911 is affected?\r\n\r\nas for unittests, this will be tricky to implement in current test mechanism, since it would require to have 2 different version of syncd (compiled with version A and then B) and cold boot from A to warm boot to B, or to have a new special configuration file for virtual switch that on warm boot it could be specified to \"enable\" new STP object to be existing on the VS"
+    },
+    {
+        "number": 654,
+        "repo": "sonic-sairedis",
+        "comment_at": "2020-08-31T17:23:37Z",
+        "comment_author": "abdosi",
+        "comment_body": "> Ok, so master works fine without any issues? just 201911 is affected?\r\n> \r\nI revisited the code-path you mention and issue will be present both in master and 201911. I am verifying on 201911 as of now. Here are two issue in above approach -\r\n\r\nIssue 1: \r\n\r\nIn Function isNonRemovableRid() we first check for isColdBootDiscoveredRid() and then isSwitchObjectDefaultRid(). In This particular case DefaultRid was dicovered as part of Warm-boot so first check will fail and return. \r\nI think the order should be reverse.  Let me know.\r\n\r\n\r\nIssue 2:\r\nEven after we reverse the order (as mention in Issue 1 above ) the API ComparisonLogic::checkMap() will fail. This is because since this discovered Switch Internal OID never gets updated to tempView.\r\n\r\nI think my initial change where I add Internal OID to COLDVIDS (irrespective of Cold or Warm boot)  make it clean because then populateExisting Object logic will take care of adding this to temp view with the existing logic.\r\n\r\n> as for unittests, this will be tricky to implement in current test mechanism, since it would require to have 2 different version of syncd (compiled with version A and then B) and cold boot from A to warm boot to B, or to have a new special configuration file for virtual switch that on warm boot it could be specified to \"enable\" new STP object to be existing on the VS\r\n\r\n"
+    },
+    {
+        "number": 654,
+        "repo": "sonic-sairedis",
+        "comment_at": "2020-09-01T16:37:41Z",
+        "comment_author": "abdosi",
+        "comment_body": "@kcudnik can you check my comments above "
+    },
+    {
+        "number": 654,
+        "repo": "sonic-sairedis",
+        "comment_at": "2020-09-01T16:37:57Z",
+        "comment_author": "kcudnik",
+        "comment_body": "ok, thats sounds good, just put a those comments in that change why we populate those tables in redis"
+    },
+    {
+        "number": 654,
+        "repo": "sonic-sairedis",
+        "review_at": "2020-08-30T17:51:16Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 654,
+        "repo": "sonic-sairedis",
+        "review_at": "2020-08-30T18:08:11Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 654,
+        "repo": "sonic-sairedis",
+        "review_at": "2020-08-30T18:12:27Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 654,
+        "repo": "sonic-sairedis",
+        "review_at": "2020-08-30T19:35:12Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 654,
+        "repo": "sonic-sairedis",
+        "review_at": "2020-09-01T21:38:04Z",
+        "review_author": "abdosi"
+    },
+    {
+        "number": 654,
+        "repo": "sonic-sairedis",
+        "review_at": "2020-09-01T21:40:01Z",
+        "review_author": "abdosi"
+    },
+    {
+        "number": 654,
+        "repo": "sonic-sairedis",
+        "review_at": "2020-09-01T21:40:10Z",
+        "review_author": "abdosi"
+    },
+    {
+        "number": 654,
+        "repo": "sonic-sairedis",
+        "review_at": "2020-09-01T21:44:44Z",
+        "review_author": "abdosi"
+    },
+    {
+        "number": 654,
+        "repo": "sonic-sairedis",
+        "review_at": "2020-09-02T10:37:44Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 654,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2020-09-02T10:37:44Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 642,
+        "repo": "sonic-sairedis",
+        "comment_at": "2020-08-06T10:33:46Z",
+        "comment_author": "kcudnik",
+        "comment_body": "retest this please"
+    },
+    {
+        "number": 642,
+        "repo": "sonic-sairedis",
+        "comment_at": "2020-08-08T21:17:05Z",
+        "comment_author": "kcudnik",
+        "comment_body": "retest this please"
+    },
+    {
+        "number": 642,
+        "repo": "sonic-sairedis",
+        "comment_at": "2020-08-31T15:56:05Z",
+        "comment_author": "kcudnik",
+        "comment_body": "retest this please"
+    },
+    {
+        "number": 642,
+        "repo": "sonic-sairedis",
+        "comment_at": "2020-09-07T10:09:46Z",
+        "comment_author": "kcudnik",
+        "comment_body": "retest this please"
+    },
+    {
+        "number": 642,
+        "repo": "sonic-sairedis",
+        "comment_at": "2020-09-07T12:44:09Z",
+        "comment_author": "kcudnik",
+        "comment_body": "retest this please"
+    },
+    {
+        "number": 642,
+        "repo": "sonic-sairedis",
+        "comment_at": "2020-09-07T16:10:04Z",
+        "comment_author": "kcudnik",
+        "comment_body": "retest this please"
+    },
+    {
+        "number": 642,
+        "repo": "sonic-sairedis",
+        "review_at": "2020-07-31T16:43:59Z",
+        "review_author": "daall"
+    },
+    {
+        "number": 642,
+        "repo": "sonic-sairedis",
+        "review_at": "2020-08-02T10:44:56Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 642,
+        "repo": "sonic-sairedis",
+        "review_at": "2020-08-02T10:45:38Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 642,
+        "repo": "sonic-sairedis",
+        "review_at": "2020-08-02T10:48:59Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 642,
+        "repo": "sonic-sairedis",
+        "review_at": "2020-08-05T15:36:29Z",
+        "review_author": "daall"
+    },
+    {
+        "number": 642,
+        "repo": "sonic-sairedis",
+        "review_at": "2020-08-05T15:37:41Z",
+        "review_author": "daall"
+    },
+    {
+        "number": 642,
+        "repo": "sonic-sairedis",
+        "review_at": "2020-08-06T18:40:22Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 642,
+        "repo": "sonic-sairedis",
+        "review_at": "2020-08-11T00:29:37Z",
+        "review_author": "daall"
+    },
+    {
+        "number": 642,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2020-08-11T00:29:37Z",
+        "latestReview_author": "daall",
+        "latestReview_state": "APPROVED"
+    }
+]
