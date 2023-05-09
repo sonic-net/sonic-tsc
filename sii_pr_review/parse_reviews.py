@@ -24,6 +24,9 @@ def main():
         with open(file) as f:
             data=json.load(f)
             for item in data:
+                if "comment_at" in item.keys() or "review_at" in item.keys() or "latestReview_at" in item.keys():
+                    data_p.append(item)
+                    continue
                 if "comments" in item.keys():
                     for comment in item["comments"]:
                         tem = {}
