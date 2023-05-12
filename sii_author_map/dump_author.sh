@@ -1,19 +1,15 @@
 #!/bin/bash
 author_list=author.list
 csv=author.csv
-unknown=author.unknown
 
 while IFS= read -r line;do
     [ -z "$line" ] && continue
 
-    if echo $line | grep @; then
-        echo $line >> $unknown; continue
-    fi
-
-    if grep "$line" $csv 2>/dev/null; then
-        grep "$line" $csv >> $csv.tmp
+    if grep "^$line," $csv 2>/dev/null; then
+        grep "^$line," $csv >> $csv.tmp
         continue
     fi
+    echo "$line" | grep " " && echo "$line,null,null" >> $csv.tmp && continue
 
     gh api /users/$line -q ". | {login,name,company}" > tmp
     sleep 1
