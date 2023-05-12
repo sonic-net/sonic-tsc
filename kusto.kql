@@ -1,4 +1,4 @@
-.drop table testPRs
+.drop table author
 
 .drop table issues ingestion csv  mapping "mapping1"
 
@@ -268,10 +268,25 @@ union hld_, prs_, reviews_, issues_, issues_triaged_, testplanhld_, testPRs_, re
 | extend organization=iff(isempty(organization) and author contains "Celestica", 'Celestica', organization)
 | extend organization=iff(isempty(organization) and author contains "Edgecore", 'Edgecore', organization)
 | extend organization=iff(isempty(organization) and author contains "Marvell", 'Marvell', organization)
+| extend organization=iff(isempty(organization) and author contains "Mellanox", 'Mellanox', organization)
 | extend score_i=iff( year == 2022, 0.3*score, iff(year == 2021, 0.25*score, iff(year == 2020, 0.2*score,iff(year == 2019, 0.15*score,iff(year == 2018, 0.1*score,0.0)))))
 | project author, organization, year, score, metric, score_i
 // summarize by organization
-| join kind=leftouter authorMap on $left.author==$right.id
+| extend organization=iff(organization contains "Nvidia", 'Nvidia', organization)
+| extend organization=iff(organization contains "Dell", 'Dell', organization)
+| extend organization=iff(organization contains "Microsoft", 'Microsoft', organization)
+| extend organization=iff(organization contains "Cisco", 'Cisco', organization)
+| extend organization=iff(organization contains "Broadcom", 'Broadcom', organization)
+| extend organization=iff(organization contains "BRCM", 'Broadcom', organization)
+| extend organization=iff(organization contains "Arista", 'Arista', organization)
+| extend organization=iff(organization contains "Intel", 'Intel', organization)
+| extend organization=iff(organization contains "Barefoot", 'Barefoot', organization)
+| extend organization=iff(organization contains "Centec", 'Centec', organization)
+| extend organization=iff(organization contains "Cavium", 'Cavium', organization)
+| extend organization=iff(organization contains "Celestica", 'Celestica', organization)
+| extend organization=iff(organization contains "Edgecore", 'Edgecore', organization)
+| extend organization=iff(organization contains "Marvell", 'Marvell', organization)
+| extend organization=iff(organization contains "Mellanox", 'Mellanox', organization)
 | summarize sum(score_i) by organization
 | sort by sum_score_i desc
 
