@@ -2,9 +2,7 @@
 
 .drop table issues ingestion csv  mapping "mapping1"
 
-.drop table prComments ingestion json mapping "mapping1"
-
-.clear table prs data 
+.clear table author data
 
 .create table prs(
     additions:      string,
@@ -149,24 +147,26 @@ author
 | extend organization=iff(organization contains "marvell", 'Marvell',organization)
 | project github_id=id,github_name=name,organization;
 
-
 // author map
 let authorMap=author;
 // 1. Merged HLD [1] Count
-let hld=
+let hld_=
 highLevelDisign
 | extend year=getyear(created_at)
-| extend score=50;
+| extend score=50
+| extend metric='hld'
+| project author,year,score,metric;
 // 2. Merged PR [2] Count (S/M/L)
-let pr =
+let prs_ =
 prs
-| where repo 
-| extend year=getyear(mergedAt)
-| extend score=iff( (toint(additions)>300) , 50 , iff( (toint(additions)>50) , 20 , 10));
+| where test_case !contains "yes"
+| extend year=getyear(merged_at)
+| extend metric='pr'
+| extend score=iff( (toint(additions)>300) , 50 , iff( (toint(additions)>50) , 20 , 10))
+| project author,year,score,metric;
 // 3. PR Review Count (S/M/L)
-let reviews=
+let reviews_=
 reviews
-| where repo != 'sonic-mgmt'
 | extend year=getyear(comment_at)
 | extend year=iff(isempty(year), getyear(review_at),year)
 | extend year=iff(isempty(year), getyear(latestReview_at),year)
@@ -175,23 +175,28 @@ reviews
 | extend author=iff(isempty(author), latestReview_author, author)
 | project number,repo,year,author
 | join kind=leftouter prs on $left.repo==$right.repo, $left.number==$right.number
+| where test_case !contains "yes"
 | project number,repo,year,author,pr_author=author1
 | where author != pr_author
 | extend tag=strcat(repo,number)
 | partition hint.strategy=native by tag(
     summarize count() by repo,number,year,author
 )
-| extend score=iff(count_ <= 2, 1, iff(count_ <= 5, 2, 5));
+| extend metric='pr_review'
+| extend score=iff(count_ <= 2, 1, iff(count_ <= 5, 2, 5))
+| project author,year,score,metric;
 // 4. PR cherry-picking [3] Count ---- TODO
 // 5. Documentations (Release Notes/Meeting Minutes) ---- DONE in item 1.
 // 6. New ASIC [4] Introduction Count ---- TODO
 // 7. Issues Opened Count
-let issue=
+let issues_=
 issues
 | extend score=5
-| extend year=getyear(createdAt);
+| extend year=getyear(created_at)
+| extend metric='issue_open'
+| project author,year,score,metric;
 // 8. Issues Triaged/Fixed Count
-let issueTriaged=
+let issues_triaged_=
 issues
 | extend organization=iff(labels contains "msft", "Microsoft", author)
 | extend organization=iff(labels contains "brcm", "Broadcom", author)
@@ -202,51 +207,80 @@ issues
 | extend organization=iff(labels contains "mellanox", "Mellanox", author)
 | where organization != ''
 | extend score=10
-| extend year=getyear(createdAt);
+| extend year=getyear(created_at)
+| extend metric='issue_triaged'
+| project author,year,score,metric;
 // 9. Merged SONiC MGMT TEST Plan HLD [1] Count
-let testplanhld=
+let testplanhld_=
 testPlanHLD
 | extend score=100
-| extend year=getyear(createdAt);
+| extend year=getyear(created_at)
+| extend metric='testplan_hld'
+| project author,year,score,metric;
 // 10. Merged Test cases [2] (S/M/L)
-let testPRs=
-testPRs
-| where testCase contains "yes"
-| extend score=iff( (toint(additions)>300) , 100 , iff( (toint(additions)>50) , 40 , 20))
-| extend year=getyear(mergedAt);
-// 11. TEST PR review count (S/M/L)
-// summarize by author.
-union hld,pr,reviews,issue,issueTriaged,testplanhld,testPRs
-| extend score_i=iff( year == 2022, 0.3*score, iff(year == 2021, 0.25*score, iff(year == 2020, 0.2*score,iff(year == 2019, 0.15*score,iff(year == 2018, 0.1*score,0.0)))))
-| summarize sum(score_i) by author
-| where author != 'mssonicbld'
-| sort by sum_score_i desc
-// summarize by organization
-| join kind=leftouter authorMap on $left.author==$right.id
-| summarize sum(sum_score_i) by organization
-| sort by sum_sum_score_i desc 
-| take 20 
-
+let testPRs_=
 prs
- 
-
-reviews
-| where repo != 'sonic-mgmt'
-
+| where test_case contains "yes"
+| extend score=iff( (toint(additions)>300) , 100 , iff( (toint(additions)>50) , 40 , 20))
+| extend year=getyear(merged_at)
+| extend metric='test_pr'
+| project author,year,score,metric;
+// 11. TEST PR review count (S/M/L)
+let reviews_test_=
 reviews
 | extend year=getyear(comment_at)
-| extend year=iff(isnull(year), getyear(review_at), year)
-| extend year=iff(isnull(year), getyear(latestReview_at), year)
+| extend year=iff(isempty(year), getyear(review_at),year)
+| extend year=iff(isempty(year), getyear(latestReview_at),year)
 | extend author=comment_author
-| extend author=iff(isempty(author), latestReview_author, author)
 | extend author=iff(isempty(author), review_author, author)
-| summarize count() by repo, author, year, number
+| extend author=iff(isempty(author), latestReview_author, author)
+| project number,repo,year,author
 | join kind=leftouter prs on $left.repo==$right.repo, $left.number==$right.number
-| project repo, author, year, number, count_, pr_author=author1
+| where test_case contains "yes"
+| project number,repo,year,author,pr_author=author1
 | where author != pr_author
+| extend tag=strcat(repo,number)
+| partition hint.strategy=native by tag(
+    summarize count() by repo,number,year,author
+)
+| extend metric='testpr_review'
+| extend score=iff(count_ <= 2, 2, iff(count_ <= 5, 4, 10))
+| project author,year,score,metric;
+// summarize by author.
+union hld_, prs_, reviews_, issues_, issues_triaged_, testplanhld_, testPRs_, reviews_test_
+| join kind=leftouter authorMap on $left.author==$right.id
+| where author != 'linux-foundation-easycla'
+| where author != 'lgtm-com'
+| where author != 'mssonicbld'
+| where author != 'azure-pipelines'
+| where author != 'svc-acs'
+| extend organization=iff(isempty(organization) and author contains "Nvidia", 'Nvidia', organization)
+| extend organization=iff(isempty(organization) and author contains "Dell", 'Dell', organization)
+| extend organization=iff(isempty(organization) and author contains "Microsoft", 'Microsoft', organization)
+| extend organization=iff(isempty(organization) and author contains "Cisco", 'Cisco', organization)
+| extend organization=iff(isempty(organization) and author contains "Broadcom", 'Broadcom', organization)
+| extend organization=iff(isempty(organization) and author contains "BRCM", 'Broadcom', organization)
+| extend organization=iff(isempty(organization) and author contains "Arista", 'Arista', organization)
+| extend organization=iff(isempty(organization) and author contains "Intel", 'Intel', organization)
+| extend organization=iff(isempty(organization) and author contains "Barefoot", 'Barefoot', organization)
+| extend organization=iff(isempty(organization) and author contains "Centec", 'Centec', organization)
+| extend organization=iff(isempty(organization) and author contains "Cavium", 'Cavium', organization)
+| extend organization=iff(isempty(organization) and author contains "Celestica", 'Celestica', organization)
+| extend organization=iff(isempty(organization) and author contains "Edgecore", 'Edgecore', organization)
+| extend organization=iff(isempty(organization) and author contains "Marvell", 'Marvell', organization)
+| extend score_i=iff( year == 2022, 0.3*score, iff(year == 2021, 0.25*score, iff(year == 2020, 0.2*score,iff(year == 2019, 0.15*score,iff(year == 2018, 0.1*score,0.0)))))
+| project author, organization, year, score, metric, score_i
+// summarize by organization
+| join kind=leftouter authorMap on $left.author==$right.id
+| summarize sum(score_i) by organization
+| sort by sum_score_i desc
 
 
-# query review comment potential way.
+
+
+
+
+// query review comment potential way.
 database('internal').GitHubEvents
 | sort by Timestamp asc 
 | where Name contains "pull_re"
