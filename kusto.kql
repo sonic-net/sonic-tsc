@@ -269,6 +269,9 @@ union hld_, prs_, reviews_, issues_, issues_triaged_, testplanhld_, testPRs_, re
 | extend organization=iff(isempty(organization) and author contains "Edgecore", 'Edgecore', organization)
 | extend organization=iff(isempty(organization) and author contains "Marvell", 'Marvell', organization)
 | extend organization=iff(isempty(organization) and author contains "Mellanox", 'Mellanox', organization)
+| extend organization=iff(isempty(organization) and author contains "Alibaba", 'Alibaba', organization)
+| extend organization=iff(isempty(organization) and author contains "Uber", 'Uber', organization)
+| extend organization=iff(isempty(organization) and author contains "Nokia", 'Nokia', organization)
 | extend score_i=iff( year == 2022, 0.3*score, iff(year == 2021, 0.25*score, iff(year == 2020, 0.2*score,iff(year == 2019, 0.15*score,iff(year == 2018, 0.1*score,0.0)))))
 | project author, organization, year, score, metric, score_i
 // summarize by organization
@@ -287,6 +290,9 @@ union hld_, prs_, reviews_, issues_, issues_triaged_, testplanhld_, testPRs_, re
 | extend organization=iff(organization contains "Edgecore", 'Edgecore', organization)
 | extend organization=iff(organization contains "Marvell", 'Marvell', organization)
 | extend organization=iff(organization contains "Mellanox", 'Mellanox', organization)
+| extend organization=iff(organization contains "Alibaba", 'Alibaba', organization)
+| extend organization=iff(organization contains "Uber", 'Uber', organization)
+| extend organization=iff(organization contains "Nokia", 'Nokia', organization)
 | summarize sum(score_i) by organization
 | sort by sum_score_i desc
 
