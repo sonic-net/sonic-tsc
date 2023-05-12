@@ -20,17 +20,7 @@ data status:
 | SONiC Production Deployment (S/M/L) [6] | NA |
 | SONiC End Consumer Proliferation (S/M/L) | NA |
 
-
-Merged PR [2] Count
-PR Review Count (S/M/L)
-```
-# dump merged prs
-./pr_dump.sh -x
-# pre-parse prs info
-./parse_prs.py $(find . -name *prs.json)
-
-# dump comments,reviews,approvals
-./pr_dump.sh -x -t reviews
-./parse_reviews.py $(find . -name *reviews.json)
-```
-
+![Author count in each Org](sii_author_map/images/author.png)
+![Sii of each Org](sii_author_map/images/Sii_org.png)
+![Sii of each author](sii_author_map/images/Sii_author.png)
+![Sii of eath metric](sii_author_map/images/Sii_metric.png)
