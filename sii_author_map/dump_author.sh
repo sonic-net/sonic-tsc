@@ -13,7 +13,7 @@ while IFS= read -r line;do
 
     gh api /users/$line -q ". | {login,name,company}" > tmp
     sleep 1
-    name=$(cat tmp | jq -r ".name")
+    name=$(cat tmp | jq -r ".name" | sed 's/,/ /g')
     id=$(cat tmp | jq -r ".login")
     company=$(cat tmp | jq -r ".company" | sed 's/,/ /g')
 
