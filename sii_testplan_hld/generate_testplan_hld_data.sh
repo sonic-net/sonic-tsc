@@ -30,7 +30,6 @@ done
 for repo in $repos;do
     
     repo_base=$(echo $repo | awk -F/ '{print$2}')
-    ignore=${repo_base}_ignore
     list=${repo_base}_hld.list
     csv=${repo_base}_hld.csv
     folder="docs/testplan"
@@ -38,13 +37,12 @@ for repo in $repos;do
     echo repo: $repo_base
     echo csv: $csv
     echo list: $list
-    echo ignore: $ignore
     echo folder: $folder
     [[ "$clone" == "y" ]] && rm -rf $repo_base
     [ -d $repo_base ] || git clone https://github.com/$repo
 
     cd $repo_base
-    find $folder/ -xtype f -size +10c | grep -v -f ../$ignore > ../$list
+    find $folder/ -xtype f -size +10c | grep -E -e "\.md" -e "\.MD" > ../$list
 
     while IFS= read -r line;do
         if grep "$line" ../$csv 2> /dev/null | grep -v ,, > /dev/null ;then
@@ -72,5 +70,5 @@ for repo in $repos;do
     done <../$list
 
     cd ..
-    mv $csv.tmp $csv
+    sort $csv.tmp > $csv
 done
