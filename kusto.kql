@@ -152,39 +152,36 @@ let authorMap=author;
 // 1. Merged HLD [1] Count
 let hld_=
 highLevelDisign
-| extend year=getyear(created_at)
+| extend time_stamp=created_at
 | extend score=50
 | extend metric='hld'
-| project author,year,score,metric;
+| project author,time_stamp,score,metric;
 // 2. Merged PR [2] Count (S/M/L)
 let prs_ =
 prs
 | where test_case !contains "yes"
-| extend year=getyear(merged_at)
+| extend time_stamp=merged_at
 | extend metric='pr'
 | extend score=iff( (toint(additions)>300) , 50 , iff( (toint(additions)>50) , 20 , 10))
-| project author,year,score,metric;
+| project author,time_stamp,score,metric;
 // 3. PR Review Count (S/M/L)
 let reviews_=
 reviews
-| extend year=getyear(comment_at)
-| extend year=iff(isempty(year), getyear(review_at),year)
-| extend year=iff(isempty(year), getyear(latestReview_at),year)
 | extend author=comment_author
 | extend author=iff(isempty(author), review_author, author)
 | extend author=iff(isempty(author), latestReview_author, author)
-| project number,repo,year,author
+| project number,repo,author
 | join kind=leftouter prs on $left.repo==$right.repo, $left.number==$right.number
 | where test_case !contains "yes"
-| project number,repo,year,author,pr_author=author1
+| project number,repo,time_stamp=merged_at,author,pr_author=author1
 | where author != pr_author
 | extend tag=strcat(repo,number)
 | partition hint.strategy=native by tag(
-    summarize count() by repo,number,year,author
+    summarize count() by repo,number,time_stamp,author
 )
 | extend metric='pr_review'
 | extend score=iff(count_ <= 2, 1, iff(count_ <= 5, 2, 5))
-| project author,year,score,metric;
+| project author,time_stamp,score,metric;
 // 4. PR cherry-picking [3] Count ---- TODO
 // 5. Documentations (Release Notes/Meeting Minutes) ---- DONE in item 1.
 // 6. New ASIC [4] Introduction Count ---- TODO
@@ -192,9 +189,9 @@ reviews
 let issues_=
 issues
 | extend score=5
-| extend year=getyear(created_at)
+| extend time_stamp=created_at
 | extend metric='issue_open'
-| project author,year,score,metric;
+| project author,time_stamp,score,metric;
 // 8. Issues Triaged/Fixed Count
 let issues_triaged_=
 issues
@@ -207,45 +204,42 @@ issues
 | extend organization=iff(labels contains "mellanox", "Mellanox", author)
 | where organization != ''
 | extend score=10
-| extend year=getyear(created_at)
+| extend time_stamp=created_at
 | extend metric='issue_triaged'
-| project author,year,score,metric;
+| project author,time_stamp,score,metric;
 // 9. Merged SONiC MGMT TEST Plan HLD [1] Count
 let testplanhld_=
 testPlanHLD
 | extend score=100
-| extend year=getyear(created_at)
+| extend time_stamp=created_at
 | extend metric='testplan_hld'
-| project author,year,score,metric;
+| project author,time_stamp,score,metric;
 // 10. Merged Test cases [2] (S/M/L)
 let testPRs_=
 prs
 | where test_case contains "yes"
 | extend score=iff( (toint(additions)>300) , 100 , iff( (toint(additions)>50) , 40 , 20))
-| extend year=getyear(merged_at)
+| extend time_stamp=merged_at
 | extend metric='test_pr'
-| project author,year,score,metric;
+| project author,time_stamp,score,metric;
 // 11. TEST PR review count (S/M/L)
 let reviews_test_=
 reviews
-| extend year=getyear(comment_at)
-| extend year=iff(isempty(year), getyear(review_at),year)
-| extend year=iff(isempty(year), getyear(latestReview_at),year)
 | extend author=comment_author
 | extend author=iff(isempty(author), review_author, author)
 | extend author=iff(isempty(author), latestReview_author, author)
-| project number,repo,year,author
+| project number,repo,author
 | join kind=leftouter prs on $left.repo==$right.repo, $left.number==$right.number
 | where test_case contains "yes"
-| project number,repo,year,author,pr_author=author1
+| project number,repo,time_stamp=merged_at,author,pr_author=author1
 | where author != pr_author
 | extend tag=strcat(repo,number)
 | partition hint.strategy=native by tag(
-    summarize count() by repo,number,year,author
+    summarize count() by repo,number,time_stamp,author
 )
 | extend metric='testpr_review'
 | extend score=iff(count_ <= 2, 2, iff(count_ <= 5, 4, 10))
-| project author,year,score,metric;
+| project author,time_stamp,score,metric;
 // summarize by author.
 union hld_, prs_, reviews_, issues_, issues_triaged_, testplanhld_, testPRs_, reviews_test_
 | join kind=leftouter authorMap on $left.author==$right.id
@@ -254,6 +248,7 @@ union hld_, prs_, reviews_, issues_, issues_triaged_, testplanhld_, testPRs_, re
 | where author != 'mssonicbld'
 | where author != 'azure-pipelines'
 | where author != 'svc-acs'
+| where author != 'msftclas'
 | extend organization=iff(isempty(organization) and author contains "Nvidia", 'Nvidia', organization)
 | extend organization=iff(isempty(organization) and author contains "Dell", 'Dell', organization)
 | extend organization=iff(isempty(organization) and author contains "Microsoft", 'Microsoft', organization)
@@ -272,8 +267,9 @@ union hld_, prs_, reviews_, issues_, issues_triaged_, testplanhld_, testPRs_, re
 | extend organization=iff(isempty(organization) and author contains "Alibaba", 'Alibaba', organization)
 | extend organization=iff(isempty(organization) and author contains "Uber", 'Uber', organization)
 | extend organization=iff(isempty(organization) and author contains "Nokia", 'Nokia', organization)
+| extend year=getyear(time_stamp)
 | extend score_i=iff( year == 2022, 0.3*score, iff(year == 2021, 0.25*score, iff(year == 2020, 0.2*score,iff(year == 2019, 0.15*score,iff(year == 2018, 0.1*score,0.0)))))
-| project author, organization, year, score, metric, score_i
+| project author, organization, year, score, metric, score_i, time_stamp
 // summarize by organization
 | extend organization=iff(organization contains "Nvidia", 'Nvidia', organization)
 | extend organization=iff(organization contains "Dell", 'Dell', organization)
@@ -295,6 +291,7 @@ union hld_, prs_, reviews_, issues_, issues_triaged_, testplanhld_, testPRs_, re
 | extend organization=iff(organization contains "Nokia", 'Nokia', organization)
 | summarize sum(score_i) by organization
 | sort by sum_score_i desc
+
 
 
 
