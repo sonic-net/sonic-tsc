@@ -17,6 +17,7 @@ if git diff author.csv | grep diff ;then
     git add author.csv
     git commit -m "author.csv changed"
     git push
+    cd ..
 
     ./kusto.py sii_author_clear
     ./kusto.py sii_author_import
