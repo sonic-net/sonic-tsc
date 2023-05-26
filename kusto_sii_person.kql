@@ -1,0 +1,185 @@
+// author map
+let authorMap=cluster('sonic.westus2.kusto.windows.net').database('sonic-buildimage-prs').author
+| distinct id, name, organization;
+// 1. Merged HLD [1] Count
+let hld_=
+cluster('sonic.westus2.kusto.windows.net').database('sonic-buildimage-prs').highLevelDisign
+| extend time_stamp=created_at
+| extend score=50
+| extend metric='hld'
+| project author,time_stamp,score,metric;
+// 2. Merged PR [2] Count (S/M/L)
+let prs_ =
+cluster('sonic.westus2.kusto.windows.net').database('sonic-buildimage-prs').prs
+| where test_case !contains "yes"
+| extend time_stamp=merged_at
+| extend metric='pr'
+| extend score=iff( (toint(additions)>300) , 50 , iff( (toint(additions)>50) , 20 , 10))
+| project author,time_stamp,score,metric;
+// 3. PR Review Count (S/M/L)
+let reviews_=
+cluster('sonic.westus2.kusto.windows.net').database('sonic-buildimage-prs').reviews
+| extend author=comment_author
+| extend author=iff(isempty(author), review_author, author)
+| extend author=iff(isempty(author), latestReview_author, author)
+| project number,repo,author
+| join kind=leftouter prs on $left.repo==$right.repo, $left.number==$right.number
+| where test_case !contains "yes"
+| project number,repo,time_stamp=merged_at,author,pr_author=author1
+| where author != pr_author
+| extend tag=strcat(repo,number)
+| partition hint.strategy=native by tag(
+    summarize count() by repo,number,time_stamp,author
+)
+| extend metric='pr_review'
+| extend score=iff(count_ <= 2, 1, iff(count_ <= 5, 2, 5))
+| project author,time_stamp,score,metric;
+// 4. PR cherry-picking [3] Count ---- TODO
+// 5. Documentations (Release Notes/Meeting Minutes) ---- DONE in item 1.
+// 6. New ASIC [4] Introduction Count ---- TODO
+// 7. Issues Opened Count
+let issues_=
+cluster('sonic.westus2.kusto.windows.net').database('sonic-buildimage-prs').issues
+| extend score=5
+| extend time_stamp=created_at
+| extend metric='issue_open'
+| project author,time_stamp,score,metric;
+// 8. Issues Triaged/Fixed Count
+let issues_triaged_=
+cluster('sonic.westus2.kusto.windows.net').database('sonic-buildimage-prs').issues
+| extend organization=iff(labels contains "msft", "Microsoft", author)
+| extend organization=iff(labels contains "brcm", "Broadcom", author)
+| extend organization=iff(labels contains "nvidia", "Nvidia", author)
+| extend organization=iff(labels contains "dell", "Dell", author)
+| extend organization=iff(labels contains "accton", "Accton", author)
+| extend organization=iff(labels contains "nokia", "Nokia", author)
+| extend organization=iff(labels contains "mellanox", "Mellanox", author)
+| where organization != ''
+| extend score=10
+| extend time_stamp=created_at
+| extend metric='issue_triaged'
+| project author,time_stamp,score,metric;
+// 9. Merged SONiC MGMT TEST Plan HLD [1] Count
+let testplanhld_=
+cluster('sonic.westus2.kusto.windows.net').database('sonic-buildimage-prs').testPlanHLD
+| extend score=100
+| extend time_stamp=created_at
+| extend metric='testplan_hld'
+| project author,time_stamp,score,metric;
+// 10. Merged Test cases [2] (S/M/L)
+let testPRs_=
+cluster('sonic.westus2.kusto.windows.net').database('sonic-buildimage-prs').prs
+| where test_case contains "yes"
+| extend score=iff( (toint(additions)>300) , 100 , iff( (toint(additions)>50) , 40 , 20))
+| extend time_stamp=merged_at
+| extend metric='test_pr'
+| project author,time_stamp,score,metric;
+// 11. TEST PR review count (S/M/L)
+let reviews_test_=
+cluster('sonic.westus2.kusto.windows.net').database('sonic-buildimage-prs').reviews
+| extend author=comment_author
+| extend author=iff(isempty(author), review_author, author)
+| extend author=iff(isempty(author), latestReview_author, author)
+| project number,repo,author
+| join kind=leftouter prs on $left.repo==$right.repo, $left.number==$right.number
+| where test_case contains "yes"
+| project number,repo,time_stamp=merged_at,author,pr_author=author1
+| where author != pr_author
+| extend tag=strcat(repo,number)
+| partition hint.strategy=native by tag(
+    summarize count() by repo,number,time_stamp,author
+)
+| extend metric='testpr_review'
+| extend score=iff(count_ <= 2, 2, iff(count_ <= 5, 4, 10))
+| project author,time_stamp,score,metric;
+// summarize by author.
+union hld_, prs_, reviews_, issues_, issues_triaged_, testplanhld_, testPRs_, reviews_test_
+| join kind=leftouter authorMap on $left.author==$right.id
+| where author != 'linux-foundation-easycla'
+| where author != 'lgtm-com'
+| where author != 'mssonicbld'
+| where author != 'azure-pipelines'
+| where author != 'svc-acs'
+| where author != 'msftclas'
+| extend organization=iff(isempty(organization), 'null', organization)
+| extend organization=iff(organization == 'null' and author contains "Nvidia", 'Nvidia', organization)
+| extend organization=iff(organization == 'null' and author contains "Dell", 'Dell', organization)
+| extend organization=iff(organization == 'null' and author contains "Microsoft", 'Microsoft', organization)
+| extend organization=iff(organization == 'null' and author contains "Cisco", 'Cisco', organization)
+| extend organization=iff(organization == 'null' and author contains "Broadcom", 'Broadcom', organization)
+| extend organization=iff(organization == 'null' and author contains "BRCM", 'Broadcom', organization)
+| extend organization=iff(organization == 'null' and author contains "Arista", 'Arista', organization)
+| extend organization=iff(organization == 'null' and author contains "Intel", 'Intel', organization)
+| extend organization=iff(organization == 'null' and author contains "Barefoot", 'Barefoot', organization)
+| extend organization=iff(organization == 'null' and author contains "Centec", 'Centec', organization)
+| extend organization=iff(organization == 'null' and author contains "Cavium", 'Cavium', organization)
+| extend organization=iff(organization == 'null' and author contains "Celestica", 'Celestica', organization)
+| extend organization=iff(organization == 'null' and author contains "Edgecore", 'Edgecore', organization)
+| extend organization=iff(organization == 'null' and author contains "Marvell", 'Marvell', organization)
+| extend organization=iff(organization == 'null' and author contains "Mellanox", 'Mellanox', organization)
+| extend organization=iff(organization == 'null' and author contains "mlnx", 'Mellanox', organization)
+| extend organization=iff(organization == 'null' and author contains "Alibaba", 'Alibaba', organization)
+| extend organization=iff(organization == 'null' and author contains "Uber", 'Uber', organization)
+| extend organization=iff(organization == 'null' and author contains "Nokia", 'Nokia', organization)
+| extend year=getyear(time_stamp)
+| extend score_i=iff( year == 2023, 0.3*score, 0.0)
+| extend score_i=iff( year == 2022, 0.3*score, iff(year == 2021, 0.25*score, iff(year == 2020, 0.2*score,iff(year == 2019, 0.15*score,iff(year == 2018, 0.1*score,0.0)))))
+| project author, organization, year, score, metric, score_i, time_stamp
+// summarize by organization
+| extend organization=iff(organization contains "Nvidia", 'Nvidia', organization)
+| extend organization=iff(organization contains "Dell", 'Dell', organization)
+| extend organization=iff(organization contains "Microsoft", 'Microsoft', organization)
+| extend organization=iff(organization contains "MSFT", 'Microsoft', organization)
+| extend organization=iff(organization contains "Cisco", 'Cisco', organization)
+| extend organization=iff(organization contains "Broadcom", 'Broadcom', organization)
+| extend organization=iff(organization contains "BRCM", 'Broadcom', organization)
+| extend organization=iff(organization contains "Arista", 'Broadcom', organization)
+| extend organization=iff(organization contains "Intel", 'Intel', organization)
+| extend organization=iff(organization contains "Barefoot", 'Intel', organization)
+| extend organization=iff(organization contains "Centec", 'Centec', organization)
+| extend organization=iff(organization contains "Cavium", 'Cavium', organization)
+| extend organization=iff(organization contains "Celestica", 'Celestica', organization)
+| extend organization=iff(organization contains "Edgecore", 'Edgecore', organization)
+| extend organization=iff(organization contains "Edge-core", 'Edgecore', organization)
+| extend organization=iff(organization contains "Marvell", 'Marvell', organization)
+| extend organization=iff(organization contains "Cavium", 'Marvell', organization)
+| extend organization=iff(organization contains "Mellanox", 'Nvidia', organization)
+| extend organization=iff(organization contains "Alibaba", 'Alibaba', organization)
+| extend organization=iff(organization contains "Uber", 'Uber', organization)
+| extend organization=iff(organization contains "Nokia", 'Nokia', organization)
+| extend organization=iff(organization contains "Juniper", 'Juniper', organization)
+| extend organization=iff(organization contains "Google", 'Google', organization)
+| extend organization=iff(organization contains "Ruijie", 'Ruijie', organization)
+| extend organization=iff(organization contains "Linkedin", 'Linkedin', organization)
+| extend organization=iff(organization contains "Keysight", 'Keysight', organization)
+| extend organization=iff(organization contains "Tencent", 'Tencent', organization)
+| extend organization=iff(organization contains "Jabil", 'Jabil', organization)
+| extend organization=iff(organization contains "Ragile", 'Ragile', organization)
+| extend organization=iff(organization contains "eBay", 'eBay', organization)
+| extend organization=iff(organization contains "VMware", 'VMware', organization)
+| extend organization=iff(organization contains "genesiscloud", 'GenesisCloud', organization)
+| extend organization=iff(organization contains "USnistgov", 'USnistgov', organization)
+| extend organization=iff(organization contains "Tutao", 'Tutao', organization)
+| extend organization=iff(organization contains "wwt", 'wwt', organization)
+| extend organization=iff(organization contains "Canonical", 'Canonical', organization)
+| extend organization=iff(organization contains "Ordnance", 'Ordnance', organization)
+| extend organization=iff(organization contains "H3C", 'H3C', organization)
+| extend organization=iff(organization contains "JD", 'JD', organization)
+| extend organization=iff(organization contains "Bayer", 'Bayer', organization)
+| extend organization=iff(organization contains "Baidu", 'Baidu', organization)
+| extend organization=iff(organization contains "Oracle", 'Oracle', organization)
+| extend organization=iff(organization contains "Teraspek", 'Teraspek', organization)
+| extend organization=iff(organization contains "ByteDance", 'ByteDance', organization)
+| extend organization=iff(organization contains "xFlow Research", 'xFlow Research', organization)
+| extend organization=iff(organization contains "Max-Planck-Institut", 'Max-Planck-Institut', organization)
+| extend organization=iff(organization contains "Internet Initiative Japan", 'Internet Initiative Japan', organization)
+| extend organization=iff(organization contains "tamu-edu", 'Texas A&M University', organization)
+| extend organization=iff(organization contains "Orange", 'Orange', organization)
+| extend organization=replace_string(organization,"@","")
+| extend organization=trim(" ",organization)
+| extend organization=iff(organization in~ ('null','Private','none','N/A',"www.volansys.com"),"Others",organization)
+| where organization == 'Others'
+| where author != ''
+| summarize Score=round(sum(score_i),2) by Individual=author
+| sort by Score desc,Individual asc 
+| where Score > 0

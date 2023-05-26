@@ -13,3 +13,4 @@ done < $csv
 
 sort tmp.csv > tmp
 mv tmp $csv
+rm tmp.csv
