@@ -32,8 +32,8 @@ if git diff author.csv | grep diff ;then
         [[ "$(./kusto.py sii_author | jq '.data[0].Count')" != "0" ]] && break
         ((i++))
     done
-    ./kusto.py sii_org > Sii_score.csv
-    ./kusto.py sii_person > Sii_individual.csv
+    ./kusto.py sii_org > Sii_org.csv
+    ./kusto.py sii_person > Sii_author.csv
 else
     echo "Nothing changed."
     exit 0
