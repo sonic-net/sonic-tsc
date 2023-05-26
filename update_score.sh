@@ -19,7 +19,9 @@ if git diff author.csv | grep diff ;then
     git push
     cd ..
 
+    sleep 1
     ./kusto.py sii_author_clear
+    sleep 1
     ./kusto.py sii_author_import
 
     i=0
