@@ -28,7 +28,7 @@ if git diff author.csv | grep diff ;then
         echo sleep 20, $i
         sleep 20
         ./kusto.py sii_author
-        [[ "$(./kusto.py sii_author)" != "0" ]] && break
+        [[ "$(./kusto.py sii_author | jq '.data[0].Count')" != "0" ]] && break
     done
 else
     echo "Nothing changed."
