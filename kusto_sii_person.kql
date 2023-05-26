@@ -178,8 +178,7 @@ union hld_, prs_, reviews_, issues_, issues_triaged_, testplanhld_, testPRs_, re
 | extend organization=replace_string(organization,"@","")
 | extend organization=trim(" ",organization)
 | extend organization=iff(organization in~ ('null','Private','none','N/A',"www.volansys.com"),"Others",organization)
-| where organization == 'Others'
 | where author != ''
-| summarize Score=round(sum(score_i),2) by Individual=author
-| sort by Score desc,Individual asc 
+| summarize Score=round(sum(score_i),2) by author, organization
+| sort by Score desc,author asc, organization
 | where Score > 0

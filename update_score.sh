@@ -24,14 +24,16 @@ if git diff author.csv | grep diff ;then
     sleep 1
     ./kusto.py sii_author_import
 
-    i=0
+    i=1
     while true; do
-        ((i++))
-        echo sleep 20, $i
+        echo "sleep 20, $i"
         sleep 20
         ./kusto.py sii_author | jq '.data[0].Count'
         [[ "$(./kusto.py sii_author | jq '.data[0].Count')" != "0" ]] && break
+        ((i++))
     done
+    ./kusto.py sii_org > Sii_score.csv
+    ./kusto.py sii_person > Sii_individual.csv
 else
     echo "Nothing changed."
     exit 0

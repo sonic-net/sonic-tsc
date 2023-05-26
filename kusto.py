@@ -34,9 +34,9 @@ def sii_person():
 
     response = client.execute_query('sonic-buildimage-prs', query)
 
-    print("Individual,Score")
+    print("Author,Organization,Score")
     for row in response.primary_results[0]:
-        print("{},{}".format(row[0],row[1]))
+        print("{},{},{}".format(row[0],row[1],row[2]))
 
 def sii_author_clear():
     query = ".clear table author data"
