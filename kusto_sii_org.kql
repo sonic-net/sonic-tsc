@@ -180,5 +180,5 @@ union hld_, prs_, reviews_, issues_, issues_triaged_, testplanhld_, testPRs_, re
 | extend organization=iff(organization in~ ('null','Private','none','N/A',"www.volansys.com"),"Others",organization)
 // org
 | summarize Score=round(sum(score_i),2) by Organization=organization
-| sort by Score desc,Organization asc 
+| sort by Organization asc,Score desc
 | where Score > 0
