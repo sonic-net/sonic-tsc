@@ -34,6 +34,9 @@ if git diff author.csv | grep diff ;then
     done
     ./kusto.py sii_org > Sii_org.csv
     ./kusto.py sii_person > Sii_author.csv
+    git add Sii_org.csv Sii_author.csv
+    git commit -m "Update Sii_org.csv Sii_author.csv"
+    git push
 else
     echo "Nothing changed."
     exit 0
