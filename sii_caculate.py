@@ -1,8 +1,10 @@
 #!/bin/python3
 
 import sys
+import os
 import json
 
+# key: lower charactor. value: print format
 org_map = {
     "dell":         "Dell",
     "microsoft":    "Microsoft",
@@ -50,6 +52,7 @@ org_map = {
     "tamu-edu":     "Texas A&M University",
     "orange":       "Orange",
     "null":         "Others",
+    "aviz networks":"Aviz Networks",
     "xflow research":           "xFlow Research",
     "max-planck-institut":      "Max-Planck-Institut",
     "internet initiative japan":"Internet Initiative Japan",
@@ -57,8 +60,8 @@ org_map = {
 
 automation_account = ['linux-foundation-easycla','lgtm-com','mssonicbld','azure-pipelines','svc-acs','msftclas']
 
-score_map = {
-    "2023": 0.3,
+year_weight = {
+#    "2023": 0.3,
     "2022": 0.3,
     "2021": 0.25,
     "2020": 0.2,
@@ -66,19 +69,16 @@ score_map = {
     "2018": 0.1,
 }
 
-def sii_org():
+def sii_caculate():
     ret = {}
-    author_org = author2org()
+    person = False
+    if len(sys.argv) > 1 and sys.argv[1].find("person") > -1:
+        person = True
 
-    score_author = {}
-    score_org = {}
-    issue_score = caculate_issue()
+    issue_score = caculate_issue(person)
+    pr_score = caculate_pr()
 
-    print(issue_score)
-        
-
-def sii_person():
-    print("sii person")
+    print(json.dumps(pr_score))
 
 
 def author2org():
@@ -98,7 +98,64 @@ def author2org():
     return ret
 
 
-def caculate_issue():
+author_org = author2org()
+
+def summ_by_org(author_score):
+    ret = {}
+    for author,score in author_score.items():
+        if author in automation_account:
+            continue
+        if author in author_org:
+            org = author_org[author]
+        else:
+            org = "Others"
+
+        if org not in ret:
+            ret[org] = 0
+
+        ret[org] += score
+    return ret
+
+def caculate_review()
+
+# Sii 2
+def caculate_pr(byperson=False):
+    ret = {'person': {}, 'org': {}}
+    for year in year_weight:
+        paths = ['sii_pr_review/', 'sii_test_pr_review/']
+        for path in paths:
+            pr_path = path + str(year)
+            files = os.listdir(pr_path)
+            for file in files:
+                if not file.endswith('prs.json'):
+                    continue
+                with open(pr_path + '/' + file) as f:
+                    content = f.read()
+                prs = json.loads(content)
+                for pr in prs:
+                    if "testCase" in pr and pr["testCase"] == "yes":
+                        continue
+                    year = pr["mergedAt"].split('-')[0]
+                    author = pr["author"]
+                    additions = pr["additions"]
+                    if author not in ret['person']:
+                        ret['person'][author] = 0
+                    if additions <= 50:
+                        score = 10
+                    elif additions <=300:
+                        score = 20
+                    else:
+                        score = 50 + int((additions-300)/100)
+                    ret['person'][author] += score * year_weight[year]
+
+    if byperson:
+        return ret['person']
+
+    return summ_by_org(ret['person'])
+
+
+# Sii 7,8
+def caculate_issue(byperson=False):
     issue_file = 'sii_issue/issues.json'
     # format:
     # open issue:   ret.person.${author} += 5 * index
@@ -115,42 +172,28 @@ def caculate_issue():
         # if github account deleted, it is ''
         if author == '':
             continue
-        if year not in score_map:
+        if year not in year_weight:
             continue
         if author not in ret['person']:
             # init ret.person.${author}
             ret['person'][author] = 0
         # SII for opening issue
-        ret['person'][author] += 5 * score_map[year]
+        ret['person'][author] += 5 * year_weight[year]
         # SII for issue triage
         for label in issue['labels'].split(','):
             if label.lower() in org_map:
                 Label = org_map[label.lower()]
                 if Label not in ret['organization']:
                     ret['organization'][Label] = 0
-                ret['organization'][Label] += 10 * score_map[year]
+                ret['organization'][Label] += 10 * year_weight[year]
 
-    ret1 = {}
-    for author,score in issue_score['person'].items():
-        if author in automation_account:
-            continue 
-        if author in author_org:
-            org = author_org[author]
-        else:
-            print(author + " org not found!!!")
-            exit(1)
-        if org not in ret1:
-            ret1[org] = 0
-        ret1[org] += score
+    if byperson:
+        return ret['person']
 
-    return ret1
-
-def caculate_pr():
-    print()
+    return summ_by_org(ret['person'])
 
 
 if __name__ == '__main__':
-    if sys.argv[1] == "sii_org":
-        sii_org()
-    if sys.argv[1] == "sii_person":
-        sii_person()
+    sii_caculate()
+
+
