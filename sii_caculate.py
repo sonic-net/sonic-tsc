@@ -108,8 +108,19 @@ def sii_caculate():
     print(json.dumps(testplan_hld_score))
 
     if not person:
-        print('summary')
-        print(summ_org_scores( issue_score,issue_triage_score,pr_score,test_pr_score,pr_review_score,test_pr_review_score,hld_doc_score,testplan_hld_score ))
+        print('Organization,Score', file=open('Sii_org.csv', 'w'))
+        summ = summ_org_scores( issue_score,issue_triage_score,pr_score,test_pr_score,pr_review_score,test_pr_review_score,hld_doc_score,testplan_hld_score )
+        for i in sorted(summ.items(), key=lambda x:x[1], reverse=True):
+            print('%s,%.2f' % i, file=open('Sii_org.csv', 'a'))
+    else:
+        summ = summ_org_scores( issue_score,pr_score,test_pr_score,pr_review_score,test_pr_review_score,hld_doc_score,testplan_hld_score )
+        print('Author,Organization,Score', file=open('Sii_author.csv', 'w'))
+        for i in sorted(summ.items(), key=lambda x:x[1], reverse=True):
+            if i[0] not in author_org:
+                org = 'Others'
+            else:
+                org = author_org[i[0]]
+            print('{},{},'.format(i[0], org) + "%.2f" % i[1], file=open('Sii_author.csv', 'a'))
 
 
 #    Sii 4,6,12,13,14,15
@@ -142,6 +153,8 @@ def caculate_hld(byperson=False):
                     author = line.split(',')[2]
                     timestamp = line.split(',')[3]
                     year = timestamp.split('-')[0]
+                    if author in automation_account:
+                        continue
                     if year not in year_weight:
                         continue
                     if path == 'sii_hld/':
@@ -172,6 +185,8 @@ def caculate_review(byperson=False):
         year = detail['year']
         test = detail['test']
         count = detail['count']
+        if author in automation_account:
+            continue
         if year not in year_weight:
             continue
         if count <= 2:
@@ -207,12 +222,14 @@ def caculate_pr(byperson=False):
         additions = detail['additions']
         year = detail['year']
         author = detail['author']
+        if author in automation_account:
+            continue
         if additions <= 50:
             score = 10
         elif additions <=300:
             score = 20
         else:
-            score = 50 #+ int((additions-300)/100)
+            score = 50 + int((additions-300)/100)
 
         if test:
             if author not in ret_test:
@@ -247,6 +264,8 @@ def caculate_issue(byperson=False):
         year = issue['createdAt'].split('-')[0]
         author = issue['author']
         labels = issue['labels'].split(',')
+        if author in automation_account:
+            continue
         # if github account deleted, it is ''
         if author == '':
             continue
@@ -357,6 +376,8 @@ def pr_review_load():
                     number = pr['number']
                     additions = pr['additions']
                     author = parse_author(pr)
+                    if author in automation_account:
+                        continue
                     prs_map[ repo + ',' + str(number) ] = {'year': year_,'author': author,'test': test, 'additions': additions}
 
     for year in year_weight:
