@@ -3,164 +3,242 @@
 import sys
 import os
 import json
+import random
 
 # key: lower charactor. value: print format
 org_map = {
-    "dell":         "Dell",
-    "microsoft":    "Microsoft",
+    'dell':         'Dell',
+    'microsoft':    'Microsoft',
     "msft":         "Microsoft",
-    "cisco":        "Cisco",
-    "broadcom":     "Broadcom",
-    "brcm":         "Broadcom",
-    "arista":       "Broadcom",
-    "intel":        "Intel",
-    "barefoot":     "Intel",
-    "centec":       "Centec",
-    "celestica":    "Celestica",
-    "edgecore":     "EdgeCore",
-    "edge-core":    "EdgeCore",
-    "marvell":      "Marvell",
-    "cavium":       "Marvell",
-    "nvidia":       "Nvidia",
-    "mellanox":     "Nvidia",
-    "mlnx":         "Nvidia",
-    "alibaba":      "Alibaba",
-    "uber":         "Uber",
-    "nokia":        "Nokia",
-    "juniper":      "Juniper",
-    "google":       "Google",
-    "ruijie":       "Ruijie",
-    "linkedin":     "Linkedin",
-    "keysight":     "Keysight",
-    "tencent":      "Tencent",
-    "jabil":        "Jabil",
-    "ragile":       "Ragile",
-    "ebay":         "eBay",
-    "vmware":       "VMware",
-    "genesiscloud": "GenesisCloud",
-    "usnistgov":    "USnistgov",
-    "tutao":        "Tutao",
-    "wwt":          "wwt",
-    "canonical":    "Canonical",
-    "ordnance":     "Ordnance",
-    "h3c":          "H3C",
-    "jd":           "JD",
-    "bayer":        "Bayer",
-    "baidu":        "Baidu",
-    "oracle":       "Oracle",
-    "teraspek":     "Teraspek",
-    "tamu-edu":     "Texas A&M University",
-    "orange":       "Orange",
-    "null":         "Others",
-    "aviz networks":"Aviz Networks",
-    "xflow research":           "xFlow Research",
-    "max-planck-institut":      "Max-Planck-Institut",
-    "internet initiative japan":"Internet Initiative Japan",
+    'cisco':        'Cisco',
+    'broadcom':     'Broadcom',
+    'brcm':         'Broadcom',
+    'arista':       'Broadcom',
+    'intel':        'Intel',
+    'barefoot':     'Intel',
+    'centec':       'Centec',
+    'celestica':    'Celestica',
+    'edgecore':     'EdgeCore',
+    'edge-core':    'EdgeCore',
+    'marvell':      'Marvell',
+    'cavium':       'Marvell',
+    'nvidia':       'Nvidia',
+    'mellanox':     'Nvidia',
+    'mlnx':         'Nvidia',
+    'alibaba':      'Alibaba',
+    'uber':         'Uber',
+    'nokia':        'Nokia',
+    'juniper':      'Juniper',
+    'google':       'Google',
+    'ruijie':       'Ruijie',
+    'linkedin':     'Linkedin',
+    'keysight':     'Keysight',
+    'tencent':      'Tencent',
+    'jabil':        'Jabil',
+    "ragile":       'Ragile',
+    'ebay':         'eBay',
+    'vmware':       'VMware',
+    'genesiscloud': 'GenesisCloud',
+    'usnistgov':    'USnistgov',
+    'tutao':        'Tutao',
+    'wwt':          'wwt',
+    'canonical':    'Canonical',
+    'ordnance':     'Ordnance',
+    'h3c':          'H3C',
+    'jd':           'JD',
+    'bayer':        'Bayer',
+    'baidu':        'Baidu',
+    'oracle':       'Oracle',
+    'teraspek':     'Teraspek',
+    'tamu-edu':     'Texas A&M University',
+    'orange':       'Orange',
+    'null':         'Others',
+    'aviz networks':'Aviz Networks',
+    'xflow research':           'xFlow Research',
+    'max-planck-institut':      'Max-Planck-Institut',
+    'internet initiative japan':'Internet Initiative Japan',
 }
 
-automation_account = ['linux-foundation-easycla','lgtm-com','mssonicbld','azure-pipelines','svc-acs','msftclas']
+automation_account = ['microsoft-github-policy-service', 'linux-foundation-easycla','lgtm-com','mssonicbld','azure-pipelines','svc-acs','msftclas']
 
 year_weight = {
-#    "2023": 0.3,
-    "2022": 0.3,
-    "2021": 0.25,
-    "2020": 0.2,
-    "2019": 0.15,
-    "2018": 0.1,
+    '2023': 0.3,
+    '2022': 0.3,
+    '2021': 0.25,
+    '2020': 0.2,
+    '2019': 0.15,
+    '2018': 0.1,
 }
+
+prs_map = {} 
+reviews_map = {}
+author_org = {}
 
 def sii_caculate():
     ret = {}
     person = False
-    if len(sys.argv) > 1 and sys.argv[1].find("person") > -1:
+    if len(sys.argv) > 1 and sys.argv[1].find('person') > -1:
         person = True
 
-    issue_score = caculate_issue(person)
-    pr_score = caculate_pr()
+    issue_score, issue_triage_score = caculate_issue(person)
+    print('issue score:')
+    print(json.dumps(issue_score))
+    print('issue triage score:')
+    print(json.dumps(issue_triage_score))
 
+    pr_score,test_pr_score = caculate_pr(person)
+    print('pr score:')
     print(json.dumps(pr_score))
 
+    print('test pr score:')
+    print(json.dumps(test_pr_score))
 
-def author2org():
+    pr_review_score,test_pr_review_score = caculate_review(person)
+    print('pr review score:')
+    print(json.dumps(pr_review_score))
+
+    print('test pr review score:')
+    print(json.dumps(test_pr_review_score))
+
+    hld_doc_score,testplan_hld_score = caculate_hld(person)
+    print('hld&doc score:')
+    print(json.dumps(hld_doc_score))
+
+    print('test plan hld score:')
+    print(json.dumps(testplan_hld_score))
+
+    if not person:
+        print('summary')
+        print(summ_org_scores( issue_score,issue_triage_score,pr_score,test_pr_score,pr_review_score,test_pr_review_score,hld_doc_score,testplan_hld_score ))
+
+
+#    Sii 4,6,12,13,14,15
+#    TODO
+# 4  PR cherry-picking [3] Count
+# 6  New ASIC [4] Introduction Count
+# 12 Summit Presentation Count
+# 13 Hackathon Participation Team Count
+# 14 SONiC Production Deployment (S/M/L) [6]
+# 15 SONiC End Consumer Proliferation (S/M/L)
+
+
+#   Sii 1,5,9
+# 1 Merged HLD [1] Count
+# 5 Documentations (Release Notes/Meeting Minutes)
+# 9 Merged SONiC MGMT TEST Plan HLD [1] Count
+def caculate_hld(byperson=False):
     ret = {}
-    with open('sii_author_map/author.csv') as f:
-        content = f.read()
-    for line in content.split('\n'):
-        if line:
-            author = line.split(',')[0]
-            org = line.split(',')[2].lower()
-            for org_official in org_map.keys():
-                if org_official in org:
-                    ret[author] = org_map[org_official]
-                    break
-            if author not in ret:
-                ret[author] = org
-    return ret
-
-
-author_org = author2org()
-
-def summ_by_org(author_score):
-    ret = {}
-    for author,score in author_score.items():
-        if author in automation_account:
-            continue
-        if author in author_org:
-            org = author_org[author]
-        else:
-            org = "Others"
-
-        if org not in ret:
-            ret[org] = 0
-
-        ret[org] += score
-    return ret
-
-def caculate_review()
-
-# Sii 2
-def caculate_pr(byperson=False):
-    ret = {'person': {}, 'org': {}}
-    for year in year_weight:
-        paths = ['sii_pr_review/', 'sii_test_pr_review/']
-        for path in paths:
-            pr_path = path + str(year)
-            files = os.listdir(pr_path)
-            for file in files:
-                if not file.endswith('prs.json'):
-                    continue
-                with open(pr_path + '/' + file) as f:
-                    content = f.read()
-                prs = json.loads(content)
-                for pr in prs:
-                    if "testCase" in pr and pr["testCase"] == "yes":
+    ret_testplan = {}
+    paths=['sii_hld/', 'sii_testplan_hld/']
+    for path in paths:
+        files = os.listdir(path)
+        for file in files:
+            if not file.endswith('.csv'):
+                continue
+            with open(path + file) as f:
+                content = f.read()
+            for line in content.split('\n'):
+                if line:
+                    author = line.split(',')[2]
+                    timestamp = line.split(',')[3]
+                    year = timestamp.split('-')[0]
+                    if year not in year_weight:
                         continue
-                    year = pr["mergedAt"].split('-')[0]
-                    author = pr["author"]
-                    additions = pr["additions"]
-                    if author not in ret['person']:
-                        ret['person'][author] = 0
-                    if additions <= 50:
-                        score = 10
-                    elif additions <=300:
-                        score = 20
+                    if path == 'sii_hld/':
+                        score = 50
+                        if author not in ret:
+                            ret[author] = 0
+                        ret[author] += score * year_weight[year]
                     else:
-                        score = 50 + int((additions-300)/100)
-                    ret['person'][author] += score * year_weight[year]
+                        score = 100
+                        if author not in ret_testplan:
+                            ret_testplan[author] = 0
+                        ret_testplan[author] += score * year_weight[year]
 
     if byperson:
-        return ret['person']
+        return ret,ret_testplan
+    return summ_by_org(ret), summ_by_org(ret_testplan)
 
-    return summ_by_org(ret['person'])
+#   Sii 3,11
+# 3  PR Review Count (S/M/L)
+# 11 TEST PR review count (S/M/L)
+def caculate_review(byperson=False):
+    ret = {}
+    ret_test = {}
+    for repo_number_author, detail in reviews_map.items():
+        repo = repo_number_author.split(',')[0]
+        number = repo_number_author.split(',')[1]
+        author = repo_number_author.split(',')[2]
+        year = detail['year']
+        test = detail['test']
+        count = detail['count']
+        if year not in year_weight:
+            continue
+        if count <= 2:
+            score = 1
+        elif count <=4:
+            score = 2
+        else:
+            score =5
+        if test:
+            if author not in ret_test:
+                ret_test[author] = 0
+            ret_test[author] += score * year_weight[year]
+        else:
+            if author not in ret:
+                ret[author] = 0
+            ret[author] += 2 * score * year_weight[year]
+
+    if byperson:
+        return ret,ret_test
+    return summ_by_org(ret),summ_by_org(ret_test)
+    
+
+#   Sii 2,10
+# 2  Merged PR [2] Count (S/M/L)
+# 10 Merged Test cases [2] (S/M/L)
+def caculate_pr(byperson=False):
+    ret = {}
+    ret_test = {}
+    for repo_number, detail in prs_map.items():
+        repo = repo_number.split(',')[0]
+        number = repo_number.split(',')[1]
+        test = detail['test']
+        additions = detail['additions']
+        year = detail['year']
+        author = detail['author']
+        if additions <= 50:
+            score = 10
+        elif additions <=300:
+            score = 20
+        else:
+            score = 50 #+ int((additions-300)/100)
+
+        if test:
+            if author not in ret_test:
+                ret_test[author] = 0
+            ret_test[author] += score * year_weight[year]
+        else:
+            if author not in ret:
+                ret[author] = 0
+            ret[author] += 2 * score * year_weight[year]
+
+    if byperson:
+        return ret,ret_test
+    return summ_by_org(ret),summ_by_org(ret_test)
 
 
-# Sii 7,8
+
+#   Sii 7,8
+# 7 Issues Opened Count
+# 8 Issues Triaged/Fixed Count
 def caculate_issue(byperson=False):
     issue_file = 'sii_issue/issues.json'
     # format:
     # open issue:   ret.person.${author} += 5 * index
     # triage issue: ret.organization.${org} += 10 * index
-    ret = {'person': {}, 'organization': {}}
+    ret_issue = {}
+    ret_issue_t = {}
     with open(issue_file) as f:
         content = f.read()
 
@@ -174,26 +252,155 @@ def caculate_issue(byperson=False):
             continue
         if year not in year_weight:
             continue
-        if author not in ret['person']:
+        if author not in ret_issue:
             # init ret.person.${author}
-            ret['person'][author] = 0
+            ret_issue[author] = 0
         # SII for opening issue
-        ret['person'][author] += 5 * year_weight[year]
+        ret_issue[author] += 5 * year_weight[year]
+
         # SII for issue triage
         for label in issue['labels'].split(','):
             if label.lower() in org_map:
                 Label = org_map[label.lower()]
-                if Label not in ret['organization']:
-                    ret['organization'][Label] = 0
-                ret['organization'][Label] += 10 * year_weight[year]
+                if Label not in ret_issue_t:
+                    ret_issue_t[Label] = 0
+                ret_issue_t[Label] += 10 * year_weight[year]
 
     if byperson:
-        return ret['person']
+        return ret_issue, ret_issue_t
+    return summ_by_org(ret_issue), ret_issue_t
 
-    return summ_by_org(ret['person'])
+
+def init():
+    author_org_load()
+
+    pr_review_load() 
+    print()
+    print('author count:', len(author_org))
+    print(random.choice(list(author_org.items())))
+    print('pr count:' ,len(prs_map))
+    print(random.choice(list(prs_map.items())))
+    print('review count:', len(reviews_map))
+    print(random.choice(list(reviews_map.items())))
+
+
+def author_org_load():
+    global author_org
+    with open('sii_author_map/author.csv') as f:
+        content = f.read()
+    for line in content.split('\n'):
+        if line:
+            author = line.split(',')[0]
+            org = line.split(',')[2].lower()
+            for org_official in org_map.keys():
+                if org_official in org:
+                    author_org[author] = org_map[org_official]
+                    break
+            if author not in author_org:
+                author_org[author] = org
+
+
+def summ_org_scores(*args):
+    ret = {}
+    for arg in args:
+        for org,score in arg.items():
+            if org not in ret:
+                ret[org] = 0
+            ret[org] += score
+    return ret
+
+
+def summ_by_org(*args):
+    ret = {}
+    for arg in args:
+        for author,score in arg.items():
+            if author in automation_account:
+                continue
+            if author in author_org:
+                org = author_org[author]
+            else:
+                org = 'Others'
+
+            if org not in ret:
+                ret[org] = 0
+
+            ret[org] += score
+    return ret
+
+
+def parse_author(map,key='author'):
+    if 'login' in map[key]:
+        return map[key]['login']
+    else:
+        return map[key]
+
+
+def pr_review_load():
+    global prs_map, reviews_map
+    for year in year_weight:
+        paths = ['sii_pr_review/', 'sii_test_pr_review/']
+        for path in paths:
+            pr_path = path + str(year)
+            files = os.listdir(pr_path)
+            for file in files:
+                if not file.endswith('prs.json'):
+                    continue
+                with open(pr_path + '/' + file) as f:
+                    content = f.read()
+                prs = json.loads(content)
+                for pr in prs:
+                    test = False
+                    if 'testCase' in pr and pr['testCase'] == 'yes':
+                        test = True
+                    year_ = pr['mergedAt'].split('-')[0]
+                    repo = pr['repo']
+                    number = pr['number']
+                    additions = pr['additions']
+                    author = parse_author(pr)
+                    prs_map[ repo + ',' + str(number) ] = {'year': year_,'author': author,'test': test, 'additions': additions}
+
+    for year in year_weight:
+        paths = ['sii_pr_review/', 'sii_test_pr_review/']
+        for path in paths:
+            pr_path = path + str(year)
+            files = os.listdir(pr_path)
+            for file in files:
+                if not file.endswith('reviews.json'):
+                    continue
+                with open(pr_path + '/' + file) as f:
+                    content = f.read()
+                reviews = json.loads(content)
+                for review in reviews:
+                    number = review['number']
+                    repo = review['repo']
+                    if 'comment_at' in review:
+                        year_ = review['comment_at'].split('-')[0]
+                        author = parse_author(review, 'comment_author')
+                    elif 'review_at' in review:
+                        if review['review_at'] == None:
+                            print('bad case:', review)
+                            continue
+                        year_ = review['review_at'].split('-')[0]
+                        author = parse_author(review, 'review_author')
+                    else:
+                        year_ = review['latestReview_at'].split('-')[0]
+                        author = parse_author(review, 'latestReview_author')
+                    if author in automation_account:
+                        continue
+                    # TODO some data need to dump!!!
+                    if repo + ',' + str(number) not in prs_map:
+                        continue
+                    if author == prs_map[ repo + ',' + str(number) ]['author']:
+                        continue
+                    test = prs_map[ repo + ',' + str(number) ]['test']
+                    # Use review count to judge S/M/L
+                    if repo + ',' + str(number) + ',' + author not in reviews_map:
+                        reviews_map[ repo + ',' + str(number) + ',' + author ] = {'year': year_, 'test': test, 'count': 0 }
+                    reviews_map[ repo + ',' + str(number) + ',' + author ]['count'] += 1
 
 
 if __name__ == '__main__':
+    init()
     sii_caculate()
 
 
