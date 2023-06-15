@@ -11,9 +11,13 @@ This repo stores raw data to caculate Sii scores and data dump script.
 - [TestPlan related HLD](sii_testplan_hld)
 
 This repo stores Sii score caculation script.
-- ./sii_caculate.py
+```
+$ ./sii_caculate.py
+```
   This command will update score by organization. [org score](Sii_org.csv)
-- ./sii_caculate.py person
+```
+$ ./sii_caculate.py person
+```
   This command will update score by each author. [author score](Sii_author.csv)
 
 ## score caculation method: [Original Link](https://github.com/sonic-net/SONiC/blob/master/tsc/TSC_Election.md)
