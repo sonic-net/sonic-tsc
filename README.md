@@ -24,9 +24,10 @@ caculate script:
 ./sii_caculate.py person
 ./sii_caculate.py
 
+:doc: /Sii_org.csv
 
 |Organization|Score                      |
-| -- | -- |
+| :-- | --: |
 |Microsoft|96489.95|
 |Nvidia|32092.00|
 |Others|17671.65|
