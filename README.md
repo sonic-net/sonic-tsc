@@ -24,7 +24,7 @@ caculate script:
 ./sii_caculate.py person
 ./sii_caculate.py
 
-:doc: /Sii_org.csv
+[Sii scores by org:](Sii_org.csv)
 
 |Organization|Score                      |
 | :-- | --: |
