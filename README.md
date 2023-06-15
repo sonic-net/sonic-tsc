@@ -11,14 +11,14 @@
 - [TestPlan related HLD](sii_testplan_hld)
 
 ### This repo stores Sii score caculation script.
+  1. This command will update score by organization. [Scores by Org](Sii_org.csv)
 ```
 $ ./sii_caculate.py
 ```
-  1. This command will update score by organization. [org score](Sii_org.csv)
+  2. This command will update score by each author. [Scores by author](Sii_author.csv)
 ```
 $ ./sii_caculate.py person
 ```
-  2. This command will update score by each author. [author score](Sii_author.csv)
 
 ## score caculation method: [Original Link](https://github.com/sonic-net/SONiC/blob/master/tsc/TSC_Election.md)
 
