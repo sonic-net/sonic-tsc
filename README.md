@@ -1,6 +1,18 @@
-# Script to dump infomation from github.
+# Sonic TSC support repo
 
-## TSC doc:
+## Description
+
+This repo stores raw data to caculate Sii scores.
+- [High Level Design](sii_hld)
+- [Contributor Organization Map](sii_author_map)
+- [Issue related data](sii_issue)
+- [Normal PRs and Reviews](sii_pr_review)
+- [Test case related PRs and Reviews](sii_test_pr_review)
+- [TestPlan related HLD](sii_testplan_hld)
+
+## score caculation method: [Original Link](https://github.com/sonic-net/SONiC/blob/master/tsc/TSC_Election.md)
+[test](../SONiC/tsc/TSC_Election.md)
+
 | Contribution (Yearly) | Category | Weight Multiplier |
 |--------------------------------  |----------| -------- |
 | Merged HLD [1] Count              | Development | 50 |
