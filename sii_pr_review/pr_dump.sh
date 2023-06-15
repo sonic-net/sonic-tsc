@@ -101,9 +101,12 @@ do
             eval $debug gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-01..$year-$month-$days" | jq --indent 4 ".[] += {repo: \"$repo\"}" > $year/$repo.$month.$dump_type.json
             delete_empty_file
             if ! ls $year/$repo.$month.$dump_type.json &>/dev/null;then
-                eval $debug gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-01..$year-$month-15" | jq --indent 4 ".[] += {repo: \"$repo\"}" > $year/$repo.$month.a.$dump_type.json
-                eval $debug gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-16..$year-$month-$days" | jq --indent 4 ".[] += {repo: \"$repo\"}" > $year/$repo.$month.b.$dump_type.json
-                jq -s 'add' $year/$repo.$month.a.$dump_type.json $year/$repo.$month.b.$dump_type.json > $year/$repo.$month.$dump_type.json
+                eval $debug gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-01..$year-$month-10" | jq --indent 4 ".[] += {repo: \"$repo\"}" > $year/$repo.$month.a.$dump_type.json
+                sleep 10
+                eval $debug gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-11..$year-$month-20" | jq --indent 4 ".[] += {repo: \"$repo\"}" > $year/$repo.$month.b.$dump_type.json
+                sleep 10
+                eval $debug gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-21..$year-$month-$days" | jq --indent 4 ".[] += {repo: \"$repo\"}" > $year/$repo.$month.c.$dump_type.json
+                jq -s 'add' $year/$repo.$month.a.$dump_type.json $year/$repo.$month.b.$dump_type.json $year/$repo.$month.c.$dump_type.json > $year/$repo.$month.$dump_type.json
             fi
             sleep $interval && continue
         done    
