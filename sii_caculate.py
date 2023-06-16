@@ -62,7 +62,7 @@ org_map = {
 automation_account = ['microsoft-github-policy-service', 'linux-foundation-easycla','lgtm-com','mssonicbld','azure-pipelines','svc-acs','msftclas']
 
 year_weight = {
-    '2023': 0.3,
+#    '2023': 0.3,
     '2022': 0.3,
     '2021': 0.25,
     '2020': 0.2,
