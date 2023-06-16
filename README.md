@@ -1,8 +1,6 @@
 # Sonic TSC support repo
 
-## Description
-
-### This repo stores raw data to caculate Sii scores and data dump script.
+### 1. This repo stores raw data to calculate Sii scores and data dump script.
 - [High Level Design](sii_hld)
 - [Contributor Organization Map](sii_author_map)
 - [Issue related data](sii_issue)
@@ -10,7 +8,7 @@
 - [Test case related PRs and Reviews](sii_test_pr_review)
 - [TestPlan related HLD](sii_testplan_hld)
 
-### This repo stores Sii score caculation script.
+### 2. This repo stores Sii score calculation script.
   1. This command will update score by organization. [Scores by Org](Sii_org.csv)
 ```
 $ ./sii_caculate.py
@@ -20,7 +18,7 @@ $ ./sii_caculate.py
 $ ./sii_caculate.py person
 ```
 
-## score caculation method: [Original Link](https://github.com/sonic-net/SONiC/blob/master/tsc/TSC_Election.md)
+## 3. SII Weight Multiplier: [Original Link](https://github.com/sonic-net/SONiC/blob/master/tsc/TSC_Election.md)
 
 | Contribution (Yearly) | Category | Weight Multiplier |
 |--------------------------------  |----------| -------- |
@@ -40,8 +38,44 @@ $ ./sii_caculate.py person
 | SONiC Production Deployment (S/M/L) [6] | Proliferation | 100/500/1000 |
 | SONiC End Consumer Proliferation (S/M/L) | Proliferation [7] | 5/50/100 |
 
-## Data store folder
-[author organization map](sii_author_map/author.csv)
-Three HLD file path:
-[dash HLD](sii_hld/dash_hld.csv)
+## 4. Raw Data store path and data dump script
+Author Organization Map:
+>   Author Organization Map: [sii_author_map/author.csv](sii_author_map/author.csv)
+>
+>   Author Org info dump script: [sii_author_map/dump_author.sh](sii_author_map/dump_author.sh)
+
+Three HLD file data:
+>   dash HLD: [dash HLD](sii_hld/dash_hld.csv)
+>
+>   sai HLD: [sai HLD](sii_hld/sai_hld.csv)
+>
+>   sonic HLD: [sonic HLD](sii_hld/sonic_hld.csv)
+>
+>   dump script: [dump_hld_data.sh](sii_hld/dash_hld.csv)
+
+
+SONiC issue data:
+>   issue data path: [issue](sii_issue/issues.json)
+>
+>   dump script: [sii_issue/issues_dump.sh](sii_issue/issues_dump.sh)
+
+SONiC PR and Review data:
+>   prs: sii_pr_review/**/*.prs.json
+>
+>   review: sii_pr_review/**/*.reviews.json
+>
+>   dump script: [sii_pr_review/pr_dump.sh](sii_pr_review/pr_dump.sh)
+
+
+SONiC test related PR and Review data:
+>   prs: sii_test_pr_review/**/*.prs.json
+>
+>   review: sii_test_pr_review/**/*.reviews.json
+>
+>   dump script: [sii_test_pr_review/pr_dump.sh](sii_test_pr_review/pr_dump.sh)
+
+SONiC testplan HLD data:
+>   test plan HLD: [test plan HLD](sii_testplan_hld/sonic-mgmt_hld.csv)
+>
+>   dump script: [sii_testplan_hld/generate_testplan_hld_data.sh](sii_testplan_hld/generate_testplan_hld_data.sh)
 
