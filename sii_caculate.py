@@ -108,19 +108,19 @@ def sii_caculate():
     print(json.dumps(testplan_hld_score))
 
     if not person:
-        print('Organization,Score', file=open('Sii_org.csv', 'w'))
+        print('Organization,Score', file=open('sii_org.csv', 'w'))
         summ = summ_org_scores( issue_score,issue_triage_score,pr_score,test_pr_score,pr_review_score,test_pr_review_score,hld_doc_score,testplan_hld_score )
         for i in sorted(summ.items(), key=lambda x:x[1], reverse=True):
-            print('%s,%.2f' % i, file=open('Sii_org.csv', 'a'))
+            print('%s,%.2f' % i, file=open('sii_org.csv', 'a'))
     else:
         summ = summ_org_scores( issue_score,pr_score,test_pr_score,pr_review_score,test_pr_review_score,hld_doc_score,testplan_hld_score )
-        print('Author,Organization,Score', file=open('Sii_author.csv', 'w'))
+        print('Author,Organization,Score', file=open('sii_author.csv', 'w'))
         for i in sorted(summ.items(), key=lambda x:x[1], reverse=True):
             if i[0] not in author_org:
                 org = 'Others'
             else:
                 org = author_org[i[0]]
-            print('{},{},'.format(i[0], org) + "%.2f" % i[1], file=open('Sii_author.csv', 'a'))
+            print('{},{},'.format(i[0], org) + "%.2f" % i[1], file=open('sii_author.csv', 'a'))
 
 
 #    Sii 4,6,12,13,14,15
