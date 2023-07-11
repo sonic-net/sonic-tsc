@@ -60,6 +60,9 @@ org_map = {
 }
 
 automation_account = ['microsoft-github-policy-service', 'linux-foundation-easycla','lgtm-com','mssonicbld','azure-pipelines','svc-acs','msftclas']
+repo_name = 'sonic-contributor-map/'
+clone_cmd = 'git clone https://github.com/sonic-net/sonic-contributor-map'
+update_cmd = 'cd sonic-contributor-map; git reset HEAD --hard; git checkout main; git pull'
 
 year_weight = {
 #    '2023': 0.3,
@@ -139,14 +142,7 @@ def sii_caculate():
 # 14 SONiC Production Deployment (S/M/L) [6]
 # 15 SONiC End Consumer Proliferation (S/M/L)
 def caculate_input():
-    repo_name = 'sonic-contributor-map/'
-    clone_cmd = 'git clone https://github.com/sonic-net/sonic-contributor-map'
-    update_cmd = 'cd sonic-contributor-map; git reset HEAD --hard; git checkout main; git pull'
     ret = {}
-    if os.path.isdir(repo_name):
-        os.system(update_cmd)
-    else:
-        os.system(clone_cmd)
     paths = ['development_new_asic_introduction.json', 'innovation_hackathon_participation_team_count.json', 'innovation_summit_presentation_count.json', 'proliferation_sonic_end_consumer_proliferation.json', 'proliferation_sonic_production_deployment.json']
 
     for path in paths:
@@ -155,20 +151,11 @@ def caculate_input():
             content = f.read()
         content_json = json.loads(content)
         for record in content_json:
+            record = {k.lower(): v for k, v in record.items()}
             key_count = 0
-            for key in record.keys():
-                if key.lower() == 'year':
-                    year = str(record[key])
-                    key_count += 1
-                if key.lower() == 'count':
-                    count = record[key]
-                    key_count += 1
-                if key.lower() == 'organization':
-                    org = record[key]
-                    key_count += 1
-            if key_count != 3:
-                print('key count not match')
-                exit(11)
+            year = str(record['year'])
+            count = record['count']
+            org = record['organization']
             if year not in year_weight.keys():
                 continue
 
@@ -358,6 +345,12 @@ def caculate_issue(byperson=False):
 
 
 def init():
+    ret = {}
+    if os.path.isdir(repo_name):
+        os.system(update_cmd)
+    else:
+        os.system(clone_cmd)
+
     author_org_load()
 
     pr_review_load() 
@@ -384,6 +377,12 @@ def author_org_load():
                     break
             if author not in author_org:
                 author_org[author] = org
+    with open ('sonic-contributor-map/contributors.json') as f:
+        content = f.read()
+        contributors_list = json.loads(content)
+    for contributor in contributors_list:
+        contributor = {k.lower(): v for k, v in contributor.items()}
+        author_org[contributor['id']] = contributor['organization']
 
 
 def summ_org_scores(*args):
