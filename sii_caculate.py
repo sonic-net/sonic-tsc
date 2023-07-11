@@ -107,9 +107,13 @@ def sii_caculate():
     print('test plan hld score:')
     print(json.dumps(testplan_hld_score))
 
+    input_score = caculate_input()
+    print('input score:')
+    print(json.dumps(input_score))
+
     if not person:
         print('Organization,Score', file=open('sii_org.csv', 'w'))
-        summ = summ_org_scores( issue_score,issue_triage_score,pr_score,test_pr_score,pr_review_score,test_pr_review_score,hld_doc_score,testplan_hld_score )
+        summ = summ_org_scores( issue_score,issue_triage_score,pr_score,test_pr_score,pr_review_score,test_pr_review_score,hld_doc_score,testplan_hld_score,input_score)
         for i in sorted(summ.items(), key=lambda x:x[1], reverse=True):
             print('%s,%.2f' % i, file=open('sii_org.csv', 'a'))
     else:
@@ -126,11 +130,74 @@ def sii_caculate():
 #    Sii 4,6,12,13,14,15
 #    TODO
 # 4  PR cherry-picking [3] Count
+
+
+#   Sii 6,12,13,14,15
 # 6  New ASIC [4] Introduction Count
 # 12 Summit Presentation Count
 # 13 Hackathon Participation Team Count
 # 14 SONiC Production Deployment (S/M/L) [6]
 # 15 SONiC End Consumer Proliferation (S/M/L)
+def caculate_input():
+    repo_name = 'sonic-contributor-map/'
+    clone_cmd = 'git clone https://github.com/sonic-net/sonic-contributor-map'
+    update_cmd = 'cd sonic-contributor-map; git reset HEAD --hard; git checkout main; git pull'
+    ret = {}
+    if os.path.isdir(repo_name):
+        os.system(update_cmd)
+    else:
+        os.system(clone_cmd)
+    paths = ['development_new_asic_introduction.json', 'innovation_hackathon_participation_team_count.json', 'innovation_summit_presentation_count.json', 'proliferation_sonic_end_consumer_proliferation.json', 'proliferation_sonic_production_deployment.json']
+
+    for path in paths:
+        file = repo_name + path
+        with open(file) as f:
+            content = f.read()
+        content_json = json.loads(content)
+        for record in content_json:
+            key_count = 0
+            for key in record.keys():
+                if key.lower() == 'year':
+                    year = str(record[key])
+                    key_count += 1
+                if key.lower() == 'count':
+                    count = record[key]
+                    key_count += 1
+                if key.lower() == 'organization':
+                    org = record[key]
+                    key_count += 1
+            if key_count != 3:
+                print('key count not match')
+                exit(11)
+            if year not in year_weight.keys():
+                continue
+
+            score = 0
+            if path == 'development_new_asic_introduction.json':
+                score = 100 * count
+            if path == 'innovation_summit_presentation_count.json':
+                score = 10 * count
+            if path == 'innovation_hackathon_participation_team_count.json':
+                score = 50 * count
+            if path == 'proliferation_sonic_production_deployment.json':
+                if count >= 100:
+                    score = 100
+                if count >= 501:
+                    score = 500
+                if count >= 50001:
+                    score = 1000
+            if path == 'proliferation_sonic_end_consumer_proliferation.json':
+                if count >= 100:
+                    score = 5
+                if count >= 501:
+                    score = 50
+                if count >= 50001:
+                    score = 100
+            score = score * year_weight[year]
+            if org not in ret:
+                ret[org] = 0
+            ret[org] += score
+    return summ_by_org(ret)
 
 
 #   Sii 1,5,9
@@ -140,7 +207,7 @@ def sii_caculate():
 def caculate_hld(byperson=False):
     ret = {}
     ret_testplan = {}
-    paths=['sii_hld/', 'sii_testplan_hld/']
+    paths = ['sii_hld/', 'sii_testplan_hld/']
     for path in paths:
         files = os.listdir(path)
         for file in files:
