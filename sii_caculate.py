@@ -184,7 +184,7 @@ def caculate_input():
             if org not in ret:
                 ret[org] = 0
             ret[org] += score
-    return summ_by_org(ret)
+    return ret
 
 
 #   Sii 1,5,9
