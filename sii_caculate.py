@@ -85,44 +85,44 @@ def sii_caculate():
 
     issue_score, issue_triage_score = caculate_issue(person)
     print('issue score:')
-    print(json.dumps(issue_score))
+    print(json.dumps(round_floats(issue_score)))
     print('issue triage score:')
-    print(json.dumps(issue_triage_score))
+    print(json.dumps(round_floats(issue_triage_score)))
 
     pr_score,test_pr_score = caculate_pr(person)
     print('pr score:')
-    print(json.dumps(pr_score))
+    print(json.dumps(round_floats(pr_score)))
 
     print('test pr score:')
-    print(json.dumps(test_pr_score))
+    print(json.dumps(round_floats(test_pr_score)))
 
     pr_review_score,test_pr_review_score = caculate_review(person)
     print('pr review score:')
-    print(json.dumps(pr_review_score))
+    print(json.dumps(round_floats(pr_review_score)))
 
     print('test pr review score:')
-    print(json.dumps(test_pr_review_score))
+    print(json.dumps(round_floats(test_pr_review_score)))
 
     hld_doc_score,testplan_hld_score = caculate_hld(person)
     print('hld&doc score:')
-    print(json.dumps(hld_doc_score))
+    print(json.dumps(round_floats(hld_doc_score)))
 
     print('test plan hld score:')
-    print(json.dumps(testplan_hld_score))
+    print(json.dumps(round_floats(testplan_hld_score)))
 
     input_score = caculate_input()
     print('input score:')
-    print(json.dumps(input_score))
+    print(json.dumps(round_floats(input_score)))
 
     if not person:
         print('Organization,Score', file=open('sii_org.csv', 'w'))
         summ = summ_org_scores( issue_score,issue_triage_score,pr_score,test_pr_score,pr_review_score,test_pr_review_score,hld_doc_score,testplan_hld_score,input_score)
-        for i in sorted(summ.items(), key=lambda x:x[1], reverse=True):
+        for i in sorted(summ.items(), key=lambda x: (-x[1], x[0])):
             print('%s,%.2f' % i, file=open('sii_org.csv', 'a'))
     else:
         summ = summ_org_scores( issue_score,pr_score,test_pr_score,pr_review_score,test_pr_review_score,hld_doc_score,testplan_hld_score )
         print('Author,Organization,Score', file=open('sii_author.csv', 'w'))
-        for i in sorted(summ.items(), key=lambda x:x[1], reverse=True):
+        for i in sorted(summ.items(), key=lambda x: (-x[1], x[0])):
             if i[0] not in author_org:
                 org = 'Others'
             else:
@@ -411,6 +411,13 @@ def summ_by_org(*args):
 
             ret[org] += score
     return ret
+
+
+def round_floats(o):
+    if isinstance(o, float): return round(o, 2)
+    if isinstance(o, dict): return {k: round_floats(v) for k, v in o.items()}
+    if isinstance(o, (list, tuple)): return [round_floats(x) for x in o]
+    return o
 
 
 def parse_author(map,key='author'):
