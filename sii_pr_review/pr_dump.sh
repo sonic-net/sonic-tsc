@@ -115,7 +115,11 @@ do
 
         file_by_year=$year/$repo.$dump_type.json
         if [[ $pr_count != 1000 ]] && [[ "$bypass_year" == n ]] && [ -z "$(ls $year/$repo.*.$dump_type.json 2>/dev/null)" ];then
-            check_dump_file $file_by_year $pr_count && continue
+            if check_dump_file $file_by_year $pr_count;then
+                cat $file_by_year | jq --indent 4 "sort_by(-.number)" > tmp
+                mv tmp $file_by_year
+                continue
+            fi
             rm -rf $file_by_year
             gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-01-01..$year-12-31" | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}] | sort_by(-.number)" > $file_by_year
             sleep $interval
