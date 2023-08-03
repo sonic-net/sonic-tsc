@@ -22,6 +22,7 @@ org_map = {
     'edge-core':    'EdgeCore',
     'marvell':      'Marvell',
     'cavium':       'Marvell',
+    'innovium':     'Marvell',
     'nvidia':       'Nvidia',
     'mellanox':     'Nvidia',
     'mlnx':         'Nvidia',
