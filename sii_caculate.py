@@ -4,6 +4,12 @@ import sys
 import os
 import json
 import random
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--predict', action='store_true')
+parser.add_argument('--person', action='store_true')
+args = parser.parse_args()
 
 # key: lower charactor. value: print format
 org_map = {
@@ -66,12 +72,19 @@ clone_cmd = 'git clone https://github.com/sonic-net/sonic-contributor-map'
 update_cmd = 'cd sonic-contributor-map; git reset HEAD --hard; git checkout main; git pull'
 
 year_weight = {
-#    '2023': 0.3,
     '2022': 0.3,
     '2021': 0.25,
     '2020': 0.2,
     '2019': 0.15,
     '2018': 0.1,
+}
+
+year_weight_predict = {
+    '2023': 0.3,
+    '2022': 0.25,
+    '2021': 0.2,
+    '2020': 0.15,
+    '2019': 0.1
 }
 
 prs_map = {} 
@@ -80,9 +93,20 @@ author_org = {}
 
 def sii_caculate():
     ret = {}
-    person = False
-    if len(sys.argv) > 1 and sys.argv[1].find('person') > -1:
-        person = True
+    person = args.person
+    predict = args.predict
+    output_file='sii'
+    if person:
+        output_file += '_author'
+    else:
+        output_file += '_org'
+
+    if predict:
+        output_file += '_predict.csv'
+        global year_weight
+        year_weight = year_weight_predict
+    else:
+        output_file += '.csv'
 
     issue_score, issue_triage_score = caculate_issue(person)
     print('issue score:')
@@ -116,19 +140,19 @@ def sii_caculate():
     print(json.dumps(round_floats(input_score)))
 
     if not person:
-        print('Organization,Score', file=open('sii_org.csv', 'w'))
+        print('Organization,Score', file=open(output_file, 'w'))
         summ = summ_org_scores( issue_score,issue_triage_score,pr_score,test_pr_score,pr_review_score,test_pr_review_score,hld_doc_score,testplan_hld_score,input_score)
         for i in sorted(summ.items(), key=lambda x: (-x[1], x[0])):
-            print('%s,%.2f' % i, file=open('sii_org.csv', 'a'))
+            print('%s,%.2f' % i, file=open(output_file, 'a'))
     else:
         summ = summ_org_scores( issue_score,pr_score,test_pr_score,pr_review_score,test_pr_review_score,hld_doc_score,testplan_hld_score )
-        print('Author,Organization,Score', file=open('sii_author.csv', 'w'))
+        print('Author,Organization,Score', file=open(output_file, 'w'))
         for i in sorted(summ.items(), key=lambda x: (-x[1], x[0])):
             if i[0] not in author_org:
                 org = 'Others'
             else:
                 org = author_org[i[0]]
-            print('{},{},'.format(i[0], org) + "%.2f" % i[1], file=open('sii_author.csv', 'a'))
+            print('{},{},'.format(i[0], org) + "%.2f" % i[1], file=open(output_file, 'a'))
 
 
 #    Sii 4,6,12,13,14,15
@@ -276,6 +300,8 @@ def caculate_pr(byperson=False):
         test = detail['test']
         additions = detail['additions']
         year = detail['year']
+        if year not in year_weight:
+            continue
         author = detail['author']
         if author in automation_account:
             continue
