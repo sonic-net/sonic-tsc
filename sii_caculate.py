@@ -188,9 +188,9 @@ def caculate_input():
             if path == 'development_new_asic_introduction.json':
                 score = 100 * count
             if path == 'innovation_summit_presentation_count.json':
-                score = 10 * count
-            if path == 'innovation_hackathon_participation_team_count.json':
                 score = 50 * count
+            if path == 'innovation_hackathon_participation_team_count.json':
+                score = 10 * count
             if path == 'proliferation_sonic_production_deployment.json':
                 if count >= 100:
                     score = 100
