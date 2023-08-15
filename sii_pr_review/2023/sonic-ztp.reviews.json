@@ -1,29 +1,228 @@
 [
     {
-        "number": 47,
+        "comments": [
+            {
+                "author": {
+                    "login": "linux-foundation-easycla"
+                },
+                "authorAssociation": "NONE",
+                "body": "<a href=\"https://easycla.lfx.linuxfoundation.org/#/?version=2\"><img src=\"https://s3.amazonaws.com/cla-project-logo-prod/cla-signed.svg\" alt=\"CLA Signed\" align=\"left\" height=\"28\" width=\"328\" ></a><br/><br />The committers listed above are authorized under a signed CLA.<ul><li>:white_check_mark: login: rajendra-dendukuri  (7a4da0ba58e38bbca76742bf4512832adb57a4ef, 31db3cdb92e659d5cfe2e96a1a6c3c977afa9c5a)</li></ul>",
+                "createdAt": "2023-04-20T04:19:02Z",
+                "includesCreatedEdit": true,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "rajendra-dendukuri"
+                },
+                "authorAssociation": "COLLABORATOR",
+                "body": "> @rajendra-dendukuri Isn't the race between rsyslog and ztp and not actually rsyslog-config? From the error log Feb 8 19:17:24.574127 r-tigon-04 ERR systemd[1]: Failed to start System Logging Service. Shouldn't the dependency be on rsyslog.service?\r\n\r\nIf we were to use After rsyslog.service, the rsyslog.service has already started during bootup. So ztp.service will always run in parallel to rsyslog-config.service. The rsyslog-config.service, internally restarts rsyslog.service. ztp.service also does the same. So the race is between these two (rsyslog-config.service and ztp.service) and its effect is seen on rsyslog.service.",
+                "createdAt": "2023-04-21T02:59:03Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": [
+                    {
+                        "content": "THUMBS_UP",
+                        "users": {
+                            "totalCount": 1
+                        }
+                    }
+                ]
+            },
+            {
+                "author": {
+                    "login": "DerrickLFX"
+                },
+                "authorAssociation": "NONE",
+                "body": "/easycla",
+                "createdAt": "2023-04-24T22:27:13Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "liat-grozovik"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@DerrickLFX @rajendra-dendukuri  this issue is open for quite sometime. Can you please approach the ZTP maintainer to get this into sonic master?\r\n",
+                "createdAt": "2023-05-01T07:58:54Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "rajendra-dendukuri"
+                },
+                "authorAssociation": "COLLABORATOR",
+                "body": "> @DerrickLFX @rajendra-dendukuri this issue is open for quite sometime. Can you please approach the ZTP maintainer to get this into sonic master?\r\n\r\nI am the sonic-ztp repo maintainer. However, I need an approving reviewer's acknowledgement before I can merge the changes.",
+                "createdAt": "2023-05-01T13:01:02Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "dgsudharsan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@rajendra-dendukuri Who else is the ZTP maintainer? Can you please tag them here?",
+                "createdAt": "2023-05-02T02:09:53Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "dgsudharsan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@rajendra-dendukuri Whose approval are we waiting for? Can you please tag for review?",
+                "createdAt": "2023-05-15T19:26:27Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "rajendra-dendukuri"
+                },
+                "authorAssociation": "COLLABORATOR",
+                "body": "@qiluo-msft Can you please review these changes.",
+                "createdAt": "2023-05-15T20:07:35Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2023-06-09T23:24:38Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "dgsudharsan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2023-04-21T03:00:48Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
+        "number": 49,
+        "reviews": [
+            {
+                "author": {
+                    "login": "dgsudharsan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "@rajendra-dendukuri Isn't the race between rsyslog and ztp and not actually rsyslog-config?\r\nFrom the error log\r\nFeb 8 19:17:24.574127 r-tigon-04 ERR systemd[1]: Failed to start System Logging Service.\r\nShouldn't the dependency be on rsyslog.service?",
+                "submittedAt": "2023-04-21T02:47:51Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "CHANGES_REQUESTED"
+            },
+            {
+                "author": {
+                    "login": "dgsudharsan"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2023-04-21T03:00:48Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            },
+            {
+                "author": {
+                    "login": "qiluo-msft"
+                },
+                "authorAssociation": "MEMBER",
+                "body": "",
+                "submittedAt": "2023-06-09T23:24:38Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
         "repo": "sonic-ztp",
-        "comment_at": "2023-02-12T06:59:45Z",
-        "comment_author": "linux-foundation-easycla",
-        "comment_body": "<a href=\"https://easycla.lfx.linuxfoundation.org/#/?version=2\"><img src=\"https://s3.amazonaws.com/cla-project-logo-prod/cla-signed.svg\" alt=\"CLA Signed\" align=\"left\" height=\"28\" width=\"328\" ></a><br/><br />The committers listed above are authorized under a signed CLA.<ul><li>:white_check_mark: login: PinghaoQu  (741591b8c465ce72a79d098ff555ead58fa808bd, e57cb06058c909f436ea83dd629ea92dae9aa698)</li></ul>"
+        "author": null
     },
     {
+        "comments": [
+            {
+                "author": {
+                    "login": "linux-foundation-easycla"
+                },
+                "authorAssociation": "NONE",
+                "body": "<a href=\"https://easycla.lfx.linuxfoundation.org/#/?version=2\"><img src=\"https://s3.amazonaws.com/cla-project-logo-prod/cla-signed.svg\" alt=\"CLA Signed\" align=\"left\" height=\"28\" width=\"328\" ></a><br/><br />The committers listed above are authorized under a signed CLA.<ul><li>:white_check_mark: login: PinghaoQu  (741591b8c465ce72a79d098ff555ead58fa808bd, e57cb06058c909f436ea83dd629ea92dae9aa698)</li></ul>",
+                "createdAt": "2023-02-12T06:59:45Z",
+                "includesCreatedEdit": true,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            },
+            {
+                "author": {
+                    "login": "PinghaoQu"
+                },
+                "authorAssociation": "CONTRIBUTOR",
+                "body": "@jleveque can you please help to review & merge? ",
+                "createdAt": "2023-02-12T07:38:48Z",
+                "includesCreatedEdit": false,
+                "isMinimized": false,
+                "minimizedReason": "",
+                "reactionGroups": []
+            }
+        ],
+        "latestReviews": [
+            {
+                "author": {
+                    "login": "rajendra-dendukuri"
+                },
+                "authorAssociation": "COLLABORATOR",
+                "body": "",
+                "submittedAt": "2023-04-20T03:51:26Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
         "number": 47,
+        "reviews": [
+            {
+                "author": {
+                    "login": "rajendra-dendukuri"
+                },
+                "authorAssociation": "COLLABORATOR",
+                "body": "",
+                "submittedAt": "2023-04-20T03:51:26Z",
+                "includesCreatedEdit": false,
+                "reactionGroups": [],
+                "state": "APPROVED"
+            }
+        ],
         "repo": "sonic-ztp",
-        "comment_at": "2023-02-12T07:38:48Z",
-        "comment_author": "PinghaoQu",
-        "comment_body": "@jleveque can you please help to review & merge? "
-    },
-    {
-        "number": 47,
-        "repo": "sonic-ztp",
-        "review_at": "2023-04-20T03:51:26Z",
-        "review_author": "rajendra-dendukuri"
-    },
-    {
-        "number": 47,
-        "repo": "sonic-ztp",
-        "latestReview_at": "2023-04-20T03:51:26Z",
-        "latestReview_author": "rajendra-dendukuri",
-        "latestReview_state": "APPROVED"
+        "author": null
     }
 ]
