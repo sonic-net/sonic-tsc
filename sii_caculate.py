@@ -404,6 +404,11 @@ def caculate_issue():
         year_m = ts.strftime("%Y%m")
         author = issue['author']
         labels = issue['labels'].split(',')
+        if author in automation_account:
+            continue
+        # if github account deleted, it is ''
+        if author == '':
+            continue
 
         if str(year) not in year_weight:
             continue
