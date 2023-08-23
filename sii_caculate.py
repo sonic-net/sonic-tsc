@@ -4,16 +4,12 @@ import sys
 import os
 import json
 import random
-import argparse
-
-parser = argparse.ArgumentParser()
-parser.add_argument('--predict', action='store_true')
-parser.add_argument('--person', action='store_true')
-args = parser.parse_args()
+from datetime import datetime,timedelta
 
 # key: lower charactor. value: print format
 org_map = {
     'dell':          'Dell',
+    'dell technologies': 'Dell',
     'microsoft':     'Microsoft',
     "msft":          'Microsoft',
     'cisco':         'Cisco',
@@ -91,70 +87,121 @@ year_weight_predict = {
 prs_map = {} 
 reviews_map = {}
 author_org = {}
+author_org_dup = {}
 
 def sii_caculate():
     ret = {}
-    person = args.person
-    predict = args.predict
-    output_file='sii'
-    if person:
-        output_file += '_author'
-    else:
-        output_file += '_org'
 
-    if predict:
-        output_file += '_predict.csv'
-        global year_weight
-        year_weight = year_weight_predict
-    else:
-        output_file += '.csv'
-
-    issue_score, issue_triage_score = caculate_issue(person)
+    issue_score, issue_triage_score = caculate_issue()
     print('issue score:')
-    print(json.dumps(round_floats(issue_score)))
+    print(json.dumps(round_floats(summ_author_scores(issue_score))))
     print('issue triage score:')
     print(json.dumps(round_floats(issue_triage_score)))
 
-    pr_score,test_pr_score = caculate_pr(person)
+    pr_score,test_pr_score = caculate_pr()
     print('pr score:')
-    print(json.dumps(round_floats(pr_score)))
+    print(json.dumps(round_floats(summ_author_scores(pr_score))))
 
     print('test pr score:')
-    print(json.dumps(round_floats(test_pr_score)))
+    print(json.dumps(round_floats(summ_author_scores(test_pr_score))))
 
-    pr_review_score,test_pr_review_score = caculate_review(person)
+    pr_review_score,test_pr_review_score = caculate_review()
     print('pr review score:')
-    print(json.dumps(round_floats(pr_review_score)))
+    print(json.dumps(round_floats(summ_author_scores(pr_review_score))))
 
     print('test pr review score:')
-    print(json.dumps(round_floats(test_pr_review_score)))
+    print(json.dumps(round_floats(summ_author_scores(test_pr_review_score))))
 
-    hld_doc_score,testplan_hld_score = caculate_hld(person)
+    hld_doc_score,testplan_hld_score = caculate_hld()
     print('hld&doc score:')
-    print(json.dumps(round_floats(hld_doc_score)))
+    print(json.dumps(round_floats(summ_author_scores(hld_doc_score))))
 
     print('test plan hld score:')
-    print(json.dumps(round_floats(testplan_hld_score)))
+    print(json.dumps(round_floats(summ_author_scores(testplan_hld_score))))
 
     input_score = caculate_input()
     print('input score:')
     print(json.dumps(round_floats(input_score)))
 
-    if not person:
-        print('Organization,Score', file=open(output_file, 'w'))
-        summ = summ_org_scores( issue_score,issue_triage_score,pr_score,test_pr_score,pr_review_score,test_pr_review_score,hld_doc_score,testplan_hld_score,input_score)
-        for i in sorted(summ.items(), key=lambda x: (-x[1], x[0])):
-            print('%s,%.2f' % i, file=open(output_file, 'a'))
-    else:
-        summ = summ_org_scores( issue_score,pr_score,test_pr_score,pr_review_score,test_pr_review_score,hld_doc_score,testplan_hld_score )
-        print('Author,Organization,Score', file=open(output_file, 'w'))
-        for i in sorted(summ.items(), key=lambda x: (-x[1], x[0])):
-            if i[0] not in author_org:
-                org = 'Others'
-            else:
-                org = author_org[i[0]]
-            print('{},{},'.format(i[0], org) + "%.2f" % i[1], file=open(output_file, 'a'))
+    output_file = 'sii_org.csv'
+    print('Organization,Score', file=open(output_file, 'w'))
+    summ = summ_dict_scores( \
+            summ_org_scores(issue_score), \
+            issue_triage_score, \
+            summ_org_scores(pr_score), \
+            summ_org_scores(test_pr_score), \
+            summ_org_scores(pr_review_score), \
+            summ_org_scores(test_pr_review_score), \
+            summ_org_scores(hld_doc_score), \
+            summ_org_scores(testplan_hld_score), \
+            input_score)
+    for i in sorted(summ.items(), key=lambda x: (-x[1], x[0])):
+        print('%s,%.2f' % i, file=open(output_file, 'a'))
 
+    output_file = 'sii_author.csv'
+    print('Author,Organization,Score', file=open(output_file, 'w'))
+
+    summ = summ_dict_scores( \
+            summ_author_scores(issue_score), \
+            summ_author_scores(pr_score), \
+            summ_author_scores(test_pr_score), \
+            summ_author_scores(pr_review_score), \
+            summ_author_scores(test_pr_review_score), \
+            summ_author_scores(hld_doc_score), \
+            summ_author_scores(testplan_hld_score))
+    for i in sorted(summ.items(), key=lambda x: (-x[1], x[0])):
+        author = i[0]
+        if author not in author_org:
+            org = 'Others'
+        else:
+            org = author_org[author]
+        if '(' in author and ')' in author:
+            org = author.split('(')[1][:-1]
+            author = author.split('(')[0]
+
+        print('{},{},'.format(author, org) + "%.2f" % i[1], file=open(output_file, 'a'))
+
+    global year_weight,year_weight_predict
+    year_weight = {}
+    year_weight = year_weight_predict
+
+    output_file = 'sii_org_predict.csv'
+    print('Organization,Score', file=open(output_file, 'w'))
+    summ = summ_dict_scores( \
+            summ_org_scores(issue_score), \
+            issue_triage_score, \
+            summ_org_scores(pr_score), \
+            summ_org_scores(test_pr_score), \
+            summ_org_scores(pr_review_score), \
+            summ_org_scores(test_pr_review_score), \
+            summ_org_scores(hld_doc_score), \
+            summ_org_scores(testplan_hld_score), \
+            input_score)
+    for i in sorted(summ.items(), key=lambda x: (-x[1], x[0])):
+        print('%s,%.2f' % i, file=open(output_file, 'a'))
+
+    output_file = 'sii_author_predict.csv'
+    print('Author,Organization,Score', file=open(output_file, 'w'))
+
+    summ = summ_dict_scores( \
+            summ_author_scores(issue_score), \
+            summ_author_scores(pr_score), \
+            summ_author_scores(test_pr_score), \
+            summ_author_scores(pr_review_score), \
+            summ_author_scores(test_pr_review_score), \
+            summ_author_scores(hld_doc_score), \
+            summ_author_scores(testplan_hld_score))
+    for i in sorted(summ.items(), key=lambda x: (-x[1], x[0])):
+        author = i[0]
+        if author not in author_org:
+            org = 'Others'
+        else:
+            org = author_org[author]
+        if '(' in author and ')' in author:
+            org = author.split('(')[1][:-1]
+            author = author.split('(')[0]
+
+        print('{},{},'.format(author, org) + "%.2f" % i[1], file=open(output_file, 'a'))
 
 #    Sii 4,6,12,13,14,15
 #    TODO
@@ -217,7 +264,7 @@ def caculate_input():
 # 1 Merged HLD [1] Count
 # 5 Documentations (Release Notes/Meeting Minutes)
 # 9 Merged SONiC MGMT TEST Plan HLD [1] Count
-def caculate_hld(byperson=False):
+def caculate_hld():
     ret = {}
     ret_testplan = {}
     paths = ['sii_hld/', 'sii_testplan_hld/']
@@ -231,44 +278,47 @@ def caculate_hld(byperson=False):
             for line in content.split('\n'):
                 if line:
                     author = line.split(',')[2]
-                    timestamp = line.split(',')[3]
-                    year = timestamp.split('-')[0]
-                    if author in automation_account:
-                        continue
+                    ts = datetime.strptime(line.split(',')[3], '%Y-%m-%dT%H:%M:%SZ')
+                    year_m = ts.strftime("%Y%m")
+                    year = year_m[:4]
                     if year not in year_weight:
                         continue
                     if path == 'sii_hld/':
                         score = 50
-                        if author not in ret:
-                            ret[author] = 0
-                        ret[author] += score * year_weight[year]
+                        if year not in ret:
+                            ret[year] = {}
+                        if author not in ret[year]:
+                            ret[year][author] = 0
+                        ret[year][author] += score * year_weight[year]
                     else:
                         score = 100
-                        if author not in ret_testplan:
-                            ret_testplan[author] = 0
-                        ret_testplan[author] += score * year_weight[year]
+                        if year not in ret_testplan:
+                            ret_testplan[year] = {}
+                        if author not in ret_testplan[year]:
+                            ret_testplan[year][author] = 0
+                        ret_testplan[year][author] += score * year_weight[year]
 
-    if byperson:
-        return ret,ret_testplan
-    return summ_by_org(ret), summ_by_org(ret_testplan)
+    return ret,ret_testplan
 
 #   Sii 3,11
 # 3  PR Review Count (S/M/L)
 # 11 TEST PR review count (S/M/L)
-def caculate_review(byperson=False):
+def caculate_review():
     ret = {}
     ret_test = {}
     for repo_number_author, detail in reviews_map.items():
         repo = repo_number_author.split(',')[0]
         number = repo_number_author.split(',')[1]
         author = repo_number_author.split(',')[2]
-        year = detail['year']
+        year_m = detail['year_m']
+        year = year_m[:4]
         test = detail['test']
         count = detail['count']
         if author in automation_account:
             continue
         if year not in year_weight:
             continue
+
         if count <= 2:
             score = 1
         elif count <=4:
@@ -276,23 +326,26 @@ def caculate_review(byperson=False):
         else:
             score =5
         if test:
-            if author not in ret_test:
-                ret_test[author] = 0
-            ret_test[author] += score * year_weight[year]
+            if year_m not in ret_test:
+                ret_test[year_m] = {}
+            if author not in ret_test[year_m]:
+                ret_test[year_m][author] = 0
+            ret_test[year_m][author] += score * year_weight[year]
         else:
-            if author not in ret:
-                ret[author] = 0
-            ret[author] += 2 * score * year_weight[year]
+            if year_m not in ret:
+                ret[year_m] = {}
+            if author not in ret[year_m]:
+                ret[year_m][author] = 0
+            # test has higher score, TODO
+            ret[year_m][author] += 2 * score * year_weight[year]
 
-    if byperson:
-        return ret,ret_test
-    return summ_by_org(ret),summ_by_org(ret_test)
-    
+    return ret,ret_test
+
 
 #   Sii 2,10
 # 2  Merged PR [2] Count (S/M/L)
 # 10 Merged Test cases [2] (S/M/L)
-def caculate_pr(byperson=False):
+def caculate_pr():
     ret = {}
     ret_test = {}
     for repo_number, detail in prs_map.items():
@@ -300,12 +353,10 @@ def caculate_pr(byperson=False):
         number = repo_number.split(',')[1]
         test = detail['test']
         additions = detail['additions']
-        year = detail['year']
-        if year not in year_weight:
-            continue
+        year_m = detail['year_m']
+        year = year_m[:4]
         author = detail['author']
-        if author in automation_account:
-            continue
+
         if additions <= 50:
             score = 10
         elif additions <=300:
@@ -314,62 +365,67 @@ def caculate_pr(byperson=False):
             score = 50 + int((additions-300)/100)
 
         if test:
-            if author not in ret_test:
-                ret_test[author] = 0
-            ret_test[author] += score * year_weight[year]
+            if year_m not in ret_test:
+                ret_test[year_m] = {}
+            if author not in ret_test[year_m]:
+                ret_test[year_m][author] = 0
+            ret_test[year_m][author] += score * year_weight[year]
         else:
-            if author not in ret:
-                ret[author] = 0
-            ret[author] += 2 * score * year_weight[year]
+            if year_m not in ret:
+                ret[year_m] = {}
+            if author not in ret[year_m]:
+                ret[year_m][author] = 0
+            # TODO test PR score * 2, it is reversed
+            ret[year_m][author] += 2 * score * year_weight[year]
 
-    if byperson:
-        return ret,ret_test
-    return summ_by_org(ret),summ_by_org(ret_test)
+    return ret,ret_test
 
 
 
 #   Sii 7,8
 # 7 Issues Opened Count
 # 8 Issues Triaged/Fixed Count
-def caculate_issue(byperson=False):
+def caculate_issue():
     issue_file = 'sii_issue/issues.json'
     # format:
-    # open issue:   ret.person.${author} += 5 * index
-    # triage issue: ret.organization.${org} += 10 * index
+    # year_m is YYYYmm, ex: 202212
+    # open issue:   ret.year_m.${author} += 5 * year_weight
+    # triage issue: ret.${org} += 10 * year_weight
     ret_issue = {}
     ret_issue_t = {}
+
     with open(issue_file) as f:
         content = f.read()
 
     issues = json.loads(content)
     for issue in issues:
-        year = issue['createdAt'].split('-')[0]
+        ts = datetime.strptime(issue['createdAt'], '%Y-%m-%dT%H:%M:%SZ')
+        year = str(ts.year)
+        year_m = ts.strftime("%Y%m")
         author = issue['author']
         labels = issue['labels'].split(',')
-        if author in automation_account:
+
+        if str(year) not in year_weight:
             continue
-        # if github account deleted, it is ''
-        if author == '':
-            continue
-        if year not in year_weight:
-            continue
-        if author not in ret_issue:
-            # init ret.person.${author}
-            ret_issue[author] = 0
+
+        if year_m not in ret_issue:
+            ret_issue[year_m] = {}
+
+        if author not in ret_issue[year_m]:
+            ret_issue[year_m][author] = 0
+
         # SII for opening issue
-        ret_issue[author] += 5 * year_weight[year]
+        ret_issue[year_m][author] += 5 * year_weight[year]
 
         # SII for issue triage
         for label in issue['labels'].split(','):
             if label.lower() in org_map:
-                Label = org_map[label.lower()]
-                if Label not in ret_issue_t:
-                    ret_issue_t[Label] = 0
-                ret_issue_t[Label] += 10 * year_weight[year]
+                Org = org_map[label.lower()]
+                if Org not in ret_issue_t:
+                    ret_issue_t[Org] = 0
+                ret_issue_t[Org] += 10 * year_weight[year]
 
-    if byperson:
-        return ret_issue, ret_issue_t
-    return summ_by_org(ret_issue), ret_issue_t
+    return ret_issue, ret_issue_t
 
 
 def init():
@@ -385,6 +441,7 @@ def init():
     print()
     print('author count:', len(author_org))
     print(random.choice(list(author_org.items())))
+    print(author_org_dup)
     print('pr count:' ,len(prs_map))
     print(random.choice(list(prs_map.items())))
     print('review count:', len(reviews_map))
@@ -392,7 +449,7 @@ def init():
 
 
 def author_org_load():
-    global author_org
+    global author_org,author_org_dup
     with open('sii_author_map/author.csv') as f:
         content = f.read()
     for line in content.split('\n'):
@@ -405,41 +462,95 @@ def author_org_load():
                     break
             if author not in author_org:
                 author_org[author] = org
+
+    tmp = {}
     with open ('sonic-contributor-map/contributors.json') as f:
         content = f.read()
         contributors_list = json.loads(content)
     for contributor in contributors_list:
         contributor = {k.lower(): v for k, v in contributor.items()}
-        author_org[contributor['id']] = contributor['organization']
+        if contributor['id'] not in tmp:
+            tmp[contributor['id']] = contributor['organization']
+        else:
+            author_org_dup[contributor['id']] = []
+
+    for k, v in dict.items(tmp):
+        author_org[k] = v
+
+    for contributor in contributors_list:
+        contributor = {k.lower(): v for k, v in contributor.items()}
+        if contributor['id'] in author_org_dup:
+            if 'enddate' in contributor:
+                contributor['enddate'] = datetime.strptime(contributor['enddate'], '%m/%Y').strftime("%Y%m")
+            if 'startdate' in contributor:
+                contributor['startdate'] = datetime.strptime(contributor['startdate'], '%m/%Y').strftime("%Y%m")
+
+            if 'startdate' not in contributor:
+                contributor['startdate'] = datetime.strptime('01/2016', '%m/%Y').strftime("%Y%m")
+            if 'enddate' not in contributor:
+                contributor['enddate'] = datetime.strptime('01/2030', '%m/%Y').strftime("%Y%m")
+
+            author_org_dup[contributor['id']].append({'organization': contributor['organization'], 'start': contributor['startdate'], 'end': contributor['enddate']})
+            author_org[contributor['id']] = 'author_org_dup'
 
 
+# input dict: .year_m.author = score
+# ex: {"202211": {"someone" : 20}}
+# output dict .author.score)
+def summ_author_scores(*args):
+    ret = {}
+    for arg in args:
+        for year_m, author_score in arg.items():
+            for author, score in author_score.items():
+                if author in automation_account or author == '':
+                    continue
+                if author in author_org_dup:
+                    for item in author_org_dup[author]:
+                        if year_m >= item['start'] and year_m <= item['end']:
+                            org = item['organization']
+                            author += "(" + org + ")"
+
+                if author not in ret:
+                    ret[author] = 0
+
+                ret[author] += score
+    return ret
+
+# input dict: year_m.author = score
+# output dict: org = score
 def summ_org_scores(*args):
     ret = {}
     for arg in args:
-        for org,score in arg.items():
-            if org not in ret:
-                ret[org] = 0
-            ret[org] += score
+        for year_m, author_score in arg.items():
+            for author, score in author_score.items():
+                org = ''
+                if author in automation_account or author == '': 
+                    continue
+
+                if author in author_org:
+                    org = author_org[author]
+
+                if author in author_org_dup:
+                    for item in author_org_dup[author]:
+                        if year_m >= item['start'] and year_m <= item['end']:
+                            org = item['organization']
+
+                if org not in ret:
+                    ret[org] = 0 
+
+                ret[org] += score
     return ret
 
-
-def summ_by_org(*args):
+# summ score dicts together
+def summ_dict_scores(*args):
     ret = {}
     for arg in args:
-        for author,score in arg.items():
-            if author in automation_account:
-                continue
-            if author in author_org:
-                org = author_org[author]
-            else:
-                org = 'Others'
+        for k, v in arg.items():
+            if k not in ret:
+                ret[k] = 0
+            ret[k] += v
 
-            if org not in ret:
-                ret[org] = 0
-
-            ret[org] += score
     return ret
-
 
 def round_floats(o):
     if isinstance(o, float): return round(o, 2)
@@ -472,14 +583,16 @@ def pr_review_load():
                     test = False
                     if 'testCase' in pr and pr['testCase'] == 'yes':
                         test = True
-                    year_ = pr['mergedAt'].split('-')[0]
+                    ts = datetime.strptime(pr['mergedAt'], '%Y-%m-%dT%H:%M:%SZ')
+                    year = str(ts.year)
+                    year_m = ts.strftime("%Y%m")
                     repo = pr['repo']
                     number = pr['number']
                     additions = pr['additions']
                     author = parse_author(pr)
                     if author in automation_account:
                         continue
-                    prs_map[ repo + ',' + str(number) ] = {'year': year_,'author': author,'test': test, 'additions': additions}
+                    prs_map[ repo + ',' + str(number) ] = {'year_m': year_m, 'author': author,'test': test, 'additions': additions}
 
     for year in year_weight:
         paths = ['sii_pr_review/', 'sii_test_pr_review/']
@@ -496,17 +609,18 @@ def pr_review_load():
                     number = review['number']
                     repo = review['repo']
                     if 'comment_at' in review:
-                        year_ = review['comment_at'].split('-')[0]
+                        ts = datetime.strptime(review['comment_at'], '%Y-%m-%dT%H:%M:%SZ')
                         author = parse_author(review, 'comment_author')
                     elif 'review_at' in review:
                         if review['review_at'] == None:
                             print('bad case:', review)
                             continue
-                        year_ = review['review_at'].split('-')[0]
+                        ts = datetime.strptime(review['review_at'], '%Y-%m-%dT%H:%M:%SZ')
                         author = parse_author(review, 'review_author')
                     else:
-                        year_ = review['latestReview_at'].split('-')[0]
+                        ts = datetime.strptime(review['latestReview_at'], '%Y-%m-%dT%H:%M:%SZ')
                         author = parse_author(review, 'latestReview_author')
+
                     if author in automation_account:
                         continue
                     # TODO some data need to dump!!!
@@ -514,10 +628,14 @@ def pr_review_load():
                         continue
                     if author == prs_map[ repo + ',' + str(number) ]['author']:
                         continue
+                    year_m = ts.strftime("%Y%m")
+                    year = year_m[:4]
+                    if year not in year_weight:
+                        continue
                     test = prs_map[ repo + ',' + str(number) ]['test']
                     # Use review count to judge S/M/L
                     if repo + ',' + str(number) + ',' + author not in reviews_map:
-                        reviews_map[ repo + ',' + str(number) + ',' + author ] = {'year': year_, 'test': test, 'count': 0 }
+                        reviews_map[ repo + ',' + str(number) + ',' + author ] = {'year_m': year_m, 'test': test, 'count': 0 }
                     reviews_map[ repo + ',' + str(number) + ',' + author ]['count'] += 1
 
 
