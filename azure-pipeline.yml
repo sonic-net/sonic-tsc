@@ -21,13 +21,10 @@ jobs:
       set -ex
       git config user.email 'sonicbld@microsoft.com'
       git config user.name 'Sonic Automation'
+      rm -rf sonic-contributor-map
       git clone https://$(USER):$(PAT)@github.com/sonic-net/sonic-contributor-map
 
       ./sii_caculate.py
-      ./sii_caculate.py --person
-
-      ./sii_caculate.py --predict
-      ./sii_caculate.py --predict --person
 
       git status | grep 'nothing to commit, working tree clean' && exit 0
 
