@@ -57,9 +57,14 @@ jobs:
         year=${current:0:4}
         year1=$(( $year -1 ))
         ./pr_dump.sh -y "$year1 $year"
+        ./pr_dump.sh -y "$year1 $year" -t reviews
       done
-      
       cd ..
+
+      cd sii_test_pr_review
+      ./pr_dump.sh -y "2022 2023"
+      cd ..
+
       git diff --cached
       git diff
     displayName: dump data
