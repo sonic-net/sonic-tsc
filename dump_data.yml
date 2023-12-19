@@ -1,0 +1,42 @@
+trigger: none
+pr: none
+
+schedules:
+- cron: '0 * * * *'
+  always: true
+  branches:
+    include:
+    - master
+
+pool: ubuntu-20.04
+
+jobs:
+- job: update
+  steps:
+  - checkout: self
+    clean: true
+    path: s
+    persistCredentials: true
+  - bash: |
+      set -ex
+      git config user.email 'sonicbld@microsoft.com'
+      git config user.name 'Sonic Automation'
+
+      cd sii_hld
+      ./dump_hld_data.sh
+      git add dash_hld.csv sai_hld.csv sonic_hld.csv
+      cd ..
+      git diff --cached --stat
+
+      cd sii_issue
+      ./issues_dump.sh
+      git add issues.json
+      cd ..
+      git diff --cached --stat
+
+      cd sii_testplan_hld
+      ./generate_testplan_hld_data.sh
+      git add sonic-mgmt_hld.csv
+      cd ..
+      git diff --cached --stat
+

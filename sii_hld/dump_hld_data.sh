@@ -72,4 +72,5 @@ for repo in $repos;do
 
     cd ..
     sort $csv.tmp > $csv
+    rm $csv.tmp $list
 done
