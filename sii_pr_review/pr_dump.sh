@@ -62,39 +62,38 @@ echo keys:     $keys
 echo interval: $interval
 echo dump:     $dump_type
 
-check_dump_file(){
-    file=$1
-    count=$2
-    [ -f $file ] || return 11
-    [[ $count != '' ]] || count=1000
-
-    length=$(cat $file | jq length)
-    [[ $? != 0 ]] || [[ $length == '' ]] && return 13
-
-    echo "        $file,$length"
-    if [[ $count != 1000 ]];then
-        [[ $length == $count ]] && return 0
-        echo Warning: $file,$length !!!!!!!!!! 1>&2
-        return 14
-    else
-        echo $length | grep -e '00$' -e '^0$' && echo Warning: $file,$length !!!!!!!!!! 1>&2 && return 15
-        return 0
-    fi
+dump_by_year(){
+    year=$1
+    org_repo=$2
+    repo=$(echo $org_repo | awk -F/ '{print$2}')
+    org=$(echo $org_repo | awk -F/ '{print$1}')
+    start=$year-01-01
+    end=$year-12-31
+    file_by_year=$year/$repo.$dump_type.json
+    pr_count=$(gh pr list -R $org_repo -L 10000 -s merged --json number -S "merged:$start..$end" | jq length)
+    echo "    pr count: $pr_count"
+    (( $pr_count >= 1000 )) && echo "    dump by month!" && return 1
+    [[ $pr_count == 0 ]] && echo "    no pr found!" && return 0
+    [[ "$bypass_year" == y ]] && echo "    dump by month!" && return 1
+    { gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$start..$end" | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}] | sort_by(-.number)" > $file_by_year && sleep $interval; } || return $?
+    [[ "$(cat $file_by_year | jq length)" != "$pr_count" ]] && echo "    pr count not match! $(cat $file_by_year | jq length) $pr_count" && return 1
 }
 
-pr_list(){
-    org_repo=$1
-    keys=$2
-    merged_at=$3
-    if [ -z "$org_repo" ] || [ -z "$keys" ] || [ -z "$merged_at" ];then
-        echo bad input!
-        echo org_repo: $org_repo
-        echo keys: $keys
-        echo merged_at: $merged_at
-        exit 2
-    fi
+dump_by_10day(){
+    a=$year/$repo.$month.a.$dump_type.json
+    b=$year/$repo.$month.b.$dump_type.json
+    c=$year/$repo.$month.c.$dump_type.json
 
-    gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-01..$year-$month-10" | jq --ind    ent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}]"
+    echo "            dump by 10 days"
+    gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-01..$year-$month-10" | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}]" > $a
+    echo "            $year-$month-01..$year-$month-10,$(cat $a | jq length)"
+    sleep 10
+    gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-11..$year-$month-20" | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}]" > $b
+    echo "            $year-$month-11..$year-$month-20,$(cat $b | jq length)"
+    sleep 10
+    gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-21..$end"            | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}]" > $c
+    echo "            $year-$month-21..$end,$(cat $c | jq length)"
+    jq -s 'add sort_by(-.number)' --indent 4 $a $b $c > $file_by_month
 }
 
 for year in $years
@@ -107,50 +106,24 @@ do
         org=$(echo $org_repo | awk -F/ '{print$1}')
         echo "    repo: $repo"
         # try dump by year when bypass_year==n and no monthly dump files
-        start=$year-01-01
-        end=$year-12-31
-        pr_count=$(gh pr list -R $org_repo -L 10000 -s merged --json number -S "merged:$start..$end" | jq length)
-        echo "    pr count: $pr_count"
-        [[ $pr_count == 0 ]] && continue
-
-        file_by_year=$year/$repo.$dump_type.json
-        if [[ $pr_count != 1000 ]] && [[ "$bypass_year" == n ]] && [ -z "$(ls $year/$repo.*.$dump_type.json 2>/dev/null)" ];then
-            if check_dump_file $file_by_year $pr_count;then
-                cat $file_by_year | jq --indent 4 "sort_by(-.number)" > tmp
-                mv tmp $file_by_year
-                continue
-            fi
-            rm -rf $file_by_year
-            gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-01-01..$year-12-31" | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}] | sort_by(-.number)" > $file_by_year
-            sleep $interval
-            check_dump_file $file_by_year $pr_count && continue
-        fi
+        dump_by_year $year $org_repo && continue
 
         # try dump by month, when dump by year failed
         for month in $months
         do
             file_by_month=$year/$repo.$month.$dump_type.json
             start=$year-$month-01
+            [[ $start > $(date -I) ]] && break
             # if the last day is not correct, download will fail.
             end=$(date -d "$year/$month/1 + 1 month -1 day" "+%Y-%m-%d")
             pr_count=$(gh pr list -R $org_repo -L 10000 -s merged --json number -S "merged:$start..$end" | jq length)
-            echo "            $start,$end,$pr_count"
-            check_dump_file $file_by_month $pr_count && continue
-            gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$start..$end" | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}]" > $file_by_month
+            echo "        $start,$end,$pr_count"
+            gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$start..$end" | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}] | sort_by(-.number)" > $file_by_month
             sleep $interval
-            check_dump_file $file_by_month $pr_count && continue
+            [[ "$(cat $file_by_month | jq length)" != "$pr_count" ]] && echo "        pr count not match! $(cat $file_by_year | jq length) $pr_count" || continue
 
             # try dump by 10 days, when dump by month failed
-            a=$year/$repo.$month.a.$dump_type.json
-            b=$year/$repo.$month.b.$dump_type.json
-            c=$year/$repo.$month.c.$dump_type.json
-            gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-01..$year-$month-10" | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}]" > $a
-            sleep 10
-            gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-11..$year-$month-20" | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}]" > $b
-            sleep 10
-            gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-21..$end"            | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}]" > $c
-            jq -s 'add' --indent 4 $a $b $c > $file_by_month
-            check_dump_file $file_by_month $pr_count
+            dump_by_10day
         done    
         jq -s 'add | sort_by(-.number)' --indent 4 $year/$repo.*.$dump_type.json > $file_by_year
         rm $year/$repo.*.$dump_type.json

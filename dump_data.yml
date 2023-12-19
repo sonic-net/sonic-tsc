@@ -2,11 +2,11 @@ trigger: none
 pr: none
 
 schedules:
-- cron: '0 * * * *'
+- cron: '0 0 1 * *'
   always: true
   branches:
     include:
-    - master
+    - main
 
 pool: ubuntu-20.04
 
@@ -29,6 +29,7 @@ jobs:
       echo $TOKEN | gh auth login --with-token
     env:
       TOKEN: $(GH_TOKEN)
+    displayName: setup env
   - bash: |
       set -ex
       git config user.email 'sonicbld@microsoft.com'
@@ -38,17 +39,28 @@ jobs:
       ./dump_hld_data.sh
       git add dash_hld.csv sai_hld.csv sonic_hld.csv
       cd ..
-      git diff --cached --stat
 
       cd sii_issue
       ./issues_dump.sh
       git add issues.json
       cd ..
-      git diff --cached --stat
 
       cd sii_testplan_hld
       ./generate_testplan_hld_data.sh
       git add sonic-mgmt_hld.csv
       cd ..
-      git diff --cached --stat
+
+      cd sii_pr_review
+      for repo in $(cat repos)
+      do
+        current=$(date -I)
+        year=${current:0:4}
+        year1=$(( $year -1 ))
+        ./pr_dump.sh -y "$year1 $year"
+      done
+      
+      cd ..
+      git diff --cached
+      git diff
+    displayName: dump data
 
