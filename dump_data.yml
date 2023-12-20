@@ -28,6 +28,8 @@ jobs:
       sudo apt install gh jq -y
 
       echo $TOKEN | gh auth login --with-token
+      git remote add sonicbld https://mssonicbld:$TOKEN@github.com/sonic-net/sonic-tsc/
+      git fetch sonicbld
     env:
       TOKEN: $(GH_TOKEN)
     displayName: setup env
@@ -40,18 +42,24 @@ jobs:
       ./dump_hld_data.sh
       git add dash_hld.csv sai_hld.csv sonic_hld.csv
       git commit -m "[data] Update HLD related data."
-      git push origin HEAD:sonicbld-hld
+      git push sonicbld HEAD:data/hld
       git reset HEAD~ --hard
       cd ..
 
       cd sii_issue
       ./issues_dump.sh
       git add issues.json
+      git commit -m "[data] Update issue related data."
+      git push sonicbld HEAD:data/issue
+      git reset HEAD~ --hard
       cd ..
 
       cd sii_testplan_hld
       ./generate_testplan_hld_data.sh
       git add sonic-mgmt_hld.csv
+      git commit -m "[data] Update testplan HLD related data."
+      git push sonicbld HEAD:data/testplan-hld
+      git reset HEAD~ --hard
       cd ..
 
       cd sii_pr_review
@@ -63,6 +71,10 @@ jobs:
         ./pr_dump.sh -y "$year1 $year" -r $repo
         ./pr_dump.sh -y "$year1 $year" -t reviews -r $repo
       done
+      git add .
+      git commit -m "[data] Update pr&review related data."
+      git push sonicbld HEAD:data/pr
+      git reset HEAD~ --hard
       cd ..
 
       cd sii_test_pr_review
@@ -70,9 +82,11 @@ jobs:
       year=${current:0:4}
       year1=$(( $year -1 ))
       ./pr_dump.sh -y "$year1 $year"
+      git add .
+      git commit -m "[data] Update test pr&review related data."
+      git push sonicbld HEAD:data/testpr
+      git reset HEAD~ --hard
       cd ..
 
-      git diff --cached
-      git diff
     displayName: dump data
 
