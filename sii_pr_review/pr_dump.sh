@@ -94,7 +94,7 @@ dump_by_10day(){
     sleep 10
     gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-21..$end"            | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}]" > $c
     echo "            $year-$month-21..$end,$(cat $c | jq length)"
-    jq -s 'add sort_by(-.number)' --indent 4 $a $b $c > $file_by_month
+    jq -s 'add | sort_by(-.number)' --indent 4 $a $b $c > $file_by_month
 }
 
 for year in $years
@@ -121,7 +121,7 @@ do
             echo "        $start,$end,$pr_count"
             gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$start..$end" | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}] | sort_by(-.number)" > $file_by_month
             sleep $interval
-            [[ "$(cat $file_by_month | jq length)" != "$pr_count" ]] && echo "        pr count not match! $(cat $file_by_year | jq length) $pr_count" || continue
+            [[ "$(cat $file_by_month | jq length)" != "$pr_count" ]] && echo "        pr count not match! $(cat $file_by_month | jq length) $pr_count" || continue
 
             # try dump by 10 days, when dump by month failed
             dump_by_10day

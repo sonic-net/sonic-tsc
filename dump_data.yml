@@ -12,7 +12,7 @@ pool: sonicbld
 
 jobs:
 - job: update
-  timeoutInMinutes: 120
+  timeoutInMinutes: 600
   variables:
   - group: SONICBLD
   steps:
@@ -39,6 +39,9 @@ jobs:
       cd sii_hld
       ./dump_hld_data.sh
       git add dash_hld.csv sai_hld.csv sonic_hld.csv
+      git commit -m "[data] Update HLD related data."
+      git push origin HEAD:sonicbld-hld
+      git reset HEAD~ --hard
       cd ..
 
       cd sii_issue
