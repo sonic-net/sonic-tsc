@@ -42,7 +42,7 @@ jobs:
       ./dump_hld_data.sh
       git add dash_hld.csv sai_hld.csv sonic_hld.csv
       git commit -m "[data] Update HLD related data."
-      git push sonicbld HEAD:data/hld
+      git push sonicbld HEAD:refs/heads/data/hld
       git reset HEAD~ --hard
       cd ..
 
@@ -50,7 +50,7 @@ jobs:
       ./issues_dump.sh
       git add issues.json
       git commit -m "[data] Update issue related data."
-      git push sonicbld HEAD:data/issue
+      git push sonicbld HEAD:refs/heads/data/issue
       git reset HEAD~ --hard
       cd ..
 
@@ -58,7 +58,7 @@ jobs:
       ./generate_testplan_hld_data.sh
       git add sonic-mgmt_hld.csv
       git commit -m "[data] Update testplan HLD related data."
-      git push sonicbld HEAD:data/testplan-hld
+      git push sonicbld HEAD:refs/heads/data/testplan-hld
       git reset HEAD~ --hard
       cd ..
 
@@ -73,7 +73,7 @@ jobs:
       done
       git add .
       git commit -m "[data] Update pr&review related data."
-      git push sonicbld HEAD:data/pr
+      git push sonicbld HEAD:refs/heads/data/pr
       git reset HEAD~ --hard
       cd ..
 
@@ -84,7 +84,7 @@ jobs:
       ./pr_dump.sh -y "$year1 $year"
       git add .
       git commit -m "[data] Update test pr&review related data."
-      git push sonicbld HEAD:data/testpr
+      git push sonicbld HEAD:refs/heads/data/testpr
       git reset HEAD~ --hard
       cd ..
 
