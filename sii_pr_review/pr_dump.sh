@@ -77,6 +77,7 @@ dump_by_year(){
     [[ "$bypass_year" == y ]] && echo "    dump by month!" && return 1
     { gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$start..$end" | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}] | sort_by(-.number)" > $file_by_year && sleep $interval; } || return $?
     [[ "$(cat $file_by_year | jq length)" != "$pr_count" ]] && echo "    pr count not match! $(cat $file_by_year | jq length) $pr_count" && return 1
+    return 0
 }
 
 dump_by_10day(){

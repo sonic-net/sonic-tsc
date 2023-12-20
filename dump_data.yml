@@ -8,11 +8,12 @@ schedules:
     include:
     - main
 
-pool: ubuntu-20.04
+pool: sonicbld
 
 jobs:
 - job: update
   variables:
+  timeoutInMinutes: 120
   - group: SONICBLD
   steps:
   - checkout: self
@@ -56,7 +57,7 @@ jobs:
         current=$(date -I)
         year=${current:0:4}
         year1=$(( $year -1 ))
-        ./pr_dump.sh -y "$year1 $year"
+        ./pr_dump.sh -y "$year1 $year" -r $repo
         ./pr_dump.sh -y "$year1 $year" -t reviews -r $repo
       done
       cd ..
