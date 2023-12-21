@@ -90,6 +90,8 @@ jobs:
         year1=$(( $year -1 ))
         ./pr_dump.sh -y "$year1 $year" -r $repo
         ./pr_dump.sh -y "$year1 $year" -t reviews -r $repo
+        ./parse_reviews.py $year1/$repo.*reviews.json
+        ./parse_reviews.py $year/$repo.*reviews.json
       done
       git add .
       git commit -m "[data] Update pr&review related data."
