@@ -81,23 +81,21 @@ dump_by_year(){
 }
 
 dump_by_10day(){
-    set -e
-
     a=$year/$repo.$month.a.$dump_type.json
     b=$year/$repo.$month.b.$dump_type.json
     c=$year/$repo.$month.c.$dump_type.json
 
     echo "            dump by 10 days"
-    gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-01..$year-$month-10" | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}]" > $a
+    gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-01..$year-$month-10" | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}]" > $a || return 1
     echo "            $year-$month-01..$year-$month-10,$(cat $a | jq length)"
     sleep $interval
-    gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-11..$year-$month-20" | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}]" > $b
+    gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-11..$year-$month-20" | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}]" > $b || return 1
     echo "            $year-$month-11..$year-$month-20,$(cat $b | jq length)"
     sleep $interval
-    gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-21..$end"            | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}]" > $c
+    gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-21..$end"            | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}]" > $c || return 1
     echo "            $year-$month-21..$end,$(cat $c | jq length)"
     sleep $interval
-    jq -s 'add | sort_by(-.number)' --indent 4 $a $b $c > $file_by_month
+    jq -s 'add | sort_by(-.number)' --indent 4 $a $b $c > $file_by_month || return 1
 }
 
 for year in $years
@@ -131,6 +129,7 @@ do
             # try dump by 10 days, when dump by month failed
             while true; do
                 dump_by_10day && break
+                sleep 60
             done
         done    
         jq -s 'add | sort_by(-.number)' --indent 4 $year/$repo.*.$dump_type.json > $file_by_year
