@@ -91,8 +91,8 @@ jobs:
         ./pr_dump.sh -y "$year1 $year" -r $repo
         ./pr_dump.sh -y "$year1 $year" -t reviews -r $repo
         repo_name=$(echo $repo | awk -F/ '{print$2}')
-        ./parse_reviews.py $year1/$repo_name.*reviews.json
-        ./parse_reviews.py $year/$repo_name.*reviews.json
+        ls $year1/$repo_name.*reviews.json &>/dev/null && ./parse_reviews.py $year1/$repo_name.*reviews.json
+        ls $year/$repo_name.*reviews.json &>/dev/null && ./parse_reviews.py $year/$repo_name.*reviews.json
       done
       git add .
       git commit -m "[data] Update pr&review related data."
