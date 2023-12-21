@@ -20,7 +20,8 @@ jobs:
     clean: true
     path: s
   - bash: |
-      set -ex
+      set -x
+
       curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
       sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
       echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
@@ -37,7 +38,7 @@ jobs:
       TOKEN: $(GH_TOKEN)
     displayName: setup env
   - bash: |
-      set -ex
+      set -x
 
       cd sii_hld
       ./dump_hld_data.sh
@@ -51,6 +52,8 @@ jobs:
     condition: ne(variables['SKIP_HLD'], 'y')
 
   - bash: |
+      set -x
+
       cd sii_issue
       ./issues_dump.sh
       git add issues.json
@@ -63,6 +66,8 @@ jobs:
     condition: ne(variables['SKIP_ISSUE'], 'y')
 
   - bash: |
+      set -x
+
       cd sii_testplan_hld
       ./generate_testplan_hld_data.sh
       git add sonic-mgmt_hld.csv
@@ -75,6 +80,8 @@ jobs:
     condition: ne(variables['SKIP_TESTHLD'], 'y')
 
   - bash: |
+      set -x
+
       cd sii_pr_review
       for repo in $(cat repos)
       do
@@ -94,6 +101,8 @@ jobs:
     condition: ne(variables['SKIP_PR'], 'y')
 
   - bash: |
+      set -x
+
       cd sii_test_pr_review
       current=$(date -I)
       year=${current:0:4}
