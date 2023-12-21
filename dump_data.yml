@@ -1,0 +1,110 @@
+trigger: none
+pr: none
+
+schedules:
+- cron: '0 0 1 * *'
+  always: true
+  branches:
+    include:
+    - main
+
+pool: sonicbld
+
+jobs:
+- job: update
+  timeoutInMinutes: 600
+  variables:
+  - group: SONICBLD
+  steps:
+  - checkout: self
+    clean: true
+    path: s
+  - bash: |
+      set -ex
+      curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+      sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
+      echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+      sudo apt update
+      sudo apt install gh jq -y
+
+      echo $TOKEN | gh auth login --with-token
+      git remote remove sonicbld || true
+      git remote add sonicbld https://mssonicbld:$TOKEN@github.com/mssonicbld/sonic-tsc/
+      git fetch sonicbld
+      git config user.email 'sonicbld@microsoft.com'
+      git config user.name 'Sonic Automation'
+    env:
+      TOKEN: $(GH_TOKEN)
+    displayName: setup env
+  - bash: |
+      set -ex
+
+      cd sii_hld
+      ./dump_hld_data.sh
+      git add dash_hld.csv sai_hld.csv sonic_hld.csv
+      git commit -m "[data] Update HLD related data."
+      git push sonicbld HEAD:refs/heads/data/hld -f
+      gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/hld -B master -b '' -t "[data] Update HLD related data." || true
+      git reset HEAD~ --hard
+      cd ..
+    displayName: dump hld
+    condition: ne(variables['SKIP_HLD'], 'y')
+
+  - bash: |
+      cd sii_issue
+      ./issues_dump.sh
+      git add issues.json
+      git commit -m "[data] Update issue related data."
+      git push sonicbld HEAD:refs/heads/data/issue -f
+      gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/issue -B master -b '' -t "[data] Update issue related data." || true
+      git reset HEAD~ --hard
+      cd ..
+    displayName: dump issue
+    condition: ne(variables['SKIP_ISSUE'], 'y')
+
+  - bash: |
+      cd sii_testplan_hld
+      ./generate_testplan_hld_data.sh
+      git add sonic-mgmt_hld.csv
+      git commit -m "[data] Update testplan HLD related data."
+      git push sonicbld HEAD:refs/heads/data/testplan-hld -f
+      gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/testplan-hld -B master -b '' -t "[data] Update testplan HLD related data." || true
+      git reset HEAD~ --hard
+      cd ..
+    displayName: dump test hld
+    condition: ne(variables['SKIP_TESTHLD'], 'y')
+
+  - bash: |
+      cd sii_pr_review
+      for repo in $(cat repos)
+      do
+        current=$(date -I)
+        year=${current:0:4}
+        year1=$(( $year -1 ))
+        ./pr_dump.sh -y "$year1 $year" -r $repo
+        ./pr_dump.sh -y "$year1 $year" -t reviews -r $repo
+      done
+      git add .
+      git commit -m "[data] Update pr&review related data."
+      git push sonicbld HEAD:refs/heads/data/pr -f
+      gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/pr -B master -b '' -t "[data] Update pr&review related data." || true
+      git reset HEAD~ --hard
+      cd ..
+    displayName: dump pr
+    condition: ne(variables['SKIP_PR'], 'y')
+
+  - bash: |
+      cd sii_test_pr_review
+      current=$(date -I)
+      year=${current:0:4}
+      year1=$(( $year -1 ))
+      ./pr_dump.sh -y "$year1 $year"
+      git add .
+      git commit -m "[data] Update test pr&review related data."
+      git push sonicbld HEAD:refs/heads/data/testpr -f
+      gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/testpr -B master -b '' -t "[data] Update test pr&review related data." || true
+      git reset HEAD~ --hard
+      cd ..
+    displayName: dump test pr
+    condition: ne(variables['SKIP_TESTPR'], 'y')
+
