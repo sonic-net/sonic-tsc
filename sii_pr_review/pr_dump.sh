@@ -138,7 +138,9 @@ do
                 sleep 60
             done
         done    
-        jq -s 'add | sort_by(-.number)' --indent 4 $year/$repo.*.$dump_type.json > $file_by_year
-        rm $year/$repo.*.$dump_type.json
+        if [[ "$repo" != "sonic-mgmt" ]]; then
+            jq -s 'add | sort_by(-.number)' --indent 4 $year/$repo.*.$dump_type.json > $file_by_year
+            rm $year/$repo.*.$dump_type.json
+        fi
     done
 done
