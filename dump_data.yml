@@ -111,6 +111,14 @@ jobs:
       year=${current:0:4}
       year1=$(( $year -1 ))
       ./pr_dump.sh -y "$year1 $year"
+      for file in $(find . -name *.prs.json)
+      do
+        ./parse_prs.py $file
+      done
+      for file in $(find . -name *.reviews.json)
+      do
+        ./parse_reviews.py $file
+      done
       git add .
       git commit -m "[data] Update test pr&review related data."
       git push sonicbld HEAD:refs/heads/data/testpr -f
