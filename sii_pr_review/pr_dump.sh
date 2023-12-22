@@ -126,7 +126,7 @@ do
             end=$(date -d "$year/$month/1 + 1 month -1 day" "+%Y-%m-%d")
             pr_count=$(gh pr list -R $org_repo -L 10000 -s merged --json number -S "merged:$start..$end" | jq length)
             echo "        $start,$end,$pr_count"
-            if [[ "$dump_type" != "reviews" || "$repo" != "sonic-buildimage" ]]; then
+            if [[ "$dump_type" != "reviews" || ( "$repo" != "sonic-buildimage" && "$repo" != "sonic-mgmt" ) ]]; then
                 gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$start..$end" | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}] | sort_by(-.number)" > $file_by_month
                 sleep $interval
                 [[ "$(cat $file_by_month | jq length)" != "$pr_count" ]] && echo "        pr count not match! $(cat $file_by_month | jq length) $pr_count" || continue
