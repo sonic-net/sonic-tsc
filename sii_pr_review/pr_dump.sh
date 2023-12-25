@@ -102,6 +102,7 @@ dump_by_10day(){
     echo "            $year-$month-21..$end,$(cat $c | jq length)"
     sleep $interval
     jq -s 'add | sort_by(-.number)' --indent 4 $a $b $c > $file_by_month
+    rm -rf $a $b $c
 }
 
 for year in $years

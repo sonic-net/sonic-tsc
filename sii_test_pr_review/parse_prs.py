@@ -26,11 +26,12 @@ def main():
                     author=item["author"]["login"]
                     item["author"]=author
                 item["testCase"]="no"
-                for item_file in item["files"]:
-                    if item_file["path"].startswith("tests") or item_file["path"].startswith("spytest"):
-                        item["testCase"]="yes"
-                        break
-                item.pop("files")
+                if "files" in item.keys():
+                    for item_file in item["files"]:
+                        if item_file["path"].startswith("tests") or item_file["path"].startswith("spytest"):
+                            item["testCase"]="yes"
+                            break
+                    item.pop("files")
 
         with open(file, 'w', encoding='utf8') as f:
             json.dump(data, f, indent=4)
