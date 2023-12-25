@@ -94,7 +94,7 @@ jobs:
         ls $year1/$repo_name.*reviews.json &>/dev/null && ./parse_reviews.py $year1/$repo_name.*reviews.json
         ls $year/$repo_name.*reviews.json &>/dev/null && ./parse_reviews.py $year/$repo_name.*reviews.json
       done
-      git add .
+      git add $year1 $year
       git commit -m "[data] Update pr&review related data."
       git push sonicbld HEAD:refs/heads/data/pr -f
       gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/pr -B master -b '' -t "[data] Update pr&review related data." || true
@@ -111,15 +111,15 @@ jobs:
       year=${current:0:4}
       year1=$(( $year -1 ))
       ./pr_dump.sh -y "$year1 $year"
-      for file in $(find . -name *.prs.json)
+      for file in $(find $year1 $year -name *.prs.json)
       do
         ./parse_prs.py $file
       done
-      for file in $(find . -name *.reviews.json)
+      for file in $(find $year1 $year -name *.reviews.json)
       do
         ./parse_reviews.py $file
       done
-      git add .
+      git add $year1 $year
       git commit -m "[data] Update test pr&review related data."
       git push sonicbld HEAD:refs/heads/data/testpr -f
       gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/testpr -B master -b '' -t "[data] Update test pr&review related data." || true
