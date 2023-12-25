@@ -94,6 +94,7 @@ jobs:
         ls $year1/$repo_name.*reviews.json &>/dev/null && ./parse_reviews.py $year1/$repo_name.*reviews.json
         ls $year/$repo_name.*reviews.json &>/dev/null && ./parse_reviews.py $year/$repo_name.*reviews.json
       done
+      rm -rf $(find . -size -10c)
       git add $year1 $year
       git commit -m "[data] Update pr&review related data."
       git push sonicbld HEAD:refs/heads/data/pr -f
@@ -119,6 +120,7 @@ jobs:
       do
         ./parse_reviews.py $file
       done
+      rm -rf $(find . -size -10c)
       git add $year1 $year
       git commit -m "[data] Update test pr&review related data."
       git push sonicbld HEAD:refs/heads/data/testpr -f
