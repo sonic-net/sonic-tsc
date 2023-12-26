@@ -111,6 +111,7 @@ jobs:
       cd sii_test_pr_review
       current=$(date -I)
       year=${current:0:4}
+      month=${current:5:2}
       (( month <=2 )) && year1=$(( $year -1 ))
       ./pr_dump.sh -y "$year1 $year"
       for file in $(find $year1 $year -name *.prs.json)
