@@ -141,7 +141,9 @@ do
         done    
         if [[ "$repo" != "sonic-mgmt" ]]; then
             jq -s 'add | sort_by(-.number)' --indent 4 $year/$repo.*.$dump_type.json > $file_by_year
-            rm $year/$repo.*.$dump_type.json
+            rm $year/$repo.*.$dump_type.json -rf
+        else
+            rm $file_by_year -rf
         fi
     done
 done
