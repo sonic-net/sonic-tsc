@@ -27,7 +27,8 @@ jobs:
       git fetch origin +refs/pull/10/merge:remotes/pull/10/merge
       git merge pull/10/merge --squash
       git status
-      git merge --continue || true
+      git commit -m draft
+      git status
       ./sii_caculate.py
 
       git status | grep 'nothing to commit, working tree clean' && exit 0
