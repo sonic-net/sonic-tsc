@@ -25,9 +25,9 @@ jobs:
       git clone https://$(USER):$(PAT)@github.com/sonic-net/sonic-contributor-map
 
       git fetch origin +refs/pull/10/merge:remotes/pull/10/merge
-      git fetch origin +refs/pull/10/merge:remotes/pull/11/merge
       git merge pull/10/merge --squash
-      git merge pull/11/merge --squash
+      git status
+      git merge --continue || true
       ./sii_caculate.py
 
       git status | grep 'nothing to commit, working tree clean' && exit 0
