@@ -11,11 +11,11 @@
 ### 2. This repo stores Sii score calculation script.
   1. This command will update score by organization. [Scores by Org](Sii_org.csv)
 ```
-$ ./sii_caculate.py
+$ ./sii_calculate.py
 ```
   2. This command will update score by each author. [Scores by author](Sii_author.csv)
 ```
-$ ./sii_caculate.py person
+$ ./sii_calculate.py person
 ```
 
 ## 3. SII Weight Multiplier: [Original Link](https://github.com/sonic-net/SONiC/blob/master/tsc/TSC_Election.md)
