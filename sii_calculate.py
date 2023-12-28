@@ -69,6 +69,7 @@ clone_cmd = 'git clone https://github.com/sonic-net/sonic-contributor-map'
 update_cmd = 'cd sonic-contributor-map; git reset HEAD --hard; git checkout main; git pull'
 
 year_weight = {
+    str(datetime.now().year - 0): 0,
     str(datetime.now().year - 1): 0.3,
     str(datetime.now().year - 2): 0.25,
     str(datetime.now().year - 3): 0.2,
@@ -81,50 +82,59 @@ year_weight_predict = {
     str(datetime.now().year - 1): 0.25,
     str(datetime.now().year - 2): 0.2,
     str(datetime.now().year - 3): 0.15,
-    str(datetime.now().year - 4): 0.1
+    str(datetime.now().year - 4): 0.1,
+    str(datetime.now().year - 5): 0
 }
 
 prs_map = {} 
+prs_drop = {}
 reviews_map = {}
 author_org = {}
 author_org_dup = {}
 
-def sii_caculate():
+def sii_calculate(predict: False):
     ret = {}
+    if predict:
+        global year_weight,year_weight_predict
+        year_weight = year_weight_predict
+        org_output_file = 'sii_org_predict.csv'
+        author_output_file = 'sii_author_predict.csv'
+    else:
+        org_output_file = 'sii_org.csv'
+        author_output_file = 'sii_author.csv'
 
-    issue_score, issue_triage_score = caculate_issue()
+    issue_score, issue_triage_score = calculate_issue()
     print('issue score:')
     print(json.dumps(round_floats(summ_author_scores(issue_score))))
     print('issue triage score:')
     print(json.dumps(round_floats(issue_triage_score)))
 
-    pr_score,test_pr_score = caculate_pr()
+    pr_score,test_pr_score = calculate_pr()
     print('pr score:')
     print(json.dumps(round_floats(summ_author_scores(pr_score))))
 
     print('test pr score:')
     print(json.dumps(round_floats(summ_author_scores(test_pr_score))))
 
-    pr_review_score,test_pr_review_score = caculate_review()
+    pr_review_score,test_pr_review_score = calculate_review()
     print('pr review score:')
     print(json.dumps(round_floats(summ_author_scores(pr_review_score))))
 
     print('test pr review score:')
     print(json.dumps(round_floats(summ_author_scores(test_pr_review_score))))
 
-    hld_doc_score,testplan_hld_score = caculate_hld()
+    hld_doc_score,testplan_hld_score = calculate_hld()
     print('hld&doc score:')
     print(json.dumps(round_floats(summ_author_scores(hld_doc_score))))
 
     print('test plan hld score:')
     print(json.dumps(round_floats(summ_author_scores(testplan_hld_score))))
 
-    input_score = caculate_input()
+    input_score = calculate_input()
     print('input score:')
     print(json.dumps(round_floats(input_score)))
 
-    output_file = 'sii_org.csv'
-    print('Organization,Score', file=open(output_file, 'w'))
+    print('Organization,Score', file=open(org_output_file, 'w'))
     summ = summ_dict_scores( \
             summ_org_scores(issue_score), \
             issue_triage_score, \
@@ -136,10 +146,9 @@ def sii_caculate():
             summ_org_scores(testplan_hld_score), \
             input_score)
     for i in sorted(summ.items(), key=lambda x: (-x[1], x[0])):
-        print('%s,%.2f' % i, file=open(output_file, 'a'))
+        print('%s,%.2f' % i, file=open(org_output_file, 'a'))
 
-    output_file = 'sii_author.csv'
-    print('Author,Organization,Score', file=open(output_file, 'w'))
+    print('Author,Organization,Score', file=open(author_output_file, 'w'))
 
     summ = summ_dict_scores( \
             summ_author_scores(issue_score), \
@@ -159,49 +168,8 @@ def sii_caculate():
             org = author.split('(')[1][:-1]
             author = author.split('(')[0]
 
-        print('{},{},'.format(author, org) + "%.2f" % i[1], file=open(output_file, 'a'))
+        print('{},{},'.format(author, org) + "%.2f" % i[1], file=open(author_output_file, 'a'))
 
-    global year_weight,year_weight_predict
-    year_weight = {}
-    year_weight = year_weight_predict
-
-    output_file = 'sii_org_predict.csv'
-    print('Organization,Score', file=open(output_file, 'w'))
-    summ = summ_dict_scores( \
-            summ_org_scores(issue_score), \
-            issue_triage_score, \
-            summ_org_scores(pr_score), \
-            summ_org_scores(test_pr_score), \
-            summ_org_scores(pr_review_score), \
-            summ_org_scores(test_pr_review_score), \
-            summ_org_scores(hld_doc_score), \
-            summ_org_scores(testplan_hld_score), \
-            input_score)
-    for i in sorted(summ.items(), key=lambda x: (-x[1], x[0])):
-        print('%s,%.2f' % i, file=open(output_file, 'a'))
-
-    output_file = 'sii_author_predict.csv'
-    print('Author,Organization,Score', file=open(output_file, 'w'))
-
-    summ = summ_dict_scores( \
-            summ_author_scores(issue_score), \
-            summ_author_scores(pr_score), \
-            summ_author_scores(test_pr_score), \
-            summ_author_scores(pr_review_score), \
-            summ_author_scores(test_pr_review_score), \
-            summ_author_scores(hld_doc_score), \
-            summ_author_scores(testplan_hld_score))
-    for i in sorted(summ.items(), key=lambda x: (-x[1], x[0])):
-        author = i[0]
-        if author not in author_org:
-            org = 'Others'
-        else:
-            org = author_org[author]
-        if '(' in author and ')' in author:
-            org = author.split('(')[1][:-1]
-            author = author.split('(')[0]
-
-        print('{},{},'.format(author, org) + "%.2f" % i[1], file=open(output_file, 'a'))
 
 #    Sii 4,6,12,13,14,15
 #    TODO
@@ -214,7 +182,7 @@ def sii_caculate():
 # 13 Hackathon Participation Team Count
 # 14 SONiC Production Deployment (S/M/L) [6]
 # 15 SONiC End Consumer Proliferation (S/M/L)
-def caculate_input():
+def calculate_input():
     ret = {}
     paths = ['development_new_asic_introduction.json', 'innovation_hackathon_participation_team_count.json', 'innovation_summit_presentation_count.json', 'proliferation_sonic_end_consumer_proliferation.json', 'proliferation_sonic_production_deployment.json']
 
@@ -264,7 +232,7 @@ def caculate_input():
 # 1 Merged HLD [1] Count
 # 5 Documentations (Release Notes/Meeting Minutes)
 # 9 Merged SONiC MGMT TEST Plan HLD [1] Count
-def caculate_hld():
+def calculate_hld():
     ret = {}
     ret_testplan = {}
     paths = ['sii_hld/', 'sii_testplan_hld/']
@@ -303,7 +271,7 @@ def caculate_hld():
 #   Sii 3,11
 # 3  PR Review Count (S/M/L)
 # 11 TEST PR review count (S/M/L)
-def caculate_review():
+def calculate_review():
     ret = {}
     ret_test = {}
     for repo_number_author, detail in reviews_map.items():
@@ -345,7 +313,7 @@ def caculate_review():
 #   Sii 2,10
 # 2  Merged PR [2] Count (S/M/L)
 # 10 Merged Test cases [2] (S/M/L)
-def caculate_pr():
+def calculate_pr():
     ret = {}
     ret_test = {}
     for repo_number, detail in prs_map.items():
@@ -385,7 +353,7 @@ def caculate_pr():
 #   Sii 7,8
 # 7 Issues Opened Count
 # 8 Issues Triaged/Fixed Count
-def caculate_issue():
+def calculate_issue():
     issue_file = 'sii_issue/issues.json'
     # format:
     # year_m is YYYYmm, ex: 202212
@@ -598,6 +566,7 @@ def pr_review_load():
                     additions = pr['additions']
                     author = parse_author(pr)
                     if author in automation_account:
+                        prs_drop[repo + ',' + str(number)] = True
                         continue
                     prs_map[ repo + ',' + str(number) ] = {'year_m': year_m, 'author': author,'test': test, 'additions': additions}
 
@@ -632,6 +601,8 @@ def pr_review_load():
                         continue
                     # TODO some data need to dump!!!
                     if repo + ',' + str(number) not in prs_map:
+                        if repo + ',' + str(number) not in prs_drop:
+                            print("Warning: PR data {} {} is missing!!!".format(repo, number), file=sys.stderr)
                         continue
                     if author == prs_map[ repo + ',' + str(number) ]['author']:
                         continue
@@ -648,6 +619,7 @@ def pr_review_load():
 
 if __name__ == '__main__':
     init()
-    sii_caculate()
+    sii_calculate(False)
+    sii_calculate(True)
 
 
