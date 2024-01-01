@@ -1,5 +1,316 @@
 [
     {
+        "number": 302,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2023-12-15T13:47:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-snmpagent/pull/301"
+    },
+    {
+        "number": 301,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2023-11-21T08:26:59Z",
+        "comment_author": "liuh-80",
+        "comment_body": "Code change in this PR verified with https://github.com/sonic-net/sonic-buildimage/pull/17228\r\n\r\nWill manually verify again and publish PR."
+    },
+    {
+        "number": 301,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2023-11-21T09:01:50Z",
+        "comment_author": "liuh-80",
+        "comment_body": "With fault handler, crash will provide more info:\r\n\r\n\r\nNov 21 09:00:38.611361 vlab-01 INFO snmp#supervisord: snmp-subagent Fatal Python error: Segmentation fault\r\nNov 21 09:00:38.611361 vlab-01 INFO snmp#supervisord: snmp-subagent\r\nNov 21 09:00:38.611361 vlab-01 INFO snmp#supervisord: snmp-subagent Thread 0x00007fc1e5fc7700 (most recent call first):\r\nNov 21 09:00:38.611361 vlab-01 INFO snmp#supervisord: snmp-subagent   File \"/usr/lib/python3.9/concurrent/futures/thread.py\", line 75 in _worker\r\nNov 21 09:00:38.611361 vlab-01 INFO snmp#supervisord: snmp-subagent   File \"/usr/lib/python3.9/th\r\nNov 21 09:00:38.615471 vlab-01 INFO snmp#supervisord: snmp-subagent reading.py\", line 892 in run\r\nNov 21 09:00:38.615471 vlab-01 INFO snmp#supervisord: snmp-subagent   File \"/usr/lib/python3.9/threading.py\", line 954 in _bootstrap_inner\r\nNov 21 09:00:38.615471 vlab-01 INFO snmp#supervisord: snmp-subagent   File \"/usr/lib/python3.9/threading.py\", line 912 in _bootstrap\r\nNov 21 09:00:38.615471 vlab-01 INFO snmp#supervisord: snmp-subagent\r\nNov 21 09:00:38.615471 vlab-01 INFO snmp#supervisord: snmp-subagent Current thread 0x00007fc1e86b0740 (most recent call first):\r\nNov 21 09:00:38.615471 vlab-01 INFO snmp#supervisord: snmp-subagent   File \"/usr/lib/python3.9/selectors.py\", line 469 in select\r\nNov 21 09:00:38.615471 vlab-01 INFO snmp#supervisord: snmp-subagent   File \"/usr/lib/python3.9/asyncio/base_events.py\", line 1854 in _run_once\r\nNov 21 09:00:38.615471 vlab-01 INFO snmp#supervisord: snmp-subagent   File \"/usr/lib/python3.9/asyncio/base_events.py\", line 596 in run_forever\r\nNov 21 09:00:38.615471 vlab-01 INFO snmp#supervisord: snmp-subagent   File \"/usr/lib/python3.9/asyncio/base_events.py\", line 629 in run_until_complete\r\nNov 21 09:00:38.615471 vlab-01 INFO snmp#supervisord: snmp-subagent   File \"/usr/local/lib/python3.9/dist-packages/sonic_ax_impl/main.py\", line 74 in main\r\nNov 21 09:00:38.615471 vlab-01 INFO snmp#supervisord: snmp-subagent   File \"/usr/local/lib/python3.9/dist-packages/sonic_ax_impl/__main__.py\", line 113 in <module>\r\nNov 21 09:00:38.615471 vlab-01 INFO snmp#supervisord: snmp-subagent   File \"/usr/lib/python3.9/runpy.py\", line 87 in _run_code\r\nNov 21 09:00:38.615471 vlab-01 INFO snmp#supervisord: snmp-subagent   File \"/usr/lib/python3.9/runpy.py\", line 197 in _run_module_as_main\r\nNov 21 09:00:39.376130 vlab-01 INFO snmp#supervisord 2023-11-21 09:00:39,374 INFO exited: snmp-subagent (terminated by SIGSEGV (core dumped); not expected)\r\nNov 21 09:00:40.411336 vlab-01 INFO snmp#supervisor-proc-exit-listener: Process 'snmp-subagent' exited unexpectedly. Terminating supervisor 'snmp'\r\n"
+    },
+    {
+        "number": 301,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2023-12-15T13:48:01Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202305: https://github.com/sonic-net/sonic-snmpagent/pull/302"
+    },
+    {
+        "number": 301,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-11-21T12:48:31Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 301,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2023-11-21T12:48:31Z",
+        "latestReview_author": "ganglyu",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 299,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2023-10-26T00:40:49Z",
+        "comment_author": "liuh-80",
+        "comment_body": "This fix verified with test PR: https://github.com/sonic-net/sonic-buildimage/pull/17004"
+    },
+    {
+        "number": 299,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-10-26T00:41:56Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 299,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2023-10-26T00:41:56Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 298,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2023-10-20T01:37:15Z",
+        "comment_author": "liuh-80",
+        "comment_body": "This PR don't need for 201911 branch, because the highspeed fix not cherry-pick to 201911."
+    },
+    {
+        "number": 298,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2023-10-20T22:21:01Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "Needed for 201911 since https://github.com/sonic-net/sonic-snmpagent/pull/296 is also needed for 201911."
+    },
+    {
+        "number": 298,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-10-13T05:34:34Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 298,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2023-10-13T05:34:34Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 296,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-10-10T20:52:53Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 296,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-10-10T20:56:48Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 296,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2023-10-10T20:56:48Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-09-15T05:26:39Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-09-15T05:36:54Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-09-15T06:34:22Z",
+        "review_author": "liuh-80"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-09-15T06:37:10Z",
+        "review_author": "liuh-80"
+    },
+    {
+        "number": 293,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2023-09-15T05:36:54Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 290,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2023-09-15T05:26:44Z",
+        "comment_author": "liuh-80",
+        "comment_body": "Pipeline build break, already create a fix PR. pending for #293 merge first"
+    },
+    {
+        "number": 290,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2023-09-18T07:03:36Z",
+        "comment_author": "liuh-80",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 290,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2023-09-18T07:03:44Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 290,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2023-09-19T06:04:16Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": ">             msg = pubsub.get_message()\r\n\r\nThe root issue is pubsub throw exception and could not auto recover. Could you repro the bug report (please add bug report in PR description)? and they verify your fix with the repro steps? #Closed\r\n\r\n---\r\nRefers to: src/sonic_ax_impl/mibs/ietf/rfc2737.py:676 in bbf45ab. [](commit_id = bbf45ab0763ae0342e9b39e50198396964e3d12e, deletion_comment = False)"
+    },
+    {
+        "number": 290,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2023-09-22T05:56:34Z",
+        "comment_author": "liuh-80",
+        "comment_body": "> > ```\r\n> >         msg = pubsub.get_message()\r\n> > ```\r\n> \r\n> The root issue is pubsub throw exception and could not auto recover. Could you repro the bug report (please add bug report in PR description)? and they verify your fix with the repro steps?\r\n> \r\n> Refers to: src/sonic_ax_impl/mibs/ietf/rfc2737.py:676 in [bbf45ab](https://github.com/sonic-net/sonic-snmpagent/commit/bbf45ab0763ae0342e9b39e50198396964e3d12e). [](commit_id = [bbf45ab](https://github.com/sonic-net/sonic-snmpagent/commit/bbf45ab0763ae0342e9b39e50198396964e3d12e), deletion_comment = False)\r\n\r\nPR description updated, add repro and verify steps."
+    },
+    {
+        "number": 290,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-09-28T07:25:56Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 290,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-10-08T05:44:34Z",
+        "review_author": "liuh-80"
+    },
+    {
+        "number": 290,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-10-09T22:14:55Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 290,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-10-10T07:51:36Z",
+        "review_author": "liuh-80"
+    },
+    {
+        "number": 290,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-10-22T04:01:59Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 290,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-10-23T02:38:35Z",
+        "review_author": "liuh-80"
+    },
+    {
+        "number": 290,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-10-28T00:22:56Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 290,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2023-10-28T00:22:56Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 289,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2023-08-31T08:34:07Z",
+        "comment_author": "ZhaohuiS",
+        "comment_body": "@liuh-80 Does this change need to be cherry picked into 202012, 202205, 202305?"
+    },
+    {
+        "number": 289,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2023-09-14T08:31:08Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@liuh-80  @qiluo-msft do we also need this on 202012?"
+    },
+    {
+        "number": 289,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2023-09-16T19:48:33Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "No such bug on 202111 or earlier branches. This PR is needed on 202205, 202305, but these branches are not existing right now."
+    },
+    {
+        "number": 289,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2023-09-18T01:37:03Z",
+        "comment_author": "liuh-80",
+        "comment_body": "> @liuh-80 @qiluo-msft do we also need this on 202012?\r\n\r\nWe don't need this on 202012 because the code which has issue does not exist on 202012."
+    },
+    {
+        "number": 289,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-08-29T20:45:39Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 289,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-08-29T20:54:59Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 289,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-08-29T20:57:56Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 289,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-08-30T06:58:35Z",
+        "review_author": "liuh-80"
+    },
+    {
+        "number": 289,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-08-30T06:58:40Z",
+        "review_author": "liuh-80"
+    },
+    {
+        "number": 289,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-08-30T06:59:14Z",
+        "review_author": "liuh-80"
+    },
+    {
+        "number": 289,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-08-30T07:42:49Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 289,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-08-31T05:43:12Z",
+        "review_author": "liuh-80"
+    },
+    {
+        "number": 289,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-08-31T07:37:15Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 289,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2023-08-31T07:37:15Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 287,
         "repo": "sonic-snmpagent",
         "review_at": "2023-07-27T00:27:18Z",
@@ -9,6 +320,106 @@
         "number": 287,
         "repo": "sonic-snmpagent",
         "latestReview_at": "2023-07-27T00:27:18Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 286,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2023-07-21T07:39:33Z",
+        "comment_author": "liuh-80",
+        "comment_body": "Agent no disk space, close re-open to run validation again."
+    },
+    {
+        "number": 286,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2023-07-21T08:53:20Z",
+        "comment_author": "liuh-80",
+        "comment_body": "PR validation failed because pipeline trying to download 17GB data to agent, and most agent does not have enough space:\r\n\r\nMinimatch patterns: [**]\r\nFiltered 1867 files from the Minimatch filters supplied.\r\nDownloaded 0.0 MB out of **17,203.8** MB (0%).\r\n"
+    },
+    {
+        "number": 286,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2023-07-24T05:46:58Z",
+        "comment_author": "liuh-80",
+        "comment_body": "Pipeline issue fixed by this PR: https://github.com/sonic-net/sonic-snmpagent/pull/287"
+    },
+    {
+        "number": 286,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-07-27T00:29:49Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 286,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-07-27T00:30:25Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 286,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-07-27T05:44:05Z",
+        "review_author": "liuh-80"
+    },
+    {
+        "number": 286,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-07-31T02:20:14Z",
+        "review_author": "liuh-80"
+    },
+    {
+        "number": 286,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-08-01T22:18:45Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 286,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-08-02T00:14:07Z",
+        "review_author": "liuh-80"
+    },
+    {
+        "number": 286,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-08-22T02:23:02Z",
+        "review_author": "liuh-80"
+    },
+    {
+        "number": 286,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-08-29T18:30:49Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 286,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-08-29T20:54:08Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 286,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-08-30T06:58:21Z",
+        "review_author": "liuh-80"
+    },
+    {
+        "number": 286,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-08-30T06:58:27Z",
+        "review_author": "liuh-80"
+    },
+    {
+        "number": 286,
+        "repo": "sonic-snmpagent",
+        "review_at": "2023-08-30T07:44:11Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 286,
+        "repo": "sonic-snmpagent",
+        "latestReview_at": "2023-08-30T07:44:11Z",
         "latestReview_author": "qiluo-msft",
         "latestReview_state": "APPROVED"
     },
@@ -89,5 +500,26 @@
         "latestReview_at": "2023-02-15T00:34:50Z",
         "latestReview_author": "SuvarnaMeenakshi",
         "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 262,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2022-09-12T23:15:07Z",
+        "comment_author": "linux-foundation-easycla",
+        "comment_body": "<a href=\"https://easycla.lfx.linuxfoundation.org/#/?version=2\"><img src=\"https://s3.amazonaws.com/cla-project-logo-prod/cla-signed.svg\" alt=\"CLA Signed\" align=\"left\" height=\"28\" width=\"328\" ></a><br/><br />The committers listed above are authorized under a signed CLA.<ul><li>:white_check_mark: login: lukasstockner / name: Lukas Stockner  (efb2ccc6d11c0fd3560d242cce1da23a7fa1fb96, 7a9e0078773d52f4ac0787f6810261b6cee3802a)</li></ul>"
+    },
+    {
+        "number": 262,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2023-09-18T21:29:45Z",
+        "comment_author": "lguohan",
+        "comment_body": "what is the portchannel has no member ports?\r\n"
+    },
+    {
+        "number": 262,
+        "repo": "sonic-snmpagent",
+        "comment_at": "2023-09-18T22:52:46Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "> what is the portchannel has no member ports?\r\n\r\nTested on DUT, and it is working with PortChannel with no emmber ports.\r\n```\r\nadmin@sonic:~$ sudo config portchannel add PortChannel999\r\nadmin@sonic:~$ show int port\r\nFlags: A - active, I - inactive, Up - up, Dw - Down, N/A - not available,\r\n       S - selected, D - deselected, * - not synced\r\n  No.  Team Dev        Protocol     Ports\r\n-----  --------------  -----------  --------------\r\n  101  PortChannel101  LACP(A)(Up)  Ethernet112(S)\r\n  102  PortChannel102  LACP(A)(Up)  Ethernet116(S)\r\n  103  PortChannel103  LACP(A)(Up)  Ethernet120(S)\r\n  104  PortChannel104  LACP(A)(Up)  Ethernet124(S)\r\n  999  PortChannel999  LACP(A)(Dw)\r\n\r\nroot@sonic:/# snmpwalk -v2c -c msft 10.64.247.236 1.3.6.1.2.1.31.1.1.1.15\r\niso.3.6.1.2.1.31.1.1.1.15.1101 = Gauge32: 100000\r\niso.3.6.1.2.1.31.1.1.1.15.1102 = Gauge32: 100000\r\niso.3.6.1.2.1.31.1.1.1.15.1103 = Gauge32: 100000\r\niso.3.6.1.2.1.31.1.1.1.15.1104 = Gauge32: 100000\r\niso.3.6.1.2.1.31.1.1.1.15.1999 = Gauge32: 0\r\n```\r\n"
     }
 ]

@@ -1,5 +1,569 @@
 [
     {
+        "number": 116,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-11-28T23:04:01Z",
+        "review_author": "kwangsuk"
+    },
+    {
+        "number": 116,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-11-29T06:43:09Z",
+        "review_author": "sachinholla"
+    },
+    {
+        "number": 116,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-11-29T07:30:50Z",
+        "review_author": "sachinholla"
+    },
+    {
+        "number": 116,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-11-30T19:38:59Z",
+        "review_author": "kwangsuk"
+    },
+    {
+        "number": 116,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-11-30T19:38:59Z",
+        "latestReview_author": "kwangsuk",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 115,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-11-14T20:13:22Z",
+        "review_author": "kwangsuk"
+    },
+    {
+        "number": 115,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-11-14T20:13:22Z",
+        "latestReview_author": "kwangsuk",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 113,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2023-11-15T23:33:59Z",
+        "comment_author": "kwangsuk",
+        "comment_body": "After initial cloning and make,, I see some errors. Can you please check?\r\n```\r\n../tools/test/format-check.sh \\\r\n        --log=../build/cvl/formatcheck.log \\\r\n        custom_validation/common.go cvl.go common/db_access.go common/cvl_types.go cvl_syntax.go internal/yparser/ly_path.go internal/yparser/yparser.go internal/util/util.go internal/util/luascript_util.go cvl_api.go cvl_luascript.go cvl_semantics.go cvl_cache.go cvl_test.go cvl_error_test.go jsondata_test.go cvl_must_test.go cvl_leafref_test.go cvl_when_test.go\r\ncvl.go\r\ncvl_syntax.go\r\ninternal/yparser/yparser.go\r\ninternal/util/util.go\r\ncvl_api.go\r\ncvl_luascript.go\r\ncvl_semantics.go\r\ncvl_cache.go\r\ncvl_test.go\r\ncvl_must_test.go\r\n\r\n10 files have formatting errors; listed in ../build/cvl/formatcheck.log\r\nExecute 'format-check.sh -fix <FILES>' to fix issues.\r\nMakefile:84: recipe for target '../build/cvl/.formatcheck' failed\r\nmake[1]: *** [../build/cvl/.formatcheck] Error 1\r\nmake[1]: Leaving directory '/home/kkim/github/community/sonic-mgmt-common/cvl'\r\nMakefile:50: recipe for target 'cvl' failed\r\nmake: *** [cvl] Error 2\r\n```\r\n"
+    },
+    {
+        "number": 113,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2023-11-16T04:06:15Z",
+        "comment_author": "faraazbrcm",
+        "comment_body": "I dont see any issue. Just pulled LATEST and compiled.\r\nwhat version of go you have?. it needs to be go1.15.15. that is what the community is based on.\r\nif there was any issue. Pipeline build itself should have failed.\r\n```\r\n/home/parallels/work/community/sonic-mgmt-common/tools/test/format-check.sh \\\r\n\t--log=/home/parallels/work/community/sonic-mgmt-common/build/translib/formatcheck.log \\\r\n\ttlerr/tlerr.go tlerr/app_errors.go common_app.go sys_app.go lldp_app.go intf_app.go internal/apis/db_diff.go internal/apis/notify.go translib.go subscribe_app_interface.go authorize.go subscribe_app_utils.go db/db_cursor.go db/db_redis_opts.go db/cvl_db_access.go db/db_table.go db/db_get.go db/map.go db/db_cache.go db/db_config.go db/db_key.go db/db_value.go db/db_stats.go db/db_onchangecache.go db/db_keys_pattern.go db/db_map.go db/db_signal.go db/db_table_pattern.go db/db_get_config.go db/subscribe.go db/db.go pfm_app.go transformer/xconst.go transformer/xlate.go transformer/xlate_prune.go transformer/xlate_datastructs.go transformer/xlate_from_db.go transformer/xlate_to_db.go transformer/xfmr_showtech.go transformer/xfmr_interface.go transformer/xfmr_dbtbl_cbk_interface.go transformer/xlate_cascade_del.go transformer/xlate_del_to_db.go transformer/transformer.go transformer/xlate_utils.go transformer/xfmr_sflow.go transformer/host_comm.go transformer/subscribe_resp_xlate.go transformer/xfmr_testxfmr_callbacks.go transformer/xlate_tbl_info.go transformer/xlate_xfmr_handler.go transformer/xfmr_path_utils.go transformer/xspec.go transformer/xlate_prune_stats.go transformer/subscribe_req_xlate.go subscribe_notify.go app_interface.go acl_app.go api_tests_app.go request_binder.go subscribe_utils.go yanglib_app.go version.go utils/utils.go utils/bits.go path_utils.go subscribe.go app_utils.go path/path.go path/path_validator.go ocbinds/schema.go path_utils_test.go internal/apis/db_diff_test.go request_binder_test.go pfm_app_test.go db/db_table_pattern_test.go db/db_get_test.go db/db_opts_to_test.go db/db_get_config_test.go db/db_test.go db/db_key_test.go db/db_cursor_test.go db/db_value_test.go db/db_redis_opts_test.go db/db_redis_pipe_test.go db/db_onchangecache_test.go db/db_keys_pattern_test.go transformer/xlate_prune_radius_test.go transformer/xlate_prune_acl_test.go transformer/transformer_test.go transformer/xlate_prune_test.go transformer/sflow_openconfig_test.go transformer/xlate_prune_interfaces_test.go transformer/testxfmryang_test.go transformer/sflow_sonic_test.go transformer/xlate_prune_ospf_test.go transformer/utils_test.go version_test.go yanglib_app_test.go intf_app_test.go subscribe_test.go app_utils_test.go translib_test.go acl_app_test.go path/path_test.go path/path_validator_test.go\r\ntouch /home/parallels/work/community/sonic-mgmt-common/build/translib/.formatcheck\r\n/usr/local/go1.15.15/bin/go test -mod=vendor -tags test -cover -coverpkg=../translib,../translib/tlerr -c ../translib -o /home/parallels/work/community/sonic-mgmt-common/build/tests/translib/translib.test\r\n/usr/local/go1.15.15/bin/go test -mod=vendor -cover -c ../translib/db -o /home/parallels/work/community/sonic-mgmt-common/build/tests/translib/db.test\r\n/usr/local/go1.15.15/bin/go test -mod=vendor -tags testapp -c -vet=off -cover -coverpkg=../translib/transformer ../translib/transformer -o /home/parallels/work/community/sonic-mgmt-common/build/tests/translib/testapp.test\r\nmake[1]: Leaving directory '/home/parallels/work/community/sonic-mgmt-common/translib'\r\n```"
+    },
+    {
+        "number": 113,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-11-28T18:51:01Z",
+        "review_author": "kwangsuk"
+    },
+    {
+        "number": 113,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-11-28T18:51:01Z",
+        "latestReview_author": "kwangsuk",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 112,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-11-03T17:39:54Z",
+        "review_author": "sallylsy"
+    },
+    {
+        "number": 112,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-11-15T19:35:26Z",
+        "review_author": "anand-kumar-subramanian"
+    },
+    {
+        "number": 112,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-11-15T19:35:26Z",
+        "latestReview_author": "anand-kumar-subramanian",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 112,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-11-03T17:39:54Z",
+        "latestReview_author": "sallylsy",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 111,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-11-03T06:05:52Z",
+        "review_author": "sachinholla"
+    },
+    {
+        "number": 111,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-11-14T20:20:28Z",
+        "review_author": "kwangsuk"
+    },
+    {
+        "number": 111,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-11-15T20:41:46Z",
+        "review_author": "mbalachandar"
+    },
+    {
+        "number": 111,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-11-15T23:42:09Z",
+        "review_author": "kwangsuk"
+    },
+    {
+        "number": 111,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-11-03T06:05:52Z",
+        "latestReview_author": "sachinholla",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 111,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-11-15T23:42:09Z",
+        "latestReview_author": "kwangsuk",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 108,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2023-10-11T21:24:42Z",
+        "comment_author": "kwangsuk",
+        "comment_body": "Can you please add a description?"
+    },
+    {
+        "number": 108,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2023-11-10T00:30:24Z",
+        "comment_author": "ayelrod",
+        "comment_body": "Is there an HLD for the config session changes that you could point me too?"
+    },
+    {
+        "number": 108,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2023-11-16T18:48:45Z",
+        "comment_author": "kwangsuk",
+        "comment_body": "Since the \"config session\" is not referenced anywhere in community HLD, I agree with @ayelrod that the relevant HLD should be provided for productive reviews. "
+    },
+    {
+        "number": 108,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-11-30T19:20:55Z",
+        "review_author": "ayelrod"
+    },
+    {
+        "number": 108,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-12-02T00:23:21Z",
+        "review_author": "anand-kumar-subramanian"
+    },
+    {
+        "number": 108,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-12-20T09:55:23Z",
+        "review_author": "anand-kumar-subramanian"
+    },
+    {
+        "number": 108,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-11-30T19:20:55Z",
+        "latestReview_author": "ayelrod",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 108,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-12-20T09:55:23Z",
+        "latestReview_author": "anand-kumar-subramanian",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 106,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-10-10T16:46:50Z",
+        "review_author": "kwangsuk"
+    },
+    {
+        "number": 106,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-10-10T16:46:50Z",
+        "latestReview_author": "kwangsuk",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 105,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-10-09T16:53:46Z",
+        "review_author": "amrutasali"
+    },
+    {
+        "number": 105,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-10-10T16:45:32Z",
+        "review_author": "kwangsuk"
+    },
+    {
+        "number": 105,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-10-10T16:46:53Z",
+        "review_author": "amrutasali"
+    },
+    {
+        "number": 105,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-10-10T16:45:32Z",
+        "latestReview_author": "kwangsuk",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 105,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-10-10T16:46:53Z",
+        "latestReview_author": "amrutasali",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 104,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2023-10-12T03:18:31Z",
+        "comment_author": "zhangyanzhao",
+        "comment_body": "@amrutasali  can you please help to add the code PRs into this HLD PR? Thanks."
+    },
+    {
+        "number": 104,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2023-10-13T18:27:50Z",
+        "comment_author": "jeff-yin",
+        "comment_body": "> @amrutasali can you please help to add the code PRs into this HLD PR? Thanks.\r\n\r\nThere's no HLD in this PR. This PR consists of some bugfixes and performance enhancements, not behavioral changes. \r\nThis PR link has been added to the Project Issue: https://github.com/sonic-net/SONiC/issues/1463 "
+    },
+    {
+        "number": 104,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-10-03T18:37:28Z",
+        "review_author": "kwangsuk"
+    },
+    {
+        "number": 104,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-11-08T18:57:28Z",
+        "review_author": "anand-kumar-subramanian"
+    },
+    {
+        "number": 104,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-10-03T18:37:28Z",
+        "latestReview_author": "kwangsuk",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 104,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-11-08T18:57:28Z",
+        "latestReview_author": "anand-kumar-subramanian",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 103,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-09-18T17:23:57Z",
+        "review_author": "kwangsuk"
+    },
+    {
+        "number": 103,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-09-18T18:08:58Z",
+        "review_author": "sallylsy"
+    },
+    {
+        "number": 103,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-09-18T21:32:45Z",
+        "review_author": "a-barboza"
+    },
+    {
+        "number": 103,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-09-18T21:34:29Z",
+        "review_author": "a-barboza"
+    },
+    {
+        "number": 103,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-09-19T17:47:03Z",
+        "review_author": "sallylsy"
+    },
+    {
+        "number": 103,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-10-02T22:57:41Z",
+        "review_author": "a-barboza"
+    },
+    {
+        "number": 103,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-09-18T17:23:57Z",
+        "latestReview_author": "kwangsuk",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 103,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-09-19T17:47:03Z",
+        "latestReview_author": "sallylsy",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2023-10-30T05:20:22Z",
+        "comment_author": "liushilongbuaa",
+        "comment_body": "@amrutasali , PR didn't merged in to sonic-buildimage.\r\nhttps://github.com/sonic-net/sonic-buildimage/pull/16744\r\nPlease help check!"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2023-10-30T17:48:15Z",
+        "comment_author": "amrutasali",
+        "comment_body": "> @amrutasali , PR didn't merged in to sonic-buildimage. [sonic-net/sonic-buildimage#16744](https://github.com/sonic-net/sonic-buildimage/pull/16744) Please help check!\r\n\r\n@liushilongbuaa This PR in sonic-mgmt-common - https://github.com/sonic-net/sonic-mgmt-common/pull/102\r\nshould go in together with the PR in sonic-mgmt-framework PR https://github.com/sonic-net/sonic-mgmt-framework/pull/119\r\nsince they have build dependency \r\n"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-09-16T00:51:42Z",
+        "review_author": "a-barboza"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-09-25T18:08:56Z",
+        "review_author": "kwangsuk"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-09-25T18:08:56Z",
+        "latestReview_author": "kwangsuk",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 102,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-09-16T00:51:42Z",
+        "latestReview_author": "a-barboza",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 101,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2023-08-16T15:59:16Z",
+        "comment_author": "sachinholla",
+        "comment_body": "Hi @kwangsuk and @anand-kumar-subramanian -- can you approve and merge this PR soon? It solves \"no space left on device\" issue observed during other PR builds. "
+    },
+    {
+        "number": 101,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-08-16T17:03:30Z",
+        "review_author": "kwangsuk"
+    },
+    {
+        "number": 101,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-08-17T04:46:23Z",
+        "review_author": "sachinholla"
+    },
+    {
+        "number": 101,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-08-17T14:14:49Z",
+        "review_author": "kwangsuk"
+    },
+    {
+        "number": 101,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-08-17T14:14:49Z",
+        "latestReview_author": "kwangsuk",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 100,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2023-08-09T00:14:33Z",
+        "comment_author": "mbalachandar",
+        "comment_body": "build is failing with the error message: **No space left on device : '/home/vsts/work/1/target/debs/bullseye/83d78431-547b-476b-b637-3dd654a116b1.tmp**"
+    },
+    {
+        "number": 100,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-09-07T23:50:52Z",
+        "review_author": "ayelrod"
+    },
+    {
+        "number": 100,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-09-08T18:21:18Z",
+        "review_author": "mbalachandar"
+    },
+    {
+        "number": 100,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-09-08T18:23:37Z",
+        "review_author": "mbalachandar"
+    },
+    {
+        "number": 100,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-09-08T18:25:18Z",
+        "review_author": "mbalachandar"
+    },
+    {
+        "number": 100,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-09-12T15:44:15Z",
+        "review_author": "ayelrod"
+    },
+    {
+        "number": 100,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-09-12T21:00:19Z",
+        "review_author": "anand-kumar-subramanian"
+    },
+    {
+        "number": 100,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-09-12T15:44:15Z",
+        "latestReview_author": "ayelrod",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 100,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-09-12T21:00:19Z",
+        "latestReview_author": "anand-kumar-subramanian",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 99,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-09-01T21:08:36Z",
+        "review_author": "kwangsuk"
+    },
+    {
+        "number": 99,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-09-18T20:43:29Z",
+        "review_author": "ndas7"
+    },
+    {
+        "number": 99,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-09-01T21:08:36Z",
+        "latestReview_author": "kwangsuk",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 99,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-09-18T20:43:29Z",
+        "latestReview_author": "ndas7",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 98,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2023-07-19T19:29:57Z",
+        "comment_author": "jarias-lfx",
+        "comment_body": "/easycla"
+    },
+    {
+        "number": 98,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2023-08-24T18:12:12Z",
+        "comment_author": "kwangsuk",
+        "comment_body": "@mbalachandar Please rebase the branch."
+    },
+    {
+        "number": 98,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2023-08-24T20:14:30Z",
+        "comment_author": "mbalachandar",
+        "comment_body": "@kwangsuk Rebased the branch, thanks."
+    },
+    {
+        "number": 98,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-08-24T17:05:21Z",
+        "review_author": "kwangsuk"
+    },
+    {
+        "number": 98,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-08-24T17:05:21Z",
+        "latestReview_author": "kwangsuk",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 97,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-09-05T18:13:55Z",
+        "review_author": "kwangsuk"
+    },
+    {
+        "number": 97,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-09-18T00:21:25Z",
+        "review_author": "sallylsy"
+    },
+    {
+        "number": 97,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-09-18T21:24:23Z",
+        "review_author": "anand-kumar-subramanian"
+    },
+    {
+        "number": 97,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-09-05T18:13:55Z",
+        "latestReview_author": "kwangsuk",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 97,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-09-18T21:24:23Z",
+        "latestReview_author": "anand-kumar-subramanian",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 97,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-09-18T00:21:25Z",
+        "latestReview_author": "sallylsy",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 96,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-09-05T17:32:23Z",
+        "review_author": "kwangsuk"
+    },
+    {
+        "number": 96,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-09-05T17:32:23Z",
+        "latestReview_author": "kwangsuk",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 95,
         "repo": "sonic-mgmt-common",
         "review_at": "2023-06-28T20:48:06Z",
@@ -81,6 +645,239 @@
         "repo": "sonic-mgmt-common",
         "latestReview_at": "2023-06-14T16:42:56Z",
         "latestReview_author": "anand-kumar-subramanian",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2023-05-30T05:06:37Z",
+        "comment_author": "Gokulnath-Raja",
+        "comment_body": "Following are the dependent pull request,\r\n\r\n- https://github.com/sonic-net/sonic-buildimage/pull/15226\r\n- https://github.com/sonic-net/sonic-mgmt-common/pull/89\r\n- https://github.com/sonic-net/sonic-mgmt-framework/pull/115\r\n- https://github.com/sonic-net/sonic-mgmt-common/pull/87 "
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2023-05-31T10:47:52Z",
+        "comment_author": "Gokulnath-Raja",
+        "comment_body": "> Following are the dependent pull request,\r\n\r\nalready updated in above comment (Following are the dependent pull request,)"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2023-06-16T05:14:23Z",
+        "comment_author": "sachinholla",
+        "comment_body": "hi @kwangsuk, please do not merge this PR before https://github.com/sonic-net/sonic-buildimage/pull/15226 is merged. Full image builds may fail without those buildimage makefile changes. It includes an enhancement to the main docker image makefile slave.mk, hence waiting for MSFT's approval"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2023-08-10T05:22:54Z",
+        "comment_author": "sachinholla",
+        "comment_body": "Hi @Gokulnath-Raja , some tests are failing -- https://dev.azure.com/mssonic/be1b070f-be15-4154-aade-b1d3bfb17054/_apis/build/builds/334869/logs/12\r\n\r\n```\r\n2023-08-10T05:14:43.8672835Z --- FAIL: Test_node_openconfig_sflow_interface (20.01s)\r\n2023-08-10T05:14:43.8673189Z     --- PASS: Test_node_openconfig_sflow_interface/Test_set_on_sflow_interface (0.00s)\r\n2023-08-10T05:14:43.8673580Z     --- PASS: Test_node_openconfig_sflow_interface/Verify_set_on_sflow_interface (0.00s)\r\n2023-08-10T05:14:43.8673963Z     --- FAIL: Test_node_openconfig_sflow_interface/Test_delete_on_sflow_interface (0.00s)\r\n2023-08-10T05:14:43.8674363Z     --- FAIL: Test_node_openconfig_sflow_interface/Verify_delete_on_sflow_interface (0.00s)\r\n2023-08-10T05:14:43.8674750Z     --- FAIL: Test_node_openconfig_sflow_interface/Test_get_on_sflow_interface (0.00s)\r\n2023-08-10T05:14:43.8675160Z     --- FAIL: Test_node_openconfig_sflow_interface/Update_admin-state_for_sflow_interface (0.00s)\r\n2023-08-10T05:14:43.8675561Z     --- FAIL: Test_node_openconfig_sflow_interface/Verify_admin-state_for_sflow_interface (0.00s)\r\n2023-08-10T05:14:43.8675981Z     --- FAIL: Test_node_openconfig_sflow_interface/Update_sampling-rate_on_sflow_interface (0.00s)\r\n2023-08-10T05:14:43.8676384Z     --- FAIL: Test_node_openconfig_sflow_interface/Verify_sampling-rate_on_sflow_interface (0.00s)\r\n2023-08-10T05:14:43.8676788Z     --- PASS: Test_node_openconfig_sflow_interface/Test_delete_on_sflow_interfaces (0.00s)\r\n```"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2023-08-10T07:03:36Z",
+        "comment_author": "mohanapriya-meganathan",
+        "comment_body": "> Hi @Gokulnath-Raja , some tests are failing -- https://dev.azure.com/mssonic/be1b070f-be15-4154-aade-b1d3bfb17054/_apis/build/builds/334869/logs/12\r\n> \r\n> ```\r\n> 2023-08-10T05:14:43.8672835Z --- FAIL: Test_node_openconfig_sflow_interface (20.01s)\r\n> 2023-08-10T05:14:43.8673189Z     --- PASS: Test_node_openconfig_sflow_interface/Test_set_on_sflow_interface (0.00s)\r\n> 2023-08-10T05:14:43.8673580Z     --- PASS: Test_node_openconfig_sflow_interface/Verify_set_on_sflow_interface (0.00s)\r\n> 2023-08-10T05:14:43.8673963Z     --- FAIL: Test_node_openconfig_sflow_interface/Test_delete_on_sflow_interface (0.00s)\r\n> 2023-08-10T05:14:43.8674363Z     --- FAIL: Test_node_openconfig_sflow_interface/Verify_delete_on_sflow_interface (0.00s)\r\n> 2023-08-10T05:14:43.8674750Z     --- FAIL: Test_node_openconfig_sflow_interface/Test_get_on_sflow_interface (0.00s)\r\n> 2023-08-10T05:14:43.8675160Z     --- FAIL: Test_node_openconfig_sflow_interface/Update_admin-state_for_sflow_interface (0.00s)\r\n> 2023-08-10T05:14:43.8675561Z     --- FAIL: Test_node_openconfig_sflow_interface/Verify_admin-state_for_sflow_interface (0.00s)\r\n> 2023-08-10T05:14:43.8675981Z     --- FAIL: Test_node_openconfig_sflow_interface/Update_sampling-rate_on_sflow_interface (0.00s)\r\n> 2023-08-10T05:14:43.8676384Z     --- FAIL: Test_node_openconfig_sflow_interface/Verify_sampling-rate_on_sflow_interface (0.00s)\r\n> 2023-08-10T05:14:43.8676788Z     --- PASS: Test_node_openconfig_sflow_interface/Test_delete_on_sflow_interfaces (0.00s)\r\n> ```\r\n\r\n@sachinholla ,yes, we are looking into it. "
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2023-08-14T06:23:07Z",
+        "comment_author": "mohanapriya-meganathan",
+        "comment_body": "@sachinholla Sanity test fails as it depends on a SFLOW_SESSION_TABLE which will be created by sflow docker container. As the azure pipelines, runs the sanity test in an isolated sonic-mgmt-framework environment it fails. So, updated the changes in the unit test framework to support the interdependency table.\r\n\r\nUpdated log:\r\n[testapp.log](https://github.com/sonic-net/sonic-mgmt-common/files/12331827/transformer.log)\r\n\r\n"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2023-08-14T06:26:33Z",
+        "comment_author": "Gokulnath-Raja",
+        "comment_body": "/AzurePipelines run Azure.sonic-common"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2023-08-14T06:26:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nCommenter does not have sufficient privileges for PR 91 in repo sonic-net/sonic-mgmt-common<br>\r\n\n</samp>"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2023-08-16T04:36:33Z",
+        "comment_author": "Gokulnath-Raja",
+        "comment_body": "@sachinholla please help in restarting the /AzurePipelines run Azure.sonic-common (pipeline failed due to space issue)"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2023-08-16T13:18:29Z",
+        "comment_author": "sachinholla",
+        "comment_body": "hi @Gokulnath-Raja, I don't know the procedure to manually trigger the PR build. I used to amend the last commit without making any changes and force push :)\r\n```\r\ngit commit --amend --no-edit\r\ngit push -f\r\n```"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2023-08-17T16:09:56Z",
+        "comment_author": "sachinholla",
+        "comment_body": "Hi Gokul, please merge latest from master branch to solve \"no space left on device\" error"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2023-08-18T06:28:30Z",
+        "comment_author": "Gokulnath-Raja",
+        "comment_body": "> Hi Gokul, please merge latest from master branch to solve \"no space left on device\" error\r\n\r\n@sachinholla done and pushed the code, kindly merge..."
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2023-08-18T15:08:11Z",
+        "comment_author": "sachinholla",
+        "comment_body": "I don't have merge permissions.. please follow up with Kwan "
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-05-31T10:37:07Z",
+        "review_author": "sachinholla"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-05-31T10:42:37Z",
+        "review_author": "Gokulnath-Raja"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-05-31T10:50:43Z",
+        "review_author": "Gokulnath-Raja"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-05-31T10:59:01Z",
+        "review_author": "Gokulnath-Raja"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-05-31T11:01:07Z",
+        "review_author": "Gokulnath-Raja"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-05-31T11:17:47Z",
+        "review_author": "mohanapriya-meganathan"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-05-31T17:18:55Z",
+        "review_author": "amrutasali"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-06-01T08:43:23Z",
+        "review_author": "Gokulnath-Raja"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-06-01T08:44:50Z",
+        "review_author": "Gokulnath-Raja"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-06-01T10:13:32Z",
+        "review_author": "sachinholla"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-06-01T10:22:43Z",
+        "review_author": "sachinholla"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-06-01T11:17:41Z",
+        "review_author": "Gokulnath-Raja"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-06-01T11:22:48Z",
+        "review_author": "Gokulnath-Raja"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-06-01T15:31:33Z",
+        "review_author": "sachinholla"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-06-01T22:27:29Z",
+        "review_author": "kwangsuk"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-06-02T06:57:41Z",
+        "review_author": "mohanapriya-meganathan"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-06-09T09:52:54Z",
+        "review_author": "sachinholla"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-06-16T05:02:59Z",
+        "review_author": "kwangsuk"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2023-08-18T16:24:40Z",
+        "review_author": "kwangsuk"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-05-31T17:18:55Z",
+        "latestReview_author": "amrutasali",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-06-02T06:57:41Z",
+        "latestReview_author": "mohanapriya-meganathan",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-08-18T16:24:40Z",
+        "latestReview_author": "kwangsuk",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 91,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2023-06-09T09:52:54Z",
+        "latestReview_author": "sachinholla",
         "latestReview_state": "APPROVED"
     },
     {
