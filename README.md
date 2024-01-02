@@ -1,6 +1,24 @@
 # Sonic TSC support repo
 
-### 1. This repo stores raw data to calculate Sii scores and data dump script.
+### 1. This repo stores SII score. We use the variable year as current year.
+
+- SII score in range [year-5, year-1]
+  - [Scores by Org](sii_org.csv)
+  - [Scores by author](sii_author.csv)
+- SII score in range [year-4, year]
+  - [Predict Scores by Org](sii_org_predict.csv)
+  - [Predict Scores by author](sii_author_predict.csv)
+
+## 2. Pipeline to dump raw data.
+- Pipeline: [sonic-net.sonic-tsc.dump.data](https://dev.azure.com/mssonic/build/_build?definitionId=1374)
+- Pipeline definition: [dump_data.yml](dump_data.yml)
+
+## 3. Pipeline to refresh SII scores.
+- Pipeline:  [sonic-net.sii.update](https://dev.azure.com/mssonic/build/_build?definitionId=1074&_a=summary)
+- Pipeline definition:  [azure-pipeline.yml](azure-pipeline.yml)
+
+## 4. This repo stores raw data to calculate SII scores and data dump script.
+
 - [High Level Design](sii_hld)
 - [Contributor Organization Map](sii_author_map)
 - [Issue related data](sii_issue)
@@ -8,17 +26,7 @@
 - [Test case related PRs and Reviews](sii_test_pr_review)
 - [TestPlan related HLD](sii_testplan_hld)
 
-### 2. This repo stores Sii score calculation script.
-  1. This command will update score by organization. [Scores by Org](Sii_org.csv)
-```
-$ ./sii_calculate.py
-```
-  2. This command will update score by each author. [Scores by author](Sii_author.csv)
-```
-$ ./sii_calculate.py person
-```
-
-## 3. SII Weight Multiplier: [Original Link](https://github.com/sonic-net/SONiC/blob/master/tsc/TSC_Election.md)
+## 5. SII Weight Multiplier: [Original Link](https://github.com/sonic-net/SONiC/blob/master/tsc/TSC_Election.md)
 
 | Contribution (Yearly) | Category | Weight Multiplier |
 |--------------------------------  |----------| -------- |
@@ -38,7 +46,8 @@ $ ./sii_calculate.py person
 | SONiC Production Deployment (S/M/L) [6] | Proliferation | 100/500/1000 |
 | SONiC End Consumer Proliferation (S/M/L) | Proliferation [7] | 5/50/100 |
 
-## 4. Raw Data store path and data dump script
+
+## 6. Raw Data store path and data dump script
 Author Organization Map:
 >   Author Organization Map: [sii_author_map/author.csv](sii_author_map/author.csv)
 >
