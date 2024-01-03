@@ -547,7 +547,10 @@ def pr_review_load():
         paths = ['sii_pr_review/', 'sii_test_pr_review/']
         for path in paths:
             pr_path = path + str(year)
-            files = os.listdir(pr_path)
+            try:
+                files = os.listdir(pr_path)
+            except FileNotFoundError:
+                continue
             for file in files:
                 if not file.endswith('prs.json'):
                     continue
