@@ -1,0 +1,157 @@
+[
+    {
+        "number": 1341,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-01-29T02:39:18Z",
+        "comment_author": "keboliu",
+        "comment_body": "@kcudnik would you please help to merge?"
+    },
+    {
+        "number": 1341,
+        "repo": "sonic-sairedis",
+        "review_at": "2024-01-23T13:21:51Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1341,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2024-01-23T13:21:51Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1339,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-01-17T19:55:44Z",
+        "comment_author": "judyjoseph",
+        "comment_body": "@saksarav-nokia Please add the test details too .. To confirm the logs are no more coming in the sairedis logs"
+    },
+    {
+        "number": 1339,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-01-17T20:03:12Z",
+        "comment_author": "saksarav-nokia",
+        "comment_body": "@judyjoseph , i tested the fix in both SUP and LC and monitored the sairedis logs, these logs are not getting logged.  Without this change, the sairedis logs used to fill very quickly and log rotate rotates the sairedis files and many files will be present with in few hours. But with this fix, only very few sairedis log files are present and the events are created only during syncd init and not the regular polling events."
+    },
+    {
+        "number": 1339,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-01-18T12:13:12Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@judyjoseph could we have an ADO for cherry pick?"
+    },
+    {
+        "number": 1339,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-01-19T23:17:56Z",
+        "comment_author": "judyjoseph",
+        "comment_body": "@kcudnik I have a quick question here -- these attributes  SAI_PORT_ATTR_FABRIC_ATTACHED, SAI_PORT_ATTR_FABRIC_ATTACHED_SWITCH_ID & SAI_PORT_ATTR_FABRIC_ATTACHED_PORT_INDEX -- are specific to T2 not applicable to T0/T1. Do we need to add any T2 specific check for these attributes inSkipRecordAttrContainer::SkipRecordAttrContainer() ?"
+    },
+    {
+        "number": 1339,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-01-21T10:26:34Z",
+        "comment_author": "kcudnik",
+        "comment_body": "im not ware of any specific platform attributes, and i dont have enough knowledge here, can you ask @saksarav-nokia "
+    },
+    {
+        "number": 1339,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-01-22T14:05:24Z",
+        "comment_author": "saksarav-nokia",
+        "comment_body": "@judyjoseph @kcudnik , The daemon FabricPortsOrch is started only if m_fabricEnabled is set and this flag is set only if the switch is voq. Do we still need to add  T2 only check in SkipRecordAttrContainer?\r\n  if (gMySwitchType != \"fabric\")\r\n    {\r\n        orchDaemon = make_shared<OrchDaemon>(&appl_db, &config_db, &state_db, chassis_app_db.get());\r\n        if (gMySwitchType == \"voq\")\r\n        {\r\n            orchDaemon->setFabricEnabled(true);\r\n            orchDaemon->setFabricPortStatEnabled(true);\r\n            orchDaemon->setFabricQueueStatEnabled(false);\r\n        }\r\n    }\r\n\r\n\r\nif (m_fabricEnabled)\r\n    {\r\n        vector<table_name_with_pri_t> fabric_port_tables = {\r\n           // empty for now\r\n        };\r\n        gFabricPortsOrch = new FabricPortsOrch(m_applDb, fabric_port_tables, m_fabricPortStatEnabled, m_fabricQueueStatEnabled);\r\n        m_orchList.push_back(gFabricPortsOrch);\r\n    }\r\n"
+    },
+    {
+        "number": 1339,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-01-22T14:18:48Z",
+        "comment_author": "kcudnik",
+        "comment_body": "Not sure about that, could you ask author of that enable fabric code ? I didn't put that there "
+    },
+    {
+        "number": 1339,
+        "repo": "sonic-sairedis",
+        "review_at": "2024-01-17T19:55:54Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 1339,
+        "repo": "sonic-sairedis",
+        "review_at": "2024-01-17T22:04:12Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1339,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2024-01-17T22:04:12Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1339,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2024-01-17T19:55:54Z",
+        "latestReview_author": "judyjoseph",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1338,
+        "repo": "sonic-sairedis",
+        "review_at": "2024-01-12T07:12:51Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1338,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2024-01-12T07:12:51Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1337,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-01-04T13:35:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-sairedis/pull/1302"
+    },
+    {
+        "number": 1337,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-01-04T23:01:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-sairedis"
+    },
+    {
+        "number": 1337,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-01-04T23:01:10Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1337,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-01-16T10:37:42Z",
+        "comment_author": "kcudnik",
+        "comment_body": "why this was merged without addressing my comment ?"
+    },
+    {
+        "number": 1337,
+        "repo": "sonic-sairedis",
+        "review_at": "2024-01-04T15:20:46Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1337,
+        "repo": "sonic-sairedis",
+        "review_at": "2024-01-04T15:21:51Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1337,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2024-01-04T15:21:51Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "COMMENTED"
+    }
+]

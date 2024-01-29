@@ -44,6 +44,62 @@
     {
         "number": 17618,
         "repo": "sonic-buildimage",
+        "comment_at": "2024-01-02T16:52:15Z",
+        "comment_author": "yxieca",
+        "comment_body": "> Hi @yxieca @StormLiangMS , could you please help cherry-pick to 202205/202311/202211?\r\n\r\n@Junchao-Mellanox can you elaborate the impact of this change for warm/fast reboot?"
+    },
+    {
+        "number": 17618,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-05T07:05:18Z",
+        "comment_author": "Junchao-Mellanox",
+        "comment_body": "Hi @yxieca , watchdog-control service is started after swss, I don't think it would affect warm/fast reboot.\r\n```\r\n[Unit]\r\nDescription=watchdog control service\r\nAfter=swss.service\r\n\r\n[Service]\r\nType=simple\r\nExecStart=/usr/local/bin/watchdog-control.sh\r\n\r\n[Install]\r\nWantedBy=multi-user.target\r\n```"
+    },
+    {
+        "number": 17618,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-18T01:36:49Z",
+        "comment_author": "Junchao-Mellanox",
+        "comment_body": "Hi @yxieca , let me know if you have more comments."
+    },
+    {
+        "number": 17618,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-18T16:29:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202311: https://github.com/sonic-net/sonic-buildimage/pull/17832"
+    },
+    {
+        "number": 17618,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-18T16:30:08Z",
+        "comment_author": "yxieca",
+        "comment_body": "> Hi @yxieca , let me know if you have more comments.\r\n\r\nThanks for the elaborations. With that I approved back porting to 202311. However, I don't feel that this should go all the way back to 202205 branch."
+    },
+    {
+        "number": 17618,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-19T01:04:35Z",
+        "comment_author": "Junchao-Mellanox",
+        "comment_body": "Thanks Ying. "
+    },
+    {
+        "number": 17618,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-22T14:33:27Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@yxieca could you please help to take to 202205?"
+    },
+    {
+        "number": 17618,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-22T23:45:14Z",
+        "comment_author": "yxieca",
+        "comment_body": "> @yxieca could you please help to take to 202205?\r\n\r\nI feel that this change should not go back that far at this point."
+    },
+    {
+        "number": 17618,
+        "repo": "sonic-buildimage",
         "review_at": "2023-12-26T02:34:29Z",
         "review_author": "keboliu"
     },
@@ -1081,6 +1137,13 @@
     {
         "number": 17486,
         "repo": "sonic-buildimage",
+        "comment_at": "2024-01-04T05:09:56Z",
+        "comment_author": "jimmyzhai",
+        "comment_body": "> @jimmyzhai can you help with 202311 cherry-picking?\r\n\r\nManually cherry-picked by https://github.com/sonic-net/sonic-buildimage/pull/17563."
+    },
+    {
+        "number": 17486,
+        "repo": "sonic-buildimage",
         "review_at": "2023-12-14T01:37:00Z",
         "review_author": "lguohan"
     },
@@ -1602,6 +1665,13 @@
     {
         "number": 17458,
         "repo": "sonic-buildimage",
+        "comment_at": "2024-01-10T02:22:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202311: https://github.com/sonic-net/sonic-buildimage/pull/17728"
+    },
+    {
+        "number": 17458,
+        "repo": "sonic-buildimage",
         "review_at": "2023-12-14T23:30:02Z",
         "review_author": "saiarcot895"
     },
@@ -1802,9 +1872,15 @@
     {
         "number": 17443,
         "repo": "sonic-buildimage",
-        "latestReview_at": "2023-12-07T21:30:36Z",
+        "review_at": "2024-01-11T21:24:46Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 17443,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2024-01-11T21:24:46Z",
         "latestReview_author": "qiluo-msft",
-        "latestReview_state": "APPROVED"
+        "latestReview_state": "COMMENTED"
     },
     {
         "number": 17443,
@@ -1880,6 +1956,13 @@
         "comment_at": "2023-12-25T05:36:29Z",
         "comment_author": "Junchao-Mellanox",
         "comment_body": "Hi @yxieca , could you please help cherry-pick to 202311?"
+    },
+    {
+        "number": 17441,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-08T18:52:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202311: https://github.com/sonic-net/sonic-buildimage/pull/17705"
     },
     {
         "number": 17441,
@@ -2311,6 +2394,20 @@
     {
         "number": 17426,
         "repo": "sonic-buildimage",
+        "comment_at": "2024-01-04T05:21:22Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "@StormLiangMS Tested on top of 202305 commit https://github.com/sonic-net/sonic-buildimage/commit/690c4c5d367152ab953f947f663002fb87a186bd"
+    },
+    {
+        "number": 17426,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-04T12:01:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202305: https://github.com/sonic-net/sonic-buildimage/pull/17674"
+    },
+    {
+        "number": 17426,
+        "repo": "sonic-buildimage",
         "review_at": "2023-12-17T06:07:55Z",
         "review_author": "liat-grozovik"
     },
@@ -2334,6 +2431,27 @@
         "comment_at": "2023-12-15T13:27:49Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202305: https://github.com/sonic-net/sonic-buildimage/pull/17526"
+    },
+    {
+        "number": 17425,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-18T13:49:49Z",
+        "comment_author": "keboliu",
+        "comment_body": "@yxieca would you please help to cherry-pick to 202311?"
+    },
+    {
+        "number": 17425,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-18T16:16:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202311: https://github.com/sonic-net/sonic-buildimage/pull/17831"
+    },
+    {
+        "number": 17425,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-22T01:41:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@DavidZagury cherry pick PR didn't pass PR checker. Please check!!!<br>https://github.com/sonic-net/sonic-buildimage/pull/17831"
     },
     {
         "number": 17425,
@@ -3408,6 +3526,20 @@
     {
         "number": 17344,
         "repo": "sonic-buildimage",
+        "comment_at": "2024-01-17T02:42:35Z",
+        "comment_author": "lizhijianrd",
+        "comment_body": "Hi @yxieca, can you please help to add \"Approved for 202311 Branch\" tag to this PR? thanks."
+    },
+    {
+        "number": 17344,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-17T03:23:21Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202311: https://github.com/sonic-net/sonic-buildimage/pull/17804"
+    },
+    {
+        "number": 17344,
+        "repo": "sonic-buildimage",
         "review_at": "2023-11-29T16:10:38Z",
         "review_author": "dgsudharsan"
     },
@@ -4179,6 +4311,13 @@
     {
         "number": 17294,
         "repo": "sonic-buildimage",
+        "comment_at": "2024-01-03T21:40:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202311: https://github.com/sonic-net/sonic-buildimage/pull/17664"
+    },
+    {
+        "number": 17294,
+        "repo": "sonic-buildimage",
         "review_at": "2023-11-28T05:52:51Z",
         "review_author": "keboliu"
     },
@@ -4309,6 +4448,27 @@
         "comment_at": "2023-11-29T02:20:31Z",
         "comment_author": "qiluo-msft",
         "comment_body": "@prsunny Could you review this PR?"
+    },
+    {
+        "number": 17281,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-03T08:55:59Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "hi @liuh-80 could you help to run test on 202305 image with this PR? We'd like to avoid regression at this stage. "
+    },
+    {
+        "number": 17281,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-04T02:14:49Z",
+        "comment_author": "liuh-80",
+        "comment_body": "> ip -6 rule list\r\n\r\n\r\n\r\n> hi @liuh-80 could you help to run test on 202305 image with this PR? We'd like to avoid regression at this stage.\r\n\r\n@StormLiangMS , I verified with SONiC.202305-17658.446964-c9b5bb179, after cherry-pick, the issue fixed:\r\n\r\nadmin@vlab-01:~$ ip -6 rule list\r\n1001: from all lookup local\r\n32765: from fec0::ffff:afa:1 lookup default\r\n32766: from all lookup main\r\n32767: from all lookup default <== IPV6 default table added\r\n"
+    },
+    {
+        "number": 17281,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-04T12:21:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202305: https://github.com/sonic-net/sonic-buildimage/pull/17676"
     },
     {
         "number": 17281,
@@ -4659,6 +4819,13 @@
         "comment_at": "2023-12-15T13:23:05Z",
         "comment_author": "mssonicbld",
         "comment_body": "@developfast PR conflicts with 202305 branch"
+    },
+    {
+        "number": 17269,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-18T00:55:24Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@developfast could you file separate PR for 202305?"
     },
     {
         "number": 17269,
@@ -5353,6 +5520,48 @@
         "comment_at": "2023-11-20T23:00:44Z",
         "comment_author": "mssonicbld",
         "comment_body": "Original PR: https://github.com/sonic-net/sonic-buildimage/pull/16860"
+    },
+    {
+        "number": 17238,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-03T01:18:40Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "Hi @theasianpianist @prsunny could you run test against 202305 branch to avoid regression at this late stage."
+    },
+    {
+        "number": 17238,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-03T02:11:07Z",
+        "comment_author": "theasianpianist",
+        "comment_body": "> Hi @theasianpianist @prsunny could you run test against 202305 branch to avoid regression at this late stage.\r\n\r\nconfirmed the functionality is working on 202305 image"
+    },
+    {
+        "number": 17238,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-04T12:24:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202305: https://github.com/sonic-net/sonic-buildimage/pull/17677"
+    },
+    {
+        "number": 17238,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-04T12:25:06Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@theasianpianist @prsunny do we need this for 202311 also?"
+    },
+    {
+        "number": 17238,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-04T21:50:02Z",
+        "comment_author": "prsunny",
+        "comment_body": "> @theasianpianist @prsunny do we need this for 202311 also?\r\n\r\nisn't this already in 202311 as the PR was merged on 30 Nov'23. If not, yes, we need this"
+    },
+    {
+        "number": 17238,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-04T23:26:14Z",
+        "comment_author": "theasianpianist",
+        "comment_body": "> @theasianpianist @prsunny do we need this for 202311 also?\r\n\r\nlooks like it's already included https://github.com/sonic-net/sonic-buildimage/commit/7d308e340a0c847f39cd203ad4a2c287b9c68e34"
     },
     {
         "number": 17238,
@@ -6240,6 +6449,20 @@
         "comment_at": "2023-11-19T02:34:23Z",
         "comment_author": "mssonicbld",
         "comment_body": "@liushilongbuaa PR conflicts with 202305 branch"
+    },
+    {
+        "number": 17182,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-18T00:54:50Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "hi @liushilongbuaa do we still need this one?"
+    },
+    {
+        "number": 17182,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-18T05:40:10Z",
+        "comment_author": "liushilongbuaa",
+        "comment_body": "> hi @liushilongbuaa do we still need this one?\r\n\r\nYes. I resolved the conflict:\r\n202211: https://github.com/sonic-net/sonic-buildimage/pull/17827\r\n202305: https://github.com/sonic-net/sonic-buildimage/pull/17828"
     },
     {
         "number": 17182,
@@ -7303,6 +7526,13 @@
         "comment_at": "2023-12-12T09:48:31Z",
         "comment_author": "Junchao-Mellanox",
         "comment_body": "Need cherry-pick to 202311 after https://github.com/sonic-net/sonic-buildimage/pull/17294 "
+    },
+    {
+        "number": 17159,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-05T20:08:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202311: https://github.com/sonic-net/sonic-buildimage/pull/17693"
     },
     {
         "number": 17159,
@@ -11699,6 +11929,13 @@
     {
         "number": 17030,
         "repo": "sonic-buildimage",
+        "comment_at": "2024-01-05T20:09:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202311: https://github.com/sonic-net/sonic-buildimage/pull/17694"
+    },
+    {
+        "number": 17030,
+        "repo": "sonic-buildimage",
         "review_at": "2023-10-27T07:59:08Z",
         "review_author": "keboliu"
     },
@@ -14927,6 +15164,20 @@
     {
         "number": 16923,
         "repo": "sonic-buildimage",
+        "comment_at": "2024-01-04T12:51:13Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "ADO: 26327820"
+    },
+    {
+        "number": 16923,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-04T12:51:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202305: https://github.com/sonic-net/sonic-buildimage/pull/17678"
+    },
+    {
+        "number": 16923,
+        "repo": "sonic-buildimage",
         "review_at": "2023-11-01T17:39:47Z",
         "review_author": "arlakshm"
     },
@@ -16927,6 +17178,13 @@
     {
         "number": 16862,
         "repo": "sonic-buildimage",
+        "comment_at": "2024-01-16T16:43:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202311: https://github.com/sonic-net/sonic-buildimage/pull/17793"
+    },
+    {
+        "number": 16862,
+        "repo": "sonic-buildimage",
         "review_at": "2023-10-12T09:08:46Z",
         "review_author": "keboliu"
     },
@@ -17107,6 +17365,13 @@
         "comment_at": "2023-12-20T09:17:20Z",
         "comment_author": "wen587",
         "comment_body": "> @wen587 could you update the ADO and test result with 202305 image?\r\n\r\nADO: 10252159"
+    },
+    {
+        "number": 16861,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-04T14:40:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202305: https://github.com/sonic-net/sonic-buildimage/pull/17679"
     },
     {
         "number": 16861,
@@ -17578,6 +17843,13 @@
         "comment_at": "2023-11-19T08:30:34Z",
         "comment_author": "liat-grozovik",
         "comment_body": "@prgeor kindly reminder to approve and merge this PR in case no additional feedback"
+    },
+    {
+        "number": 16846,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-04T16:30:11Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@dbarashinvd PR conflicts with 202311 branch"
     },
     {
         "number": 16846,
@@ -22359,6 +22631,34 @@
     {
         "number": 16714,
         "repo": "sonic-buildimage",
+        "comment_at": "2024-01-05T05:06:40Z",
+        "comment_author": "rlhui",
+        "comment_body": "@abdosi - there's conflict to cherry-pick, please create another PR for msft 202205, thanks"
+    },
+    {
+        "number": 16714,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-05T05:57:03Z",
+        "comment_author": "abdosi",
+        "comment_body": "> @abdosi - there's conflict to cherry-pick, please create another PR for msft 202205, thanks\r\n\r\n@rlhui PR: https://github.com/Azure/sonic-buildimage-msft/pull/208"
+    },
+    {
+        "number": 16714,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-08T21:07:42Z",
+        "comment_author": "gechiang",
+        "comment_body": "@StormLiangMS can we have this approved for 202305?\r\nThanks!"
+    },
+    {
+        "number": 16714,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-18T00:44:21Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@abdosi PR conflicts with 202305 branch\r\n\r\n@StormLiangMS : PR: https://github.com/sonic-net/sonic-buildimage/pull/17837 for 202305."
+    },
+    {
+        "number": 16714,
+        "repo": "sonic-buildimage",
         "review_at": "2023-10-24T20:48:28Z",
         "review_author": "arlakshm"
     },
@@ -24070,6 +24370,13 @@
     {
         "number": 16689,
         "repo": "sonic-buildimage",
+        "comment_at": "2024-01-22T19:03:37Z",
+        "comment_author": "spilkey-cisco",
+        "comment_body": "@gechiang @abdosi Please cherry-pick into 202311. Let me know if a new PR is needed due to merge conflicts."
+    },
+    {
+        "number": 16689,
+        "repo": "sonic-buildimage",
         "review_at": "2023-09-26T20:01:02Z",
         "review_author": "gechiang"
     },
@@ -24976,6 +25283,37 @@
         "repo": "sonic-buildimage",
         "review_at": "2023-10-09T21:22:28Z",
         "review_author": "qiluo-msft"
+    },
+    {
+        "number": 16661,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-01-18T16:05:20Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 16661,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-01-18T16:05:39Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 16661,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-01-19T01:42:53Z",
+        "review_author": "liuh-80"
+    },
+    {
+        "number": 16661,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-01-19T01:42:56Z",
+        "review_author": "liuh-80"
+    },
+    {
+        "number": 16661,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2024-01-18T16:05:39Z",
+        "latestReview_author": "Pterosaur",
+        "latestReview_state": "COMMENTED"
     },
     {
         "number": 16661,
@@ -27862,6 +28200,20 @@
         "comment_at": "2023-12-15T13:18:26Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202305: https://github.com/sonic-net/sonic-buildimage/pull/17522"
+    },
+    {
+        "number": 16612,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-06T11:26:39Z",
+        "comment_author": "lizhijianrd",
+        "comment_body": "Hi @yxieca, can you please help to backport this PR to 202205? I've verified the backport will not introduce any regression. Thanks."
+    },
+    {
+        "number": 16612,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-08T18:50:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202205: https://github.com/sonic-net/sonic-buildimage/pull/17704"
     },
     {
         "number": 16612,
@@ -33122,6 +33474,13 @@
     {
         "number": 16377,
         "repo": "sonic-buildimage",
+        "comment_at": "2024-01-22T05:03:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202205: https://github.com/sonic-net/sonic-buildimage/pull/17871"
+    },
+    {
+        "number": 16377,
+        "repo": "sonic-buildimage",
         "review_at": "2023-09-05T15:57:21Z",
         "review_author": "yxieca"
     },
@@ -37542,6 +37901,13 @@
     {
         "number": 16254,
         "repo": "sonic-buildimage",
+        "comment_at": "2024-01-18T00:42:20Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@vmittal-msft @gechiang remind for 202305 cherry pick"
+    },
+    {
+        "number": 16254,
+        "repo": "sonic-buildimage",
         "review_at": "2023-08-25T01:12:36Z",
         "review_author": "gechiang"
     },
@@ -39890,6 +40256,27 @@
         "comment_at": "2023-08-29T17:23:38Z",
         "comment_author": "lguohan",
         "comment_body": "can you clairfy this secure_boot_image flag, what does it indicating, is it indicating the image has secure boot enabled, but when we install it on a non-secure boot enabled platform, will the image install ok? but boot without secure boot enabled? \r\n\r\n@lguohan this flag is build time flag to indicate the image has been compiled as signed image (secure boot enabled) \r\n\r\nRegarding installation behavior of this image on non secured platform is out of scope of this change. I also did not find any details here: https://github.com/sonic-net/SONiC/blob/master/doc/secure_boot/hld_secure_boot.md\r\n\r\n\r\nReason for this PR was to avoid failure of this : https://github.com/sonic-net/sonic-mgmt/pull/9747"
+    },
+    {
+        "number": 16191,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-04T13:01:58Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@abdosi could you provide test result with 202305 image?"
+    },
+    {
+        "number": 16191,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-05T06:44:17Z",
+        "comment_author": "abdosi",
+        "comment_body": "> @abdosi could you provide test result with 202305 image?\r\n\r\n@StormLiangMS this change is generic and already this test https://github.com/sonic-net/sonic-mgmt/pull/9747 which is part of 202305 sonic-mgmt indirectly invoke this new variable define in sonic_version.yml"
+    },
+    {
+        "number": 16191,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-18T00:41:52Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202305: https://github.com/sonic-net/sonic-buildimage/pull/17814"
     },
     {
         "number": 16191,
@@ -52485,6 +52872,20 @@
     {
         "number": 15765,
         "repo": "sonic-buildimage",
+        "comment_at": "2024-01-04T13:04:05Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@abdosi could you have ADO to support this cherry pick?"
+    },
+    {
+        "number": 15765,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-05T06:28:17Z",
+        "comment_author": "abdosi",
+        "comment_body": "> @abdosi could you have ADO to support this cherry pick?\r\n\r\n@StormLiangMS this is needed. ADO updated."
+    },
+    {
+        "number": 15765,
+        "repo": "sonic-buildimage",
         "review_at": "2023-07-10T15:41:32Z",
         "review_author": "prsunny"
     },
@@ -53356,6 +53757,13 @@
         "comment_at": "2023-07-05T06:17:39Z",
         "comment_author": "lixiaoyuner",
         "comment_body": "> lots of packages installed, need to how how much disk space consumed. need to measure.\r\n\r\nk8s master image will run on PilotFish host as a VM, no need to care about the disk space. We will not include this k8s master feature in any released sonic image.\r\n\r\nMore details:\r\nFor this k8s master feature, we have a include_kubernetes_master flag in rules/config to decide whether install all these k8s master packages or not. We plan to build the k8s master image from internal master branch on demand (maybe run official pipeline for internal master branch by passing include_kubernetes_master=y manually, because the master image will not change frequently) after this PR goes into internal maser branch. The default value of include_kubernetes_master will be alway \"n\". So, any official branch released sonic image will not include k8s master packages. After we get a sonic-vs image with k8s master package from internal master branch, we will create VM by this image on PolitFish host, it means the k8s master image should be only run on PolitFish host, the VM's disk size is under our control, so don't need to care about the package size.\r\n\r\n\r\n> geneva is a separate feature, i thought we are going to add a container? there is risk to add such new things into existing branch\r\n\r\nOur k8s master image need this docker image for now, we have used this Geneva tools to send metric and log in our k8s master cluster. We will not include this docker image in any released sonic images, so the risk should be not that serious. I heard @FengPan is going to add Geneva container, I think after sonic support Geneva, I can remove it from k8s master feature and use sonic original Geneva feature."
+    },
+    {
+        "number": 15716,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-01T11:30:40Z",
+        "comment_author": "ridahanif96",
+        "comment_body": "@lixiaoyuner ,Hi, i am trying to test this code via custom build in rules file where i did \"INCLUDE_KUBERNETES=y && INCLUDE_KUBERNETES_MASTER==y\" but got build error in [PR](https://github.com/sonic-net/sonic-buildimage/pull/17634). Can you please help. "
     },
     {
         "number": 15716,
@@ -59707,6 +60115,27 @@
         "comment_at": "2023-07-13T23:35:37Z",
         "comment_author": "gechiang",
         "comment_body": "@hold off from picking to msft repo for now..."
+    },
+    {
+        "number": 15383,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-04T13:04:55Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@gechiang @abdosi do we still need this for 202305? If so, could you provide ADO?"
+    },
+    {
+        "number": 15383,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-05T06:14:24Z",
+        "comment_author": "abdosi",
+        "comment_body": "> @gechiang @abdosi do we still need this for 202305? If so, could you provide ADO?\r\n\r\n@StormLiangMS : Yes it is needed . Updated ADO in PR description."
+    },
+    {
+        "number": 15383,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-18T00:35:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202305: https://github.com/sonic-net/sonic-buildimage/pull/17813"
     },
     {
         "number": 15383,
@@ -67997,6 +68426,13 @@
     {
         "number": 14952,
         "repo": "sonic-buildimage",
+        "comment_at": "2024-01-03T16:53:30Z",
+        "comment_author": "rlhui",
+        "comment_body": "Already in 202305 code base"
+    },
+    {
+        "number": 14952,
+        "repo": "sonic-buildimage",
         "review_at": "2023-05-30T19:55:46Z",
         "review_author": "arlakshm"
     },
@@ -69949,6 +70385,20 @@
         "comment_at": "2023-11-07T08:26:17Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202305: https://github.com/sonic-net/sonic-buildimage/pull/17111"
+    },
+    {
+        "number": 14859,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-23T09:40:54Z",
+        "comment_author": "slutati1536",
+        "comment_body": "@[dgsudharsan](https://github.com/dgsudharsan)\r\n@[prsunny](https://github.com/prsunny)\r\n@[lguohan](https://github.com/lguohan)\r\nwas this commit cherrypicked to 202205?"
+    },
+    {
+        "number": 14859,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-01-23T16:08:16Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "@slutati1536 I don't think this was cherry-picked to 202205"
     },
     {
         "number": 14859,
