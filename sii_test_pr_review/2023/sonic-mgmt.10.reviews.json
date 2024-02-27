@@ -2739,6 +2739,25 @@
     {
         "number": 10300,
         "repo": "sonic-mgmt",
+        "review_at": "2024-02-20T07:08:04Z",
+        "review_author": "XuChen-MSFT"
+    },
+    {
+        "number": 10300,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-02-20T19:20:32Z",
+        "review_author": "zhixzhu"
+    },
+    {
+        "number": 10300,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-02-20T07:08:04Z",
+        "latestReview_author": "XuChen-MSFT",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 10300,
+        "repo": "sonic-mgmt",
         "latestReview_at": "2023-10-18T20:19:32Z",
         "latestReview_author": "abdosi",
         "latestReview_state": "APPROVED"
@@ -2749,6 +2768,27 @@
         "comment_at": "2023-10-11T18:01:32Z",
         "comment_author": "collivier",
         "comment_body": "The verification issue (Test kvmtest-t0-sonic by Elastictest) doesn't seem related to this PR:\r\n```\r\nTASK [vm_set : Retrieve a list of the defined VMs] *****************************\r\nWednesday 11 October 2023 17:45:51 +0000 (0:00:00.019) 0:00:01.044 2016 2017 2018 2019 2020 2021 2022 2023 2024 parse_prs.py parse_reviews.py pr_dump.sh \r\nAn exception occurred during task execution. To see the full traceback, use -vvv. The error was: libvirtError: Failed to connect socket to '/var/run/libvirt/libvirt-sock': No such file or directory\r\nfatal: [STR-ACS-VSERV-01]: FAILED! => {\"changed\": false, \"msg\": \"Failed to connect socket to '/var/run/libvirt/libvirt-sock': No such file or directory\"}\r\n```\r\nhttps://elastictest.org/scheduler/testplan/6526db7ff773ca326e14c156?testcase=testbed_q_sonic-elastictest-prod-vmss-D16s-v3_15228_vms-kvm-t0-64-32_prepare.log&type=prepare\r\n\r\n@wangxin @yxieca @jcaiMR et al. : could you please reset the verification ?"
+    },
+    {
+        "number": 10298,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-02-04T02:47:07Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@collivier PR conflicts with 202311 branch"
+    },
+    {
+        "number": 10298,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-02-04T02:47:09Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@collivier PR conflicts with 202305 branch"
+    },
+    {
+        "number": 10298,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-02-04T02:48:49Z",
+        "comment_author": "wangxin",
+        "comment_body": "> @collivier PR conflicts with 202311 branch\r\n\r\nThis PR is already included in 202311 branch."
     },
     {
         "number": 10298,
@@ -3640,6 +3680,13 @@
         "comment_at": "2023-11-02T03:33:43Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202305: https://github.com/sonic-net/sonic-mgmt/pull/10588"
+    },
+    {
+        "number": 10245,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-02-04T18:23:12Z",
+        "comment_author": "rraghav-cisco",
+        "comment_body": "Cherry-pick PR to 202205: https://github.com/sonic-net/sonic-mgmt/pull/11601"
     },
     {
         "number": 10245,
@@ -4972,6 +5019,41 @@
         "comment_at": "2023-12-14T20:58:30Z",
         "comment_author": "rraghav-cisco",
         "comment_body": "@mssonicbld : 202305 PR: #11022 "
+    },
+    {
+        "number": 10198,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-02-18T07:43:55Z",
+        "comment_author": "lipxu",
+        "comment_body": "Hi, @rraghav-cisco and @abdosi , have you tried to test the PR on dualtor devices, seems all test_pfcwd_function related cases failed on dualtor devices after the PR merged, may you please help to check, thanks a lot.\r\n\r\n@lolyu @StormLiangMS for vis"
+    },
+    {
+        "number": 10198,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-02-18T07:55:27Z",
+        "comment_author": "rraghav-cisco",
+        "comment_body": "@lipxu : No , I have not tested on dualtor. what error are you getting ?"
+    },
+    {
+        "number": 10198,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-02-18T08:03:05Z",
+        "comment_author": "lipxu",
+        "comment_body": "> @lipxu : No , I have not tested on dualtor. what error are you getting ?\r\n\r\nThanks for looking at this failure, all cases failed in \"self.verify_rx_ingress(\"forward\")\" during SendVerifyTraffic.\r\nIt should related to the \"'vlan_mac'\" change, thanks.\r\n\r\n File \"/usr/local/lib/python2.7/dist-packages/_pytest/python.py\", line 174, in pytest_pyfunc_call\r\n testfunction(**testargs)\r\n File \"/azp/_work/4/s/tests/pfcwd/test_pfcwd_function.py\", line 797, in test_pfcwd_actions\r\n self.is_dualtor)\r\n File \"/azp/_work/4/s/tests/pfcwd/test_pfcwd_function.py\", line 478, in __init__\r\n self.verify_rx_ingress(\"forward\")\r\n **File \"/azp/_work/4/s/tests/pfcwd/test_pfcwd_function.py\", line 539, in verify_rx_ingress**\r\n log_file=log_file)\r\n File \"/azp/_work/4/s/tests/ptf_runner.py\", line 80, in ptf_runner\r\n result = host.shell(cmd, chdir=\"/root\", module_ignore_errors=module_ignore_errors)\r\n\r\nclass SendVerifyTraffic():\r\n \"\"\" PTF test \"\"\"\r\n def __init__(self, ptf, router_mac, tx_mac, pfc_params, is_dualtor):\r\n \"\"\"\r\n Args:\r\n ptf(AnsibleHost) : ptf instance\r\n router_mac(string) : router mac address\r\n ptf_params(dict) : all PFC test params specific to the DUT port\r\n \"\"\"\r\n self.ptf = ptf\r\n self.router_mac = router_mac\r\n self.tx_mac = tx_mac\r\n self.pfc_queue_index = pfc_params['queue_index']\r\n self.pfc_wd_test_pkt_count = pfc_params['test_pkt_count']\r\n self.pfc_wd_rx_port_id = pfc_params['rx_port_id']\r\n self.pfc_wd_test_port = pfc_params['test_port']\r\n self.pfc_wd_test_port_id = pfc_params['test_port_id']\r\n self.pfc_wd_test_port_ids = pfc_params['test_port_ids']\r\n self.pfc_wd_test_neighbor_addr = pfc_params['test_neighbor_addr']\r\n self.pfc_wd_rx_neighbor_addr = pfc_params['rx_neighbor_addr']\r\n self.pfc_wd_test_port_vlan_id = pfc_params['test_port_vlan_id']\r\n self.pfc_wd_rx_port_vlan_id = pfc_params['rx_port_vlan_id']\r\n self.port_id_to_type_map = pfc_params['port_id_to_type_map']\r\n self.port_type = pfc_params['port_type']\r\n if is_dualtor:\r\n self.vlan_mac = \"00:aa:bb:cc:dd:ee\"\r\n else:\r\n self.vlan_mac = router_mac\r\n # Verify traffic before pfc storm\r\n **self.verify_rx_ingress(\"forward\")**"
+    },
+    {
+        "number": 10198,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-02-18T08:08:49Z",
+        "comment_author": "rraghav-cisco",
+        "comment_body": "@lipxu \r\nI am surprised. the mac address is modified only for the non-dualtor case. As you can see, the above code sets mac to a hardcoded value in dualtor case. This PR shouldn't affect dualtor."
+    },
+    {
+        "number": 10198,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-02-18T08:25:18Z",
+        "comment_author": "lipxu",
+        "comment_body": "> @lipxu I am surprised. the mac address is modified only for the non-dualtor case. As you can see, the above code sets mac to a hardcoded value in dualtor case. This PR shouldn't affect dualtor.\r\n\r\nThe cases in test_pfcwd_function would also run on dualtor devices. This PR modified the \"'vlan_mac': self.vlan_mac,\" to \"'vlan_mac': self.tx_mac,\", which caused failure on dualtor devices, please help to check and make sure the cases could pass on dualtor devices, thanks."
     },
     {
         "number": 10198,
