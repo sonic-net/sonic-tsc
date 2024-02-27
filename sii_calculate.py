@@ -298,14 +298,13 @@ def calculate_review():
                 ret_test[year_m] = {}
             if author not in ret_test[year_m]:
                 ret_test[year_m][author] = 0
-            ret_test[year_m][author] += score * year_weight[year]
+            ret_test[year_m][author] += 2 * score * year_weight[year]
         else:
             if year_m not in ret:
                 ret[year_m] = {}
             if author not in ret[year_m]:
                 ret[year_m][author] = 0
-            # test has higher score, TODO
-            ret[year_m][author] += 2 * score * year_weight[year]
+            ret[year_m][author] += score * year_weight[year]
 
     return ret,ret_test
 
