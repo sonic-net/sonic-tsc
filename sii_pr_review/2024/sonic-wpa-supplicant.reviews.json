@@ -1,0 +1,70 @@
+[
+    {
+        "number": 80,
+        "repo": "sonic-wpa-supplicant",
+        "comment_at": "2024-02-21T15:37:21Z",
+        "comment_author": "JunhongMao",
+        "comment_body": "@wumiaont , I suggest fixing these issue by upgrading the codes to meet the requirements of GCC and Openssl 3.0 other than closing the warning by GCC options. "
+    },
+    {
+        "number": 80,
+        "repo": "sonic-wpa-supplicant",
+        "comment_at": "2024-02-21T16:09:03Z",
+        "comment_author": "wumiaont",
+        "comment_body": "> @wumiaont , I suggest fixing these issue by upgrading the codes to meet the requirements of GCC and Openssl 3.0 other than closing the warning by GCC options.\r\n\r\nThis is a temporary solution to make macsec container able to build under bookworm. With the next commit of porting wpa-supplicant openssl 3.0 support in which you are working now you should remove two of the flags. This may take a while as code change is significant thus needs significant testing for macsec. This PR will make sonic to be able to build macsec containers under bookworn before real support is in."
+    },
+    {
+        "number": 80,
+        "repo": "sonic-wpa-supplicant",
+        "comment_at": "2024-02-21T16:11:22Z",
+        "comment_author": "wumiaont",
+        "comment_body": "> JunhongMao\r\nIf you can also resolve the use-after-free issue in your commit then we can pend this PR as it will not be needed. \r\n"
+    },
+    {
+        "number": 80,
+        "repo": "sonic-wpa-supplicant",
+        "comment_at": "2024-02-21T19:30:30Z",
+        "comment_author": "judyjoseph",
+        "comment_body": "@wumiaont please check again, good to fix them than ignoring the errors. Adding @saiarcot895 who is actively involved. REF: https://github.com/sonic-net/sonic-swss/pull/3017"
+    },
+    {
+        "number": 80,
+        "repo": "sonic-wpa-supplicant",
+        "comment_at": "2024-02-21T20:14:02Z",
+        "comment_author": "wumiaont",
+        "comment_body": "> @wumiaont please check again, good to fix them than ignoring the errors. Adding @saiarcot895 who is actively involved. REF: [sonic-net/sonic-swss#3017](https://github.com/sonic-net/sonic-swss/pull/3017)\r\n\r\n@judyjoseph Hi Judy. We will have a second PR to fix the deprecated warning and const cast warning issue by uses high level opennssl APIs. This will be a huge change so needs time to code and test. This one is just unblock us as replacing with high level APIs needs some effort. Currently there's PR in sonic-buildimage branch waiting for this PR to be in so macsec can be built under bookworm."
+    },
+    {
+        "number": 80,
+        "repo": "sonic-wpa-supplicant",
+        "comment_at": "2024-02-21T22:44:25Z",
+        "comment_author": "wumiaont",
+        "comment_body": "@saiarcot895 @kcudnik I don't have write permission for this repo. Can you help to commit this PR if you all agree the fix is fine now? Thx"
+    },
+    {
+        "number": 80,
+        "repo": "sonic-wpa-supplicant",
+        "review_at": "2024-02-21T19:49:19Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 80,
+        "repo": "sonic-wpa-supplicant",
+        "review_at": "2024-02-21T19:59:40Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 80,
+        "repo": "sonic-wpa-supplicant",
+        "latestReview_at": "2024-02-21T19:59:40Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 80,
+        "repo": "sonic-wpa-supplicant",
+        "latestReview_at": "2024-02-21T19:49:19Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    }
+]

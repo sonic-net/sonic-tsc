@@ -5767,6 +5767,25 @@
         "comment_body": "Hi @liushilongbuaa, I opened #17297 to fix it, but it looks like some other commit that is being brought in is breaking tests (this is based on the fact that #17069 is also failing PR tests, but doesn't have my commits). Specifically, `config reload` in some cases is broken. I'm trying to find out what change is breaking it."
     },
     {
+        "number": 17234,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-02-21T02:42:37Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 17234,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-02-21T05:54:25Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 17234,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2024-02-21T02:42:37Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "COMMENTED"
+    },
+    {
         "number": 17232,
         "repo": "sonic-buildimage",
         "comment_at": "2023-11-20T22:34:22Z",
@@ -15286,6 +15305,13 @@
         "comment_at": "2024-01-04T12:51:58Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202305: https://github.com/sonic-net/sonic-buildimage/pull/17678"
+    },
+    {
+        "number": 16923,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-02-16T23:07:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202311: https://github.com/sonic-net/sonic-buildimage/pull/18112"
     },
     {
         "number": 16923,
@@ -44006,6 +44032,20 @@
     {
         "number": 16082,
         "repo": "sonic-buildimage",
+        "comment_at": "2024-02-06T00:37:14Z",
+        "comment_author": "skg-net",
+        "comment_body": "@FuzailBrcm Can you please update the Quality Metric (Alpha/Beta/GA) for the feature either in this PR comments or in HLD itself based on https://github.com/sonic-net/SONiC/blob/master/doc/SONiC%20feature%20quality%20definition.md\r\nThanks"
+    },
+    {
+        "number": 16082,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-02-06T05:19:52Z",
+        "comment_author": "FuzailBrcm",
+        "comment_body": "@skg-net \r\nThis is not a feature but a minor enhancement to the existing PDDF framework. It was a demand from Ufispace (https://github.com/sonic-net/sonic-buildimage/pull/16017) who are using a different vendor GPIO chip in their platform. \r\nIn this PR as well, UT is covered but I dont think its possible to write a separate sonic-mgmt test for this change.\r\n\r\nHowever, the tests present in the following file in the sonic-mgmt should cover the change present in this PR.\r\nhttps://github.com/sonic-net/sonic-mgmt/blob/master/tests/platform_tests/cli/test_show_platform.py\r\n\r\nSo absolutely speaking, Quality Metric for this PR should be \"Beta/GA\" since the sonic-mgmt test is covered."
+    },
+    {
+        "number": 16082,
+        "repo": "sonic-buildimage",
         "review_at": "2023-08-11T00:52:06Z",
         "review_author": "cytsai0409"
     },
@@ -45913,6 +45953,20 @@
         "comment_at": "2023-08-14T05:39:36Z",
         "comment_author": "nonodark",
         "comment_body": "@yxieca @adyeung @Praveen-Brcm please help merge, thanks."
+    },
+    {
+        "number": 16017,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-02-06T00:36:46Z",
+        "comment_author": "skg-net",
+        "comment_body": "@nonodark Can you please update the Quality Metric (Alpha/Beta/GA) for the feature either in this PR comments or in HLD itself based on https://github.com/sonic-net/SONiC/blob/master/doc/SONiC%20feature%20quality%20definition.md\r\nThanks"
+    },
+    {
+        "number": 16017,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-02-16T08:59:42Z",
+        "comment_author": "nonodark",
+        "comment_body": "@skg-net \r\nThis is not a feature, but porting SONiC to the Ufispace platform. Please mark the Quality Metric as Beta for this PR. Thanks."
     },
     {
         "number": 16017,
@@ -47940,6 +47994,13 @@
     {
         "number": 15965,
         "repo": "sonic-buildimage",
+        "comment_at": "2024-02-05T20:05:02Z",
+        "comment_author": "skg-net",
+        "comment_body": "@dgsudharsan Can you please update the Quality Metric (Alpha/Beta/GA) for the feature either in this PR comments or in HLD itself based on https://github.com/sonic-net/SONiC/blob/master/doc/SONiC%20feature%20quality%20definition.md\r\nThanks"
+    },
+    {
+        "number": 15965,
+        "repo": "sonic-buildimage",
         "review_at": "2023-08-01T13:22:32Z",
         "review_author": "StormLiangMS"
     },
@@ -48401,6 +48462,20 @@
     {
         "number": 15956,
         "repo": "sonic-buildimage",
+        "comment_at": "2024-02-06T00:36:24Z",
+        "comment_author": "skg-net",
+        "comment_body": "@FuzailBrcm Can you please update the Quality Metric (Alpha/Beta/GA) for the feature either in this PR comments or in HLD itself based on https://github.com/sonic-net/SONiC/blob/master/doc/SONiC%20feature%20quality%20definition.md\r\nThanks"
+    },
+    {
+        "number": 15956,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-02-06T04:49:51Z",
+        "comment_author": "FuzailBrcm",
+        "comment_body": "@skg-net \r\nThis is not a feature but a minor enhancement to the existing PDDF framework. UT is covered but I dont think its possible to write a sonic-mgmt test for this change. \r\n\r\nThe following test in the sonic-mgmt should cover the change present in this PR.\r\nhttps://github.com/sonic-net/sonic-mgmt/blob/497baa5668cf8859012163467498c90f5fdac215/tests/platform_tests/cli/test_show_platform.py#L349\r\n\r\nSo absolutely speaking, Quality Metric for this PR should be \"Beta/GA\" since the sonic-mgmt test is covered."
+    },
+    {
+        "number": 15956,
+        "repo": "sonic-buildimage",
         "review_at": "2023-08-03T07:27:46Z",
         "review_author": "jostar-yang"
     },
@@ -48492,13 +48567,6 @@
         "comment_at": "2023-08-02T06:21:46Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
-    },
-    {
-        "number": 15955,
-        "repo": "sonic-buildimage",
-        "comment_at": "2023-08-02T08:27:23Z",
-        "comment_author": "yaqiangz",
-        "comment_body": "/azpw run Azure.sonic-buildimage (Build broadcom)"
     },
     {
         "number": 15955,
@@ -49476,6 +49544,27 @@
         "comment_at": "2023-10-11T06:34:25Z",
         "comment_author": "liat-grozovik",
         "comment_body": "@Yakiv-Huryk many thanks for this great achievements. \r\nThanks for all the rest who provided feedback and made it even better "
+    },
+    {
+        "number": 15924,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-02-06T00:29:38Z",
+        "comment_author": "skg-net",
+        "comment_body": "@Yakiv-Huryk Can you please update the Quality Metric (Alpha/Beta/GA) for the feature either in this PR comments or in HLD itself based on https://github.com/sonic-net/SONiC/blob/master/doc/SONiC%20feature%20quality%20definition.md\r\nThanks"
+    },
+    {
+        "number": 15924,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-02-08T16:11:42Z",
+        "comment_author": "k-v1",
+        "comment_body": "@skg-net\r\n\r\nOriginal feature was implemented and merged to master.\r\nBut @qiluo-msft suggested to use DPKG cache for 1st stage rootfs file.\r\nThese improvements for DPKG cache were also implemented and merged in this PR but disabled because they contain some bugs (https://github.com/sonic-net/sonic-buildimage/issues/16944).\r\n\r\nI suggested additional fixes and improvements (https://github.com/sonic-net/sonic-buildimage/pull/17100).\r\nBut my PR is for Debian bullseye. Now SONiC is based on Debian bookworm and need to update my PR.\r\nI can try to update my PR but I'm not sure should I waste my time on this because my other PRs for build time improvements and DPKG cache have not been merged (e.g. #16959, #15735, #17644).\r\n\r\nOther possible solution if @Yakiv-Huryk provides fixes by himself (e.g. partially based on #17100).\r\nI can review his PR in this case."
+    },
+    {
+        "number": 15924,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-02-15T12:29:43Z",
+        "comment_author": "Yakiv-Huryk",
+        "comment_body": "> @Yakiv-Huryk Can you please update the Quality Metric (Alpha/Beta/GA) for the feature either in this PR comments or in HLD itself based on https://github.com/sonic-net/SONiC/blob/master/doc/SONiC%20feature%20quality%20definition.md Thanks\r\n\r\nIt\u2019s GA. Since it\u2019s a build improvement, it doesn't really fit the Feature Quality Definition. There is no flag to enable/disable it and no sonic-mgmt tests."
     },
     {
         "number": 15924,
@@ -70550,6 +70639,13 @@
     {
         "number": 14859,
         "repo": "sonic-buildimage",
+        "comment_at": "2024-02-06T00:56:09Z",
+        "comment_author": "prsunny",
+        "comment_body": "> @[dgsudharsan](https://github.com/dgsudharsan) @[prsunny](https://github.com/prsunny) @[lguohan](https://github.com/lguohan) was this commit cherrypicked to 202205?\r\n\r\nNo, it was not. Only backported to 202305+"
+    },
+    {
+        "number": 14859,
+        "repo": "sonic-buildimage",
         "review_at": "2023-09-18T22:29:08Z",
         "review_author": "prsunny"
     },
@@ -81326,6 +81422,13 @@
         "comment_at": "2023-05-05T23:18:42Z",
         "comment_author": "saiarcot895",
         "comment_body": "@k-v1 I think it would be better for feature/capability consistency (and some minor space savings) that everything uses the openssl version of curl, unless there's a very good reason that some other backend needs to be used."
+    },
+    {
+        "number": 14351,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-02-20T22:13:09Z",
+        "comment_author": "bluecmd",
+        "comment_body": "I filed https://github.com/sonic-net/sonic-mgmt-framework/issues/130 to investigate changing it to openssl as well instead of gnutls."
     },
     {
         "number": 14351,
