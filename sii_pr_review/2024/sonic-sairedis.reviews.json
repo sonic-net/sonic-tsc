@@ -1119,6 +1119,158 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 1342,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-01-25T07:20:26Z",
+        "comment_author": "kcudnik",
+        "comment_body": "Is the root case already known? Was it double join?"
+    },
+    {
+        "number": 1342,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-01-25T19:55:09Z",
+        "comment_author": "jiahua-wang",
+        "comment_body": "Double join could be an explanation. More likely scenario is that m_taskThread is not joinable because after MdioIpcServer constructor startMdioThread() was not called or because startMdioThread() failed. @kenneth-arista can provide more test details."
+    },
+    {
+        "number": 1342,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-01-26T11:26:45Z",
+        "comment_author": "kcudnik",
+        "comment_body": "> Double join could be an explanation. More likely scenario is that m_taskThread is not joinable because after MdioIpcServer constructor startMdioThread() was not called or because startMdioThread() failed. @kenneth-arista can provide more test details.\r\n\r\nCan you investigate which exactly scenario is that ?"
+    },
+    {
+        "number": 1342,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-01-29T18:07:30Z",
+        "comment_author": "kenneth-arista",
+        "comment_body": "> > Double join could be an explanation. More likely scenario is that m_taskThread is not joinable because after MdioIpcServer constructor startMdioThread() was not called or because startMdioThread() failed. @kenneth-arista can provide more test details.\r\n> \r\n> Can you investigate which exactly scenario is that ?\r\n\r\nUnfortunately, I don't have all the logs when the problem occurred before integrating Jiahua's patch. Prior to the patch, I would often seen several syncd core files after each full sonic-mgmt test runs. I suspect these crashes are triggered in tests involving reboot."
+    },
+    {
+        "number": 1342,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-01-29T18:22:19Z",
+        "comment_author": "kenneth-arista",
+        "comment_body": "I recall that a syncd crash was observed once during sonic-mgmt `override_config_table` tests. "
+    },
+    {
+        "number": 1342,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-01-29T18:36:22Z",
+        "comment_author": "jiahua-wang",
+        "comment_body": "This patch will address both cases of double join and thread not starting properly."
+    },
+    {
+        "number": 1342,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-02-21T18:43:10Z",
+        "comment_author": "rlhui",
+        "comment_body": "@jiahua-wang  - please update the branch? thanks"
+    },
+    {
+        "number": 1342,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-02-22T05:40:19Z",
+        "comment_author": "xumia",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1342,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-02-22T05:40:30Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1342,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-02-23T06:23:55Z",
+        "comment_author": "jiahua-wang",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1342,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-02-23T06:24:01Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nCommenter does not have sufficient privileges for PR 1342 in repo sonic-net/sonic-sairedis<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1342,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-02-27T16:18:17Z",
+        "comment_author": "jiahua-wang",
+        "comment_body": "/AzurePipelines run Azure.sonic-sairedis"
+    },
+    {
+        "number": 1342,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-02-27T16:18:23Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nCommenter does not have sufficient privileges for PR 1342 in repo sonic-net/sonic-sairedis<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1342,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-03-06T18:24:42Z",
+        "comment_author": "judyjoseph",
+        "comment_body": "@kcudnik Can we merge this PR "
+    },
+    {
+        "number": 1342,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-03-06T18:24:51Z",
+        "comment_author": "judyjoseph",
+        "comment_body": "/AzurePipelines run Azure.sonic-sairedis"
+    },
+    {
+        "number": 1342,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-03-06T18:25:01Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1342,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-03-06T19:05:13Z",
+        "comment_author": "jiahua-wang",
+        "comment_body": "@kcudnik @rlhui @judyjoseph  All checks were passed when I created the PR for the first time. After I merged other commits, 2 checks always fail at the place not related to my code change. Should I close this one and create another one with the same code change?"
+    },
+    {
+        "number": 1342,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-03-07T06:54:22Z",
+        "comment_author": "kcudnik",
+        "comment_body": "All passed do you want me to merge?"
+    },
+    {
+        "number": 1342,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-03-07T06:57:12Z",
+        "comment_author": "jiahua-wang",
+        "comment_body": "@kcudnik Please merge."
+    },
+    {
+        "number": 1342,
+        "repo": "sonic-sairedis",
+        "review_at": "2024-02-12T16:30:42Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1342,
+        "repo": "sonic-sairedis",
+        "review_at": "2024-02-22T13:17:04Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1342,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2024-02-22T13:17:04Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 1341,
         "repo": "sonic-sairedis",
         "comment_at": "2024-01-29T02:39:18Z",
@@ -1263,6 +1415,34 @@
         "comment_at": "2024-02-12T17:52:47Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202305: https://github.com/sonic-net/sonic-sairedis/pull/1354"
+    },
+    {
+        "number": 1339,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-03-07T17:02:42Z",
+        "comment_author": "gechiang",
+        "comment_body": "@yxieca this PR was approved for 202205 but I don't see this ever made it into 202205.  Did this missed by auto-cherry-pick somehow?  Can you help check what happened?\r\nThanks!"
+    },
+    {
+        "number": 1339,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-03-07T17:26:56Z",
+        "comment_author": "yxieca",
+        "comment_body": "> @yxieca this PR was approved for 202205 but I don't see this ever made it into 202205. Did this missed by auto-cherry-pick somehow? Can you help check what happened? Thanks!\r\n\r\n@liushilongbuaa can you take a look?"
+    },
+    {
+        "number": 1339,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-03-08T08:37:47Z",
+        "comment_author": "liushilongbuaa",
+        "comment_body": "> > @yxieca this PR was approved for 202205 but I don't see this ever made it into 202205. Did this missed by auto-cherry-pick somehow? Can you help check what happened? Thanks!\r\n> \r\n> @liushilongbuaa can you take a look?\r\n\r\ntests/TestClient.cpp and tests/testclient.cpp breaks our workflow. I'm still working on Root Cause."
+    },
+    {
+        "number": 1339,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-03-08T08:55:40Z",
+        "comment_author": "liushilongbuaa",
+        "comment_body": "@gechiang , @yxieca  please create separate PR to cherry pick if urgent."
     },
     {
         "number": 1339,
