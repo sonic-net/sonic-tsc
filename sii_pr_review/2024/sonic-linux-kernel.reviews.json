@@ -1,5 +1,185 @@
 [
     {
+        "number": 383,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-03-06T14:31:21Z",
+        "comment_author": "pavannaregundi",
+        "comment_body": "> Nice. Great, these are upstream.\r\n> \r\n> Please add the git.kernel.org URL to\r\n> \r\n> > 0003-arm64-dts-marvell-Add-NAND-flash-controller-to-AC5.patch - [torvalds/linux@58fe732](https://github.com/torvalds/linux/commit/58fe732)\r\n\r\nDone. Thanks"
+    },
+    {
+        "number": 383,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-03-13T02:17:44Z",
+        "comment_author": "pavannaregundi",
+        "comment_body": "@saiarcot895 Can this PR be merged?"
+    },
+    {
+        "number": 383,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-03-06T14:02:45Z",
+        "review_author": "paulmenzel"
+    },
+    {
+        "number": 383,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-03-06T14:52:10Z",
+        "review_author": "paulmenzel"
+    },
+    {
+        "number": 383,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-03-13T05:21:39Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 383,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2024-03-13T05:21:39Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 383,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2024-03-06T14:52:10Z",
+        "latestReview_author": "paulmenzel",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 382,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-03-05T23:52:24Z",
+        "comment_author": "bmridul",
+        "comment_body": "@abdosi,  Pls check. "
+    },
+    {
+        "number": 382,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-03-07T00:58:04Z",
+        "comment_author": "bmridul",
+        "comment_body": "> Thank you for your patch. I\u2019d be great if you could amend the git commit message summary and merge/pull request title to use imperative mood and _to enable_ or _for_:\r\n> \r\n> > Disable small sector erase size for UBIFS on flash\r\n> \r\n> Also could you please copy the merge/pull request description to the commit message?\r\n> \r\n> I\u2019d use Markdown to format the description, and, for example, indent code blocks by four spaces.\r\n> \r\n> ```\r\n> # mount | grep obfl\r\n> ubi0 on /mnt/obfl type ubifs (rw,relatime,assert=read-only,ubi=0,vol=0)\r\n> ```\r\n> \r\n> And just a tip, that `findmnt -n /mnt/obfl` does the same. (`-n` suppresses the printing of the header.)\r\n\r\n@paulmenzel , Pls check updates"
+    },
+    {
+        "number": 382,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-03-07T01:25:27Z",
+        "comment_author": "prgeor",
+        "comment_body": "@bmridul Why a filesystem like UBIFS is limited by Nand's/NOR's erase size? What error are you seeing with this config enbled? "
+    },
+    {
+        "number": 382,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-03-07T01:25:49Z",
+        "comment_author": "prgeor",
+        "comment_body": "@bmridul any reference for this claim:\r\n`UBIFS does not work on NOR Flash with small sector erasesize`"
+    },
+    {
+        "number": 382,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-03-07T01:43:21Z",
+        "comment_author": "prgeor",
+        "comment_body": "@bmridul why should UBIFS care the underlying media NOR or NAND"
+    },
+    {
+        "number": 382,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-03-07T01:47:06Z",
+        "comment_author": "bmridul",
+        "comment_body": "> @bmridul any reference for this claim: `UBIFS does not work on NOR Flash with small sector erasesize`\r\n\r\n@prgeor , I have put a [link](https://cateee.net/lkddb/web-lkddb/MTD_SPI_NOR_USE_4K_SECTORS.html) to the man  page for the kernel config in PR description. There itself this issue is mentioned. \r\n\r\n    Please note that some tools/drivers/filesystems may not work with 4096 B erase size (e.g. UBIFS requires 15 KiB as a minimum)."
+    },
+    {
+        "number": 382,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-03-07T01:58:14Z",
+        "comment_author": "bmridul",
+        "comment_body": "> @bmridul Why a filesystem like UBIFS is limited by Nand's/NOR's erase size? What error are you seeing with this config enbled?\r\n\r\nBasically the ubiattach command fails with errors..\r\n\r\n    **[  145.820167] ubi0 error: validate_vid_hdr [ubi]: bad data_size\r\n    [  145.826621] ubi0 error: validate_vid_hdr [ubi]: bad VID header**\r\n    [  145.833163] Volume identifier header dump:\r\n    [  145.837752]  magic     55424921\r\n    [  145.841270]  version   1\r\n    [  145.844109]  vol_type  1\r\n    [  145.846934]  copy_flag 1\r\n    [  145.849775]  compat    5\r\n    [  145.852609]  vol_id    2147479551\r\n    [  145.856318]  lnum      0\r\n    [  145.859146]  data_size 22016\r\n    [  145.862370]  used_ebs  0\r\n    [  145.865207]  data_pad  0\r\n    [  145.868044]  sqnum     1\r\n    [  145.870869]  hdr_crc   11f8b00c\r\n    [  145.874390] Volume identifier header hexdump:\r\n    **[  145.879362] ubi0 error: ubi_io_read_vid_hdr [ubi]: validation failed for PEB 2064**\r\n    [  145.891655] ubi0 error: ubi_attach_mtd_dev [ubi]: failed to attach mtd4, error -22\r\n\r\nWith the fix, we are able to mount the flash and access the file system contents."
+    },
+    {
+        "number": 382,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-03-07T07:36:56Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "Why not just cite the line from the Kconfig description?\r\n\r\n> From the description of `CONFIG_MTD_SPI_NOR_USE_4K_SECTORS`:\r\n> \r\n> > Please note that some tools/drivers/filesystems may not work with 4096 B erase size (e.g. UBIFS requires 15 KiB as a minimum).\r\n\r\nAlso, I\u2019d appreciate the UBIFS \u201cerror\u201d messages in the commit message too, so should somebody hit this error, it is easily found in the git history/log."
+    },
+    {
+        "number": 382,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-03-11T18:08:24Z",
+        "comment_author": "abdosi",
+        "comment_body": "@paulmenzel / @saiarcot895 can we help merge of this"
+    },
+    {
+        "number": 382,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-03-11T22:44:11Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "Thank you."
+    },
+    {
+        "number": 382,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-03-06T06:10:42Z",
+        "review_author": "paulmenzel"
+    },
+    {
+        "number": 382,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-03-07T01:02:49Z",
+        "review_author": "abdosi"
+    },
+    {
+        "number": 382,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-03-07T02:18:09Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 382,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-03-07T04:32:36Z",
+        "review_author": "bmridul"
+    },
+    {
+        "number": 382,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-03-11T16:12:35Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 382,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-03-11T19:06:53Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 382,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2024-03-06T06:10:42Z",
+        "latestReview_author": "paulmenzel",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 382,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2024-03-11T19:06:53Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 382,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2024-03-11T16:12:35Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 382,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2024-03-07T01:02:49Z",
+        "latestReview_author": "abdosi",
+        "latestReview_state": "DISMISSED"
+    },
+    {
         "number": 381,
         "repo": "sonic-linux-kernel",
         "comment_at": "2024-03-07T02:09:01Z",
@@ -33,6 +213,101 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 380,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-03-05T19:10:43Z",
+        "comment_author": "oleksandrivantsiv",
+        "comment_body": "> Thank you for your patch. Some small nits:\r\n> \r\n> 1. The [official spelling seems to be _BlueField_](https://www.nvidia.com/en-us/networking/products/data-processing-unit/).\r\n> 2. Please split the commit into two.\r\n> 3. Please amend the commit message to remove the trailing dot from the commit message summary/title, and to give a little more background about the system. For example, would BlueField-2 now also be supported?\r\n\r\nThank you Paul for your feedback. \r\n1. Both `Bluefield` and `BlueField` are correct spellings as well as BF-3. I prefer `Bluefield`\r\n2. The default merge strategy in the repository is \"squash\". Even if I split the changes into two commits they will be squashed together during PR merge. Instead, I split the changes into separate PR: https://github.com/sonic-net/sonic-linux-kernel/pull/381\r\n3. Only BF-3 is supported. We have no plans to add BF-2 support.\r\n "
+    },
+    {
+        "number": 380,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-03-14T15:19:12Z",
+        "comment_author": "oleksandrivantsiv",
+        "comment_body": "@saiarcot895 can we merge this PR?"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-03-05T03:57:14Z",
+        "review_author": "vivekrnv"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-03-05T06:41:28Z",
+        "review_author": "paulmenzel"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-03-05T18:37:56Z",
+        "review_author": "oleksandrivantsiv"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-03-05T19:02:40Z",
+        "review_author": "oleksandrivantsiv"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-03-07T02:14:04Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-03-07T03:05:10Z",
+        "review_author": "vivekrnv"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-03-08T21:25:01Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-03-08T23:01:36Z",
+        "review_author": "vivekrnv"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-03-13T23:08:31Z",
+        "review_author": "oleksandrivantsiv"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-03-14T01:19:12Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2024-03-08T23:01:36Z",
+        "latestReview_author": "vivekrnv",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2024-03-05T06:41:28Z",
+        "latestReview_author": "paulmenzel",
+        "latestReview_state": "CHANGES_REQUESTED"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2024-03-14T01:19:12Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 379,
         "repo": "sonic-linux-kernel",
         "comment_at": "2024-03-08T21:33:41Z",
@@ -55,6 +330,51 @@
         "number": 379,
         "repo": "sonic-linux-kernel",
         "latestReview_at": "2024-03-08T21:33:26Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 378,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-03-06T13:27:17Z",
+        "comment_author": "Pavan-Nokia",
+        "comment_body": "@saiarcot895 Please help review and merge"
+    },
+    {
+        "number": 378,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-03-11T16:35:53Z",
+        "comment_author": "Pavan-Nokia",
+        "comment_body": "@saiarcot895  Understood and agree. The comment you are referring to was from our previous version of the DTS that we tried to upstream.\r\nWe have modified the DTS to address most of Andrew's comments in this version of the DTS as much as our platform supports. \r\nThank you for help with review and merging"
+    },
+    {
+        "number": 378,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-03-07T01:59:19Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 378,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-03-07T13:52:36Z",
+        "review_author": "Pavan-Nokia"
+    },
+    {
+        "number": 378,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-03-08T21:29:20Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 378,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-03-08T21:31:40Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 378,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2024-03-08T21:31:40Z",
         "latestReview_author": "saiarcot895",
         "latestReview_state": "APPROVED"
     },
