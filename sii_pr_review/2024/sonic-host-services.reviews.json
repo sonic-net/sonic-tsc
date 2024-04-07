@@ -1,5 +1,51 @@
 [
     {
+        "number": 106,
+        "repo": "sonic-host-services",
+        "comment_at": "2024-03-21T04:30:24Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "Could you paste the crash stack? Could you check the coverage? #Closed"
+    },
+    {
+        "number": 106,
+        "repo": "sonic-host-services",
+        "comment_at": "2024-03-21T04:50:42Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "@alexrallen @dgsudharsan Please help review this PR? wondering why this is not identified by original testcases? #Closed"
+    },
+    {
+        "number": 106,
+        "repo": "sonic-host-services",
+        "comment_at": "2024-03-21T05:32:57Z",
+        "comment_author": "liuh-80",
+        "comment_body": "> Could you paste the crash stack? Could you check the coverage?\r\n\r\nHere is the crash stack in syslog:\r\n\r\nMar 13 06:40:24.354944 vlab-01 INFO hostcfgd[17776]: Traceback (most recent call last):\r\nMar 13 06:40:24.355016 vlab-01 INFO hostcfgd[17776]:   File \"/usr/local/bin/hostcfgd\", line 1799, in <module>\r\nMar 13 06:40:24.355353 vlab-01 INFO hostcfgd[17776]:     main()\r\nMar 13 06:40:24.355403 vlab-01 INFO hostcfgd[17776]:   File \"/usr/local/bin/hostcfgd\", line 1796, in main\r\nMar 13 06:40:24.355596 vlab-01 INFO hostcfgd[17776]:     daemon.start()\r\nMar 13 06:40:24.355643 vlab-01 INFO hostcfgd[17776]:   File \"/usr/local/bin/hostcfgd\", line 1788, in start\r\nMar 13 06:40:24.355975 vlab-01 INFO hostcfgd[17776]:     self.config_db.listen(init_data_handler=self.load)\r\nMar 13 06:40:24.356032 vlab-01 INFO hostcfgd[17776]:   File \"/usr/lib/python3/dist-packages/swsscommon/swsscommon.py\", line 2539, in listen\r\nMar 13 06:40:24.356884 vlab-01 INFO hostcfgd[17776]:     self.__fire(table, row, data)\r\nMar 13 06:40:24.356955 vlab-01 INFO hostcfgd[17776]:   File \"/usr/lib/python3/dist-packages/swsscommon/swsscommon.py\", line 2606, in __fire\r\nMar 13 06:40:24.357448 vlab-01 INFO hostcfgd[17776]:     handler(table, key, data)\r\nMar 13 06:40:24.357505 vlab-01 INFO hostcfgd[17776]:   File \"/usr/local/bin/hostcfgd\", line 1733, in callback\r\nMar 13 06:40:24.357844 vlab-01 INFO hostcfgd[17776]:     return func(key, op, data)\r\nMar 13 06:40:24.357899 vlab-01 INFO hostcfgd[17776]:            ^^^^^^^^^^^^^^^^^^^\r\nMar 13 06:40:24.357940 vlab-01 INFO hostcfgd[17776]:   File \"/usr/local/bin/hostcfgd\", line 1599, in aaa_handler\r\nMar 13 06:40:24.358215 vlab-01 INFO hostcfgd[17776]:     self.aaacfg.aaa_update(key, data)\r\nMar 13 06:40:24.358263 vlab-01 INFO hostcfgd[17776]:   File \"/usr/local/bin/hostcfgd\", line 304, in aaa_update\r\nMar 13 06:40:24.358430 vlab-01 INFO hostcfgd[17776]:     self.modify_conf_file()\r\nMar 13 06:40:24.358472 vlab-01 INFO hostcfgd[17776]:   File \"/usr/local/bin/hostcfgd\", line 487, in modify_conf_file\r\nMar 13 06:40:24.358523 vlab-01 INFO hostcfgd[17776]:     authorization.update(self.authorization)\r\nMar 13 06:40:24.358581 vlab-01 INFO hostcfgd[17776]: TypeError: 'NoneType' object is not iterable\r\nMar 13 06:40:24.540918 vlab-01 NOTICE systemd[1]: hostcfgd.service: Main process exited, code=exited, status=1/FAILURE"
+    },
+    {
+        "number": 106,
+        "repo": "sonic-host-services",
+        "review_at": "2024-03-21T04:43:15Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 106,
+        "repo": "sonic-host-services",
+        "review_at": "2024-03-21T05:38:59Z",
+        "review_author": "liuh-80"
+    },
+    {
+        "number": 106,
+        "repo": "sonic-host-services",
+        "review_at": "2024-03-30T01:11:10Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 106,
+        "repo": "sonic-host-services",
+        "latestReview_at": "2024-03-30T01:11:10Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 105,
         "repo": "sonic-host-services",
         "review_at": "2024-03-12T18:35:45Z",
@@ -9,6 +55,74 @@
         "number": 105,
         "repo": "sonic-host-services",
         "latestReview_at": "2024-03-12T18:35:45Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 103,
+        "repo": "sonic-host-services",
+        "review_at": "2024-03-06T00:51:14Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 103,
+        "repo": "sonic-host-services",
+        "review_at": "2024-03-06T09:00:11Z",
+        "review_author": "FengPan-Frank"
+    },
+    {
+        "number": 103,
+        "repo": "sonic-host-services",
+        "review_at": "2024-03-21T23:45:29Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 103,
+        "repo": "sonic-host-services",
+        "review_at": "2024-03-21T23:46:17Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 103,
+        "repo": "sonic-host-services",
+        "review_at": "2024-03-22T03:16:18Z",
+        "review_author": "FengPan-Frank"
+    },
+    {
+        "number": 103,
+        "repo": "sonic-host-services",
+        "review_at": "2024-03-22T03:16:28Z",
+        "review_author": "FengPan-Frank"
+    },
+    {
+        "number": 103,
+        "repo": "sonic-host-services",
+        "review_at": "2024-03-27T00:37:45Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 103,
+        "repo": "sonic-host-services",
+        "review_at": "2024-04-01T07:10:16Z",
+        "review_author": "liushilongbuaa"
+    },
+    {
+        "number": 103,
+        "repo": "sonic-host-services",
+        "review_at": "2024-04-01T08:49:07Z",
+        "review_author": "FengPan-Frank"
+    },
+    {
+        "number": 103,
+        "repo": "sonic-host-services",
+        "latestReview_at": "2024-04-01T07:10:16Z",
+        "latestReview_author": "liushilongbuaa",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 103,
+        "repo": "sonic-host-services",
+        "latestReview_at": "2024-03-27T00:37:45Z",
         "latestReview_author": "qiluo-msft",
         "latestReview_state": "APPROVED"
     },
