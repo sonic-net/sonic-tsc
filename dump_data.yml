@@ -137,6 +137,7 @@ jobs:
       git commit -m "[data] Update test pr&review related data."
       git push sonicbld HEAD:refs/heads/data/testpr -f
       re=$(gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/testpr -B master -b '' -t "[data] Update test pr&review related data." 2>&1 || true)
+      sleep 60
       add=$(git show HEAD --stat | grep '[0-9]* *insertions' -Eo | grep [0-9]* -Eo)
       del=$(git show HEAD --stat | grep '[0-9]* *deletions' -Eo | grep [0-9]* -Eo)
       (( add/del > 3 )) && (( del < 10 )) && gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
