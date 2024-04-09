@@ -1154,6 +1154,20 @@
     {
         "number": 11705,
         "repo": "sonic-mgmt",
+        "comment_at": "2024-04-05T00:51:03Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "MSFT ADO: 25587938\r\n@StormLiangMS Can you help with the cherry-pick to 202305? Thanks"
+    },
+    {
+        "number": 11705,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-04-05T03:03:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202305: https://github.com/sonic-net/sonic-mgmt/pull/12315"
+    },
+    {
+        "number": 11705,
+        "repo": "sonic-mgmt",
         "review_at": "2024-02-15T19:54:24Z",
         "review_author": "bingwang-ms"
     },
@@ -1415,6 +1429,13 @@
         "comment_at": "2024-03-22T05:59:33Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202305: https://github.com/sonic-net/sonic-mgmt/pull/12103"
+    },
+    {
+        "number": 11693,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-03-29T01:14:01Z",
+        "comment_author": "kevinskwang",
+        "comment_body": "This PR blocked the testQosSaiLosslessVoq,\r\nThe error is \r\n\r\n def testQosSaiLosslessVoq(\r\nE fixture 'skip_longlink' not found\r\n> available fixtures: __pytest_repeat_step_number, _check_ingress_speed_gte_400g, _skip_watermark_multi_DUT, active_active_ports, active_active_ports_config, active_standby_ports, ansible_adhoc, ansible_facts, ansible_module, backup_and_restore_config_db_session, cable_type, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, change_mac_addresses, change_port_speed, check_bgp, check_dbmemory, check_dut_asic_type, check_interfaces, check_monit, check_mux_simulator, check_neighbor_macsec_empty, check_processes, check_secureboot, check_simulator_read_side, check_skip_shared_res_test, cleanup_cache_for_session, clear_neigh_entries, collect_db_d\r\n"
     },
     {
         "number": 11693,
@@ -2846,6 +2867,13 @@
         "comment_at": "2024-03-02T08:13:43Z",
         "comment_author": "rraghav-cisco",
         "comment_body": "> @kevinskwang @rraghav-cisco why are we merging a .rej file ? tests/qos/test_qos_sai.py.rej\r\n\r\nMy bad. Can we revert it or shall I raise a seperate PR to remove this ?"
+    },
+    {
+        "number": 11617,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-04-03T00:37:43Z",
+        "comment_author": "rraghav-cisco",
+        "comment_body": "> > @kevinskwang @rraghav-cisco why are we merging a .rej file ? tests/qos/test_qos_sai.py.rej\r\n> \r\n> My bad. Can we revert it or shall I raise a seperate PR to remove this ?\r\n\r\n@kevinskwang : Raised this PR to remove this: https://github.com/sonic-net/sonic-mgmt/pull/12288"
     },
     {
         "number": 11617,
@@ -5576,6 +5604,13 @@
         "comment_at": "2024-03-04T06:35:27Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202305: https://github.com/sonic-net/sonic-mgmt/pull/11868"
+    },
+    {
+        "number": 11397,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-03-26T13:36:58Z",
+        "comment_author": "vikshaw-Nokia",
+        "comment_body": "PR for 2205 is created https://github.com/sonic-net/sonic-mgmt/pull/12155\r\n"
     },
     {
         "number": 11397,
@@ -8997,6 +9032,20 @@
         "comment_at": "2024-03-21T15:30:44Z",
         "comment_author": "amitpawar12",
         "comment_body": "For multiple line-card scenario, we have following traffic flow direction:\r\ntgen port -------> Ingress LC <-> Egress LC ---------> tgen port\r\n\r\nPFC is sent by tgen on the Egress LC\r\nEgress LC <-- PFC -- tgen port\r\n\r\nThere is verify_pause_frame_count_dut in multidut_helper.py to check the count of the PFC frames on egress line-card. Since the duthost1 and duthost2 are coming from randomized duthost_list in the test-case script, it becomes difficult to identify the egress line-card in multidut_helper.py. We should have some mechanism to identify the right egress line card."
+    },
+    {
+        "number": 7912,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-03-28T13:00:24Z",
+        "comment_author": "amitpawar12",
+        "comment_body": "The above test does not explicitly set \"snappi_extra_params.headroom_test_params\" and hence by default gets set to \"None\".\r\nFor lossless scenario, the test_traffic_pause flag is set to \"true\". The multidut_helper.py has code to check \"verify_in_flight_buffer_pkts\" if the flag is set to true.\r\n\r\nThis function is defined in tests/common/snappi_tests/traffic_generation.py and relies on value of snappi_extra_params.headroom_test_params. The code checks if snappi_extra_params.headroom_test_params is set to None and assigns \"exceeds_headroom\" to False. The above path takes to checking if \"tx_bytes_total < dut_buffer_size\" and asserts if not true. But tx_bytes_total will totally depend upon the duration of the test. If the test is for longer time or with higher bandwidth, the tx_bytes_total could be greater than dut_buffer_size.\r\nThis needs to be addressed.\r\n"
+    },
+    {
+        "number": 7912,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-03-28T17:53:25Z",
+        "comment_author": "developfast",
+        "comment_body": "@amitpawar12 this is slightly incorrect. Since we pause the traffic by congesting the egress link out of the DUT even before the first regular frame is TXed from the traffic generator, the switch (in theory) should only be able to hold enough frames as the size of its buffer, since the entire route is 100% congested, and the switch will send back pfc pause frames to the traffic generator to pause. Hence, `tx_bytes_total` here is the number of regular packet bytes sent till the buffer fills up. "
     },
     {
         "number": 7912,
