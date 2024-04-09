@@ -45,7 +45,9 @@ jobs:
       git add dash_hld.csv sai_hld.csv sonic_hld.csv
       git commit -m "[data] Update HLD related data."
       git push sonicbld HEAD:refs/heads/data/hld -f
-      gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/hld -B master -b '' -t "[data] Update HLD related data." || true
+      re=$(gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/hld -B master -b '' -t "[data] Update HLD related data." 2>&1 || true)
+      sleep 60
+      git show HEAD --stat | grep '[0-9]* *deletions' -Eo || gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
       git reset HEAD~ --hard
       cd ..
     displayName: dump hld
@@ -59,7 +61,11 @@ jobs:
       git add issues.json
       git commit -m "[data] Update issue related data."
       git push sonicbld HEAD:refs/heads/data/issue -f
-      gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/issue -B master -b '' -t "[data] Update issue related data." || true
+      re=$(gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/issue -B master -b '' -t "[data] Update issue related data." 2>&1 || true)
+      sleep 60
+      add=$(git show HEAD --stat | grep '[0-9]* *insertions' -Eo | grep [0-9]* -Eo)
+      del=$(git show HEAD --stat | grep '[0-9]* *deletions' -Eo | grep [0-9]* -Eo)
+      (( add/del > 3 )) && (( del < 10 )) && gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
       git reset HEAD~ --hard
       cd ..
     displayName: dump issue
@@ -73,7 +79,9 @@ jobs:
       git add sonic-mgmt_hld.csv
       git commit -m "[data] Update testplan HLD related data."
       git push sonicbld HEAD:refs/heads/data/testplan-hld -f
-      gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/testplan-hld -B master -b '' -t "[data] Update testplan HLD related data." || true
+      re=$(gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/testplan-hld -B master -b '' -t "[data] Update testplan HLD related data." 2>&1 || true)
+      sleep 60
+      git show HEAD --stat | grep '[0-9]* *deletions' -Eo || gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
       git reset HEAD~ --hard
       cd ..
     displayName: dump test hld
@@ -99,7 +107,11 @@ jobs:
       git add $year1 $year
       git commit -m "[data] Update pr&review related data."
       git push sonicbld HEAD:refs/heads/data/pr -f
-      gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/pr -B master -b '' -t "[data] Update pr&review related data." || true
+      re=$(gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/pr -B master -b '' -t "[data] Update pr&review related data." 2>&1 || true)
+      sleep 60
+      add=$(git show HEAD --stat | grep '[0-9]* *insertions' -Eo | grep [0-9]* -Eo)
+      del=$(git show HEAD --stat | grep '[0-9]* *deletions' -Eo | grep [0-9]* -Eo)
+      (( add/del > 3 )) && (( del < 10 )) && gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
       git reset HEAD~ --hard
       cd ..
     displayName: dump pr
@@ -126,7 +138,11 @@ jobs:
       git add $year1 $year
       git commit -m "[data] Update test pr&review related data."
       git push sonicbld HEAD:refs/heads/data/testpr -f
-      gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/testpr -B master -b '' -t "[data] Update test pr&review related data." || true
+      re=$(gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/testpr -B master -b '' -t "[data] Update test pr&review related data." 2>&1 || true)
+      sleep 60
+      add=$(git show HEAD --stat | grep '[0-9]* *insertions' -Eo | grep [0-9]* -Eo)
+      del=$(git show HEAD --stat | grep '[0-9]* *deletions' -Eo | grep [0-9]* -Eo)
+      (( add/del > 3 )) && (( del < 10 )) && gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
       git reset HEAD~ --hard
       cd ..
     displayName: dump test pr
