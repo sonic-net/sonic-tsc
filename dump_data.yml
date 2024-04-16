@@ -38,58 +38,76 @@ jobs:
       TOKEN: $(GH_TOKEN)
     displayName: setup env
   - bash: |
-      set -x
+      set -ex
 
+      git reset origin/master --hard
       cd sii_hld
       ./dump_hld_data.sh
       git add dash_hld.csv sai_hld.csv sonic_hld.csv
       git commit -m "[data] Update HLD related data."
       git push sonicbld HEAD:refs/heads/data/hld -f
       re=$(gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/hld -B master -b '' -t "[data] Update HLD related data." 2>&1 || true)
-      sleep 60
-      git show HEAD --stat | grep '[0-9]* *deletions' -Eo || gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
-      git reset HEAD~ --hard
+      add=$(git show HEAD --stat | grep '[0-9]* *insertions' -Eo | grep [0-9]* -Eo || true)
+      del=$(git show HEAD --stat | grep '[0-9]* *deletions' -Eo | grep [0-9]* -Eo || true)
+      if [ -z "$del" ]; then
+        sleep 60
+        gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
+      fi
+      git reset origin/master --hard
       cd ..
     displayName: dump hld
     condition: ne(variables['SKIP_HLD'], 'y')
 
   - bash: |
-      set -x
+      set -ex
 
+      git reset origin/master --hard
       cd sii_issue
       ./issues_dump.sh
       git add issues.json
       git commit -m "[data] Update issue related data."
       git push sonicbld HEAD:refs/heads/data/issue -f
       re=$(gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/issue -B master -b '' -t "[data] Update issue related data." 2>&1 || true)
-      sleep 60
-      add=$(git show HEAD --stat | grep '[0-9]* *insertions' -Eo | grep [0-9]* -Eo)
-      del=$(git show HEAD --stat | grep '[0-9]* *deletions' -Eo | grep [0-9]* -Eo)
-      (( add/del > 3 )) && (( del < 10 )) && gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
-      git reset HEAD~ --hard
+      add=$(git show HEAD --stat | grep '[0-9]* *insertions' -Eo | grep [0-9]* -Eo || true)
+      del=$(git show HEAD --stat | grep '[0-9]* *deletions' -Eo | grep [0-9]* -Eo || true)
+      if [ -z "$del" ]; then
+        sleep 60
+        gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
+      elif (( add/del >= 1 )) && (( del < 30 )); then
+        sleep 60
+        gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
+      else
+      fi
+      git reset origin/master --hard
       cd ..
     displayName: dump issue
     condition: ne(variables['SKIP_ISSUE'], 'y')
 
   - bash: |
-      set -x
+      set -ex
 
+      git reset origin/master --hard
       cd sii_testplan_hld
       ./generate_testplan_hld_data.sh
       git add sonic-mgmt_hld.csv
       git commit -m "[data] Update testplan HLD related data."
       git push sonicbld HEAD:refs/heads/data/testplan-hld -f
       re=$(gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/testplan-hld -B master -b '' -t "[data] Update testplan HLD related data." 2>&1 || true)
-      sleep 60
-      git show HEAD --stat | grep '[0-9]* *deletions' -Eo || gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
-      git reset HEAD~ --hard
+      add=$(git show HEAD --stat | grep '[0-9]* *insertions' -Eo | grep [0-9]* -Eo || true)
+      del=$(git show HEAD --stat | grep '[0-9]* *deletions' -Eo | grep [0-9]* -Eo || true)
+      if [ -z "$del" ]; then
+        sleep 60
+        gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
+      fi
+      git reset origin/master --hard
       cd ..
     displayName: dump test hld
     condition: ne(variables['SKIP_TESTHLD'], 'y')
 
   - bash: |
-      set -x
+      set -ex
 
+      git reset origin/master --hard
       cd sii_pr_review
       for repo in $(cat repos)
       do
@@ -108,18 +126,25 @@ jobs:
       git commit -m "[data] Update pr&review related data."
       git push sonicbld HEAD:refs/heads/data/pr -f
       re=$(gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/pr -B master -b '' -t "[data] Update pr&review related data." 2>&1 || true)
-      sleep 60
-      add=$(git show HEAD --stat | grep '[0-9]* *insertions' -Eo | grep [0-9]* -Eo)
-      del=$(git show HEAD --stat | grep '[0-9]* *deletions' -Eo | grep [0-9]* -Eo)
-      (( add/del > 3 )) && (( del < 10 )) && gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
-      git reset HEAD~ --hard
+      add=$(git show HEAD --stat | grep '[0-9]* *insertions' -Eo | grep [0-9]* -Eo || true)
+      del=$(git show HEAD --stat | grep '[0-9]* *deletions' -Eo | grep [0-9]* -Eo || true)
+      if [ -z "$del" ]; then
+        sleep 60
+        gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
+      elif (( add/del >= 15 )) && (( del < 200 )); then
+        sleep 60
+        gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
+      else
+      fi
+      git reset origin/master --hard
       cd ..
     displayName: dump pr
     condition: ne(variables['SKIP_PR'], 'y')
 
   - bash: |
-      set -x
+      set -ex
 
+      git reset origin/master --hard
       cd sii_test_pr_review
       current=$(date -I)
       year=${current:0:4}
@@ -140,10 +165,17 @@ jobs:
       git push sonicbld HEAD:refs/heads/data/testpr -f
       re=$(gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/testpr -B master -b '' -t "[data] Update test pr&review related data." 2>&1 || true)
       sleep 60
-      add=$(git show HEAD --stat | grep '[0-9]* *insertions' -Eo | grep [0-9]* -Eo)
-      del=$(git show HEAD --stat | grep '[0-9]* *deletions' -Eo | grep [0-9]* -Eo)
-      (( add/del > 3 )) && (( del < 10 )) && gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
-      git reset HEAD~ --hard
+      add=$(git show HEAD --stat | grep '[0-9]* *insertions' -Eo | grep [0-9]* -Eo || true)
+      del=$(git show HEAD --stat | grep '[0-9]* *deletions' -Eo | grep [0-9]* -Eo || true)
+      if [ -z "$del" ]; then
+        sleep 60
+        gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
+      elif (( add/del >= 20 )) ; then
+        sleep 60
+        gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
+      else
+      fi
+      git reset origin/master --hard
       cd ..
     displayName: dump test pr
     condition: ne(variables['SKIP_TESTPR'], 'y')
