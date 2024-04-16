@@ -1,5 +1,51 @@
 [
     {
+        "number": 1988,
+        "repo": "sai",
+        "review_at": "2024-04-11T20:18:41Z",
+        "review_author": "rlhui"
+    },
+    {
+        "number": 1988,
+        "repo": "sai",
+        "latestReview_at": "2024-04-11T20:18:41Z",
+        "latestReview_author": "rlhui",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1987,
+        "repo": "sai",
+        "comment_at": "2024-04-04T15:41:22Z",
+        "comment_author": "mholankar",
+        "comment_body": "@mikeberesford @JaiOCP for viz"
+    },
+    {
+        "number": 1987,
+        "repo": "sai",
+        "comment_at": "2024-04-10T16:52:47Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "@JaiOCP - could you please help review this again, so we can merge it?"
+    },
+    {
+        "number": 1987,
+        "repo": "sai",
+        "review_at": "2024-04-05T20:59:02Z",
+        "review_author": "JaiOCP"
+    },
+    {
+        "number": 1987,
+        "repo": "sai",
+        "review_at": "2024-04-10T19:35:49Z",
+        "review_author": "JaiOCP"
+    },
+    {
+        "number": 1987,
+        "repo": "sai",
+        "latestReview_at": "2024-04-10T19:35:49Z",
+        "latestReview_author": "JaiOCP",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 1986,
         "repo": "sai",
         "review_at": "2024-04-01T16:06:01Z",
@@ -41,6 +87,113 @@
         "repo": "sai",
         "latestReview_at": "2024-04-04T15:56:29Z",
         "latestReview_author": "JaiOCP",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1985,
+        "repo": "sai",
+        "comment_at": "2024-04-11T21:28:12Z",
+        "comment_author": "rlhui",
+        "comment_body": "@kcudnik , can we add reason why this change is needed? thanks."
+    },
+    {
+        "number": 1985,
+        "repo": "sai",
+        "comment_at": "2024-04-12T07:16:30Z",
+        "comment_author": "kcudnik",
+        "comment_body": "usually mac address each byte has 2 hexadecimal values, just corrected this to have a valid form"
+    },
+    {
+        "number": 1985,
+        "repo": "sai",
+        "review_at": "2024-04-12T21:37:42Z",
+        "review_author": "rlhui"
+    },
+    {
+        "number": 1985,
+        "repo": "sai",
+        "latestReview_at": "2024-04-12T21:37:42Z",
+        "latestReview_author": "rlhui",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1984,
+        "repo": "sai",
+        "comment_at": "2024-03-19T20:06:28Z",
+        "comment_author": "erohsik",
+        "comment_body": "> Looks good along the same lines as ingress and egress.\r\n> \r\n> For the sake of completeness, consider including other missing sai_acl_stage_t enums like POST_INGRESS.\r\n\r\nOnly the MACSEC stages don't have the acl capability attribute.. Not sure if there is a requirement for querying the capabilities for those stages.."
+    },
+    {
+        "number": 1984,
+        "repo": "sai",
+        "comment_at": "2024-04-09T02:06:09Z",
+        "comment_author": "rlhui",
+        "comment_body": "do we need to add this new attribute for capability check or if below API can be used?\r\n\r\nsai_status_t sai_query_attribute_capability(\r\n        _In_ sai_object_id_t switch_id,\r\n        _In_ sai_object_type_t object_type,\r\n        _In_ sai_attr_id_t attr_id,\r\n        _Out_ sai_attr_capability_t *attr_capability);"
+    },
+    {
+        "number": 1984,
+        "repo": "sai",
+        "comment_at": "2024-04-11T00:20:47Z",
+        "comment_author": "erohsik",
+        "comment_body": "> do we need to add this new attribute for capability check or if below API can be used?\r\n> \r\n> sai_status_t sai_query_attribute_capability( _In_ sai_object_id_t switch_id, _In_ sai_object_type_t object_type, _In_ sai_attr_id_t attr_id, _Out_ sai_attr_capability_t *attr_capability);\r\n\r\nThanks for taking a look at this PR..\r\nA get on this new attribute will return a value of type sai_acl_capability_t indicating the matches/actions etc supported in PRE_INGRESS ACL stage..\r\nThe sai_query_attribute_capability returns sai_attr_capability_t indicating if create/get/set are implemented.."
+    },
+    {
+        "number": 1984,
+        "repo": "sai",
+        "comment_at": "2024-04-11T21:29:39Z",
+        "comment_author": "rlhui",
+        "comment_body": "@JaiOCP  please also help review/approve."
+    },
+    {
+        "number": 1984,
+        "repo": "sai",
+        "comment_at": "2024-04-11T21:42:03Z",
+        "comment_author": "JaiOCP",
+        "comment_body": "Kishore, Please update the PR with a small modification request.\r\n\r\nOn Thu, Apr 11, 2024 at 2:30\u202fPM Rita Hui ***@***.***> wrote:\r\n\r\n> @JaiOCP <https://github.com/JaiOCP> please also help review/approve.\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/opencomputeproject/SAI/pull/1984#issuecomment-2050586785>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AKCSHLMIW5LNZ2YUVJT32MTY436FRAVCNFSM6AAAAABEZYUWN6VHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDANJQGU4DMNZYGU>\r\n> .\r\n> You are receiving this because you were mentioned.Message ID:\r\n> ***@***.***>\r\n>\r\n\r\n-- \r\nThis electronic communication and the information and any files transmitted \r\nwith it, or attached to it, are confidential and are intended solely for \r\nthe use of the individual or entity to whom it is addressed and may contain \r\ninformation that is confidential, legally privileged, protected by privacy \r\nlaws, or otherwise restricted from disclosure to anyone else. If you are \r\nnot the intended recipient or the person responsible for delivering the \r\ne-mail to the intended recipient, you are hereby notified that any use, \r\ncopying, distributing, dissemination, forwarding, printing, or copying of \r\nthis e-mail is strictly prohibited. If you received this e-mail in error, \r\nplease return the e-mail to the sender, delete it from your computer, and \r\ndestroy any printed copy of it.\r\n"
+    },
+    {
+        "number": 1984,
+        "repo": "sai",
+        "review_at": "2024-03-17T06:04:17Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1984,
+        "repo": "sai",
+        "review_at": "2024-03-18T05:11:46Z",
+        "review_author": "rck-innovium"
+    },
+    {
+        "number": 1984,
+        "repo": "sai",
+        "review_at": "2024-04-11T21:40:35Z",
+        "review_author": "JaiOCP"
+    },
+    {
+        "number": 1984,
+        "repo": "sai",
+        "review_at": "2024-04-12T22:04:26Z",
+        "review_author": "erohsik"
+    },
+    {
+        "number": 1984,
+        "repo": "sai",
+        "latestReview_at": "2024-04-11T21:40:35Z",
+        "latestReview_author": "JaiOCP",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 1984,
+        "repo": "sai",
+        "latestReview_at": "2024-03-17T06:04:17Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1984,
+        "repo": "sai",
+        "latestReview_at": "2024-03-18T05:11:46Z",
+        "latestReview_author": "rck-innovium",
         "latestReview_state": "APPROVED"
     },
     {
@@ -239,6 +392,32 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 1971,
+        "repo": "sai",
+        "review_at": "2024-03-01T10:24:13Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1971,
+        "repo": "sai",
+        "latestReview_at": "2024-03-01T10:24:13Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1970,
+        "repo": "sai",
+        "review_at": "2024-03-01T09:55:12Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1970,
+        "repo": "sai",
+        "latestReview_at": "2024-03-01T09:55:12Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 1968,
         "repo": "sai",
         "review_at": "2024-02-27T17:36:43Z",
@@ -341,6 +520,72 @@
         "repo": "sai",
         "latestReview_at": "2024-02-12T20:23:55Z",
         "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1958,
+        "repo": "sai",
+        "review_at": "2024-02-07T18:19:33Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1958,
+        "repo": "sai",
+        "latestReview_at": "2024-02-07T18:19:33Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1957,
+        "repo": "sai",
+        "comment_at": "2024-02-07T16:29:22Z",
+        "comment_author": "kcudnik",
+        "comment_body": "Please provide description why making this change "
+    },
+    {
+        "number": 1957,
+        "repo": "sai",
+        "comment_at": "2024-02-09T09:17:49Z",
+        "comment_author": "cscarpitta",
+        "comment_body": "> Please provide description why making this change\r\n\r\n@kcudnik I updated the PR description. Thanks."
+    },
+    {
+        "number": 1957,
+        "repo": "sai",
+        "review_at": "2024-02-08T16:46:26Z",
+        "review_author": "JaiOCP"
+    },
+    {
+        "number": 1957,
+        "repo": "sai",
+        "review_at": "2024-02-08T17:13:47Z",
+        "review_author": "rck-innovium"
+    },
+    {
+        "number": 1957,
+        "repo": "sai",
+        "review_at": "2024-03-18T15:26:32Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1957,
+        "repo": "sai",
+        "latestReview_at": "2024-03-18T15:26:32Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1957,
+        "repo": "sai",
+        "latestReview_at": "2024-02-08T16:46:26Z",
+        "latestReview_author": "JaiOCP",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1957,
+        "repo": "sai",
+        "latestReview_at": "2024-02-08T17:13:47Z",
+        "latestReview_author": "rck-innovium",
         "latestReview_state": "APPROVED"
     },
     {
@@ -854,6 +1099,120 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 1938,
+        "repo": "sai",
+        "comment_at": "2024-01-11T07:33:31Z",
+        "comment_author": "marian-pritsak",
+        "comment_body": "> Putting the question here for closure on outer RIF VRF derivation.\r\n> \r\n> Today, RIF provides the VRF in order to perform the tunnel decap and routing lookup. With this model, RIF derivation will be done post tunnel decap but VRF is required for tunnel decap lookup.\r\n> \r\n> Any thoughts on how we can handle it here ?\r\n\r\nYes, I'd like to deprecate tunnel term entry VR_ID attribute as it does not make sense in this proposed model."
+    },
+    {
+        "number": 1938,
+        "repo": "sai",
+        "comment_at": "2024-01-11T16:13:19Z",
+        "comment_author": "mholankar",
+        "comment_body": "This change in the model impacts our current usage of Tunnel Decap. What is the plan for backward compatibility?"
+    },
+    {
+        "number": 1938,
+        "repo": "sai",
+        "comment_at": "2024-01-11T16:16:28Z",
+        "comment_author": "rlhui",
+        "comment_body": "Can we please have an md doc for this as it's a quite significant change with the current pipeline. Thanks."
+    },
+    {
+        "number": 1938,
+        "repo": "sai",
+        "comment_at": "2024-02-13T19:06:23Z",
+        "comment_author": "mholankar",
+        "comment_body": "I discussed with our team, and we are ok with deprecating the tunnel term entry VR_ID attribute. "
+    },
+    {
+        "number": 1938,
+        "repo": "sai",
+        "comment_at": "2024-02-22T13:17:31Z",
+        "comment_author": "kcudnik",
+        "comment_body": "please resolve conflicts"
+    },
+    {
+        "number": 1938,
+        "repo": "sai",
+        "comment_at": "2024-02-22T16:21:21Z",
+        "comment_author": "marian-pritsak",
+        "comment_body": "TODO: What happens to mymac lookup?"
+    },
+    {
+        "number": 1938,
+        "repo": "sai",
+        "comment_at": "2024-02-26T22:15:08Z",
+        "comment_author": "KrisNey-MSFT",
+        "comment_body": "Need Fred's GitHub account (Yue Gao) to review and approve."
+    },
+    {
+        "number": 1938,
+        "repo": "sai",
+        "comment_at": "2024-04-04T15:31:08Z",
+        "comment_author": "kcudnik",
+        "comment_body": "you will need to squash commits to 1"
+    },
+    {
+        "number": 1938,
+        "repo": "sai",
+        "review_at": "2023-12-18T18:22:40Z",
+        "review_author": "srikrishnagopu"
+    },
+    {
+        "number": 1938,
+        "repo": "sai",
+        "review_at": "2023-12-18T20:11:50Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1938,
+        "repo": "sai",
+        "review_at": "2024-02-22T00:01:27Z",
+        "review_author": "kperumalbfn"
+    },
+    {
+        "number": 1938,
+        "repo": "sai",
+        "review_at": "2024-02-22T05:09:41Z",
+        "review_author": "srikrishnagopu"
+    },
+    {
+        "number": 1938,
+        "repo": "sai",
+        "review_at": "2024-04-11T21:38:55Z",
+        "review_author": "JaiOCP"
+    },
+    {
+        "number": 1938,
+        "repo": "sai",
+        "latestReview_at": "2024-02-22T05:09:41Z",
+        "latestReview_author": "srikrishnagopu",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1938,
+        "repo": "sai",
+        "latestReview_at": "2023-12-18T20:11:50Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1938,
+        "repo": "sai",
+        "latestReview_at": "2024-02-22T00:01:27Z",
+        "latestReview_author": "kperumalbfn",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1938,
+        "repo": "sai",
+        "latestReview_at": "2024-04-11T21:38:55Z",
+        "latestReview_author": "JaiOCP",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 1937,
         "repo": "sai",
         "comment_at": "2023-12-12T19:57:57Z",
@@ -1139,6 +1498,95 @@
         "repo": "sai",
         "latestReview_at": "2023-12-06T17:12:35Z",
         "latestReview_author": "JaiOCP",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1920,
+        "repo": "sai",
+        "comment_at": "2024-03-07T20:00:55Z",
+        "comment_author": "kcudnik",
+        "comment_body": "You need to squash commits since you changed the name of the enum"
+    },
+    {
+        "number": 1920,
+        "repo": "sai",
+        "comment_at": "2024-03-12T23:01:16Z",
+        "comment_author": "j-bos",
+        "comment_body": "> You need to squash commits since you changed the name of the enum\r\n\r\nDone."
+    },
+    {
+        "number": 1920,
+        "repo": "sai",
+        "review_at": "2023-11-04T03:15:42Z",
+        "review_author": "srikrishnagopu"
+    },
+    {
+        "number": 1920,
+        "repo": "sai",
+        "review_at": "2023-11-06T16:47:39Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1920,
+        "repo": "sai",
+        "review_at": "2023-12-06T21:13:31Z",
+        "review_author": "j-bos"
+    },
+    {
+        "number": 1920,
+        "repo": "sai",
+        "review_at": "2023-12-07T06:21:37Z",
+        "review_author": "srikrishnagopu"
+    },
+    {
+        "number": 1920,
+        "repo": "sai",
+        "review_at": "2024-02-22T05:11:22Z",
+        "review_author": "srikrishnagopu"
+    },
+    {
+        "number": 1920,
+        "repo": "sai",
+        "review_at": "2024-02-22T05:11:55Z",
+        "review_author": "srikrishnagopu"
+    },
+    {
+        "number": 1920,
+        "repo": "sai",
+        "review_at": "2024-03-07T17:50:51Z",
+        "review_author": "j-bos"
+    },
+    {
+        "number": 1920,
+        "repo": "sai",
+        "review_at": "2024-03-13T05:27:31Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1920,
+        "repo": "sai",
+        "review_at": "2024-04-11T00:03:57Z",
+        "review_author": "rlhui"
+    },
+    {
+        "number": 1920,
+        "repo": "sai",
+        "latestReview_at": "2024-02-22T05:11:55Z",
+        "latestReview_author": "srikrishnagopu",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1920,
+        "repo": "sai",
+        "latestReview_at": "2024-03-13T05:27:31Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1920,
+        "repo": "sai",
+        "latestReview_at": "2024-04-11T00:03:57Z",
+        "latestReview_author": "rlhui",
         "latestReview_state": "APPROVED"
     },
     {
