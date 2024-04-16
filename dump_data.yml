@@ -44,7 +44,7 @@ jobs:
       cd sii_hld
       ./dump_hld_data.sh
       git add dash_hld.csv sai_hld.csv sonic_hld.csv
-      git commit -m "[data] Update HLD related data."
+      git commit -m "[data] Update HLD related data." || exit 0
       git push sonicbld HEAD:refs/heads/data/hld -f
       re=$(gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/hld -B master -b '' -t "[data] Update HLD related data." 2>&1 || true)
       add=$(git show HEAD --stat | grep '[0-9]* *insertion' -Eo | grep [0-9]* -Eo || true)
@@ -65,7 +65,7 @@ jobs:
       cd sii_issue
       ./issues_dump.sh
       git add issues.json
-      git commit -m "[data] Update issue related data."
+      git commit -m "[data] Update issue related data." || exit 0
       git push sonicbld HEAD:refs/heads/data/issue -f
       re=$(gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/issue -B master -b '' -t "[data] Update issue related data." 2>&1 || true)
       add=$(git show HEAD --stat | grep '[0-9]* *insertion' -Eo | grep [0-9]* -Eo || true)
@@ -91,7 +91,7 @@ jobs:
       cd sii_testplan_hld
       ./generate_testplan_hld_data.sh
       git add sonic-mgmt_hld.csv
-      git commit -m "[data] Update testplan HLD related data."
+      git commit -m "[data] Update testplan HLD related data." || exit 0
       git push sonicbld HEAD:refs/heads/data/testplan-hld -f
       re=$(gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/testplan-hld -B master -b '' -t "[data] Update testplan HLD related data." 2>&1 || true)
       add=$(git show HEAD --stat | grep '[0-9]* *insertion' -Eo | grep [0-9]* -Eo || true)
@@ -124,7 +124,7 @@ jobs:
       done
       rm -rf $(find . -size -10c)
       git add $year1 $year
-      git commit -m "[data] Update pr&review related data."
+      git commit -m "[data] Update pr&review related data." || exit 0
       git push sonicbld HEAD:refs/heads/data/pr -f
       re=$(gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/pr -B master -b '' -t "[data] Update pr&review related data." 2>&1 || true)
       add=$(git show HEAD --stat | grep '[0-9]* *insertion' -Eo | grep [0-9]* -Eo || true)
@@ -163,7 +163,7 @@ jobs:
       done
       rm -rf $(find . -size -10c)
       git add $year1 $year
-      git commit -m "[data] Update test pr&review related data."
+      git commit -m "[data] Update test pr&review related data." || exit 0
       git push sonicbld HEAD:refs/heads/data/testpr -f
       re=$(gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/testpr -B master -b '' -t "[data] Update test pr&review related data." 2>&1 || true)
       sleep 60
