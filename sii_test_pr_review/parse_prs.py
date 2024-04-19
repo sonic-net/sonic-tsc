@@ -28,7 +28,7 @@ def main():
                 item["testCase"]="no"
                 if "files" in item.keys():
                     for item_file in item["files"]:
-                        if item_file["path"].startswith("tests") or item_file["path"].startswith("spytest"):
+                        if item_file["path"].startswith("tests") or item_file["path"].startswith("spytest") or item_file["path"].startswith("sdn_tests"):
                             item["testCase"]="yes"
                             break
                     item.pop("files")
