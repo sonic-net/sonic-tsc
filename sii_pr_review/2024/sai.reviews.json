@@ -1,5 +1,18 @@
 [
     {
+        "number": 2011,
+        "repo": "sai",
+        "review_at": "2024-05-10T06:46:03Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2011,
+        "repo": "sai",
+        "latestReview_at": "2024-05-10T06:46:03Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 2007,
         "repo": "sai",
         "review_at": "2024-04-25T08:51:28Z",
@@ -1233,6 +1246,27 @@
         "latestReview_at": "2024-03-05T00:13:39Z",
         "latestReview_author": "vivekrnv",
         "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1971,
+        "repo": "sai",
+        "comment_at": "2024-05-10T20:15:16Z",
+        "comment_author": "r12f",
+        "comment_body": "Hi @bluecmd , thanks for making this change! And since these files are generated, do you mind to help update the template in the DASH repo here to make them align? This will help solve this problem for good. Otherwise, as we are adding new commands, they will break this again.\r\n\r\nThe DASH repo is here: https://github.com/sonic-net/DASH. And the template file that needs to be updated is here: https://github.com/sonic-net/DASH/blob/main/dash-pipeline/SAI/templates/saiapi.h.j2."
+    },
+    {
+        "number": 1971,
+        "repo": "sai",
+        "comment_at": "2024-05-11T09:31:11Z",
+        "comment_author": "bluecmd",
+        "comment_body": "@r12f Sure, I'll take a look next week! Thanks for bringing this up."
+    },
+    {
+        "number": 1971,
+        "repo": "sai",
+        "comment_at": "2024-05-12T13:32:57Z",
+        "comment_author": "bluecmd",
+        "comment_body": "@r12f I couldn't figure out how to generate the documentation, the README.md in the near-by directory seems to be quite outdated.\r\n\r\nThat said, I believe the following should be enough:\r\n\r\n```patch\r\n\r\ndiff --git a/dash-pipeline/SAI/templates/saiapi.h.j2 b/dash-pipeline/SAI/templates/saiapi.h.j2\r\nindex c6eeb17..0f79af7 100644\r\n--- a/dash-pipeline/SAI/templates/saiapi.h.j2\r\n+++ b/dash-pipeline/SAI/templates/saiapi.h.j2\r\n@@ -19,7 +19,9 @@\r\n  *\r\n  * @file    saiexperimental{{ sai_api.app_name | replace('_', '') }}.h\r\n  *\r\n- * @brief   This module defines SAI P4 extension  interface\r\n+ * @brief   This module defines SAI extensions for {{ sai_api.app_name }}\r\n+ *\r\n+ * @warning This module is a SAI experimental module\r\n  */\r\n \r\n #if !defined (__SAIEXPERIMENTAL{{ sai_api.app_name | replace('_', '') | upper }}_H_)\r\n@@ -28,7 +30,7 @@\r\n #include <saitypes.h>\r\n \r\n /**\r\n- * @defgroup SAIEXPERIMENTAL{{ sai_api.app_name | upper}} SAI - Extension specific API definitions\r\n+ * @defgroup SAIEXPERIMENTAL{{ sai_api.app_name | upper}} SAI - Experimental: {{ sai_api.app_name }} specific API definitions\r\n  *\r\n  * @{\r\n  */\r\n\r\n```\r\n\r\nI authorize whomever to take that code as they see fit, so feel free to submit it if you can validate that it does the trick."
     },
     {
         "number": 1971,
