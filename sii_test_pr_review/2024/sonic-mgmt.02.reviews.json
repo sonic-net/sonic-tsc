@@ -5179,6 +5179,13 @@
     {
         "number": 11458,
         "repo": "sonic-mgmt",
+        "comment_at": "2024-05-17T23:47:22Z",
+        "comment_author": "anamehra",
+        "comment_body": "Hi @lixiaoyuner , with this new testcase on a KUBERNETES enabled build, we observed following loganalyzer errors:\r\n```\r\n Match Messages:\r\nE Apr 26 04:49:06.951797 bjw-can-8102-1 ERR ctrmgrd.py: Refer file /tmp/tmpj2csr7f7kube_hints_ for troubleshooting tips\r\nE \r\nE Apr 26 04:49:06.952134 bjw-can-8102-1 ERR ctrmgrd.py: Join failed: HTTPSConnectionPool(host='k8svip.ap.gbl', port=6443): Max retries exceeded with url: /api/v1/namespaces/default/configmaps/kube-root-ca.crt (Caused by NameResolutionError(\"&lt;urllib3.connection.HTTPSConnection object at 0x7fce9a825250&gt;: Failed to resolve 'k8svip.ap.gbl' ([Errno -3] Temporary failure in name resolution)\"))\r\nE \r\nE Apr 26 04:49:46.964672 bjw-can-8102-1 ERR ctrmgrd.py: Refer file /tmp/tmp4r0omiobkube_hints_ for troubleshooting tips\r\nE \r\nE Apr 26 04:49:46.964855 bjw-can-8102-1 ERR ctrmgrd.py: Join failed: HTTPSConnectionPool(host='k8svip.ap.gbl', port=6443): Max retries exceeded with url: /api/v1/namespaces/default/configmaps/kube-root-ca.crt (Caused by NameResolutionError(\"&lt;urllib3.connection.HTTPSConnection object at 0x7fce9a825c70&gt;: Failed to resolve 'k8svip.ap.gbl' ([Errno -3] Temporary failure in name resolution)\"))\r\nE\r\n```\r\n\r\nI see the testcase using the hostname 'k8svip.ap.gbl'. What is the expectation with the test environment?\r\n\r\nThanks!\r\n\r\n\r\n"
+    },
+    {
+        "number": 11458,
+        "repo": "sonic-mgmt",
         "review_at": "2024-02-01T09:44:24Z",
         "review_author": "wen587"
     },
