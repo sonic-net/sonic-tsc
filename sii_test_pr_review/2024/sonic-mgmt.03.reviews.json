@@ -6580,6 +6580,13 @@
     {
         "number": 11771,
         "repo": "sonic-mgmt",
+        "comment_at": "2024-05-18T00:55:20Z",
+        "comment_author": "kishanps",
+        "comment_body": "Tagged for 202405 [release](https://github.com/sonic-net/SONiC/issues/1615)"
+    },
+    {
+        "number": 11771,
+        "repo": "sonic-mgmt",
         "review_at": "2024-03-05T18:16:30Z",
         "review_author": "yxieca"
     },
@@ -8208,6 +8215,20 @@
         "comment_at": "2024-04-08T08:17:59Z",
         "comment_author": "vivekverma-arista",
         "comment_body": "> @bktsim-arista The change caused some regression for other test cases in test_qos_sai. Can you please fix it or revert this change?\r\n> \r\n> ```\r\n> 14:44:01 __init__._fixture_generator_decorator L0088 ERROR | \r\n> KeyError('peer_addr_ipv6')\r\n> Traceback (most recent call last):\r\n> File \"/var/src/sonic-mgmt_vms21-t0-2700_646f1402735219c3e5444094/tests/common/plugins/log_section_start/__init__.py\", line 84, in _fixture_generator_decorator\r\n> res = next(it)\r\n> File \"/var/src/sonic-mgmt_vms21-t0-2700_646f1402735219c3e5444094/tests/qos/qos_sai_base.py\", line 1089, in dutConfig\r\n> testPorts = self.__buildTestPorts(request, testPortIds, testPortIps,\r\n> File \"/var/src/sonic-mgmt_vms21-t0-2700_646f1402735219c3e5444094/tests/qos/qos_sai_base.py\", line 766, in __buildTestPorts\r\n> \"dst_port_ipv6\": dst_test_port_ips[dstPort]['peer_addr_ipv6'],\r\n> KeyError: 'peer_addr_ipv6'\r\n> ```\r\n\r\n\r\nHi @bingwang-ms, this was fixed in https://github.com/sonic-net/sonic-mgmt/pull/12334."
+    },
+    {
+        "number": 10941,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-05-17T17:33:10Z",
+        "comment_author": "rraghav-cisco",
+        "comment_body": "@vivekverma-arista :\r\nThe qos-sai explicitly disables IPv6 as shown by below code in qos/qos_sai_base.py:\r\n```\r\n1738 @pytest.fixture(scope='class', autouse=True)\r\n1739 def dut_disable_ipv6(self, duthosts, get_src_dst_asic_and_duts, tbinfo, lower_tor_host, # noqa F811\r\n1740 swapSyncd_on_selected_duts):\r\n1741 for duthost in get_src_dst_asic_and_duts['all_duts']:\r\n1742 docker0_ipv6_addr = \\\r\n1743 duthost.shell(\"sudo ip -6 addr show dev docker0 | grep global\" + \" | awk '{print $2}'\")[\r\n1744 \"stdout_lines\"][0]\r\n1745 duthost.shell(\"sysctl -w net.ipv6.conf.all.disable_ipv6=1\")\r\n1746 \r\n1747 yield\r\n1748 \r\n1749 for duthost in get_src_dst_asic_and_duts['all_duts']:\r\n1750 duthost.shell(\"sysctl -w net.ipv6.conf.all.disable_ipv6=0\")\r\n1751 logger.info(\"Adding docker0's IPv6 address since it was removed when disabing IPv6\")\r\n1752 duthost.shell(\"ip -6 addr add {} dev docker0\".format(docker0_ipv6_addr))\r\n1753 config_reload(duthost, config_source='config_db', safe_reload=True, check_intf_up_ports=True)\r\n```\r\n\r\nSo even if minigraph has ipv6 addresses, the new test will fail. Can you pls attach a passing log for this ?"
+    },
+    {
+        "number": 10941,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-05-17T18:30:10Z",
+        "comment_author": "vivekverma-arista",
+        "comment_body": "> @vivekverma-arista : The qos-sai explicitly disables IPv6 as shown by below code in qos/qos_sai_base.py:\r\n> \r\n> ```\r\n> 1738 @pytest.fixture(scope='class', autouse=True)\r\n> 1739 def dut_disable_ipv6(self, duthosts, get_src_dst_asic_and_duts, tbinfo, lower_tor_host, # noqa F811\r\n> 1740 swapSyncd_on_selected_duts):\r\n> 1741 for duthost in get_src_dst_asic_and_duts['all_duts']:\r\n> 1742 docker0_ipv6_addr = \\\r\n> 1743 duthost.shell(\"sudo ip -6 addr show dev docker0 | grep global\" + \" | awk '{print $2}'\")[\r\n> 1744 \"stdout_lines\"][0]\r\n> 1745 duthost.shell(\"sysctl -w net.ipv6.conf.all.disable_ipv6=1\")\r\n> 1746 \r\n> 1747 yield\r\n> 1748 \r\n> 1749 for duthost in get_src_dst_asic_and_duts['all_duts']:\r\n> 1750 duthost.shell(\"sysctl -w net.ipv6.conf.all.disable_ipv6=0\")\r\n> 1751 logger.info(\"Adding docker0's IPv6 address since it was removed when disabing IPv6\")\r\n> 1752 duthost.shell(\"ip -6 addr add {} dev docker0\".format(docker0_ipv6_addr))\r\n> 1753 config_reload(duthost, config_source='config_db', safe_reload=True, check_intf_up_ports=True)\r\n> ```\r\n> \r\n> So even if minigraph has ipv6 addresses, the new test will fail. Can you pls attach a passing log for this ?\r\n\r\nHi @rraghav-cisco, we are skipping the test in master and 202311 [#12834](https://github.com/sonic-net/sonic-mgmt/pull/12834)"
     },
     {
         "number": 10941,
