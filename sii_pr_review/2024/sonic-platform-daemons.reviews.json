@@ -1,5 +1,26 @@
 [
     {
+        "number": 490,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-05-18T04:12:01Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-platform-daemons/pull/459"
+    },
+    {
+        "number": 488,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-05-16T18:52:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-platform-daemons/pull/482"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-05-09T02:54:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-platform-daemons/pull/478"
+    },
+    {
         "number": 485,
         "repo": "sonic-platform-daemons",
         "comment_at": "2024-05-01T07:18:55Z",
@@ -94,6 +115,27 @@
     {
         "number": 482,
         "repo": "sonic-platform-daemons",
+        "comment_at": "2024-05-13T16:47:06Z",
+        "comment_author": "yxieca",
+        "comment_body": "@Junchao-Mellanox @prgeor I don't have enough information from PR comment to understand the change and issue it is addressing. Please update the PR comments with more information. @prgeor  do you agree to backport this change?"
+    },
+    {
+        "number": 482,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-05-14T01:49:01Z",
+        "comment_author": "Junchao-Mellanox",
+        "comment_body": "Hi @yxieca , I added some description. Please kindly review again."
+    },
+    {
+        "number": 482,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-05-16T18:53:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202311: https://github.com/sonic-net/sonic-platform-daemons/pull/488"
+    },
+    {
+        "number": 482,
+        "repo": "sonic-platform-daemons",
         "review_at": "2024-04-29T08:23:37Z",
         "review_author": "keboliu"
     },
@@ -135,6 +177,153 @@
         "latestReview_at": "2024-04-29T08:23:37Z",
         "latestReview_author": "keboliu",
         "latestReview_state": "DISMISSED"
+    },
+    {
+        "number": 480,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-04-26T02:23:31Z",
+        "comment_author": "mlok-nokia",
+        "comment_body": "@deepak-singhal0408  @judyjoseph  This PR is for an issue of logging lost midplane connectivity log.  Total 3 PRs. Please review them.  Thanks"
+    },
+    {
+        "number": 480,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-04-30T17:34:19Z",
+        "comment_author": "bmridul",
+        "comment_body": "Can you provide details (schema) on Chassis Module Reboot Info table which is introduced here. \r\nA small write up/enhancement to PMON Chassisd HLD will also be useful.  "
+    },
+    {
+        "number": 480,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-04-30T18:12:03Z",
+        "comment_author": "bmridul",
+        "comment_body": "It is not clear why the Chassis module reboot info entry needs to be removed from platform specific code. Isn't this handled entirely in sonic common code.\r\n\r\nhttps://github.com/sonic-net/sonic-buildimage/blob/9ad556336d7e8216daaf6bd8a769532434b2f7e4/device/nokia/x86_64-nokia_ixr7250e_36x400g-r0/platform_reboot#L16"
+    },
+    {
+        "number": 480,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-04-30T20:05:05Z",
+        "comment_author": "mlok-nokia",
+        "comment_body": "> It is not clear why the Chassis module reboot info entry needs to be removed from platform specific code. Isn't this handled entirely in sonic common code.\r\n> \r\n> https://github.com/sonic-net/sonic-buildimage/blob/9ad556336d7e8216daaf6bd8a769532434b2f7e4/device/nokia/x86_64-nokia_ixr7250e_36x400g-r0/platform_reboot#L16\r\n\r\nOn Nokia platform,  one of the unpexpect reboot (missing heartbeart reboot)  is calling the \"sudo reboot\".  Since \"sudo reboot\" creates the expected  CHASSIS_MODULE_REBOOT_INFO_TABLE entry, we need to remove it for this case. This is platform specified behaviors. "
+    },
+    {
+        "number": 480,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-04-30T20:15:46Z",
+        "comment_author": "mlok-nokia",
+        "comment_body": "> Can you provide details (schema) on Chassis Module Reboot Info table which is introduced here. A small write up/enhancement to PMON Chassisd HLD will also be useful.\r\n\r\nThe CHASSIS_MODULE_REBOOT_INFO_TABLE defined as below:\r\nkeys: \"CHASSIS_MODULE_REBOOT_INFO_TABLE|<module name>\"\r\nvalue:  \"reboot\" : \"expected\"\r\n\r\nExample:\r\n{\r\n  \"CHASSIS_MODULE_REBOOT_INFO_TABLE|LINE-CARD1\": {\r\n    \"expireat\": 1714507996.2318723,\r\n    \"ttl\": -0.001,\r\n    \"type\": \"hash\",\r\n    \"value\": {\r\n      \"reboot\": \"expected\"\r\n    }\r\n  }\r\n}"
+    },
+    {
+        "number": 480,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-05-01T20:55:15Z",
+        "comment_author": "deepak-singhal0408",
+        "comment_body": "@mlok-nokia, could you please also add UT case?"
+    },
+    {
+        "number": 480,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-05-03T17:48:56Z",
+        "comment_author": "deepak-singhal0408",
+        "comment_body": "@bmridul @amulyan7 could you please have a look at the latest change share any further comments. Thanks!"
+    },
+    {
+        "number": 480,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-05-03T17:51:15Z",
+        "comment_author": "mlok-nokia",
+        "comment_body": "> @mlok-nokia, could you please also add UT case?\r\n\r\nUT has been added"
+    },
+    {
+        "number": 480,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-05-09T23:52:38Z",
+        "comment_author": "judyjoseph",
+        "comment_body": "@kenneth-arista could you review as well"
+    },
+    {
+        "number": 480,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-04-30T18:25:59Z",
+        "review_author": "bmridul"
+    },
+    {
+        "number": 480,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-04-30T18:36:33Z",
+        "review_author": "amulyan7"
+    },
+    {
+        "number": 480,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-04-30T18:38:19Z",
+        "review_author": "amulyan7"
+    },
+    {
+        "number": 480,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-05-01T20:54:36Z",
+        "review_author": "deepak-singhal0408"
+    },
+    {
+        "number": 480,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-05-03T17:32:07Z",
+        "review_author": "deepak-singhal0408"
+    },
+    {
+        "number": 480,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-05-03T21:30:09Z",
+        "review_author": "bmridul"
+    },
+    {
+        "number": 480,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-05-09T23:51:09Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 480,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2024-04-30T18:38:19Z",
+        "latestReview_author": "amulyan7",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 480,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2024-05-03T21:30:09Z",
+        "latestReview_author": "bmridul",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 480,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2024-05-09T23:51:09Z",
+        "latestReview_author": "judyjoseph",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 480,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2024-05-03T17:32:07Z",
+        "latestReview_author": "deepak-singhal0408",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 478,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-05-06T21:55:51Z",
+        "comment_author": "vdahiya12",
+        "comment_body": "@StormLiangMS @yxieca please cherry-pick into the branches tagged"
+    },
+    {
+        "number": 478,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-05-09T02:54:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202305: https://github.com/sonic-net/sonic-platform-daemons/pull/486"
     },
     {
         "number": 478,
@@ -648,6 +837,163 @@
         "number": 460,
         "repo": "sonic-platform-daemons",
         "latestReview_at": "2024-04-09T02:43:36Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 459,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-04-09T21:00:13Z",
+        "comment_author": "prgeor",
+        "comment_body": "@AnoopKamath Please test\r\n1. Xcvrd restart\r\n2. Config interface shut/no-shut of 2x400G is not impacting the other datapath"
+    },
+    {
+        "number": 459,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-05-14T06:04:51Z",
+        "comment_author": "AnoopKamath",
+        "comment_body": "> @AnoopKamath Please test\r\n> \r\n> 1. Xcvrd restart\r\n> 2. Config interface shut/no-shut of 2x400G is not impacting the other datapath\r\n\r\n1. Tested XCVRD restart and saw modules going to READY state\r\n2. Tested config shut/no-shut on 4 different modules and it is not impacting other datapath\r\n\r\nLogs attached"
+    },
+    {
+        "number": 459,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-05-15T19:32:27Z",
+        "comment_author": "prgeor",
+        "comment_body": "@AnoopKamath can you use this API https://github.com/sonic-net/sonic-platform-common/pull/471"
+    },
+    {
+        "number": 459,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-05-15T23:15:48Z",
+        "comment_author": "AnoopKamath",
+        "comment_body": "> @AnoopKamath can you use this API [sonic-net/sonic-platform-common#471](https://github.com/sonic-net/sonic-platform-common/pull/471)\r\n\r\n@prgeor : UT looks good after I patched https://github.com/sonic-net/sonic-platform-common/pull/471/files. I will update the PR after you merger these changes. Thanks\r\n"
+    },
+    {
+        "number": 459,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-05-18T04:12:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202311: https://github.com/sonic-net/sonic-platform-daemons/pull/490"
+    },
+    {
+        "number": 459,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-04-09T23:09:52Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 459,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-04-10T05:31:39Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 459,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-04-15T21:06:45Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 459,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-04-16T11:22:09Z",
+        "review_author": "AnoopKamath"
+    },
+    {
+        "number": 459,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-05-14T06:02:54Z",
+        "review_author": "AnoopKamath"
+    },
+    {
+        "number": 459,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-05-14T06:31:26Z",
+        "review_author": "AnoopKamath"
+    },
+    {
+        "number": 459,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-05-14T06:32:08Z",
+        "review_author": "AnoopKamath"
+    },
+    {
+        "number": 459,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-05-14T16:45:20Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 459,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-05-14T16:45:48Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 459,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-05-14T16:46:13Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 459,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-05-14T16:47:45Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 459,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-05-14T16:59:39Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 459,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-05-14T17:00:10Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 459,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-05-15T17:58:46Z",
+        "review_author": "AnoopKamath"
+    },
+    {
+        "number": 459,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-05-17T03:35:32Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 459,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-05-17T03:41:47Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 459,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-05-17T07:31:54Z",
+        "review_author": "AnoopKamath"
+    },
+    {
+        "number": 459,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-05-17T17:43:58Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 459,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2024-04-15T21:06:45Z",
+        "latestReview_author": "mihirpat1",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 459,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2024-05-17T17:43:58Z",
         "latestReview_author": "prgeor",
         "latestReview_state": "APPROVED"
     },
