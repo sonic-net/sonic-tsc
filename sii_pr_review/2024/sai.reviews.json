@@ -1,5 +1,12 @@
 [
     {
+        "number": 2017,
+        "repo": "sai",
+        "comment_at": "2024-05-25T12:43:51Z",
+        "comment_author": "kcudnik",
+        "comment_body": "could be used like this:\r\n```\r\n    SAI_PORT_ATTR_CUSTOM_RANGE_START = 0x10000000,\r\n\r\n    /**\r\n     * @brief Custom attribute\r\n     *\r\n     * @type bool\r\n     * @flags CREATE_AND_SET\r\n     * @default false\r\n     */\r\n    SAI_PORT_ATTR_CUSTOM_ATTRIBUTE = SAI_PORT_ATTR_CUSTOM_RANGE_START,\r\n\r\n    /**\r\n     * @brief Custom attribute\r\n     *\r\n     * @type bool\r\n     * @flags CREATE_AND_SET\r\n     * @default false\r\n     */\r\n    SAI_PORT_ATTR_CUSTOM_ATTRIBUTE_2,\r\n\r\n    /** End of custom range base */\r\n    SAI_PORT_ATTR_CUSTOM_RANGE_END\r\n```"
+    },
+    {
         "number": 2011,
         "repo": "sai",
         "review_at": "2024-05-10T06:46:03Z",
@@ -9,6 +16,54 @@
         "number": 2011,
         "repo": "sai",
         "latestReview_at": "2024-05-10T06:46:03Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2010,
+        "repo": "sai",
+        "comment_at": "2024-05-08T01:32:33Z",
+        "comment_author": "saksarav-nokia",
+        "comment_body": "@kcudnik @vmittal-msft , please review"
+    },
+    {
+        "number": 2010,
+        "repo": "sai",
+        "comment_at": "2024-05-08T06:36:11Z",
+        "comment_author": "kcudnik",
+        "comment_body": "Please fix build errors"
+    },
+    {
+        "number": 2010,
+        "repo": "sai",
+        "comment_at": "2024-05-08T18:27:48Z",
+        "comment_author": "saksarav-nokia",
+        "comment_body": "@kcudnik , i had to rebase to fix the build errors. Please check now"
+    },
+    {
+        "number": 2010,
+        "repo": "sai",
+        "comment_at": "2024-05-08T18:33:56Z",
+        "comment_author": "kcudnik",
+        "comment_body": "please add more description"
+    },
+    {
+        "number": 2010,
+        "repo": "sai",
+        "comment_at": "2024-05-08T19:40:22Z",
+        "comment_author": "saksarav-nokia",
+        "comment_body": "Description:\r\n  sonic-mgmt Qos tests disables the TX for the destination ports to induce the shared buffer full, nominal headroom full a, ingress drop and egress drop.  \r\n Voq systems like BCM DNX has credit watchdog timer running periodically to check if voq's and flush the data in the voq to prevent the data being stuck forever in the voq. So to avoid the credit watchdog timer flushing the voq during sonic-mgmt Qos tests, we need to disable the credit watchdog timer and enable it back after the test. \r\nThe SAI attribute SAI_SWITCH_ATTR_CREDIT_WD was not present in the older SAI versions and got added in SAI 10.X. So this PR adds the sai-thrift support to enable or disable the SAI_SWITCH_ATTR_CREDIT_WD for Voq systems."
+    },
+    {
+        "number": 2010,
+        "repo": "sai",
+        "review_at": "2024-05-08T18:31:06Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2010,
+        "repo": "sai",
+        "latestReview_at": "2024-05-08T18:31:06Z",
         "latestReview_author": "kcudnik",
         "latestReview_state": "APPROVED"
     },

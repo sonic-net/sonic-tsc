@@ -1,5 +1,171 @@
 [
     {
+        "number": 1382,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-23T11:07:47Z",
+        "comment_author": "kcudnik",
+        "comment_body": "errors related to this: https://github.com/docker/docker-py/issues/3256"
+    },
+    {
+        "number": 1382,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-23T11:10:06Z",
+        "comment_author": "kcudnik",
+        "comment_body": "it seems like this fix is helping, but some of the tests (11 tests fail) and it seems to be consistently failing, failure is not related to http+docker issue"
+    },
+    {
+        "number": 1382,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-23T11:10:51Z",
+        "comment_author": "kcudnik",
+        "comment_body": "failing tests seems to be from the same group:\r\n```\r\ntest_crm.py::TestCrm::test_CrmFdbEntry FAILED                            [ 65%]\r\ntest_crm.py::TestCrm::test_CrmIpv4Route FAILED                           [ 65%]\r\ntest_crm.py::TestCrm::test_CrmIpv6Route FAILED                           [ 66%]\r\ntest_crm.py::TestCrm::test_CrmIpv4Nexthop FAILED                         [ 66%]\r\ntest_crm.py::TestCrm::test_CrmIpv6Nexthop FAILED                         [ 67%]\r\ntest_crm.py::TestCrm::test_CrmIpv4Neighbor FAILED                        [ 67%]\r\ntest_crm.py::TestCrm::test_CrmIpv6Neighbor FAILED                        [ 68%]\r\ntest_crm.py::TestCrm::test_CrmNexthopGroup FAILED                        [ 68%]\r\ntest_crm.py::TestCrm::test_CrmNexthopGroupMember FAILED                  [ 69%]\r\ntest_crm.py::TestCrm::test_CrmAcl FAILED                                 [ 69%]\r\ntest_crm.py::TestCrm::test_CrmAclGroup FAILED                            [ 70%]\r\n```\r\n\r\n@prsunny do you have idea why those fail ?"
+    },
+    {
+        "number": 1382,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-23T11:32:26Z",
+        "comment_author": "kcudnik",
+        "comment_body": "I merged this as it fixes over 179 tests, and leaves 11 to go, which probably needs other fix"
+    },
+    {
+        "number": 1381,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-22T19:18:54Z",
+        "comment_author": "kcudnik",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1381,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-22T19:19:05Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1381,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-22T19:19:32Z",
+        "comment_author": "kcudnik",
+        "comment_body": "@prsunny https://github.com/sonic-net/sonic-swss/pull/3154 could this be the issue we see here on this repo? many PRs are failing in similar way, almost all tests fail in connection issue"
+    },
+    {
+        "number": 1381,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-22T20:34:40Z",
+        "comment_author": "prsunny",
+        "comment_body": "> @prsunny [sonic-net/sonic-swss#3154](https://github.com/sonic-net/sonic-swss/pull/3154) could this be the issue we see here on this repo? many PRs are failing in similar way, almost all tests fail in connection issue\r\n\r\nwe've another issue on swss thats being tracked. But this could be an issue as well"
+    },
+    {
+        "number": 1381,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-23T06:29:42Z",
+        "comment_author": "kcudnik",
+        "comment_body": "@prsunny @rlhui i made separate pr to fix pipeline: https://github.com/sonic-net/sonic-sairedis/pull/1382 just to see if this will fix the issue"
+    },
+    {
+        "number": 1381,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-23T18:25:53Z",
+        "comment_author": "kcudnik",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1381,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-23T18:26:04Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1380,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-20T17:50:22Z",
+        "comment_author": "Yakiv-Huryk",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1380,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-20T17:50:24Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1380,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-20T17:50:35Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1380,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-21T16:57:55Z",
+        "comment_author": "Yakiv-Huryk",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1380,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-21T16:57:57Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1380,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-21T16:58:09Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1380,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-24T16:53:18Z",
+        "comment_author": "Yakiv-Huryk",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1380,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-24T16:53:21Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1380,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-24T16:53:31Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1380,
+        "repo": "sonic-sairedis",
+        "review_at": "2024-05-20T14:14:47Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1380,
+        "repo": "sonic-sairedis",
+        "review_at": "2024-05-21T16:01:02Z",
+        "review_author": "oleksandrivantsiv"
+    },
+    {
+        "number": 1380,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2024-05-20T14:14:47Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1380,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2024-05-21T16:01:02Z",
+        "latestReview_author": "oleksandrivantsiv",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 1377,
         "repo": "sonic-sairedis",
         "comment_at": "2024-05-09T07:35:12Z",
@@ -23,6 +189,74 @@
         "number": 1377,
         "repo": "sonic-sairedis",
         "latestReview_at": "2024-05-09T07:34:07Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1375,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-02T21:57:42Z",
+        "comment_author": "saksarav-nokia",
+        "comment_body": "@kcudnik , Please review"
+    },
+    {
+        "number": 1375,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-08T13:25:08Z",
+        "comment_author": "saksarav-nokia",
+        "comment_body": "@kcudnik , The following errors don't seem to be related to my changes. Could you please check?\r\n\r\n2024-05-03T07:00:35.3530529Z [       OK ] ClientServerSai.MCAST_FDB_ENTRY (7 ms)\r\n2024-05-03T07:00:35.3530896Z [ RUN      ] ClientServerSai.NEIGHBOR_ENTRY\r\n2024-05-03T07:00:35.3588404Z Assertion failed: pfd.revents & POLLIN (src/signaler.cpp:265)\r\n2024-05-03T07:00:35.6283404Z /bin/bash: line 6: 24157 Aborted                 (core dumped) ${dir}$tst\r\n2024-05-03T07:00:35.6310396Z FAIL: tests\r\n2024-05-03T07:00:35.6333449Z ===================\r\n2024-05-03T07:00:35.6333615Z 1 of 2 tests failed\r\n2024-05-03T07:00:35.6333720Z ===================\r\n2024-05-03T07:00:35.6344952Z make[3]: Leaving directory '/__w/1/s/unittest/lib'\r\n2024-05-03T07:00:35.6345307Z make[2]: Leaving directory '/__w/1/s/unittest/lib'\r\n2024-05-03T07:00:35.6352726Z make[3]: *** [Makefile:1975: check-TESTS] Error 1\r\n2024-05-03T07:00:35.6353348Z make[2]: *** [Makefile:2101: check-am] Error 2\r\n2024-05-03T07:00:35.6354243Z make[1]: *** [Makefile:405: check-recursive] Error 1\r\n2024-05-03T07:00:35.6360517Z make[1]: Leaving directory '/__w/1/s/unittest'\r\n2024-05-03T07:00:35.6366782Z make: *** [Makefile:460: check-recursive] Error 1\r\n2024-05-03T07:00:35.6380667Z \r\n2024-05-03T07:00:35.6454915Z ##[error]Bash exited with code '2'.\r\n2024-05-03T07:00:35.6539806Z ##[section]Finishing: Run sonic sairedis unit tests"
+    },
+    {
+        "number": 1375,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-08T14:06:14Z",
+        "comment_author": "kcudnik",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1375,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-08T14:06:24Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1375,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-08T14:06:24Z",
+        "comment_author": "kcudnik",
+        "comment_body": "This error seems to be related to zmq"
+    },
+    {
+        "number": 1375,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-10T06:48:37Z",
+        "comment_author": "kcudnik",
+        "comment_body": "no issue now :)"
+    },
+    {
+        "number": 1375,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-25T08:29:26Z",
+        "comment_author": "kcudnik",
+        "comment_body": "i'm wondering whether not move to to some config file, or add sairedis API for OA  to make control what's recorded or not"
+    },
+    {
+        "number": 1375,
+        "repo": "sonic-sairedis",
+        "review_at": "2024-05-03T06:34:59Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1375,
+        "repo": "sonic-sairedis",
+        "review_at": "2024-05-25T08:28:16Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1375,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2024-05-25T08:28:16Z",
         "latestReview_author": "kcudnik",
         "latestReview_state": "APPROVED"
     },
@@ -340,6 +574,13 @@
         "latestReview_at": "2024-04-03T07:49:55Z",
         "latestReview_author": "kcudnik",
         "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1363,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-25T16:56:17Z",
+        "comment_author": "kcudnik",
+        "comment_body": "Will be needed for DASH application\r\n\r\nSAI proxy will forward every SAI api call to server"
     },
     {
         "number": 1362,

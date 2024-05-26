@@ -1,5 +1,19 @@
 [
     {
+        "number": 129,
+        "repo": "sonic-host-services",
+        "comment_at": "2024-05-21T21:38:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-host-services/pull/106"
+    },
+    {
+        "number": 126,
+        "repo": "sonic-host-services",
+        "comment_at": "2024-05-20T23:29:58Z",
+        "comment_author": "gechiang",
+        "comment_body": "We also need this for 202205 which T2 chassis is still actively using the branch and need this bug fix."
+    },
+    {
         "number": 126,
         "repo": "sonic-host-services",
         "review_at": "2024-05-17T20:41:06Z",
@@ -76,6 +90,38 @@
         "repo": "sonic-host-services",
         "latestReview_at": "2024-05-11T02:24:39Z",
         "latestReview_author": "liuh-80",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 120,
+        "repo": "sonic-host-services",
+        "comment_at": "2024-04-26T02:06:13Z",
+        "comment_author": "abdosi",
+        "comment_body": "@anamehra @mlok-nokia for viz."
+    },
+    {
+        "number": 120,
+        "repo": "sonic-host-services",
+        "review_at": "2024-05-17T00:06:19Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 120,
+        "repo": "sonic-host-services",
+        "review_at": "2024-05-20T20:30:08Z",
+        "review_author": "abdosi"
+    },
+    {
+        "number": 120,
+        "repo": "sonic-host-services",
+        "review_at": "2024-05-21T04:11:32Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 120,
+        "repo": "sonic-host-services",
+        "latestReview_at": "2024-05-21T04:11:32Z",
+        "latestReview_author": "judyjoseph",
         "latestReview_state": "APPROVED"
     },
     {
@@ -313,6 +359,13 @@
         "comment_at": "2024-03-21T05:32:57Z",
         "comment_author": "liuh-80",
         "comment_body": "> Could you paste the crash stack? Could you check the coverage?\r\n\r\nHere is the crash stack in syslog:\r\n\r\nMar 13 06:40:24.354944 vlab-01 INFO hostcfgd[17776]: Traceback (most recent call last):\r\nMar 13 06:40:24.355016 vlab-01 INFO hostcfgd[17776]:   File \"/usr/local/bin/hostcfgd\", line 1799, in <module>\r\nMar 13 06:40:24.355353 vlab-01 INFO hostcfgd[17776]:     main()\r\nMar 13 06:40:24.355403 vlab-01 INFO hostcfgd[17776]:   File \"/usr/local/bin/hostcfgd\", line 1796, in main\r\nMar 13 06:40:24.355596 vlab-01 INFO hostcfgd[17776]:     daemon.start()\r\nMar 13 06:40:24.355643 vlab-01 INFO hostcfgd[17776]:   File \"/usr/local/bin/hostcfgd\", line 1788, in start\r\nMar 13 06:40:24.355975 vlab-01 INFO hostcfgd[17776]:     self.config_db.listen(init_data_handler=self.load)\r\nMar 13 06:40:24.356032 vlab-01 INFO hostcfgd[17776]:   File \"/usr/lib/python3/dist-packages/swsscommon/swsscommon.py\", line 2539, in listen\r\nMar 13 06:40:24.356884 vlab-01 INFO hostcfgd[17776]:     self.__fire(table, row, data)\r\nMar 13 06:40:24.356955 vlab-01 INFO hostcfgd[17776]:   File \"/usr/lib/python3/dist-packages/swsscommon/swsscommon.py\", line 2606, in __fire\r\nMar 13 06:40:24.357448 vlab-01 INFO hostcfgd[17776]:     handler(table, key, data)\r\nMar 13 06:40:24.357505 vlab-01 INFO hostcfgd[17776]:   File \"/usr/local/bin/hostcfgd\", line 1733, in callback\r\nMar 13 06:40:24.357844 vlab-01 INFO hostcfgd[17776]:     return func(key, op, data)\r\nMar 13 06:40:24.357899 vlab-01 INFO hostcfgd[17776]:            ^^^^^^^^^^^^^^^^^^^\r\nMar 13 06:40:24.357940 vlab-01 INFO hostcfgd[17776]:   File \"/usr/local/bin/hostcfgd\", line 1599, in aaa_handler\r\nMar 13 06:40:24.358215 vlab-01 INFO hostcfgd[17776]:     self.aaacfg.aaa_update(key, data)\r\nMar 13 06:40:24.358263 vlab-01 INFO hostcfgd[17776]:   File \"/usr/local/bin/hostcfgd\", line 304, in aaa_update\r\nMar 13 06:40:24.358430 vlab-01 INFO hostcfgd[17776]:     self.modify_conf_file()\r\nMar 13 06:40:24.358472 vlab-01 INFO hostcfgd[17776]:   File \"/usr/local/bin/hostcfgd\", line 487, in modify_conf_file\r\nMar 13 06:40:24.358523 vlab-01 INFO hostcfgd[17776]:     authorization.update(self.authorization)\r\nMar 13 06:40:24.358581 vlab-01 INFO hostcfgd[17776]: TypeError: 'NoneType' object is not iterable\r\nMar 13 06:40:24.540918 vlab-01 NOTICE systemd[1]: hostcfgd.service: Main process exited, code=exited, status=1/FAILURE"
+    },
+    {
+        "number": 106,
+        "repo": "sonic-host-services",
+        "comment_at": "2024-05-21T21:38:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202311: https://github.com/sonic-net/sonic-host-services/pull/129"
     },
     {
         "number": 106,
