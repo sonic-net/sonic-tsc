@@ -10737,6 +10737,20 @@
     {
         "number": 10079,
         "repo": "sonic-mgmt",
+        "comment_at": "2024-05-27T07:58:25Z",
+        "comment_author": "vivekverma-arista",
+        "comment_body": "This has broken the following testcases for active-standby dualtor in 202305, 202311 and master -\r\n\r\n```\r\n1. qos/test_tunnel_qos_remap.py::test_encap_dscp_rewrite[active-standby]\r\n2. qos/test_tunnel_qos_remap.py::test_bounced_back_traffic_in_expected_queue[active-standby]\r\n3. qos/test_tunnel_qos_remap.py::test_tunnel_decap_dscp_to_queue_mapping\r\n```\r\n\r\n```\r\n @pytest.fixture\r\n def toggle_all_aa_ports_to_lower_tor(config_active_active_dualtor_active_standby,\r\n lower_tor_host, upper_tor_host, active_active_ports): # noqa F811\r\n&gt; config_active_active_dualtor_active_standby(lower_tor_host, upper_tor_host, active_active_ports)\r\nE TypeError: 'NoneType' object is not callable\r\n```\r\n\r\n```\r\n @pytest.fixture\r\n def toggle_all_aa_ports_to_rand_selected_tor(config_active_active_dualtor_active_standby,\r\n rand_selected_dut, rand_unselected_dut, active_active_ports): # noqa F811\r\n&gt; config_active_active_dualtor_active_standby(rand_selected_dut, rand_unselected_dut, active_active_ports)\r\nE TypeError: 'NoneType' object is not callable\r\n```\r\nThis is because the check for active-active ports is missing similar to this: https://github.com/sonic-net/sonic-mgmt/blob/master/tests/common/dualtor/dual_tor_utils.py#L1807\r\n"
+    },
+    {
+        "number": 10079,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-05-27T14:47:17Z",
+        "comment_author": "vivekverma-arista",
+        "comment_body": "> This has broken the following testcases for active-standby dualtor in 202305, 202311 and master -\r\n> \r\n> ```\r\n> 1. qos/test_tunnel_qos_remap.py::test_encap_dscp_rewrite[active-standby]\r\n> 2. qos/test_tunnel_qos_remap.py::test_bounced_back_traffic_in_expected_queue[active-standby]\r\n> 3. qos/test_tunnel_qos_remap.py::test_tunnel_decap_dscp_to_queue_mapping\r\n> ```\r\n> \r\n> ```\r\n> @pytest.fixture\r\n> def toggle_all_aa_ports_to_lower_tor(config_active_active_dualtor_active_standby,\r\n> lower_tor_host, upper_tor_host, active_active_ports): # noqa F811\r\n> &gt; config_active_active_dualtor_active_standby(lower_tor_host, upper_tor_host, active_active_ports)\r\n> E TypeError: 'NoneType' object is not callable\r\n> ```\r\n> \r\n> ```\r\n> @pytest.fixture\r\n> def toggle_all_aa_ports_to_rand_selected_tor(config_active_active_dualtor_active_standby,\r\n> rand_selected_dut, rand_unselected_dut, active_active_ports): # noqa F811\r\n> &gt; config_active_active_dualtor_active_standby(rand_selected_dut, rand_unselected_dut, active_active_ports)\r\n> E TypeError: 'NoneType' object is not callable\r\n> ```\r\n> \r\n> This is because the check for active-active ports is missing similar to this: https://github.com/sonic-net/sonic-mgmt/blob/master/tests/common/dualtor/dual_tor_utils.py#L1807\r\n\r\nhttps://github.com/sonic-net/sonic-mgmt/pull/13001 raised to fix this."
+    },
+    {
+        "number": 10079,
+        "repo": "sonic-mgmt",
         "review_at": "2023-10-27T08:48:57Z",
         "review_author": "lolyu"
     },
