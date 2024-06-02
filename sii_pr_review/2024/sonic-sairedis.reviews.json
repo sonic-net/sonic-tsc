@@ -1,5 +1,26 @@
 [
     {
+        "number": 1384,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-26T17:12:04Z",
+        "comment_author": "kcudnik",
+        "comment_body": "later on entire libsaistub can be auto generated from saimetadata, it's just as stub for API call"
+    },
+    {
+        "number": 1383,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-26T10:47:25Z",
+        "comment_author": "kcudnik",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1383,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-26T10:47:36Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
         "number": 1382,
         "repo": "sonic-sairedis",
         "comment_at": "2024-05-23T11:07:47Z",
@@ -333,6 +354,174 @@
         "number": 1374,
         "repo": "sonic-sairedis",
         "latestReview_at": "2024-04-23T08:07:52Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1373,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-04-21T14:49:10Z",
+        "comment_author": "kcudnik",
+        "comment_body": "looks good, make code coverage and unnitests, and move out from draft then i will review it"
+    },
+    {
+        "number": 1373,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-21T17:52:49Z",
+        "comment_author": "Ndancejic",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1373,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-21T17:52:52Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1373,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-21T17:53:04Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1373,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-21T20:52:48Z",
+        "comment_author": "Ndancejic",
+        "comment_body": "@kcudnik Could you take a look? not sure what else I need for coverage, but the tests that are failing are common among other PRs out right now"
+    },
+    {
+        "number": 1373,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-22T08:32:12Z",
+        "comment_author": "kcudnik",
+        "comment_body": "not passing tests you can ignore, those are flaky, but you can see that you don't have tests that cover your code, and here is exactly showed where: https://dev.azure.com/mssonic/build/_build/results?buildId=552818&view=codecoverage-tab"
+    },
+    {
+        "number": 1373,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-22T19:42:27Z",
+        "comment_author": "kcudnik",
+        "comment_body": "```\r\nmain::test_bulk_neighbor: Fresh start\r\nKilling syncd\r\nFlushing redis\r\nStarting syncd\r\nReplay BCM56850/bulk_neighbor.rec\r\nterminate called after throwing an instance of 'std::runtime_error'\r\n  what():  :- translate_local_to_redis: failed to translate local RID oid:0x20000000006ee\r\nplayer BCM56850/bulk_neighbor.rec: exitcode: 134:\r\nFAIL: BCM56850.pl\r\n```\r\n\r\nyou can make run tests locally on your dev machine by making \"make check\" and post when they pass\r\n\r\nRID translation is problem that you used RID value of object that was not created previously in script or was not obtained by GET api"
+    },
+    {
+        "number": 1373,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-22T20:54:15Z",
+        "comment_author": "Ndancejic",
+        "comment_body": "> ```\r\n> main::test_bulk_neighbor: Fresh start\r\n> Killing syncd\r\n> Flushing redis\r\n> Starting syncd\r\n> Replay BCM56850/bulk_neighbor.rec\r\n> terminate called after throwing an instance of 'std::runtime_error'\r\n>   what():  :- translate_local_to_redis: failed to translate local RID oid:0x20000000006ee\r\n> player BCM56850/bulk_neighbor.rec: exitcode: 134:\r\n> FAIL: BCM56850.pl\r\n> ```\r\n> \r\n> you can make run tests locally on your dev machine by making \"make check\" and post when they pass\r\n> \r\n> RID translation is problem that you used RID value of object that was not created previously in script or was not obtained by GET api\r\n\r\nI run into the following error when trying to run autogen.sh: `configure.ac:32: error: AM_COND_IF: no such condition \"CODE_COVERAGE_ENABLED\"`"
+    },
+    {
+        "number": 1373,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-23T13:10:04Z",
+        "comment_author": "kcudnik",
+        "comment_body": "you need to install \" autoconf-archive\" packaged in ubuntu that contains that code coverage sctipt"
+    },
+    {
+        "number": 1373,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-23T17:22:01Z",
+        "comment_author": "Ndancejic",
+        "comment_body": "> you need to install \" autoconf-archive\" packaged in ubuntu that contains that code coverage sctipt\r\n\r\nI see, I'll get that set up for next time then. I was able to get the coverage passing in the meantime, so this PR is ready for review/merge"
+    },
+    {
+        "number": 1373,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-28T21:53:06Z",
+        "comment_author": "Ndancejic",
+        "comment_body": "@kcudnik Coverage and tests are passing in the last commit, could you please review"
+    },
+    {
+        "number": 1373,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-29T06:04:46Z",
+        "comment_author": "Ndancejic",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1373,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-29T06:04:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1373,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-29T06:04:59Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1373,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-29T09:47:07Z",
+        "comment_author": "kcudnik",
+        "comment_body": "@Ndancejic  i made big refactor on master, removed a lot of unnecessary code, please resolve conflicts and check build "
+    },
+    {
+        "number": 1373,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-05-29T18:52:30Z",
+        "comment_author": "Ndancejic",
+        "comment_body": "@kcudnik rebased onto the latest, please take a look and approve if no additional comments"
+    },
+    {
+        "number": 1373,
+        "repo": "sonic-sairedis",
+        "review_at": "2024-05-24T00:13:08Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 1373,
+        "repo": "sonic-sairedis",
+        "review_at": "2024-05-24T00:13:30Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 1373,
+        "repo": "sonic-sairedis",
+        "review_at": "2024-05-24T00:30:42Z",
+        "review_author": "Ndancejic"
+    },
+    {
+        "number": 1373,
+        "repo": "sonic-sairedis",
+        "review_at": "2024-05-24T08:04:21Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1373,
+        "repo": "sonic-sairedis",
+        "review_at": "2024-05-24T18:01:03Z",
+        "review_author": "Ndancejic"
+    },
+    {
+        "number": 1373,
+        "repo": "sonic-sairedis",
+        "review_at": "2024-05-24T18:01:48Z",
+        "review_author": "Ndancejic"
+    },
+    {
+        "number": 1373,
+        "repo": "sonic-sairedis",
+        "review_at": "2024-05-29T19:20:46Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1373,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2024-05-24T00:13:30Z",
+        "latestReview_author": "prsunny",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 1373,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2024-05-29T19:20:46Z",
         "latestReview_author": "kcudnik",
         "latestReview_state": "APPROVED"
     },
