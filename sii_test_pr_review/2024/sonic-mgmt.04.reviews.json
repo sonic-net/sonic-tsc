@@ -2361,6 +2361,20 @@
     {
         "number": 12467,
         "repo": "sonic-mgmt",
+        "comment_at": "2024-06-14T06:42:10Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202305: https://github.com/sonic-net/sonic-mgmt/pull/13299"
+    },
+    {
+        "number": 12467,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-06-14T06:42:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202311: https://github.com/sonic-net/sonic-mgmt/pull/13300"
+    },
+    {
+        "number": 12467,
+        "repo": "sonic-mgmt",
         "review_at": "2024-04-18T03:25:54Z",
         "review_author": "StormLiangMS"
     },
@@ -5500,6 +5514,13 @@
     {
         "number": 12283,
         "repo": "sonic-mgmt",
+        "comment_at": "2024-06-04T00:52:56Z",
+        "comment_author": "siqbal1986",
+        "comment_body": "@StormLiangMS @yxieca reminder."
+    },
+    {
+        "number": 12283,
+        "repo": "sonic-mgmt",
         "review_at": "2024-04-08T19:09:27Z",
         "review_author": "prsunny"
     },
@@ -5558,6 +5579,13 @@
         "comment_at": "2024-05-08T15:35:34Z",
         "comment_author": "selldinesh",
         "comment_body": "> @dks0692 : Seeing it with\r\n> \r\n> ```\r\n> sonic@snappi-202305-sonic-mgmt:~$ pip list | grep snappi\r\n> snappi 0.9.1\r\n> snappi-convergence 0.4.1\r\n> snappi-ixnetwork 0.9.1\r\n> sonic@snappi-202305-sonic-mgmt:~$ \r\n> ```\r\n\r\n@rraghav-cisco could u please modify the snappi-convergence and snappi-ixnetwork versions as mentioned above and give a try"
+    },
+    {
+        "number": 12279,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-06-16T15:05:20Z",
+        "comment_author": "rraghav-cisco",
+        "comment_body": "@selldinesh , with this also I am seeing the problem. Does it matter if the python2 is still the other package version?\r\n\r\n```\r\nFAILED snappi_tests/reboot/test_cold_reboot.py::test_reboot[cold] - AttributeError: 'LagPort' object has no attribute 'protocol'\r\nFAILED snappi_tests/reboot/test_fast_reboot.py::test_reboot[fast] - AttributeError: 'LagPort' object has no attribute 'protocol'\r\nFAILED snappi_tests/reboot/test_soft_reboot.py::test_reboot[soft] - AttributeError: 'LagPort' object has no attribute 'protocol'\r\nFAILED snappi_tests/reboot/test_warm_reboot.py::test_reboot[warm] - AttributeError: 'LagPort' object has no attribute 'protocol'\r\n```\r\n\r\nPython3 has the required snappi versions:\r\n```\r\nsonic@snappi-202311-sonic-mgmt:/data/tests$ pip3 list | grep snappi\r\nsnappi 0.9.1\r\nsnappi-convergence 0.4.1\r\nsnappi-ixnetwork 0.9.1\r\nWARNING: There was an error checking the latest version of pip.\r\nsonic@snappi-202311-sonic-mgmt:/data/tests$ pip list | grep snappi\r\nDEPRECATION: Python 2.7 reached the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 is no longer maintained. pip 21.0 will drop support for Python 2.7 in January 2021. More details about Python 2 support in pip can be found at https://pip.pypa.io/en/latest/development/release-process/#python-2-support pip 21.0 will remove support for this functionality.\r\nsnappi 0.7.44\r\nsnappi-convergence 0.2.2\r\nsnappi-ixnetwork 0.7.12\r\nsonic@snappi-202311-sonic-mgmt:/data/tests$ \r\n\r\n```"
     },
     {
         "number": 12279,
@@ -6656,6 +6684,20 @@
     {
         "number": 12224,
         "repo": "sonic-mgmt",
+        "comment_at": "2024-06-10T16:11:44Z",
+        "comment_author": "vkjammala-arista",
+        "comment_body": "Hi, we need this fix on 202305 branch (using python3) as well. Please help merging this fix to 202311 and 202305 branches, Thanks!"
+    },
+    {
+        "number": 12224,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-06-10T16:48:56Z",
+        "comment_author": "wenyiz2021",
+        "comment_body": "@wangxin could you help to backport this change to 202311 and 202305 branches? added labels, thanks!"
+    },
+    {
+        "number": 12224,
+        "repo": "sonic-mgmt",
         "review_at": "2024-04-08T22:21:47Z",
         "review_author": "wenyiz2021"
     },
@@ -7115,6 +7157,13 @@
         "comment_at": "2024-05-22T08:20:05Z",
         "comment_author": "mhen1",
         "comment_body": "Hey,\r\nI\u2019ve added a new PR, updated with the skip reasons - Updated skip reasons on Mellanox platforms by mhen1 \u00b7 Pull Request #12939 \u00b7 sonic-net/sonic-mgmt (github.com)<https://github.com/sonic-net/sonic-mgmt/pull/12939>.\r\nThanks,\r\nMor Hen\r\n\r\nFrom: bingwang-ms ***@***.***>\r\nSent: Thursday, 9 May 2024 18:37\r\nTo: sonic-net/sonic-mgmt ***@***.***>\r\nCc: Mor Hen ***@***.***>; Mention ***@***.***>\r\nSubject: Re: [sonic-net/sonic-mgmt] Add new skips on mellanox platforms to .yml file (PR #12183)\r\n\r\n\r\nBelow tests are passing on Mellanox platform\r\n\r\ntest_show_platform_fanstatus_mocked\r\n\r\ntest_thermal_control_fan_status\r\n\r\ntest_thermal_control_load_invalid_format_json\r\n\r\ntest_thermal_control_load_invalid_value_json\r\n\r\nBelow test is always disabled\r\ntest_buffer_model_test\r\nPlease double check.\r\n\r\n\u2014\r\nReply to this email directly, view it on GitHub<https://github.com/sonic-net/sonic-mgmt/pull/12183#issuecomment-2102907516>, or unsubscribe<https://github.com/notifications/unsubscribe-auth/BFFHNL4F5DLNI52FKYS3LETZBOJ3NAVCNFSM6AAAAABFI2NE3OVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDCMBSHEYDONJRGY>.\r\nYou are receiving this because you were mentioned.Message ID: ***@***.***>\r\n"
+    },
+    {
+        "number": 12183,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-06-19T10:25:43Z",
+        "comment_author": "mhen1",
+        "comment_body": "Hey,\r\nCould you please take a look and approve it?\r\nThanks,\r\nMor Hen\r\n\r\nFrom: Mor Hen ***@***.***>\r\nSent: Wednesday, 22 May 2024 11:20\r\nTo: sonic-net/sonic-mgmt ***@***.***>; sonic-net/sonic-mgmt ***@***.***>; Xin Wang ***@***.***>\r\nCc: Mention ***@***.***>; Roy Sror ***@***.***>\r\nSubject: RE: [sonic-net/sonic-mgmt] Add new skips on mellanox platforms to .yml file (PR #12183)\r\n\r\nHey,\r\nI\u2019ve added a new PR, updated with the skip reasons - Updated skip reasons on Mellanox platforms by mhen1 \u00b7 Pull Request #12939 \u00b7 sonic-net/sonic-mgmt (github.com)<https://github.com/sonic-net/sonic-mgmt/pull/12939>.\r\nThanks,\r\nMor Hen\r\n\r\nFrom: bingwang-ms ***@***.******@***.***>>\r\nSent: Thursday, 9 May 2024 18:37\r\nTo: sonic-net/sonic-mgmt ***@***.******@***.***>>\r\nCc: Mor Hen ***@***.******@***.***>>; Mention ***@***.******@***.***>>\r\nSubject: Re: [sonic-net/sonic-mgmt] Add new skips on mellanox platforms to .yml file (PR #12183)\r\n\r\n\r\nBelow tests are passing on Mellanox platform\r\n\r\ntest_show_platform_fanstatus_mocked\r\n\r\ntest_thermal_control_fan_status\r\n\r\ntest_thermal_control_load_invalid_format_json\r\n\r\ntest_thermal_control_load_invalid_value_json\r\n\r\nBelow test is always disabled\r\ntest_buffer_model_test\r\nPlease double check.\r\n\r\n\u2014\r\nReply to this email directly, view it on GitHub<https://github.com/sonic-net/sonic-mgmt/pull/12183#issuecomment-2102907516>, or unsubscribe<https://github.com/notifications/unsubscribe-auth/BFFHNL4F5DLNI52FKYS3LETZBOJ3NAVCNFSM6AAAAABFI2NE3OVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDCMBSHEYDONJRGY>.\r\nYou are receiving this because you were mentioned.Message ID: ***@***.******@***.***>>\r\n"
     },
     {
         "number": 12183,
@@ -8494,6 +8543,27 @@
     {
         "number": 11998,
         "repo": "sonic-mgmt",
+        "comment_at": "2024-06-07T02:41:32Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "hi @yxieca for 202311 cherry pick. "
+    },
+    {
+        "number": 11998,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-06-07T02:41:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202305: https://github.com/sonic-net/sonic-mgmt/pull/13180"
+    },
+    {
+        "number": 11998,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-06-12T00:58:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202311: https://github.com/sonic-net/sonic-mgmt/pull/13236"
+    },
+    {
+        "number": 11998,
+        "repo": "sonic-mgmt",
         "review_at": "2024-04-08T22:19:21Z",
         "review_author": "wenyiz2021"
     },
@@ -8791,6 +8861,20 @@
         "comment_at": "2024-04-25T00:59:22Z",
         "comment_author": "StormLiangMS",
         "comment_body": "hi @yutongzhang-microsoft @wangxin closed the issue https://github.com/sonic-net/sonic-mgmt/issues/7874, caused test failure on nightly, could you make sure the test runs well on 202305/202311 before the cherry pick? I will reopen the issue till the cherry pick is done. "
+    },
+    {
+        "number": 11928,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-06-11T09:04:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202311: https://github.com/sonic-net/sonic-mgmt/pull/13224"
+    },
+    {
+        "number": 11928,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-06-11T09:04:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202305: https://github.com/sonic-net/sonic-mgmt/pull/13225"
     },
     {
         "number": 11928,
