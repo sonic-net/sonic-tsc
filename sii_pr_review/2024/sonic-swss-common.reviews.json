@@ -67,6 +67,76 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 878,
+        "repo": "sonic-swss-common",
+        "comment_at": "2024-05-29T05:36:50Z",
+        "comment_author": "lguohan",
+        "comment_body": "@Pterosaur , please check why build failure."
+    },
+    {
+        "number": 878,
+        "repo": "sonic-swss-common",
+        "comment_at": "2024-05-29T09:46:42Z",
+        "comment_author": "Pterosaur",
+        "comment_body": "> @Pterosaur , please check why build failure.\r\n\r\n@lguohan  We should cherry-pick https://github.com/sonic-net/sonic-swss-common/pull/836 to 202311 firstly."
+    },
+    {
+        "number": 878,
+        "repo": "sonic-swss-common",
+        "comment_at": "2024-05-30T08:10:31Z",
+        "comment_author": "Pterosaur",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 878,
+        "repo": "sonic-swss-common",
+        "comment_at": "2024-05-30T08:10:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 878,
+        "repo": "sonic-swss-common",
+        "comment_at": "2024-05-30T08:10:46Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 878,
+        "repo": "sonic-swss-common",
+        "comment_at": "2024-05-30T22:39:33Z",
+        "comment_author": "Pterosaur",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 878,
+        "repo": "sonic-swss-common",
+        "comment_at": "2024-05-30T22:39:35Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 878,
+        "repo": "sonic-swss-common",
+        "comment_at": "2024-05-30T22:39:47Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 878,
+        "repo": "sonic-swss-common",
+        "comment_at": "2024-05-31T09:25:19Z",
+        "comment_author": "Pterosaur",
+        "comment_body": "@lguohan @qiluo-msft Please help to approve and merge this to 202311"
+    },
+    {
+        "number": 878,
+        "repo": "sonic-swss-common",
+        "comment_at": "2024-06-03T02:52:09Z",
+        "comment_author": "keboliu",
+        "comment_body": "@yxieca would you please help to merge?"
+    },
+    {
         "number": 877,
         "repo": "sonic-swss-common",
         "comment_at": "2024-05-30T03:09:00Z",
@@ -263,6 +333,150 @@
         "repo": "sonic-swss-common",
         "latestReview_at": "2024-05-28T16:21:47Z",
         "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 873,
+        "repo": "sonic-swss-common",
+        "comment_at": "2024-05-01T19:19:19Z",
+        "comment_author": "arista-nwolfe",
+        "comment_body": "Tagging @mlok-nokia to confirm if this is a viable solution to the `CHASSIS_APP_DB` unix socket issue on multi-asic LCs we discussed in the meeting today."
+    },
+    {
+        "number": 873,
+        "repo": "sonic-swss-common",
+        "comment_at": "2024-05-02T14:41:40Z",
+        "comment_author": "mlok-nokia",
+        "comment_body": "> Tagging @mlok-nokia to confirm if this is a viable solution to the `CHASSIS_APP_DB` unix socket issue on multi-asic LCs we discussed in the meeting today.\r\n\r\nThis fix looks good to me.  It uses the same mechanism as how it has been handled in the local host. I think we can use this fix to make sonic-db-cli command behaves the same as 202205 branch. \r\n"
+    },
+    {
+        "number": 873,
+        "repo": "sonic-swss-common",
+        "comment_at": "2024-05-15T17:09:24Z",
+        "comment_author": "rlhui",
+        "comment_body": "@qiluo-msft  ping again, thx"
+    },
+    {
+        "number": 873,
+        "repo": "sonic-swss-common",
+        "comment_at": "2024-05-17T20:49:53Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "sonic-db-cli is behaving similar to redis-cli. If user provide `options.m_unixsocket`, we should stick with it. Even in existing code, I do not understand why options.m_unixsocket could be changed."
+    },
+    {
+        "number": 873,
+        "repo": "sonic-swss-common",
+        "comment_at": "2024-05-17T21:35:03Z",
+        "comment_author": "arlakshm",
+        "comment_body": "> sonic-db-cli is behaving similar to redis-cli. If user provide `options.m_unixsocket`, we should stick with it. Even in existing code, I do not understand why options.m_unixsocket could be changed.\r\n\r\n@qiluo-msft in the PR, https://github.com/sonic-net/sonic-swss-common/pull/797, change was made to always use unix socket when passing the `namespace` option to the `sonic-db-cli` command.\r\nThe user option is overwritten to use unixsocket in this case\r\n\r\nThis PR is fixing communication to chassis redis instance from namespace in the linecard, because we cannot use unixsocket in this case.\r\n"
+    },
+    {
+        "number": 873,
+        "repo": "sonic-swss-common",
+        "comment_at": "2024-05-29T05:41:06Z",
+        "comment_author": "lguohan",
+        "comment_body": "@qiluo-msft , can you check this one?"
+    },
+    {
+        "number": 873,
+        "repo": "sonic-swss-common",
+        "comment_at": "2024-06-05T03:08:09Z",
+        "comment_author": "judyjoseph",
+        "comment_body": "@arista-nwolfe could you rebase this branch "
+    },
+    {
+        "number": 873,
+        "repo": "sonic-swss-common",
+        "comment_at": "2024-06-12T22:08:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-swss-common/pull/883"
+    },
+    {
+        "number": 873,
+        "repo": "sonic-swss-common",
+        "comment_at": "2024-06-15T23:04:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@arista-nwolfe cherry pick PR didn't pass PR checker. Please check!!!<br>https://github.com/sonic-net/sonic-swss-common/pull/883"
+    },
+    {
+        "number": 873,
+        "repo": "sonic-swss-common",
+        "comment_at": "2024-06-16T23:04:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@arista-nwolfe cherry pick PR didn't pass PR checker. Please check!!!<br>https://github.com/sonic-net/sonic-swss-common/pull/883"
+    },
+    {
+        "number": 873,
+        "repo": "sonic-swss-common",
+        "comment_at": "2024-06-17T23:04:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@arista-nwolfe cherry pick PR didn't pass PR checker. Please check!!!<br>https://github.com/sonic-net/sonic-swss-common/pull/883"
+    },
+    {
+        "number": 873,
+        "repo": "sonic-swss-common",
+        "comment_at": "2024-06-18T23:01:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@arista-nwolfe cherry pick PR didn't pass PR checker. Please check!!!<br>https://github.com/sonic-net/sonic-swss-common/pull/883"
+    },
+    {
+        "number": 873,
+        "repo": "sonic-swss-common",
+        "comment_at": "2024-06-19T23:01:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@arista-nwolfe cherry pick PR didn't pass PR checker. Please check!!!<br>https://github.com/sonic-net/sonic-swss-common/pull/883"
+    },
+    {
+        "number": 873,
+        "repo": "sonic-swss-common",
+        "comment_at": "2024-06-20T23:01:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@arista-nwolfe cherry pick PR didn't pass PR checker. Please check!!!<br>https://github.com/sonic-net/sonic-swss-common/pull/883"
+    },
+    {
+        "number": 873,
+        "repo": "sonic-swss-common",
+        "comment_at": "2024-06-21T23:01:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@arista-nwolfe cherry pick PR didn't pass PR checker. Please check!!!<br>https://github.com/sonic-net/sonic-swss-common/pull/883"
+    },
+    {
+        "number": 873,
+        "repo": "sonic-swss-common",
+        "review_at": "2024-05-02T14:42:54Z",
+        "review_author": "mlok-nokia"
+    },
+    {
+        "number": 873,
+        "repo": "sonic-swss-common",
+        "review_at": "2024-05-17T20:39:32Z",
+        "review_author": "arlakshm"
+    },
+    {
+        "number": 873,
+        "repo": "sonic-swss-common",
+        "review_at": "2024-06-11T23:56:03Z",
+        "review_author": "liuh-80"
+    },
+    {
+        "number": 873,
+        "repo": "sonic-swss-common",
+        "latestReview_at": "2024-05-17T20:39:32Z",
+        "latestReview_author": "arlakshm",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 873,
+        "repo": "sonic-swss-common",
+        "latestReview_at": "2024-06-11T23:56:03Z",
+        "latestReview_author": "liuh-80",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 873,
+        "repo": "sonic-swss-common",
+        "latestReview_at": "2024-05-02T14:42:54Z",
+        "latestReview_author": "mlok-nokia",
         "latestReview_state": "APPROVED"
     },
     {

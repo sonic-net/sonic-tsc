@@ -1,5 +1,309 @@
 [
     {
+        "number": 410,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-06-19T16:04:13Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 410,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2024-06-19T16:04:13Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 409,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-06-19T16:03:45Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 409,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2024-06-19T16:03:45Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 405,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-06-14T09:47:08Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-linux-kernel/pull/397"
+    },
+    {
+        "number": 404,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-06-14T07:58:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-linux-kernel/pull/397"
+    },
+    {
+        "number": 403,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-06-14T07:58:16Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-linux-kernel/pull/397"
+    },
+    {
+        "number": 402,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-06-14T06:55:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-linux-kernel/pull/397"
+    },
+    {
+        "number": 401,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-06-13T16:12:13Z",
+        "comment_author": "prgeor",
+        "comment_body": "> This certainly fixes the immediate problem of kernel corruption, however it may have implications for low memory devices with high transceiver counts. The writebuf is completely unused in the use_smbus != 0 case, so an optimization might be to handle that specific case. For the pure i2c controllers using i2c_transfer, I had also considered reallocating in the sysfs write function, however that gets tricky with interactions with optoe_eeprom_write (as we don't want to hold a lock across the timeout retry loop). Finally, another option might be to have a stack based buffer in optoe_eeprom_write for small transfers, and dynamcally allocate/free within optoe_eeprom_write for large transfers (and avoid any allocation at all in the probe function). But again, this solution solves the immediate problem of kernel corruption, at the expense of more memory usage.\r\n\r\n@billie-alsup I had thought about this and I would prefer to keep the memory allocation once, instead of resizing the memory buffer size to the optoe's write data size causing fragmentation at runtime. I am doing a trade-off between memory (128 bytes * 128 physical ports) = 16KB waste vs memory fragmentation and simplicity that comes with static allocation."
+    },
+    {
+        "number": 401,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-06-13T17:14:57Z",
+        "comment_author": "prgeor",
+        "comment_body": "@mihirpat1 fyi"
+    },
+    {
+        "number": 401,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-06-14T08:02:30Z",
+        "comment_author": "liushilongbuaa",
+        "comment_body": "reopen this PR to run pipeline."
+    },
+    {
+        "number": 401,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-06-14T13:05:44Z",
+        "comment_author": "lguohan",
+        "comment_body": "@prgeor , can you open pr on 202311/202405 and master for this bug fix?"
+    },
+    {
+        "number": 401,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-06-13T16:05:32Z",
+        "review_author": "billie-alsup"
+    },
+    {
+        "number": 401,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2024-06-13T16:05:32Z",
+        "latestReview_author": "billie-alsup",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 400,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-06-10T21:35:43Z",
+        "review_author": "dgsudharsan"
+    },
+    {
+        "number": 400,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-06-10T21:36:05Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 400,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2024-06-10T21:36:05Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 400,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2024-06-10T21:35:43Z",
+        "latestReview_author": "dgsudharsan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 399,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-06-10T21:08:11Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-linux-kernel/pull/396"
+    },
+    {
+        "number": 397,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-06-05T02:47:37Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "@liushilongbuaa Should `sonicbld_8c` be removed? Not sure in what cases it should be used for."
+    },
+    {
+        "number": 397,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-06-05T05:34:27Z",
+        "comment_author": "liushilongbuaa",
+        "comment_body": "> @liushilongbuaa Should `sonicbld_8c` be removed? Not sure in what cases it should be used for.\r\n\r\nOh, yes. sonicbld_8c is deleted."
+    },
+    {
+        "number": 397,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-06-14T06:55:59Z",
+        "comment_author": "liushilongbuaa",
+        "comment_body": "202405 need this PR to run PR validation."
+    },
+    {
+        "number": 397,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-06-14T06:56:02Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-linux-kernel/pull/402"
+    },
+    {
+        "number": 397,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-06-14T07:58:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202305: https://github.com/sonic-net/sonic-linux-kernel/pull/403"
+    },
+    {
+        "number": 397,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-06-14T07:58:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202311: https://github.com/sonic-net/sonic-linux-kernel/pull/404"
+    },
+    {
+        "number": 397,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-06-14T09:47:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202205: https://github.com/sonic-net/sonic-linux-kernel/pull/405"
+    },
+    {
+        "number": 397,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-06-05T02:46:28Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 397,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2024-06-05T02:46:28Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 396,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-06-10T21:08:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-linux-kernel/pull/399"
+    },
+    {
+        "number": 396,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-06-04T00:11:44Z",
+        "review_author": "dgsudharsan"
+    },
+    {
+        "number": 396,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-06-04T00:28:38Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 396,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-06-04T00:34:57Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 396,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-06-04T00:36:19Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 396,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-06-06T17:07:08Z",
+        "review_author": "vivekrnv"
+    },
+    {
+        "number": 396,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-06-06T17:07:20Z",
+        "review_author": "vivekrnv"
+    },
+    {
+        "number": 396,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-06-06T17:07:28Z",
+        "review_author": "vivekrnv"
+    },
+    {
+        "number": 396,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-06-06T17:22:22Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 396,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2024-06-06T17:22:22Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 396,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2024-06-04T00:11:44Z",
+        "latestReview_author": "dgsudharsan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 395,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-06-14T08:02:56Z",
+        "comment_author": "lguohan",
+        "comment_body": "@saiarcot895  to confirm and merge. lgtm."
+    },
+    {
+        "number": 395,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-05-31T07:23:27Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 395,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-05-31T08:15:10Z",
+        "review_author": "roger530-ho"
+    },
+    {
+        "number": 395,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-06-14T08:02:16Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 395,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-06-20T17:22:40Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 395,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2024-06-14T08:02:16Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 395,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2024-06-20T17:22:40Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 394,
         "repo": "sonic-linux-kernel",
         "comment_at": "2024-05-21T23:45:52Z",
