@@ -1,10 +1,662 @@
 [
     {
+        "number": 3447,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-25T23:18:43Z",
+        "review_author": "wenyiz2021"
+    },
+    {
+        "number": 3447,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-07-25T23:18:43Z",
+        "latestReview_author": "wenyiz2021",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3445,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-24T18:06:07Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-utilities/pull/3408"
+    },
+    {
+        "number": 3442,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-23T22:55:07Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-utilities/pull/3437"
+    },
+    {
+        "number": 3441,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-23T22:54:34Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-utilities/pull/3437"
+    },
+    {
+        "number": 3440,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-23T22:52:38Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-utilities/pull/3437"
+    },
+    {
+        "number": 3437,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-23T22:52:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-utilities/pull/3440"
+    },
+    {
+        "number": 3437,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-23T22:54:38Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202311: https://github.com/sonic-net/sonic-utilities/pull/3441"
+    },
+    {
+        "number": 3437,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-23T22:55:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202305: https://github.com/sonic-net/sonic-utilities/pull/3442"
+    },
+    {
+        "number": 3437,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-23T07:42:07Z",
+        "review_author": "wen587"
+    },
+    {
+        "number": 3437,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-07-23T07:42:07Z",
+        "latestReview_author": "wen587",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3434,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-19T01:30:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-utilities/pull/3385"
+    },
+    {
+        "number": 3429,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-18T05:24:10Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 3429,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-07-18T05:24:10Z",
+        "latestReview_author": "StormLiangMS",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3427,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-16T05:10:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-utilities/pull/3353"
+    },
+    {
+        "number": 3427,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-16T06:04:16Z",
+        "comment_author": "evanpurcell",
+        "comment_body": "Was just working on a deployment with 202405 and hit an issue with config reloading through `config reload`\r\n\r\nRoot caused to run_command_in_alias_mode not respecting return_cmd which is used in config/main.py _is_system_starting (and other places).\r\n\r\nWorkaround is simple by exiting alias mode but  I wanted to point out that while you are returning the value of `run_command_in_alias_mode`, that value will always be None as `run_command_in_alias_mode` does not return a value. \r\n\r\nI am happy to author a patch that brings alias mode function prototype into alignment with run_command if that would be helpful.\r\n\r\n-Evan "
+    },
+    {
+        "number": 3427,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-16T07:17:27Z",
+        "comment_author": "yejianquan",
+        "comment_body": "> Was just working on a deployment with 202405 and hit an issue with config reloading through `config reload`\r\n> \r\n> Root caused to run_command_in_alias_mode not respecting return_cmd which is used in config/main.py _is_system_starting (and other places).\r\n> \r\n> Workaround is simple by exiting alias mode but I wanted to point out that while you are returning the value of `run_command_in_alias_mode`, that value will always be None as `run_command_in_alias_mode` does not return a value.\r\n> \r\n> I am happy to author a patch that brings alias mode function prototype into alignment with run_command if that would be helpful.\r\n> \r\n> -Evan\r\n\r\nThis commit is already in master, but not in 202405(before this PR)and now blocking the 202405 submodule advancing.\r\nBecause on alias mode, the removal of IP on an interface will fail because it returns before the task actually done.\r\n![image](https://github.com/user-attachments/assets/5ea585f5-cf1d-47d6-b6d7-eefd1422da5f)\r\n\r\nHence cherry-pick to 202405 is necessary. \r\n\r\nAs for fixing the return_val of `run_command_in_alias_mode` @saiarcot895  please suggest here"
+    },
+    {
+        "number": 3427,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-16T06:23:26Z",
+        "review_author": "yejianquan"
+    },
+    {
+        "number": 3427,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-07-16T06:23:26Z",
+        "latestReview_author": "yejianquan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3424,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-15T23:23:15Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 3424,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-15T23:39:36Z",
+        "review_author": "BYGX-wcr"
+    },
+    {
+        "number": 3424,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-16T22:17:09Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 3424,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-07-16T22:17:09Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3423,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-15T21:46:54Z",
+        "comment_author": "yejianquan",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3423,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-15T21:47:04Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3423,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-16T01:12:11Z",
+        "review_author": "cyw233"
+    },
+    {
+        "number": 3423,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-07-16T01:12:11Z",
+        "latestReview_author": "cyw233",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3418,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-15T21:27:51Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 3418,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-15T21:43:10Z",
+        "review_author": "AnoopKamath"
+    },
+    {
+        "number": 3418,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-16T04:21:11Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 3418,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-18T00:38:54Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 3418,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-18T00:39:38Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 3418,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-18T22:39:59Z",
+        "review_author": "AnoopKamath"
+    },
+    {
+        "number": 3418,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-18T22:40:13Z",
+        "review_author": "AnoopKamath"
+    },
+    {
+        "number": 3418,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-23T05:31:45Z",
+        "review_author": "Junchao-Mellanox"
+    },
+    {
+        "number": 3418,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-25T22:18:39Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 3418,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-25T22:19:55Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 3418,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-25T22:31:22Z",
+        "review_author": "AnoopKamath"
+    },
+    {
+        "number": 3418,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-25T22:37:53Z",
+        "review_author": "AnoopKamath"
+    },
+    {
+        "number": 3418,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-25T22:40:58Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 3418,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-26T00:17:01Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 3418,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-26T01:01:38Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 3418,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-07-26T01:01:38Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3418,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-07-23T05:31:45Z",
+        "latestReview_author": "Junchao-Mellanox",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3418,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-07-26T00:17:01Z",
+        "latestReview_author": "mihirpat1",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3417,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-18T17:27:46Z",
+        "comment_author": "wenyiz2021",
+        "comment_body": "@arlakshm @tjchadaga for viz, there is change in rexec to sort output LC names per request"
+    },
+    {
+        "number": 3417,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-24T22:44:33Z",
+        "comment_author": "gechiang",
+        "comment_body": "@BYGX-wcr , I am not able to cleanly cherry-pick this into the msft repo 202205 branch.\r\nPlease manually submit a new PR in this REPO:\r\nhttps://github.com/sonic-net/sonic-utilities.msft\r\nbranch 202205\r\nPlease tag me to review your new PR.\r\nThanks!"
+    },
+    {
+        "number": 3417,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-13T00:47:17Z",
+        "review_author": "wenyiz2021"
+    },
+    {
+        "number": 3417,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-13T00:49:06Z",
+        "review_author": "wenyiz2021"
+    },
+    {
+        "number": 3417,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-17T18:19:51Z",
+        "review_author": "BYGX-wcr"
+    },
+    {
+        "number": 3417,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-17T18:19:58Z",
+        "review_author": "BYGX-wcr"
+    },
+    {
+        "number": 3417,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-18T00:53:30Z",
+        "review_author": "wenyiz2021"
+    },
+    {
+        "number": 3417,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-18T16:26:22Z",
+        "review_author": "BYGX-wcr"
+    },
+    {
+        "number": 3417,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-18T17:26:48Z",
+        "review_author": "wenyiz2021"
+    },
+    {
+        "number": 3417,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-07-18T17:26:48Z",
+        "latestReview_author": "wenyiz2021",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3416,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-12T02:15:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-utilities/pull/3369"
+    },
+    {
+        "number": 3415,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-12T02:15:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-utilities/pull/3370"
+    },
+    {
+        "number": 3414,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-19T20:40:45Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 3414,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-07-19T20:40:45Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3408,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-09T12:57:19Z",
+        "comment_author": "ridahanif96",
+        "comment_body": "@dgsudharsan can you help review this PR"
+    },
+    {
+        "number": 3408,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-10T04:35:48Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "@bingwang-ms @qiluo-msft Can you please help to review and merge this fix?"
+    },
+    {
+        "number": 3408,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-10T08:58:32Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "@ridahanif96 Please create a separate PR for 202311"
+    },
+    {
+        "number": 3408,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-11T05:15:50Z",
+        "comment_author": "ridahanif96",
+        "comment_body": "> @ridahanif96 Please create a separate PR for 202311\r\n\r\n@dgsudharsan 202311 branch doesn't have these changes. Supported change is added in 202405. Should i make PR for 202405?"
+    },
+    {
+        "number": 3408,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-11T05:25:22Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "> > @ridahanif96 Please create a separate PR for 202311\r\n> \r\n> @dgsudharsan 202311 branch doesn't have these changes. Supported change is added in 202405. Should i make PR for 202405?\r\n\r\nI see. I removed request for 202311. No need separate PR for 202405 as there is a \"Request for 202405\" tag"
+    },
+    {
+        "number": 3408,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-11T05:36:41Z",
+        "comment_author": "ridahanif96",
+        "comment_body": "> > > @ridahanif96 Please create a separate PR for 202311\r\n> > \r\n> > \r\n> > @dgsudharsan 202311 branch doesn't have these changes. Supported change is added in 202405. Should i make PR for 202405?\r\n> \r\n> I see. I removed request for 202311. No need separate PR for 202405 as there is a \"Request for 202405\" tag\r\n\r\nOkay"
+    },
+    {
+        "number": 3408,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-11T05:37:42Z",
+        "comment_author": "ridahanif96",
+        "comment_body": "@qiluo-msft @bingwang-ms can you pls help review and merge this. Thanks in advance"
+    },
+    {
+        "number": 3408,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-23T04:23:06Z",
+        "comment_author": "ridahanif96",
+        "comment_body": "@qiluo-msft @bingwang-ms can you pls help review & merge this."
+    },
+    {
+        "number": 3408,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-24T15:01:29Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "@bingwang-ms Can you please cherry-pick for 202405?"
+    },
+    {
+        "number": 3408,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-24T18:06:11Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-utilities/pull/3445"
+    },
+    {
+        "number": 3408,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-10T04:35:11Z",
+        "review_author": "dgsudharsan"
+    },
+    {
+        "number": 3408,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-23T21:41:57Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 3408,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-07-23T21:41:57Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3408,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-07-10T04:35:11Z",
+        "latestReview_author": "dgsudharsan",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 3393,
         "repo": "sonic-utilities",
         "comment_at": "2024-07-01T20:45:19Z",
         "comment_author": "mssonicbld",
         "comment_body": "Original PR: https://github.com/sonic-net/sonic-utilities/pull/3389"
+    },
+    {
+        "number": 3392,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-01T20:44:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-utilities/pull/3389"
+    },
+    {
+        "number": 3392,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-01T23:01:03Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3392,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-01T23:01:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3392,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-02T23:04:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3392,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-02T23:05:03Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3392,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-03T23:01:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3392,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-03T23:01:34Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3392,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-04T23:01:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3392,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-04T23:01:49Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3392,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-05T23:01:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3392,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-05T23:01:50Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3392,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-06T23:04:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3392,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-06T23:05:05Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3392,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-07T23:04:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3392,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-07T23:04:45Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3392,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-08T23:00:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3392,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-08T23:01:09Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3392,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-09T23:01:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3392,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-09T23:01:36Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3392,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-10T23:01:16Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3392,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-10T23:01:26Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3392,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-11T23:04:35Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3392,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-11T23:04:45Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3391,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-01T08:06:55Z",
+        "review_author": "arlakshm"
+    },
+    {
+        "number": 3391,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-07-01T08:06:55Z",
+        "latestReview_author": "arlakshm",
+        "latestReview_state": "APPROVED"
     },
     {
         "number": 3390,
@@ -76,6 +728,34 @@
     {
         "number": 3389,
         "repo": "sonic-utilities",
+        "comment_at": "2024-07-07T23:04:38Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@dgsudharsan cherry pick PR didn't pass PR checker. Please check!!!<br>https://github.com/sonic-net/sonic-utilities/pull/3392"
+    },
+    {
+        "number": 3389,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-08T23:01:01Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@dgsudharsan cherry pick PR didn't pass PR checker. Please check!!!<br>https://github.com/sonic-net/sonic-utilities/pull/3392"
+    },
+    {
+        "number": 3389,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-09T23:01:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@dgsudharsan cherry pick PR didn't pass PR checker. Please check!!!<br>https://github.com/sonic-net/sonic-utilities/pull/3392"
+    },
+    {
+        "number": 3389,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-10T23:01:18Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@dgsudharsan cherry pick PR didn't pass PR checker. Please check!!!<br>https://github.com/sonic-net/sonic-utilities/pull/3392"
+    },
+    {
+        "number": 3389,
+        "repo": "sonic-utilities",
         "review_at": "2024-07-01T20:43:59Z",
         "review_author": "bingwang-ms"
     },
@@ -92,6 +772,52 @@
         "comment_at": "2024-06-27T16:38:58Z",
         "comment_author": "mssonicbld",
         "comment_body": "Original PR: https://github.com/sonic-net/sonic-utilities/pull/3356"
+    },
+    {
+        "number": 3385,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-18T22:48:03Z",
+        "comment_author": "mihirpat1",
+        "comment_body": "> @prgeor PR looks OK, but its in draft\r\n\r\n@prgeor I have published the PR now."
+    },
+    {
+        "number": 3385,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-19T01:30:19Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-utilities/pull/3434"
+    },
+    {
+        "number": 3385,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-17T02:48:10Z",
+        "review_author": "vivekrnv"
+    },
+    {
+        "number": 3385,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-18T22:46:27Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 3385,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-18T22:58:18Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 3385,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-07-17T02:48:10Z",
+        "latestReview_author": "vivekrnv",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3385,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-07-18T22:58:18Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
     },
     {
         "number": 3384,
@@ -161,11 +887,347 @@
         "comment_body": "Original PR: https://github.com/sonic-net/sonic-utilities/pull/3267"
     },
     {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-20T05:59:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-utilities/pull/3360"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-20T23:01:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-20T23:01:22Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-21T23:01:14Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-21T23:01:24Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-22T23:04:08Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-22T23:04:17Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-23T23:04:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-23T23:04:32Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-24T23:01:21Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-24T23:01:31Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-25T23:01:02Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-25T23:01:12Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-26T23:00:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-26T23:00:59Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-27T23:04:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-27T23:04:40Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-28T23:01:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-28T23:01:27Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-29T23:04:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-29T23:04:40Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-30T23:04:03Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-30T23:04:12Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-01T23:01:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-01T23:01:14Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-02T23:04:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-02T23:05:06Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-03T23:01:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-03T23:01:36Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-04T23:01:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-04T23:01:51Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-05T23:01:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-05T23:01:53Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-06T23:04:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-06T23:05:09Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-07T23:04:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-07T23:04:48Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-08T23:01:02Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-08T23:01:12Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-09T23:01:29Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-09T23:01:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-10T23:01:19Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-10T23:01:30Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-11T23:04:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3376,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-11T23:04:47Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
         "number": 3375,
         "repo": "sonic-utilities",
         "comment_at": "2024-06-24T00:18:36Z",
         "comment_author": "cyw233",
         "comment_body": "Created a PR in `sonic-mgmt` to sync with this typo fix: https://github.com/sonic-net/sonic-mgmt/pull/13395"
+    },
+    {
+        "number": 3375,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-15T07:06:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-utilities/pull/3421"
+    },
+    {
+        "number": 3375,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-15T07:08:34Z",
+        "comment_author": "yejianquan",
+        "comment_body": "Hi @gechiang , do you think we need to do compatibility on our production scripts?\r\nI don't know whether there's a possibility that, they just use 'Neighbhor' to check the BGP state.\r\nIn that case, if we correct the typo, maybe affect something."
+    },
+    {
+        "number": 3375,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-15T07:34:21Z",
+        "comment_author": "gechiang",
+        "comment_body": "We should not make this change.\r\n@zhangyanzhao asked me to make this change before and I did not think it is good idea to change it after this has been out like this misspelled for so many years.  Many community users may already adopt to this miss spelled word into their scripts and if we change this at this point, it will impact many of those automation scripts.\r\nWe should revert this change and just live with the way it is...\r\n"
     },
     {
         "number": 3375,
@@ -198,6 +1260,74 @@
         "latestReview_at": "2024-06-20T23:46:04Z",
         "latestReview_author": "abdosi",
         "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3373,
+        "repo": "sonic-utilities",
+        "review_at": "2024-06-20T07:52:57Z",
+        "review_author": "wen587"
+    },
+    {
+        "number": 3373,
+        "repo": "sonic-utilities",
+        "review_at": "2024-06-21T05:53:01Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 3373,
+        "repo": "sonic-utilities",
+        "review_at": "2024-06-21T17:51:51Z",
+        "review_author": "xincunli-sonic"
+    },
+    {
+        "number": 3373,
+        "repo": "sonic-utilities",
+        "review_at": "2024-06-25T00:50:50Z",
+        "review_author": "wen587"
+    },
+    {
+        "number": 3373,
+        "repo": "sonic-utilities",
+        "review_at": "2024-06-25T02:27:06Z",
+        "review_author": "wen587"
+    },
+    {
+        "number": 3373,
+        "repo": "sonic-utilities",
+        "review_at": "2024-06-25T03:20:04Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 3373,
+        "repo": "sonic-utilities",
+        "review_at": "2024-06-26T03:07:51Z",
+        "review_author": "wen587"
+    },
+    {
+        "number": 3373,
+        "repo": "sonic-utilities",
+        "review_at": "2024-06-28T00:36:25Z",
+        "review_author": "wen587"
+    },
+    {
+        "number": 3373,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-09T18:59:28Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 3373,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-07-09T18:59:28Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3373,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-06-28T00:36:25Z",
+        "latestReview_author": "wen587",
+        "latestReview_state": "DISMISSED"
     },
     {
         "number": 3371,
@@ -243,6 +1373,13 @@
     {
         "number": 3370,
         "repo": "sonic-utilities",
+        "comment_at": "2024-07-12T02:15:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-utilities/pull/3415"
+    },
+    {
+        "number": 3370,
+        "repo": "sonic-utilities",
         "review_at": "2024-06-18T17:31:56Z",
         "review_author": "prgeor"
     },
@@ -251,6 +1388,77 @@
         "repo": "sonic-utilities",
         "latestReview_at": "2024-06-18T17:31:56Z",
         "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3369,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-12T02:06:29Z",
+        "comment_author": "mihirpat1",
+        "comment_body": "@bingwang-ms Can you please help to merge this to 202405?\r\nMSFT ADO - 26677525"
+    },
+    {
+        "number": 3369,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-12T02:15:47Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-utilities/pull/3416"
+    },
+    {
+        "number": 3369,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-25T00:19:53Z",
+        "comment_author": "prgeor",
+        "comment_body": "@lguohan add the request for 202311 branch"
+    },
+    {
+        "number": 3369,
+        "repo": "sonic-utilities",
+        "review_at": "2024-06-18T21:56:12Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 3369,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-11T15:38:37Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 3369,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-11T15:44:45Z",
+        "review_author": "xinyulin"
+    },
+    {
+        "number": 3369,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-11T15:46:21Z",
+        "review_author": "xinyulin"
+    },
+    {
+        "number": 3369,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-11T16:23:17Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 3369,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-12T00:01:33Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 3369,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-07-12T00:01:33Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3369,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-07-11T16:23:17Z",
+        "latestReview_author": "mihirpat1",
         "latestReview_state": "APPROVED"
     },
     {
@@ -297,6 +1505,440 @@
         "latestReview_at": "2024-06-18T04:36:36Z",
         "latestReview_author": "ganglyu",
         "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-12T22:07:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-utilities/pull/3322"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-12T23:11:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-12T23:11:43Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-13T23:05:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-13T23:05:39Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-14T23:01:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-14T23:01:51Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-15T23:04:09Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-15T23:04:19Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-16T23:04:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-16T23:04:53Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-17T13:27:20Z",
+        "comment_author": "saksarav-nokia",
+        "comment_body": "The pipeline is failing with the following error and i don't think it is related to my changes. Please take a look.\r\n\r\n024-06-16T23:10:01.1067590Z ##[section]Starting: Download sonic swss common deb packages\r\n2024-06-16T23:10:01.1073174Z ==============================================================================\r\n2024-06-16T23:10:01.1073301Z Task         : Download Pipeline Artifacts\r\n2024-06-16T23:10:01.1073374Z Description  : Download build and pipeline artifacts\r\n2024-06-16T23:10:01.1073688Z Version      : 2.198.0\r\n2024-06-16T23:10:01.1073749Z Author       : Microsoft Corporation\r\n2024-06-16T23:10:01.1073822Z Help         : https://docs.microsoft.com/azure/devops/pipelines/tasks/utility/download-pipeline-artifact\r\n2024-06-16T23:10:01.1073941Z ==============================================================================\r\n2024-06-16T23:10:02.1351382Z ##[error]No builds currently exist in the pipeline definition supplied.\r\n2024-06-16T23:10:02.1842585Z ##[section]Finishing: Download sonic swss common deb packages"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-17T23:04:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-17T23:04:51Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-18T23:01:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-18T23:01:16Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-19T23:01:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-19T23:01:25Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-20T23:01:14Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-20T23:01:23Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-21T23:01:16Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-21T23:01:26Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-22T23:04:09Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-22T23:04:19Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-23T23:04:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-23T23:04:35Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-24T23:01:24Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-24T23:01:33Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-25T23:01:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-25T23:01:15Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-26T23:00:52Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-26T23:01:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-27T23:04:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-27T23:04:42Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-28T23:01:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-28T23:01:31Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-29T23:04:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-29T23:04:43Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-30T23:04:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-30T23:04:14Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-01T23:01:07Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-01T23:01:16Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-02T23:04:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-02T23:05:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-03T23:01:29Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-03T23:01:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-04T23:01:44Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-04T23:01:53Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-05T23:01:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-05T23:01:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-06T23:05:01Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-06T23:05:11Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-07T23:04:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-07T23:04:51Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-08T23:01:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-08T23:01:14Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-09T23:01:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-09T23:01:41Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-10T23:01:21Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-10T23:01:32Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-11T23:04:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-utilities"
+    },
+    {
+        "number": 3366,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-11T23:04:48Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
     },
     {
         "number": 3365,
@@ -654,6 +2296,34 @@
     {
         "number": 3357,
         "repo": "sonic-utilities",
+        "comment_at": "2024-07-07T23:04:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@dgsudharsan cherry pick PR didn't pass PR checker. Please check!!! Auto cherry pick PR will be closed in 3 days.<br>https://github.com/sonic-net/sonic-utilities/pull/3361"
+    },
+    {
+        "number": 3357,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-08T23:01:09Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@dgsudharsan cherry pick PR didn't pass PR checker. Please check!!! Auto cherry pick PR will be closed in 3 days.<br>https://github.com/sonic-net/sonic-utilities/pull/3361"
+    },
+    {
+        "number": 3357,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-09T23:01:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@dgsudharsan cherry pick PR didn't pass PR checker. Please check!!! Auto cherry pick PR will be closed in 3 days.<br>https://github.com/sonic-net/sonic-utilities/pull/3361"
+    },
+    {
+        "number": 3357,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-10T23:01:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@dgsudharsan cherry pick PR didn't pass PR checker. Please check!!! Auto cherry pick PR will be closed in 3 days.<br>https://github.com/sonic-net/sonic-utilities/pull/3361"
+    },
+    {
+        "number": 3357,
+        "repo": "sonic-utilities",
         "review_at": "2024-06-06T23:24:42Z",
         "review_author": "oleksandrivantsiv"
     },
@@ -744,6 +2414,13 @@
         "comment_at": "2024-06-05T06:31:21Z",
         "comment_author": "mssonicbld",
         "comment_body": "Original PR: https://github.com/sonic-net/sonic-utilities/pull/3276"
+    },
+    {
+        "number": 3353,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-16T05:10:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-utilities/pull/3427"
     },
     {
         "number": 3353,
@@ -1059,6 +2736,13 @@
         "comment_at": "2024-06-24T06:48:42Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202311: https://github.com/sonic-net/sonic-utilities/pull/3384"
+    },
+    {
+        "number": 3342,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-25T16:03:27Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "@StormLiangMS Please check if this change is required for 202305 branch."
     },
     {
         "number": 3342,
@@ -1698,6 +3382,34 @@
         "comment_at": "2024-06-21T23:01:17Z",
         "comment_author": "mssonicbld",
         "comment_body": "@saksarav-nokia cherry pick PR didn't pass PR checker. Please check!!!<br>https://github.com/sonic-net/sonic-utilities/pull/3366"
+    },
+    {
+        "number": 3322,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-08T23:01:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@saksarav-nokia cherry pick PR didn't pass PR checker. Please check!!! Auto cherry pick PR will be closed in 3 days.<br>https://github.com/sonic-net/sonic-utilities/pull/3366"
+    },
+    {
+        "number": 3322,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-09T23:01:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@saksarav-nokia cherry pick PR didn't pass PR checker. Please check!!! Auto cherry pick PR will be closed in 3 days.<br>https://github.com/sonic-net/sonic-utilities/pull/3366"
+    },
+    {
+        "number": 3322,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-10T23:01:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@saksarav-nokia cherry pick PR didn't pass PR checker. Please check!!! Auto cherry pick PR will be closed in 3 days.<br>https://github.com/sonic-net/sonic-utilities/pull/3366"
+    },
+    {
+        "number": 3322,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-11T23:04:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@saksarav-nokia cherry pick PR didn't pass PR checker. Please check!!! Auto cherry pick PR will be closed in 3 days.<br>https://github.com/sonic-net/sonic-utilities/pull/3366"
     },
     {
         "number": 3322,
@@ -8392,6 +10104,251 @@
         "repo": "sonic-utilities",
         "latestReview_at": "2024-01-16T17:23:53Z",
         "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3059,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-05-16T19:04:22Z",
+        "comment_author": "vmittal-msft",
+        "comment_body": "@bktsim-arista Few things -\r\n1. Can you please share how \"Show dropcounter capabilites/configuration/counts\" command is going to change ? \r\n2. please add test for all options under dropcounter.\r\n3. If no namespace specified, Will it show for all namespaces? if we specify, will it show for only that namespace ?\r\n4. Is this verified to be working fine on pizza box as well as chassis?"
+    },
+    {
+        "number": 3059,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-05-16T22:45:31Z",
+        "comment_author": "arista-nwolfe",
+        "comment_body": "> @bktsim-arista Few things -\r\n> \r\n> 1. Can you please share how \"Show dropcounter capabilites/configuration/counts\" command is going to change ?\r\n> 2. please add test for all options under dropcounter.\r\n> 3. If no namespace specified, Will it show for all namespaces? if we specify, will it show for only that namespace ?\r\n> 4. Is this verified to be working fine on pizza box as well as chassis?\r\n\r\nFor questions 1 & 2: This PR only adds multi-asic support to `show dropcounter counts` so we shouldn't include test coverage for `capabilities/configuration` as it's not supported yet on multi-asic."
+    },
+    {
+        "number": 3059,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-30T22:40:04Z",
+        "comment_author": "kenneth-arista",
+        "comment_body": "@arlakshm please review"
+    },
+    {
+        "number": 3059,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-01T04:16:52Z",
+        "comment_author": "kenneth-arista",
+        "comment_body": "> * If no namespace specified, Will it show for all namespaces? if we specify, will it show for only that namespace ?\r\n\r\nThe latest changes support this.\r\n"
+    },
+    {
+        "number": 3059,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-02T17:42:42Z",
+        "comment_author": "wenyiz2021",
+        "comment_body": "@arlakshm @vmittal-msft please check if your review comments are resolved"
+    },
+    {
+        "number": 3059,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-04T02:29:23Z",
+        "comment_author": "kenneth-arista",
+        "comment_body": "> 4. Is this verified to be working fine on pizza box as well as chassis?\r\nYes, I verified that the changes work on a pizza box with a single ASIC. \r\n\r\nFor example, \r\n\r\n```\r\nadmin@pkz303:/$ show dropcounters counts  --help\r\nUsage: show dropcounters counts [OPTIONS]\r\n\r\n  Show drop counts\r\n\r\nOptions:\r\n  -g, --group TEXT\r\n  -t, --counter_type TEXT\r\n  --verbose                Enable verbose output\r\n  -n, --namespace []       Namespace name or all\r\n  -h, -?, --help           Show this message and exit.\r\n\r\nadmin@pkz303:/$ show dropcounters counts\r\n     IFACE    STATE    RX_ERR    RX_DROPS    TX_ERR    TX_DROPS    DEBUG1    DEBUG2    DEBUG3\r\n----------  -------  --------  ----------  --------  ----------  --------  --------  --------\r\n Ethernet0        U         0           0         0           0         0         0         0\r\n Ethernet1        X         0           0         0           0         0         0         0\r\n Ethernet2        U         0           0         0           0         0         0         0\r\n Ethernet3        U         0           0         0           0         0         0         0\r\n Ethernet4        X         0           0         0           0         0         0         0\r\n Ethernet5        X         0           0         0           0         0         0         0\r\n Ethernet6        X         0           0         0           0         0         0         0\r\n Ethernet7        U         0           0         0           0         0         0         0\r\n Ethernet8        U         0           0         0           0         0         0         0\r\n Ethernet9        U         0           0         0           0         0         0         0\r\nEthernet10        U         0           0         0           0         0         0         0\r\nEthernet11        X         0           0         0           0         0         0         0\r\nEthernet12        U         0           0         0           0         0         0         0\r\nEthernet13        U         0           0         0           0         0         0         0\r\nEthernet14        U         0           0         0           0         0         0         0\r\nEthernet15        U         0           0         0           0         0         0         0\r\nEthernet16        X         0           0         0           0         0         0         0\r\nEthernet17        X         0           0         0           0         0         0         0\r\nEthernet18        U         0           0         0           0         0         0         0\r\nEthernet19        X         0           0         0           0         0         0         0\r\nEthernet20        U         0           0         0           0         0         0         0\r\nEthernet21        X         0           0         0           0         0         0         0\r\nEthernet22        U         0           0         0           0         0         0         0\r\nEthernet23        U         0           0         0           0         0         0         0\r\nEthernet24        U         0           0         0           0         0         0         0\r\nEthernet25        U         0           0         0           0         0         0         0\r\nEthernet26        U         0           0         0           0         0         0         0\r\nEthernet27        U         0           0         0           0         0         0         0\r\nEthernet28        U         0           0         0           0         0         0         0\r\nEthernet29        X         0           0         0           0         0         0         0\r\nEthernet30        U         0           0         0           0         0         0         0\r\nEthernet31        X         0           0         0           0         0         0         0\r\nEthernet32        U         0           0         0           0         0         0         0\r\nEthernet33        U         0           0         0           0         0         0         0\r\nEthernet34        X         0           0         0           0         0         0         0\r\nEthernet35        U         0           0         0           0         0         0         0\r\nEthernet36        U         0           0         0           0         0         0         0\r\nEthernet37        X         0           0         0           0         0         0         0\r\nEthernet38        U         0           0         0           0         0         0         0\r\nEthernet39        X         0           0         0           0         0         0         0\r\nEthernet40        X         0           0         0           0         0         0         0\r\nEthernet41        U         0           0         0           0         0         0         0\r\nEthernet42        U         0           0         0           0         0         0         0\r\nEthernet43        X         0           0         0           0         0         0         0\r\nEthernet44        X         0           0         0           0         0         0         0\r\nEthernet45        U         0           0         0           0         0         0         0\r\nEthernet46        X         0           0         0           0         0         0         0\r\nEthernet47        U         0           0         0           0         0         0         0\r\nEthernet48        U         0           0         0           0         0         0         0\r\nEthernet49        U         0           0         0           0         0         0         0\r\nEthernet50        U         0           0         0           0         0         0         0\r\nEthernet51        U         0           0         0           0         0         0         0\r\n\r\nadmin@pkz303:/$ show dropcounters counts -g TEST\r\n\r\n     IFACE    STATE    DEBUG3\r\n----------  -------  --------\r\n Ethernet0        U         0\r\n Ethernet1        X         0\r\n Ethernet2        U         0\r\n Ethernet3        U         0\r\n Ethernet4        X         0\r\n Ethernet5        X         0\r\n Ethernet6        X         0\r\n Ethernet7        U         0\r\n Ethernet8        U         0\r\n Ethernet9        U         0\r\nEthernet10        U         0\r\nEthernet11        X         0\r\nEthernet12        U         0\r\nEthernet13        U         0\r\nEthernet14        U         0\r\nEthernet15        U         0\r\nEthernet16        X         0\r\nEthernet17        X         0\r\nEthernet18        U         0\r\nEthernet19        X         0\r\nEthernet20        U         0\r\nEthernet21        X         0\r\nEthernet22        U         0\r\nEthernet23        U         0\r\nEthernet24        U         0\r\nEthernet25        U         0\r\nEthernet26        U         0\r\nEthernet27        U         0\r\nEthernet28        U         0\r\nEthernet29        X         0\r\nEthernet30        U         0\r\nEthernet31        X         0\r\nEthernet32        U         0\r\nEthernet33        U         0\r\nEthernet34        X         0\r\nEthernet35        U         0\r\nEthernet36        U         0\r\nEthernet37        X         0\r\nEthernet38        U         0\r\nEthernet39        X         0\r\nEthernet40        X         0\r\nEthernet41        U         0\r\nEthernet42        U         0\r\nEthernet43        X         0\r\nEthernet44        X         0\r\nEthernet45        U         0\r\nEthernet46        X         0\r\nEthernet47        U         0\r\nEthernet48        U         0\r\nEthernet49        U         0\r\nEthernet50        U         0\r\nEthernet51        U         0\r\n\r\nadmin@pkz303:/$ show dropcounters counts -t PORT_INGRESS_DROPS\r\n     IFACE    STATE    RX_ERR    RX_DROPS    DEBUG1    DEBUG2    DEBUG3\r\n----------  -------  --------  ----------  --------  --------  --------\r\n Ethernet0        U         0           0         0         0         0\r\n Ethernet1        X         0           0         0         0         0\r\n Ethernet2        U         0           0         0         0         0\r\n Ethernet3        U         0           0         0         0         0\r\n Ethernet4        X         0           0         0         0         0\r\n Ethernet5        X         0           0         0         0         0\r\n Ethernet6        X         0           0         0         0         0\r\n Ethernet7        U         0           0         0         0         0\r\n Ethernet8        U         0           0         0         0         0\r\n Ethernet9        U         0           0         0         0         0\r\nEthernet10        U         0           0         0         0         0\r\nEthernet11        X         0           0         0         0         0\r\nEthernet12        U         0           0         0         0         0\r\nEthernet13        U         0           0         0         0         0\r\nEthernet14        U         0           0         0         0         0\r\nEthernet15        U         0           0         0         0         0\r\nEthernet16        X         0           0         0         0         0\r\nEthernet17        X         0           0         0         0         0\r\nEthernet18        U         0           0         0         0         0\r\nEthernet19        X         0           0         0         0         0\r\nEthernet20        U         0           0         0         0         0\r\nEthernet21        X         0           0         0         0         0\r\nEthernet22        U         0           0         0         0         0\r\nEthernet23        U         0           0         0         0         0\r\nEthernet24        U         0           0         0         0         0\r\nEthernet25        U         0           0         0         0         0\r\nEthernet26        U         0           0         0         0         0\r\nEthernet27        U         0           0         0         0         0\r\nEthernet28        U         0           0         0         0         0\r\nEthernet29        X         0           0         0         0         0\r\nEthernet30        U         0           0         0         0         0\r\nEthernet31        X         0           0         0         0         0\r\nEthernet32        U         0           0         0         0         0\r\nEthernet33        U         0           0         0         0         0\r\nEthernet34        X         0           0         0         0         0\r\nEthernet35        U         0           0         0         0         0\r\nEthernet36        U         0           0         0         0         0\r\nEthernet37        X         0           0         0         0         0\r\nEthernet38        U         0           0         0         0         0\r\nEthernet39        X         0           0         0         0         0\r\nEthernet40        X         0           0         0         0         0\r\nEthernet41        U         0           0         0         0         0\r\nEthernet42        U         0           0         0         0         0\r\nEthernet43        X         0           0         0         0         0\r\nEthernet44        X         0           0         0         0         0\r\nEthernet45        U         0           0         0         0         0\r\nEthernet46        X         0           0         0         0         0\r\nEthernet47        U         0           0         0         0         0\r\nEthernet48        U         0           0         0         0         0\r\nEthernet49        U         0           0         0         0         0\r\nEthernet50        U         0           0         0         0         0\r\nEthernet51        U         0           0         0         0         0\r\n\r\nadmin@pkz303:/$ dropstat --version\r\ndropstat, version 1.0\r\n```\r\n"
+    },
+    {
+        "number": 3059,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-10T23:19:53Z",
+        "comment_author": "wenyiz2021",
+        "comment_body": " @arlakshm has a concern on using `click` option in `scripts` directory which is outside of `show` directory.\r\notherwise LGTM.\r\nthanks @kenneth-arista for adding test as well\r\n"
+    },
+    {
+        "number": 3059,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-12T02:36:26Z",
+        "comment_author": "kenneth-arista",
+        "comment_body": "> @arlakshm has a concern on using `click` option in `scripts` directory which is outside of `show` directory. otherwise LGTM. thanks @kenneth-arista for adding test as well\r\n\r\nThanks @wenyiz2021 . The @click library usage in the script significantly improves the readability and maintainability of the standalone script. Thanks Wenyi for suggesting it. I think this is a good change. @arlakshm please let me know how you would like to proceed. I recommend keeping the change \ud83d\ude04 "
+    },
+    {
+        "number": 3059,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-07-24T06:31:25Z",
+        "comment_author": "kenneth-arista",
+        "comment_body": "@wenyiz2021 can you help merge this change? "
+    },
+    {
+        "number": 3059,
+        "repo": "sonic-utilities",
+        "review_at": "2024-04-08T22:32:02Z",
+        "review_author": "wenyiz2021"
+    },
+    {
+        "number": 3059,
+        "repo": "sonic-utilities",
+        "review_at": "2024-04-08T22:41:11Z",
+        "review_author": "wenyiz2021"
+    },
+    {
+        "number": 3059,
+        "repo": "sonic-utilities",
+        "review_at": "2024-05-16T19:04:33Z",
+        "review_author": "vmittal-msft"
+    },
+    {
+        "number": 3059,
+        "repo": "sonic-utilities",
+        "review_at": "2024-05-16T21:31:50Z",
+        "review_author": "arista-nwolfe"
+    },
+    {
+        "number": 3059,
+        "repo": "sonic-utilities",
+        "review_at": "2024-06-30T22:24:14Z",
+        "review_author": "kenneth-arista"
+    },
+    {
+        "number": 3059,
+        "repo": "sonic-utilities",
+        "review_at": "2024-06-30T22:24:51Z",
+        "review_author": "kenneth-arista"
+    },
+    {
+        "number": 3059,
+        "repo": "sonic-utilities",
+        "review_at": "2024-06-30T23:19:30Z",
+        "review_author": "arlakshm"
+    },
+    {
+        "number": 3059,
+        "repo": "sonic-utilities",
+        "review_at": "2024-06-30T23:43:30Z",
+        "review_author": "arlakshm"
+    },
+    {
+        "number": 3059,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-01T02:21:34Z",
+        "review_author": "kenneth-arista"
+    },
+    {
+        "number": 3059,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-02T17:42:07Z",
+        "review_author": "wenyiz2021"
+    },
+    {
+        "number": 3059,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-10T23:20:01Z",
+        "review_author": "wenyiz2021"
+    },
+    {
+        "number": 3059,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-05-16T19:04:33Z",
+        "latestReview_author": "vmittal-msft",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 3059,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-06-30T23:43:30Z",
+        "latestReview_author": "arlakshm",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 3059,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-07-01T02:21:34Z",
+        "latestReview_author": "kenneth-arista",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 3059,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-05-16T21:31:50Z",
+        "latestReview_author": "arista-nwolfe",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 3059,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-07-10T23:20:01Z",
+        "latestReview_author": "wenyiz2021",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3058,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-05-16T19:01:13Z",
+        "comment_author": "vmittal-msft",
+        "comment_body": "@bktsim-arista Few things -\r\n1. Can you please share how \"Show priority-group drop/persistent-watermark/watermark\" command is going to change ? \r\n2. please add test for all options under priority-group.\r\n3. If no namespace specified, Will it show for all namespaces? if we specify, will it show for only that namespace ?\r\n4. Is this verified to be working fine on pizza box as well as chassis?"
+    },
+    {
+        "number": 3058,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-05-16T22:40:51Z",
+        "comment_author": "arista-nwolfe",
+        "comment_body": "> @bktsim-arista Few things -\r\n> \r\n> 1. Can you please share how \"Show priority-group drop/persistent-watermark/watermark\" command is going to change ?\r\n> 2. please add test for all options under priority-group.\r\n> 3. If no namespace specified, Will it show for all namespaces? if we specify, will it show for only that namespace ?\r\n> 4. Is this verified to be working fine on pizza box as well as chassis?\r\n\r\nFor questions 1 & 2: This PR only adds multi-asic support for `show priority-group drop` so we shouldn't have tests for `persistent-watermark/watermark` commands. Support for multi-asic on those commands along with their UT are in https://github.com/sonic-net/sonic-utilities/pull/3060"
+    },
+    {
+        "number": 3058,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-05T05:51:20Z",
+        "comment_author": "kenneth-arista",
+        "comment_body": "> 4\\. Is this verified to be working fine on pizza box as well as chassis?\r\n\r\nYes, confirmed that the changes work on a pizza box as well.\r\n"
+    },
+    {
+        "number": 3058,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-05T07:02:05Z",
+        "comment_author": "kenneth-arista",
+        "comment_body": "> 3. If no namespace specified, Will it show for all namespaces? if we specify, will it show for only that namespace ?\r\n\r\nIf `--namespace` is specified, then only counters relevant to that namespace will be shown or cleared. If the namespace arg is not passed, the command affects all namespaces. \r\n\r\nFor example,\r\n```\r\n$ show priority-group  drop counters --namespace asic0\r\nIngress PG dropped packets:\r\n         Port    PG0    PG1    PG2    PG3    PG4    PG5    PG6    PG7\r\n-------------  -----  -----  -----  -----  -----  -----  -----  -----\r\n    Ethernet0      0      0      0      0      0      0      0      0\r\n    Ethernet8      0      0      0      0      0      0      0      0\r\n   Ethernet16      0      0      0      0      0      0      0      0\r\n   Ethernet24      0      0      0      0      0      0      0      0\r\n   Ethernet32      0      0      0      0      0      0      0      0\r\n   Ethernet40      0      0      0      0      0      0      0      0\r\n   Ethernet48      0      0      0      0      0      0      0      0\r\n   Ethernet56      0      0      0      0      0      0      0      0\r\n   Ethernet64      0      0      0      0      0      0      0      0\r\n   Ethernet72      0      0      0      0      0      0      0      0\r\n   Ethernet80      0      0      0      0      0      0      0      0\r\n   Ethernet88      0      0      0      0      0      0      0      0\r\n   Ethernet96      0      0      0      0      0      0      0      0\r\n  Ethernet104      0      0      0      0      0      0      0      0\r\n  Ethernet112      0      0      0      0      0      0      0      0\r\n  Ethernet120      0      0      0      0      0      0      0      0\r\n  Ethernet128      0      0      0      0      0      0      0      0\r\n  Ethernet136      0      0      0      0      0      0      0      0\r\n Ethernet-IB0      0      0      0      0      0      0      0      0\r\nEthernet-Rec0      0      0      0      0      0      0      0      0\r\n```\r\n```\r\n$ show priority-group  drop counters --namespace asic1\r\nIngress PG dropped packets:\r\n         Port    PG0    PG1    PG2    PG3    PG4    PG5    PG6    PG7\r\n-------------  -----  -----  -----  -----  -----  -----  -----  -----\r\n  Ethernet144      0      0      0      0      0      0      0      0\r\n  Ethernet152      0      0      0      0      0      0      0      0\r\n  Ethernet160      0      0      0      0      0      0      0      0\r\n  Ethernet168      0      0      0      0      0      0      0      0\r\n  Ethernet176      0      0      0      0      0      0      0      0\r\n  Ethernet184      0      0      0      0      0      0      0      0\r\n  Ethernet192      0      0      0      0      0      0      0      0\r\n  Ethernet200      0      0      0      0      0      0      0      0\r\n  Ethernet208      0      0      0      0      0      0      0      0\r\n  Ethernet216      0      0      0      0      0      0      0      0\r\n  Ethernet224      0      0      0      0      0      0      0      0\r\n  Ethernet232      0      0      0      0      0      0      0      0\r\n  Ethernet240      0      0      0      0      0      0      0      0\r\n  Ethernet248      0      0      0      0      0      0      0      0\r\n  Ethernet256      0      0      0      0      0      0      0      0\r\n  Ethernet264      0      0      0      0      0      0      0      0\r\n  Ethernet272      0      0      0      0      0      0      0      0\r\n  Ethernet280      0      0      0      0      0      0      0      0\r\n Ethernet-IB1      0      0      0      0      0      0      0      0\r\nEthernet-Rec1      0      0      0      0      0      0      0      0\r\n```\r\n```\r\n$ show priority-group  drop counters\r\nIngress PG dropped packets:\r\n         Port    PG0    PG1    PG2    PG3    PG4    PG5    PG6    PG7\r\n-------------  -----  -----  -----  -----  -----  -----  -----  -----\r\n    Ethernet0      0      0      0      0      0      0      0      0\r\n    Ethernet8      0      0      0      0      0      0      0      0\r\n   Ethernet16      0      0      0      0      0      0      0      0\r\n   Ethernet24      0      0      0      0      0      0      0      0\r\n   Ethernet32      0      0      0      0      0      0      0      0\r\n   Ethernet40      0      0      0      0      0      0      0      0\r\n   Ethernet48      0      0      0      0      0      0      0      0\r\n   Ethernet56      0      0      0      0      0      0      0      0\r\n   Ethernet64      0      0      0      0      0      0      0      0\r\n   Ethernet72      0      0      0      0      0      0      0      0\r\n   Ethernet80      0      0      0      0      0      0      0      0\r\n   Ethernet88      0      0      0      0      0      0      0      0\r\n   Ethernet96      0      0      0      0      0      0      0      0\r\n  Ethernet104      0      0      0      0      0      0      0      0\r\n  Ethernet112      0      0      0      0      0      0      0      0\r\n  Ethernet120      0      0      0      0      0      0      0      0\r\n  Ethernet128      0      0      0      0      0      0      0      0\r\n  Ethernet136      0      0      0      0      0      0      0      0\r\n  Ethernet144      0      0      0      0      0      0      0      0\r\n  Ethernet152      0      0      0      0      0      0      0      0\r\n  Ethernet160      0      0      0      0      0      0      0      0\r\n  Ethernet168      0      0      0      0      0      0      0      0\r\n  Ethernet176      0      0      0      0      0      0      0      0\r\n  Ethernet184      0      0      0      0      0      0      0      0\r\n  Ethernet192      0      0      0      0      0      0      0      0\r\n  Ethernet200      0      0      0      0      0      0      0      0\r\n  Ethernet208      0      0      0      0      0      0      0      0\r\n  Ethernet216      0      0      0      0      0      0      0      0\r\n  Ethernet224      0      0      0      0      0      0      0      0\r\n  Ethernet232      0      0      0      0      0      0      0      0\r\n  Ethernet240      0      0      0      0      0      0      0      0\r\n  Ethernet248      0      0      0      0      0      0      0      0\r\n  Ethernet256      0      0      0      0      0      0      0      0\r\n  Ethernet264      0      0      0      0      0      0      0      0\r\n  Ethernet272      0      0      0      0      0      0      0      0\r\n  Ethernet280      0      0      0      0      0      0      0      0\r\n Ethernet-IB0      0      0      0      0      0      0      0      0\r\n Ethernet-IB1      0      0      0      0      0      0      0      0\r\nEthernet-Rec0      0      0      0      0      0      0      0      0\r\nEthernet-Rec1      0      0      0      0      0      0      0      0\r\n```\r\n"
+    },
+    {
+        "number": 3058,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-05T09:10:35Z",
+        "comment_author": "kenneth-arista",
+        "comment_body": "For simplicity the `clear` command ignores the namespace argument and will always apply to all applicable namespaces. The reason is that clearing is accomplished via caching. If the namespace argument were honored, there will be unwieldy logic to cache only counters specific to the namespace. If the user mixes and matches `clear` and `show` commands with different `namespace` arguments, the end result will be confusing. "
+    },
+    {
+        "number": 3058,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-06-11T03:03:44Z",
+        "comment_author": "kenneth-arista",
+        "comment_body": "@arlakshm please review"
+    },
+    {
+        "number": 3058,
+        "repo": "sonic-utilities",
+        "review_at": "2024-05-16T19:01:38Z",
+        "review_author": "vmittal-msft"
+    },
+    {
+        "number": 3058,
+        "repo": "sonic-utilities",
+        "review_at": "2024-06-14T20:43:26Z",
+        "review_author": "kenneth-arista"
+    },
+    {
+        "number": 3058,
+        "repo": "sonic-utilities",
+        "review_at": "2024-06-26T22:55:02Z",
+        "review_author": "wenyiz2021"
+    },
+    {
+        "number": 3058,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-05-16T19:01:38Z",
+        "latestReview_author": "vmittal-msft",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 3058,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-06-14T20:43:26Z",
+        "latestReview_author": "kenneth-arista",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 3058,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-06-26T22:55:02Z",
+        "latestReview_author": "wenyiz2021",
         "latestReview_state": "APPROVED"
     },
     {
