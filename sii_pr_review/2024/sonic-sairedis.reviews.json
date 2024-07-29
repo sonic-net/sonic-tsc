@@ -1,5 +1,79 @@
 [
     {
+        "number": 1402,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-07-08T14:04:23Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "@kcudnik Can you please review.\r\n\r\nNo new code was introduced and existing code was just moved. There was no coverage for the existing code as well"
+    },
+    {
+        "number": 1402,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-07-08T17:43:41Z",
+        "comment_author": "kcudnik",
+        "comment_body": "Please fix build issues and code coverage "
+    },
+    {
+        "number": 1402,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-07-18T02:34:35Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "> Please fix build issues and code coverage\r\n\r\n@kcudnik As mentioned in the previous comments its the existing code which I just moved. The existing code doesn't have coverage and I feel it is not within the scope of this PR to cover the existing code."
+    },
+    {
+        "number": 1402,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-07-18T05:00:29Z",
+        "comment_author": "kcudnik",
+        "comment_body": "Unfortunately when you touch code that is not covered, code coverage must pass to be able to merge pr"
+    },
+    {
+        "number": 1402,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-07-24T14:36:12Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "@kcudnik Can you please merge this PR?"
+    },
+    {
+        "number": 1402,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-07-26T22:44:37Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "@kcudnik Can you please merge this PR?"
+    },
+    {
+        "number": 1402,
+        "repo": "sonic-sairedis",
+        "review_at": "2024-07-05T09:15:20Z",
+        "review_author": "Junchao-Mellanox"
+    },
+    {
+        "number": 1402,
+        "repo": "sonic-sairedis",
+        "review_at": "2024-07-24T05:29:24Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1402,
+        "repo": "sonic-sairedis",
+        "review_at": "2024-07-24T18:54:32Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1402,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2024-07-24T18:54:32Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1402,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2024-07-05T09:15:20Z",
+        "latestReview_author": "Junchao-Mellanox",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 1395,
         "repo": "sonic-sairedis",
         "comment_at": "2024-06-14T01:44:25Z",
@@ -40,6 +114,69 @@
         "comment_at": "2024-05-26T17:12:04Z",
         "comment_author": "kcudnik",
         "comment_body": "later on entire libsaistub can be auto generated from saimetadata, it's just as stub for API call"
+    },
+    {
+        "number": 1384,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-07-11T10:31:35Z",
+        "comment_author": "aviramd",
+        "comment_body": "Hi Kamil,\r\n\r\nI kindly need some clarification regarding this modification. To be more specific, I will reference the example of the sai_query_attribute_capability API. I have traced the flow of sai_query_attribute_capability calls from switchorch.cpp. Before this change, there was a module named sai_redis_interfacequery.cpp, but It was removed in this commit . Additionally, I cannot locate any implementation of sai_query_attribute_capability in swss. Could you please clarify if this is an auto-generated file and if it gets deleted after the build?\r\nThanks\r\nAviram"
+    },
+    {
+        "number": 1384,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-07-13T05:23:48Z",
+        "comment_author": "kcudnik",
+        "comment_body": "Hey, all the apis you are referring are now auto generated and implementation is in lib and vslib Sai.cpp, take a look at stub.pl file and generated files in lib and vslib die after make sai_redis.cpp and sai_vs.cpp"
+    },
+    {
+        "number": 1384,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-07-14T14:18:20Z",
+        "comment_author": "aviramd",
+        "comment_body": "Hey,\r\nI understand that all the APIs are now auto-generated . However, since the auto-generated files are deleted, it makes it difficult to debug and review the code.\r\n\r\nWould it be possible to consider deleting the auto-generated files just before regenerating them? This way, we can have access to the generated code for debugging and review purposes until we need to regenerate them."
+    },
+    {
+        "number": 1384,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-07-14T17:14:09Z",
+        "comment_author": "kcudnik",
+        "comment_body": "Not sure where is the problem? Files are auto generated if sai changes, if no changes are to sai directory then files stay the same, there is no need for debug generated code, only the one that is I. Sai.cpp. Class "
+    },
+    {
+        "number": 1384,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-07-15T11:34:00Z",
+        "comment_author": "aviramd",
+        "comment_body": "The auto-generated files are deleted after the build process. As a result, anyone unfamiliar with the format of these files will encounter gaps when trying to trace the code flow. This issue also affects debugging with gdb, as parts of the code will be missing. However, now that I understand the format and flow, I no longer need these files.   "
+    },
+    {
+        "number": 1384,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-07-15T19:03:37Z",
+        "comment_author": "kcudnik",
+        "comment_body": "CPP auto.generared files are not deleted unless you make clean "
+    },
+    {
+        "number": 1384,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-07-16T06:19:33Z",
+        "comment_author": "aviramd",
+        "comment_body": "I clearly see that sai_redis.cpp is deleted after build (I am not on latest master but I didn't see and changes related on latest commits)\r\n\r\nplease check build syncd_1.0.0_arm64.deb.log \r\n\r\n[syncd_1.0.0_arm64.deb.log](https://github.com/user-attachments/files/16243889/syncd_1.0.0_arm64.deb.log)\r\n"
+    },
+    {
+        "number": 1384,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-07-16T15:49:36Z",
+        "comment_author": "aviramd",
+        "comment_body": "Can you please explain or provide a reference that explains the concepts behind ClientSai, ServerSai, ClientServerSai, RedisRemoteSaiInterface, and proxylib?"
+    },
+    {
+        "number": 1384,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-07-24T05:36:33Z",
+        "comment_author": "kcudnik",
+        "comment_body": "Currently there is no document on that, you would need to go to git blame to see corresponding commit descriptions, but basically client server is a way to talk to libsaitedis from multiple clients, this was idea to make tests and later on some live action on syncd when orhagent is already running, bit this idea is not utilized, for lib proxy is new idea for dash project, to be able to also communicate to some sai apis while syncd is already running but from other modules, client server is running above syncd, and lib proxy under syncd, redisremoteinterfsce is interface that communicates from libsaitedys to syncd and is utilized by orhagent, all those interfaces uses serialization and serialization code, which In multiple places is duplicated and this needs to be merged to some serialize class and reused, but currently I'm no vacationand will refactor this when needed, probably when bulk apis will need to be implemented since not all serialization a support bulk"
     },
     {
         "number": 1383,
