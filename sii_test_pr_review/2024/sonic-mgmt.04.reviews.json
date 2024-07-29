@@ -7543,6 +7543,13 @@
     {
         "number": 12146,
         "repo": "sonic-mgmt",
+        "comment_at": "2024-07-12T03:02:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202311: https://github.com/sonic-net/sonic-mgmt/pull/13643"
+    },
+    {
+        "number": 12146,
+        "repo": "sonic-mgmt",
         "review_at": "2024-03-30T01:14:44Z",
         "review_author": "qiluo-msft"
     },
@@ -8841,6 +8848,27 @@
         "comment_at": "2024-04-16T16:45:45Z",
         "comment_author": "liat-grozovik",
         "comment_body": "@SuvarnaMeenakshi @qiluo-msft please help to review. "
+    },
+    {
+        "number": 11941,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-07-25T06:28:21Z",
+        "comment_author": "yutongzhang-microsoft",
+        "comment_body": "Hi, @arfeigin , this script fails on kvm testbed, can you help us double check?\r\n\r\nhttps://elastictest.org/scheduler/testplan/66a1da787efd0bb46f79e610?searchTestCase=snmp&testcase=snmp%2Ftest_snmp_queue_counters.py&type=console"
+    },
+    {
+        "number": 11941,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-07-28T10:44:08Z",
+        "comment_author": "arfeigin",
+        "comment_body": "> Hi, @arfeigin , this script fails on kvm testbed, can you help us double check?\r\n> \r\n> https://elastictest.org/scheduler/testplan/66a1da787efd0bb46f79e610?searchTestCase=snmp&testcase=snmp%2Ftest_snmp_queue_counters.py&type=console\r\n\r\nHi @yutongzhang-microsoft , I don't have access to see the failure. \r\n![image](https://github.com/user-attachments/assets/d00329aa-6472-4f7c-8dc6-3462fafceac1)\r\nCan you share more details please?\r\n"
+    },
+    {
+        "number": 11941,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-07-29T01:40:49Z",
+        "comment_author": "yutongzhang-microsoft",
+        "comment_body": "@arfeigin Here is the short test summary info \r\n\r\n\r\n================================================================= short test summary info ==================================================================\r\nERROR snmp/test_snmp_queue_counters.py::test_snmp_queue_counters[vlab-01] - Failed: Processes \"['analyze_logs--<MultiAsicSonicHost vlab-01>']\" failed with exit code \"1\"\r\nFAILED snmp/test_snmp_queue_counters.py::test_snmp_queue_counters[vlab-01] - KeyError: 'Ethernet0|3-4'\r\n==================================================== 1 failed, 1 warning, 1 error in 317.19s (0:05:17) =====================================================\r\nINFO:root:Can not get Allure report URL. Please check logs\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n```\r\n05:35:06 __init__.pytest_runtest_call L0040 ERROR | Traceback (most recent call last):\r\n File \"/usr/local/lib/python3.8/dist-packages/_pytest/python.py\", line 1788, in runtest\r\n self.ihook.pytest_pyfunc_call(pyfuncitem=self)\r\n File \"/usr/local/lib/python3.8/dist-packages/pluggy/_hooks.py\", line 513, in __call__\r\n return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)\r\n File \"/usr/local/lib/python3.8/dist-packages/pluggy/_manager.py\", line 120, in _hookexec\r\n return self._inner_hookexec(hook_name, methods, kwargs, firstresult)\r\n File \"/usr/local/lib/python3.8/dist-packages/pluggy/_callers.py\", line 139, in _multicall\r\n raise exception.with_traceback(exception.__traceback__)\r\n File \"/usr/local/lib/python3.8/dist-packages/pluggy/_callers.py\", line 103, in _multicall\r\n res = hook_impl.function(*args)\r\n File \"/usr/local/lib/python3.8/dist-packages/_pytest/python.py\", line 194, in pytest_pyfunc_call\r\n result = testfunction(**testargs)\r\n File \"/var/src/sonic-mgmt/tests/snmp/test_snmp_queue_counters.py\", line 66, in test_snmp_queue_counters\r\n del data['BUFFER_QUEUE'][\"Ethernet0|3-4\"]\r\nKeyError: 'Ethernet0|3-4'\r\n```\r\n\r\n\r\n\r\n\r\n\r\n\r\n<img width=\"1147\" alt=\"image\" src=\"https://github.com/user-attachments/assets/7bfe25ed-2c79-4fc3-bf9b-de864c8aa7c7\">\r\n"
     },
     {
         "number": 11941,
