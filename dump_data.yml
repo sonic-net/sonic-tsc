@@ -47,12 +47,8 @@ jobs:
       git commit -m "[data] Update HLD related data." || exit 0
       git push sonicbld HEAD:refs/heads/data/hld -f
       re=$(gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/hld -B master -b '' -t "[data] Update HLD related data." 2>&1 || true)
-      add=$(git show HEAD --stat | grep '[0-9]* *insertion' -Eo | grep '[0-9]*' -Eo || true)
-      del=$(git show HEAD --stat | grep '[0-9]* *deletion' -Eo | grep '[0-9]*' -Eo || true)
-      if [ -z "$del" ]; then
-        sleep 60
-        gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
-      fi
+      sleep 60
+      gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
       git reset origin/master --hard
       cd ..
     displayName: dump hld
@@ -68,17 +64,8 @@ jobs:
       git commit -m "[data] Update issue related data." || exit 0
       git push sonicbld HEAD:refs/heads/data/issue -f
       re=$(gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/issue -B master -b '' -t "[data] Update issue related data." 2>&1 || true)
-      add=$(git show HEAD --stat | grep '[0-9]* *insertion' -Eo | grep '[0-9]*' -Eo || true)
-      del=$(git show HEAD --stat | grep '[0-9]* *deletion' -Eo | grep '[0-9]*' -Eo || true)
-      if [ -z "$del" ]; then
-        sleep 60
-        gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
-      elif (( add/del >= 1 )) && (( del < 30 )); then
-        sleep 60
-        gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
-      else
-        echo "Don't auto merge"
-      fi
+      sleep 60
+      gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
       git reset origin/master --hard
       cd ..
     displayName: dump issue
@@ -94,12 +81,8 @@ jobs:
       git commit -m "[data] Update testplan HLD related data." || exit 0
       git push sonicbld HEAD:refs/heads/data/testplan-hld -f
       re=$(gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/testplan-hld -B master -b '' -t "[data] Update testplan HLD related data." 2>&1 || true)
-      add=$(git show HEAD --stat | grep '[0-9]* *insertion' -Eo | grep '[0-9]*' -Eo || true)
-      del=$(git show HEAD --stat | grep '[0-9]* *deletion' -Eo | grep '[0-9]*' -Eo || true)
-      if [ -z "$del" ]; then
-        sleep 60
-        gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
-      fi
+      sleep 60
+      gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
       git reset origin/master --hard
       cd ..
     displayName: dump test hld
@@ -127,17 +110,8 @@ jobs:
       git commit -m "[data] Update pr&review related data." || exit 0
       git push sonicbld HEAD:refs/heads/data/pr -f
       re=$(gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/pr -B master -b '' -t "[data] Update pr&review related data." 2>&1 || true)
-      add=$(git show HEAD --stat | grep '[0-9]* *insertion' -Eo | grep '[0-9]*' -Eo || true)
-      del=$(git show HEAD --stat | grep '[0-9]* *deletion' -Eo | grep '[0-9]*' -Eo || true)
-      if [ -z "$del" ]; then
-        sleep 60
-        gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
-      elif (( add/del >= 15 )) && (( del < 200 )); then
-        sleep 60
-        gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
-      else
-        echo "Don't auto merge"
-      fi
+      sleep 60
+      gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
       git reset origin/master --hard
       cd ..
     displayName: dump pr
@@ -166,17 +140,8 @@ jobs:
       git commit -m "[data] Update test pr&review related data." || exit 0
       git push sonicbld HEAD:refs/heads/data/testpr -f
       re=$(gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/testpr -B master -b '' -t "[data] Update test pr&review related data." 2>&1 || true)
-      add=$(git show HEAD --stat | grep '[0-9]* *insertion' -Eo | grep '[0-9]*' -Eo || true)
-      del=$(git show HEAD --stat | grep '[0-9]* *deletion' -Eo | grep '[0-9]*' -Eo || true)
-      if [ -z "$del" ]; then
-        sleep 60
-        gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
-      elif (( add/del >= 20 )) ; then
-        sleep 60
-        gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
-      else
-        echo "Don't auto merge"
-      fi
+      sleep 60
+      gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
       git reset origin/master --hard
       cd ..
     displayName: dump test pr
