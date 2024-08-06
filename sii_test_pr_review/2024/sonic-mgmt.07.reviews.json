@@ -8218,6 +8218,13 @@
     {
         "number": 13477,
         "repo": "sonic-mgmt",
+        "comment_at": "2024-08-05T03:10:18Z",
+        "comment_author": "wen587",
+        "comment_body": "Hi @bingwang-ms , it should be include in 202405."
+    },
+    {
+        "number": 13477,
+        "repo": "sonic-mgmt",
         "review_at": "2024-07-02T09:11:25Z",
         "review_author": "wen587"
     },
@@ -10536,6 +10543,13 @@
         "comment_at": "2024-08-02T22:42:25Z",
         "comment_author": "saiarcot895",
         "comment_body": "@echuawu Sorry for the delay here, but I think the approach of this PR is too heavy-handed. Specifically, removing the 802.1q module makes the assumption that the server does not use VLANs at all (even if there's only one container running on the system, VLANs could be used for other purposes). Removing and re-inserting a kernel module that affects networking on a server is risky at best."
+    },
+    {
+        "number": 12958,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-08-05T02:24:08Z",
+        "comment_author": "echuawu",
+        "comment_body": "> @echuawu Sorry for the delay here, but I think the approach of this PR is too heavy-handed. Specifically, removing the 802.1q module makes the assumption that the server does not use VLANs at all (even if there's only one container running on the system, VLANs could be used for other purposes). Removing and re-inserting a kernel module that affects networking on a server is risky at best.\r\n\r\nHi @saiarcot895 , the re-inject action would avoid rebooting the test server when some vlan interface could not be configured and also could not be removed. We should have a assessment about the benefits it gained and the potential risky as you mentioned it may leads to. @bingwang-ms , what's your ideas?"
     },
     {
         "number": 12958,
