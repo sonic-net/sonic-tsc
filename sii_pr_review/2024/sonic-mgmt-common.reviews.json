@@ -1,5 +1,70 @@
 [
     {
+        "number": 143,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2024-06-26T18:46:09Z",
+        "comment_author": "adyeung",
+        "comment_body": "@anand-kumar-subramanian pls review"
+    },
+    {
+        "number": 143,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2024-07-22T15:36:53Z",
+        "comment_author": "slicking",
+        "comment_body": "@mbalachandar while this patch does prevent go routines from deadlocking on a bad mutex, it doesn't fully solve the problem.  The copy of the Entry struct results in the two Entry objects sharing a single instance of the ChildSchema map but using two different Mutex objects to protect access to it.  This can lead to \"concurrent map read and map write\" errors.\r\n\r\nI will change this patch to move move all these objects (ChildSchema, ChildSchemaMutex, IsSchemaValidated) into a new struct, then add a pointer to that struct into the Entry object, and then ensure each Entry created initializes this struct.  The copy operation on the Entry operation will then result in both Entry objects sharing the same ChildSchema map and mutex which is safe.\r\n\r\nThis change looks simple enough, but since these errors are rare timing events I'll let it run in our tests for a few days.  If that doesn't show any problems I'll update this PR, probably towards end of this week.  If you feel there is a better way to address this issue than switching to a pointer in the Entry struct feel free to let me know."
+    },
+    {
+        "number": 143,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2024-07-01T16:39:44Z",
+        "review_author": "ayelrod"
+    },
+    {
+        "number": 143,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2024-07-09T18:04:49Z",
+        "review_author": "mbalachandar"
+    },
+    {
+        "number": 143,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2024-07-22T15:21:26Z",
+        "review_author": "slicking"
+    },
+    {
+        "number": 143,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2024-08-06T17:39:24Z",
+        "review_author": "mbalachandar"
+    },
+    {
+        "number": 143,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2024-08-06T23:03:34Z",
+        "review_author": "sneelam20"
+    },
+    {
+        "number": 143,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2024-07-01T16:39:44Z",
+        "latestReview_author": "ayelrod",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 143,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2024-08-06T17:39:24Z",
+        "latestReview_author": "mbalachandar",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 143,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2024-08-06T23:03:34Z",
+        "latestReview_author": "sneelam20",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 141,
         "repo": "sonic-mgmt-common",
         "review_at": "2024-05-28T20:04:54Z",
