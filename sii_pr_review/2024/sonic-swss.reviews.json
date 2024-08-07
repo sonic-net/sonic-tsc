@@ -5301,6 +5301,13 @@
     {
         "number": 3112,
         "repo": "sonic-swss",
+        "comment_at": "2024-08-06T02:51:47Z",
+        "comment_author": "stephenxs",
+        "comment_body": "> enhancement, no cherry pick to 202305.\r\n\r\nHi @StormLiangMS \r\nWhen the issue happens, there are a large number of messages, causing the system to drop messages from orchagent. As a result, some important message can be lost."
+    },
+    {
+        "number": 3112,
+        "repo": "sonic-swss",
         "review_at": "2024-04-23T21:14:54Z",
         "review_author": "neethajohn"
     },
@@ -5414,6 +5421,20 @@
         "comment_at": "2024-05-03T21:40:57Z",
         "comment_author": "prsunny",
         "comment_body": "@prgeor , @arlakshm , could you folks signoff?"
+    },
+    {
+        "number": 3111,
+        "repo": "sonic-swss",
+        "comment_at": "2024-08-06T22:36:13Z",
+        "comment_author": "justin-wong-ce",
+        "comment_body": "@arista-nwolfe A backport to 202311 is needed to fix a regression caused by a backport of this PR: https://github.com/sonic-net/sonic-swss/pull/3052\r\n\r\nCan you add a `Request for 202311 Branch` label please?"
+    },
+    {
+        "number": 3111,
+        "repo": "sonic-swss",
+        "comment_at": "2024-08-06T22:42:38Z",
+        "comment_author": "arista-nwolfe",
+        "comment_body": "> @arista-nwolfe A backport to 202311 is needed to fix a regression caused by a backport of this PR: #3052\r\n> \r\n> Can you add a `Request for 202311 Branch` label please?\r\n\r\nI don't have label permissions @wenyiz2021 @arlakshm @vmittal-msft would one of you be able to add it."
     },
     {
         "number": 3111,
@@ -7511,6 +7532,13 @@
     {
         "number": 3057,
         "repo": "sonic-swss",
+        "comment_at": "2024-08-06T01:29:19Z",
+        "comment_author": "stephenxs",
+        "comment_body": "> Hi @stephenxs, can you share the log pattern if the issue happened?\r\n\r\nHi @bingwang-ms \r\nAs the following\r\n```\r\nFeb 22 09:40:00.452958 sonic ERR syncd#SDK: :- sendApiResponse: api SAI_COMMON_API_CREATE failed in syncd mode: SAI_STATUS_INVALID_ATTRIBUTE_MAX\r\nFeb 22 09:40:00.453055 sonic ERR syncd#SDK: :- processQuadEvent: attr: SAI_BUFFER_PROFILE_ATTR_XON_TH: 19456\r\nFeb 22 09:40:00.453055 sonic ERR syncd#SDK: :- processQuadEvent: attr: SAI_BUFFER_PROFILE_ATTR_XOFF_TH: 33792\r\nFeb 22 09:40:00.453132 sonic ERR syncd#SDK: :- processQuadEvent: attr: SAI_BUFFER_PROFILE_ATTR_RESERVED_BUFFER_SIZE: 19456\r\nFeb 22 09:40:00.453132 sonic ERR syncd#SDK: :- processQuadEvent: attr: SAI_BUFFER_PROFILE_ATTR_POOL_ID: oid:0x18000000000a8f\r\nFeb 22 09:40:00.453132 sonic ERR syncd#SDK: :- processQuadEvent: attr: SAI_BUFFER_PROFILE_ATTR_THRESHOLD_MODE: SAI_BUFFER_PROFILE_THRESHOLD_MODE_DYNAMIC\r\nFeb 22 09:40:00.453132 sonic ERR syncd#SDK: :- processQuadEvent: attr: SAI_BUFFER_PROFILE_ATTR_SHARED_DYNAMIC_TH: 0\r\nFeb 22 09:40:00.453221 sonic ERR swss#orchagent: :- create: create status: SAI_STATUS_INVALID_ATTRIBUTE_MAX\r\nFeb 22 09:40:00.453236 sonic ERR swss#orchagent: :- processBufferProfile: Failed to create buffer profile pg_lossless_10000_5m_profile with type BUFFER_PROFILE_TABLE, rv:-131071\r\nFeb 22 09:40:00.453236 sonic ERR swss#orchagent: :- handleSaiCreateStatus: Encountered failure in create operation, exiting orchagent, SAI API: SAI_API_BUFFER, status: SAI_STATUS_INVALID_ATTRIBUTE_MAX\r\n```"
+    },
+    {
+        "number": 3057,
+        "repo": "sonic-swss",
         "review_at": "2024-03-04T17:17:39Z",
         "review_author": "neethajohn"
     },
@@ -7783,6 +7811,13 @@
         "comment_at": "2024-07-31T19:05:57Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202311: https://github.com/sonic-net/sonic-swss/pull/3248"
+    },
+    {
+        "number": 3052,
+        "repo": "sonic-swss",
+        "comment_at": "2024-08-06T22:31:37Z",
+        "comment_author": "justin-wong-ce",
+        "comment_body": "The recent backport to 202311 caused a regression on 202311.\r\n\r\nThe backported commit had an issue that was previously fixed with https://github.com/sonic-net/sonic-swss/pull/3111 on master, which was not backported. Making a backport request to backport https://github.com/sonic-net/sonic-swss/pull/3111 to 202311."
     },
     {
         "number": 3052,
