@@ -1,5 +1,12 @@
 [
     {
+        "number": 14084,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-08-12T19:05:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-mgmt/pull/12346"
+    },
+    {
         "number": 14069,
         "repo": "sonic-mgmt",
         "comment_at": "2024-08-09T17:31:19Z",
@@ -81,6 +88,46 @@
         "comment_at": "2024-08-09T04:42:04Z",
         "comment_author": "mssonicbld",
         "comment_body": "Original PR: https://github.com/sonic-net/sonic-mgmt/pull/14024"
+    },
+    {
+        "number": 14053,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-08-09T03:21:03Z",
+        "comment_author": "xwjiang-ms",
+        "comment_body": "Could you share scripts you moved and their success rate? You have sorted the test job so it's not clear which script you have moved"
+    },
+    {
+        "number": 14053,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-08-09T03:28:00Z",
+        "comment_author": "yutongzhang-microsoft",
+        "comment_body": "> Could you share scripts you moved and their success rate? You have sorted the test job so it's not clear which script you have moved\r\n\r\nSorry, I forgot to paste. Done"
+    },
+    {
+        "number": 14053,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-08-09T03:29:22Z",
+        "review_author": "xwjiang-ms"
+    },
+    {
+        "number": 14053,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-08-12T02:02:04Z",
+        "review_author": "wangxin"
+    },
+    {
+        "number": 14053,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-08-12T02:02:04Z",
+        "latestReview_author": "wangxin",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 14053,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-08-09T03:29:22Z",
+        "latestReview_author": "xwjiang-ms",
+        "latestReview_state": "APPROVED"
     },
     {
         "number": 14052,
@@ -344,6 +391,130 @@
         "repo": "sonic-mgmt",
         "latestReview_at": "2024-08-08T00:28:58Z",
         "latestReview_author": "lizhijianrd",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 14013,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-08-07T08:18:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The [pre-commit](http://pre-commit.com/) check detected issues in the files touched by this pull request.\nThe pre-commit check is a mandatory check, please fix detected issues.\n\nDetailed pre-commit check results:\n<samp>trim trailing whitespace.................................................Passed<br/>fix end of files.........................................................Failed<br/>- hook id: end-of-file-fixer<br/>- exit code: 1<br/>- files were modified by this hook<br/><br/>Fixing tests/route/test_route_bgp_ecmp.py<br/><br/>check yaml...........................................(no files to check)Skipped<br/>check for added large files..............................................Passed<br/>check python ast.........................................................Passed<br/>flake8...................................................................Failed<br/>- hook id: flake8<br/>- exit code: 1<br/><br/>tests/route/test_route_bgp_ecmp.py:5:1: F401 'math' imported but unused<br/>tests/route/test_route_bgp_ecmp.py:6:1: F401 'collections.namedtuple' imported but unused<br/>tests/route/test_route_bgp_ecmp.py:8:1: F401 'ptf.testutils' imported but unused<br/>tests/route/test_route_bgp_ecmp.py:9:1: F401 'ptf.packet as scapy' imported but unused<br/>tests/route/test_route_bgp_ecmp.py:13:1: F401 'ptf.mask.Mask' imported but unused<br/>...<br/>[truncated extra lines, please run pre-commit locally to view full check results]<br/></samp>\n\nTo run the pre-commit checks locally, you can follow below steps:\n1. Ensure that default python is python3. In sonic-mgmt docker container, default python is python2. You can run\n the check by activating the python3 virtual environment in sonic-mgmt docker container or outside of sonic-mgmt\n docker container.\n2. Ensure that the `pre-commit` package is installed:\n```\nsudo pip install pre-commit\n```\n3. Go to repository root folder\n4. Install the pre-commit hooks:\n```\npre-commit install\n```\n5. Use pre-commit to check staged file:\n```\npre-commit\n```\n6. Alternatively, you can check committed files using:\n```\npre-commit run --from-ref <commit_id> --to-ref <commit_id>\n```"
+    },
+    {
+        "number": 14013,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-08-08T05:53:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The [pre-commit](http://pre-commit.com/) check detected issues in the files touched by this pull request.\nThe pre-commit check is a mandatory check, please fix detected issues.\n\nDetailed pre-commit check results:\n<samp>trim trailing whitespace.................................................Passed<br/>fix end of files.........................................................Failed<br/>- hook id: end-of-file-fixer<br/>- exit code: 1<br/>- files were modified by this hook<br/><br/>Fixing tests/route/test_route_bgp_ecmp.py<br/><br/>check yaml...............................................................Passed<br/>check for added large files..............................................Passed<br/>check python ast.........................................................Passed<br/>flake8...................................................................Passed<br/>flake8...............................................(no files to check)Skipped<br/>check conditional mark sort..............................................Passed<br/></samp>\n\nTo run the pre-commit checks locally, you can follow below steps:\n1. Ensure that default python is python3. In sonic-mgmt docker container, default python is python2. You can run\n the check by activating the python3 virtual environment in sonic-mgmt docker container or outside of sonic-mgmt\n docker container.\n2. Ensure that the `pre-commit` package is installed:\n```\nsudo pip install pre-commit\n```\n3. Go to repository root folder\n4. Install the pre-commit hooks:\n```\npre-commit install\n```\n5. Use pre-commit to check staged file:\n```\npre-commit\n```\n6. Alternatively, you can check committed files using:\n```\npre-commit run --from-ref <commit_id> --to-ref <commit_id>\n```"
+    },
+    {
+        "number": 14013,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-08-12T07:33:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@wsycqyz PR conflicts with 202405 branch"
+    },
+    {
+        "number": 14013,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-08-09T06:52:23Z",
+        "review_author": "yutongzhang-microsoft"
+    },
+    {
+        "number": 14013,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-08-09T06:53:57Z",
+        "review_author": "wsycqyz"
+    },
+    {
+        "number": 14013,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-08-09T06:56:58Z",
+        "review_author": "yutongzhang-microsoft"
+    },
+    {
+        "number": 14013,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-08-12T07:28:48Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 14013,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-08-12T07:28:48Z",
+        "latestReview_author": "StormLiangMS",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 14013,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-08-09T06:56:58Z",
+        "latestReview_author": "yutongzhang-microsoft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 14012,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-08-07T07:08:59Z",
+        "comment_author": "yaqiangz",
+        "comment_body": "Hi @lolyu could you please help to review this PR?"
+    },
+    {
+        "number": 14012,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-08-12T06:47:35Z",
+        "comment_author": "yaqiangz",
+        "comment_body": "Hi @wangxin could you please help to merge this PR?"
+    },
+    {
+        "number": 14012,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-08-12T11:27:28Z",
+        "comment_author": "yaqiangz",
+        "comment_body": "Hi @yxieca @bingwang-ms could you please help to approve the backport request?"
+    },
+    {
+        "number": 14012,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-08-07T10:26:54Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 14012,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-08-08T02:15:28Z",
+        "review_author": "yaqiangz"
+    },
+    {
+        "number": 14012,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-08-08T07:59:29Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 14012,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-08-08T07:59:43Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 14012,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-08-12T07:44:02Z",
+        "review_author": "wangxin"
+    },
+    {
+        "number": 14012,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-08-12T07:44:02Z",
+        "latestReview_author": "wangxin",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 14012,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-08-08T07:59:43Z",
+        "latestReview_author": "lolyu",
         "latestReview_state": "APPROVED"
     },
     {
@@ -2616,6 +2787,46 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 13412,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-07-29T02:06:27Z",
+        "comment_author": "wangxin",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 13412,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-07-29T02:06:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 13412,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-06-24T02:28:34Z",
+        "review_author": "xwjiang-ms"
+    },
+    {
+        "number": 13412,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-06-24T07:23:27Z",
+        "review_author": "yutongzhang-microsoft"
+    },
+    {
+        "number": 13412,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-06-24T07:23:27Z",
+        "latestReview_author": "yutongzhang-microsoft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 13412,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-06-24T02:28:34Z",
+        "latestReview_author": "xwjiang-ms",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 13274,
         "repo": "sonic-mgmt",
         "comment_at": "2024-06-13T08:29:31Z",
@@ -2628,6 +2839,45 @@
         "comment_at": "2024-06-18T14:55:26Z",
         "comment_author": "lolyu",
         "comment_body": "Hi @wangxin @StormLiangMS, could you please help force merge this cherry-pick PR?"
+    },
+    {
+        "number": 13070,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-05-31T00:50:32Z",
+        "review_author": "wsycqyz"
+    },
+    {
+        "number": 13070,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-05-31T22:43:17Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 13070,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-08-12T02:03:47Z",
+        "review_author": "wangxin"
+    },
+    {
+        "number": 13070,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-08-12T02:03:47Z",
+        "latestReview_author": "wangxin",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 13070,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-05-31T00:50:32Z",
+        "latestReview_author": "wsycqyz",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 13070,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-05-31T22:43:17Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
     },
     {
         "number": 13005,
