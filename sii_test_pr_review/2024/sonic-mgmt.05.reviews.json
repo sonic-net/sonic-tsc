@@ -7691,6 +7691,13 @@
     {
         "number": 12642,
         "repo": "sonic-mgmt",
+        "comment_at": "2024-08-13T04:21:34Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "@Ghulam-Bahoo @siqbal1986 This test uses FRR based bfd and not BFD offload. However for FRR based BFD we need to have frr_mgmt_framework_config set to true\r\nhttps://github.com/sonic-net/sonic-buildimage/blob/72b2f79c75705ccdfc73f6b2a0ab05c375eff400/dockers/docker-fpm-frr/frr/supervisord/supervisord.conf.j2#L65\r\n\r\nI don't see this test case explicitly introducing this configuration. How does this test work?\r\n\r\nWe see the following error\r\n\r\n```\r\nvtysh -c 'configure terminal' -c 'bfd'\r\nbfdd is not running\r\n```\r\n\r\n@nhe-NV FYI"
+    },
+    {
+        "number": 12642,
+        "repo": "sonic-mgmt",
         "review_at": "2024-05-02T18:00:31Z",
         "review_author": "siqbal1986"
     },
