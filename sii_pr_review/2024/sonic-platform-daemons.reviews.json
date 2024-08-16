@@ -1,5 +1,174 @@
 [
     {
+        "number": 530,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-08-07T01:56:26Z",
+        "comment_author": "mlok-nokia",
+        "comment_body": "@gechiang @judyjoseph This PR enhances the chassis module on-line and off-line message with physical slot info.  Please review it.  Thanks"
+    },
+    {
+        "number": 530,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-08-07T02:17:04Z",
+        "comment_author": "mlok-nokia",
+        "comment_body": "@gechiang @judyjoseph  I just found this PR  https://github.com/sonic-net/sonic-platform-daemons/pull/480 have not be merged to 202205 branch while other PRs which are associated with PR https://github.com/sonic-net/sonic-platform-daemons/pull/480 have been merged to 202205.  Please merge this PRs first."
+    },
+    {
+        "number": 530,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-08-07T06:17:44Z",
+        "comment_author": "gechiang",
+        "comment_body": "> @gechiang @judyjoseph I just found this PR #480 have not be merged to 202205 branch while other PRs which are associated with PR #480 have been merged to 202205. Please merge this PRs first.\r\n\r\n@mlok-nokia the PR you quoted is no longer allowed for public 202205 branch for this submodule as it is a feature enhancement and not a bug fix and 202205 release owner stopped accepting changes.  We do have internal build that takes it in as a patch already so we are good."
+    },
+    {
+        "number": 530,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-08-07T14:23:48Z",
+        "comment_author": "mlok-nokia",
+        "comment_body": "> Can you also add the same change for the 4 syslog related to Midplane connectivity issues at line 455, 457, 459, and 465. Also on line 556 for module down long time please also add the slot info as well. Thanks!\r\n\r\n@gechiang  I just made the change and tested it. Please review it again."
+    },
+    {
+        "number": 530,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-08-07T15:06:54Z",
+        "comment_author": "mlok-nokia",
+        "comment_body": "> > @gechiang @judyjoseph I just found this PR #480 have not be merged to 202205 branch while other PRs which are associated with PR #480 have been merged to 202205. Please merge this PRs first.\r\n> \r\n> @mlok-nokia the PR you quoted is no longer allowed for public 202205 branch for this submodule as it is a feature enhancement and not a bug fix and 202205 release owner stopped accepting changes. We do have internal build that takes it in as a patch already so we are good.\r\n\r\nOk. Thanks."
+    },
+    {
+        "number": 530,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-08-07T17:00:30Z",
+        "comment_author": "mlok-nokia",
+        "comment_body": "@gechiang  Do we need this PR for 202205 branch?\r\n"
+    },
+    {
+        "number": 530,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-08-07T17:59:56Z",
+        "comment_author": "rlhui",
+        "comment_body": "can we also have corresponding test for this?"
+    },
+    {
+        "number": 530,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-08-07T18:07:19Z",
+        "comment_author": "mlok-nokia",
+        "comment_body": "> can we also have corresponding test for this?\r\n\r\nThere are already testcases. But not for checking logging message.  "
+    },
+    {
+        "number": 530,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-08-07T22:42:52Z",
+        "comment_author": "gechiang",
+        "comment_body": "> @gechiang Do we need this PR for 202205 branch?\r\n\r\nyes. but we will do it internally as officially public 202205 is closed...  So once we have this merged, we will pick it up in our next internal build.  For community who also needs this for testing on 202205 MSFT repo will also have to manually patch it in their own internal 202205 based builds..."
+    },
+    {
+        "number": 530,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-08-12T08:56:55Z",
+        "comment_author": "arlakshm",
+        "comment_body": "@kenneth-arista for viz.. "
+    },
+    {
+        "number": 530,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-08-12T10:17:22Z",
+        "comment_author": "arlakshm",
+        "comment_body": "can we add some unit test? "
+    },
+    {
+        "number": 530,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-08-12T16:30:49Z",
+        "comment_author": "mlok-nokia",
+        "comment_body": "> can we add some unit test?\r\nThere are UTs for this section of code.  But it is just not able check the log texts.  For this module, adding any new line of code requires to add UT for it. Otherwise, it will fail to UT verification during image build."
+    },
+    {
+        "number": 530,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-08-14T17:15:25Z",
+        "comment_author": "gechiang",
+        "comment_body": "All comments seem to have been answered already.  Any other comments? @kenneth-arista any comments? \r\nThanks!"
+    },
+    {
+        "number": 530,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-08-14T20:48:01Z",
+        "comment_author": "gechiang",
+        "comment_body": "@arlakshm , please help sign off on this PR.\r\n@rlhui , please help merge this PR.\r\nThanks!"
+    },
+    {
+        "number": 530,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-08-15T19:39:19Z",
+        "comment_author": "judyjoseph",
+        "comment_body": "@mlok-nokia a general comment -- there are a few more places in the chassisd script where we just have the Module {} alone, should we add Slot {} there too for uniform logs -- not critical but @gechiang f.y.i"
+    },
+    {
+        "number": 530,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-08-15T21:28:31Z",
+        "comment_author": "mlok-nokia",
+        "comment_body": "> @mlok-nokia a general comment -- there are a few more places in the chassisd script where we just have the Module {} alone, should we add Slot {} there too for uniform logs -- not critical but @gechiang f.y.i\r\n\r\nIt seems like there are only two messages which contains Module {}.  I will take a look if it is feasible to add the slot for since one of them complains Module {} with hostname while another is logging for CLI command \"config chassis module shutdown <module>\""
+    },
+    {
+        "number": 530,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-08-07T06:26:37Z",
+        "review_author": "gechiang"
+    },
+    {
+        "number": 530,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-08-07T22:44:38Z",
+        "review_author": "gechiang"
+    },
+    {
+        "number": 530,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-08-12T10:13:37Z",
+        "review_author": "arlakshm"
+    },
+    {
+        "number": 530,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-08-12T14:24:05Z",
+        "review_author": "mlok-nokia"
+    },
+    {
+        "number": 530,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-08-14T17:56:03Z",
+        "review_author": "kenneth-arista"
+    },
+    {
+        "number": 530,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-08-15T08:04:50Z",
+        "review_author": "arlakshm"
+    },
+    {
+        "number": 530,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2024-08-15T08:04:50Z",
+        "latestReview_author": "arlakshm",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 530,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2024-08-07T22:44:38Z",
+        "latestReview_author": "gechiang",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 530,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2024-08-14T17:56:03Z",
+        "latestReview_author": "kenneth-arista",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 526,
         "repo": "sonic-platform-daemons",
         "comment_at": "2024-07-25T15:40:41Z",
@@ -422,6 +591,13 @@
         "comment_at": "2024-07-25T15:56:01Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-platform-daemons/pull/527"
+    },
+    {
+        "number": 501,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-08-15T01:23:37Z",
+        "comment_author": "Junchao-Mellanox",
+        "comment_body": "The auto create PR for 202405 has got a conflict.\r\nManually created backport PR for 202405: https://github.com/sonic-net/sonic-platform-daemons/pull/532 \r\n@bingwang-ms , could you please help merge that?"
     },
     {
         "number": 501,
