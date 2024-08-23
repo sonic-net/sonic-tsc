@@ -1,5 +1,12 @@
 [
     {
+        "number": 3494,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-08-22T16:06:40Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-utilities/pull/3439"
+    },
+    {
         "number": 3489,
         "repo": "sonic-utilities",
         "review_at": "2024-08-14T03:57:30Z",
@@ -406,6 +413,13 @@
         "comment_at": "2024-07-23T22:52:38Z",
         "comment_author": "mssonicbld",
         "comment_body": "Original PR: https://github.com/sonic-net/sonic-utilities/pull/3437"
+    },
+    {
+        "number": 3439,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-08-22T16:06:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-utilities/pull/3494"
     },
     {
         "number": 3439,
@@ -10783,6 +10797,157 @@
         "repo": "sonic-utilities",
         "latestReview_at": "2024-01-16T17:23:53Z",
         "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3062,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-03-22T01:05:36Z",
+        "comment_author": "vmittal-msft",
+        "comment_body": "please re-base the PR to latest"
+    },
+    {
+        "number": 3062,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-05-16T19:49:08Z",
+        "comment_author": "vmittal-msft",
+        "comment_body": "@bktsim-arista \r\n1.Is this verified on pizzabox as well ?\r\n2. If no namespace is given, will it show for all ?"
+    },
+    {
+        "number": 3062,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-05-31T20:36:50Z",
+        "comment_author": "arlakshm",
+        "comment_body": "/Azp run Azure.sonic-utilities "
+    },
+    {
+        "number": 3062,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-05-31T20:36:59Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3062,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-08-07T17:36:00Z",
+        "comment_author": "kenneth-arista",
+        "comment_body": "@arlakshm @vmittal-msft @wenyiz2021 this PR is ready for review. All tests have passed with the latest updates. It will be easier to review with whitespace difference disabled because the new static checks requires reformatting (e.g. spacing) of touched Python files. "
+    },
+    {
+        "number": 3062,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-08-07T17:49:35Z",
+        "comment_author": "arista-hpandya",
+        "comment_body": "> please share command and it's output from multi asic platform. Also, please make sure it still works for ToR.\r\n\r\nHere are the snapshots obtained after running it on a multi-asic devise:\r\n\r\n`ecnconfig -l -n asic0`\r\n![ecnconfig -l -n asic0](https://github.com/user-attachments/assets/6617bb3d-b74b-4e47-be69-15ba258ebd69)\r\n\r\n`ecnconfig -l -n asic1`\r\n![ecnconfig -l -n asic1](https://github.com/user-attachments/assets/e222618c-c7e1-4536-95bb-d47e68590c41)\r\n\r\n`ecnconfig -l`\r\n![ecnconfig -l](https://github.com/user-attachments/assets/70875f3f-df28-43ca-8b6e-accf7c6f45d5)\r\n\r\n> Behaviour of queue on mutli-asic platform\r\n\r\n![multi_asic queue get and set](https://github.com/user-attachments/assets/334ec878-a642-486b-8553-a869838afb6e)\r\n\r\n> Behaviour of set on multi-asic platform when no namespace is specified\r\n\r\n![multi_set_all_masic](https://github.com/user-attachments/assets/6fdf4a37-6cae-46c8-ae40-9dc6e1f5bb9a)\r\n\r\n\r\n\r\n"
+    },
+    {
+        "number": 3062,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-08-07T17:51:37Z",
+        "comment_author": "arista-hpandya",
+        "comment_body": "> @vmittal-msft 1.Is this verified on pizzabox as well ? 2. If no namespace is given, will it show for all ?\r\n\r\nYes, behaviour on single asic devices is preserved and when no namespace is given, it will show/set for all\r\n"
+    },
+    {
+        "number": 3062,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-08-20T16:49:52Z",
+        "comment_author": "arista-hpandya",
+        "comment_body": "> I am assuming this is verified on T0/T1 device as well to make sure it is fine.\r\n\r\nNo, it has not been tested on T0/T1 devices yet. I will update the PR once I have tested it on the same."
+    },
+    {
+        "number": 3062,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-08-21T22:06:21Z",
+        "comment_author": "arista-hpandya",
+        "comment_body": "> I am assuming this is verified on T0/T1 device as well to make sure it is fine.\r\n\r\nThe changes have been verified on T0 and T1 devices, the snapshots of the same are attached below. TL;DR: It should be safe to merge\r\n\r\n### T0\r\n![ecnconfig multi_set](https://github.com/user-attachments/assets/c2c09de4-bf0b-4dcc-a914-32459344546b)\r\n![ecnconfig queue test](https://github.com/user-attachments/assets/8f50a267-a25a-44f6-bdb2-babb0ca6cbb7)\r\n\r\n---\r\n### T1\r\n![ecnconfig_multi_set](https://github.com/user-attachments/assets/073c9c67-30fa-477d-a134-7efc81a9e80e)\r\n![ecnconfig_queue_test](https://github.com/user-attachments/assets/2c8c260b-cc0f-40f6-a822-67bed857226d)\r\n"
+    },
+    {
+        "number": 3062,
+        "repo": "sonic-utilities",
+        "review_at": "2024-03-22T01:10:21Z",
+        "review_author": "vmittal-msft"
+    },
+    {
+        "number": 3062,
+        "repo": "sonic-utilities",
+        "review_at": "2024-03-22T01:11:38Z",
+        "review_author": "vmittal-msft"
+    },
+    {
+        "number": 3062,
+        "repo": "sonic-utilities",
+        "review_at": "2024-03-22T01:12:18Z",
+        "review_author": "vmittal-msft"
+    },
+    {
+        "number": 3062,
+        "repo": "sonic-utilities",
+        "review_at": "2024-05-16T19:48:10Z",
+        "review_author": "vmittal-msft"
+    },
+    {
+        "number": 3062,
+        "repo": "sonic-utilities",
+        "review_at": "2024-08-07T17:52:42Z",
+        "review_author": "arista-hpandya"
+    },
+    {
+        "number": 3062,
+        "repo": "sonic-utilities",
+        "review_at": "2024-08-07T17:54:53Z",
+        "review_author": "wenyiz2021"
+    },
+    {
+        "number": 3062,
+        "repo": "sonic-utilities",
+        "review_at": "2024-08-07T18:08:56Z",
+        "review_author": "arista-hpandya"
+    },
+    {
+        "number": 3062,
+        "repo": "sonic-utilities",
+        "review_at": "2024-08-07T19:21:34Z",
+        "review_author": "kenneth-arista"
+    },
+    {
+        "number": 3062,
+        "repo": "sonic-utilities",
+        "review_at": "2024-08-12T18:43:23Z",
+        "review_author": "wenyiz2021"
+    },
+    {
+        "number": 3062,
+        "repo": "sonic-utilities",
+        "review_at": "2024-08-19T23:28:25Z",
+        "review_author": "vmittal-msft"
+    },
+    {
+        "number": 3062,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-08-12T18:43:23Z",
+        "latestReview_author": "wenyiz2021",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 3062,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-08-07T19:21:34Z",
+        "latestReview_author": "kenneth-arista",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 3062,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-08-07T18:08:56Z",
+        "latestReview_author": "arista-hpandya",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 3062,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-08-19T23:28:25Z",
+        "latestReview_author": "vmittal-msft",
         "latestReview_state": "APPROVED"
     },
     {
