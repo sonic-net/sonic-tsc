@@ -1,5 +1,38 @@
 [
     {
+        "number": 14248,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-08-26T16:58:59Z",
+        "review_author": "yejianquan"
+    },
+    {
+        "number": 14248,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-08-26T16:58:59Z",
+        "latestReview_author": "yejianquan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 14246,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-08-26T23:44:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@yejianquan PR conflicts with 202405 branch"
+    },
+    {
+        "number": 14246,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-08-26T23:40:32Z",
+        "review_author": "sdszhang"
+    },
+    {
+        "number": 14246,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-08-26T23:40:32Z",
+        "latestReview_author": "sdszhang",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 14238,
         "repo": "sonic-mgmt",
         "comment_at": "2024-08-23T21:08:49Z",
@@ -21,6 +54,46 @@
         "comment_body": "Original PR: https://github.com/sonic-net/sonic-mgmt/pull/13878"
     },
     {
+        "number": 14230,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-08-26T01:28:22Z",
+        "comment_author": "wsycqyz",
+        "comment_body": "Do we need this PR in 202405 branch?"
+    },
+    {
+        "number": 14230,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-08-26T05:01:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-mgmt/pull/14244"
+    },
+    {
+        "number": 14230,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-08-26T05:01:29Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202311: https://github.com/sonic-net/sonic-mgmt/pull/14245"
+    },
+    {
+        "number": 14230,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-08-23T08:18:07Z",
+        "review_author": "kevinskwang"
+    },
+    {
+        "number": 14230,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-08-23T08:22:20Z",
+        "review_author": "kevinskwang"
+    },
+    {
+        "number": 14230,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-08-23T08:22:20Z",
+        "latestReview_author": "kevinskwang",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 14227,
         "repo": "sonic-mgmt",
         "review_at": "2024-08-23T07:44:09Z",
@@ -31,6 +104,67 @@
         "repo": "sonic-mgmt",
         "latestReview_at": "2024-08-23T07:44:09Z",
         "latestReview_author": "wangxin",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 14225,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-08-25T23:47:11Z",
+        "comment_author": "yejianquan",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 14225,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-08-25T23:47:21Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 14225,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-08-26T10:03:55Z",
+        "comment_author": "lipxu",
+        "comment_body": "Just curious, how much time could be saved by using multiple threads in such conditions? thanks"
+    },
+    {
+        "number": 14225,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-08-26T17:10:33Z",
+        "comment_author": "yejianquan",
+        "comment_body": "> Just curious, how much time could be saved by using multiple threads in such conditions? thanks\r\n\r\nHi @lipxu , Good question,\r\nit's interesting that with multi-thread, we convert it to CPU bound from I/O bound,\r\nit's because ansible computes and combines hosts between inv_files on every host initialization.\r\nThat's why I just use 8 threads rather than 12/24/72 in this PR.\r\n\r\nIn my test, on a T1 testbed, this single PR reduces neighbors initialization time to ~40s from ~120s.\r\n\r\nI have another PR https://github.com/sonic-net/sonic-mgmt/pull/14246 \r\nThis PR trims the hosts in the inventory file, then ansible takes less time on single ansible_host initialization.\r\n\r\nCombined with the trim, on a T2 topology with 72 neighbors,\r\nThe initialization reduced to ~8s from ~200s.\r\n"
+    },
+    {
+        "number": 14225,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-08-26T23:35:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-mgmt/pull/14257"
+    },
+    {
+        "number": 14225,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-08-26T23:29:00Z",
+        "review_author": "sdszhang"
+    },
+    {
+        "number": 14225,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-08-26T23:29:00Z",
+        "latestReview_author": "sdszhang",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 14224,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-08-23T21:10:38Z",
+        "review_author": "yanmo96"
+    },
+    {
+        "number": 14224,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-08-23T21:10:38Z",
+        "latestReview_author": "yanmo96",
         "latestReview_state": "APPROVED"
     },
     {
@@ -46,6 +180,20 @@
         "comment_at": "2024-08-23T01:49:36Z",
         "comment_author": "mssonicbld",
         "comment_body": "Original PR: https://github.com/sonic-net/sonic-mgmt/pull/14198"
+    },
+    {
+        "number": 14217,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-08-26T10:27:40Z",
+        "comment_author": "lizhijianrd",
+        "comment_body": "Hi @yxieca @bingwang-ms , can you please help add approval tag for backport 202311 and 202405. Thanks."
+    },
+    {
+        "number": 14217,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-08-26T22:13:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-mgmt/pull/14253"
     },
     {
         "number": 14217,
@@ -79,6 +227,32 @@
         "comment_at": "2024-08-22T08:28:29Z",
         "comment_author": "mssonicbld",
         "comment_body": "Original PR: https://github.com/sonic-net/sonic-mgmt/pull/13410"
+    },
+    {
+        "number": 14212,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-08-22T06:21:05Z",
+        "review_author": "xwjiang-ms"
+    },
+    {
+        "number": 14212,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-08-26T08:05:35Z",
+        "review_author": "yejianquan"
+    },
+    {
+        "number": 14212,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-08-26T08:05:35Z",
+        "latestReview_author": "yejianquan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 14212,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-08-22T06:21:05Z",
+        "latestReview_author": "xwjiang-ms",
+        "latestReview_state": "APPROVED"
     },
     {
         "number": 14211,
@@ -2972,6 +3146,40 @@
         "repo": "sonic-mgmt",
         "latestReview_at": "2024-08-06T11:28:28Z",
         "latestReview_author": "yejianquan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 13991,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-08-06T03:13:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-mgmt/pull/13492"
+    },
+    {
+        "number": 13991,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-08-26T06:49:04Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "/azp run Azure.sonic-mgmt"
+    },
+    {
+        "number": 13991,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-08-26T06:49:14Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 13991,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-08-07T06:27:45Z",
+        "review_author": "yutongzhang-microsoft"
+    },
+    {
+        "number": 13991,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-08-07T06:27:45Z",
+        "latestReview_author": "yutongzhang-microsoft",
         "latestReview_state": "APPROVED"
     },
     {
@@ -6925,6 +7133,87 @@
         "repo": "sonic-mgmt",
         "latestReview_at": "2024-08-19T10:32:36Z",
         "latestReview_author": "wangxin",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 13384,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-06-20T20:22:28Z",
+        "comment_author": "zhixzhu",
+        "comment_body": "Lock/Prepare testbed failed, need a rerun."
+    },
+    {
+        "number": 13384,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-06-21T00:51:31Z",
+        "comment_author": "wsycqyz",
+        "comment_body": "Re-trigger PR test"
+    },
+    {
+        "number": 13384,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-07-18T20:23:57Z",
+        "comment_author": "jamesan47",
+        "comment_body": "@kevinwangsk please help with the review."
+    },
+    {
+        "number": 13384,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-08-16T15:15:22Z",
+        "comment_author": "XuChen-MSFT",
+        "comment_body": "if need to cherry pick to 202311, must cherry pick https://github.com/sonic-net/sonic-mgmt/pull/10838 first\r\n"
+    },
+    {
+        "number": 13384,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-08-23T08:27:16Z",
+        "comment_author": "kevinskwang",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 13384,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-08-23T08:27:26Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 13384,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-08-27T00:29:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-mgmt/pull/14262"
+    },
+    {
+        "number": 13384,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-08-27T00:29:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@zhixzhu PR conflicts with 202311 branch"
+    },
+    {
+        "number": 13384,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-08-16T15:22:48Z",
+        "review_author": "XuChen-MSFT"
+    },
+    {
+        "number": 13384,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-08-16T17:08:36Z",
+        "review_author": "zhixzhu"
+    },
+    {
+        "number": 13384,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-08-23T06:03:32Z",
+        "review_author": "XuChen-MSFT"
+    },
+    {
+        "number": 13384,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-08-23T06:03:32Z",
+        "latestReview_author": "XuChen-MSFT",
         "latestReview_state": "APPROVED"
     },
     {
