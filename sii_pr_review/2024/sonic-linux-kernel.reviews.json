@@ -1,5 +1,26 @@
 [
     {
+        "number": 427,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-08-28T01:44:16Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-linux-kernel/pull/421"
+    },
+    {
+        "number": 422,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-08-28T11:06:28Z",
+        "comment_author": "liushilongbuaa",
+        "comment_body": "@saiarcot895 , submodule updation failed on this PR.\r\n```\r\n/sonic/src/sonic-linux-kernel/linux-6.1.38 /sonic/src/sonic-linux-kernel\r\nhint: Using 'master' as the name for the initial branch. This default branch name\r\nhint: is subject to change. To configure the initial branch name to use in all\r\nhint: of your new repositories, which will suppress this warning, call:\r\nhint: \r\nhint: \tgit config --global init.defaultBranch <name>\r\nhint: \r\nhint: Names commonly chosen instead of 'master' are 'main', 'trunk' and\r\nhint: 'development'. The just-created branch can be renamed via this command:\r\nhint: \r\nhint: \tgit branch -m <name>\r\nInitialized empty Git repository in /sonic/src/sonic-linux-kernel/linux-6.1.38/.git/\r\nerror: patch failed: debian/config/defines:1\r\nerror: debian/config/defines: patch does not apply\r\nerror: patch failed: debian/control.md5sum:38\r\nerror: debian/control.md5sum: patch does not apply\r\nstg import: Diff does not apply cleanly\r\nmake[1]: *** [Makefile:38: /sonic/target/debs/bookworm/linux-headers-6.1.0-11-2-common_6.1.38-4_all.deb] Error 2\r\nmake[1]: Leaving directory '/sonic/src/sonic-linux-kernel'\r\n[  FAIL LOG END  ] [ target/debs/bookworm/linux-headers-6.1.0-11-2-common_6.1.38-4_all.deb ]\r\n```"
+    },
+    {
+        "number": 422,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-08-28T18:52:44Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "@liushilongbuaa That's expected, since this is a kernel version upgrade. sonic-net/sonic-buildimage#19564 will handle this."
+    },
+    {
         "number": 421,
         "repo": "sonic-linux-kernel",
         "comment_at": "2024-08-02T00:49:11Z",
@@ -19,6 +40,13 @@
         "comment_at": "2024-08-09T22:31:25Z",
         "comment_author": "byu343",
         "comment_body": "> ```\r\n> 2024-08-01T18:32:48.4308213Z /__w/1/s/linux-6.1.38/drivers/net/ethernet/broadcom/tg3.c: In function 'tg3_init_one':\r\n> 2024-08-01T18:32:48.4340740Z /__w/1/s/linux-6.1.38/drivers/net/ethernet/broadcom/tg3.c:17758:31: error: implicit declaration of function 'pci_set_consistent_dma_mask' [-Werror=implicit-function-declaration]\r\n> 2024-08-01T18:32:48.4341139Z 17758 |                         err = pci_set_consistent_dma_mask(pdev,\r\n> 2024-08-01T18:32:48.4341357Z       |                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n> 2024-08-01T18:32:48.8755815Z   /__w/1/s/linux-6.1.38/scripts/check-local-export drivers/gpu/drm/drm_gem_vram_helper.o\r\n> ```\r\n\r\nThis has been fixed. It was for some kernel API change on bookworm."
+    },
+    {
+        "number": 421,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-08-28T01:44:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-linux-kernel/pull/427"
     },
     {
         "number": 421,
@@ -85,6 +113,12 @@
         "repo": "sonic-linux-kernel",
         "review_at": "2024-08-27T18:22:44Z",
         "review_author": "saiarcot895"
+    },
+    {
+        "number": 421,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-08-28T04:57:46Z",
+        "review_author": "paulmenzel"
     },
     {
         "number": 421,
