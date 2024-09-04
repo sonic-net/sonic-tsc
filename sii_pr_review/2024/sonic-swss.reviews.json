@@ -62,6 +62,150 @@
         "comment_body": "Original PR: https://github.com/sonic-net/sonic-swss/pull/3052"
     },
     {
+        "number": 3247,
+        "repo": "sonic-swss",
+        "comment_at": "2024-07-30T21:31:48Z",
+        "comment_author": "kenneth-arista",
+        "comment_body": "Related to https://github.com/sonic-net/sonic-buildimage/issues/19288"
+    },
+    {
+        "number": 3247,
+        "repo": "sonic-swss",
+        "comment_at": "2024-07-31T16:35:05Z",
+        "comment_author": "jfeng-arista",
+        "comment_body": "@kenneth-arista @arlakshm @vmittal-msft "
+    },
+    {
+        "number": 3247,
+        "repo": "sonic-swss",
+        "comment_at": "2024-07-31T17:39:28Z",
+        "comment_author": "judyjoseph",
+        "comment_body": "@saksarav-nokia to review too"
+    },
+    {
+        "number": 3247,
+        "repo": "sonic-swss",
+        "comment_at": "2024-08-05T20:53:01Z",
+        "comment_author": "saksarav-nokia",
+        "comment_body": "Tested the fix and seems to be working. However i see lot of these log messages and not sure if we need have them at NOTICE level\r\n\r\n2024 Aug  5 20:50:16.520538 ixre-cpm-chassis12 NOTICE swss0#orchagent: :- updateStateDbTable: PORT0 updates POLL_WITH_ERRORS to 0 0\r\n2024 Aug  5 20:50:16.520538 ixre-cpm-chassis12 NOTICE swss0#orchagent: :- updateStateDbTable: PORT0 updates POLL_WITH_NO_ERRORS to 8 8\r\n2024 Aug  5 20:50:16.520594 ixre-cpm-chassis12 NOTICE swss0#orchagent: :- updateStateDbTable: PORT0 updates POLL_WITH_FEC_ERRORS to 0 0\r\n2024 Aug  5 20:50:16.520662 ixre-cpm-chassis12 NOTICE swss0#orchagent: :- updateStateDbTable: PORT0 updates POLL_WITH_NOFEC_ERRORS to 8 8\r\n2024 Aug  5 20:50:16.520717 ixre-cpm-chassis12 NOTICE swss0#orchagent: :- updateStateDbTable: PORT0 updates CONFIG_ISOLATED to 0 0\r\n2024 Aug  5 20:50:16.520782 ixre-cpm-chassis12 NOTICE swss0#orchagent: :- updateStateDbTable: PORT0 updates ISOLATED to 0 0\r\n"
+    },
+    {
+        "number": 3247,
+        "repo": "sonic-swss",
+        "comment_at": "2024-08-05T21:06:32Z",
+        "comment_author": "jfeng-arista",
+        "comment_body": "I can change the message  level to INFO"
+    },
+    {
+        "number": 3247,
+        "repo": "sonic-swss",
+        "comment_at": "2024-08-05T21:11:43Z",
+        "comment_author": "jfeng-arista",
+        "comment_body": "> Tested the fix and seems to be working. However i see lot of these log messages and not sure if we need have them at NOTICE level\r\n> \r\n> 2024 Aug 5 20:50:16.520538 ixre-cpm-chassis12 NOTICE swss0#orchagent: :- updateStateDbTable: PORT0 updates POLL_WITH_ERRORS to 0 0 2024 Aug 5 20:50:16.520538 ixre-cpm-chassis12 NOTICE swss0#orchagent: :- updateStateDbTable: PORT0 updates POLL_WITH_NO_ERRORS to 8 8 2024 Aug 5 20:50:16.520594 ixre-cpm-chassis12 NOTICE swss0#orchagent: :- updateStateDbTable: PORT0 updates POLL_WITH_FEC_ERRORS to 0 0 2024 Aug 5 20:50:16.520662 ixre-cpm-chassis12 NOTICE swss0#orchagent: :- updateStateDbTable: PORT0 updates POLL_WITH_NOFEC_ERRORS to 8 8 2024 Aug 5 20:50:16.520717 ixre-cpm-chassis12 NOTICE swss0#orchagent: :- updateStateDbTable: PORT0 updates CONFIG_ISOLATED to 0 0 2024 Aug 5 20:50:16.520782 ixre-cpm-chassis12 NOTICE swss0#orchagent: :- updateStateDbTable: PORT0 updates ISOLATED to 0 0\r\n\r\nChanged the log level to INFO, so it will not show up by default now"
+    },
+    {
+        "number": 3247,
+        "repo": "sonic-swss",
+        "comment_at": "2024-08-07T21:48:30Z",
+        "comment_author": "jfeng-arista",
+        "comment_body": "can anyone help review again and see if we can merge up this ? thank you "
+    },
+    {
+        "number": 3247,
+        "repo": "sonic-swss",
+        "comment_at": "2024-08-13T20:08:21Z",
+        "comment_author": "jfeng-arista",
+        "comment_body": "test_HashSwitchGlobalConfiguration[inner-frame-ecmp-hash] failed (1 runs remaining out of 2).\r\nNot releated to this change "
+    },
+    {
+        "number": 3247,
+        "repo": "sonic-swss",
+        "comment_at": "2024-08-14T16:41:18Z",
+        "comment_author": "jfeng-arista",
+        "comment_body": "/azpw run Azure.sonic-swss"
+    },
+    {
+        "number": 3247,
+        "repo": "sonic-swss",
+        "comment_at": "2024-08-14T16:41:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run Azure.sonic-swss"
+    },
+    {
+        "number": 3247,
+        "repo": "sonic-swss",
+        "comment_at": "2024-08-14T16:41:31Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3247,
+        "repo": "sonic-swss",
+        "comment_at": "2024-08-15T00:43:06Z",
+        "comment_author": "jfeng-arista",
+        "comment_body": "I don't quite get the coverage results, I added test to cover the change and get coverage tests passed before  retarting the pipeline. How it can fail the coverage test after the rerun ...\r\n\r\nstart again \r\n\r\n/azpw run Azure.sonic-swss"
+    },
+    {
+        "number": 3247,
+        "repo": "sonic-swss",
+        "comment_at": "2024-08-15T00:43:15Z",
+        "comment_author": "jfeng-arista",
+        "comment_body": "/azpw run Azure.sonic-swss"
+    },
+    {
+        "number": 3247,
+        "repo": "sonic-swss",
+        "comment_at": "2024-08-15T00:43:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run Azure.sonic-swss"
+    },
+    {
+        "number": 3247,
+        "repo": "sonic-swss",
+        "comment_at": "2024-08-15T00:43:27Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3247,
+        "repo": "sonic-swss",
+        "comment_at": "2024-08-15T01:00:05Z",
+        "comment_author": "jfeng-arista",
+        "comment_body": "/azpw  run coverage.Azure.sonic-swss.vstest "
+    },
+    {
+        "number": 3247,
+        "repo": "sonic-swss",
+        "comment_at": "2024-08-21T13:16:58Z",
+        "comment_author": "arlakshm",
+        "comment_body": "@prsunny, can you please help merge this PR"
+    },
+    {
+        "number": 3247,
+        "repo": "sonic-swss",
+        "review_at": "2024-08-12T08:33:52Z",
+        "review_author": "arlakshm"
+    },
+    {
+        "number": 3247,
+        "repo": "sonic-swss",
+        "review_at": "2024-08-12T17:44:58Z",
+        "review_author": "jfeng-arista"
+    },
+    {
+        "number": 3247,
+        "repo": "sonic-swss",
+        "review_at": "2024-08-21T13:16:31Z",
+        "review_author": "arlakshm"
+    },
+    {
+        "number": 3247,
+        "repo": "sonic-swss",
+        "latestReview_at": "2024-08-21T13:16:31Z",
+        "latestReview_author": "arlakshm",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 3246,
         "repo": "sonic-swss",
         "comment_at": "2024-07-30T15:45:11Z",
