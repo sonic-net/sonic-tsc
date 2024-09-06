@@ -1,5 +1,39 @@
 [
     {
+        "number": 3522,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-09-05T02:29:52Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-utilities/pull/3490"
+    },
+    {
+        "number": 3521,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-09-05T20:26:01Z",
+        "comment_author": "kenneth-arista",
+        "comment_body": "@vmittal-msft @wenyiz2021 @arlakshm FYI"
+    },
+    {
+        "number": 3521,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-09-05T20:56:40Z",
+        "comment_author": "wenyiz2021",
+        "comment_body": "to be cherry pick in 202405, after https://github.com/sonic-net/sonic-utilities/pull/3057 is ported to 202405"
+    },
+    {
+        "number": 3521,
+        "repo": "sonic-utilities",
+        "review_at": "2024-09-05T20:54:28Z",
+        "review_author": "wenyiz2021"
+    },
+    {
+        "number": 3521,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-09-05T20:54:28Z",
+        "latestReview_author": "wenyiz2021",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 3517,
         "repo": "sonic-utilities",
         "comment_at": "2024-09-03T16:49:02Z",
@@ -217,6 +251,13 @@
         "comment_at": "2024-08-20T01:30:20Z",
         "comment_author": "wen587",
         "comment_body": "> > ```\r\n> >     table_hard_dependency_check(host_config)\r\n> > ```\r\n> \r\n> This part also needs add other asics' config check?\r\n> \r\n> Refers to: config/main.py:2007 in [16481df](https://github.com/sonic-net/sonic-utilities/commit/16481df500df03bb503feb67396d81007f512b07). [](commit_id = [16481df](https://github.com/sonic-net/sonic-utilities/commit/16481df500df03bb503feb67396d81007f512b07), deletion_comment = False)\r\n\r\nCurrently it only has dependency check about AAA which is only exist in host. It is weakened version of YANG validation based on PROD issue. I think after yang validation enabled, we can remove it or just add parts that YANG could not covered."
+    },
+    {
+        "number": 3490,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-09-05T02:29:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-utilities/pull/3522"
     },
     {
         "number": 3490,
@@ -11693,6 +11734,100 @@
         "number": 3062,
         "repo": "sonic-utilities",
         "latestReview_at": "2024-08-19T23:28:25Z",
+        "latestReview_author": "vmittal-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3061,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-03-22T01:06:27Z",
+        "comment_author": "vmittal-msft",
+        "comment_body": "@bktsim-arista please re-base to latest"
+    },
+    {
+        "number": 3061,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-03-22T01:08:37Z",
+        "comment_author": "vmittal-msft",
+        "comment_body": "@bktsim-arista  please share command and it's output from multi-asic platform. Also, did we verify to make sure, it still works for ToR."
+    },
+    {
+        "number": 3061,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-04-11T21:16:45Z",
+        "comment_author": "rdjeric-arista",
+        "comment_body": "@vmittal-msft \r\nHere's the output on a multiasic platform:\r\n```root@cmp235-3:~# mmuconfig -l\r\nNo buffer pool information available\r\nNo buffer profile information available\r\nroot@cmp235-3:~# mmuconfig -l -n asic0\r\nNo buffer pool information available\r\nNo buffer profile information available\r\nroot@cmp235-3:~# mmuconfig -p alpha_profile -a 2 -n asic0\r\nroot@cmp235-3:~# mmuconfig -l\r\nNo buffer pool information available\r\nNo buffer profile information available\r\nroot@cmp235-3:~# mmuconfig -l -n asic0\r\nNo buffer pool information available\r\nProfile: alpha_profile\r\n----------  -\r\ndynamic_th  2\r\n----------  -\r\n\r\nroot@cmp235-3:~#\r\n```\r\n\r\nAlso, we tested this on a ToR, and behavior was consistent on a single ASIC system."
+    },
+    {
+        "number": 3061,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-05-16T19:22:52Z",
+        "comment_author": "vmittal-msft",
+        "comment_body": "> @vmittal-msft Here's the output on a multiasic platform:\r\n> \r\n> ```\r\n> No buffer pool information available\r\n> No buffer profile information available\r\n> root@cmp235-3:~# mmuconfig -l -n asic0\r\n> No buffer pool information available\r\n> No buffer profile information available\r\n> root@cmp235-3:~# mmuconfig -p alpha_profile -a 2 -n asic0\r\n> root@cmp235-3:~# mmuconfig -l\r\n> No buffer pool information available\r\n> No buffer profile information available\r\n> root@cmp235-3:~# mmuconfig -l -n asic0\r\n> No buffer pool information available\r\n> Profile: alpha_profile\r\n> ----------  -\r\n> dynamic_th  2\r\n> ----------  -\r\n> \r\n> root@cmp235-3:~#\r\n> ```\r\n> \r\n> Also, we tested this on a ToR, and behavior was consistent on a single ASIC system.\r\n\r\nThanks. @rdjeric-arista @bktsim-arista Can you please share the o/p with some config present ? If no namespace is given, will it show all namespaces ?"
+    },
+    {
+        "number": 3061,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-08-22T03:17:33Z",
+        "comment_author": "kenneth-arista",
+        "comment_body": "@vmittal-msft @wenyiz2021 @arlakshm this PR is ready for review"
+    },
+    {
+        "number": 3061,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-08-22T04:20:29Z",
+        "comment_author": "vmittal-msft",
+        "comment_body": "@bktsim-arista  Please rebase"
+    },
+    {
+        "number": 3061,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-08-22T04:30:13Z",
+        "comment_author": "arista-hpandya",
+        "comment_body": "> @bktsim-arista Please rebase\r\n\r\n@bktsim-arista is not at Arista anymore. You can redirect these requests to me or @kenneth-arista. Thank you!"
+    },
+    {
+        "number": 3061,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-09-05T16:23:35Z",
+        "comment_author": "arista-hpandya",
+        "comment_body": "@vmittal-msft Can we merge this change?"
+    },
+    {
+        "number": 3061,
+        "repo": "sonic-utilities",
+        "review_at": "2024-03-22T01:09:20Z",
+        "review_author": "vmittal-msft"
+    },
+    {
+        "number": 3061,
+        "repo": "sonic-utilities",
+        "review_at": "2024-05-16T19:45:40Z",
+        "review_author": "vmittal-msft"
+    },
+    {
+        "number": 3061,
+        "repo": "sonic-utilities",
+        "review_at": "2024-07-22T21:34:34Z",
+        "review_author": "kenneth-arista"
+    },
+    {
+        "number": 3061,
+        "repo": "sonic-utilities",
+        "review_at": "2024-09-04T22:44:08Z",
+        "review_author": "vmittal-msft"
+    },
+    {
+        "number": 3061,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-07-22T21:34:34Z",
+        "latestReview_author": "kenneth-arista",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 3061,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-09-04T22:44:08Z",
         "latestReview_author": "vmittal-msft",
         "latestReview_state": "APPROVED"
     },
