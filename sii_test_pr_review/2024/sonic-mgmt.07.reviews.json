@@ -11286,6 +11286,13 @@
     {
         "number": 12558,
         "repo": "sonic-mgmt",
+        "comment_at": "2024-09-09T08:56:26Z",
+        "comment_author": "echuawu",
+        "comment_body": "We also are facing the failure of test_orchagent_logrotate[xxx-None-1-5], even we have this PR. Add the wait_until of no_pending_entries could not fix that. The hung and recovered orchagent process would not handle the pending entries. The root cause of the failure was after the config reload in fixture simulate_small_var_log_partition, the switch does not fully recovered, here I created a PR https://github.com/sonic-net/sonic-mgmt/pull/14478 to handle it and the fix was validated PASS at our setup."
+    },
+    {
+        "number": 12558,
+        "repo": "sonic-mgmt",
         "review_at": "2024-05-30T20:55:39Z",
         "review_author": "prsunny"
     },
