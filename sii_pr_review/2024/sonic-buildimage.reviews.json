@@ -1,5 +1,38 @@
 [
     {
+        "number": 20189,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-09-09T16:45:25Z",
+        "comment_author": "abdosi",
+        "comment_body": "@rlhui : Can you please help with merge of this."
+    },
+    {
+        "number": 20189,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-09-07T23:17:33Z",
+        "review_author": "arlakshm"
+    },
+    {
+        "number": 20189,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-09-08T06:34:34Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 20189,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2024-09-08T06:34:34Z",
+        "latestReview_author": "judyjoseph",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 20189,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2024-09-07T23:17:33Z",
+        "latestReview_author": "arlakshm",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 20182,
         "repo": "sonic-buildimage",
         "comment_at": "2024-09-06T21:43:58Z",
@@ -304,6 +337,32 @@
         "comment_at": "2024-09-03T22:02:51Z",
         "comment_author": "mssonicbld",
         "comment_body": "Original PR: https://github.com/sonic-net/sonic-buildimage/pull/19739"
+    },
+    {
+        "number": 20114,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-09-03T22:22:17Z",
+        "review_author": "dgsudharsan"
+    },
+    {
+        "number": 20114,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-09-09T22:53:57Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 20114,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2024-09-03T22:22:17Z",
+        "latestReview_author": "dgsudharsan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 20114,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2024-09-09T22:53:57Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
     },
     {
         "number": 20111,
@@ -877,6 +936,159 @@
         "repo": "sonic-buildimage",
         "latestReview_at": "2024-09-04T00:32:52Z",
         "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 20020,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-08-28T18:46:56Z",
+        "comment_author": "kperumalbfn",
+        "comment_body": "/azpw run Azure.sonic-buildimage"
+    },
+    {
+        "number": 20020,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-08-28T18:52:03Z",
+        "comment_author": "kperumalbfn",
+        "comment_body": "/AzurePipelines run Azure.sonic-buildimage"
+    },
+    {
+        "number": 20020,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-08-28T18:52:15Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 20020,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-08-28T23:58:25Z",
+        "comment_author": "eddieruan-alibaba",
+        "comment_body": "/AzurePipelines run Azure.sonic-buildimage\r\n"
+    },
+    {
+        "number": 20020,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-08-28T23:58:31Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nCommenter does not have sufficient privileges for PR 20020 in repo sonic-net/sonic-buildimage<br>\r\n\n</samp>"
+    },
+    {
+        "number": 20020,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-09-05T18:41:53Z",
+        "comment_author": "kperumalbfn",
+        "comment_body": "@eddieruan-alibaba Could you update the branch and retry? Recent commits have all sanities passed."
+    },
+    {
+        "number": 20020,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-09-06T04:51:43Z",
+        "comment_author": "eddieruan-alibaba",
+        "comment_body": "> @eddieruan-alibaba Could you update the branch and retry? Recent commits have all sanities passed.\r\n\r\n@kperumalbfn I still hit a failure.\r\n\r\nThe log I saw is at https://elastictest.org/scheduler/publictestplan/66da5d8f9ae803ee15b3c380?testcase=syslog%2Ftest_logrotate.py%7C%7C%7C2&type=console\r\n\r\nwhich has the following error message. I don't feel this failure is related to my changes.\r\n\r\nsyslog/test_logrotate.py::test_orchagent_logrotate[vlab-03-None-1-5] \r\n-------------------------------- live log call ---------------------------------\r\n03:32:59 utilities.wait_until L0142 ERROR | Exception caught while checking no_pending_entries:Traceback (most recent call last):\r\n File \"/var/src/sonic-mgmt/tests/common/utilities.py\", line 138, in wait_until\r\n check_result = condition(*args, **kwargs)\r\n File \"/var/src/sonic-mgmt/tests/syslog/test_logrotate.py\", line 260, in no_pending_entries\r\n return not bool(get_pending_entries(duthost, ignore_list=ignore_list))\r\n File \"/var/src/sonic-mgmt/tests/syslog/test_logrotate.py\", line 243, in get_pending_entries\r\n pending_entries.remove(entry)\r\nKeyError: '_ROUTE_TABLE:20c0:e9b0::/64'\r\n, error:'_ROUTE_TABLE:20c0:e9b0::/64'\r\n03:33:01 utilities.wait_until L0142 ERROR | Exception caught while checking \r\n"
+    },
+    {
+        "number": 20020,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-08-26T01:30:00Z",
+        "review_author": "venkatmahalingam"
+    },
+    {
+        "number": 20020,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-08-26T01:33:10Z",
+        "review_author": "venkatmahalingam"
+    },
+    {
+        "number": 20020,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-08-26T01:37:16Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 20020,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-08-26T01:38:10Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 20020,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-08-26T01:44:27Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 20020,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-08-26T01:59:59Z",
+        "review_author": "venkatmahalingam"
+    },
+    {
+        "number": 20020,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-08-26T02:05:49Z",
+        "review_author": "venkatmahalingam"
+    },
+    {
+        "number": 20020,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-08-26T02:22:24Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 20020,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-08-26T02:23:26Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 20020,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-08-26T03:32:35Z",
+        "review_author": "venkatmahalingam"
+    },
+    {
+        "number": 20020,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-08-26T03:33:39Z",
+        "review_author": "venkatmahalingam"
+    },
+    {
+        "number": 20020,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-08-26T04:44:05Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 20020,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-08-26T04:48:36Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 20020,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-08-26T05:00:29Z",
+        "review_author": "venkatmahalingam"
+    },
+    {
+        "number": 20020,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-09-09T05:13:44Z",
+        "review_author": "kperumalbfn"
+    },
+    {
+        "number": 20020,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2024-09-09T05:13:44Z",
+        "latestReview_author": "kperumalbfn",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 20020,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2024-08-26T05:00:29Z",
+        "latestReview_author": "venkatmahalingam",
         "latestReview_state": "APPROVED"
     },
     {
@@ -3507,6 +3719,419 @@
         "comment_at": "2024-08-02T00:52:07Z",
         "comment_author": "mssonicbld",
         "comment_body": "Original PR: https://github.com/sonic-net/sonic-buildimage/pull/18978"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-08-01T21:30:38Z",
+        "comment_author": "jfeng-arista",
+        "comment_body": "This is fixing https://github.com/sonic-net/sonic-buildimage/issues/19660\r\n\r\n@kenneth-arista @arlakshm @vmittal-msft "
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-08-13T02:40:55Z",
+        "comment_author": "jfeng-arista",
+        "comment_body": "/azpw run Azure.sonic-buildimage"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-08-13T02:40:57Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run Azure.sonic-buildimage"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-08-13T02:41:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-08-13T15:26:39Z",
+        "comment_author": "jfeng-arista",
+        "comment_body": "ASSERT TRUE FAILED(5085): sizeof(sai_switch_health_data_t) == (SAI_SWITCH_HEALTH_DATA_T_SIZE): wrong size of sai_switch_health_data_t, expected 16, got 4\r\nmake[2]: 2016 2017 2018 2019 2020 2021 2022 2023 2024 parse_reviews.py pr_dump.sh repo_list.sh repos update.sh [Makefile:89: all] Error 1\r\nmake[2]: Leaving directory '/sonic/src/dash-sai/DASH/dash-pipeline/SAI/SAI/meta'\r\n\r\ndoes not seem related to our code "
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-08-13T15:39:18Z",
+        "comment_author": "jfeng-arista",
+        "comment_body": "I see the same error on other PRs as well, thinking this is not related the change, try one more time of runming the pipleline, otherwise, we will wait for the issue get fixed upstream \r\n\r\n "
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-08-13T15:39:20Z",
+        "comment_author": "jfeng-arista",
+        "comment_body": "/azpw run Azure.sonic-buildimage"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-08-13T15:39:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run Azure.sonic-buildimage"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-08-13T15:39:35Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-08-13T23:09:19Z",
+        "comment_author": "jfeng-arista",
+        "comment_body": "same failure before, I will wait a bit for the upstream fix then kick off the test pipeline again"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-08-14T16:41:06Z",
+        "comment_author": "jfeng-arista",
+        "comment_body": "/azpw run Azure.sonic-buildimage"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-08-14T16:41:09Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run Azure.sonic-buildimage"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-08-14T16:41:21Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-08-19T16:06:11Z",
+        "comment_author": "jfeng-arista",
+        "comment_body": "/azpw run Azure.sonic-buildimage\r\n"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-08-19T16:06:14Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run Azure.sonic-buildimage"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-08-19T16:06:26Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-08-19T17:10:42Z",
+        "comment_author": "kenneth-arista",
+        "comment_body": "@arlakshm @wenyiz2021 can you help unblock the `ms_checker` failure? We don't have permission to see what is failing. "
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-08-19T21:19:56Z",
+        "comment_author": "vmittal-msft",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-08-19T21:20:03Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nCommenter does not have sufficient privileges for PR 19767 in repo sonic-net/sonic-buildimage<br>\r\n\n</samp>"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-08-20T15:33:26Z",
+        "comment_author": "jfeng-arista",
+        "comment_body": "/azpw run Azure.sonic-buildimage"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-08-20T15:33:29Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run Azure.sonic-buildimage"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-08-20T15:33:44Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-08-28T17:53:56Z",
+        "comment_author": "abdosi",
+        "comment_body": "@qiluo-msft : Can you please help to merge this."
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-08-28T18:55:09Z",
+        "comment_author": "jfeng-arista",
+        "comment_body": "> please add some UT\r\n\r\nI updated existing UT test test_fabric_port_table and test_fabric_monitor_data_table to cover the new attributes. please let me know if this is enough. thank you\r\n\r\n\r\n\r\n"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-09-04T17:42:06Z",
+        "comment_author": "rlhui",
+        "comment_body": "@arlakshm and @mlok-nokia please quickly review so this one could be merged, thanks."
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-09-04T17:43:05Z",
+        "comment_author": "rlhui",
+        "comment_body": "@qiluo-msft , please help review this quickly? thanks."
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-09-05T05:03:11Z",
+        "comment_author": "jfeng-arista",
+        "comment_body": "> LGTM\r\n\r\nthanks "
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-09-05T05:38:53Z",
+        "comment_author": "kenneth-arista",
+        "comment_body": "Referencing https://github.com/sonic-net/sonic-utilities/issues/3443"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-09-05T15:25:15Z",
+        "comment_author": "jfeng-arista",
+        "comment_body": "\"Error type: DUTHOST_UNREACHABLE\r\nError message: DUT host unreachable for vms-kvm-dual-t0 on running test_pretest.py|||vms-kvm-dual-t0_215703\r\n\"\r\n\r\nit failed with above issue. \r\n\r\nkick off another build "
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-09-05T15:25:34Z",
+        "comment_author": "jfeng-arista",
+        "comment_body": "/azpw run Azure.sonic-buildimage"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-09-05T15:25:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run Azure.sonic-buildimage"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-09-05T15:25:48Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-09-06T03:07:26Z",
+        "comment_author": "jfeng-arista",
+        "comment_body": "Error type: START_WORKER_AGENT_FAILED\r\nError message: Prepare testbed failed: testbed_q_sonic-elastictest-prod-vmss-D8s-v3_216742 for START_WORKER_AGENT_FAILED, testbed_id is: 66da046a066cc8cdf5ad59eb, cmd is: Start sonic-mgmt worker agent\r\nOperation failed with exception: Exception('Test plan id: 66da01891b0209cf5f97a1fb, status: None, result: FAILED, Elapsed 0 seconds. Check https://elastictest.org/scheduler/testplan/66da01891b0209cf5f97a1fb for test plan status')\r\n\r\n\r\nThe failure does not look related to the change "
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-09-06T03:07:34Z",
+        "comment_author": "jfeng-arista",
+        "comment_body": "/azpw run Azure.sonic-buildimage"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-09-06T03:07:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run Azure.sonic-buildimage"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-09-06T03:07:47Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-08-12T15:58:54Z",
+        "review_author": "arlakshm"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-08-12T16:27:27Z",
+        "review_author": "jfeng-arista"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-08-19T21:16:26Z",
+        "review_author": "vmittal-msft"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-08-21T13:14:46Z",
+        "review_author": "arlakshm"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-08-28T19:10:56Z",
+        "review_author": "jfeng-arista"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-09-04T17:42:24Z",
+        "review_author": "arlakshm"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-09-05T02:26:03Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-09-05T02:33:02Z",
+        "review_author": "wen587"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-09-05T02:36:53Z",
+        "review_author": "wen587"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-09-05T03:54:22Z",
+        "review_author": "jfeng-arista"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-09-05T04:01:18Z",
+        "review_author": "jfeng-arista"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-09-05T04:30:42Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-09-05T04:49:39Z",
+        "review_author": "jfeng-arista"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-09-05T04:50:51Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-09-05T04:57:05Z",
+        "review_author": "jfeng-arista"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-09-05T05:01:18Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-09-05T05:02:37Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-09-05T05:22:20Z",
+        "review_author": "wen587"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-09-05T05:27:35Z",
+        "review_author": "jfeng-arista"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-09-05T06:29:06Z",
+        "review_author": "wen587"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-09-09T06:24:08Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2024-09-05T06:29:06Z",
+        "latestReview_author": "wen587",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2024-09-09T06:24:08Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2024-08-19T21:16:26Z",
+        "latestReview_author": "vmittal-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2024-09-05T05:02:37Z",
+        "latestReview_author": "ganglyu",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 19767,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2024-09-04T17:42:24Z",
+        "latestReview_author": "arlakshm",
+        "latestReview_state": "DISMISSED"
     },
     {
         "number": 19761,
