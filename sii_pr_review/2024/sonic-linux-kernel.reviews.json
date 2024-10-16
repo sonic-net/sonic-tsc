@@ -1,10 +1,156 @@
 [
     {
+        "number": 439,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-10-08T00:38:41Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 439,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2024-10-08T00:38:41Z",
+        "latestReview_author": "StormLiangMS",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 437,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-10-09T08:22:39Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "> Fix: https://github.com/sonic-net/sonic-buildimage/issues/20368\r\n\r\nI\u2019d use the tag *Resolves:*.\r\n\r\n> Ref: https://lore.kernel.org/stable/20241001112035.973187-1-idosch@nvidia.com/t/#u\r\n\r\nPlease summarize the discussion. Best cite @idosch\u2019s explanation from his first reply to Greg."
+    },
+    {
+        "number": 437,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-10-09T21:25:47Z",
+        "comment_author": "vivekrnv",
+        "comment_body": "> But first of, why?  Why not just take the upstrema commits instead?\r\n> \r\n> thanks,\r\n> greg k-h\r\n\r\nIdo:\r\n> There were a lot of changes as part of the 6.3 cycle to completely\r\n> rework the semantics of the devlink instance reference count. As part of\r\n> these changes, commit d77278196441 (\"devlink: bump the instance index\r\n> directly when iterating\") inadvertently fixed the bug mentioned in this\r\n> patch. This commit cannot be applied to 6.1.y as-is because a prior\r\n> commit (also in 6.3) moved the code to a different file (leftover.c ->\r\n> core.c). There might be more dependencies that I'm currently unaware of.\r\n> \r\n> The alternative, proposed in this patch, is to provide a minimal and\r\n> contained fix for the bug introduced in upstream commit c2368b19807a\r\n> (\"net: devlink: introduce \"unregistering\" mark and use it during\r\n> devlinks iteration\") as part of the 6.0 cycle.\r\n\r\nSummary of https://lore.kernel.org/stable/20241001112035.973187-1-idosch@nvidia.com/t/#u"
+    },
+    {
+        "number": 437,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-10-09T21:41:14Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "Thanks. But I meant to put that into the merge/pull request and commit message description."
+    },
+    {
+        "number": 437,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-10-14T20:35:31Z",
+        "comment_author": "vivekrnv",
+        "comment_body": "@bingwang-ms Can this me merged?"
+    },
+    {
+        "number": 437,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-10-02T17:57:59Z",
+        "review_author": "dgsudharsan"
+    },
+    {
+        "number": 437,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-10-09T02:52:58Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 437,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2024-10-09T02:52:58Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 437,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2024-10-02T17:57:59Z",
+        "latestReview_author": "dgsudharsan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 436,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-09-30T20:30:43Z",
+        "comment_author": "vivekrnv",
+        "comment_body": "msn2100 platform. upstream code is refactored and patch cannot be applied directly. https://github.com/gregkh/linux/commit/d35df77707bf5ae1221b5ba1c8a88cf4fcdd4901.\r\n\r\nIt seems safe to revert the offending commit than to make an effort to port the upstream change into the stable branch. \r\n\r\nI'll ofcourse change this once the upstream commit is backported to 6.1 branch  "
+    },
+    {
+        "number": 436,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-09-30T15:50:34Z",
+        "review_author": "dgsudharsan"
+    },
+    {
+        "number": 436,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-09-30T20:04:21Z",
+        "review_author": "paulmenzel"
+    },
+    {
+        "number": 436,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-10-02T15:49:41Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 436,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2024-09-30T20:04:21Z",
+        "latestReview_author": "paulmenzel",
+        "latestReview_state": "CHANGES_REQUESTED"
+    },
+    {
+        "number": 436,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2024-10-02T15:49:41Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 436,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2024-09-30T15:50:34Z",
+        "latestReview_author": "dgsudharsan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 432,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-09-11T06:27:00Z",
+        "review_author": "paulmenzel"
+    },
+    {
+        "number": 432,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2024-09-30T16:05:02Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 432,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2024-09-11T06:27:00Z",
+        "latestReview_author": "paulmenzel",
+        "latestReview_state": "CHANGES_REQUESTED"
+    },
+    {
+        "number": 432,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2024-09-30T16:05:02Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 427,
         "repo": "sonic-linux-kernel",
         "comment_at": "2024-08-28T01:44:16Z",
         "comment_author": "mssonicbld",
         "comment_body": "Original PR: https://github.com/sonic-net/sonic-linux-kernel/pull/421"
+    },
+    {
+        "number": 423,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2024-10-02T11:46:01Z",
+        "comment_author": "robertlperry",
+        "comment_body": "Hi @saiarcot895, I was curious on why wasn't the latest 6.1.X kernel/Debian Linux version chosen? For example, why was 6.1.94 selected over 6.1.106? Thanks for any insight. "
     },
     {
         "number": 422,
