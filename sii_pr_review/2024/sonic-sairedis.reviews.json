@@ -1,5 +1,19 @@
 [
     {
+        "number": 1431,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-10-10T19:56:05Z",
+        "comment_author": "kcudnik",
+        "comment_body": "there is problem with swss becasue of backward compatibility issues:\r\n\r\n```\r\ng++ -DHAVE_CONFIG_H -I. -I../..  -g -DNDEBUG  -std=c++14 -Wall -fPIC -Wno-write-strings -I/usr/include/swss -I/usr/include/libnl3 -Werror -Wno-reorder -Wcast-align -Wcast-qual -Wconversion -Wdisabled-optimization -Wextra -Wfloat-equal -Wformat=2 -Wformat-nonliteral -Wformat-security -Wformat-y2k -Wimport -Winit-self -Winvalid-pch -Wlong-long -Wmissing-field-initializers -Wmissing-format-attribute -Wno-aggregate-return -Wno-padded -Wno-switch-enum -Wno-unused-parameter -Wpacked -Wpointer-arith -Wredundant-decls -Wstack-protector -Wstrict-aliasing=3 -Wswitch -Wswitch-default -Wunreachable-code -Wunused -Wvariadic-macros -Wno-switch-default -Wno-long-long -Wno-redundant-decls  -I /usr/include/sai -I ../../orchagent/flex_counter -I ../../orchagent/debug_counter -I ../../lib -I../../cfgmgr -I../../orchagent -I../../orchagent/p4orch/tests -I../../orchagent/dash -I../../warmrestart -Wdate-time -D_FORTIFY_SOURCE=2  -g -O2 -ffile-prefix-map=/__w/1/s=. -fstack-protector-strong -Wformat -Werror=format-security -c -o tests-warmrestarthelper_ut.o `test -f 'warmrestarthelper_ut.cpp' || echo './'`warmrestarthelper_ut.cpp\r\nswitchorch_ut.cpp: In member function 'virtual void switchorch_test::SwitchOrchTest_SwitchOrchTestHandleEvent_Test::TestBody()':\r\nswitchorch_ut.cpp:295:83: error: missing initializer for member '_sai_switch_health_data_t::data' [-Werror=missing-field-initializers]\r\n  295 |         sai_switch_health_data_t data = {.data_type = SAI_HEALTH_DATA_TYPE_GENERAL};\r\n      |                                                                                   ^\r\n```\r\n\r\n because some fields in structs appear, current swss won't let it compile  because initializers are missing\r\nsimilar will be for SER data and port_oper_status notification with port_error_status field :(\r\n\r\nbecause swss gets SAI headers from sairedis, then when pointer from v1.14 to v1.15 is updated, new firlds show up and they are captured by gcc compiler\r\n\r\nso there are 2 ways to solve this\r\nwe update swss repo to disable this warning globally (not reccomended)\r\nwe disable this warning on swss on places where is used  (also tidious to search all places)\r\n\r\nand this will happen again when we another time will break backward compatibility\r\n\r\n"
+    },
+    {
+        "number": 1431,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-10-10T20:08:47Z",
+        "comment_author": "kcudnik",
+        "comment_body": "attempt to fix tests on swss: https://github.com/sonic-net/sonic-swss/pull/3321"
+    },
+    {
         "number": 1426,
         "repo": "sonic-sairedis",
         "comment_at": "2024-09-28T01:42:32Z",
