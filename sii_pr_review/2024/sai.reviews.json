@@ -2234,6 +2234,185 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 2003,
+        "repo": "sai",
+        "comment_at": "2024-04-23T23:30:04Z",
+        "comment_author": "SidharajU",
+        "comment_body": "@dipankar-ba @lguohan Please review "
+    },
+    {
+        "number": 2003,
+        "repo": "sai",
+        "comment_at": "2024-04-24T05:03:12Z",
+        "comment_author": "SidharajU",
+        "comment_body": "In the current implementation (without the proposed changes), there is no relation between secure flow, secure channel and the macsec_port_id/port. MACsec user is not able create a flow or secure channel for a particular core. This is an optional attiribute so this change won't break current macsec applications and the new attribute should only be used when there is a need to have a relation between flow, SC, SA and a port. "
+    },
+    {
+        "number": 2003,
+        "repo": "sai",
+        "comment_at": "2024-04-24T16:36:51Z",
+        "comment_author": "kcudnik",
+        "comment_body": "please add PR description"
+    },
+    {
+        "number": 2003,
+        "repo": "sai",
+        "comment_at": "2024-04-24T16:56:34Z",
+        "comment_author": "SidharajU",
+        "comment_body": "> please add PR description\r\n\r\nI have added comment about the description: \r\n\r\nIn the current implementation (without the proposed changes), there is no relation between secure flow, secure channel and the macsec_port_id/port. MACsec user is not able create a flow or secure channel for a particular core. This is an optional attiribute so this change won't break current macsec applications and the new attribute should only be used when there is a need to have a relation between flow, SC, SA and a port.\r\n\r\n"
+    },
+    {
+        "number": 2003,
+        "repo": "sai",
+        "comment_at": "2024-04-24T22:41:46Z",
+        "comment_author": "SidharajU",
+        "comment_body": "> This change does not allow using a MACsec flow for multiple MACsec ports. Instead of binding a MACsec port to a MACsec flow, can a MACsec port be bound to a MACsec SC? That allows MACsec flows to identify common policies (stored in per-flow entries) to be applied to SCs that serve different ports. An alternative could be to allow a list of ports to be associated to each flow.\r\n\r\nYes. we can move the attribute from MACsec flow to MACsec SC."
+    },
+    {
+        "number": 2003,
+        "repo": "sai",
+        "comment_at": "2024-04-25T16:09:27Z",
+        "comment_author": "helloanandhi",
+        "comment_body": "MACSEC rules are bound to a port. These rules have MACSEC flow as action. The MACSEC flow can have multiple SCs. Adding Port to SC association at MACSEC SC, could break the association of MACSEC rule to port. "
+    },
+    {
+        "number": 2003,
+        "repo": "sai",
+        "comment_at": "2024-04-25T16:10:36Z",
+        "comment_author": "helloanandhi",
+        "comment_body": "> > This change does not allow using a MACsec flow for multiple MACsec ports. Instead of binding a MACsec port to a MACsec flow, can a MACsec port be bound to a MACsec SC? That allows MACsec flows to identify common policies (stored in per-flow entries) to be applied to SCs that serve different ports. An alternative could be to allow a list of ports to be associated to each flow.\r\n> \r\n> Yes. we can move the attribute from MACsec flow to MACsec SC.\r\n\r\nWhy would you want to share a MACSEC flow across MACSEC ports ? Does hardware engine allow it ?"
+    },
+    {
+        "number": 2003,
+        "repo": "sai",
+        "comment_at": "2024-04-25T16:47:55Z",
+        "comment_author": "dipankar-ba",
+        "comment_body": "Hi Anandhi,\r\n\r\nHonestly I do not know about all MACsec implementations out there.  This\r\nobject relationship is accepted and used for years - so I didn't want to\r\nrisk breaking that unless it is absolutely necessary.\r\n\r\nThe SAI MACsec clearly allows multiple MACsec ingress SC to be bound to one\r\nMACsec ingress flow.  Years back, I came across an implementation that\r\nmakes use of it.  However I do not remember if all those SCs (sharing a\r\nflow) had to be for 1 port.\r\n\r\n- Dipankar\r\n\r\n\r\nOn Thu, Apr 25, 2024 at 9:10\u202fAM Anandhi Dhanabalan ***@***.***>\r\nwrote:\r\n\r\n> This change does not allow using a MACsec flow for multiple MACsec ports.\r\n> Instead of binding a MACsec port to a MACsec flow, can a MACsec port be\r\n> bound to a MACsec SC? That allows MACsec flows to identify common policies\r\n> (stored in per-flow entries) to be applied to SCs that serve different\r\n> ports. An alternative could be to allow a list of ports to be associated to\r\n> each flow.\r\n>\r\n> Yes. we can move the attribute from MACsec flow to MACsec SC.\r\n>\r\n> Why would you want to share a MACSEC flow across MACSEC ports ? Does\r\n> hardware engine allow it ?\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/opencomputeproject/SAI/pull/2003#issuecomment-2077661670>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AN3GZXMJEAD5NBKALTJH2JTY7ETJFAVCNFSM6AAAAABGVZKDYOVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDANZXGY3DCNRXGA>\r\n> .\r\n> You are receiving this because you were mentioned.Message ID:\r\n> ***@***.***>\r\n>\r\n"
+    },
+    {
+        "number": 2003,
+        "repo": "sai",
+        "comment_at": "2024-04-25T17:32:02Z",
+        "comment_author": "SidharajU",
+        "comment_body": "So are we moving back the MACsec port id from MACsec SC to Flow. There is already an implicit relationship between \r\nMACsec port -> ACL table -> MACsec flow -> MACsec SC but the relation doesn't establish until it binds to an ACL entry. Instead of bind point, can we make an explicit relation between MACsec flow and MACsec port id? Looks like based on the current design, we cannot assign a flow to multiple MACsec port ids. "
+    },
+    {
+        "number": 2003,
+        "repo": "sai",
+        "comment_at": "2024-04-25T18:21:32Z",
+        "comment_author": "dipankar-ba",
+        "comment_body": "There is no implicit relationship limiting a flow from being used for\r\nmultiple ports.  Multiple ACL entries can be bound to a MACsec flow, and\r\nthose can belong to different ACL tables and different ports.\r\n\r\n- Dipankar\r\n\r\n\r\nOn Thu, Apr 25, 2024 at 10:32\u202fAM SidharajU ***@***.***> wrote:\r\n\r\n> So are we moving back the MACsec port id from MACsec SC to Flow. There is\r\n> already an implicit relationship between\r\n> MACsec port -> ACL table -> MACsec flow -> MACsec SC but the relation\r\n> doesn't establish until it binds to an ACL entry. Instead of bind point,\r\n> can we make an explicit relation between MACsec flow and MACsec port id?\r\n> Looks like based on the current design, we cannot assign a flow to multiple\r\n> MACsec port ids.\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/opencomputeproject/SAI/pull/2003#issuecomment-2077806082>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AN3GZXJI4FI5MA63GRKVFSLY7E42TAVCNFSM6AAAAABGVZKDYOVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDANZXHAYDMMBYGI>\r\n> .\r\n> You are receiving this because you were mentioned.Message ID:\r\n> ***@***.***>\r\n>\r\n"
+    },
+    {
+        "number": 2003,
+        "repo": "sai",
+        "comment_at": "2024-04-25T22:10:20Z",
+        "comment_author": "SidharajU",
+        "comment_body": "Thanks Dipankar. \r\n@helloanandhi  Are you okay with the current changes based on Dipankar's explanation?\r\n"
+    },
+    {
+        "number": 2003,
+        "repo": "sai",
+        "comment_at": "2024-04-26T06:22:43Z",
+        "comment_author": "helloanandhi",
+        "comment_body": "If MACsec port is allowed to be bound to SC, that would break the existing semantics\r\n\r\nFor example, In illustration below MACSEC port P1 would point to a MACsec flow (F1) with secure channel (SC2) associated to P2, this would be incorrect.\r\nMACsec port (say P1) -> ACL table (say T1)-> MACsec flow (say F1) -> MACsec SC (SC1 {mapped to P1} , SC2 {mapped to P2}  )"
+    },
+    {
+        "number": 2003,
+        "repo": "sai",
+        "comment_at": "2024-04-26T07:03:02Z",
+        "comment_author": "helloanandhi",
+        "comment_body": "> There is no implicit relationship limiting a flow from being used for multiple ports. Multiple ACL entries can be bound to a MACsec flow, and those can belong to different ACL tables and different ports. - Dipankar\r\n> [\u2026](#)\r\n> On Thu, Apr 25, 2024 at 10:32\u202fAM SidharajU ***@***.***> wrote: So are we moving back the MACsec port id from MACsec SC to Flow. There is already an implicit relationship between MACsec port -> ACL table -> MACsec flow -> MACsec SC but the relation doesn't establish until it binds to an ACL entry. Instead of bind point, can we make an explicit relation between MACsec flow and MACsec port id? Looks like based on the current design, we cannot assign a flow to multiple MACsec port ids. \u2014 Reply to this email directly, view it on GitHub <[#2003 (comment)](https://github.com/opencomputeproject/SAI/pull/2003#issuecomment-2077806082)>, or unsubscribe <https://github.com/notifications/unsubscribe-auth/AN3GZXJI4FI5MA63GRKVFSLY7E42TAVCNFSM6AAAAABGVZKDYOVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDANZXHAYDMMBYGI> . You are receiving this because you were mentioned.Message ID: ***@***.***>\r\n\r\nPlease note, multiple secure channels (SCs) can be associated with a single MACsec port. To allow this, MACsec flow - which is a logical encapsulation has list of SC's. "
+    },
+    {
+        "number": 2003,
+        "repo": "sai",
+        "comment_at": "2024-04-26T09:40:02Z",
+        "comment_author": "kcudnik",
+        "comment_body": "pleas sign your commit to pass DCO"
+    },
+    {
+        "number": 2003,
+        "repo": "sai",
+        "comment_at": "2024-04-26T16:46:24Z",
+        "comment_author": "dipankar-ba",
+        "comment_body": "> > There is no implicit relationship limiting a flow from being used for multiple ports. Multiple ACL entries can be bound to a MACsec flow, and those can belong to different ACL tables and different ports. - Dipankar\r\n> > [\u2026](#)\r\n> > On Thu, Apr 25, 2024 at 10:32\u202fAM SidharajU _**@**_._**> wrote: So are we moving back the MACsec port id from MACsec SC to Flow. There is already an implicit relationship between MACsec port -> ACL table -> MACsec flow -> MACsec SC but the relation doesn't establish until it binds to an ACL entry. Instead of bind point, can we make an explicit relation between MACsec flow and MACsec port id? Looks like based on the current design, we cannot assign a flow to multiple MACsec port ids. \u2014 Reply to this email directly, view it on GitHub <[#2003 (comment)](https://github.com/opencomputeproject/SAI/pull/2003#issuecomment-2077806082)>, or unsubscribe https://github.com/notifications/unsubscribe-auth/AN3GZXJI4FI5MA63GRKVFSLY7E42TAVCNFSM6AAAAABGVZKDYOVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDANZXHAYDMMBYGI . You are receiving this because you were mentioned.Message ID: _**@**_.**_>\r\n> \r\n> Please note, multiple secure channels (SCs) can be associated with a single MACsec port. To allow this, MACsec flow - which is a logical encapsulation has list of SC's.\r\n\r\nWhen I defined the API, I did not intend a flow to be used for multiple ports.  In fact the only intended use case for multiple SCs attached to a flow was for a single ingress port as described in Fig-4 and the text below it in https://github.com/opencomputeproject/SAI/blob/master/doc/macsec-gearbox/SAI_MACsec_API_Proposal-v1.4.docx\r\n\r\nBut while considering this PR, I realized nothing prevented someone from binding the ACL and SC for 2 ports to 1 MACsec flow.  That could allow the same flow (aka vPort) policy to be applied to multiple ports (if the hardware permitted it).  And the safer approach was to attach a port to a flow, because nobody should attach the same SC to 2 ports of a device.  If you think *nobody* has shared a flow for  multiple ports, and there an imperative to attach the port to a flow, please go ahead and do it.  I would not have done it, because attaching a port to an SC works equally well and seems safer."
+    },
+    {
+        "number": 2003,
+        "repo": "sai",
+        "comment_at": "2024-04-29T05:25:01Z",
+        "comment_author": "helloanandhi",
+        "comment_body": "@SidharajU , AFAIK, It not prudent to share a flow across macsec ports in hardware though current SAI software modelling does not prevent it explicitly.  As @dipankar-ba stated, if your hardware supports it, could you please add a 'md' file with work-flow, to clearly explain the intention and use case of this new attribute ?\r\nPlease note the ACL binding happens at physical port level, which can have one or more macsec ports created. I believe the SC is at per macsec port level. A pictorial diagram explaining all this would be helpful.\r\n"
+    },
+    {
+        "number": 2003,
+        "repo": "sai",
+        "comment_at": "2024-04-29T09:07:00Z",
+        "comment_author": "prafull-brcm",
+        "comment_body": "@SidharajU\r\nDCO error please use this command to signoff using your email. \r\ngit commit -s -m \u201ccommit message\u201d"
+    },
+    {
+        "number": 2003,
+        "repo": "sai",
+        "comment_at": "2024-04-29T16:16:56Z",
+        "comment_author": "dipankar-ba",
+        "comment_body": "Hi Anandhi,\r\n\r\nPerhaps you are right and nobody in their right mind would have shared a\r\nflow across ports.  But in Sid's defense it is not him :-)\r\n\r\nForgive the repetition - but in case you missed my main point.  I do not\r\nwant to break somebody's existing driver (including people other than\r\nBroadcom or Marvell) - and that's why I advocated attaching port to SC.\r\nBut if you and Sid think attaching it to flow is worth the risk, try it as\r\nlong as you are willing to fix any fallout.\r\n\r\n- Dipankar\r\n\r\n\r\nOn Sun, Apr 28, 2024 at 10:25\u202fPM Anandhi Dhanabalan <\r\n***@***.***> wrote:\r\n\r\n> @SidharajU <https://github.com/SidharajU> , AFAIK, It not prudent to\r\n> share a flow across macsec ports in hardware though current SAI software\r\n> modelling does not prevent it explicitly. As @dipankar-ba\r\n> <https://github.com/dipankar-ba> stated, if your hardware supports it\r\n> could you please add a 'md' file with work flow as well to clearly explain\r\n> the intention and use case of this attribute ?\r\n> Please note the ACL binding happens at physical port level, which can have\r\n> one or more macsec ports created. I believe the SC is at per macsec port\r\n> level. A pictorial diagram explaining all this would be helpful.\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/opencomputeproject/SAI/pull/2003#issuecomment-2081911709>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AN3GZXLQZXSCKMNWRZQBVALY7XKUHAVCNFSM6AAAAABGVZKDYOVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDAOBRHEYTCNZQHE>\r\n> .\r\n> You are receiving this because you were mentioned.Message ID:\r\n> ***@***.***>\r\n>\r\n"
+    },
+    {
+        "number": 2003,
+        "repo": "sai",
+        "comment_at": "2024-05-06T07:07:47Z",
+        "comment_author": "helloanandhi",
+        "comment_body": "@dipankar-ba , Attaching port to SC or Flow, will have same limitation as multiple ACL tables bound to different physical ports can point to these. Hence a work flow from @SidharajU would clarify the use case."
+    },
+    {
+        "number": 2003,
+        "repo": "sai",
+        "comment_at": "2024-05-06T15:36:14Z",
+        "comment_author": "dipankar-ba",
+        "comment_body": "Attaching a port to SC will not cause trouble for existing drivers because\r\na MACsec SC cannot support 2 ports. If a new driver needs to program\r\nper-port memory for a flow, such programming can be deferred until the flow\r\nis associated with a SC.\r\n\r\nAttaching a port to a flow can have problems because, as discussed earlier,\r\nan existing driver could have attached a flow to have multiple ports.\r\nHowever, I do not know of anyone who has done it.  So as I said before, you\r\ncan try it out - but be ready to revert if it breaks.\r\n\r\nSid and you can make that call - IMO there is no point rehashing this topic\r\nfurther.\r\n\r\n- Dipankar\r\n\r\n\r\nOn Mon, May 6, 2024 at 12:09\u202fAM Anandhi Dhanabalan ***@***.***>\r\nwrote:\r\n\r\n> @dipankar-ba <https://github.com/dipankar-ba> , Attaching port to SC or\r\n> Flow, will have same limitation as multiple ACL tables bound to different\r\n> physical ports can point to these. Hence a work flow from @SidharajU\r\n> <https://github.com/SidharajU> would clarify the use case.\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/opencomputeproject/SAI/pull/2003#issuecomment-2095325259>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AN3GZXJZVO5QWNAKDGVPHJDZA4UCDAVCNFSM6AAAAABGVZKDYOVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDAOJVGMZDKMRVHE>\r\n> .\r\n> You are receiving this because you were mentioned.Message ID:\r\n> ***@***.***>\r\n>\r\n"
+    },
+    {
+        "number": 2003,
+        "repo": "sai",
+        "comment_at": "2024-09-19T22:30:02Z",
+        "comment_author": "rlhui",
+        "comment_body": "@SidharajU please take care of DCO? thanks."
+    },
+    {
+        "number": 2003,
+        "repo": "sai",
+        "review_at": "2024-04-24T22:23:29Z",
+        "review_author": "dipankar-ba"
+    },
+    {
+        "number": 2003,
+        "repo": "sai",
+        "review_at": "2024-04-24T23:47:39Z",
+        "review_author": "dipankar-ba"
+    },
+    {
+        "number": 2003,
+        "repo": "sai",
+        "review_at": "2024-05-06T15:13:05Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2003,
+        "repo": "sai",
+        "latestReview_at": "2024-05-06T15:13:05Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2003,
+        "repo": "sai",
+        "latestReview_at": "2024-04-24T23:47:39Z",
+        "latestReview_author": "dipankar-ba",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 2002,
         "repo": "sai",
         "review_at": "2024-04-23T07:18:50Z",
