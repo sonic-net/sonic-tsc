@@ -1,5 +1,73 @@
 [
     {
+        "number": 15346,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-11-04T07:55:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-mgmt/pull/15219"
+    },
+    {
+        "number": 15345,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-11-04T07:49:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-mgmt/pull/15250"
+    },
+    {
+        "number": 15344,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-11-04T07:49:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-mgmt/pull/15336"
+    },
+    {
+        "number": 15336,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-11-04T07:49:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-mgmt/pull/15344"
+    },
+    {
+        "number": 15336,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-11-04T07:48:50Z",
+        "review_author": "kevinskwang"
+    },
+    {
+        "number": 15336,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-11-04T07:48:50Z",
+        "latestReview_author": "kevinskwang",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 15335,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-11-04T00:22:02Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-mgmt/pull/15268"
+    },
+    {
+        "number": 15333,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-11-04T00:19:08Z",
+        "comment_author": "yejianquan",
+        "comment_body": "202405 only accept fixes, refactor should not go into 202405 unless it's really necessary.\r\nFor this refactor, it's a little bit trouble to resolve the conflict when we cherry-pick the commits, but it's acceptable.\r\nLet's not to import potential regression to 202405"
+    },
+    {
+        "number": 15333,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-11-04T04:47:01Z",
+        "review_author": "yejianquan"
+    },
+    {
+        "number": 15333,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-11-04T04:47:01Z",
+        "latestReview_author": "yejianquan",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 15326,
         "repo": "sonic-mgmt",
         "comment_at": "2024-11-01T15:33:23Z",
@@ -89,6 +157,38 @@
         "comment_body": "Original PR: https://github.com/sonic-net/sonic-mgmt/pull/15258"
     },
     {
+        "number": 15300,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-11-01T05:56:02Z",
+        "comment_author": "lerry-lee",
+        "comment_body": "Because this PR update test_plan.py but the PR test pipeline not use the update script(still use master branch), so all tests failed. Raised draft PR to test, all passed.\r\nhttps://github.com/sonic-net/sonic-mgmt/pull/15316\r\n![image](https://github.com/user-attachments/assets/6169fb30-a033-4bfe-9fc5-11aa96aa8c18)\r\n\r\nThe only difference is that draft PR uses the test_plan.py of its branch instead of downloading it from remote master branch.\r\n![image](https://github.com/user-attachments/assets/32bc0841-f81b-437b-8fd5-f30e38617919)\r\n"
+    },
+    {
+        "number": 15300,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-31T07:21:20Z",
+        "review_author": "wangxin"
+    },
+    {
+        "number": 15300,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-31T07:57:11Z",
+        "review_author": "lerry-lee"
+    },
+    {
+        "number": 15300,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-11-04T03:22:04Z",
+        "review_author": "wangxin"
+    },
+    {
+        "number": 15300,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-11-04T03:22:04Z",
+        "latestReview_author": "wangxin",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 15298,
         "repo": "sonic-mgmt",
         "comment_at": "2024-11-01T03:24:20Z",
@@ -107,6 +207,13 @@
         "latestReview_at": "2024-11-01T03:23:09Z",
         "latestReview_author": "yejianquan",
         "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 15295,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-11-04T22:41:10Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "@matthew-soulsby, @StormLiangMS The change caused some issue in 202311 branch. Can you please check?\r\n```\r\n # Set up console host\r\n host = None\r\n for attempt in range(1, 4):\r\n try:\r\n host = ConsoleHost(console_type=console_type,\r\n console_host=console_host,\r\n console_port=console_port,\r\n sonic_username=creds['sonicadmin_user'],\r\n sonic_password=sonic_password,\r\n console_username=console_username,\r\n console_password=creds['console_password'][console_type])\r\n break\r\n except Exception as e:\r\n logger.warning(f\"Attempt {attempt}/3 failed: {e}\")\r\n continue\r\n else:\r\n> raise Exception(\"Failed to set up connection to console port. See warning logs for details.\")\r\nE Exception: Failed to set up connection to console port. See warning logs for details.\r\n\r\n```"
     },
     {
         "number": 15295,
@@ -189,6 +296,99 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 15266,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-31T20:20:50Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 15266,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-11-04T03:24:20Z",
+        "review_author": "wangxin"
+    },
+    {
+        "number": 15266,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-11-04T03:24:20Z",
+        "latestReview_author": "wangxin",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 15266,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-10-31T20:20:50Z",
+        "latestReview_author": "zjswhhh",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 15250,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-11-04T07:49:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-mgmt/pull/15345"
+    },
+    {
+        "number": 15250,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-11-04T07:49:19Z",
+        "review_author": "kevinskwang"
+    },
+    {
+        "number": 15250,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-11-04T07:49:19Z",
+        "latestReview_author": "kevinskwang",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 15219,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-11-04T02:58:33Z",
+        "comment_author": "yejianquan",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 15219,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-11-04T02:58:44Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 15219,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-11-04T07:55:10Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-mgmt/pull/15346"
+    },
+    {
+        "number": 15219,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-30T04:10:27Z",
+        "review_author": "bpar9"
+    },
+    {
+        "number": 15219,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-11-04T03:29:27Z",
+        "review_author": "wsycqyz"
+    },
+    {
+        "number": 15219,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-11-04T03:29:27Z",
+        "latestReview_author": "wsycqyz",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 15219,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-10-30T04:10:27Z",
+        "latestReview_author": "bpar9",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 15210,
         "repo": "sonic-mgmt",
         "comment_at": "2024-10-31T02:56:07Z",
@@ -237,6 +437,34 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 15207,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-10-28T09:57:01Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-mgmt/pull/15057"
+    },
+    {
+        "number": 15207,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-11-02T23:24:49Z",
+        "comment_author": "sdszhang",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 15207,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-11-04T00:10:24Z",
+        "comment_author": "yejianquan",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 15207,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-11-04T00:10:35Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
         "number": 15168,
         "repo": "sonic-mgmt",
         "comment_at": "2024-10-25T05:54:13Z",
@@ -249,6 +477,20 @@
         "comment_at": "2024-11-03T23:01:17Z",
         "comment_author": "Janetxxx",
         "comment_body": "@wangxin Could you please help to merge it? Thanks "
+    },
+    {
+        "number": 15168,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-11-04T01:59:02Z",
+        "comment_author": "Janetxxx",
+        "comment_body": "@bingwang-ms Could you please help to approve the request label"
+    },
+    {
+        "number": 15168,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-11-04T22:39:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-mgmt/pull/15351"
     },
     {
         "number": 15168,
@@ -618,6 +860,368 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-09-26T18:31:52Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The [pre-commit](http://pre-commit.com/) check detected issues in the files touched by this pull request.\nThe pre-commit check is a mandatory check, please fix detected issues.\n\nDetailed pre-commit check results:\n<samp>trim trailing whitespace.................................................Passed<br/>fix end of files.........................................................Passed<br/>check yaml...........................................(no files to check)Skipped<br/>check for added large files..............................................Passed<br/>check python ast.........................................................Passed<br/>flake8...................................................................Failed<br/>- hook id: flake8<br/>- exit code: 1<br/><br/>tests/l2/test_l2_configure.py:52:1: E302 expected 2 blank lines, found 1<br/><br/>flake8...............................................(no files to check)Skipped<br/>check conditional mark sort..........................(no files to check)Skipped<br/></samp>\n\nTo run the pre-commit checks locally, you can follow below steps:\n1. Ensure that default python is python3. In sonic-mgmt docker container, default python is python2. You can run\n the check by activating the python3 virtual environment in sonic-mgmt docker container or outside of sonic-mgmt\n docker container.\n2. Ensure that the `pre-commit` package is installed:\n```\nsudo pip install pre-commit\n```\n3. Go to repository root folder\n4. Install the pre-commit hooks:\n```\npre-commit install\n```\n5. Use pre-commit to check staged file:\n```\npre-commit\n```\n6. Alternatively, you can check committed files using:\n```\npre-commit run --from-ref <commit_id> --to-ref <commit_id>\n```"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-09-26T18:39:02Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The [pre-commit](http://pre-commit.com/) check detected issues in the files touched by this pull request.\nThe pre-commit check is a mandatory check, please fix detected issues.\n\nDetailed pre-commit check results:\n<samp>trim trailing whitespace.................................................Passed<br/>fix end of files.........................................................Passed<br/>check yaml...........................................(no files to check)Skipped<br/>check for added large files..............................................Passed<br/>check python ast.........................................................Passed<br/>flake8...................................................................Failed<br/>- hook id: flake8<br/>- exit code: 1<br/><br/>tests/l2/test_l2_configure.py:52:1: E302 expected 2 blank lines, found 1<br/><br/>flake8...............................................(no files to check)Skipped<br/>check conditional mark sort..........................(no files to check)Skipped<br/></samp>\n\nTo run the pre-commit checks locally, you can follow below steps:\n1. Ensure that default python is python3. In sonic-mgmt docker container, default python is python2. You can run\n the check by activating the python3 virtual environment in sonic-mgmt docker container or outside of sonic-mgmt\n docker container.\n2. Ensure that the `pre-commit` package is installed:\n```\nsudo pip install pre-commit\n```\n3. Go to repository root folder\n4. Install the pre-commit hooks:\n```\npre-commit install\n```\n5. Use pre-commit to check staged file:\n```\npre-commit\n```\n6. Alternatively, you can check committed files using:\n```\npre-commit run --from-ref <commit_id> --to-ref <commit_id>\n```"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-09-27T07:24:35Z",
+        "comment_author": "ganglyu",
+        "comment_body": "Step 3 is not included in this test.\r\nhttps://github.com/sonic-net/sonic-mgmt/issues/8777\r\n1. Cold reboot a device.\r\n2. Perform L2 config steps via [L2 Switch mode \u00b7 sonic-net/SONiC Wiki (github.com)](https://github.com/sonic-net/SONiC/wiki/L2-Switch-mode)\r\n3. Install target image.\r\n4. Cold reboot\r\n5. Check config_db"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-10-01T18:28:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The [pre-commit](http://pre-commit.com/) check detected issues in the files touched by this pull request.\nThe pre-commit check is a mandatory check, please fix detected issues.\n\nDetailed pre-commit check results:\n<samp>trim trailing whitespace.................................................Failed<br/>- hook id: trailing-whitespace<br/>- exit code: 1<br/>- files were modified by this hook<br/><br/>Fixing tests/l2/test_l2_configure.py<br/><br/>fix end of files.........................................................Failed<br/>- hook id: end-of-file-fixer<br/>- exit code: 1<br/>- files were modified by this hook<br/><br/>Fixing tests/l2/conftest.py<br/><br/>check yaml...........................................(no files to check)Skipped<br/>check for added large files..............................................Passed<br/>check python ast.........................................................Passed<br/>flake8...................................................................Failed<br/>- hook id: flake8<br/>- exit code: 1<br/>...<br/>[truncated extra lines, please run pre-commit locally to view full check results]<br/></samp>\n\nTo run the pre-commit checks locally, you can follow below steps:\n1. Ensure that default python is python3. In sonic-mgmt docker container, default python is python2. You can run\n the check by activating the python3 virtual environment in sonic-mgmt docker container or outside of sonic-mgmt\n docker container.\n2. Ensure that the `pre-commit` package is installed:\n```\nsudo pip install pre-commit\n```\n3. Go to repository root folder\n4. Install the pre-commit hooks:\n```\npre-commit install\n```\n5. Use pre-commit to check staged file:\n```\npre-commit\n```\n6. Alternatively, you can check committed files using:\n```\npre-commit run --from-ref <commit_id> --to-ref <commit_id>\n```"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-10-01T18:34:26Z",
+        "comment_author": "hdwhdw",
+        "comment_body": "Updated the testcase according to comment. The test case should reflect what [the issue ](https://github.com/sonic-net/sonic-mgmt/issues/8777) is looking for."
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-10-08T19:13:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The [pre-commit](http://pre-commit.com/) check detected issues in the files touched by this pull request.\nThe pre-commit check is a mandatory check, please fix detected issues.\n\nDetailed pre-commit check results:\n<samp>trim trailing whitespace.................................................Failed<br/>- hook id: trailing-whitespace<br/>- exit code: 1<br/>- files were modified by this hook<br/><br/>Fixing tests/remote_run_tests.sh<br/><br/>fix end of files.........................................................Passed<br/>check yaml...........................................(no files to check)Skipped<br/>check for added large files..............................................Passed<br/>check python ast.........................................................Passed<br/>flake8...................................................................Failed<br/>- hook id: flake8<br/>- exit code: 1<br/><br/>tests/l2/test_l2_configure.py:65:52: F821 undefined name 'tbinfo'<br/>tests/l2/test_l2_configure.py:66:5: F841 local variable 'mg_ip' is assigned to but never used<br/>tests/l2/test_l2_configure.py:67:5: F841 local variable 'init_config' is assigned to but never used<br/><br/>flake8...............................................(no files to check)Skipped<br/>...<br/>[truncated extra lines, please run pre-commit locally to view full check results]<br/></samp>\n\nTo run the pre-commit checks locally, you can follow below steps:\n1. Ensure that default python is python3. In sonic-mgmt docker container, default python is python2. You can run\n the check by activating the python3 virtual environment in sonic-mgmt docker container or outside of sonic-mgmt\n docker container.\n2. Ensure that the `pre-commit` package is installed:\n```\nsudo pip install pre-commit\n```\n3. Go to repository root folder\n4. Install the pre-commit hooks:\n```\npre-commit install\n```\n5. Use pre-commit to check staged file:\n```\npre-commit\n```\n6. Alternatively, you can check committed files using:\n```\npre-commit run --from-ref <commit_id> --to-ref <commit_id>\n```"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-10-10T20:58:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The [pre-commit](http://pre-commit.com/) check detected issues in the files touched by this pull request.\nThe pre-commit check is a mandatory check, please fix detected issues.\n\nDetailed pre-commit check results:\n<samp>trim trailing whitespace.................................................Failed<br/>- hook id: trailing-whitespace<br/>- exit code: 1<br/>- files were modified by this hook<br/><br/>Fixing tests/l2/test_l2_configure.py<br/><br/>fix end of files.........................................................Passed<br/>check yaml...........................................(no files to check)Skipped<br/>check for added large files..............................................Passed<br/>check python ast.........................................................Passed<br/>flake8...................................................................Failed<br/>- hook id: flake8<br/>- exit code: 1<br/><br/>tests/l2/test_l2_configure.py:56:5: E303 too many blank lines (2)<br/><br/>flake8...............................................(no files to check)Skipped<br/>check conditional mark sort..........................(no files to check)Skipped<br/></samp>\n\nTo run the pre-commit checks locally, you can follow below steps:\n1. Ensure that default python is python3. In sonic-mgmt docker container, default python is python2. You can run\n the check by activating the python3 virtual environment in sonic-mgmt docker container or outside of sonic-mgmt\n docker container.\n2. Ensure that the `pre-commit` package is installed:\n```\nsudo pip install pre-commit\n```\n3. Go to repository root folder\n4. Install the pre-commit hooks:\n```\npre-commit install\n```\n5. Use pre-commit to check staged file:\n```\npre-commit\n```\n6. Alternatively, you can check committed files using:\n```\npre-commit run --from-ref <commit_id> --to-ref <commit_id>\n```"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-10-14T15:36:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The [pre-commit](http://pre-commit.com/) check detected issues in the files touched by this pull request.\nThe pre-commit check is a mandatory check, please fix detected issues.\n\nDetailed pre-commit check results:\n<samp>trim trailing whitespace.................................................Failed<br/>- hook id: trailing-whitespace<br/>- exit code: 1<br/>- files were modified by this hook<br/><br/>Fixing tests/l2/test_l2_configure.py<br/><br/>fix end of files.........................................................Passed<br/>check yaml...........................................(no files to check)Skipped<br/>check for added large files..............................................Passed<br/>check python ast.........................................................Passed<br/>flake8...................................................................Failed<br/>- hook id: flake8<br/>- exit code: 1<br/><br/>tests/l2/test_l2_configure.py:59:5: E303 too many blank lines (2)<br/><br/>flake8...............................................(no files to check)Skipped<br/>check conditional mark sort..........................(no files to check)Skipped<br/></samp>\n\nTo run the pre-commit checks locally, you can follow below steps:\n1. Ensure that default python is python3. In sonic-mgmt docker container, default python is python2. You can run\n the check by activating the python3 virtual environment in sonic-mgmt docker container or outside of sonic-mgmt\n docker container.\n2. Ensure that the `pre-commit` package is installed:\n```\nsudo pip install pre-commit\n```\n3. Go to repository root folder\n4. Install the pre-commit hooks:\n```\npre-commit install\n```\n5. Use pre-commit to check staged file:\n```\npre-commit\n```\n6. Alternatively, you can check committed files using:\n```\npre-commit run --from-ref <commit_id> --to-ref <commit_id>\n```"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-10-14T15:38:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The [pre-commit](http://pre-commit.com/) check detected issues in the files touched by this pull request.\nThe pre-commit check is a mandatory check, please fix detected issues.\n\nDetailed pre-commit check results:\n<samp>trim trailing whitespace.................................................Failed<br/>- hook id: trailing-whitespace<br/>- exit code: 1<br/>- files were modified by this hook<br/><br/>Fixing tests/l2/test_l2_configure.py<br/><br/>fix end of files.........................................................Passed<br/>check yaml...........................................(no files to check)Skipped<br/>check for added large files..............................................Passed<br/>check python ast.........................................................Passed<br/>flake8...................................................................Passed<br/>flake8...............................................(no files to check)Skipped<br/>check conditional mark sort..........................(no files to check)Skipped<br/></samp>\n\nTo run the pre-commit checks locally, you can follow below steps:\n1. Ensure that default python is python3. In sonic-mgmt docker container, default python is python2. You can run\n the check by activating the python3 virtual environment in sonic-mgmt docker container or outside of sonic-mgmt\n docker container.\n2. Ensure that the `pre-commit` package is installed:\n```\nsudo pip install pre-commit\n```\n3. Go to repository root folder\n4. Install the pre-commit hooks:\n```\npre-commit install\n```\n5. Use pre-commit to check staged file:\n```\npre-commit\n```\n6. Alternatively, you can check committed files using:\n```\npre-commit run --from-ref <commit_id> --to-ref <commit_id>\n```"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-10-23T22:08:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The [pre-commit](http://pre-commit.com/) check detected issues in the files touched by this pull request.\nThe pre-commit check is a mandatory check, please fix detected issues.\n\nDetailed pre-commit check results:\n<samp>trim trailing whitespace.................................................Failed<br/>- hook id: trailing-whitespace<br/>- exit code: 1<br/>- files were modified by this hook<br/><br/>Fixing tests/l2/test_l2_configure.py<br/><br/>fix end of files.........................................................Failed<br/>- hook id: end-of-file-fixer<br/>- exit code: 1<br/>- files were modified by this hook<br/><br/>Fixing tests/l2/conftest.py<br/><br/>check yaml...........................................(no files to check)Skipped<br/>check for added large files..............................................Passed<br/>check python ast.........................................................Passed<br/>flake8...................................................................Failed<br/>- hook id: flake8<br/>- exit code: 1<br/>...<br/>[truncated extra lines, please run pre-commit locally to view full check results]<br/></samp>\n\nTo run the pre-commit checks locally, you can follow below steps:\n1. Ensure that default python is python3. In sonic-mgmt docker container, default python is python2. You can run\n the check by activating the python3 virtual environment in sonic-mgmt docker container or outside of sonic-mgmt\n docker container.\n2. Ensure that the `pre-commit` package is installed:\n```\nsudo pip install pre-commit\n```\n3. Go to repository root folder\n4. Install the pre-commit hooks:\n```\npre-commit install\n```\n5. Use pre-commit to check staged file:\n```\npre-commit\n```\n6. Alternatively, you can check committed files using:\n```\npre-commit run --from-ref <commit_id> --to-ref <commit_id>\n```"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-10-23T22:12:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The [pre-commit](http://pre-commit.com/) check detected issues in the files touched by this pull request.\nThe pre-commit check is a mandatory check, please fix detected issues.\n\nDetailed pre-commit check results:\n<samp>trim trailing whitespace.................................................Passed<br/>fix end of files.........................................................Failed<br/>- hook id: end-of-file-fixer<br/>- exit code: 1<br/>- files were modified by this hook<br/><br/>Fixing tests/l2/conftest.py<br/><br/>check yaml...........................................(no files to check)Skipped<br/>check for added large files..............................................Passed<br/>check python ast.........................................................Passed<br/>flake8...................................................................Passed<br/>flake8...............................................(no files to check)Skipped<br/>check conditional mark sort..........................(no files to check)Skipped<br/></samp>\n\nTo run the pre-commit checks locally, you can follow below steps:\n1. Ensure that default python is python3. In sonic-mgmt docker container, default python is python2. You can run\n the check by activating the python3 virtual environment in sonic-mgmt docker container or outside of sonic-mgmt\n docker container.\n2. Ensure that the `pre-commit` package is installed:\n```\nsudo pip install pre-commit\n```\n3. Go to repository root folder\n4. Install the pre-commit hooks:\n```\npre-commit install\n```\n5. Use pre-commit to check staged file:\n```\npre-commit\n```\n6. Alternatively, you can check committed files using:\n```\npre-commit run --from-ref <commit_id> --to-ref <commit_id>\n```"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-10-23T23:02:10Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The [pre-commit](http://pre-commit.com/) check detected issues in the files touched by this pull request.\nThe pre-commit check is a mandatory check, please fix detected issues.\n\nDetailed pre-commit check results:\n<samp>trim trailing whitespace.................................................Passed<br/>fix end of files.........................................................Failed<br/>- hook id: end-of-file-fixer<br/>- exit code: 1<br/>- files were modified by this hook<br/><br/>Fixing tests/l2/conftest.py<br/><br/>check yaml...........................................(no files to check)Skipped<br/>check for added large files..............................................Passed<br/>check python ast.........................................................Passed<br/>flake8...................................................................Passed<br/>flake8...............................................(no files to check)Skipped<br/>check conditional mark sort..........................(no files to check)Skipped<br/></samp>\n\nTo run the pre-commit checks locally, you can follow below steps:\n1. Ensure that default python is python3. In sonic-mgmt docker container, default python is python2. You can run\n the check by activating the python3 virtual environment in sonic-mgmt docker container or outside of sonic-mgmt\n docker container.\n2. Ensure that the `pre-commit` package is installed:\n```\nsudo pip install pre-commit\n```\n3. Go to repository root folder\n4. Install the pre-commit hooks:\n```\npre-commit install\n```\n5. Use pre-commit to check staged file:\n```\npre-commit\n```\n6. Alternatively, you can check committed files using:\n```\npre-commit run --from-ref <commit_id> --to-ref <commit_id>\n```"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-10-29T00:07:28Z",
+        "comment_author": "hdwhdw",
+        "comment_body": "Updated the test so we don't need to upgrade. See commit message for test result."
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-10-30T00:56:34Z",
+        "comment_author": "hdwhdw",
+        "comment_body": "Force push to fix a commit message."
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-10-30T01:15:18Z",
+        "comment_author": "ganglyu",
+        "comment_body": "Can you check database version before and after config reload?\r\n\r\nadmin@str-msn2700-20:~$ sonic-db-cli CONFIG_DB hgetall \"VERSIONS|DATABASE\"\r\n{'VERSION': 'version_202305_01'}"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-10-30T02:16:07Z",
+        "comment_author": "hdwhdw",
+        "comment_body": "@ganglyu done."
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-10-30T02:47:25Z",
+        "comment_author": "hdwhdw",
+        "comment_body": "@ganglyu \r\n`daweihuang@sonic-mgmt:/data/sonic-mgmt/tests$ cat logs/test.log | grep \"Database version\"\r\n30/10/2024 02:09:22 test_l2_configure.test_no_hardcoded_mini L0147 INFO | Database version before L2 configuration reload: version_2_0_0\r\n30/10/2024 02:12:20 test_l2_configure.test_no_hardcoded_mini L0153 INFO | Database version after L2 configuration reload: version_2_0_0`"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-27T06:15:17Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-27T06:15:25Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-27T06:18:47Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-27T06:26:11Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-27T07:34:15Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-27T13:55:01Z",
+        "review_author": "wen587"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-27T13:56:39Z",
+        "review_author": "wen587"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-27T16:23:45Z",
+        "review_author": "xincunli-sonic"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-27T16:24:31Z",
+        "review_author": "xincunli-sonic"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-27T16:30:10Z",
+        "review_author": "xincunli-sonic"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-27T16:37:57Z",
+        "review_author": "xincunli-sonic"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-01T18:29:51Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-01T18:29:59Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-01T18:30:09Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-01T18:30:19Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-01T18:30:24Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-01T18:30:49Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-01T18:32:01Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-01T18:32:24Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-01T18:33:10Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-02T00:32:46Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-02T00:41:36Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-02T00:46:16Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-02T01:05:14Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-03T01:09:46Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-07T15:07:26Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-07T22:24:44Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-29T02:17:05Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-29T16:10:07Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-29T20:56:09Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-29T21:43:11Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-29T23:03:42Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-30T23:21:35Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-31T18:31:34Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-11-01T00:03:58Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-11-01T15:37:33Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-11-04T23:30:34Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-09-27T13:56:39Z",
+        "latestReview_author": "wen587",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-11-04T23:30:34Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 14714,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-10-30T23:21:35Z",
+        "latestReview_author": "ganglyu",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 14666,
         "repo": "sonic-mgmt",
         "comment_at": "2024-09-19T23:20:28Z",
@@ -686,6 +1290,431 @@
         "repo": "sonic-mgmt",
         "latestReview_at": "2024-10-30T03:28:08Z",
         "latestReview_author": "StormLiangMS",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-07-24T05:31:03Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The [pre-commit](http://pre-commit.com/) check detected issues in the files touched by this pull request.\nThe pre-commit check is a mandatory check, please fix detected issues.\n\nDetailed pre-commit check results:\n<samp>trim trailing whitespace.................................................Failed<br/>- hook id: trailing-whitespace<br/>- exit code: 1<br/>- files were modified by this hook<br/><br/>Fixing ansible/roles/vm_set/library/vm_topology.py<br/>Fixing tests/srv6/7nodes_cisco/P1.json<br/>Fixing ansible/roles/sonic/tasks/vsonic.yml<br/>Fixing tests/srv6/7nodes_cisco/P4.json<br/>Fixing tests/srv6/7nodes_cisco/P2.json<br/>Fixing tests/srv6/7nodes_cisco/P3.json<br/>Fixing tests/srv6/7nodes_cisco/PE2.json<br/>Fixing tests/srv6/7nodes_cisco/PE3.json<br/>Fixing ansible/group_vars/all/labinfo.json<br/>Fixing ansible/vars/topo_ciscovs-7nodes.yml<br/>Fixing tests/srv6/srv6_utils.py<br/>Fixing ansible/vtestbed.yaml<br/>Fixing tests/srv6/7nodes_cisco/PE1.json<br/>Fixing ansible/library/topo_facts.py<br/>...<br/>[truncated extra lines, please run pre-commit locally to view full check results]<br/></samp>\n\nTo run the pre-commit checks locally, you can follow below steps:\n1. Ensure that default python is python3. In sonic-mgmt docker container, default python is python2. You can run\n the check by activating the python3 virtual environment in sonic-mgmt docker container or outside of sonic-mgmt\n docker container.\n2. Ensure that the `pre-commit` package is installed:\n```\nsudo pip install pre-commit\n```\n3. Go to repository root folder\n4. Install the pre-commit hooks:\n```\npre-commit install\n```\n5. Use pre-commit to check staged file:\n```\npre-commit\n```\n6. Alternatively, you can check committed files using:\n```\npre-commit run --from-ref <commit_id> --to-ref <commit_id>\n```"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-07-24T21:43:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The [pre-commit](http://pre-commit.com/) check detected issues in the files touched by this pull request.\nThe pre-commit check is a mandatory check, please fix detected issues.\n\nDetailed pre-commit check results:\n<samp>trim trailing whitespace.................................................Failed<br/>- hook id: trailing-whitespace<br/>- exit code: 1<br/>- files were modified by this hook<br/><br/>Fixing ansible/roles/vm_set/library/vm_topology.py<br/>Fixing tests/srv6/7nodes_cisco/P1.json<br/>Fixing ansible/roles/sonic/tasks/vsonic.yml<br/>Fixing tests/srv6/7nodes_cisco/P4.json<br/>Fixing tests/srv6/7nodes_cisco/P2.json<br/>Fixing tests/srv6/7nodes_cisco/P3.json<br/>Fixing tests/srv6/7nodes_cisco/PE2.json<br/>Fixing tests/srv6/7nodes_cisco/PE3.json<br/>Fixing ansible/group_vars/all/labinfo.json<br/>Fixing ansible/vars/topo_ciscovs-7nodes.yml<br/>Fixing tests/srv6/srv6_utils.py<br/>Fixing ansible/vtestbed.yaml<br/>Fixing tests/srv6/7nodes_cisco/PE1.json<br/>Fixing ansible/library/topo_facts.py<br/>...<br/>[truncated extra lines, please run pre-commit locally to view full check results]<br/></samp>\n\nTo run the pre-commit checks locally, you can follow below steps:\n1. Ensure that default python is python3. In sonic-mgmt docker container, default python is python2. You can run\n the check by activating the python3 virtual environment in sonic-mgmt docker container or outside of sonic-mgmt\n docker container.\n2. Ensure that the `pre-commit` package is installed:\n```\nsudo pip install pre-commit\n```\n3. Go to repository root folder\n4. Install the pre-commit hooks:\n```\npre-commit install\n```\n5. Use pre-commit to check staged file:\n```\npre-commit\n```\n6. Alternatively, you can check committed files using:\n```\npre-commit run --from-ref <commit_id> --to-ref <commit_id>\n```"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-07-24T22:13:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The [pre-commit](http://pre-commit.com/) check detected issues in the files touched by this pull request.\nThe pre-commit check is a mandatory check, please fix detected issues.\n\nDetailed pre-commit check results:\n<samp>trim trailing whitespace.................................................Failed<br/>- hook id: trailing-whitespace<br/>- exit code: 1<br/>- files were modified by this hook<br/><br/>Fixing ansible/roles/vm_set/library/vm_topology.py<br/>Fixing tests/srv6/7nodes_cisco/P1.json<br/>Fixing ansible/roles/sonic/tasks/vsonic.yml<br/>Fixing tests/srv6/7nodes_cisco/P4.json<br/>Fixing tests/srv6/7nodes_cisco/P2.json<br/>Fixing tests/srv6/7nodes_cisco/P3.json<br/>Fixing tests/srv6/7nodes_cisco/PE2.json<br/>Fixing tests/srv6/7nodes_cisco/PE3.json<br/>Fixing tests/srv6/test_srv6_basic_sanity.py<br/>Fixing ansible/group_vars/all/labinfo.json<br/>Fixing ansible/vars/topo_ciscovs-7nodes.yml<br/>Fixing tests/srv6/srv6_utils.py<br/>Fixing ansible/vtestbed.yaml<br/>Fixing tests/srv6/7nodes_cisco/PE1.json<br/>Fixing ansible/library/topo_facts.py<br/>...<br/>[truncated extra lines, please run pre-commit locally to view full check results]<br/></samp>\n\nTo run the pre-commit checks locally, you can follow below steps:\n1. Ensure that default python is python3. In sonic-mgmt docker container, default python is python2. You can run\n the check by activating the python3 virtual environment in sonic-mgmt docker container or outside of sonic-mgmt\n docker container.\n2. Ensure that the `pre-commit` package is installed:\n```\nsudo pip install pre-commit\n```\n3. Go to repository root folder\n4. Install the pre-commit hooks:\n```\npre-commit install\n```\n5. Use pre-commit to check staged file:\n```\npre-commit\n```\n6. Alternatively, you can check committed files using:\n```\npre-commit run --from-ref <commit_id> --to-ref <commit_id>\n```"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-07-24T22:19:09Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The [pre-commit](http://pre-commit.com/) check detected issues in the files touched by this pull request.\nThe pre-commit check is a mandatory check, please fix detected issues.\n\nDetailed pre-commit check results:\n<samp>trim trailing whitespace.................................................Failed<br/>- hook id: trailing-whitespace<br/>- exit code: 1<br/>- files were modified by this hook<br/><br/>Fixing ansible/roles/vm_set/library/vm_topology.py<br/>Fixing tests/srv6/7nodes_cisco/P1.json<br/>Fixing ansible/roles/sonic/tasks/vsonic.yml<br/>Fixing tests/srv6/7nodes_cisco/P4.json<br/>Fixing tests/srv6/7nodes_cisco/P2.json<br/>Fixing tests/srv6/7nodes_cisco/P3.json<br/>Fixing tests/srv6/7nodes_cisco/PE2.json<br/>Fixing tests/srv6/7nodes_cisco/PE3.json<br/>Fixing tests/srv6/test_srv6_basic_sanity.py<br/>Fixing ansible/group_vars/all/labinfo.json<br/>Fixing ansible/vars/topo_ciscovs-7nodes.yml<br/>Fixing tests/srv6/srv6_utils.py<br/>Fixing ansible/vtestbed.yaml<br/>Fixing tests/srv6/7nodes_cisco/PE1.json<br/>Fixing ansible/library/topo_facts.py<br/>...<br/>[truncated extra lines, please run pre-commit locally to view full check results]<br/></samp>\n\nTo run the pre-commit checks locally, you can follow below steps:\n1. Ensure that default python is python3. In sonic-mgmt docker container, default python is python2. You can run\n the check by activating the python3 virtual environment in sonic-mgmt docker container or outside of sonic-mgmt\n docker container.\n2. Ensure that the `pre-commit` package is installed:\n```\nsudo pip install pre-commit\n```\n3. Go to repository root folder\n4. Install the pre-commit hooks:\n```\npre-commit install\n```\n5. Use pre-commit to check staged file:\n```\npre-commit\n```\n6. Alternatively, you can check committed files using:\n```\npre-commit run --from-ref <commit_id> --to-ref <commit_id>\n```"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-07-25T01:36:19Z",
+        "comment_author": "wsycqyz",
+        "comment_body": "@eddieruan-alibaba Thank you for the effort! But there is still pre-commit errors, would you please fix them?"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-07-25T19:20:29Z",
+        "comment_author": "eddieruan-alibaba",
+        "comment_body": "> @eddieruan-alibaba Thank you for the effort! But there is still pre-commit errors, would you please fix them?\r\n\r\nFixed pre-commit. Saw some failure in sanity test. Can you help to provide the log from the following link? I don't have access to the test log.\r\n\r\nCheck https://elastictest.org/scheduler/testplan/66a2a16f7661e5cde3a655fe for test plan status'"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-09-04T08:11:44Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The [pre-commit](http://pre-commit.com/) check detected issues in the files touched by this pull request.\nThe pre-commit check is a mandatory check, please fix detected issues.\n\nDetailed pre-commit check results:\n<samp>trim trailing whitespace.................................................Failed<br/>- hook id: trailing-whitespace<br/>- exit code: 1<br/>- files were modified by this hook<br/><br/>Fixing ansible/config_sonic_basedon_testbed.yml<br/><br/>fix end of files.........................................................Failed<br/>- hook id: end-of-file-fixer<br/>- exit code: 1<br/>- files were modified by this hook<br/><br/>Fixing tests/srv6/7nodes_cisco/P1.json<br/>Fixing tests/srv6/7nodes_cisco/P4.json<br/>Fixing tests/srv6/7nodes_cisco/P2.json<br/>Fixing tests/srv6/7nodes_cisco/P3.json<br/>Fixing tests/srv6/7nodes_cisco/PE2.json<br/>Fixing tests/srv6/7nodes_cisco/PE3.json<br/>Fixing tests/srv6/7nodes_cisco/PE1.json<br/>...<br/>[truncated extra lines, please run pre-commit locally to view full check results]<br/></samp>\n\nTo run the pre-commit checks locally, you can follow below steps:\n1. Ensure that default python is python3. In sonic-mgmt docker container, default python is python2. You can run\n the check by activating the python3 virtual environment in sonic-mgmt docker container or outside of sonic-mgmt\n docker container.\n2. Ensure that the `pre-commit` package is installed:\n```\nsudo pip install pre-commit\n```\n3. Go to repository root folder\n4. Install the pre-commit hooks:\n```\npre-commit install\n```\n5. Use pre-commit to check staged file:\n```\npre-commit\n```\n6. Alternatively, you can check committed files using:\n```\npre-commit run --from-ref <commit_id> --to-ref <commit_id>\n```"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-09-04T08:11:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The [pre-commit](http://pre-commit.com/) check detected issues in the files touched by this pull request.\nThe pre-commit check is a mandatory check, please fix detected issues.\n\nDetailed pre-commit check results:\n<samp>trim trailing whitespace.................................................Failed<br/>- hook id: trailing-whitespace<br/>- exit code: 1<br/>- files were modified by this hook<br/><br/>Fixing ansible/config_sonic_basedon_testbed.yml<br/><br/>fix end of files.........................................................Failed<br/>- hook id: end-of-file-fixer<br/>- exit code: 1<br/>- files were modified by this hook<br/><br/>Fixing tests/srv6/7nodes_cisco/P1.json<br/>Fixing tests/srv6/7nodes_cisco/P4.json<br/>Fixing tests/srv6/7nodes_cisco/P2.json<br/>Fixing tests/srv6/7nodes_cisco/P3.json<br/>Fixing tests/srv6/7nodes_cisco/PE2.json<br/>Fixing tests/srv6/7nodes_cisco/PE3.json<br/>Fixing tests/srv6/7nodes_cisco/PE1.json<br/>...<br/>[truncated extra lines, please run pre-commit locally to view full check results]<br/></samp>\n\nTo run the pre-commit checks locally, you can follow below steps:\n1. Ensure that default python is python3. In sonic-mgmt docker container, default python is python2. You can run\n the check by activating the python3 virtual environment in sonic-mgmt docker container or outside of sonic-mgmt\n docker container.\n2. Ensure that the `pre-commit` package is installed:\n```\nsudo pip install pre-commit\n```\n3. Go to repository root folder\n4. Install the pre-commit hooks:\n```\npre-commit install\n```\n5. Use pre-commit to check staged file:\n```\npre-commit\n```\n6. Alternatively, you can check committed files using:\n```\npre-commit run --from-ref <commit_id> --to-ref <commit_id>\n```"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-09-04T08:23:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The [pre-commit](http://pre-commit.com/) check detected issues in the files touched by this pull request.\nThe pre-commit check is a mandatory check, please fix detected issues.\n\nDetailed pre-commit check results:\n<samp>trim trailing whitespace.................................................Failed<br/>- hook id: trailing-whitespace<br/>- exit code: 1<br/>- files were modified by this hook<br/><br/>Fixing ansible/config_sonic_basedon_testbed.yml<br/><br/>fix end of files.........................................................Failed<br/>- hook id: end-of-file-fixer<br/>- exit code: 1<br/>- files were modified by this hook<br/><br/>Fixing ansible/vars/configdb_jsons/7nodes_cisco/PE3.json<br/>Fixing ansible/vars/configdb_jsons/7nodes_cisco/PE2.json<br/>Fixing ansible/vars/configdb_jsons/7nodes_cisco/P1.json<br/>Fixing ansible/vars/configdb_jsons/7nodes_cisco/P2.json<br/>Fixing ansible/vars/configdb_jsons/7nodes_cisco/PE1.json<br/>Fixing ansible/vars/configdb_jsons/7nodes_cisco/P4.json<br/>Fixing ansible/vars/configdb_jsons/7nodes_cisco/P3.json<br/>...<br/>[truncated extra lines, please run pre-commit locally to view full check results]<br/></samp>\n\nTo run the pre-commit checks locally, you can follow below steps:\n1. Ensure that default python is python3. In sonic-mgmt docker container, default python is python2. You can run\n the check by activating the python3 virtual environment in sonic-mgmt docker container or outside of sonic-mgmt\n docker container.\n2. Ensure that the `pre-commit` package is installed:\n```\nsudo pip install pre-commit\n```\n3. Go to repository root folder\n4. Install the pre-commit hooks:\n```\npre-commit install\n```\n5. Use pre-commit to check staged file:\n```\npre-commit\n```\n6. Alternatively, you can check committed files using:\n```\npre-commit run --from-ref <commit_id> --to-ref <commit_id>\n```"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-09-04T09:59:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The [pre-commit](http://pre-commit.com/) check detected issues in the files touched by this pull request.\nThe pre-commit check is a mandatory check, please fix detected issues.\n\nDetailed pre-commit check results:\n<samp>trim trailing whitespace.................................................Failed<br/>- hook id: trailing-whitespace<br/>- exit code: 1<br/>- files were modified by this hook<br/><br/>Fixing ansible/config_sonic_basedon_testbed.yml<br/><br/>fix end of files.........................................................Passed<br/>check yaml...............................................................Failed<br/>- hook id: check-yaml<br/>- exit code: 1<br/><br/>while constructing a mapping<br/>in \"ansible/vars/topo_ciscovs-7nodes.yml\", line 57, column 5<br/>found duplicate key \"PE1P3\" with value \"{}\" (original value: \"{}\")<br/>in \"ansible/vars/topo_ciscovs-7nodes.yml\", line 62, column 5<br/><br/>To suppress this check see:<br/>http://yaml.readthedocs.io/en/latest/api.html#duplicate-keys<br/>...<br/>[truncated extra lines, please run pre-commit locally to view full check results]<br/></samp>\n\nTo run the pre-commit checks locally, you can follow below steps:\n1. Ensure that default python is python3. In sonic-mgmt docker container, default python is python2. You can run\n the check by activating the python3 virtual environment in sonic-mgmt docker container or outside of sonic-mgmt\n docker container.\n2. Ensure that the `pre-commit` package is installed:\n```\nsudo pip install pre-commit\n```\n3. Go to repository root folder\n4. Install the pre-commit hooks:\n```\npre-commit install\n```\n5. Use pre-commit to check staged file:\n```\npre-commit\n```\n6. Alternatively, you can check committed files using:\n```\npre-commit run --from-ref <commit_id> --to-ref <commit_id>\n```"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-09-04T10:03:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The [pre-commit](http://pre-commit.com/) check detected issues in the files touched by this pull request.\nThe pre-commit check is a mandatory check, please fix detected issues.\n\nDetailed pre-commit check results:\n<samp>trim trailing whitespace.................................................Failed<br/>- hook id: trailing-whitespace<br/>- exit code: 1<br/>- files were modified by this hook<br/><br/>Fixing ansible/config_sonic_basedon_testbed.yml<br/><br/>fix end of files.........................................................Passed<br/>check yaml...............................................................Passed<br/>check for added large files..............................................Passed<br/>check python ast.........................................................Passed<br/>flake8...................................................................Failed<br/>- hook id: flake8<br/>- exit code: 1<br/><br/>tests/common/testbed.py:259:121: E501 line too long (123 > 120 characters)<br/>tests/srv6/srv6_utils.py:10:1: E302 expected 2 blank lines, found 1<br/>tests/srv6/test_srv6_basic_sanity.py:30:1: E302 expected 2 blank lines, found 1<br/><br/>flake8...............................................(no files to check)Skipped<br/>...<br/>[truncated extra lines, please run pre-commit locally to view full check results]<br/></samp>\n\nTo run the pre-commit checks locally, you can follow below steps:\n1. Ensure that default python is python3. In sonic-mgmt docker container, default python is python2. You can run\n the check by activating the python3 virtual environment in sonic-mgmt docker container or outside of sonic-mgmt\n docker container.\n2. Ensure that the `pre-commit` package is installed:\n```\nsudo pip install pre-commit\n```\n3. Go to repository root folder\n4. Install the pre-commit hooks:\n```\npre-commit install\n```\n5. Use pre-commit to check staged file:\n```\npre-commit\n```\n6. Alternatively, you can check committed files using:\n```\npre-commit run --from-ref <commit_id> --to-ref <commit_id>\n```"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-09-04T23:19:34Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The [pre-commit](http://pre-commit.com/) check detected issues in the files touched by this pull request.\nThe pre-commit check is a mandatory check, please fix detected issues.\n\nDetailed pre-commit check results:\n<samp>trim trailing whitespace.................................................Failed<br/>- hook id: trailing-whitespace<br/>- exit code: 1<br/>- files were modified by this hook<br/><br/>Fixing ansible/config_sonic_basedon_testbed.yml<br/><br/>fix end of files.........................................................Passed<br/>check yaml...............................................................Passed<br/>check for added large files..............................................Passed<br/>check python ast.........................................................Passed<br/>flake8...................................................................Passed<br/>flake8...............................................(no files to check)Skipped<br/>check conditional mark sort..............................................Passed<br/></samp>\n\nTo run the pre-commit checks locally, you can follow below steps:\n1. Ensure that default python is python3. In sonic-mgmt docker container, default python is python2. You can run\n the check by activating the python3 virtual environment in sonic-mgmt docker container or outside of sonic-mgmt\n docker container.\n2. Ensure that the `pre-commit` package is installed:\n```\nsudo pip install pre-commit\n```\n3. Go to repository root folder\n4. Install the pre-commit hooks:\n```\npre-commit install\n```\n5. Use pre-commit to check staged file:\n```\npre-commit\n```\n6. Alternatively, you can check committed files using:\n```\npre-commit run --from-ref <commit_id> --to-ref <commit_id>\n```"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-09-10T04:27:43Z",
+        "comment_author": "eddieruan-alibaba",
+        "comment_body": "@wangwin I have responded all your comments. Can you help to take a look again? "
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-09-19T23:00:04Z",
+        "comment_author": "eddieruan-alibaba",
+        "comment_body": "@wangxin any more comments?\r\n\r\n@lguohan can you review it as well?"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-10-28T21:23:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The [pre-commit](http://pre-commit.com/) check detected issues in the files touched by this pull request.\nThe pre-commit check is a mandatory check, please fix detected issues.\n\nDetailed pre-commit check results:\n<samp>trim trailing whitespace.................................................Passed<br/>fix end of files.........................................................Passed<br/>check yaml...............................................................Failed<br/>- hook id: check-yaml<br/>- exit code: 1<br/><br/>while constructing a mapping<br/>in \"ansible/vars/topo_ciscovs-7nodes.yml\", line 57, column 5<br/>found duplicate key \"PE1P3\" with value \"{}\" (original value: \"{}\")<br/>in \"ansible/vars/topo_ciscovs-7nodes.yml\", line 62, column 5<br/><br/>To suppress this check see:<br/>http://yaml.readthedocs.io/en/latest/api.html#duplicate-keys<br/><br/>check for added large files..............................................Passed<br/>check python ast.........................................................Passed<br/>flake8...................................................................Passed<br/>flake8...............................................(no files to check)Skipped<br/>check conditional mark sort..............................................Passed<br/></samp>\n\nTo run the pre-commit checks locally, you can follow below steps:\n1. Ensure that default python is python3. In sonic-mgmt docker container, default python is python2. You can run\n the check by activating the python3 virtual environment in sonic-mgmt docker container or outside of sonic-mgmt\n docker container.\n2. Ensure that the `pre-commit` package is installed:\n```\nsudo pip install pre-commit\n```\n3. Go to repository root folder\n4. Install the pre-commit hooks:\n```\npre-commit install\n```\n5. Use pre-commit to check staged file:\n```\npre-commit\n```\n6. Alternatively, you can check committed files using:\n```\npre-commit run --from-ref <commit_id> --to-ref <commit_id>\n```"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-10-28T21:50:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The [pre-commit](http://pre-commit.com/) check detected issues in the files touched by this pull request.\nThe pre-commit check is a mandatory check, please fix detected issues.\n\nDetailed pre-commit check results:\n<samp>trim trailing whitespace.................................................Passed<br/>fix end of files.........................................................Failed<br/>- hook id: end-of-file-fixer<br/>- exit code: 1<br/>- files were modified by this hook<br/><br/>Fixing ansible/vars/configdb_jsons/7nodes_cisco/PE3.json<br/>Fixing ansible/vars/configdb_jsons/7nodes_cisco/PE2.json<br/>Fixing ansible/vars/configdb_jsons/7nodes_cisco/P1.json<br/>Fixing ansible/vars/configdb_jsons/7nodes_cisco/P2.json<br/>Fixing ansible/vars/configdb_jsons/7nodes_cisco/PE1.json<br/>Fixing ansible/vars/configdb_jsons/7nodes_cisco/P4.json<br/>Fixing ansible/vars/configdb_jsons/7nodes_cisco/P3.json<br/><br/>check yaml...............................................................Passed<br/>check for added large files..............................................Passed<br/>check python ast.........................................................Passed<br/>flake8...................................................................Passed<br/>flake8...............................................(no files to check)Skipped<br/>check conditional mark sort..............................................Passed<br/></samp>\n\nTo run the pre-commit checks locally, you can follow below steps:\n1. Ensure that default python is python3. In sonic-mgmt docker container, default python is python2. You can run\n the check by activating the python3 virtual environment in sonic-mgmt docker container or outside of sonic-mgmt\n docker container.\n2. Ensure that the `pre-commit` package is installed:\n```\nsudo pip install pre-commit\n```\n3. Go to repository root folder\n4. Install the pre-commit hooks:\n```\npre-commit install\n```\n5. Use pre-commit to check staged file:\n```\npre-commit\n```\n6. Alternatively, you can check committed files using:\n```\npre-commit run --from-ref <commit_id> --to-ref <commit_id>\n```"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-11-02T03:38:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The [pre-commit](http://pre-commit.com/) check detected issues in the files touched by this pull request.\nThe pre-commit check is a mandatory check, please fix detected issues.\n\nDetailed pre-commit check results:\n<samp>trim trailing whitespace.................................................Passed<br/>fix end of files.........................................................Failed<br/>- hook id: end-of-file-fixer<br/>- exit code: 1<br/>- files were modified by this hook<br/><br/>Fixing ansible/vars/init_cfg_profiles.yml<br/><br/>check yaml...............................................................Passed<br/>check for added large files..............................................Passed<br/>check python ast.........................................................Passed<br/>flake8...................................................................Passed<br/>flake8...............................................(no files to check)Skipped<br/>check conditional mark sort..............................................Passed<br/></samp>\n\nTo run the pre-commit checks locally, you can follow below steps:\n1. Ensure that default python is python3. In sonic-mgmt docker container, default python is python2. You can run\n the check by activating the python3 virtual environment in sonic-mgmt docker container or outside of sonic-mgmt\n docker container.\n2. Ensure that the `pre-commit` package is installed:\n```\nsudo pip install pre-commit\n```\n3. Go to repository root folder\n4. Install the pre-commit hooks:\n```\npre-commit install\n```\n5. Use pre-commit to check staged file:\n```\npre-commit\n```\n6. Alternatively, you can check committed files using:\n```\npre-commit run --from-ref <commit_id> --to-ref <commit_id>\n```"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-02T07:26:18Z",
+        "review_author": "wangxin"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-02T07:59:22Z",
+        "review_author": "wangxin"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-02T08:10:32Z",
+        "review_author": "wangxin"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-03T01:44:20Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-03T01:49:47Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-03T01:51:43Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-04T07:44:15Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-04T07:47:42Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-04T07:52:44Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-04T08:22:14Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-04T08:22:24Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-04T08:23:31Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-04T08:23:58Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-04T08:25:05Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-05T01:05:47Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-05T01:12:23Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-05T01:12:51Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-05T09:33:43Z",
+        "review_author": "wangxin"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-05T11:26:39Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-05T11:31:09Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-05T14:37:52Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-05T14:45:21Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-06T07:35:24Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-28T11:43:49Z",
+        "review_author": "wangxin"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-28T11:45:12Z",
+        "review_author": "wangxin"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-28T11:50:51Z",
+        "review_author": "wangxin"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-28T11:51:19Z",
+        "review_author": "wangxin"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-28T11:56:01Z",
+        "review_author": "wangxin"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-28T11:56:38Z",
+        "review_author": "wangxin"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-28T11:59:38Z",
+        "review_author": "wangxin"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-28T22:04:51Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-28T22:14:12Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-28T22:14:33Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-28T22:16:30Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-28T22:17:03Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-28T22:17:27Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-10-31T05:39:17Z",
+        "review_author": "wangxin"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-11-02T03:41:00Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-11-04T01:28:34Z",
+        "review_author": "wangxin"
+    },
+    {
+        "number": 13785,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-11-04T01:28:34Z",
+        "latestReview_author": "wangxin",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 13645,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-07-12T20:31:36Z",
+        "comment_author": "eddieruan-alibaba",
+        "comment_body": "https://github.com/eddieruan-alibaba/sonic-mgmt/blob/phoenix_ptf_testplan/docs/testplan/srv6/SRv6-phoenixwing-ptf-testplan.md"
+    },
+    {
+        "number": 13645,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-09-02T03:36:09Z",
+        "comment_author": "wangxin",
+        "comment_body": "@eddieruan-alibaba Content of this PR is also included in #14259. \r\n\r\nTo avoid duplication, maybe it would be better to keep this PR for PTF test plan. And use #14259 for spytest test plan only."
+    },
+    {
+        "number": 13645,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-09-02T11:24:47Z",
+        "comment_author": "eddieruan-alibaba",
+        "comment_body": "> @eddieruan-alibaba Content of this PR is also included in #14259.\r\n> \r\n> To avoid duplication, maybe it would be better to keep this PR for PTF test plan. And use #14259 for spytest test plan only.\r\n\r\nYes. 14259 was raised for collecting spytest testplan's comments. But since both are not in and spytest test plan branch is a child branch of ptf testplan. It got both. \r\n\r\nBut 14259 will be spytest only."
+    },
+    {
+        "number": 13645,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-09-05T09:04:27Z",
+        "comment_author": "wangxin",
+        "comment_body": "> > @eddieruan-alibaba Content of this PR is also included in #14259.\r\n> > To avoid duplication, maybe it would be better to keep this PR for PTF test plan. And use #14259 for spytest test plan only.\r\n> \r\n> Yes. 14259 was raised for collecting spytest testplan's comments. But since both are not in and spytest test plan branch is a child branch of ptf testplan. It got both.\r\n> \r\n> But 14259 will be spytest only.\r\n\r\nThanks for explaining the reason. Can you remove the PTF test plan from #14259 to avoid duplication?"
+    },
+    {
+        "number": 13645,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-02T07:33:56Z",
+        "review_author": "wangxin"
+    },
+    {
+        "number": 13645,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-02T12:33:26Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 13645,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-02T12:33:39Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 13645,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-09-02T12:34:46Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 13645,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-11-04T07:34:15Z",
+        "review_author": "wangxin"
+    },
+    {
+        "number": 13645,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-11-04T07:34:15Z",
+        "latestReview_author": "wangxin",
         "latestReview_state": "APPROVED"
     },
     {
