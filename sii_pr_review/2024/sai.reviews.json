@@ -1636,6 +1636,13 @@
     {
         "number": 2028,
         "repo": "sai",
+        "comment_at": "2024-11-09T07:33:41Z",
+        "comment_author": "kcudnik",
+        "comment_body": "i decribed issue on the on the github comment:\r\nhttps://github.com/sonic-net/sonic-buildimage/issues/20725#issuecomment-2463999387\r\n\r\nand yes, if if DASH is implemented in the SAI lib, on older version thatn v1.15.0 then it's before enums DASH shifted, so if we use v1.15.0 headers with v1.14.0 libsai, then new port attributes will overlay DASH extensions, and return output will not match the attribute type\r\n\r\ni proposed solution for that to update metadata for each attribute with specific attribute version when it was introduced, so comparing version with libsai will prevent that\r\n\r\nof course for dash attributes, currently syncd is not using that, but that enum shift to range 0x20000000 is not backward compatible, so there is no easy fix for that, also syncd is not doing discovery on experimental headers, and since  they can change any time, then there is no point to assign version to those attributes "
+    },
+    {
+        "number": 2028,
+        "repo": "sai",
         "review_at": "2024-06-06T21:40:07Z",
         "review_author": "r12f"
     },
