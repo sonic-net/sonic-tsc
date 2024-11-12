@@ -1,5 +1,19 @@
 [
     {
+        "number": 20729,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-08T03:02:21Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 20729,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-08T03:02:32Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
         "number": 20728,
         "repo": "sonic-buildimage",
         "comment_at": "2024-11-07T22:55:13Z",
@@ -9031,7 +9045,7 @@
         "repo": "sonic-buildimage",
         "comment_at": "2024-11-07T00:59:21Z",
         "comment_author": "yuazhe",
-        "comment_body": "> @yuazhe Do we need to update sonic-mgmt test as well?\r\n\r\n@bingwang-ms Yes, as the 4700 psu number designate has been changed, mgmt testing need to make correspond change."
+        "comment_body": "> @yuazhe Do we need to update sonic-mgmt test as well?\r\n\r\n@bingwang-ms Yes, as the 4700 psu number designate has been changed, mgmt testing need to make correspond change.\r\nhttps://github.com/sonic-net/sonic-mgmt/pull/15488"
     },
     {
         "number": 19927,
@@ -23724,6 +23738,20 @@
         "comment_at": "2024-11-07T22:55:17Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-buildimage/pull/20728"
+    },
+    {
+        "number": 19268,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-11T09:09:21Z",
+        "comment_author": "liushilongbuaa",
+        "comment_body": "@JunhongMao , @qiluo-msft , this PR breaks broadcom build.\r\nLog Link: https://dev.azure.com/mssonic/build/_build/results?buildId=692197&view=results\r\n```\r\nrax.c: In function 'raxRemove':\r\nrax.c:1064:28: error: pointer 'h' may be used after 'free' [-Werror=use-after-free]\r\n 1064 | raxNode *new = raxRemoveChild(h,child);\r\n | ^~~~~~~~~~~~~~~~~~~~~~~\r\nIn file included from rax.c:45:\r\nrax_malloc.h:44:18: note: call to 'free' here\r\n 44 | #define rax_free free\r\nrax.c:1054:13: note: in expansion of macro 'rax_free'\r\n 1054 | rax_free(child);\r\n | ^~~~~~~~\r\nlistpack.c: In function 'lpDeleteRangeWithEntry':\r\nlistpack.c:937:31: error: pointer 'lp' used after 'realloc' [-Werror=use-after-free]\r\n 937 | unsigned long poff = first-lp;\r\n | ~~~~~^~~\r\nIn file included from listpack.c:45:\r\nIn function 'lpShrinkToFit',\r\n inlined from 'lpDeleteRangeWithEntry' at listpack.c:945:10:\r\nlistpack_malloc.h:47:28: note: call to 'realloc' here\r\n 47 | #define lp_realloc(ptr,sz) realloc(ptr,sz)\r\n | ^~~~~~~~~~~~~~~\r\nlistpack.c:177:16: note: in expansion of macro 'lp_realloc'\r\n 177 | return lp_realloc(lp, size);\r\n | ^~~~~~~~~~\r\ncc -MM -fPIC -O3 -std=c99 -Wall -Wextra -pedantic -Werror -fvisibility=hidden zipmap.c > zipmap.d\r\ncc1: all warnings being treated as errors\r\nmake[4]: 2016 2017 2018 2019 2020 2021 2022 2023 2024 parse_reviews.py pr_dump.sh repo_list.sh repos update.sh [Makefile:15: listpack.o] Error 1\r\n\r\n```"
+    },
+    {
+        "number": 19268,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-11T17:54:16Z",
+        "comment_author": "JunhongMao",
+        "comment_body": "I have created a new PR below to fix it. Please help to review it. Thanks.\r\nhttps://github.com/sonic-net/sonic-buildimage/pull/20759"
     },
     {
         "number": 19268,
@@ -41473,6 +41501,74 @@
         "number": 18620,
         "repo": "sonic-buildimage",
         "latestReview_at": "2024-10-25T19:07:12Z",
+        "latestReview_author": "Praveen-Brcm",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 18618,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-10-24T07:11:56Z",
+        "comment_author": "vijaya-ops",
+        "comment_body": "/azpw run Azure.sonic-buildimage"
+    },
+    {
+        "number": 18618,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-10-24T07:11:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run Azure.sonic-buildimage"
+    },
+    {
+        "number": 18618,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-10-24T07:12:11Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 18618,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-01T05:14:04Z",
+        "comment_author": "vijaya-ops",
+        "comment_body": "/azpw run Azure.sonic-buildimage"
+    },
+    {
+        "number": 18618,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-01T05:14:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run Azure.sonic-buildimage"
+    },
+    {
+        "number": 18618,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-01T05:14:18Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 18618,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-09-30T06:09:51Z",
+        "review_author": "sutharsansr"
+    },
+    {
+        "number": 18618,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-11-11T21:44:30Z",
+        "review_author": "Praveen-Brcm"
+    },
+    {
+        "number": 18618,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2024-09-30T06:09:51Z",
+        "latestReview_author": "sutharsansr",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 18618,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2024-11-11T21:44:30Z",
         "latestReview_author": "Praveen-Brcm",
         "latestReview_state": "APPROVED"
     },
