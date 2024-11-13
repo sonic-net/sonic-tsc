@@ -2078,6 +2078,204 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 2013,
+        "repo": "sai",
+        "comment_at": "2024-05-10T21:59:54Z",
+        "comment_author": "itaibaz",
+        "comment_body": "next hop group member objects are being created this way implicitly, without being returned to the application\r\nwe don't support such flow in any place AFAIK\r\nIf we go with the approach here, application should then query the next hop list of each group created, then query the next hop id, and thus learn the object ids. This seems like a must step, as application should then be able to manage and remove these next hop group members\r\nSo while the motivation for the PR is clear, it creates complexity "
+    },
+    {
+        "number": 2013,
+        "repo": "sai",
+        "comment_at": "2024-05-10T22:30:16Z",
+        "comment_author": "erohsik",
+        "comment_body": "> next hop group member objects are being created this way implicitly, without being returned to the application we don't support such flow in any place AFAIK If we go with the approach here, application should then query the next hop list of each group created, then query the next hop id, and thus learn the object ids. This seems like a must step, as application should then be able to manage and remove these next hop group members So while the motivation for the PR is clear, it creates complexity\r\n\r\n\r\nThanks for taking a look. An example of the modification workflow is in the doc. With this next hop group, if the next hop group starts with {a,b,c,d} and then transitions to {a,b,e}, then the group is modified with the next hop list set to {a,b,e}. There is no explicit deletion of members c and d or addition of e.  "
+    },
+    {
+        "number": 2013,
+        "repo": "sai",
+        "comment_at": "2024-05-10T22:36:40Z",
+        "comment_author": "itaibaz",
+        "comment_body": "should we mark then\r\nSAI_NEXT_HOP_GROUP_ATTR_NEXT_HOP_MEMBER_LIST\r\nas not valid for this type of group ?\r\n\r\nand add clarification in the MD, that \r\n1) no next hop group member objects are created here\r\n2) to change next hops set a new full list\r\n3) group can be removed without a need to remove group members first \r\n?"
+    },
+    {
+        "number": 2013,
+        "repo": "sai",
+        "comment_at": "2024-05-13T21:40:58Z",
+        "comment_author": "erohsik",
+        "comment_body": "> should we mark then SAI_NEXT_HOP_GROUP_ATTR_NEXT_HOP_MEMBER_LIST as not valid for this type of group ?\r\n> \r\n> and add clarification in the MD, that\r\n> \r\n>     1. no next hop group member objects are created here\r\n> \r\n>     2. to change next hops set a new full list\r\n> \r\n>     3. group can be removed without a need to remove group members first\r\n>        ?\r\n\r\nThanks for the review. I have updated the PR."
+    },
+    {
+        "number": 2013,
+        "repo": "sai",
+        "comment_at": "2024-05-23T09:10:56Z",
+        "comment_author": "rck-innovium",
+        "comment_body": "@erohsik \u00a0This is a useful enhancement. Thanks for that.\r\n\r\nI have a comment on the way this is modelled in this proposal. The model is maintaining two different lists: one for the NHs and the other for the weights of the corresponding NH. We cannot atomically add a new NH to a created group- we need \\[step-1\\] call to add the NH to group, and \\[step-2\\] another call to set the weight. The weights to be programmed in the h/w are inconsistent between step-1 and step-2.\r\n\r\nThis is not elegant and tomorrow if we want to support this say for Ordered ECMP, we would need another list to specify the 'Sequence Id'. \u00a0We could extend this for every ECMP feature like Fine Grained etc.\r\n\r\nA cleaner way would be to do one of the below:\r\n\r\n#### Option-1: reuse \u00a0sai\\_next\\_hop\\_group\\_member:\r\n\r\nMake SAI\\_NEXT\\_HOP\\_GROUP\\_MEMBER\\_ATTR\\_NEXT\\_HOP\\_GROUP\\_ID mandatory only if NH Group is NOT of type SAI\\_NEXT\\_HOP\\_GROUP\\_TYPE\\_ECMP\\_WITH\\_MEMBERS.\r\n\r\nMake the object type of SAI\\_NEXT\\_HOP\\_GROUP\\_ATTR\\_NEXT\\_HOP\\_LIST as SAI\\_OBJECT\\_TYPE\\_NEXT\\_HOP\\_GROUP\\_MEMBER and remove SAI\\_NEXT\\_HOP\\_GROUP\\_ATTR\\_NEXT\\_HOP\\_MEMBER\\_WEIGHT\\_LIST\r\n\r\n**Option-2: create a new type of sai\\_next\\_hop\\_group\\_init\\_member**\r\n\r\nA challenge with option#1 would be to enforce it via SAI metacheckers and backward compatibility. If option#1 is not possible, then we can consider creating a new object type like below (definitely needs a better name).\r\n\r\n```\r\ntypedef enum _sai_next_hop_group_init_member_attr_t\r\n{\r\n\r\n:\r\n:\r\n    /**\r\n     * @brief Next hop id\r\n     *\r\n     * @type sai_object_id_t\r\n     * @flags MANDATORY_ON_CREATE | CREATE_AND_SET\r\n     * @objects SAI_OBJECT_TYPE_NEXT_HOP, SAI_OBJECT_TYPE_NEXT_HOP_GROUP\r\n     */\r\n    SAI_NEXT_HOP_GROUP_INIT_MEMBER_ATTR_NEXT_HOP_ID,\r\n  \r\n    /**\r\n     * @brief Member weights\r\n     *\r\n     *\r\n     * @type sai_uint32_t\r\n     * @flags CREATE_AND_SET\r\n     * @default 1\r\n     */\r\n    SAI_NEXT_HOP_GROUP_INIT_MEMBER_ATTR_WEIGHT,\r\n        \r\n :\r\n :\r\n }\r\n```"
+    },
+    {
+        "number": 2013,
+        "repo": "sai",
+        "comment_at": "2024-05-23T14:34:58Z",
+        "comment_author": "erohsik",
+        "comment_body": "> @erohsik  This is a useful enhancement. Thanks for that.\r\n> \r\n> I have a comment on the way this is modelled in this proposal. The model is maintaining two different lists: one for the NHs and the other for the weights of the corresponding NH. We cannot atomically add a new NH to a created group- we need [step-1] call to add the NH to group, and [step-2] another call to set the weight. The weights to be programmed in the h/w are inconsistent between step-1 and step-2.\r\n\r\nThanks for the review.\r\nThe document describes the modify workflow. The application would bulk set the two attributes (new NH list, new weight list) in one step.."
+    },
+    {
+        "number": 2013,
+        "repo": "sai",
+        "comment_at": "2024-05-23T16:07:02Z",
+        "comment_author": "helloanandhi",
+        "comment_body": "Creating a generic solution for all next hop group types would be more future extensible."
+    },
+    {
+        "number": 2013,
+        "repo": "sai",
+        "comment_at": "2024-05-28T18:39:18Z",
+        "comment_author": "rck-innovium",
+        "comment_body": "> > @erohsik This is a useful enhancement. Thanks for that.  \r\n> > I have a comment on the way this is modelled in this proposal. The model is maintaining two different lists: one for the NHs and the other for the weights of the corresponding NH. We cannot atomically add a new NH to a created group- we need \\[step-1\\] call to add the NH to group, and \\[step-2\\] another call to set the weight. The weights to be programmed in the h/w are inconsistent between step-1 and step-2.\r\n> \r\n> Thanks for the review. The document describes the modify workflow. The application would bulk set the two attributes (new NH list, new weight list) in one step..\r\n\r\nThe current solution looks to be a point fix for a specific NHG type like WECPM and not for other NHG type. How would you handle the case of supporting counters per member Nexthop using the single step workflow?"
+    },
+    {
+        "number": 2013,
+        "repo": "sai",
+        "comment_at": "2024-05-29T09:45:24Z",
+        "comment_author": "kcudnik",
+        "comment_body": "you will need  to rebase on origin/master and force push to pass metadata check"
+    },
+    {
+        "number": 2013,
+        "repo": "sai",
+        "comment_at": "2024-10-04T22:45:31Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "@itaibaz - could you please help finish the review on this?"
+    },
+    {
+        "number": 2013,
+        "repo": "sai",
+        "comment_at": "2024-10-24T17:24:33Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "@itaibaz, @JaiOCP - could you please help sign off on this?"
+    },
+    {
+        "number": 2013,
+        "repo": "sai",
+        "comment_at": "2024-10-24T17:25:00Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "@erohsik - please resolve branch conflicts"
+    },
+    {
+        "number": 2013,
+        "repo": "sai",
+        "comment_at": "2024-11-07T05:50:52Z",
+        "comment_author": "erohsik",
+        "comment_body": "> @erohsik - please resolve branch conflicts\r\n\r\nDone.."
+    },
+    {
+        "number": 2013,
+        "repo": "sai",
+        "review_at": "2024-05-13T23:53:27Z",
+        "review_author": "itaibaz"
+    },
+    {
+        "number": 2013,
+        "repo": "sai",
+        "review_at": "2024-05-14T13:38:17Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2013,
+        "repo": "sai",
+        "review_at": "2024-05-23T09:12:16Z",
+        "review_author": "rck-innovium"
+    },
+    {
+        "number": 2013,
+        "repo": "sai",
+        "review_at": "2024-09-12T04:12:05Z",
+        "review_author": "rck-innovium"
+    },
+    {
+        "number": 2013,
+        "repo": "sai",
+        "review_at": "2024-09-17T05:33:48Z",
+        "review_author": "erohsik"
+    },
+    {
+        "number": 2013,
+        "repo": "sai",
+        "review_at": "2024-09-17T06:09:36Z",
+        "review_author": "rck-innovium"
+    },
+    {
+        "number": 2013,
+        "repo": "sai",
+        "review_at": "2024-09-19T22:33:07Z",
+        "review_author": "rlhui"
+    },
+    {
+        "number": 2013,
+        "repo": "sai",
+        "review_at": "2024-09-24T02:10:01Z",
+        "review_author": "erohsik"
+    },
+    {
+        "number": 2013,
+        "repo": "sai",
+        "review_at": "2024-09-24T04:21:40Z",
+        "review_author": "erohsik"
+    },
+    {
+        "number": 2013,
+        "repo": "sai",
+        "review_at": "2024-09-25T14:21:43Z",
+        "review_author": "erohsik"
+    },
+    {
+        "number": 2013,
+        "repo": "sai",
+        "review_at": "2024-11-07T08:34:25Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2013,
+        "repo": "sai",
+        "review_at": "2024-11-12T18:12:05Z",
+        "review_author": "JaiOCP"
+    },
+    {
+        "number": 2013,
+        "repo": "sai",
+        "latestReview_at": "2024-09-19T22:33:07Z",
+        "latestReview_author": "rlhui",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 2013,
+        "repo": "sai",
+        "latestReview_at": "2024-05-13T23:53:27Z",
+        "latestReview_author": "itaibaz",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 2013,
+        "repo": "sai",
+        "latestReview_at": "2024-09-17T06:09:36Z",
+        "latestReview_author": "rck-innovium",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2013,
+        "repo": "sai",
+        "latestReview_at": "2024-11-12T18:12:05Z",
+        "latestReview_author": "JaiOCP",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2013,
+        "repo": "sai",
+        "latestReview_at": "2024-11-07T08:34:25Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 2011,
         "repo": "sai",
         "review_at": "2024-05-10T06:46:03Z",
