@@ -1294,6 +1294,507 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 2045,
+        "repo": "sai",
+        "comment_at": "2024-07-18T16:57:36Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "@nadershinouda - please look into the metadata check failure. Adding @kcudnik "
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "comment_at": "2024-07-18T17:19:46Z",
+        "comment_author": "nadershinouda",
+        "comment_body": "> @nadershinouda - please look into the metadata check failure. Adding @kcudnik\r\n\r\nI had this passing but there was an update in master that I picked up, which is causing this failure. It looks because how I merged the updates:\r\n\r\nThis is the error I see:\r\nWARNING: Both enums have the same value SAI_API_ICMP_ECHO and SAI_API_PREFIX_COMPRESSION = 0x00000052\r\nWARNING: Both enums have the same value SAI_OBJECT_TYPE_ICMP_ECHO_SESSION and SAI_OBJECT_TYPE_PREFIX_COMPRESSION_TABLE = 0x00000111\r\nprocessing commit 5eaebb9\r\nERROR: check ! SAI_API_PREFIX_COMPRESSION value is 0x00000053, but on was 0x00000052 on commit 1ee867c\r\nERROR: check ! SAI_OBJECT_TYPE_PREFIX_COMPRESSION_TABLE value is 0x00000112, but on was 0x00000111 on commit 1ee867c\r\nERROR: check ! SAI_OBJECT_TYPE_PREFIX_COMPRESSION_ENTRY value is 0x00000113, but on was 0x00000112 on commit 1ee867c\r\nprocessing commit 12c952e\r\nERROR: please correct all 3 error(s) and all 2 warnings before continue\r\nmake: *** [Makefile:90: all] Error 1\r\n\r\nSo yes it was originally the SAI_API value was 52, but a commit went in that made me go and update my code to be 53. The same with SAI_OBJECT. What I have now is correct."
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "comment_at": "2024-07-19T07:28:03Z",
+        "comment_author": "kcudnik",
+        "comment_body": "You need to squash changes and force push instead to merge "
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "comment_at": "2024-07-19T13:15:05Z",
+        "comment_author": "nadershinouda",
+        "comment_body": "> You need to squash changes and force push instead to merge\r\n\r\n@kcudnik, how do I do that now that I already merged the changes? Is there an easy way to do that or do I need to revert the changes, then do as you suggested?"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "comment_at": "2024-07-19T14:29:49Z",
+        "comment_author": "kcudnik",
+        "comment_body": "You can rebase locally and then force push to this branch "
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "comment_at": "2024-07-19T19:00:37Z",
+        "comment_author": "nadershinouda",
+        "comment_body": "> You can rebase locally and then force push to this branch\r\n\r\nthank you"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "comment_at": "2024-09-19T15:12:30Z",
+        "comment_author": "nadershinouda",
+        "comment_body": "@rck-innovium  and @helloanandhi, I made all the changes that you asked for. Can you please look over my latest changes and approve if you are don't have anymore comments. "
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "comment_at": "2024-10-07T15:49:00Z",
+        "comment_author": "rlhui",
+        "comment_body": "There is only one .md file in this PR so far.  I don't see \"SAI-Proposal-ACL-Bincode.md\" as mentioned in the PR description."
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "comment_at": "2024-11-07T14:47:15Z",
+        "comment_author": "nadershinouda",
+        "comment_body": "@JaiOCP when you get a chance can you review the updated document and give your feedback or approve"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "comment_at": "2024-11-13T14:09:36Z",
+        "comment_author": "nadershinouda",
+        "comment_body": "@tjchadaga what else is required to get this PR approved/merged"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-07-25T16:22:50Z",
+        "review_author": "rck-innovium"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-07-25T17:01:38Z",
+        "review_author": "helloanandhi"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-07-25T17:06:20Z",
+        "review_author": "helloanandhi"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-07-25T17:07:39Z",
+        "review_author": "helloanandhi"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-07-29T08:35:39Z",
+        "review_author": "helloanandhi"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-07-29T20:45:00Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-07-29T20:45:58Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-07-29T20:48:11Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-07-29T20:53:31Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-07-29T20:56:26Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-07-29T20:58:33Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-07-29T21:01:30Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-07-29T21:04:04Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-07-30T04:53:19Z",
+        "review_author": "rck-innovium"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-07-30T04:58:36Z",
+        "review_author": "rck-innovium"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-07-30T14:52:37Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-07-30T14:57:46Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-07-30T15:00:56Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-08-07T14:28:07Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-08-07T14:28:46Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-08-08T18:41:14Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-08-08T18:41:56Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-08-08T18:42:50Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-08-08T18:45:43Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-08-08T18:46:50Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-08-13T18:22:29Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-08-13T18:22:57Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-08-13T18:23:36Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-08-13T18:23:52Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-08-13T18:23:58Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-08-13T18:24:03Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-08-13T18:24:50Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-08-13T18:24:55Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-08-14T13:27:31Z",
+        "review_author": "helloanandhi"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-08-14T14:11:32Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-08-14T15:50:12Z",
+        "review_author": "helloanandhi"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-08-14T16:39:32Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-08-21T17:06:54Z",
+        "review_author": "rck-innovium"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-08-21T17:13:56Z",
+        "review_author": "rck-innovium"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-08-21T18:14:35Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-08-21T18:17:09Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-08-25T08:06:42Z",
+        "review_author": "rck-innovium"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-08-25T13:23:05Z",
+        "review_author": "rck-innovium"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-08-27T14:11:27Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-08-27T15:42:56Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-09-16T22:41:45Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-09-22T20:08:30Z",
+        "review_author": "rck-innovium"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-09-22T20:25:39Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-10-06T13:56:23Z",
+        "review_author": "ilyav11"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-10-06T14:16:47Z",
+        "review_author": "rck-innovium"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-10-06T17:09:27Z",
+        "review_author": "ilyav11"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-10-06T20:06:46Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-10-07T14:59:50Z",
+        "review_author": "rck-innovium"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-10-07T15:53:41Z",
+        "review_author": "rck-innovium"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-10-07T15:54:16Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-10-07T16:02:35Z",
+        "review_author": "rck-innovium"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-10-07T16:04:44Z",
+        "review_author": "rck-innovium"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-11-08T19:47:01Z",
+        "review_author": "JaiOCP"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-11-08T20:45:35Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-11-08T21:18:38Z",
+        "review_author": "JaiOCP"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-11-08T22:06:49Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-11-08T22:43:51Z",
+        "review_author": "JaiOCP"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-11-08T22:53:47Z",
+        "review_author": "nadershinouda"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-11-08T23:03:48Z",
+        "review_author": "JaiOCP"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-11-08T23:04:02Z",
+        "review_author": "JaiOCP"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "review_at": "2024-11-09T08:11:06Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "latestReview_at": "2024-08-14T15:50:12Z",
+        "latestReview_author": "helloanandhi",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "latestReview_at": "2024-10-06T17:09:27Z",
+        "latestReview_author": "ilyav11",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "latestReview_at": "2024-10-07T16:04:44Z",
+        "latestReview_author": "rck-innovium",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "latestReview_at": "2024-11-08T23:04:02Z",
+        "latestReview_author": "JaiOCP",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2045,
+        "repo": "sai",
+        "latestReview_at": "2024-11-09T08:11:06Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 2044,
         "repo": "sai",
         "comment_at": "2024-07-25T16:38:21Z",
