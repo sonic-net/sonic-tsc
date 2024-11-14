@@ -1,5 +1,33 @@
 [
     {
+        "number": 20782,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-13T07:33:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-buildimage/pull/20592"
+    },
+    {
+        "number": 20781,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-13T07:16:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-buildimage/pull/20165"
+    },
+    {
+        "number": 20779,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-13T04:57:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-buildimage/pull/20759"
+    },
+    {
+        "number": 20778,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-13T04:47:01Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-buildimage/pull/19778"
+    },
+    {
         "number": 20759,
         "repo": "sonic-buildimage",
         "comment_at": "2024-11-11T18:06:52Z",
@@ -26,6 +54,13 @@
         "comment_at": "2024-11-12T08:15:03Z",
         "comment_author": "wdoekes",
         "comment_body": "LGTM\r\n\r\n(1:1 my original fix + 1 version update, so should be good :stuck_out_tongue:)\r\n(and I see it was indeed merged to 202405 as well, so needs cherry-pick)"
+    },
+    {
+        "number": 20759,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-13T04:57:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-buildimage/pull/20779"
     },
     {
         "number": 20759,
@@ -58,6 +93,144 @@
         "latestReview_at": "2024-11-11T18:10:27Z",
         "latestReview_author": "qiluo-msft",
         "latestReview_state": "DISMISSED"
+    },
+    {
+        "number": 20743,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-08T21:50:39Z",
+        "comment_author": "prgeor",
+        "comment_body": "@liat-grozovik @Junchao-Mellanox can you also review"
+    },
+    {
+        "number": 20743,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-11T03:19:08Z",
+        "comment_author": "Junchao-Mellanox",
+        "comment_body": "> There is a limitation on the Mellanox platform to support RX LOS reading in FW control mode, this change will also enable the RX LOS reading in FW control mode, we should have a logic to differentiate between FW control mode and host mgmt mode. @Junchao-Mellanox\r\n\r\nThanks for catching this. Indeed, we need do something like following:\r\n```\r\ndef get_rx_los(self):\r\n \"\"\"Accessing rx los is not supproted, return all False\r\n\r\n Returns:\r\n list: [False] 2016 2017 2018 2019 2020 2021 2022 2023 2024 parse_reviews.py pr_dump.sh repo_list.sh repos update.sh channels\r\n \"\"\"\r\n api = self.get_xcvr_api()\r\n if self.is_sw_control():\r\n return api.get_rx_los()\r\n return [False] 2016 2017 2018 2019 2020 2021 2022 2023 2024 parse_reviews.py pr_dump.sh repo_list.sh repos update.sh api.NUM_CHANNELS if api else None\r\n```"
+    },
+    {
+        "number": 20743,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-11T06:16:08Z",
+        "comment_author": "mihirpat1",
+        "comment_body": "> we should have a logic to differentiate between FW control mode and host mgmt mode. @Junchao-Mellanox\r\n\r\n@Junchao-Mellanox @keboliu I have now addressed this. Can you please help in reviewing it?"
+    },
+    {
+        "number": 20743,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-13T07:27:44Z",
+        "comment_author": "mihirpat1",
+        "comment_body": "@liat-grozovik Can you please help in merging this PR?"
+    },
+    {
+        "number": 20743,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-13T21:40:55Z",
+        "comment_author": "mihirpat1",
+        "comment_body": "@bingwang-ms @yxieca Can you please help in merging this to 202405 and 202311?\r\nMSFT ADO - 30180403"
+    },
+    {
+        "number": 20743,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-13T21:48:08Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-buildimage/pull/20790"
+    },
+    {
+        "number": 20743,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-11-08T21:50:25Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 20743,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-11-11T03:02:13Z",
+        "review_author": "Junchao-Mellanox"
+    },
+    {
+        "number": 20743,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-11-11T03:12:56Z",
+        "review_author": "keboliu"
+    },
+    {
+        "number": 20743,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-11-11T06:14:28Z",
+        "review_author": "Junchao-Mellanox"
+    },
+    {
+        "number": 20743,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-11-13T06:18:12Z",
+        "review_author": "keboliu"
+    },
+    {
+        "number": 20743,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-11-13T18:14:27Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 20743,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2024-11-11T06:14:28Z",
+        "latestReview_author": "Junchao-Mellanox",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 20743,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2024-11-13T18:14:27Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 20743,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2024-11-13T06:18:12Z",
+        "latestReview_author": "keboliu",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 20736,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-08T11:05:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-buildimage/pull/20566"
+    },
+    {
+        "number": 20733,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-11-08T06:26:25Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 20733,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-11-08T07:19:48Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 20733,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-11-08T08:04:18Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 20733,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2024-11-08T07:19:48Z",
+        "latestReview_author": "ganglyu",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 20733,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2024-11-08T08:04:18Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
     },
     {
         "number": 20729,
@@ -780,6 +953,13 @@
     {
         "number": 20592,
         "repo": "sonic-buildimage",
+        "comment_at": "2024-11-13T07:34:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-buildimage/pull/20782"
+    },
+    {
+        "number": 20592,
+        "repo": "sonic-buildimage",
         "review_at": "2024-11-06T06:09:36Z",
         "review_author": "Blueve"
     },
@@ -1159,6 +1339,46 @@
         "repo": "sonic-buildimage",
         "latestReview_at": "2024-10-28T16:14:24Z",
         "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 20555,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-01T17:46:17Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 20555,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-01T17:46:29Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 20555,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-10-22T06:17:40Z",
+        "review_author": "wen587"
+    },
+    {
+        "number": 20555,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-11-13T19:23:54Z",
+        "review_author": "bingwang-ms"
+    },
+    {
+        "number": 20555,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2024-11-13T19:23:54Z",
+        "latestReview_author": "bingwang-ms",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 20555,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2024-10-22T06:17:40Z",
+        "latestReview_author": "wen587",
         "latestReview_state": "APPROVED"
     },
     {
@@ -1815,6 +2035,113 @@
         "repo": "sonic-buildimage",
         "latestReview_at": "2024-10-16T20:14:39Z",
         "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 20506,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-06T00:47:31Z",
+        "comment_author": "wen587",
+        "comment_body": "Hi @stepanblyschak , \r\nI saw not all device are with enable field on devices. \r\nCan we have some unit test for below scenarios? Here is what we expect in production: \r\n\r\nIf mgmt device, which is `If DEVICE_METADATA['localhost']['type'] is in ['MgmtTsToR', 'MgmtToRRouter', 'BmcMgmtToRRouter'])`\r\nThen:\r\n```\r\n },\r\n \"FLEX_COUNTER_TABLE\": {\r\n \"ACL\": {\r\n \"FLEX_COUNTER_DELAY_STATUS\": \"false\",\r\n \"FLEX_COUNTER_STATUS\": \"enable\",\r\n \"POLL_INTERVAL\": \"10000\"\r\n },\r\n \"BUFFER_POOL_WATERMARK\": {\r\n \"FLEX_COUNTER_DELAY_STATUS\": \"false\",\r\n \"FLEX_COUNTER_STATUS\": \"disable\"\r\n },\r\n \"PFCWD\": {\r\n \"FLEX_COUNTER_DELAY_STATUS\": \"false\",\r\n \"FLEX_COUNTER_STATUS\": \"disable\"\r\n },\r\n \"PG_DROP\": {\r\n \"FLEX_COUNTER_DELAY_STATUS\": \"false\",\r\n \"FLEX_COUNTER_STATUS\": \"disable\"\r\n },\r\n \"PG_WATERMARK\": {\r\n \"FLEX_COUNTER_DELAY_STATUS\": \"false\",\r\n \"FLEX_COUNTER_STATUS\": \"disable\"\r\n },\r\n \"PORT\": {\r\n \"FLEX_COUNTER_STATUS\": \"enable\"\r\n },\r\n \"PORT_BUFFER_DROP\": {\r\n \"FLEX_COUNTER_DELAY_STATUS\": \"false\",\r\n \"FLEX_COUNTER_STATUS\": \"disable\"\r\n },\r\n \"QUEUE\": {\r\n \"FLEX_COUNTER_DELAY_STATUS\": \"false\",\r\n \"FLEX_COUNTER_STATUS\": \"disable\"\r\n },\r\n \"QUEUE_WATERMARK\": {\r\n \"FLEX_COUNTER_DELAY_STATUS\": \"false\",\r\n \"FLEX_COUNTER_STATUS\": \"disable\"\r\n },\r\n \"RIF\": {\r\n \"FLEX_COUNTER_STATUS\": \"enable\"\r\n }\r\n },\r\n```\r\n\r\nIf not mgmt device: \r\n```\r\n \"FLEX_COUNTER_TABLE\": {\r\n \"ACL\": {\r\n \"FLEX_COUNTER_DELAY_STATUS\": \"false\",\r\n \"FLEX_COUNTER_STATUS\": \"enable\",\r\n \"POLL_INTERVAL\": \"10000\"\r\n }, \r\n \"BUFFER_POOL_WATERMARK\": {\r\n \"FLEX_COUNTER_STATUS\": \"enable\"\r\n }, \r\n \"PFCWD\": {\r\n \"FLEX_COUNTER_STATUS\": \"enable\"\r\n }, \r\n \"PG_DROP\": {\r\n \"FLEX_COUNTER_STATUS\": \"enable\"\r\n }, \r\n \"PG_WATERMARK\": {\r\n \"FLEX_COUNTER_STATUS\": \"enable\"\r\n }, \r\n \"PORT\": {\r\n \"FLEX_COUNTER_STATUS\": \"enable\"\r\n }, \r\n \"PORT_BUFFER_DROP\": {\r\n \"FLEX_COUNTER_STATUS\": \"enable\"\r\n }, \r\n \"QUEUE\": {\r\n \"FLEX_COUNTER_STATUS\": \"enable\"\r\n }, \r\n \"QUEUE_WATERMARK\": {\r\n \"FLEX_COUNTER_STATUS\": \"enable\"\r\n }, \r\n \"RIF\": {\r\n \"FLEX_COUNTER_STATUS\": \"enable\"\r\n }\r\n },\r\n```\r\n\r\nCan we also add some unit test to guarantee the output?"
+    },
+    {
+        "number": 20506,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-06T02:54:46Z",
+        "comment_author": "wen587",
+        "comment_body": "BTW, image PR for this logic: https://github.com/sonic-net/sonic-buildimage/pull/16937"
+    },
+    {
+        "number": 20506,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-06T13:20:07Z",
+        "comment_author": "stepanblyschak",
+        "comment_body": "> Hi @stepanblyschak , I saw not all device are with enable field on devices. Can we have some unit test for below scenarios? Here is what we expect in production:\r\n> \r\n> If mgmt device, which is `If DEVICE_METADATA['localhost']['type'] is in ['MgmtTsToR', 'MgmtToRRouter', 'BmcMgmtToRRouter'])` Then:\r\n> \r\n> ```\r\n> },\r\n> \"FLEX_COUNTER_TABLE\": {\r\n> \"ACL\": {\r\n> \"FLEX_COUNTER_DELAY_STATUS\": \"false\",\r\n> \"FLEX_COUNTER_STATUS\": \"enable\",\r\n> \"POLL_INTERVAL\": \"10000\"\r\n> },\r\n> \"BUFFER_POOL_WATERMARK\": {\r\n> \"FLEX_COUNTER_DELAY_STATUS\": \"false\",\r\n> \"FLEX_COUNTER_STATUS\": \"disable\"\r\n> },\r\n> \"PFCWD\": {\r\n> \"FLEX_COUNTER_DELAY_STATUS\": \"false\",\r\n> \"FLEX_COUNTER_STATUS\": \"disable\"\r\n> },\r\n> \"PG_DROP\": {\r\n> \"FLEX_COUNTER_DELAY_STATUS\": \"false\",\r\n> \"FLEX_COUNTER_STATUS\": \"disable\"\r\n> },\r\n> \"PG_WATERMARK\": {\r\n> \"FLEX_COUNTER_DELAY_STATUS\": \"false\",\r\n> \"FLEX_COUNTER_STATUS\": \"disable\"\r\n> },\r\n> \"PORT\": {\r\n> \"FLEX_COUNTER_STATUS\": \"enable\"\r\n> },\r\n> \"PORT_BUFFER_DROP\": {\r\n> \"FLEX_COUNTER_DELAY_STATUS\": \"false\",\r\n> \"FLEX_COUNTER_STATUS\": \"disable\"\r\n> },\r\n> \"QUEUE\": {\r\n> \"FLEX_COUNTER_DELAY_STATUS\": \"false\",\r\n> \"FLEX_COUNTER_STATUS\": \"disable\"\r\n> },\r\n> \"QUEUE_WATERMARK\": {\r\n> \"FLEX_COUNTER_DELAY_STATUS\": \"false\",\r\n> \"FLEX_COUNTER_STATUS\": \"disable\"\r\n> },\r\n> \"RIF\": {\r\n> \"FLEX_COUNTER_STATUS\": \"enable\"\r\n> }\r\n> },\r\n> ```\r\n> \r\n> If not mgmt device:\r\n> \r\n> ```\r\n> \"FLEX_COUNTER_TABLE\": {\r\n> \"ACL\": {\r\n> \"FLEX_COUNTER_DELAY_STATUS\": \"false\",\r\n> \"FLEX_COUNTER_STATUS\": \"enable\",\r\n> \"POLL_INTERVAL\": \"10000\"\r\n> }, \r\n> \"BUFFER_POOL_WATERMARK\": {\r\n> \"FLEX_COUNTER_STATUS\": \"enable\"\r\n> }, \r\n> \"PFCWD\": {\r\n> \"FLEX_COUNTER_STATUS\": \"enable\"\r\n> }, \r\n> \"PG_DROP\": {\r\n> \"FLEX_COUNTER_STATUS\": \"enable\"\r\n> }, \r\n> \"PG_WATERMARK\": {\r\n> \"FLEX_COUNTER_STATUS\": \"enable\"\r\n> }, \r\n> \"PORT\": {\r\n> \"FLEX_COUNTER_STATUS\": \"enable\"\r\n> }, \r\n> \"PORT_BUFFER_DROP\": {\r\n> \"FLEX_COUNTER_STATUS\": \"enable\"\r\n> }, \r\n> \"QUEUE\": {\r\n> \"FLEX_COUNTER_STATUS\": \"enable\"\r\n> }, \r\n> \"QUEUE_WATERMARK\": {\r\n> \"FLEX_COUNTER_STATUS\": \"enable\"\r\n> }, \r\n> \"RIF\": {\r\n> \"FLEX_COUNTER_STATUS\": \"enable\"\r\n> }\r\n> },\r\n> ```\r\n> \r\n> Can we also add some unit test to guarantee the output?\r\n\r\n\r\n\r\n> BTW, image PR for this logic: #16937\r\n\r\n@wen587 minigraph.py runs after init_cfg.json is loaded overriding its content. This PR does not change it. I see UT for that functionality were added as part of #16937"
+    },
+    {
+        "number": 20506,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-10-22T06:17:24Z",
+        "review_author": "wen587"
+    },
+    {
+        "number": 20506,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-10-26T01:07:59Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 20506,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-10-26T01:08:30Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 20506,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-10-26T14:33:31Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 20506,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-10-28T16:54:48Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 20506,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-11-04T08:06:13Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 20506,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-11-04T11:58:17Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 20506,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-11-05T00:35:25Z",
+        "review_author": "wen587"
+    },
+    {
+        "number": 20506,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-11-05T09:21:20Z",
+        "review_author": "stepanblyschak"
+    },
+    {
+        "number": 20506,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-11-06T03:04:06Z",
+        "review_author": "wen587"
+    },
+    {
+        "number": 20506,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-11-06T14:13:09Z",
+        "review_author": "wen587"
+    },
+    {
+        "number": 20506,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-11-11T17:51:05Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 20506,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2024-11-11T17:51:05Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 20506,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2024-11-06T14:13:09Z",
+        "latestReview_author": "wen587",
         "latestReview_state": "APPROVED"
     },
     {
@@ -3979,6 +4306,25 @@
         "comment_body": "Original PR: https://github.com/sonic-net/sonic-buildimage/pull/20209"
     },
     {
+        "number": 20315,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-10-07T16:35:50Z",
+        "review_author": "arlakshm"
+    },
+    {
+        "number": 20315,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-11-13T20:18:00Z",
+        "review_author": "arlakshm"
+    },
+    {
+        "number": 20315,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2024-11-13T20:18:00Z",
+        "latestReview_author": "arlakshm",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 20308,
         "repo": "sonic-buildimage",
         "review_at": "2024-09-19T23:31:03Z",
@@ -5618,6 +5964,89 @@
         "comment_at": "2024-09-11T05:01:04Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-buildimage/pull/20223"
+    },
+    {
+        "number": 20165,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-09-06T14:07:44Z",
+        "comment_author": "pavannaregundi",
+        "comment_body": "@Blueve @Pavan-Nokia Please review"
+    },
+    {
+        "number": 20165,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-10-18T02:11:37Z",
+        "comment_author": "Blueve",
+        "comment_body": "@pavannaregundi please help update sonic-mgmt test id for above change"
+    },
+    {
+        "number": 20165,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-10-23T06:16:28Z",
+        "comment_author": "pavannaregundi",
+        "comment_body": "> @pavannaregundi please help update sonic-mgmt test id for above change\r\n\r\n@Blueve We have used following sonic-mgmt commit id to test this.\r\n\r\n```\r\ncommit d0c4549ed4448cada922345c8a028eb8b476daf2 (HEAD -> new_commit, origin/master, origin/HEAD, master)\r\nAuthor: Bobby McGonigle <bobbymcgonigle@arista.com>\r\nDate: Wed Aug 7 23:12:15 2024 -0700\r\n```"
+    },
+    {
+        "number": 20165,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-10-25T13:44:34Z",
+        "comment_author": "Pavan-Nokia",
+        "comment_body": "Hi Jing,\r\nbelow if the kusto test upload ID \r\nd974dd9a-93a8-47f0-ba89-b5ac48c56832 - Mx\r\n5a0fcfca-3fae-4205-a436-8ccd09719c10 - M0"
+    },
+    {
+        "number": 20165,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-10-31T14:09:46Z",
+        "comment_author": "Blueve",
+        "comment_body": "@Pavan-Nokia should following lines use `continue` instead?\r\nI didn't get how the retry works\r\n\r\nhttps://github.com/Marvell-switching/mrvl-prestera/compare/36fa3a3f4e317d8c0c111cc74aafffce12e1546d...9608c8c41e462998cd144ed34780e34f1b48e081#diff-d81733e3ed589ee79a5a8edab98acbe7c2cf441a2cb8b8d7381acf179403b372R397\r\n\r\nhttps://github.com/Marvell-switching/mrvl-prestera/compare/36fa3a3f4e317d8c0c111cc74aafffce12e1546d...9608c8c41e462998cd144ed34780e34f1b48e081#diff-d81733e3ed589ee79a5a8edab98acbe7c2cf441a2cb8b8d7381acf179403b372R397"
+    },
+    {
+        "number": 20165,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-04T03:37:20Z",
+        "comment_author": "pavannaregundi",
+        "comment_body": "> @Pavan-Nokia should following lines use `continue` instead? I didn't get how the retry works\r\n> \r\n> [Marvell-switching/mrvl-prestera@36fa3a3...9608c8c#diff-d81733e3ed589ee79a5a8edab98acbe7c2cf441a2cb8b8d7381acf179403b372R397](https://github.com/Marvell-switching/mrvl-prestera/compare/36fa3a3f4e317d8c0c111cc74aafffce12e1546d...9608c8c41e462998cd144ed34780e34f1b48e081#diff-d81733e3ed589ee79a5a8edab98acbe7c2cf441a2cb8b8d7381acf179403b372R397)\r\n> \r\n> [Marvell-switching/mrvl-prestera@36fa3a3...9608c8c#diff-d81733e3ed589ee79a5a8edab98acbe7c2cf441a2cb8b8d7381acf179403b372R397](https://github.com/Marvell-switching/mrvl-prestera/compare/36fa3a3f4e317d8c0c111cc74aafffce12e1546d...9608c8c41e462998cd144ed34780e34f1b48e081#diff-d81733e3ed589ee79a5a8edab98acbe7c2cf441a2cb8b8d7381acf179403b372R397)\r\n\r\n@Blueve Logic checks to find for aligned memory allocation as per the size of the request. If a non-aligned memory is found it stores them in array named non_aligned_dma_arr. If an aligned memory is found, at any stage it breaks out of loop. At the end frees the non_aligned_dma_arr."
+    },
+    {
+        "number": 20165,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-06T06:04:51Z",
+        "comment_author": "Blueve",
+        "comment_body": "ADO: 30148643"
+    },
+    {
+        "number": 20165,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-12T05:31:18Z",
+        "comment_author": "Blueve",
+        "comment_body": "/azpw ms_conflict -f"
+    },
+    {
+        "number": 20165,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-13T07:12:17Z",
+        "comment_author": "liushilongbuaa",
+        "comment_body": "/azpw ms_conflict"
+    },
+    {
+        "number": 20165,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-13T07:16:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-buildimage/pull/20781"
+    },
+    {
+        "number": 20165,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-11-06T06:02:57Z",
+        "review_author": "Blueve"
+    },
+    {
+        "number": 20165,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2024-11-06T06:02:57Z",
+        "latestReview_author": "Blueve",
+        "latestReview_state": "APPROVED"
     },
     {
         "number": 20157,
@@ -11299,6 +11728,60 @@
         "comment_at": "2024-08-02T21:40:13Z",
         "comment_author": "mssonicbld",
         "comment_body": "Original PR: https://github.com/sonic-net/sonic-buildimage/pull/19755"
+    },
+    {
+        "number": 19778,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-09-19T20:13:54Z",
+        "comment_author": "mlok-nokia",
+        "comment_body": "@abdosi I have changed the code to be more generic to check if docker doesn't exist, log a message. Please review it again."
+    },
+    {
+        "number": 19778,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-10-09T17:49:27Z",
+        "comment_author": "mlok-nokia",
+        "comment_body": "@abdosi HI Abhishek, Please help to review this PR. Thanks."
+    },
+    {
+        "number": 19778,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-06T18:54:18Z",
+        "comment_author": "rlhui",
+        "comment_body": "@abdosi reminder to help re-review, thanks."
+    },
+    {
+        "number": 19778,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-13T03:26:10Z",
+        "comment_author": "abdosi",
+        "comment_body": "@yejianquan "
+    },
+    {
+        "number": 19778,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-13T04:47:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-buildimage/pull/20778"
+    },
+    {
+        "number": 19778,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-08-28T17:50:23Z",
+        "review_author": "abdosi"
+    },
+    {
+        "number": 19778,
+        "repo": "sonic-buildimage",
+        "review_at": "2024-11-13T03:25:45Z",
+        "review_author": "abdosi"
+    },
+    {
+        "number": 19778,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2024-11-13T03:25:45Z",
+        "latestReview_author": "abdosi",
+        "latestReview_state": "APPROVED"
     },
     {
         "number": 19777,
@@ -39161,6 +39644,20 @@
         "latestReview_at": "2024-04-17T16:25:14Z",
         "latestReview_author": "prsunny",
         "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 18699,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-13T01:57:56Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "hi @wen587 could you file a separate PR to 202311? Ashwin identified that missing this one could cause no severity issue in the syslog. "
+    },
+    {
+        "number": 18699,
+        "repo": "sonic-buildimage",
+        "comment_at": "2024-11-13T02:07:53Z",
+        "comment_author": "wen587",
+        "comment_body": "Hi @StormLiangMS , internal-202311 already has the PR. [internal-202311](https://msazure.visualstudio.com/One/_git/Networking-acs-buildimage?path=/files/image_config/rsyslog/rsyslog.conf.j2&version=GBinternal-202311&line=60&lineEnd=62&lineStartColumn=1&lineEndColumn=1&lineStyle=plain&_a=contents)\r\nDo we need to bring it to public 202311 repo?"
     },
     {
         "number": 18699,
