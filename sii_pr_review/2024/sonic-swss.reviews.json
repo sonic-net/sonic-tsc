@@ -1,5 +1,12 @@
 [
     {
+        "number": 3376,
+        "repo": "sonic-swss",
+        "comment_at": "2024-11-18T23:04:08Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-swss/pull/3351"
+    },
+    {
         "number": 3374,
         "repo": "sonic-swss",
         "comment_at": "2024-11-15T18:18:09Z",
@@ -2266,6 +2273,83 @@
         "comment_at": "2024-08-08T22:29:16Z",
         "comment_author": "mssonicbld",
         "comment_body": "Original PR: https://github.com/sonic-net/sonic-swss/pull/3111"
+    },
+    {
+        "number": 3252,
+        "repo": "sonic-swss",
+        "comment_at": "2024-09-04T22:21:33Z",
+        "comment_author": "prsunny",
+        "comment_body": "This seems to be a breaking change to me. Can you confirm if this can be merged and not break existing platform?"
+    },
+    {
+        "number": 3252,
+        "repo": "sonic-swss",
+        "comment_at": "2024-09-05T06:43:45Z",
+        "comment_author": "krismarvell",
+        "comment_body": "@prsunny This PR wont break existing platform builds and also the functionalty of marvell(renamed as marvell-prestera) and innovium(renamed as marvell-teralynx) platforms. Also this has sonic-buildimage changes to enable respective platform builds in sonic master repo. Pls let me know if you see any specific concerns/breakages even with the additional changes in sonic-buildimage, sonic-sairedis and sonic-utilities PRs below.\r\nsonic-buildimage: https://github.com/sonic-net/sonic-buildimage/pull/19829\r\nsonic-sairedis: https://github.com/sonic-net/sonic-sairedis/pull/1408\r\nsonic-utilties: https://github.com/sonic-net/sonic-utilities/pull/3474"
+    },
+    {
+        "number": 3252,
+        "repo": "sonic-swss",
+        "comment_at": "2024-09-09T15:34:30Z",
+        "comment_author": "krismarvell",
+        "comment_body": "@prsunny I see code coverage failing. Is there a way to bypass vstest ? If not, may need your help as to how to trace the code coverage errors."
+    },
+    {
+        "number": 3252,
+        "repo": "sonic-swss",
+        "comment_at": "2024-09-10T08:52:25Z",
+        "comment_author": "krismarvell",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 3252,
+        "repo": "sonic-swss",
+        "comment_at": "2024-09-10T08:52:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 3252,
+        "repo": "sonic-swss",
+        "comment_at": "2024-09-10T08:52:39Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3252,
+        "repo": "sonic-swss",
+        "comment_at": "2024-09-23T15:25:21Z",
+        "comment_author": "prsunny",
+        "comment_body": "@krismarvell , we can merge this PR once you confirm its ready. Do you've an order of merge dependency? Which PR should be going first? "
+    },
+    {
+        "number": 3252,
+        "repo": "sonic-swss",
+        "comment_at": "2024-09-23T15:39:21Z",
+        "comment_author": "krismarvell",
+        "comment_body": "@prsunny For the successful image build, i think it can be merged in any order and hence this swss change can be merged indepently. Pls let me know if you think otherwise. the sonic-swss submodule update into sonic-buildimage will happen subsequently ? "
+    },
+    {
+        "number": 3252,
+        "repo": "sonic-swss",
+        "comment_at": "2024-09-23T16:14:45Z",
+        "comment_author": "prsunny",
+        "comment_body": "> @prsunny For the successful image build, i think it can be merged in any order and hence this swss change can be merged indepently. Pls let me know if you think otherwise. the sonic-swss submodule update into sonic-buildimage will happen subsequently ?\r\n\r\nsubmodule update is automated. It can happen in the next day itself. Is it going to break anything for this platform?"
+    },
+    {
+        "number": 3252,
+        "repo": "sonic-swss",
+        "comment_at": "2024-09-24T03:28:47Z",
+        "comment_author": "krismarvell",
+        "comment_body": "@prsunny this merge is not going to break the build"
+    },
+    {
+        "number": 3252,
+        "repo": "sonic-swss",
+        "comment_at": "2024-11-19T17:24:30Z",
+        "comment_author": "prsunny",
+        "comment_body": "Platform renaming, and bypassing coverage"
     },
     {
         "number": 3251,
