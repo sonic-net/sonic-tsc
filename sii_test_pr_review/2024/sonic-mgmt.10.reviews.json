@@ -6040,6 +6040,13 @@
     {
         "number": 14890,
         "repo": "sonic-mgmt",
+        "comment_at": "2024-11-28T01:01:49Z",
+        "comment_author": "shivuv",
+        "comment_body": "@bingwang-ms Can you help to cherry pick this into 202405 ?"
+    },
+    {
+        "number": 14890,
+        "repo": "sonic-mgmt",
         "review_at": "2024-10-10T06:10:17Z",
         "review_author": "lipxu"
     },
@@ -6114,6 +6121,13 @@
         "comment_at": "2024-10-08T20:45:03Z",
         "comment_author": "mssonicbld",
         "comment_body": "The [pre-commit](http://pre-commit.com/) check detected issues in the files touched by this pull request.\nThe pre-commit check is a mandatory check, please fix detected issues.\n\nDetailed pre-commit check results:\n<samp>trim trailing whitespace.................................................Failed<br/>- hook id: trailing-whitespace<br/>- exit code: 1<br/>- files were modified by this hook<br/><br/>Fixing tests/bgp/test_bgp_azng_migration.py<br/><br/>fix end of files.........................................................Passed<br/>check yaml...........................................(no files to check)Skipped<br/>check for added large files..............................................Passed<br/>check python ast.........................................................Passed<br/>flake8...................................................................Failed<br/>- hook id: flake8<br/>- exit code: 1<br/><br/>tests/bgp/test_bgp_azng_migration.py:13:1: E302 expected 2 blank lines, found 1<br/>tests/bgp/test_bgp_azng_migration.py:20:17: E221 multiple spaces before operator<br/>tests/bgp/test_bgp_azng_migration.py:46:8: E111 indentation is not a multiple of 4<br/>tests/bgp/test_bgp_azng_migration.py:88:56: E222 multiple spaces after operator<br/>tests/bgp/test_bgp_azng_migration.py:91:56: E222 multiple spaces after operator<br/>...<br/>[truncated extra lines, please run pre-commit locally to view full check results]<br/></samp>\n\nTo run the pre-commit checks locally, you can follow below steps:\n1. Ensure that default python is python3. In sonic-mgmt docker container, default python is python2. You can run\n the check by activating the python3 virtual environment in sonic-mgmt docker container or outside of sonic-mgmt\n docker container.\n2. Ensure that the `pre-commit` package is installed:\n```\nsudo pip install pre-commit\n```\n3. Go to repository root folder\n4. Install the pre-commit hooks:\n```\npre-commit install\n```\n5. Use pre-commit to check staged file:\n```\npre-commit\n```\n6. Alternatively, you can check committed files using:\n```\npre-commit run --from-ref <commit_id> --to-ref <commit_id>\n```"
+    },
+    {
+        "number": 14888,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-11-27T18:02:09Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-mgmt/pull/15779"
     },
     {
         "number": 14888,
