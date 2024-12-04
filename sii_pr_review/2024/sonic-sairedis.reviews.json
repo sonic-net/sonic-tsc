@@ -1,10 +1,171 @@
 [
     {
+        "number": 1478,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-12-02T22:00:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-sairedis/pull/1437"
+    },
+    {
         "number": 1476,
         "repo": "sonic-sairedis",
         "comment_at": "2024-11-30T18:33:49Z",
         "comment_author": "mssonicbld",
         "comment_body": "Original PR: https://github.com/sonic-net/sonic-sairedis/pull/1401"
+    },
+    {
+        "number": 1474,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-11-28T07:38:42Z",
+        "comment_author": "geans-pin",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1474,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-11-28T07:38:47Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nCommenter does not have sufficient privileges for PR 1474 in repo sonic-net/sonic-sairedis<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1474,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-11-28T11:31:51Z",
+        "comment_author": "kcudnik",
+        "comment_body": "changes like this should be cherrypicked and have the same name as original PR not \"new commit same as\""
+    },
+    {
+        "number": 1474,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-11-28T11:40:37Z",
+        "comment_author": "geans-pin",
+        "comment_body": "Any idea of the Azure Pipelines 13 ran longer than the maximum time of 60 mins ?\r\n\r\n##[error]The job running on agent Azure Pipelines 13 ran longer than the maximum time of 60 minutes. For more information, see https://go.microsoft.com/fwlink/?linkid=2077134\r\nAgent: Azure Pipelines 13\r\nStarted: Today at \u4e0b\u53482:30\r\nDuration: 1h 0m 7s\r\n\r\nJob preparation parameters\r\n9 queue time variables used\r\n[1 artifact](https://dev.azure.com/mssonic/build/_build/results?buildId=707294&view=artifacts&pathAsName=false) produced"
+    },
+    {
+        "number": 1474,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-11-28T11:54:03Z",
+        "comment_author": "geans-pin",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1474,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-11-28T11:54:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1474,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-11-28T11:54:17Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1474,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-11-28T11:54:53Z",
+        "comment_author": "kcudnik",
+        "comment_body": "```\r\n2024-11-28T06:54:18.5245096Z [       OK ] ClientServerSai.FDB_ENTRY (8 ms)\r\n2024-11-28T06:54:18.5245628Z [ RUN      ] ClientServerSai.FLOW_ENTRY\r\n2024-11-28T07:30:08.7223662Z ##[error]The Operation will be canceled. The next steps may not contain expected logs.\r\n2024-11-28T07:30:08.7401297Z ##[error]The operation was canceled.\r\n2024-11-28T07:30:08.7405562Z ##[section]Finishing: Run sonic sairedis unit tests\r\n```\r\n\r\nusually build process is les than 30 min, but here for somehow its stuck on FLOW_ENTRY,  you would nedd to download syslog from that build and analyse syslog what went wrong"
+    },
+    {
+        "number": 1474,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-11-28T15:04:19Z",
+        "comment_author": "geans-pin",
+        "comment_body": "With /azpw run, all checker pass"
+    },
+    {
+        "number": 1474,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-11-28T17:26:44Z",
+        "comment_author": "Praveen-Brcm",
+        "comment_body": "@ZhaohuiS Can you please help approve and merge the PR. All checks are passing now."
+    },
+    {
+        "number": 1474,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-12-02T21:19:36Z",
+        "comment_author": "adyeung",
+        "comment_body": "@ZhaohuiS @StormLiangMS please review and signoff if there is no further comments"
+    },
+    {
+        "number": 1474,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-12-03T04:22:07Z",
+        "comment_author": "ZhaohuiS",
+        "comment_body": "> @ZhaohuiS @StormLiangMS please review and signoff if there is no further comments\r\n\r\n@adyeung  I found same sai.profile location issue for UT script. Could you please test it and verify if it works then submit the commits? "
+    },
+    {
+        "number": 1474,
+        "repo": "sonic-sairedis",
+        "comment_at": "2024-12-03T07:13:09Z",
+        "comment_author": "geans-pin",
+        "comment_body": "> > @ZhaohuiS @StormLiangMS please review and signoff if there is no further comments\r\n> \r\n> @adyeung I found same sai.profile location issue for UT script. Could you please test it and verify if it works then submit the commits?\r\n\r\nWIth or Without the sai.profile search path change for all the MICAS platforms we have,  the function and UT works well. \r\nApply the same search path change to UT script in the new commit. Please help to verify on your specific platform with different location of sai.profile. \r\n\r\nList the Micas platforms which we have verified :\r\nM2-W6510-48V8C (TD3X7)\r\nM2-W6930-64QC (TH4)\r\nM2-W6920-32QC2X (TH3)\r\nM2-W6510-48GT4V (TD3X2)\r\nM2-W6520-24DC8QC (TD4)\r\nM2-W6510-32C (TD3X7)"
+    },
+    {
+        "number": 1474,
+        "repo": "sonic-sairedis",
+        "review_at": "2024-11-29T06:49:30Z",
+        "review_author": "ZhaohuiS"
+    },
+    {
+        "number": 1474,
+        "repo": "sonic-sairedis",
+        "review_at": "2024-11-29T09:18:14Z",
+        "review_author": "geans-pin"
+    },
+    {
+        "number": 1474,
+        "repo": "sonic-sairedis",
+        "review_at": "2024-12-02T21:48:37Z",
+        "review_author": "anilkpan"
+    },
+    {
+        "number": 1474,
+        "repo": "sonic-sairedis",
+        "review_at": "2024-12-03T04:20:10Z",
+        "review_author": "ZhaohuiS"
+    },
+    {
+        "number": 1474,
+        "repo": "sonic-sairedis",
+        "review_at": "2024-12-03T07:08:27Z",
+        "review_author": "geans-pin"
+    },
+    {
+        "number": 1474,
+        "repo": "sonic-sairedis",
+        "review_at": "2024-12-03T08:11:56Z",
+        "review_author": "ZhaohuiS"
+    },
+    {
+        "number": 1474,
+        "repo": "sonic-sairedis",
+        "review_at": "2024-12-03T08:20:10Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1474,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2024-12-03T08:11:56Z",
+        "latestReview_author": "ZhaohuiS",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1474,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2024-12-02T21:48:37Z",
+        "latestReview_author": "anilkpan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1474,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2024-12-03T08:20:10Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
     },
     {
         "number": 1471,
