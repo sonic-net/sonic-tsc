@@ -61,6 +61,13 @@
     {
         "number": 954,
         "repo": "sonic-swss-common",
+        "comment_at": "2024-12-04T02:56:32Z",
+        "comment_author": "a114j0y",
+        "comment_body": "> @qiluo-msft , @liuh-80 , @yuezhoujk , please explain motivation of such change.\r\n\r\nWe see such an exception when running the testcase in the azure pipeline:\r\n\r\nC++ exception with description \"RedisReply catches system_error: command: *3\\r\\n$6\\r\\nSCRIPT\\r\\n$4\\r\\nLOAD\\r\\n$52\\r\\nredis.call('PUBLISH', 'ROUTE_TABLE_CHANNEL@0', 'G');\\r\\n, reason: Expected to get redis type 1 got type 3, err: NON-STRING-REPLY: Input/output error: Input/output error\" thrown in SetUp().\r\n\r\nwhich indicates that the redis server fails to do SCRIPT LOAD, although it works on our end.\r\n\r\nWe checked the c++ string `m_luaPub` that is to be loaded into a redis script:\r\nm_luaPub += \"redis.call('PUBLISH', '\" + channel + \"', 'G');\";\r\n\r\nit could be successfully loaded into script on our end, but throws exception in the azure pipeline."
+    },
+    {
+        "number": 954,
+        "repo": "sonic-swss-common",
         "review_at": "2024-11-22T01:45:16Z",
         "review_author": "liuh-80"
     },
