@@ -1,5 +1,19 @@
 [
     {
+        "number": 570,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-12-05T16:38:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-platform-daemons/pull/558"
+    },
+    {
+        "number": 569,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-12-04T23:25:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-platform-daemons/pull/560"
+    },
+    {
         "number": 566,
         "repo": "sonic-platform-daemons",
         "comment_at": "2024-11-30T18:31:11Z",
@@ -101,6 +115,19 @@
     {
         "number": 560,
         "repo": "sonic-platform-daemons",
+        "review_at": "2024-12-05T15:11:00Z",
+        "review_author": "mlok-nokia"
+    },
+    {
+        "number": 560,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2024-12-05T15:11:00Z",
+        "latestReview_author": "mlok-nokia",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 560,
+        "repo": "sonic-platform-daemons",
         "latestReview_at": "2024-12-01T20:23:40Z",
         "latestReview_author": "arlakshm",
         "latestReview_state": "APPROVED"
@@ -143,6 +170,13 @@
     {
         "number": 558,
         "repo": "sonic-platform-daemons",
+        "comment_at": "2024-12-05T16:38:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-platform-daemons/pull/570"
+    },
+    {
+        "number": 558,
+        "repo": "sonic-platform-daemons",
         "review_at": "2024-11-11T21:23:54Z",
         "review_author": "gechiang"
     },
@@ -164,6 +198,121 @@
         "repo": "sonic-platform-daemons",
         "latestReview_at": "2024-11-13T04:31:30Z",
         "latestReview_author": "judyjoseph",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 555,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-10-30T18:05:26Z",
+        "comment_author": "abdosi",
+        "comment_body": "@bmridul and @mlok-nokia  can you help check this . does this need sonic change or we should push this into platform implementation."
+    },
+    {
+        "number": 555,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-11-13T07:38:41Z",
+        "comment_author": "gechiang",
+        "comment_body": "Just want to higlight that this change has a dependency of this PR mentioned by Author in the PR description:\r\n**Platform library support change https://github.com/sonic-net/sonic-buildimage/pull/20603 should be merged before this change.**"
+    },
+    {
+        "number": 555,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-11-27T18:24:38Z",
+        "comment_author": "rlhui",
+        "comment_body": "> Just want to higlight that this change has a dependency of this PR mentioned by Author in the PR description: **Platform library support change [sonic-net/sonic-buildimage#20603](https://github.com/sonic-net/sonic-buildimage/pull/20603) should be merged before this change.**\r\n\r\n\r\n> @bmridul and @mlok-nokia can you help check this . does this need sonic change or we should push this into platform implementation.\r\n\r\n@bmridul , @mlok-nokia ping again"
+    },
+    {
+        "number": 555,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-11-27T19:17:27Z",
+        "comment_author": "spilkey-cisco",
+        "comment_body": "I like this change! But at the same time, I think support should be added to include fans from all possible locations, not just add `Module`s. Similar to `Module`, fans may exist directly on the chassis, and not in a fan drawer. Can a type and handling for that be added in this PR as well?"
+    },
+    {
+        "number": 555,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-11-27T19:36:33Z",
+        "comment_author": "patrickmacarthur",
+        "comment_body": "> I like this change! But at the same time, I think support should be added to include fans from all possible locations, not just add `Module`s. Similar to `Module`, fans may exist directly on the chassis, and not in a fan drawer. Can a type and handling for that be added in this PR as well?\r\n\r\nThis already exists today; any fan in a fan drawer on the chassis is already displayed. This PR is just adding missing output for fans that are attached to modules."
+    },
+    {
+        "number": 555,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-11-27T19:44:37Z",
+        "comment_author": "spilkey-cisco",
+        "comment_body": "> > I like this change! But at the same time, I think support should be added to include fans from all possible locations, not just add `Module`s. Similar to `Module`, fans may exist directly on the chassis, and not in a fan drawer. Can a type and handling for that be added in this PR as well?\r\n> \r\n> This already exists today; any fan in a fan drawer on the chassis is already displayed. This PR is just adding missing output for fans that are attached to modules.\r\n\r\nI'm referring specifically to fans not in a physical fan drawer (adding `CHASSIS` as a type in addition to `DRAWER`). Today, vendors must configure some notion of a 'logical' fan drawer to house fans connected directly to the chassis (not in a physical fan drawer), essentially treating the chassis itself as a fan drawer. This could be further confused by a chassis that could have both physical fan drawers with fans, and fans directly connected to the chassis without fan drawers. This feels like an unnecessary limitation, but perhaps there is some reason I'm missing as to why this should not be done?"
+    },
+    {
+        "number": 555,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-11-29T04:05:07Z",
+        "comment_author": "mlok-nokia",
+        "comment_body": "> > Just want to higlight that this change has a dependency of this PR mentioned by Author in the PR description: **Platform library support change [sonic-net/sonic-buildimage#20603](https://github.com/sonic-net/sonic-buildimage/pull/20603) should be merged before this change.**\r\n> \r\n> > @bmridul and @mlok-nokia can you help check this . does this need sonic change or we should push this into platform implementation.\r\n> \r\n> @bmridul , @mlok-nokia ping again\r\n\r\nPR  \r\n\r\n> > Just want to higlight that this change has a dependency of this PR mentioned by Author in the PR description: **Platform library support change [sonic-net/sonic-buildimage#20603](https://github.com/sonic-net/sonic-buildimage/pull/20603) should be merged before this change.**\r\n> \r\n> > @bmridul and @mlok-nokia can you help check this . does this need sonic change or we should push this into platform implementation.\r\n> \r\n> @bmridul , @mlok-nokia ping again\r\n\r\nI think these 2 PR can be pushed independently.  PR20603 is just Arista's platform specified code.  "
+    },
+    {
+        "number": 555,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-12-04T19:11:26Z",
+        "comment_author": "patrickmacarthur",
+        "comment_body": "> > > I like this change! But at the same time, I think support should be added to include fans from all possible locations, not just add `Module`s. Similar to `Module`, fans may exist directly on the chassis, and not in a fan drawer. Can a type and handling for that be added in this PR as well?\r\n> > \r\n> > \r\n> > This already exists today; any fan in a fan drawer on the chassis is already displayed. This PR is just adding missing output for fans that are attached to modules.\r\n> \r\n> I'm referring specifically to fans not in a physical fan drawer (adding `CHASSIS` as a type in addition to `DRAWER`). Today, vendors must configure some notion of a 'logical' fan drawer to house fans connected directly to the chassis (not in a physical fan drawer), essentially treating the chassis itself as a fan drawer. This could be further confused by a chassis that could have both physical fan drawers with fans, and fans directly connected to the chassis without fan drawers. This feels like an unnecessary limitation, but perhaps there is some reason I'm missing as to why this should not be done?\r\n\r\nDiscussed during chassis meeting, this should be implemented in a follow-up PR, as it widens the scope to affect not just chassis but also fixed systems."
+    },
+    {
+        "number": 555,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-12-04T21:06:36Z",
+        "comment_author": "gechiang",
+        "comment_body": "@assrinivasan please help take a quick look of this PR content to see if you have any concerns especially for non-chassis platforms while @prgeor is out of office.\r\nThanks!"
+    },
+    {
+        "number": 555,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-11-13T07:26:39Z",
+        "review_author": "gechiang"
+    },
+    {
+        "number": 555,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-11-27T19:55:17Z",
+        "review_author": "spilkey-cisco"
+    },
+    {
+        "number": 555,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-12-06T01:17:29Z",
+        "review_author": "assrinivasan"
+    },
+    {
+        "number": 555,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-12-06T18:10:21Z",
+        "review_author": "rlhui"
+    },
+    {
+        "number": 555,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2024-11-27T19:55:17Z",
+        "latestReview_author": "spilkey-cisco",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 555,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2024-12-06T01:17:29Z",
+        "latestReview_author": "assrinivasan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 555,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2024-11-13T07:26:39Z",
+        "latestReview_author": "gechiang",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 555,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2024-12-06T18:10:21Z",
+        "latestReview_author": "rlhui",
         "latestReview_state": "APPROVED"
     },
     {
