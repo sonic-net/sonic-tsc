@@ -3594,6 +3594,183 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 1997,
+        "repo": "sai",
+        "comment_at": "2024-04-17T18:23:16Z",
+        "comment_author": "kcudnik",
+        "comment_body": "you will need to add exception for SAI_PORT_STAT_END in meta/ancestry.pl at line 180"
+    },
+    {
+        "number": 1997,
+        "repo": "sai",
+        "comment_at": "2024-04-17T18:51:43Z",
+        "comment_author": "rajendrat",
+        "comment_body": "> you will need to add exception for SAI_PORT_STAT_END in meta/ancestry.pl at line 180\r\n\r\nThanks @kcudnik. Created exception for  SAI_PORT_STAT_END, still i see the meta check failure. Any input?"
+    },
+    {
+        "number": 1997,
+        "repo": "sai",
+        "comment_at": "2024-04-18T07:21:01Z",
+        "comment_author": "kcudnik",
+        "comment_body": "you need to squash your commits"
+    },
+    {
+        "number": 1997,
+        "repo": "sai",
+        "comment_at": "2024-04-20T07:23:02Z",
+        "comment_author": "rajendrat",
+        "comment_body": "> you need to squash your commits\r\n\r\n@kcudnik : Even after squash I see the issue. is there any skip required in CheckHash ?"
+    },
+    {
+        "number": 1997,
+        "repo": "sai",
+        "comment_at": "2024-04-20T08:13:45Z",
+        "comment_author": "kcudnik",
+        "comment_body": "please read pipeline errors:\r\n```\r\nUpdated 71 paths from 1b10e39\r\nChecking for possible enum values shift (current branch vs origin/master) ...\r\nERROR: value of SAI_PORT_STAT_DOT3_CONTROL_IN_UNKNOWN_OPCODES differ: ../inc//saiport.h:2595 vs temp/inc//saiport.h:2583 => (178 != 172)\r\nERROR: value of SAI_PORT_STAT_DOT3_STATS_ALIGNMENT_ERRORS differ: ../inc//saiport.h:2569 vs temp/inc//saiport.h:2557 => (165 != 159)\r\nERROR: value of SAI_PORT_STAT_DOT3_STATS_CARRIER_SENSE_ERRORS differ: ../inc//saiport.h:2587 vs temp/inc//saiport.h:2575 => (174 != 168)\r\nERROR: value of SAI_PORT_STAT_DOT3_STATS_DEFERRED_TRANSMISSIONS differ: ../inc//saiport.h:2579 vs temp/inc//saiport.h:2567 => (170 != 164)\r\nERROR: value of SAI_PORT_STAT_DOT3_STATS_EXCESSIVE_COLLISIONS differ: ../inc//saiport.h:2583 vs temp/inc//saiport.h:2571 => (172 != 166)\r\nERROR: value of SAI_PORT_STAT_DOT3_STATS_FCS_ERRORS differ: ../inc//saiport.h:2571 vs temp/inc//saiport.h:2559 => (166 != 160)\r\nERROR: value of SAI_PORT_STAT_DOT3_STATS_FRAME_TOO_LONGS differ: ../inc//saiport.h:2589 vs temp/inc//saiport.h:2577 => (175 != 169)\r\nERROR: value of SAI_PORT_STAT_DOT3_STATS_INTERNAL_MAC_RECEIVE_ERRORS differ: ../inc//saiport.h:2591 vs temp/inc//saiport.h:2579 => (176 != 170)\r\nERROR: value of SAI_PORT_STAT_DOT3_STATS_INTERNAL_MAC_TRANSMIT_ERRORS differ: ../inc//saiport.h:2585 vs temp/inc//saiport.h:2573 => (173 != 167)\r\nERROR: value of SAI_PORT_STAT_DOT3_STATS_LATE_COLLISIONS differ: ../inc//saiport.h:2581 vs temp/inc//saiport.h:2569 => (171 != 165)\r\nERROR: value of SAI_PORT_STAT_DOT3_STATS_MULTIPLE_COLLISION_FRAMES differ: ../inc//saiport.h:2575 vs temp/inc//saiport.h:2563 => (168 != 162)\r\nERROR: value of SAI_PORT_STAT_DOT3_STATS_SINGLE_COLLISION_FRAMES differ: ../inc//saiport.h:2573 vs temp/inc//saiport.h:2561 => (167 != 161)\r\n``` \r\nyou shifted enum values"
+    },
+    {
+        "number": 1997,
+        "repo": "sai",
+        "comment_at": "2024-04-23T08:12:54Z",
+        "comment_author": "kcudnik",
+        "comment_body": "```\r\nChecking for possible enum values shift (current branch vs origin/master) ...\r\nERROR: value of SAI_PORT_STAT_END differ: ../inc//saiport.h:2726 vs temp/inc//saiport.h:2714 => (12294 != 12288)\r\nenum SAI_PORT_STAT_ETHER_IN_PKTS_1519_TO_2500_OCTETS only defined in ../inc//saiport.h:2714\r\nenum SAI_PORT_STAT_ETHER_IN_PKTS_2501_TO_9000_OCTETS only defined in ../inc//saiport.h:2716\r\nenum SAI_PORT_STAT_ETHER_IN_PKTS_9001_TO_16383_OCTETS only defined in ../inc//saiport.h:2718\r\nenum SAI_PORT_STAT_ETHER_OUT_PKTS_1519_TO_2500_OCTETS only defined in ../inc//saiport.h:2720\r\nenum SAI_PORT_STAT_ETHER_OUT_PKTS_2501_TO_9000_OCTETS only defined in ../inc//saiport.h:2722\r\nenum SAI_PORT_STAT_ETHER_OUT_PKTS_9001_TO_16383_OCTETS only defined in ../inc//saiport.h:2724\r\nERROR: value of SAI_PORT_STAT_END differ: temp/inc//saiport.h:2714 vs ../inc//saiport.h:2726 => (12288 != 12294)\r\nERROR: please correct all 2 error(s) before continue\r\n```\r\n\r\nyou will need to add exception for this error,  you will need to add excetpion for checkheaders.pl on line 196, and that chance in ancestry.pl is not needed"
+    },
+    {
+        "number": 1997,
+        "repo": "sai",
+        "comment_at": "2024-04-23T17:02:56Z",
+        "comment_author": "kcudnik",
+        "comment_body": "i think you will also need to rebase to master"
+    },
+    {
+        "number": 1997,
+        "repo": "sai",
+        "comment_at": "2024-04-23T18:27:17Z",
+        "comment_author": "rajendrat",
+        "comment_body": "> i think you will also need to rebase to master\r\n\r\n@kcudnik : Tried rebase to master, still seeing the same error. \r\n\r\n2024-04-23T16:50:46.5235965Z ERROR: FATAL: sai_attribute_value_t members were removed on commit 636fdcd, NOT ALLOWED!\r\n"
+    },
+    {
+        "number": 1997,
+        "repo": "sai",
+        "comment_at": "2024-04-23T18:41:42Z",
+        "comment_author": "kcudnik",
+        "comment_body": "no you didn't:\r\n\r\n```\r\n* 636fdcd (1997) Adding additional Ether pkts stats ranges for Cisco Platforms\r\n| * e329bf2 (origin/master, origin/HEAD) [meta] Fix dangling pointer warning for gcc 12 (#1996)\r\n| * 2587c3b (tag: v1.14.0, origin/v1.14) SAI Proposal for PoE Support (#1977)\r\n|/  \r\n* ca6b08f Update sai version to v1.14.0 (#1991)\r\n```"
+    },
+    {
+        "number": 1997,
+        "repo": "sai",
+        "comment_at": "2024-04-24T16:15:38Z",
+        "comment_author": "rajendrat",
+        "comment_body": "@kcudnik , @prgeor : All checks passed, could you please merge this PR."
+    },
+    {
+        "number": 1997,
+        "repo": "sai",
+        "comment_at": "2024-04-29T16:27:01Z",
+        "comment_author": "lguohan",
+        "comment_body": "i suggest to have a RO attribute defined to indicate which range the asic support. for example, the traditional range, or this new packet size range.\r\n\r\nwe can say the RO default value is triditional range. if they asic support new range, then when application queries, it will return the range_2 for example. this allows application to write code with capability."
+    },
+    {
+        "number": 1997,
+        "repo": "sai",
+        "comment_at": "2024-09-19T22:28:17Z",
+        "comment_author": "rlhui",
+        "comment_body": "@rajendrat  please resolve conflicts."
+    },
+    {
+        "number": 1997,
+        "repo": "sai",
+        "comment_at": "2024-09-19T22:39:29Z",
+        "comment_author": "rlhui",
+        "comment_body": "> i suggest to have a RO attribute defined to indicate which range the asic support. for example, the traditional range, or this new packet size range.\r\n> \r\n> we can say the RO default value is triditional range. if they asic support new range, then when application queries, it will return the range_2 for example. this allows application to write code with capability.\r\n\r\n@rajendrat any update on this"
+    },
+    {
+        "number": 1997,
+        "repo": "sai",
+        "comment_at": "2024-10-02T12:36:54Z",
+        "comment_author": "kcudnik",
+        "comment_body": "you will need to rebase on master, resolve conflicts and squash"
+    },
+    {
+        "number": 1997,
+        "repo": "sai",
+        "comment_at": "2024-11-27T10:10:05Z",
+        "comment_author": "kcudnik",
+        "comment_body": "Squash and push force "
+    },
+    {
+        "number": 1997,
+        "repo": "sai",
+        "comment_at": "2024-12-03T22:46:52Z",
+        "comment_author": "rajendrat",
+        "comment_body": "@kcudnik : could you please help addressing this error.\r\n\r\n##[error]Bash exited with code '2'.\r\nFinishing: Metadata check\r\nhttps://github.com/opencomputeproject/SAI/pull/1997/checks?check_run_id=33880016163\r\n"
+    },
+    {
+        "number": 1997,
+        "repo": "sai",
+        "comment_at": "2024-12-04T09:23:42Z",
+        "comment_author": "kcudnik",
+        "comment_body": "> @kcudnik : could you please help addressing this error.\r\n> \r\n> ##[error]Bash exited with code '2'. Finishing: Metadata check https://github.com/opencomputeproject/SAI/pull/1997/checks?check_run_id=33880016163\r\n\r\n```\r\nSkipping cap file sample.cap\r\nWARNING: header contains two empty lines one after another saiport.h 2638\r\n```"
+    },
+    {
+        "number": 1997,
+        "repo": "sai",
+        "comment_at": "2024-12-07T06:17:18Z",
+        "comment_author": "rajendrat",
+        "comment_body": "> > @kcudnik : could you please help addressing this error.\r\n> > ##[error]Bash exited with code '2'. Finishing: Metadata check https://github.com/opencomputeproject/SAI/pull/1997/checks?check_run_id=33880016163\r\n> \r\n> ```\r\n> Skipping cap file sample.cap\r\n> WARNING: header contains two empty lines one after another saiport.h 2638\r\n> ```\r\n\r\nThanks @kcudnik , fixed it"
+    },
+    {
+        "number": 1997,
+        "repo": "sai",
+        "comment_at": "2024-12-08T19:53:59Z",
+        "comment_author": "rajendrat",
+        "comment_body": "@kcudnik , @lguohan  : Could you please merge this PR."
+    },
+    {
+        "number": 1997,
+        "repo": "sai",
+        "review_at": "2024-04-18T18:17:53Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 1997,
+        "repo": "sai",
+        "review_at": "2024-04-18T18:18:30Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 1997,
+        "repo": "sai",
+        "review_at": "2024-04-23T08:09:34Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1997,
+        "repo": "sai",
+        "review_at": "2024-10-25T10:31:47Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1997,
+        "repo": "sai",
+        "review_at": "2024-12-09T08:41:23Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1997,
+        "repo": "sai",
+        "latestReview_at": "2024-04-18T18:18:30Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1997,
+        "repo": "sai",
+        "latestReview_at": "2024-12-09T08:41:23Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 1994,
         "repo": "sai",
         "review_at": "2024-04-16T20:38:45Z",
