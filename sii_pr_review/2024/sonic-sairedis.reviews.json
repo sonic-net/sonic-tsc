@@ -210,6 +210,13 @@
     {
         "number": 1468,
         "repo": "sonic-sairedis",
+        "comment_at": "2024-12-09T23:28:49Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "@Junchao-Mellanox This PR caused failure in PR test in submodule update. https://github.com/sonic-net/sonic-buildimage/pull/21001\r\nThe error message points to the code changed in this PR. Can you take a look?\r\n```\r\nTestSyncd.cpp:16:23: error: 'empty' is not a type\r\n     MOCK_METHOD(bool, empty, (), (override));\r\n                       ^~~~~\r\nTestSyncd.cpp:16:30: error: expected identifier before '(' token\r\n     MOCK_METHOD(bool, empty, (), (override));\r\n                              ^\r\nTestSyncd.cpp:16:34: error: expected identifier before '(' token\r\n     MOCK_METHOD(bool, empty, (), (override));\r\n                                  ^\r\nTestSyncd.cpp:16:44: error: ISO C++ forbids declaration of 'MOCK_METHOD' with no type [-fpermissive]\r\n     MOCK_METHOD(bool, empty, (), (override));\r\n                                            ^\r\nTestSyncd.cpp:17:23: error: 'pop' is not a type\r\n     MOCK_METHOD(void, pop, (swss::KeyOpFieldsValuesTuple& kco, bool initViewMode), (override));\r\n                       ^~~\r\nTestSyncd.cpp:17:28: error: expected identifier before '(' token\r\n     MOCK_METHOD(void, pop, (swss::KeyOpFieldsValuesTuple& kco, bool initViewMode), (override));\r\n                            ^\r\nTestSyncd.cpp:17:84: error: expected identifier before '(' token\r\n     MOCK_METHOD(void, pop, (swss::KeyOpFieldsValuesTuple& kco, bool initViewMode), (override));\r\n                                                                                    ^\r\nTestSyncd.cpp:17:94: error: ISO C++ forbids declaration of 'MOCK_METHOD' with no type [-fpermissive]\r\n     MOCK_METHOD(void, pop, (swss::KeyOpFieldsValuesTuple& kco, bool initViewMode), (override));\r\n                                                                                              ^\r\nTestSyncd.cpp:17:17: error: invalid use of type 'void' in parameter declaration\r\n     MOCK_METHOD(void, pop, (swss::KeyOpFieldsValuesTuple& kco, bool initViewMode), (override));\r\n                 ^~~~\r\n```"
+    },
+    {
+        "number": 1468,
+        "repo": "sonic-sairedis",
         "review_at": "2024-11-21T06:58:36Z",
         "review_author": "kcudnik"
     },
