@@ -1,5 +1,45 @@
 [
     {
+        "number": 3670,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-12-10T22:24:20Z",
+        "comment_author": "arista-hpandya",
+        "comment_body": "Can we please backport this change to 202405?"
+    },
+    {
+        "number": 3670,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-12-11T00:09:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202411: https://github.com/sonic-net/sonic-utilities/pull/3673"
+    },
+    {
+        "number": 3670,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-12-11T00:09:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-utilities/pull/3674"
+    },
+    {
+        "number": 3670,
+        "repo": "sonic-utilities",
+        "review_at": "2024-12-10T04:52:08Z",
+        "review_author": "xincunli-sonic"
+    },
+    {
+        "number": 3670,
+        "repo": "sonic-utilities",
+        "review_at": "2024-12-10T06:21:33Z",
+        "review_author": "xincunli-sonic"
+    },
+    {
+        "number": 3670,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-12-10T06:21:33Z",
+        "latestReview_author": "xincunli-sonic",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 3664,
         "repo": "sonic-utilities",
         "review_at": "2024-12-07T02:16:44Z",
@@ -274,6 +314,20 @@
         "comment_at": "2024-12-02T20:34:39Z",
         "comment_author": "mlok-nokia",
         "comment_body": "@arlakshm and @judyjoseph This PR filters out a list of commands which are not applicable to Supervisor for \"show techsupport\".  please review it."
+    },
+    {
+        "number": 3646,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-12-10T01:02:00Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "@mlok-nokia @arlakshm Can you confirm this change will not break single ASIC platform?"
+    },
+    {
+        "number": 3646,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-12-10T03:11:08Z",
+        "comment_author": "mlok-nokia",
+        "comment_body": "> @mlok-nokia @arlakshm Can you confirm this change will not break single ASIC platform?\r\n\r\nThis change has nothing to do with single/multi ASIC. It will not break  single AISC platform."
     },
     {
         "number": 3646,
@@ -2120,6 +2174,27 @@
         "comment_at": "2024-11-30T18:21:59Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-utilities/pull/3635"
+    },
+    {
+        "number": 3554,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-12-10T09:05:57Z",
+        "comment_author": "auspham",
+        "comment_body": "Hi @vmittal-msft @arista-hpandya, we suspect that this PR could potentially led to the issue mentioned here:\r\n\r\nhttps://github.com/sonic-net/sonic-mgmt/pull/15949\r\n\r\nCould you please advise if this is the expected fix. Thanks"
+    },
+    {
+        "number": 3554,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-12-10T18:53:57Z",
+        "comment_author": "arista-hpandya",
+        "comment_body": "@auspham This PR was built on the philosophy that when no namespace is mentioned, all namespaces are considered. This behaviour also sustains if you use `sudo ip netns` command. Note that the later is an old way of selecting namespaces and we wish to move away from it.\r\n\r\nFor clarity:\r\nCMD: `sudo ip netns exec asic1 show queue counters Ethernet128`\r\nOutput:\r\n```\r\nFor namespace asic0:\r\n       Port    TxQ    Counter/pkts    Counter/bytes    Drop/pkts    Drop/bytes\r\n-----------  -----  --------------  ---------------  -----------  ------------\r\nEthernet128    UC0               0                0            0             0\r\nEthernet128    UC1               0                0            0             0\r\nEthernet128    UC2               0                0            0             0\r\nEthernet128    UC3               0                0            0             0\r\nEthernet128    UC4               0                0            0             0\r\nEthernet128    UC5               0                0            0             0\r\nEthernet128    UC6               0                0            0             0\r\nEthernet128    UC7           96670         10071667            0             0\r\nEthernet128    MC8               0                0            0             0\r\nEthernet128    MC9               0                0            0             0\r\nEthernet128   MC10               0                0            0             0\r\nEthernet128   MC11               0                0            0             0\r\nEthernet128   MC12               0                0            0             0\r\nEthernet128   MC13               0                0            0             0\r\nEthernet128   MC14               0                0            0             0\r\nEthernet128   MC15               0                0            0             0\r\n\r\nPort doesn't exist! Ethernet128\r\n```\r\n\r\nNote above how we got the expected output on asic 0 but since the interface was absent on asic1 it raised an error. Additionally the sudo ip netns command to choose asic1 was ignored because we no longer support it.\r\n\r\nFor completeness, the ideal way to. use this command would be:\r\nCMD: `show queue counters Ethernet128 -n asic0`\r\nOutput:\r\n```\r\nFor namespace asic0:\r\n       Port    TxQ    Counter/pkts    Counter/bytes    Drop/pkts    Drop/bytes\r\n-----------  -----  --------------  ---------------  -----------  ------------\r\nEthernet128    UC0               0                0            0             0\r\nEthernet128    UC1               0                0            0             0\r\nEthernet128    UC2               0                0            0             0\r\nEthernet128    UC3               0                0            0             0\r\nEthernet128    UC4               0                0            0             0\r\nEthernet128    UC5               0                0            0             0\r\nEthernet128    UC6               0                0            0             0\r\nEthernet128    UC7           96714         10075797            0             0\r\nEthernet128    MC8               0                0            0             0\r\nEthernet128    MC9               0                0            0             0\r\nEthernet128   MC10               0                0            0             0\r\nEthernet128   MC11               0                0            0             0\r\nEthernet128   MC12               0                0            0             0\r\nEthernet128   MC13               0                0            0             0\r\nEthernet128   MC14               0                0            0             0\r\nEthernet128   MC15               0                0            0             0\r\n```\r\n\r\nCMD: `show queue counters Ethernet128 -n asic1`\r\nOutput:\r\n```\r\nPort doesn't exist! Ethernet128\r\n```"
+    },
+    {
+        "number": 3554,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-12-10T21:31:41Z",
+        "comment_author": "auspham",
+        "comment_body": "Thanks for the clear and detail response @arista-hpandya . @yejianquan for viz"
     },
     {
         "number": 3554,

@@ -228,6 +228,492 @@
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
     },
     {
+        "number": 2089,
+        "repo": "sai",
+        "comment_at": "2024-10-29T11:00:39Z",
+        "comment_author": "Pterosaur",
+        "comment_body": "> SAI already supports streaming telemetry at sub-second intervals. Please refer: https://github.com/opencomputeproject/SAI/pull/1670/files\r\n> \r\n> SAI also supports sending packets to local collector over GENETLINK. Please refer: https://github.com/opencomputeproject/SAI/pull/1986/files\r\n> \r\n> 1. Title\r\n>    The current PR is adding some enhancements to the already supported TAM streaming telemetry to local collector. The title is misleading, it is incorrectly suggesting that  streaming telemetry is so far not supported in SAI. Maybe rename to \"TAM Streaming Telemetry Count mode\".\r\n> 2. List of enhancements\r\n>    It would be good to clearly call out the new SAI attributes and enums being defined, their meaning and why they are needed.\r\n>    The new attributes/enums and APIs are limited to just the below functionality but this is not clearly called out at the beginning of the document like other SAI specs.\r\n> \r\n> * Bulking based on count\r\n> * SAI vendor to publish IPFIX templates\r\n> * Switch TAM Cache (motivation and semantics-FIFO/LIFO are unclear)\r\n> * Streaming Stats Capability query\r\n\r\nMake sense, Thanks for your suggestion. I will change it."
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "comment_at": "2024-12-06T15:39:50Z",
+        "comment_author": "kcudnik",
+        "comment_body": "please fix build"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "comment_at": "2024-12-06T16:01:13Z",
+        "comment_author": "Pterosaur",
+        "comment_body": "> please fix build\r\n\r\nHi @kcudnik , it was failed on the ancestry check. I feel the git graph check has an issue, it shouldn't check the conflict on these commits belong to this PR but check the conflict between PR with master branch.\r\nOtherwise, if I want to fix the ancestry check, I have to rebase the commit history.\r\n\r\n```\r\n./checkancestry.sh\r\nancestry graph\r\n*   74f9cf8 Merge 4a210e373be4db0c1e7a980150000509ceb4852d into ad20062eb1f2a24aa79983422e83b921b49c011f\r\n|\\  \r\n| * 4a210e3 Change the default value for chunk count\r\n| * c449e5d Merge branch 'master' into ipfix_stream_telemetry\r\n|/  \r\n* ad20062 Introduce new extended port oper status notification (#2087)\r\ngit rev list from 5f75d99 to HEAD\r\ngit checkout work tree commits: 5f75d99 91ef792 97c8ed2 ad20062 c449e5d 4a210e3 74f9cf8\r\nloaded history from ancestry.5f75d99.history\r\n```"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "comment_at": "2024-12-06T16:13:46Z",
+        "comment_author": "kcudnik",
+        "comment_body": "There is no easy way to do this you need to squash your commits and force push"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "comment_at": "2024-12-10T00:45:56Z",
+        "comment_author": "Pterosaur",
+        "comment_body": "@kcudnik  Could you please help to merge this PR?"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-10-22T17:07:45Z",
+        "review_author": "r12f"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-10-22T17:12:57Z",
+        "review_author": "r12f"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-10-23T02:13:02Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-10-23T04:00:58Z",
+        "review_author": "JaiOCP"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-10-23T11:22:21Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-10-23T17:32:12Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-10-23T17:35:46Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-10-24T15:06:08Z",
+        "review_author": "r12f"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-10-28T17:01:10Z",
+        "review_author": "rck-innovium"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-10-28T18:30:35Z",
+        "review_author": "rck-innovium"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-10-29T10:15:37Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-10-29T10:17:04Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-10-29T10:36:07Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-10-29T10:55:18Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-10-29T11:11:24Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-10-30T02:32:56Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-10-30T02:35:13Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-11-04T08:39:48Z",
+        "review_author": "rck-innovium"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-11-04T08:42:43Z",
+        "review_author": "rck-innovium"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-11-05T02:49:03Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-11-05T02:51:39Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-11-05T20:07:21Z",
+        "review_author": "rck-innovium"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-11-06T02:24:08Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-11-06T02:39:38Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-11-06T07:26:56Z",
+        "review_author": "rck-innovium"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-11-07T16:48:30Z",
+        "review_author": "rajkumar38"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-11-08T03:32:27Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-11-12T16:59:45Z",
+        "review_author": "rajkumar38"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-11-13T03:09:10Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-11-13T05:16:48Z",
+        "review_author": "rajkumar38"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-11-13T07:31:21Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-11-25T18:56:55Z",
+        "review_author": "r12f"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-11-26T02:03:47Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-11-26T05:51:12Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-11-26T05:51:15Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-11-26T05:51:19Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-12-04T20:31:56Z",
+        "review_author": "JaiOCP"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-12-05T08:49:23Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-12-05T16:37:29Z",
+        "review_author": "JaiOCP"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-12-06T04:42:24Z",
+        "review_author": "bandaru-viswanath"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-12-06T05:11:38Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-12-06T05:13:30Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-12-06T05:13:41Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-12-06T05:22:00Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-12-06T08:43:44Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-12-06T08:44:16Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-12-06T13:57:00Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-12-06T15:36:04Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-12-06T16:02:23Z",
+        "review_author": "bandaru-viswanath"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-12-06T16:02:31Z",
+        "review_author": "bandaru-viswanath"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-12-06T16:03:24Z",
+        "review_author": "bandaru-viswanath"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-12-06T16:03:32Z",
+        "review_author": "bandaru-viswanath"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-12-06T16:22:35Z",
+        "review_author": "r12f"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-12-06T16:44:20Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-12-06T16:59:57Z",
+        "review_author": "bandaru-viswanath"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-12-06T17:07:41Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-12-06T17:12:22Z",
+        "review_author": "bandaru-viswanath"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-12-06T17:40:55Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-12-06T18:06:18Z",
+        "review_author": "bandaru-viswanath"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-12-06T19:20:40Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-12-07T04:43:50Z",
+        "review_author": "bandaru-viswanath"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-12-07T04:44:09Z",
+        "review_author": "bandaru-viswanath"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-12-08T18:09:40Z",
+        "review_author": "ygdalnaouri"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-12-09T03:23:42Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-12-09T04:50:40Z",
+        "review_author": "r12f"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-12-09T08:45:24Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "review_at": "2024-12-10T09:36:20Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "latestReview_at": "2024-12-08T18:09:40Z",
+        "latestReview_author": "ygdalnaouri",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "latestReview_at": "2024-11-13T05:16:48Z",
+        "latestReview_author": "rajkumar38",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "latestReview_at": "2024-11-06T07:26:56Z",
+        "latestReview_author": "rck-innovium",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "latestReview_at": "2024-12-05T16:37:29Z",
+        "latestReview_author": "JaiOCP",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "latestReview_at": "2024-12-07T04:44:09Z",
+        "latestReview_author": "bandaru-viswanath",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "latestReview_at": "2024-12-10T09:36:20Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2089,
+        "repo": "sai",
+        "latestReview_at": "2024-12-09T04:50:40Z",
+        "latestReview_author": "r12f",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 2088,
         "repo": "sai",
         "comment_at": "2024-10-10T09:24:11Z",
