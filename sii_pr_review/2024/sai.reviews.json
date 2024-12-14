@@ -13,6 +13,20 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 2114,
+        "repo": "sai",
+        "comment_at": "2024-11-22T13:43:27Z",
+        "comment_author": "kcudnik",
+        "comment_body": "Unfortunately this is enum breaking change, fortunately sonic is not using this attribute, and in vendor case, if they have any custom traps, it's easy to workaround it in internal headers:\r\n\r\n```c\r\n#define SAI_HOSTIF_USER_DEFINED_TRAP_TYPE_CUSTOM_RANGE_BASE_OLD (0x1000)\r\n\r\nif (trapid >= SAI_HOSTIF_USER_DEFINED_TRAP_TYPE_CUSTOM_RANGE_BASE_OLD &&\r\n    trapid <  SAI_HOSTIF_USER_DEFINED_TRAP_TYPE_CUSTOM_RANGE_BASE)\r\n{\r\n    trapid = trapid - SAI_HOSTIF_USER_DEFINED_TRAP_TYPE_CUSTOM_RANGE_BASE_OLD +\r\n                      SAI_HOSTIF_USER_DEFINED_TRAP_TYPE_CUSTOM_RANGE_BASE;\r\n}\r\n```\r\n\r\nif this will help, we can introduce depreciated enum in SAI with previous values for convenience"
+    },
+    {
+        "number": 2114,
+        "repo": "sai",
+        "comment_at": "2024-11-22T14:15:04Z",
+        "comment_author": "kcudnik",
+        "comment_body": "FYI @JaiOCP @tushar-ty @marian-pritsak @itaibaz please join discussion if you have any comments"
+    },
+    {
         "number": 2105,
         "repo": "sai",
         "comment_at": "2024-11-15T13:27:55Z",
