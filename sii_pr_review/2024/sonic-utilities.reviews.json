@@ -1,5 +1,67 @@
 [
     {
+        "number": 3678,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-12-12T06:25:07Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3678,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-12-12T06:25:19Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3678,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-12-12T23:49:49Z",
+        "comment_author": "deepak-singhal0408",
+        "comment_body": "Sonic-buildimage PR checker Passes now.. https://github.com/sonic-net/sonic-buildimage/pull/21145"
+    },
+    {
+        "number": 3678,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-12-12T23:50:23Z",
+        "comment_author": "deepak-singhal0408",
+        "comment_body": "MSFT ADO: 30169130"
+    },
+    {
+        "number": 3678,
+        "repo": "sonic-utilities",
+        "review_at": "2024-12-13T00:06:31Z",
+        "review_author": "arlakshm"
+    },
+    {
+        "number": 3678,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-12-13T00:06:31Z",
+        "latestReview_author": "arlakshm",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3677,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-12-12T01:06:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3677,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-12-12T01:06:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-utilities/pull/3515"
+    },
+    {
+        "number": 3677,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-12-12T01:06:27Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
         "number": 3674,
         "repo": "sonic-utilities",
         "comment_at": "2024-12-11T00:09:13Z",
@@ -12,6 +74,79 @@
         "comment_at": "2024-12-11T00:09:11Z",
         "comment_author": "mssonicbld",
         "comment_body": "Original PR: https://github.com/sonic-net/sonic-utilities/pull/3670"
+    },
+    {
+        "number": 3671,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-12-10T22:25:01Z",
+        "comment_author": "saksarav-nokia",
+        "comment_body": "@rlhui @vmittal-msft @arista-nwolfe @abdosi  for viz"
+    },
+    {
+        "number": 3671,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-12-11T17:39:37Z",
+        "comment_author": "arista-hpandya",
+        "comment_body": "@saksarav-nokia Can you elaborate on the usecase of namespace/asic specific clear commands? I recall when I was working on adding multi-asic support to queuestat we decided to go forward with the goal that a clear would \"clear all namespaces\"."
+    },
+    {
+        "number": 3671,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-12-11T20:54:42Z",
+        "comment_author": "saksarav-nokia",
+        "comment_body": "> @saksarav-nokia Can you elaborate on the usecase of namespace/asic specific clear commands? I recall when I was working on adding multi-asic support to queuestat we decided to go forward with the goal that a clear would \"clear all namespaces\".\r\n\r\n@arista-hpandya , queuestat is called for the following 2 scenarios for sonic-clear queuecounter.\r\n  1) without --voq:  - In this case, the egress queue corresponding to front panel ports in the respective asic is cached when QueueStatWrapper calls QueueStat for each asic. In this case asic0 has only asic0's front panel ports and asic1 has only asic1's front panel ports\r\n\r\n2) with --voq:  - In this case, the voq counters corresponding to system ports in the respective asic is cached when QueueStatWrapper calls QueueStat for each asic. But as you know, each asic has all the system ports of entire chassis (For J2C+, per asic in each IMM, there are system port for 18 front panel ports, 1 cpu port, 2 recycle ports) . That means asic0 and asic1 has the same set of system ports . So when QueueStat is called for asic0, the cache files are created for all system ports and when the  QueueStat is called for asic1, the cache files are created with exact same name which overwrites the cache files created for asic0. So when you show after clear, the show queue counter --voq doesn't work as expected."
+    },
+    {
+        "number": 3671,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-12-12T14:05:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3671,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-12-12T14:06:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3671,
+        "repo": "sonic-utilities",
+        "review_at": "2024-12-11T18:14:57Z",
+        "review_author": "arista-hpandya"
+    },
+    {
+        "number": 3671,
+        "repo": "sonic-utilities",
+        "review_at": "2024-12-11T21:03:42Z",
+        "review_author": "saksarav-nokia"
+    },
+    {
+        "number": 3671,
+        "repo": "sonic-utilities",
+        "review_at": "2024-12-11T21:07:35Z",
+        "review_author": "saksarav-nokia"
+    },
+    {
+        "number": 3671,
+        "repo": "sonic-utilities",
+        "review_at": "2024-12-11T21:51:48Z",
+        "review_author": "arlakshm"
+    },
+    {
+        "number": 3671,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-12-11T18:14:57Z",
+        "latestReview_author": "arista-hpandya",
+        "latestReview_state": "CHANGES_REQUESTED"
+    },
+    {
+        "number": 3671,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-12-11T21:51:48Z",
+        "latestReview_author": "arlakshm",
+        "latestReview_state": "APPROVED"
     },
     {
         "number": 3670,
@@ -469,6 +604,13 @@
     {
         "number": 3646,
         "repo": "sonic-utilities",
+        "comment_at": "2024-12-13T14:34:20Z",
+        "comment_author": "mlok-nokia",
+        "comment_body": "> > > @mlok-nokia @arlakshm Can you confirm this change will not break single ASIC platform?\r\n> > \r\n> > \r\n> > This change has nothing to do with single/multi ASIC. It will not break single AISC platform.\r\n> \r\n> There is some generic change in this PR, which is not related to supervisor card. Can you verify the `generate_dump` command on a single ASIC platform?\r\n\r\nThe generic change is for fix the common error report when output string is empty.  The change adds check if the output is empty before further action.  Changes applies to both Single and Multi Asic.  And one of the fix is command line syntax issue\r\n"
+    },
+    {
+        "number": 3646,
+        "repo": "sonic-utilities",
         "review_at": "2024-12-03T02:58:27Z",
         "review_author": "arlakshm"
     },
@@ -607,6 +749,146 @@
         "comment_at": "2024-11-20T19:26:31Z",
         "comment_author": "mssonicbld",
         "comment_body": "Original PR: https://github.com/sonic-net/sonic-utilities/pull/3058"
+    },
+    {
+        "number": 3623,
+        "repo": "sonic-utilities",
+        "review_at": "2024-11-20T17:02:05Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 3623,
+        "repo": "sonic-utilities",
+        "review_at": "2024-11-20T17:54:28Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 3623,
+        "repo": "sonic-utilities",
+        "review_at": "2024-11-20T17:56:58Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 3623,
+        "repo": "sonic-utilities",
+        "review_at": "2024-11-20T22:41:48Z",
+        "review_author": "qinchuanares"
+    },
+    {
+        "number": 3623,
+        "repo": "sonic-utilities",
+        "review_at": "2024-11-20T22:42:28Z",
+        "review_author": "qinchuanares"
+    },
+    {
+        "number": 3623,
+        "repo": "sonic-utilities",
+        "review_at": "2024-11-20T22:43:29Z",
+        "review_author": "qinchuanares"
+    },
+    {
+        "number": 3623,
+        "repo": "sonic-utilities",
+        "review_at": "2024-11-20T22:43:57Z",
+        "review_author": "qinchuanares"
+    },
+    {
+        "number": 3623,
+        "repo": "sonic-utilities",
+        "review_at": "2024-11-20T22:44:19Z",
+        "review_author": "qinchuanares"
+    },
+    {
+        "number": 3623,
+        "repo": "sonic-utilities",
+        "review_at": "2024-11-20T22:44:33Z",
+        "review_author": "qinchuanares"
+    },
+    {
+        "number": 3623,
+        "repo": "sonic-utilities",
+        "review_at": "2024-11-21T21:15:15Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 3623,
+        "repo": "sonic-utilities",
+        "review_at": "2024-11-21T21:15:26Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 3623,
+        "repo": "sonic-utilities",
+        "review_at": "2024-11-21T23:41:13Z",
+        "review_author": "qinchuanares"
+    },
+    {
+        "number": 3623,
+        "repo": "sonic-utilities",
+        "review_at": "2024-11-21T23:42:17Z",
+        "review_author": "qinchuanares"
+    },
+    {
+        "number": 3623,
+        "repo": "sonic-utilities",
+        "review_at": "2024-12-02T04:13:34Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 3623,
+        "repo": "sonic-utilities",
+        "review_at": "2024-12-02T04:15:47Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 3623,
+        "repo": "sonic-utilities",
+        "review_at": "2024-12-02T14:50:44Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 3623,
+        "repo": "sonic-utilities",
+        "review_at": "2024-12-02T14:50:57Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 3623,
+        "repo": "sonic-utilities",
+        "review_at": "2024-12-02T14:51:03Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 3623,
+        "repo": "sonic-utilities",
+        "review_at": "2024-12-02T14:51:08Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 3623,
+        "repo": "sonic-utilities",
+        "review_at": "2024-12-02T14:58:27Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 3623,
+        "repo": "sonic-utilities",
+        "review_at": "2024-12-12T13:10:59Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 3623,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-11-21T23:42:17Z",
+        "latestReview_author": "qinchuanares",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 3623,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-12-12T13:10:59Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
     },
     {
         "number": 3619,
@@ -3007,6 +3289,13 @@
         "latestReview_at": "2024-09-03T06:49:43Z",
         "latestReview_author": "lizhijianrd",
         "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3515,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-12-12T01:06:21Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-utilities/pull/3677"
     },
     {
         "number": 3515,
@@ -8392,6 +8681,60 @@
         "repo": "sonic-utilities",
         "latestReview_at": "2024-05-31T22:45:46Z",
         "latestReview_author": "vmittal-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3345,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-05-30T15:47:47Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "The changes look good to me. Can you also add some test to cover the change?"
+    },
+    {
+        "number": 3345,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-12-11T21:39:16Z",
+        "comment_author": "wenyiz2021",
+        "comment_body": "> The changes look good to me. Can you also add some test to cover the change?\r\n\r\nhi @bingwang-ms , this change is already covered by tests/config_override_test.py::TestConfigOverrideMultiasic::test_device_metadata_gen_sysinfo\r\n\r\nhttps://dev.azure.com/mssonic/build/_build/results?buildId=718282&view=logs&j=83516c17-6666-5250-abde-63983ce72a49&t=4db68653-cc6c-5898-0eb1-3562ebc9ad55"
+    },
+    {
+        "number": 3345,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-12-12T02:43:58Z",
+        "comment_author": "wenyiz2021",
+        "comment_body": "@bingwang-ms could you approve again? thanks!"
+    },
+    {
+        "number": 3345,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-12-12T02:44:07Z",
+        "comment_author": "wenyiz2021",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3345,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-12-12T02:44:17Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3345,
+        "repo": "sonic-utilities",
+        "review_at": "2024-12-11T21:43:59Z",
+        "review_author": "bingwang-ms"
+    },
+    {
+        "number": 3345,
+        "repo": "sonic-utilities",
+        "review_at": "2024-12-12T19:15:29Z",
+        "review_author": "bingwang-ms"
+    },
+    {
+        "number": 3345,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2024-12-12T19:15:29Z",
+        "latestReview_author": "bingwang-ms",
         "latestReview_state": "APPROVED"
     },
     {
