@@ -1,5 +1,106 @@
 [
     {
+        "number": 16074,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-14T10:52:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16074,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-14T10:52:19Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-mgmt/pull/16072"
+    },
+    {
+        "number": 16074,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-14T10:52:29Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16072,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-13T23:25:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16072,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-13T23:26:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16072,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-14T10:52:16Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-mgmt/pull/16074"
+    },
+    {
+        "number": 16072,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-12-14T03:02:43Z",
+        "review_author": "yejianquan"
+    },
+    {
+        "number": 16072,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-12-14T07:05:01Z",
+        "review_author": "harjotsinghpawra"
+    },
+    {
+        "number": 16072,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-12-14T10:51:05Z",
+        "review_author": "yejianquan"
+    },
+    {
+        "number": 16072,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-12-14T10:51:05Z",
+        "latestReview_author": "yejianquan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 16071,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-13T22:19:14Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16071,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-13T22:19:26Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16071,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-13T22:19:47Z",
+        "comment_author": "jfeng-arista",
+        "comment_body": "@kenneth-arista @arista-nwolfe @ysmanman @arlakshm "
+    },
+    {
+        "number": 16071,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-12-14T01:35:05Z",
+        "review_author": "arlakshm"
+    },
+    {
+        "number": 16071,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-12-14T01:35:05Z",
+        "latestReview_author": "arlakshm",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 16063,
         "repo": "sonic-mgmt",
         "comment_at": "2024-12-13T06:21:43Z",
@@ -638,6 +739,60 @@
         "repo": "sonic-mgmt",
         "latestReview_at": "2024-12-11T05:48:05Z",
         "latestReview_author": "siqbal1986",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 16005,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-13T01:33:07Z",
+        "comment_author": "wenyiz2021",
+        "comment_body": "I'm ok with this change, but have a dumb question:\r\n\r\nis it enough if we make sure Rx_drop is 1000? \r\ne.g. if Rx_drop is 1000, we can skip the range asserts because no packets are egress-ed and it's the most ideal case. if it is not exact match, we can check the range with tolerance?"
+    },
+    {
+        "number": 16005,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-13T16:18:20Z",
+        "comment_author": "arista-nwolfe",
+        "comment_body": "> I'm ok with this change, but have a dumb question:\r\n> \r\n> is it enough if we make sure Rx_drop is 1000? e.g. if Rx_drop is 1000, we can skip the range asserts because no packets are egress-ed and it's the most ideal case. if it is not exact match, we can check the range with tolerance?\r\n\r\nYeah IMO the TX_OK check seems like a weird one in this test, we should just check that all the packets were dropped on RX and that should be sufficient to indicate a passing test. But I'm not sure if certain platforms were failing because not all packets were being dropped or counted hence the tolerance was introduced? I figured rewriting the test to just check `RX_DROP` might cause issues on other platforms."
+    },
+    {
+        "number": 16005,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-13T20:41:27Z",
+        "comment_author": "wenyiz2021",
+        "comment_body": "> > I'm ok with this change, but have a dumb question:\r\n> > is it enough if we make sure Rx_drop is 1000? e.g. if Rx_drop is 1000, we can skip the range asserts because no packets are egress-ed and it's the most ideal case. if it is not exact match, we can check the range with tolerance?\r\n> \r\n> Yeah IMO the TX_OK check seems like a weird one in this test, we should just check that all the packets were dropped on RX and that should be sufficient to indicate a passing test. But I'm not sure if certain platforms were failing because not all packets were being dropped or counted hence the tolerance was introduced? I figured rewriting the test to just check `RX_DROP` might cause issues on other platforms.\r\n\r\nI mean something like:\r\n\r\nif Rx_drop is 1000: \r\n return True\r\npytest_aserts1\r\npytest_aserts2\r\n...\r\n\r\nhow about this? "
+    },
+    {
+        "number": 16005,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-13T20:42:37Z",
+        "comment_author": "wenyiz2021",
+        "comment_body": "because we were increasing the Tx_ok tolerance the 2nd time, and it seems is not a necessary check"
+    },
+    {
+        "number": 16005,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-12-13T21:50:50Z",
+        "review_author": "wenyiz2021"
+    },
+    {
+        "number": 16005,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-12-14T06:07:16Z",
+        "review_author": "rlhui"
+    },
+    {
+        "number": 16005,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-12-13T21:50:50Z",
+        "latestReview_author": "wenyiz2021",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 16005,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-12-14T06:07:16Z",
+        "latestReview_author": "rlhui",
         "latestReview_state": "APPROVED"
     },
     {
@@ -2141,6 +2296,130 @@
         "repo": "sonic-mgmt",
         "latestReview_at": "2024-12-06T01:29:10Z",
         "latestReview_author": "alpeshspatel",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 15917,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-05T23:14:37Z",
+        "comment_author": "kenneth-arista",
+        "comment_body": "@arlakshm for awareness"
+    },
+    {
+        "number": 15917,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-09T22:11:53Z",
+        "comment_author": "arista-hpandya",
+        "comment_body": "Looks like the pipeline failed with an Azure authentication error:\r\n\r\n```\r\n##[error]Error Code: [1]\r\n##[error]Error: Azure login failed\r\n##[error]Script failed with error: ERROR: AADSTS500031: Cannot find signing certificate configured. Trace ID: b11efad7-3c3b-4607-9c3f-d81b4ce04500 Correlation ID: e76892ba-b02e-4a05-acb9-1a03c19be3b7 Timestamp: 2024-12-05 22:00:55Z\r\nInteractive authentication is needed. Please run:\r\naz login\r\n```"
+    },
+    {
+        "number": 15917,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-09T22:13:30Z",
+        "comment_author": "arista-hpandya",
+        "comment_body": "/Azp run Azure.sonic-mgmt"
+    },
+    {
+        "number": 15917,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-09T22:13:37Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nCommenter does not have sufficient privileges for PR 15917 in repo sonic-net/sonic-mgmt<br>\r\n\n</samp>"
+    },
+    {
+        "number": 15917,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-09T22:17:51Z",
+        "comment_author": "arista-hpandya",
+        "comment_body": "/azpw run Azure.sonic-mgmt"
+    },
+    {
+        "number": 15917,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-09T22:17:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run Azure.sonic-mgmt"
+    },
+    {
+        "number": 15917,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-09T22:18:04Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 15917,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-11T16:29:31Z",
+        "comment_author": "yxieca",
+        "comment_body": "@arista-hpandya @wenyiz2021 I suggest add the offending error logs to the issue and assess if we should white-list them instead? disabling the log analyzer will generally ignore all issues could be caught by log analyzer therefore leaving windows for regression."
+    },
+    {
+        "number": 15917,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-11T18:51:55Z",
+        "comment_author": "wenyiz2021",
+        "comment_body": "> @arista-hpandya @wenyiz2021 I suggest add the offending error logs to the issue and assess if we should white-list them instead? disabling the log analyzer will generally ignore all issues could be caught by log analyzer therefore leaving windows for regression.\r\n\r\n@yxieca , here the error logs happened due to reboot, since the other reboot cases are disabling loganalyzer, and this test are all reboot tests except 1 config reload test.\r\n\r\nI think it would be hard to whitelist all errors due to reboot.\r\nIf we really want to do whitelist, then it should be applicable for other reboot tests?"
+    },
+    {
+        "number": 15917,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-11T20:12:21Z",
+        "comment_author": "arista-hpandya",
+        "comment_body": "> @arista-hpandya @wenyiz2021 I suggest add the offending error logs to the issue and assess if we should white-list them instead? disabling the log analyzer will generally ignore all issues could be caught by log analyzer therefore leaving windows for regression.\r\n\r\nHi @yxieca and @wenyiz2021 , thank you for reviewing the change. To my knowledge the current process of ignoring logs is via adding them to `ansible/roles/test/files/tools/loganalyzer/loganalyzer_common_ignore.txt`. The issue with this approach is that it is not test specific. As you rightly mentioned many of these issues raised by loganalyzer are valid issues/regressions to look at. In fact many of them are reproducible in other tests and are being actively worked upon. Adding these logs in the ignore file will hide these errors from all tests and not just the voq_disrupts tests."
+    },
+    {
+        "number": 15917,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-11T20:16:57Z",
+        "comment_author": "arista-hpandya",
+        "comment_body": "If you wish I can open an issue for these untracked loganalyzer errors which would ensure that they don't slide away while giving the voq reboot tests the ability to run and verify reboot related checks"
+    },
+    {
+        "number": 15917,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-11T21:21:01Z",
+        "comment_author": "yxieca",
+        "comment_body": "> > @arista-hpandya @wenyiz2021 I suggest add the offending error logs to the issue and assess if we should white-list them instead? disabling the log analyzer will generally ignore all issues could be caught by log analyzer therefore leaving windows for regression.\r\n> \r\n> Hi @yxieca and @wenyiz2021 , thank you for reviewing the change. To my knowledge the current process of ignoring logs is via adding them to `ansible/roles/test/files/tools/loganalyzer/loganalyzer_common_ignore.txt`. The issue with this approach is that it is not test specific. As you rightly mentioned many of these issues raised by loganalyzer are valid issues/regressions to look at. In fact many of them are reproducible in other tests and are being actively worked upon. Adding these logs in the ignore file will hide these errors from all tests and not just the voq_disrupts tests.\r\n\r\nThe log analyzer infrastructure support adding whitelist to a single test case.\r\n\r\nWith that said, reboot related error logs is long and Wenyi is right, other tests currently also choose to disable log analyzer.\r\n"
+    },
+    {
+        "number": 15917,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-11T22:16:15Z",
+        "comment_author": "wenyiz2021",
+        "comment_body": "there is a way to ignore certain syslog on the testcase \r\nhttps://github.com/sonic-net/sonic-mgmt/blob/4aa835e441f6c35a7c35f8f7ba62ae09971e3f76/tests/autorestart/test_container_autorestart.py#L82C5-L82C42"
+    },
+    {
+        "number": 15917,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-11T22:34:18Z",
+        "comment_author": "arista-hpandya",
+        "comment_body": "Thank you @wenyiz2021 and @yxieca for the prompt response. Based on the discussion can we go ahead and merge this change for consistency across all reboot test cases."
+    },
+    {
+        "number": 15917,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-12-10T18:43:02Z",
+        "review_author": "wenyiz2021"
+    },
+    {
+        "number": 15917,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-12-14T05:26:24Z",
+        "review_author": "rlhui"
+    },
+    {
+        "number": 15917,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-12-10T18:43:02Z",
+        "latestReview_author": "wenyiz2021",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 15917,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-12-14T05:26:24Z",
+        "latestReview_author": "rlhui",
         "latestReview_state": "APPROVED"
     },
     {
@@ -4752,6 +5031,131 @@
         "repo": "sonic-mgmt",
         "latestReview_at": "2024-12-03T18:09:31Z",
         "latestReview_author": "liat-grozovik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 15653,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-11-21T05:12:15Z",
+        "comment_author": "arista-nwolfe",
+        "comment_body": "> Would it be better to roll a frontend node rather than skip the test?\r\n\r\nWe discussed this in the community meeting today.\r\nBecause the `setup_gnmi_server` is a `module` fixture it's done once for the entire `gnmi` module of tests.\r\nhttps://github.com/sonic-net/sonic-mgmt/blob/master/tests/gnmi/conftest.py#L38\r\nSo if we restrict these 2 tests to only run on a frontend node we're forcing all tests in the `gnmi` module to run on a frontend node and this could result in a loss of coverage (some tests can run on the supervisor)"
+    },
+    {
+        "number": 15653,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-11-21T03:24:07Z",
+        "review_author": "Javier-Tan"
+    },
+    {
+        "number": 15653,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-12-04T23:31:47Z",
+        "review_author": "wenyiz2021"
+    },
+    {
+        "number": 15653,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-12-04T23:35:03Z",
+        "review_author": "wenyiz2021"
+    },
+    {
+        "number": 15653,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-12-04T23:35:13Z",
+        "review_author": "wenyiz2021"
+    },
+    {
+        "number": 15653,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-12-14T04:44:52Z",
+        "review_author": "rlhui"
+    },
+    {
+        "number": 15653,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-11-21T03:24:07Z",
+        "latestReview_author": "Javier-Tan",
+        "latestReview_state": "CHANGES_REQUESTED"
+    },
+    {
+        "number": 15653,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-12-04T23:35:13Z",
+        "latestReview_author": "wenyiz2021",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 15653,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-12-14T04:44:52Z",
+        "latestReview_author": "rlhui",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 15649,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-11-21T03:46:25Z",
+        "comment_author": "Javier-Tan",
+        "comment_body": "Hi Sanjair, sorry I didn't quite understand, are you saying it's possible TSA TSB startup service is still running (`get_tsa_tsb_service_status(linecard, 'running')`) and TSC shows maintenance mode`TS_MAINTENANCE == get_traffic_shift_state(linecard, cmd='TSC no-stats')` at the same time?"
+    },
+    {
+        "number": 15649,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-11-21T20:49:07Z",
+        "comment_author": "sanjair-git",
+        "comment_body": "> Hi Sanjair, sorry I didn't quite understand, are you saying it's possible TSA TSB startup service is still running (`get_tsa_tsb_service_status(linecard, 'running')`) and TSC shows maintenance mode`TS_MAINTENANCE == get_traffic_shift_state(linecard, cmd='TSC no-stats')` at the same time?\r\n\r\nHi @Javier-Tan,\r\n\r\nLet me rephrase the test scenario here in detail,\r\n\r\n1. Initially, Supervisor and all line cards are in TS_NORMAL state. \r\n2. Reboot supervisor card which in turn reboots all line cards.\r\n3. When line cards come up, 'tsa-tsb' service starts running and applies 'TSA' config which brings the _traffic_shift_state_ of line cards to be in 'TS_MAINTENANCE' state. \r\n4. When the service is running, as part of the test case, we are applying 'TSB' command on the supervisor. This makes '_CHASSIS_APP_DB_' **tsa_enabled** config set to 'false' for all. (_superviosr & line cards_). During this time, line card's CONFIG_DB is still 'true' as tsa-tsb service is running.\r\n\r\nDuring Step 4 above, test case handles two cases. What if the line card's tsa-tsb service is still **running** or service is already **done and exited** after timer expiry. \r\n\r\n- tsa-tsb service running case - we make sure traffic_shift_state is TS_MAINTENANCE\r\n- tsa-tsb service exited case - we make srue traffic_shift_state is TS_NORMAL\r\n\r\nAs part of the above check, when we get the status of tsa-tsb service, there could be chances for the second/third line card to show the status like this shown below once completing the check for first line card. (_15 mins = 900 seconds is the max configured value on the line card for tsa-tsb service_)\r\n\r\n`DEBUG tests.common.devices.base:base.py:108 /data/tests/common/devices/multi_asic.py::_run_on_asics#135: [ixre-egl-board7] AnsibleModule::shell Result => {\"changed\": true, \"stdout\": \" **Active: active (running)** since Sat 2024-11-16 20:19:21 UTC; **15min ago**\",`\r\n\r\nAt this 15th minute, tsa-tsb service applies 'TSB' on the line card and changes the traffic-shift-state to '_TS_NORMAL_' already in the background even though the service status shows '**active (running)**'. To handle this, I have added the above code change for this particular test case.\r\n\r\n"
+    },
+    {
+        "number": 15649,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-11-26T06:00:37Z",
+        "comment_author": "Javier-Tan",
+        "comment_body": "Hi @sanjair-git, thanks for the clarification. I think this is a safe fix, I wonder if the service being active after it's finished its duty should be investigated, perhaps it is on purpose for cleanup."
+    },
+    {
+        "number": 15649,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-11-26T14:30:07Z",
+        "comment_author": "sanjair-git",
+        "comment_body": "> Hi @sanjair-git, thanks for the clarification. I think this is a safe fix, I wonder if the service being active after it's finished its duty should be investigated, perhaps it is on purpose for cleanup.\r\n\r\n@Javier-Tan, from what I noticed, yes, it is on the purpose of cleanup. Can you please approve if you are ok with the fix?"
+    },
+    {
+        "number": 15649,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-11-26T14:46:26Z",
+        "review_author": "Javier-Tan"
+    },
+    {
+        "number": 15649,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-12-05T09:09:11Z",
+        "review_author": "tjchadaga"
+    },
+    {
+        "number": 15649,
+        "repo": "sonic-mgmt",
+        "review_at": "2024-12-14T05:16:33Z",
+        "review_author": "rlhui"
+    },
+    {
+        "number": 15649,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-12-05T09:09:11Z",
+        "latestReview_author": "tjchadaga",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 15649,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-12-14T05:16:33Z",
+        "latestReview_author": "rlhui",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 15649,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2024-11-26T14:46:26Z",
+        "latestReview_author": "Javier-Tan",
         "latestReview_state": "APPROVED"
     },
     {
