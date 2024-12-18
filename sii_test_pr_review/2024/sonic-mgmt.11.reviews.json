@@ -1088,6 +1088,20 @@
     {
         "number": 15688,
         "repo": "sonic-mgmt",
+        "comment_at": "2024-12-18T01:03:14Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "This change caused some regressions.\r\nThe code below is not working if the selected port and queue name doesn't have `-`, such as `Ethernet136|5`. \r\nhttps://github.com/sonic-net/sonic-mgmt/blob/14cde772757879838cd0a5a2157a173fc390d15b/tests/snmp/test_snmp_queue_counters.py#L164\r\nThe error message is \r\n```\r\n range_str = str(buffer_queue_to_del.split('|')[-1])\r\n> buffer_queues_removed = int(range_str.split('-')[1]) - int(range_str.split('-')[0]) + 1\r\nE IndexError: list index out of range\r\n``` \r\n\r\n"
+    },
+    {
+        "number": 15688,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-18T01:04:46Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "@harjotsinghpawra , @yejianquan Can you please help check the regression?"
+    },
+    {
+        "number": 15688,
+        "repo": "sonic-mgmt",
         "review_at": "2024-11-22T10:09:04Z",
         "review_author": "yejianquan"
     },
@@ -2379,6 +2393,20 @@
         "comment_at": "2024-11-20T03:26:26Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 15604,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-17T19:25:33Z",
+        "comment_author": "deepak-singhal0408",
+        "comment_body": "@yatishkoul @vmittal-msft @wenyiz2021 for viz..\r\n"
+    },
+    {
+        "number": 15604,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-17T19:26:43Z",
+        "comment_author": "deepak-singhal0408",
+        "comment_body": "@bingwang-ms could you help approve this for 202405 branch? thanks,\r\nThis is causing conflicts while cherry-picking other PRs on top of it. Thanks,"
     },
     {
         "number": 15604,
