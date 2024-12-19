@@ -1102,6 +1102,41 @@
     {
         "number": 15688,
         "repo": "sonic-mgmt",
+        "comment_at": "2024-12-18T02:46:30Z",
+        "comment_author": "yejianquan",
+        "comment_body": "> @harjotsinghpawra , @yejianquan Can you please help check the regression?\r\n\r\nHi @harjotsinghpawra , please resolve the regression ASAP.\r\nI remember you confirmed it works on single asic systems. \r\nWhy we hit this regression?\r\nhttps://github.com/sonic-net/sonic-mgmt/pull/16072\r\n![image](https://github.com/user-attachments/assets/25447952-a53b-48eb-bb25-a41a319e50a2)\r\n"
+    },
+    {
+        "number": 15688,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-18T08:01:09Z",
+        "comment_author": "harjotsinghpawra",
+        "comment_body": "Hi @yejianquan \r\n\r\nThis is a a completely new issue. I fixed the other issue that day which was count mismatch. In all the testbeds and config files i used the Queue names were in format of \"Ethernet128|1-2\" or something like that there was a range at , i looked at the schema also the similar ranges were used but if you think there will be case where only one Bufffer Queue is present and we need to test that also i can make changes accordingly . But then interface naming standard has to consistent . Is there a guideline or doc for that , i am new to sonic so please let me know what valid strings can be in interface name otherwise it can be failed again in future .\r\n\r\nThis would have failed in multi-asic as well . if interface name was picked where only one buffer is created ?\r\n "
+    },
+    {
+        "number": 15688,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-18T08:59:16Z",
+        "comment_author": "yejianquan",
+        "comment_body": "> Hi @yejianquan\r\n> \r\n> This is a a completely new issue. I fixed the other issue that day which was count mismatch. In all the testbeds and config files i used the Queue names were in format of \"Ethernet128|1-2\" or something like that there was a range at , i looked at the schema also the similar ranges were used but if you think there will be case where only one Bufffer Queue is present and we need to test that also i can make changes accordingly . But then interface naming standard has to consistent . Is there a guideline or doc for that , i am new to sonic so please let me know what valid strings can be in interface name otherwise it can be failed again in future .\r\n> \r\n> This would have failed in multi-asic as well . if interface name was picked where only one buffer is created ?\r\n\r\nHi @harjotsinghpawra , ok and welcome to the SONiC world!\r\n\r\nHere's the doc https://github.com/sonic-net/SONiC/wiki/Configuration#buffer-queue\r\nAnd you code is not compatible on this configuration:\r\n{\r\n \"Ethernet188|6\": {\r\n \"profile\": \"egress_lossless_profile\"\r\n },\r\n \"Ethernet188|7\": {\r\n \"profile\": \"egress_lossy_profile\"\r\n }\r\n}\r\nI'm not sure whether we have more patterns in use, but I think you can make it compatible on '0-1' and '3' formats?\r\nThat would be easy and we can resolve the regression.\r\n@bingwang-ms please suggest if you have more advices."
+    },
+    {
+        "number": 15688,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-18T16:59:23Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "Currently we don't have more patterns. Only below two patterns\r\n- Ethernet188|6\r\n- Ethernet188|0-1\r\n\r\nWhen debugging the test, I also saw some other failures. The error message is as below. Not sure if it's caused by this change.\r\n\r\n![image](https://github.com/user-attachments/assets/38ec00ea-b997-43b2-aa63-c85a7a9b6ef5)\r\n\r\n"
+    },
+    {
+        "number": 15688,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-18T18:06:19Z",
+        "comment_author": "harjotsinghpawra",
+        "comment_body": "@bingwang-ms the other failure you saw was fixed as part of this PR https://github.com/sonic-net/sonic-mgmt/pull/16072 \r\n@yejianquan \r\nAlso i have raised the PR for the range failure we are seeing \r\nhttps://github.com/sonic-net/sonic-mgmt/pull/16139"
+    },
+    {
+        "number": 15688,
+        "repo": "sonic-mgmt",
         "review_at": "2024-11-22T10:09:04Z",
         "review_author": "yejianquan"
     },
@@ -1286,6 +1321,20 @@
         "comment_at": "2024-11-21T09:16:04Z",
         "comment_author": "mssonicbld",
         "comment_body": "Original PR: https://github.com/sonic-net/sonic-mgmt/pull/15583"
+    },
+    {
+        "number": 15667,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-18T04:02:34Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@cyw233 PR conflicts with 202405 branch"
+    },
+    {
+        "number": 15667,
+        "repo": "sonic-mgmt",
+        "comment_at": "2024-12-18T05:41:28Z",
+        "comment_author": "cyw233",
+        "comment_body": "~Cherry-pick PR: #16128~\r\n\r\nIf the PR only contains changes to `.azure-pipelines/run-test-elastictest-template.yml` and `.azure-pipelines/test_plan.py`, then there's no need to cherry pick to feature branch as the internal pipeline will download them from GitHub master branch"
     },
     {
         "number": 15667,
