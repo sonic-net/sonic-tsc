@@ -79,6 +79,27 @@
     {
         "number": 3703,
         "repo": "sonic-utilities",
+        "comment_at": "2025-01-08T23:23:55Z",
+        "comment_author": "abdosi",
+        "comment_body": "@bingwang-ms "
+    },
+    {
+        "number": 3703,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-01-09T00:17:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-utilities/pull/3706"
+    },
+    {
+        "number": 3703,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-01-09T00:37:47Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202405: https://github.com/Azure/sonic-utilities.msft/pull/103"
+    },
+    {
+        "number": 3703,
+        "repo": "sonic-utilities",
         "review_at": "2025-01-03T10:41:17Z",
         "review_author": "yejianquan"
     },
@@ -106,6 +127,94 @@
         "repo": "sonic-utilities",
         "latestReview_at": "2025-01-03T22:12:59Z",
         "latestReview_author": "BYGX-wcr",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3695,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-12-24T03:47:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3695,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-12-24T03:47:36Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3695,
+        "repo": "sonic-utilities",
+        "comment_at": "2024-12-31T15:47:32Z",
+        "comment_author": "bradh352",
+        "comment_body": "@FengPan-Frank I'm not very familiar with the way the test infrastructure is designed, I can see the existing tests for `show ip interfaces` in `show_ip_int_test.py`, however its not clear how the running config that is used is loaded.  \r\n\r\nFrom some grepping for the IPs the existing test cases use it appears to be loaded via mock_tables/mock_single_asic.py  ... \r\n\r\nI don't immediately see how to augment the config db, I see some tests do things like:\r\n```\r\nfrom .mock_tables import dbconnector\r\njsonfile_config = os.path.join(mock_db_path, \"config_db\")\r\ndbconnector.dedicated_dbs['CONFIG_DB'] = jsonfile_config\r\ndb = Db()\r\n```\r\nBut I'm pretty sure that ends up replacing the entire config_db instead of augmenting it, is that true?\r\n\r\nI guess I could do a bunch of `runner.invoke(config.config.commands[\"bgp\"].commands[...` to configure it"
+    },
+    {
+        "number": 3695,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-01-02T14:33:51Z",
+        "comment_author": "FengPan-Frank",
+        "comment_body": "> show_ip_int_test\r\n\r\nwe usually use mock config to do this, refer https://github.com/search?q=repo%3Asonic-net%2Fsonic-utilities%20int_ip_input&type=code"
+    },
+    {
+        "number": 3695,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-01-02T14:40:14Z",
+        "comment_author": "bradh352",
+        "comment_body": "> > show_ip_int_test\r\n> \r\n> we usually use mock config to do this, refer https://github.com/search?q=repo%3Asonic-net%2Fsonic-utilities%20int_ip_input&type=code\r\n\r\nOk, that's the way i mentioned I wasn't sure about.  Does that replace the entire CONFIG_DB, or does it merge into existing configuration?\r\n\r\nI do see it sets `os.environ['UTILITIES_UNIT_TESTING'] = \"1\"` in the `int_ip_input` which is used to `config` tests instead of `os.environ['UTILITIES_UNIT_TESTING'] = \"2\"` which is used in `show` tests but I don't see any docs on what that actually means.  Its not clear where to look in the code either for what it means."
+    },
+    {
+        "number": 3695,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-01-07T15:04:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3695,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-01-07T15:04:48Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3695,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-01-07T15:23:15Z",
+        "comment_author": "bradh352",
+        "comment_body": "I've tried quite a few things here and I can't see a way for the ipintutil to ever read anything other than the single or multi asic mock tables.  The only thing I've gotten to work is I saw there was a Vlan100 defined in that mock table with a link-local ipv6 address, so I assigned that interface to use BGP Unnumbered and should cover the exception.   Hopefully this is good enough."
+    },
+    {
+        "number": 3695,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-01-07T15:35:23Z",
+        "comment_author": "bradh352",
+        "comment_body": "@FengPan-Frank my solution appears to have brought coverage up to 100% of the changes, hopefully this is acceptable so it can be merged."
+    },
+    {
+        "number": 3695,
+        "repo": "sonic-utilities",
+        "review_at": "2024-12-30T06:32:23Z",
+        "review_author": "FengPan-Frank"
+    },
+    {
+        "number": 3695,
+        "repo": "sonic-utilities",
+        "review_at": "2024-12-30T06:33:49Z",
+        "review_author": "FengPan-Frank"
+    },
+    {
+        "number": 3695,
+        "repo": "sonic-utilities",
+        "review_at": "2025-01-08T07:28:09Z",
+        "review_author": "FengPan-Frank"
+    },
+    {
+        "number": 3695,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2025-01-08T07:28:09Z",
+        "latestReview_author": "FengPan-Frank",
         "latestReview_state": "APPROVED"
     },
     {
