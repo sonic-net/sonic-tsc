@@ -413,5 +413,180 @@
         "latestReview_at": "2025-01-08T18:38:55Z",
         "latestReview_author": "prsunny",
         "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3325,
+        "repo": "sonic-swss",
+        "comment_at": "2024-10-22T01:20:05Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 3325,
+        "repo": "sonic-swss",
+        "comment_at": "2024-10-22T01:20:07Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 3325,
+        "repo": "sonic-swss",
+        "comment_at": "2024-10-22T01:20:17Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3325,
+        "repo": "sonic-swss",
+        "comment_at": "2024-10-31T20:57:05Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "Comparing the time needed to send SIGTERM to the teamd processes before and after this change, it appears that the time is roughly the same for about 70 LAGs, as tested on a physical device.\r\n\r\nBefore:\r\n\r\n```\r\n2024 Oct 31 20:33:56.338480 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel1 pid 26\r\n2024 Oct 31 20:33:56.345896 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel10 pid 35\r\n2024 Oct 31 20:33:56.349179 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel101 pid 43\r\n2024 Oct 31 20:33:56.354644 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel102 pid 51\r\n2024 Oct 31 20:33:56.360318 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel103 pid 59\r\n2024 Oct 31 20:33:56.400292 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel104 pid 67\r\n2024 Oct 31 20:33:56.400309 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel11 pid 75\r\n2024 Oct 31 20:33:56.400867 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel12 pid 83\r\n2024 Oct 31 20:33:56.401188 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel13 pid 91\r\n2024 Oct 31 20:33:56.401362 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel14 pid 100\r\n2024 Oct 31 20:33:56.402117 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel15 pid 109\r\n2024 Oct 31 20:33:56.411100 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel16 pid 117\r\n2024 Oct 31 20:33:56.411989 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel17 pid 125\r\n2024 Oct 31 20:33:56.441357 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel18 pid 133\r\n2024 Oct 31 20:33:56.486524 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel19 pid 141\r\n2024 Oct 31 20:33:56.486781 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel2 pid 149\r\n2024 Oct 31 20:33:56.486951 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel20 pid 157\r\n2024 Oct 31 20:33:56.487095 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel21 pid 165\r\n2024 Oct 31 20:33:56.487985 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel22 pid 173\r\n2024 Oct 31 20:33:56.487985 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel23 pid 181\r\n2024 Oct 31 20:33:56.488143 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel24 pid 189\r\n2024 Oct 31 20:33:56.491583 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel25 pid 197\r\n2024 Oct 31 20:33:56.498010 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel26 pid 205\r\n2024 Oct 31 20:33:56.501587 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel27 pid 213\r\n2024 Oct 31 20:33:56.504982 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel28 pid 221\r\n2024 Oct 31 20:33:56.560632 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel29 pid 229\r\n2024 Oct 31 20:33:56.604924 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel3 pid 237\r\n2024 Oct 31 20:33:56.604950 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel30 pid 245\r\n2024 Oct 31 20:33:56.604974 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel31 pid 253\r\n2024 Oct 31 20:33:56.605128 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel32 pid 261\r\n2024 Oct 31 20:33:56.608329 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel33 pid 269\r\n2024 Oct 31 20:33:56.646533 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel34 pid 277\r\n2024 Oct 31 20:33:56.651903 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel35 pid 285\r\n2024 Oct 31 20:33:56.656102 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel36 pid 293\r\n2024 Oct 31 20:33:56.660620 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel37 pid 301\r\n2024 Oct 31 20:33:56.677031 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel38 pid 309\r\n2024 Oct 31 20:33:56.679521 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel39 pid 317\r\n2024 Oct 31 20:33:56.685786 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel4 pid 325\r\n2024 Oct 31 20:33:56.689406 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel40 pid 333\r\n2024 Oct 31 20:33:56.692990 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel41 pid 341\r\n2024 Oct 31 20:33:56.795228 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel42 pid 349\r\n2024 Oct 31 20:33:56.802910 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel43 pid 357\r\n2024 Oct 31 20:33:56.809630 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel44 pid 365\r\n2024 Oct 31 20:33:56.843699 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel45 pid 373\r\n2024 Oct 31 20:33:56.881881 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel46 pid 381\r\n2024 Oct 31 20:33:56.897540 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel47 pid 389\r\n2024 Oct 31 20:33:56.935467 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel48 pid 397\r\n2024 Oct 31 20:33:56.937797 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel49 pid 405\r\n2024 Oct 31 20:33:56.942456 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel5 pid 413\r\n2024 Oct 31 20:33:56.943508 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel50 pid 421\r\n2024 Oct 31 20:33:56.945620 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel51 pid 429\r\n2024 Oct 31 20:33:56.968744 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel52 pid 437\r\n2024 Oct 31 20:33:56.969017 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel53 pid 445\r\n2024 Oct 31 20:33:56.969215 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel54 pid 453\r\n2024 Oct 31 20:33:56.969315 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel55 pid 461\r\n2024 Oct 31 20:33:56.972646 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel56 pid 469\r\n2024 Oct 31 20:33:56.973366 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel57 pid 477\r\n2024 Oct 31 20:33:56.974690 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel58 pid 485\r\n2024 Oct 31 20:33:56.975190 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel59 pid 493\r\n2024 Oct 31 20:33:56.975761 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel6 pid 501\r\n2024 Oct 31 20:33:57.013460 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel60 pid 509\r\n2024 Oct 31 20:33:57.017120 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel61 pid 517\r\n2024 Oct 31 20:33:57.020771 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel62 pid 525\r\n2024 Oct 31 20:33:57.024415 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel63 pid 533\r\n2024 Oct 31 20:33:57.028257 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel64 pid 541\r\n2024 Oct 31 20:33:57.034454 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel65 pid 549\r\n2024 Oct 31 20:33:57.035288 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel66 pid 557\r\n2024 Oct 31 20:33:57.039678 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel67 pid 565\r\n2024 Oct 31 20:33:57.051380 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel68 pid 573\r\n2024 Oct 31 20:33:57.060741 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel69 pid 581\r\n```\r\n\r\nAfter:\r\n\r\n```\r\n2024 Oct 31 20:42:29.550813 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel1 pid 27\r\n2024 Oct 31 20:42:29.550813 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel10 pid 35\r\n2024 Oct 31 20:42:29.550813 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel101 pid 43\r\n2024 Oct 31 20:42:29.550861 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel102 pid 51\r\n2024 Oct 31 20:42:29.550861 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel103 pid 59\r\n2024 Oct 31 20:42:29.550885 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel104 pid 68\r\n2024 Oct 31 20:42:29.550907 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel11 pid 77\r\n2024 Oct 31 20:42:29.550907 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel12 pid 85\r\n2024 Oct 31 20:42:29.550946 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel13 pid 93\r\n2024 Oct 31 20:42:29.653453 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel14 pid 101\r\n2024 Oct 31 20:42:29.653453 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel15 pid 109\r\n2024 Oct 31 20:42:29.653453 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel16 pid 117\r\n2024 Oct 31 20:42:29.653453 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel17 pid 125\r\n2024 Oct 31 20:42:29.653453 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel18 pid 133\r\n2024 Oct 31 20:42:29.653453 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel19 pid 141\r\n2024 Oct 31 20:42:29.653453 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel2 pid 149\r\n2024 Oct 31 20:42:29.653453 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel20 pid 157\r\n2024 Oct 31 20:42:29.653453 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel21 pid 165\r\n2024 Oct 31 20:42:29.653453 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel22 pid 173\r\n2024 Oct 31 20:42:29.767222 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel23 pid 181\r\n2024 Oct 31 20:42:29.767674 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel24 pid 189\r\n2024 Oct 31 20:42:29.767744 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel25 pid 197\r\n2024 Oct 31 20:42:29.767805 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel26 pid 205\r\n2024 Oct 31 20:42:29.767866 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel27 pid 213\r\n2024 Oct 31 20:42:29.767946 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel28 pid 221\r\n2024 Oct 31 20:42:29.768005 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel29 pid 229\r\n2024 Oct 31 20:42:29.768067 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel3 pid 237\r\n2024 Oct 31 20:42:29.768125 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel30 pid 245\r\n2024 Oct 31 20:42:29.768182 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel31 pid 253\r\n2024 Oct 31 20:42:29.858922 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel32 pid 261\r\n2024 Oct 31 20:42:29.858922 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel33 pid 269\r\n2024 Oct 31 20:42:29.858931 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel34 pid 277\r\n2024 Oct 31 20:42:29.858938 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel35 pid 285\r\n2024 Oct 31 20:42:29.858938 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel36 pid 293\r\n2024 Oct 31 20:42:29.858947 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel37 pid 301\r\n2024 Oct 31 20:42:29.858954 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel38 pid 309\r\n2024 Oct 31 20:42:29.858954 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel39 pid 317\r\n2024 Oct 31 20:42:29.858965 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel4 pid 325\r\n2024 Oct 31 20:42:29.858965 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel40 pid 333\r\n2024 Oct 31 20:42:29.964442 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel41 pid 341\r\n2024 Oct 31 20:42:29.964474 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel42 pid 349\r\n2024 Oct 31 20:42:29.964499 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel43 pid 357\r\n2024 Oct 31 20:42:29.964523 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel44 pid 365\r\n2024 Oct 31 20:42:29.964548 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel45 pid 373\r\n2024 Oct 31 20:42:29.964574 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel46 pid 381\r\n2024 Oct 31 20:42:29.964599 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel47 pid 389\r\n2024 Oct 31 20:42:29.964625 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel48 pid 397\r\n2024 Oct 31 20:42:29.964651 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel49 pid 405\r\n2024 Oct 31 20:42:29.964676 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel5 pid 413\r\n2024 Oct 31 20:42:30.115429 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel50 pid 421\r\n2024 Oct 31 20:42:30.115523 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel51 pid 429\r\n2024 Oct 31 20:42:30.115592 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel52 pid 437\r\n2024 Oct 31 20:42:30.115660 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel53 pid 445\r\n2024 Oct 31 20:42:30.115725 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel54 pid 453\r\n2024 Oct 31 20:42:30.115980 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel55 pid 461\r\n2024 Oct 31 20:42:30.116046 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel56 pid 469\r\n2024 Oct 31 20:42:30.116113 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel57 pid 477\r\n2024 Oct 31 20:42:30.116178 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel58 pid 485\r\n2024 Oct 31 20:42:30.116550 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel59 pid 493\r\n2024 Oct 31 20:42:30.167335 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel6 pid 501\r\n2024 Oct 31 20:42:30.167365 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel60 pid 509\r\n2024 Oct 31 20:42:30.167365 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel61 pid 517\r\n2024 Oct 31 20:42:30.167375 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel62 pid 525\r\n2024 Oct 31 20:42:30.167375 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel63 pid 533\r\n2024 Oct 31 20:42:30.167384 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel64 pid 541\r\n2024 Oct 31 20:42:30.167384 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel65 pid 549\r\n2024 Oct 31 20:42:30.167415 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel66 pid 557\r\n2024 Oct 31 20:42:30.167459 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel67 pid 565\r\n2024 Oct 31 20:42:30.167469 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel68 pid 573\r\n2024 Oct 31 20:42:30.274461 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel69 pid 581\r\n```\r\n\r\nIn both cases, for 70 LAGs, it took about 0.6-0.7 seconds to send SIGTERM to the teamd processes, but the distribution of SIGTERMs sent is different. However, on this device, there are still some netlink messages getting dropped resulting in the cleanup not being complete."
+    },
+    {
+        "number": 3325,
+        "repo": "sonic-swss",
+        "comment_at": "2024-11-11T02:50:27Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "@saiarcot895  Can you please run your changes with test_po_cleanup and test_po_cleanup_after_reload? We are noticing these tests statically fail with your changes"
+    },
+    {
+        "number": 3325,
+        "repo": "sonic-swss",
+        "comment_at": "2024-11-20T14:51:58Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "@saiarcot895  Do we have an updated fix?"
+    },
+    {
+        "number": 3325,
+        "repo": "sonic-swss",
+        "comment_at": "2024-12-02T17:23:33Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "Updated syslog after changes:\r\n\r\n```\r\n2024 Dec  2 07:41:43.760139 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel14 pid 102\r\n2024 Dec  2 07:41:43.760166 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel15 pid 110\r\n2024 Dec  2 07:41:43.760189 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel16 pid 118\r\n2024 Dec  2 07:41:43.760213 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel17 pid 126\r\n2024 Dec  2 07:41:43.760237 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel18 pid 134\r\n2024 Dec  2 07:41:43.760262 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel19 pid 142\r\n2024 Dec  2 07:41:43.760291 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel2 pid 150\r\n2024 Dec  2 07:41:43.760316 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel20 pid 158\r\n2024 Dec  2 07:41:43.760343 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel21 pid 166\r\n2024 Dec  2 07:41:43.760368 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel22 pid 174\r\n...\r\n2024 Dec  2 07:41:43.981285 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel23 pid 182\r\n2024 Dec  2 07:41:43.981778 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel24 pid 190\r\n2024 Dec  2 07:41:43.982313 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel25 pid 198\r\n2024 Dec  2 07:41:43.982413 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel26 pid 206\r\n2024 Dec  2 07:41:43.982544 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel27 pid 214\r\n2024 Dec  2 07:41:43.982598 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel28 pid 222\r\n2024 Dec  2 07:41:43.982652 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel29 pid 230\r\n2024 Dec  2 07:41:43.982706 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel3 pid 238\r\n2024 Dec  2 07:41:43.982759 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel30 pid 246\r\n2024 Dec  2 07:41:43.982812 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel31 pid 254\r\n...\r\n2024 Dec  2 07:41:44.191547 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel32 pid 262\r\n2024 Dec  2 07:41:44.191547 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel33 pid 270\r\n2024 Dec  2 07:41:44.191555 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel34 pid 278\r\n2024 Dec  2 07:41:44.191555 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel35 pid 286\r\n2024 Dec  2 07:41:44.191574 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel36 pid 294\r\n2024 Dec  2 07:41:44.191574 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel37 pid 302\r\n2024 Dec  2 07:41:44.191574 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel38 pid 310\r\n2024 Dec  2 07:41:44.191584 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel39 pid 318\r\n2024 Dec  2 07:41:44.191584 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel4 pid 326\r\n2024 Dec  2 07:41:44.191595 str2-7260cx3-acs-9 NOTICE teamd#teammgrd: :- cleanTeamProcesses: Sent SIGTERM to port channel PortChannel40 pid 334\r\n...\r\n```\r\n\r\nSIGTERM signal to the teamd supervisord was sent at 07:41:40, and the container exited at 07:41:46.\r\n\r\nTeamd container is also configured to have a 60-second wait time (instead of the 10-second wait time) for termination, meaning docker will wait 60 seconds for the container to go down before forcefully killing it. This means that a 6-second wait time here is fine."
+    },
+    {
+        "number": 3325,
+        "repo": "sonic-swss",
+        "comment_at": "2024-12-15T04:19:11Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3325,
+        "repo": "sonic-swss",
+        "comment_at": "2024-12-15T04:19:22Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3325,
+        "repo": "sonic-swss",
+        "comment_at": "2025-01-06T21:04:34Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3325,
+        "repo": "sonic-swss",
+        "comment_at": "2025-01-06T21:04:45Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3325,
+        "repo": "sonic-swss",
+        "comment_at": "2025-01-08T21:00:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3325,
+        "repo": "sonic-swss",
+        "comment_at": "2025-01-08T21:00:18Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3325,
+        "repo": "sonic-swss",
+        "comment_at": "2025-01-10T01:27:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3325,
+        "repo": "sonic-swss",
+        "comment_at": "2025-01-10T01:27:40Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3325,
+        "repo": "sonic-swss",
+        "comment_at": "2025-01-10T22:04:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3325,
+        "repo": "sonic-swss",
+        "comment_at": "2025-01-10T22:05:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3325,
+        "repo": "sonic-swss",
+        "review_at": "2024-12-15T04:19:22Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 3325,
+        "repo": "sonic-swss",
+        "review_at": "2024-12-15T04:23:51Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 3325,
+        "repo": "sonic-swss",
+        "review_at": "2025-01-06T21:04:52Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 3325,
+        "repo": "sonic-swss",
+        "review_at": "2025-01-08T19:21:51Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 3325,
+        "repo": "sonic-swss",
+        "review_at": "2025-01-08T19:26:26Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 3325,
+        "repo": "sonic-swss",
+        "review_at": "2025-01-08T19:26:47Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 3325,
+        "repo": "sonic-swss",
+        "review_at": "2025-01-12T20:21:13Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 3325,
+        "repo": "sonic-swss",
+        "latestReview_at": "2025-01-12T20:21:13Z",
+        "latestReview_author": "prsunny",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3325,
+        "repo": "sonic-swss",
+        "latestReview_at": "2025-01-08T19:21:51Z",
+        "latestReview_author": "judyjoseph",
+        "latestReview_state": "DISMISSED"
     }
 ]
