@@ -100,8 +100,28 @@
     {
         "number": 576,
         "repo": "sonic-platform-daemons",
+        "comment_at": "2025-01-27T23:07:44Z",
+        "comment_author": "yejianquan",
+        "comment_body": "> @yejianquan did we investigate why thermalctld was deleting the PSU entry from the DB on restart ? This code seem to be inefficient in that the PSUd will keep updating the DB even if there is NO PSU update.\r\n> \r\n> We should have instead fixed the thermalctld\r\n\r\nHi @prgeor , yes, please look into https://github.com/sonic-net/sonic-platform-daemons/issues/575\r\nthe `PHYSICAL_ENTITY_INFO|PSU *` got removed when thermalctld restarted.\r\nAnd during my test, it's a lightweight function, and it only affects chassis devices.\r\nBut yes, if we can have fix in thermalctld it would be better."
+    },
+    {
+        "number": 576,
+        "repo": "sonic-platform-daemons",
         "review_at": "2024-12-16T10:03:18Z",
         "review_author": "abdosi"
+    },
+    {
+        "number": 576,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-01-27T21:57:56Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 576,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-01-27T21:57:56Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "COMMENTED"
     },
     {
         "number": 576,
