@@ -1,5 +1,26 @@
 [
     {
+        "number": 3493,
+        "repo": "sonic-swss",
+        "comment_at": "2025-02-04T23:03:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-swss/pull/3477"
+    },
+    {
+        "number": 3493,
+        "repo": "sonic-swss",
+        "comment_at": "2025-02-04T23:03:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3493,
+        "repo": "sonic-swss",
+        "comment_at": "2025-02-04T23:03:16Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
         "number": 3487,
         "repo": "sonic-swss",
         "comment_at": "2025-01-28T19:17:33Z",
@@ -524,6 +545,20 @@
         "comment_at": "2025-02-04T23:03:51Z",
         "comment_author": "bingwang-ms",
         "comment_body": "Cherry-pick to 202405 since PR https://github.com/sonic-net/sonic-swss/pull/3477 was in 202405"
+    },
+    {
+        "number": 3477,
+        "repo": "sonic-swss",
+        "comment_at": "2025-02-05T05:57:16Z",
+        "comment_author": "keboliu",
+        "comment_body": "Hi @abdosi is there a separated PR for 202411 as it has conflict and can not be cherry-picked?"
+    },
+    {
+        "number": 3477,
+        "repo": "sonic-swss",
+        "comment_at": "2025-02-05T09:08:29Z",
+        "comment_author": "stephenxs",
+        "comment_body": "> @abdosi , please check the cherry-pick labels. Looks like there is conflict and may have to raise separate PR\r\n\r\n@prsunny @abdosi @keboliu \r\nwe have a conflict in cherry-picking the PR to 202411 because the dependency PR #3394 hasn't been in 202411.\r\nOnce we cherry-pick #3394, this PR can be cherry-picked cleanly.\r\n\r\n```\r\nstephens@ae9afa824b59:/sonic/src/sonic-swss$ git checkout origin/202411 \r\nHEAD is now at 822310d4 Ignore failure in setPortPfcAsym if SAI_STATUS_NOT_SUPPORTED (#3471)\r\nstephens@ae9afa824b59:/sonic/src/sonic-swss$ git cherry-pick 8465c1db68f44034adda55d86cbddfab244766e7\r\n[detached HEAD f74afca9] Added change not to create ECMP Group in SAI and program the route if none of ECMP members are active/link-up (#3394)\r\n Author: abdosi <58047199+abdosi@users.noreply.github.com>\r\n Date: Wed Dec 18 23:09:21 2024 +0530\r\n 3 files changed, 54 insertions(+), 26 deletions(-)\r\nstephens@ae9afa824b59:/sonic/src/sonic-swss$ git cherry-pick df08d2d8851980217826d3756292223cc1a593d6\r\n[detached HEAD 5d415c13] Avoid removing a VRF routing table when there are pending creation entries in gRouteBulker (#3477)\r\n Author: Stephen Sun <5379172+stephenxs@users.noreply.github.com>\r\n Date: Fri Jan 31 01:46:29 2025 +0800\r\n 3 files changed, 47 insertions(+), 5 deletions(-)\r\nstephens@ae9afa824b59:/sonic/src/sonic-swss$ git log\r\ncommit 5d415c1385697887a02d844e82164d97c0517bdb (HEAD)\r\nAuthor: Stephen Sun <5379172+stephenxs@users.noreply.github.com>\r\nDate:   Fri Jan 31 01:46:29 2025 +0800\r\n\r\n    Avoid removing a VRF routing table when there are pending creation entries in gRouteBulker (#3477)\r\n    \r\n    * Set bytes to 0 before copying IPv4 addresses/masks to avoid uninitialized bytes\r\n    * Avoid removing a VRF routing table when there are pending creation entries in gRouteBulker\r\n    \r\n    Remove a VRF routing table when a routing entry is removed only if there is no pending creation entry in gRouteBulker\r\n    Avoid uninitialized value SAI IP address/prefix structure\r\n    Why I did it\r\n    \r\n    Fix issue: out of range exception can be thrown in addRoutePost due to non exist VRF\r\n\r\ncommit f74afca96110725075f7f72a3973bea64570b0c2\r\nAuthor: abdosi <58047199+abdosi@users.noreply.github.com>\r\nDate:   Wed Dec 18 23:09:21 2024 +0530\r\n\r\n    Added change not to create ECMP Group in SAI and program the route if none of ECMP members are active/link-up (#3394)\r\n    \r\n    What I did:\r\n    Added change not to create ECMP Group in SAI and program the route if none of the ECMP members are active/link-up.\r\n    Also do not program the Temp Route if Neigh is not active (Link Down)\r\n    \r\n    Also as part of this change if Route is not programmed and if we remove that route than decrement VRF Reference count in removeRoute as removeRoutePost will not be called in this case.\r\n    \r\n    Why I did:\r\n    In scale setup of T2 it's possible all links can go down simultaneously which case we can get Route messages with all nexthops being in down state. In such case we might create empty Nexthop Group in SAI for the given route which causes not needed SAI call for Nexthop Group creation and also create traffic blackhole for the route where that route can still forward traffic via default route if eligible/applicable.\r\n    \r\n    Also in this case no point to add Temp Route if neighbor is link down.\r\n\r\ncommit 822310d4100fd7b9200b0692498af29ee46de669 (origin/202411)\r\nAuthor: mssonicbld <79238446+mssonicbld@users.noreply.github.com>\r\nDate:   Wed Jan 15 16:02:30 2025 +0800\r\n\r\n    Ignore failure in setPortPfcAsym if SAI_STATUS_NOT_SUPPORTED (#3471)\r\n    \r\n    <!--\r\n    Please make sure you have read and understood the contribution guildlines:\r\n    https://github.com/Azure/SONiC/blob/gh-pages/CONTRIBUTING.md\r\n    \r\n    1. Make sure your commit includes a signature generted with `git commit -s`\r\n    2. Make sure your commit title follows the correct format: [component]: description\r\n    3. Make sure your commit message contains enough details about the change and related tests\r\n    4. Make sure your pull request adds related reviewers, asignees, labels\r\n    \r\n    Please also provide the following information in this pull request:\r\n    -->\r\n```"
     },
     {
         "number": 3477,
@@ -1790,6 +1825,60 @@
         "repo": "sonic-swss",
         "latestReview_at": "2024-12-21T02:27:01Z",
         "latestReview_author": "alpeshspatel",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3427,
+        "repo": "sonic-swss",
+        "comment_at": "2024-12-17T03:57:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3427,
+        "repo": "sonic-swss",
+        "comment_at": "2024-12-17T03:57:35Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3427,
+        "repo": "sonic-swss",
+        "comment_at": "2025-02-05T08:27:08Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3427,
+        "repo": "sonic-swss",
+        "comment_at": "2025-02-05T08:27:20Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3427,
+        "repo": "sonic-swss",
+        "review_at": "2025-01-06T19:16:33Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 3427,
+        "repo": "sonic-swss",
+        "review_at": "2025-02-05T10:47:13Z",
+        "review_author": "liat-grozovik"
+    },
+    {
+        "number": 3427,
+        "repo": "sonic-swss",
+        "latestReview_at": "2025-02-05T10:47:13Z",
+        "latestReview_author": "liat-grozovik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3427,
+        "repo": "sonic-swss",
+        "latestReview_at": "2025-01-06T19:16:33Z",
+        "latestReview_author": "prsunny",
         "latestReview_state": "APPROVED"
     },
     {
