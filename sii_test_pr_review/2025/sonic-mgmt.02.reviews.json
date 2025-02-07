@@ -1,5 +1,181 @@
 [
     {
+        "number": 16816,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-06T02:07:35Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16816,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-06T02:07:45Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16816,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-07T01:57:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202411: https://github.com/sonic-net/sonic-mgmt/pull/16840"
+    },
+    {
+        "number": 16816,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-07T01:57:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-mgmt/pull/16841"
+    },
+    {
+        "number": 16816,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-02-06T23:08:51Z",
+        "review_author": "matthew-soulsby"
+    },
+    {
+        "number": 16816,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-02-07T01:53:16Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 16816,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2025-02-06T23:08:51Z",
+        "latestReview_author": "matthew-soulsby",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 16816,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2025-02-07T01:53:16Z",
+        "latestReview_author": "StormLiangMS",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 16805,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-05T16:38:44Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16805,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-05T16:38:57Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16805,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-05T22:19:09Z",
+        "comment_author": "augusdn",
+        "comment_body": "@wenyiz2021 Here is the snippet of log from failed case.\r\nTest log:\r\n26/01/2025 02:18:51 base._run L0071 DEBUG | /var/src/sonic-mgmt/tests/common/devices/multi_asic.py::_run_on_asics#136: [lc3-1] AnsibleModule::command, args=[\"reboot\"], kwargs={}\r\n26/01/2025 02:18:53 reboot.wait_for_startup L0196 INFO | waiting for ssh to startup on lc1-1\r\n\r\nSyslog from lc1:\r\n2025 Jan 26 02:18:46.645999 lc1-1 NOTICE root: User requested rebooting device ...\r\n2025 Jan 26 02:19:01.271662 lc1-1 NOTICE root: Failed killing container pmon RC 1 .\r\n2025 Jan 26 02:19:09.661568 lc1-1 INFO CCmisApi: reboot: Initiate shutdown command\r\n2025 Jan 26 02:21:49.548658 lc1-1 INFO cisco_platform.py[1193]: boot: cold boot\r\n\r\n\r\nMeanwhile test logged following output:\r\n26/01/2025 02:19:16 processes_utils.get_critical_processes_s L0035 INFO | The status of checking process in container 'pmon' is: False\r\n26/01/2025 02:19:16 processes_utils.get_critical_processes_s L0037 INFO | The processes not running in container 'pmon' are: '[]'\r\n26/01/2025 02:19:16 utilities.wait_until L0153 DEBUG | _all_critical_processes_healthy is False, wait 20 seconds and check again\r\n26/01/2025 02:19:36 transport._log L1873 DEBUG | EOF in transport thread\r\n26/01/2025 02:19:36 utilities.wait_until L0135 DEBUG | Time elapsed: 32.826792 seconds\r\n\r\n**We can see critical process check is failing due to pmon, but we get host unreachable error right after this**\r\npytest_ansible.errors.AnsibleConnectionFailure: Host unreachable in the inventory\r\n, error:Host unreachable in the inventory\r\n26/01/2025 02:20:55 utilities.wait_until L0153 DEBUG | _all_critical_processes_healthy is False, wait 20 seconds and check again\r\n26/01/2025 02:21:15 utilities.wait_until L0135 DEBUG | Time elapsed: 131.649778 seconds\r\n\r\n**This continues until time elapsed = 309s**\r\n26/01/2025 02:23:53 processes_utils.get_critical_processes_s L0035 INFO | The status of checking process in container 'pmon' is: False\r\n26/01/2025 02:23:53 processes_utils.get_critical_processes_s L0037 INFO | The processes not running in container 'pmon' are: '[]'\r\n26/01/2025 02:23:53 utilities.wait_until L0153 DEBUG | _all_critical_processes_healthy is False, wait 20 seconds and check again\r\n26/01/2025 02:24:13 utilities.wait_until L0135 DEBUG | Time elapsed: 309.133999 seconds\r\n\r\n**At this point, we see other processes have started, but their uptime is only 26s. Which shows LC has rebooted recently**\r\n\"rsyslogd RUNNING pid 48, uptime 0:00:25\", \"supervisor-proc-exit-listener RUNNING pid 38, uptime 0:00:26\"\r\n"
+    },
+    {
+        "number": 16805,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-05T22:56:27Z",
+        "comment_author": "wenyiz2021",
+        "comment_body": "@arlakshm for viz"
+    },
+    {
+        "number": 16805,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-06T02:17:13Z",
+        "comment_author": "augusdn",
+        "comment_body": "Successful test run and confirmed synchronized reboot on 7804 device\r\n\r\n06/02/2025 01:42:05 test_chassis_reboot.execute_reboot_comma L0030 INFO | Run cold reboot on <MultiAsicSonicHost lc5-1>\r\n06/02/2025 01:42:08 test_chassis_reboot.execute_reboot_comma L0030 INFO | Run cold reboot on <MultiAsicSonicHost lc3-1>\r\n06/02/2025 01:42:40 test_chassis_reboot.execute_reboot_comma L0030 INFO | Run cold reboot on <MultiAsicSonicHost lc7-1>\r\n06/02/2025 01:43:10 test_chassis_reboot.test_parallel_reboot L0092 INFO | DEBUGGING - Wait for all reboots to complete\r\n06/02/2025 01:43:10 test_chassis_reboot.test_parallel_reboot L0096 INFO | Reboot and shutdown result: shutdown success on lc5-1\r\n06/02/2025 01:43:10 test_chassis_reboot.test_parallel_reboot L0096 INFO | Reboot and shutdown result: shutdown success on lc3-1\r\n06/02/2025 01:43:10 test_chassis_reboot.test_parallel_reboot L0096 INFO | Reboot and shutdown result: shutdown success on lc7-1\r\n\r\n\r\nplatform_tests/test_chassis_reboot.py::test_parallel_reboot PASSED [100%]"
+    },
+    {
+        "number": 16805,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-06T02:18:16Z",
+        "comment_author": "augusdn",
+        "comment_body": "Successful test run and confirmed synchronized reboot on 7250 device\r\n06/02/2025 01:27:53 test_chassis_reboot.execute_reboot_comma L0030 INFO | Run cold reboot on <MultiAsicSonicHost lc1-1>\r\n06/02/2025 01:28:08 test_chassis_reboot.execute_reboot_comma L0030 INFO | Run cold reboot on <MultiAsicSonicHost lc2-1>\r\n06/02/2025 01:28:37 test_chassis_reboot.execute_reboot_comma L0030 INFO | Run cold reboot on <MultiAsicSonicHost lc3-1>\r\n06/02/2025 01:28:47 test_chassis_reboot.test_parallel_reboot L0092 INFO | DEBUGGING - Wait for all reboots to complete\r\n06/02/2025 01:28:47 test_chassis_reboot.test_parallel_reboot L0096 INFO | Reboot and shutdown result: shutdown success on lc1-1\r\n06/02/2025 01:28:47 test_chassis_reboot.test_parallel_reboot L0096 INFO | Reboot and shutdown result: shutdown success on lc2-1\r\n06/02/2025 01:28:59 test_chassis_reboot.test_parallel_reboot L0096 INFO | Reboot and shutdown result: shutdown success on lc3-1\r\n\r\nplatform_tests/test_chassis_reboot.py::test_parallel_reboot PASSED [100%]"
+    },
+    {
+        "number": 16805,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-06T03:41:53Z",
+        "comment_author": "augusdn",
+        "comment_body": "Hi @arlakshm, could you help me review and merge the PR please? Thank you!"
+    },
+    {
+        "number": 16805,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-06T23:10:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202411: https://github.com/sonic-net/sonic-mgmt/pull/16833"
+    },
+    {
+        "number": 16805,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-06T23:10:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202405: https://github.com/Azure/sonic-mgmt.msft/pull/65"
+    },
+    {
+        "number": 16805,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-02-05T18:25:50Z",
+        "review_author": "wenyiz2021"
+    },
+    {
+        "number": 16805,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-02-05T22:57:51Z",
+        "review_author": "wenyiz2021"
+    },
+    {
+        "number": 16805,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-02-06T02:24:13Z",
+        "review_author": "wenyiz2021"
+    },
+    {
+        "number": 16805,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-02-06T06:16:07Z",
+        "review_author": "arlakshm"
+    },
+    {
+        "number": 16805,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2025-02-06T06:16:07Z",
+        "latestReview_author": "arlakshm",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 16805,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2025-02-06T02:24:13Z",
+        "latestReview_author": "wenyiz2021",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 16804,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-05T12:33:11Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16804,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-05T12:33:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-mgmt/pull/16795"
+    },
+    {
+        "number": 16804,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-05T12:33:24Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
         "number": 16795,
         "repo": "sonic-mgmt",
         "comment_at": "2025-02-05T05:47:33Z",
@@ -23,6 +199,48 @@
     {
         "number": 16795,
         "repo": "sonic-mgmt",
+        "comment_at": "2025-02-07T01:45:06Z",
+        "comment_author": "liuh-80",
+        "comment_body": "There are 202305 and 202311 buildimage PR been blocked by this issue."
+    },
+    {
+        "number": 16795,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-07T01:46:09Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202311: https://github.com/sonic-net/sonic-mgmt/pull/16837"
+    },
+    {
+        "number": 16795,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-07T01:46:09Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202305: https://github.com/sonic-net/sonic-mgmt/pull/16838"
+    },
+    {
+        "number": 16795,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-07T01:46:36Z",
+        "comment_author": "yejianquan",
+        "comment_body": "FYI @yxieca @StormLiangMS for cherry-picking to 202305 and 202311, \r\nit's harmless ceos enhancement, and 202305/202311 is blocked by this"
+    },
+    {
+        "number": 16795,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-07T01:49:48Z",
+        "comment_author": "yejianquan",
+        "comment_body": "And fyi @bingwang-ms for 202405"
+    },
+    {
+        "number": 16795,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-07T01:49:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-mgmt/pull/16839"
+    },
+    {
+        "number": 16795,
+        "repo": "sonic-mgmt",
         "review_at": "2025-02-05T05:53:09Z",
         "review_author": "liamkearney-msft"
     },
@@ -41,8 +259,8 @@
     {
         "number": 16795,
         "repo": "sonic-mgmt",
-        "latestReview_at": "2025-02-05T05:53:09Z",
-        "latestReview_author": "liamkearney-msft",
+        "latestReview_at": "2025-02-05T12:32:14Z",
+        "latestReview_author": "yejianquan",
         "latestReview_state": "APPROVED"
     },
     {
@@ -55,9 +273,30 @@
     {
         "number": 16795,
         "repo": "sonic-mgmt",
-        "latestReview_at": "2025-02-05T12:32:14Z",
-        "latestReview_author": "yejianquan",
+        "latestReview_at": "2025-02-05T05:53:09Z",
+        "latestReview_author": "liamkearney-msft",
         "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 16792,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-05T03:38:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16792,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-05T03:38:44Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-mgmt/pull/16781"
+    },
+    {
+        "number": 16792,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-05T03:38:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
     },
     {
         "number": 16790,
@@ -98,6 +337,142 @@
         "repo": "sonic-mgmt",
         "latestReview_at": "2025-02-05T23:27:51Z",
         "latestReview_author": "yejianquan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 16789,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-05T02:57:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16789,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-05T02:58:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16789,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-06T02:17:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16789,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-06T02:17:42Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16789,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-06T07:53:35Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16789,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-06T07:53:47Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16789,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-02-06T18:37:05Z",
+        "review_author": "BYGX-wcr"
+    },
+    {
+        "number": 16789,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-02-07T01:02:32Z",
+        "review_author": "yejianquan"
+    },
+    {
+        "number": 16789,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2025-02-07T01:02:32Z",
+        "latestReview_author": "yejianquan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 16789,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2025-02-06T18:37:05Z",
+        "latestReview_author": "BYGX-wcr",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 16788,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-05T02:55:03Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16788,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-05T02:55:14Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16788,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-05T02:56:12Z",
+        "comment_author": "sdszhang",
+        "comment_body": "test results:\r\n\r\n```\r\n~$ show ip bgp summary\r\n\r\nIPv4 Unicast Summary:\r\nBGP router identifier 10.1.0.32, local AS number 65100 vrf-id 0\r\nBGP table version 12812\r\nRIB entries 12823, using 2462016 bytes of memory\r\nPeers 12, using 8903712 KiB of memory\r\nPeer groups 5, using 320 bytes of memory\r\n\r\n\r\nNeighbhor V AS MsgRcvd MsgSent TblVer InQ OutQ Up/Down State/PfxRcd NeighborName\r\n----------- --- ----- --------- --------- -------- ----- ------ --------- -------------- --------------\r\n10.0.0.57 4 64600 3205 3208 0 0 0 00:00:16 6400 ARISTA01T1\r\n10.0.0.59 4 64600 3205 3208 0 0 0 00:00:16 6400 ARISTA02T1\r\n10.0.0.61 4 64600 3205 2 0 0 0 00:00:01 6400 ARISTA03T1\r\n10.0.0.63 4 64600 3208 3208 0 0 0 00:00:17 6400 ARISTA04T1\r\n10.0.0.65 4 64600 3205 2 0 0 0 00:00:01 6400 ARISTA05T1\r\n10.0.0.67 4 64600 3205 2 0 0 0 00:00:01 6400 ARISTA06T1\r\n10.0.0.69 4 64600 3205 3208 0 0 0 00:00:16 6400 ARISTA07T1\r\n10.0.0.71 4 64600 3205 3208 0 0 0 00:00:15 6400 ARISTA08T1\r\n10.0.0.157 4 65100 5 12 0 0 0 00:00:19 0 ARISTA01PT0\r\n10.0.0.159 4 65100 5 12 0 0 0 00:00:19 0 ARISTA02PT0\r\n10.0.0.161 4 65100 5 12 0 0 0 00:00:19 0 ARISTA03PT0\r\n10.0.0.163 4 65100 5 12 0 0 0 00:00:19 0 ARISTA04PT0\r\n\r\nTotal number of neighbors 12\r\n~$ show interface status\r\n Interface Lanes Speed MTU FEC Alias Vlan Oper Admin Type Asym PFC\r\n--------------- --------------- ------- ----- ----- ------- --------------- ------ ------- --------------- ----------\r\n Ethernet0 0,1,2,3 100G 9100 rs etp1 trunk up up QSFP28 or later off\r\n Ethernet4 4,5,6,7 100G 9100 rs etp2 trunk up up QSFP28 or later off\r\n Ethernet8 8,9,10,11 100G 9100 rs etp3 trunk up up QSFP28 or later off\r\n Ethernet12 12,13,14,15 100G 9100 rs etp4 trunk up up QSFP28 or later off\r\n Ethernet16 16,17,18,19 100G 9100 rs etp5 routed up up QSFP28 or later off\r\n Ethernet20 20,21,22,23 100G 9100 rs etp6 trunk up up QSFP28 or later off\r\n Ethernet24 24,25,26,27 100G 9100 rs etp7 PortChannel102 up up QSFP28 or later off\r\n Ethernet28 28,29,30,31 100G 9100 rs etp8 PortChannel104 up up QSFP28 or later off\r\n Ethernet32 32,33,34,35 100G 9100 rs etp9 PortChannel106 up up QSFP28 or later off\r\n Ethernet36 36,37,38,39 100G 9100 rs etp10 PortChannel108 up up QSFP28 or later off\r\n Ethernet40 40,41,42,43 100G 9100 rs etp11 routed up up QSFP28 or later off\r\n Ethernet44 44,45,46,47 100G 9100 rs etp12 trunk up up QSFP28 or later off\r\n Ethernet48 48,49,50,51 100G 9100 rs etp13 trunk up up QSFP28 or later off\r\n Ethernet52 52,53,54,55 100G 9100 rs etp14 trunk up up QSFP28 or later off\r\n Ethernet56 56,57,58,59 100G 9100 rs etp15 trunk up up QSFP28 or later off\r\n Ethernet60 60,61,62,63 100G 9100 rs etp16 trunk up up QSFP28 or later off\r\n Ethernet64 64,65,66,67 100G 9100 rs etp17 trunk up up QSFP28 or later off\r\n Ethernet68 68,69,70,71 100G 9100 rs etp18 trunk up up QSFP28 or later off\r\n Ethernet72 72,73,74,75 100G 9100 rs etp19 trunk up up QSFP28 or later off\r\n Ethernet76 76,77,78,79 100G 9100 rs etp20 trunk up up QSFP28 or later off\r\n Ethernet80 80,81,82,83 100G 9100 rs etp21 routed up up QSFP28 or later off\r\n Ethernet84 84,85,86,87 100G 9100 rs etp22 trunk up up QSFP28 or later off\r\n Ethernet88 88,89,90,91 100G 9100 rs etp23 PortChannel109 up up QSFP28 or later off\r\n Ethernet92 92,93,94,95 100G 9100 rs etp24 PortChannel1010 up up QSFP28 or later off\r\n Ethernet96 96,97,98,99 100G 9100 rs etp25 PortChannel1011 up up QSFP28 or later off\r\n Ethernet100 100,101,102,103 100G 9100 rs etp26 PortChannel1012 up up QSFP28 or later off\r\n Ethernet104 104,105,106,107 100G 9100 rs etp27 routed up up QSFP28 or later off\r\n Ethernet108 108,109,110,111 100G 9100 rs etp28 trunk up up QSFP28 or later off\r\n Ethernet112 112,113,114,115 100G 9100 rs etp29 trunk up up QSFP28 or later off\r\n Ethernet116 116,117,118,119 100G 9100 rs etp30 trunk up up QSFP28 or later off\r\n Ethernet120 120,121,122,123 100G 9100 rs etp31 routed down down QSFP28 or later off\r\n Ethernet124 124,125,126,127 100G 9100 rs etp32 routed down down QSFP28 or later off\r\n PortChannel102 N/A 100G 9100 N/A N/A routed up up N/A N/A\r\n PortChannel104 N/A 100G 9100 N/A N/A routed up up N/A N/A\r\n PortChannel106 N/A 100G 9100 N/A N/A routed up up N/A N/A\r\n PortChannel108 N/A 100G 9100 N/A N/A routed up up N/A N/A\r\n PortChannel109 N/A 100G 9100 N/A N/A routed up up N/A N/A\r\nPortChannel1010 N/A 100G 9100 N/A N/A routed up up N/A N/A\r\nPortChannel1011 N/A 100G 9100 N/A N/A routed up up N/A N/A\r\nPortChannel1012 N/A 100G 9100 N/A N/A routed up up N/A N/A\r\n```"
+    },
+    {
+        "number": 16788,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-05T22:31:29Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16788,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-05T22:31:40Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16788,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-06T02:47:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202411: https://github.com/sonic-net/sonic-mgmt/pull/16818"
+    },
+    {
+        "number": 16788,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-02-05T18:53:39Z",
+        "review_author": "r12f"
+    },
+    {
+        "number": 16788,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-02-06T02:46:37Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 16788,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2025-02-05T18:53:39Z",
+        "latestReview_author": "r12f",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 16788,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2025-02-06T02:46:37Z",
+        "latestReview_author": "StormLiangMS",
         "latestReview_state": "APPROVED"
     },
     {
@@ -163,6 +538,82 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 16780,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-04T22:02:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16780,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-04T22:02:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nPull request contains merge conflicts.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16780,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-04T22:02:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16780,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-04T22:02:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nPull request contains merge conflicts.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16780,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-04T22:57:21Z",
+        "comment_author": "yejianquan",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16780,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-04T22:57:33Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16780,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-05T04:52:30Z",
+        "comment_author": "auspham",
+        "comment_body": "/azpw run\r\n"
+    },
+    {
+        "number": 16780,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-05T04:52:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 16780,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-05T04:52:43Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16780,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-02-06T05:33:35Z",
+        "review_author": "yejianquan"
+    },
+    {
+        "number": 16780,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2025-02-06T05:33:35Z",
+        "latestReview_author": "yejianquan",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 16773,
         "repo": "sonic-mgmt",
         "comment_at": "2025-02-04T05:16:08Z",
@@ -212,15 +663,15 @@
     {
         "number": 16773,
         "repo": "sonic-mgmt",
-        "latestReview_at": "2025-02-04T05:42:26Z",
-        "latestReview_author": "Javier-Tan",
+        "latestReview_at": "2025-02-04T12:20:30Z",
+        "latestReview_author": "yejianquan",
         "latestReview_state": "APPROVED"
     },
     {
         "number": 16773,
         "repo": "sonic-mgmt",
-        "latestReview_at": "2025-02-04T12:20:30Z",
-        "latestReview_author": "yejianquan",
+        "latestReview_at": "2025-02-04T05:42:26Z",
+        "latestReview_author": "Javier-Tan",
         "latestReview_state": "APPROVED"
     },
     {
@@ -278,15 +729,15 @@
     {
         "number": 16772,
         "repo": "sonic-mgmt",
-        "latestReview_at": "2025-02-04T04:53:48Z",
-        "latestReview_author": "auspham",
+        "latestReview_at": "2025-02-04T07:01:26Z",
+        "latestReview_author": "yejianquan",
         "latestReview_state": "APPROVED"
     },
     {
         "number": 16772,
         "repo": "sonic-mgmt",
-        "latestReview_at": "2025-02-04T07:01:26Z",
-        "latestReview_author": "yejianquan",
+        "latestReview_at": "2025-02-04T04:53:48Z",
+        "latestReview_author": "auspham",
         "latestReview_state": "APPROVED"
     },
     {
@@ -339,15 +790,15 @@
     {
         "number": 16769,
         "repo": "sonic-mgmt",
-        "latestReview_at": "2025-02-05T01:08:31Z",
-        "latestReview_author": "abdosi",
+        "latestReview_at": "2025-02-05T01:02:51Z",
+        "latestReview_author": "cyw233",
         "latestReview_state": "APPROVED"
     },
     {
         "number": 16769,
         "repo": "sonic-mgmt",
-        "latestReview_at": "2025-02-05T01:02:51Z",
-        "latestReview_author": "cyw233",
+        "latestReview_at": "2025-02-05T01:08:31Z",
+        "latestReview_author": "abdosi",
         "latestReview_state": "APPROVED"
     },
     {
@@ -537,15 +988,55 @@
     {
         "number": 16755,
         "repo": "sonic-mgmt",
-        "latestReview_at": "2025-02-05T04:53:26Z",
-        "latestReview_author": "arlakshm",
+        "latestReview_at": "2025-02-03T22:30:09Z",
+        "latestReview_author": "Javier-Tan",
         "latestReview_state": "APPROVED"
     },
     {
         "number": 16755,
         "repo": "sonic-mgmt",
-        "latestReview_at": "2025-02-03T22:30:09Z",
-        "latestReview_author": "Javier-Tan",
+        "latestReview_at": "2025-02-05T04:53:26Z",
+        "latestReview_author": "arlakshm",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 16754,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-01T00:08:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16754,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-01T00:08:37Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16754,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-02-03T04:53:57Z",
+        "review_author": "YatishSVC"
+    },
+    {
+        "number": 16754,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-02-06T18:05:34Z",
+        "review_author": "rlhui"
+    },
+    {
+        "number": 16754,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2025-02-06T18:05:34Z",
+        "latestReview_author": "rlhui",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 16754,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2025-02-03T04:53:57Z",
+        "latestReview_author": "YatishSVC",
         "latestReview_state": "APPROVED"
     },
     {
@@ -770,6 +1261,121 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 16723,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-30T00:13:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16723,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-30T00:13:35Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16723,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-03T22:58:24Z",
+        "comment_author": "arista-nwolfe",
+        "comment_body": "@wenyiz2021 "
+    },
+    {
+        "number": 16723,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-03T23:22:37Z",
+        "comment_author": "arista-nwolfe",
+        "comment_body": "Thanks for looking @wenyiz2021 I only changed the `last_timestamp` keyword argument in the function signature.\r\n`test_ro_disk.py` and `test_authorization.py` don't pass that keyword argument so they don't need updating"
+    },
+    {
+        "number": 16723,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-02-03T23:15:27Z",
+        "review_author": "wenyiz2021"
+    },
+    {
+        "number": 16723,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-02-03T23:24:50Z",
+        "review_author": "wenyiz2021"
+    },
+    {
+        "number": 16723,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-02-06T18:04:18Z",
+        "review_author": "rlhui"
+    },
+    {
+        "number": 16723,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2025-02-06T18:04:18Z",
+        "latestReview_author": "rlhui",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 16723,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2025-02-03T23:24:50Z",
+        "latestReview_author": "wenyiz2021",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 16708,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-29T18:49:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16708,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-29T18:49:42Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16708,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-29T19:12:36Z",
+        "comment_author": "justin-wong-ce",
+        "comment_body": "/azpw run Azure.sonic-mgmt"
+    },
+    {
+        "number": 16708,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-29T19:12:40Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run Azure.sonic-mgmt"
+    },
+    {
+        "number": 16708,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-29T19:12:49Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16708,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-06T08:49:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202411: https://github.com/sonic-net/sonic-mgmt/pull/16824"
+    },
+    {
+        "number": 16708,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-02-06T08:48:55Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 16708,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2025-02-06T08:48:55Z",
+        "latestReview_author": "StormLiangMS",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 16684,
         "repo": "sonic-mgmt",
         "comment_at": "2025-01-26T03:38:21Z",
@@ -955,6 +1561,86 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 16640,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-22T15:12:09Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16640,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-22T15:12:21Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16640,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-22T15:21:07Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16640,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-22T15:21:20Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16640,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-05T20:37:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16640,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-05T20:38:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16640,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-02-05T19:07:18Z",
+        "review_author": "SuvarnaMeenakshi"
+    },
+    {
+        "number": 16640,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-02-05T20:35:55Z",
+        "review_author": "wumiaont"
+    },
+    {
+        "number": 16640,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-02-05T20:54:57Z",
+        "review_author": "SuvarnaMeenakshi"
+    },
+    {
+        "number": 16640,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-02-06T17:56:52Z",
+        "review_author": "rlhui"
+    },
+    {
+        "number": 16640,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2025-02-06T17:56:52Z",
+        "latestReview_author": "rlhui",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 16640,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2025-02-05T20:54:57Z",
+        "latestReview_author": "SuvarnaMeenakshi",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 16626,
         "repo": "sonic-mgmt",
         "comment_at": "2025-01-22T02:33:48Z",
@@ -1052,6 +1738,302 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 16621,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-21T23:35:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16621,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-21T23:35:50Z",
+        "comment_author": "linux-foundation-easycla",
+        "comment_body": "<a href=\"https://easycla.lfx.linuxfoundation.org/#/?version=2\"><img src=\"https://s3.amazonaws.com/cla-project-logo-prod/cla-signed.svg\" alt=\"CLA Signed\" align=\"left\" height=\"28\" width=\"328\" ><br ><ul><li>:white_check_mark:login: isiddeeq-cisco / (9c05f027f4e54e5f0273d1389d0b399d0ff2533a)</li></ul><br>The committers listed above are authorized under a signed CLA."
+    },
+    {
+        "number": 16621,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-21T23:36:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16621,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-07T01:48:53Z",
+        "comment_author": "rajendrat",
+        "comment_body": "viz @wsycqyz @kevinwangsk . Please help review / merge this PR. "
+    },
+    {
+        "number": 16621,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-07T02:43:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@isiddeeq-cisco PR conflicts with 202405 branch"
+    },
+    {
+        "number": 16621,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-07T02:43:29Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202411: https://github.com/sonic-net/sonic-mgmt/pull/16843"
+    },
+    {
+        "number": 16621,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-01-24T23:46:26Z",
+        "review_author": "bpar9"
+    },
+    {
+        "number": 16621,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-02-07T02:40:29Z",
+        "review_author": "wsycqyz"
+    },
+    {
+        "number": 16621,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2025-02-07T02:40:29Z",
+        "latestReview_author": "wsycqyz",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 16621,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2025-01-24T23:46:26Z",
+        "latestReview_author": "bpar9",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-20T07:42:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-20T07:42:44Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines could not run because the pipeline triggers exclude this branch/path.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-20T10:53:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-20T10:54:09Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines could not run because the pipeline triggers exclude this branch/path.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-20T10:56:03Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-20T10:56:11Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines could not run because the pipeline triggers exclude this branch/path.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-20T11:04:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-20T11:05:04Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines could not run because the pipeline triggers exclude this branch/path.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-20T11:27:02Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-20T11:27:11Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines could not run because the pipeline triggers exclude this branch/path.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-21T05:51:02Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-21T05:51:10Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines could not run because the pipeline triggers exclude this branch/path.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-22T08:29:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-22T08:29:34Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines could not run because the pipeline triggers exclude this branch/path.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-03T12:26:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-03T12:26:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines could not run because the pipeline triggers exclude this branch/path.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-04T14:21:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-04T14:21:58Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-04T15:23:34Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-04T15:23:47Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-04T15:25:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-04T15:25:34Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines could not run because the pipeline triggers exclude this branch/path.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-06T12:43:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-06T12:43:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines could not run because the pipeline triggers exclude this branch/path.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-06T12:58:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-06T12:58:11Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines could not run because the pipeline triggers exclude this branch/path.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-06T15:06:21Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-06T15:06:30Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines could not run because the pipeline triggers exclude this branch/path.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-01-23T15:22:29Z",
+        "review_author": "rkavitha-hcl"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-02-06T15:19:42Z",
+        "review_author": "rkavitha-hcl"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-02-06T18:11:41Z",
+        "review_author": "vamsipunati"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2025-02-06T18:11:41Z",
+        "latestReview_author": "vamsipunati",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 16590,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2025-02-06T15:19:42Z",
+        "latestReview_author": "rkavitha-hcl",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 16574,
         "repo": "sonic-mgmt",
         "comment_at": "2025-01-17T13:44:09Z",
@@ -1076,6 +2058,129 @@
         "repo": "sonic-mgmt",
         "latestReview_at": "2025-01-20T01:57:15Z",
         "latestReview_author": "wangxin",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 16550,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-16T10:48:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16550,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-16T10:48:51Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16550,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-17T16:20:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16550,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-17T16:21:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16550,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-17T16:22:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16550,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-17T16:23:03Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16550,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-17T16:33:57Z",
+        "comment_author": "alpeshspatel",
+        "comment_body": "viz: @abdosi @sdszhang "
+    },
+    {
+        "number": 16550,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-01-21T22:14:27Z",
+        "comment_author": "sdszhang",
+        "comment_body": "has a corresponding image code drop before merging."
+    },
+    {
+        "number": 16550,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-04T20:15:40Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 16550,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-04T20:15:52Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16550,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-07T02:50:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202411: https://github.com/sonic-net/sonic-mgmt/pull/16844"
+    },
+    {
+        "number": 16550,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-02-07T02:50:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202405: https://github.com/Azure/sonic-mgmt.msft/pull/66"
+    },
+    {
+        "number": 16550,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-01-17T16:33:36Z",
+        "review_author": "alpeshspatel"
+    },
+    {
+        "number": 16550,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-01-24T08:00:06Z",
+        "review_author": "bpar9"
+    },
+    {
+        "number": 16550,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-02-07T02:36:42Z",
+        "review_author": "sdszhang"
+    },
+    {
+        "number": 16550,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2025-01-17T16:33:36Z",
+        "latestReview_author": "alpeshspatel",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 16550,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2025-01-24T08:00:06Z",
+        "latestReview_author": "bpar9",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 16550,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2025-02-07T02:36:42Z",
+        "latestReview_author": "sdszhang",
         "latestReview_state": "APPROVED"
     },
     {
@@ -1141,15 +2246,15 @@
     {
         "number": 16513,
         "repo": "sonic-mgmt",
-        "latestReview_at": "2025-02-04T20:36:10Z",
-        "latestReview_author": "arlakshm",
+        "latestReview_at": "2025-02-04T20:35:15Z",
+        "latestReview_author": "vmittal-msft",
         "latestReview_state": "APPROVED"
     },
     {
         "number": 16513,
         "repo": "sonic-mgmt",
-        "latestReview_at": "2025-02-04T20:35:15Z",
-        "latestReview_author": "vmittal-msft",
+        "latestReview_at": "2025-02-04T20:36:10Z",
+        "latestReview_author": "arlakshm",
         "latestReview_state": "APPROVED"
     },
     {
@@ -1317,15 +2422,15 @@
     {
         "number": 16442,
         "repo": "sonic-mgmt",
-        "latestReview_at": "2025-01-20T00:56:28Z",
-        "latestReview_author": "Javier-Tan",
+        "latestReview_at": "2025-02-05T12:33:21Z",
+        "latestReview_author": "yejianquan",
         "latestReview_state": "APPROVED"
     },
     {
         "number": 16442,
         "repo": "sonic-mgmt",
-        "latestReview_at": "2025-02-05T12:33:21Z",
-        "latestReview_author": "yejianquan",
+        "latestReview_at": "2025-01-20T00:56:28Z",
+        "latestReview_author": "Javier-Tan",
         "latestReview_state": "APPROVED"
     },
     {
@@ -2063,15 +3168,15 @@
     {
         "number": 16081,
         "repo": "sonic-mgmt",
-        "latestReview_at": "2025-02-04T21:30:48Z",
-        "latestReview_author": "qiluo-msft",
+        "latestReview_at": "2025-01-23T06:09:49Z",
+        "latestReview_author": "wen587",
         "latestReview_state": "APPROVED"
     },
     {
         "number": 16081,
         "repo": "sonic-mgmt",
-        "latestReview_at": "2025-01-23T06:09:49Z",
-        "latestReview_author": "wen587",
+        "latestReview_at": "2025-02-04T21:30:48Z",
+        "latestReview_author": "qiluo-msft",
         "latestReview_state": "APPROVED"
     },
     {
