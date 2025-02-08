@@ -4594,5 +4594,755 @@
         "latestReview_at": "2025-01-21T20:48:57Z",
         "latestReview_author": "eddieruan-alibaba",
         "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2023-11-15T04:07:04Z",
+        "comment_author": "nakano-omw",
+        "comment_body": "/AzurePipelines run Azure.sonic-swss"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2023-11-15T04:07:11Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nCommenter does not have sufficient privileges for PR 2919 in repo sonic-net/sonic-swss<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2023-11-15T04:11:36Z",
+        "comment_author": "nakano-omw",
+        "comment_body": "@zice312963205 @shuaishang \r\nPlease help in restarting the /AzurePipelines run Azure.sonic-swss. Would you be able to grant me the privilege?"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2023-12-15T04:27:54Z",
+        "comment_author": "ridahanif96",
+        "comment_body": "@nakano-omw your branch needs to be updated and you need to repush your code first. @prsunny Hi Prince, can you please help with this PR to merge. Thanks."
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2023-12-15T11:49:18Z",
+        "comment_author": "nakano-omw",
+        "comment_body": "@ridahanif96 I have repush. Thanks."
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2024-01-18T09:12:48Z",
+        "comment_author": "zice312963205",
+        "comment_body": "Looks good"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2024-02-05T08:38:33Z",
+        "comment_author": "zhangyanzhao",
+        "comment_body": "reviewers, can you please help to review and approve this PR? Thanks."
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2024-09-19T22:07:07Z",
+        "comment_author": "kperumalbfn",
+        "comment_body": "@ntt-omw Please check the compiler failures\r\n\r\nroutesync.cpp:800:23: error: 'rtnl_route_get_nh_id' was not declared in this scope; did you mean 'rtnl_route_get_iif'?\r\n  800 |     uint32_t nhg_id = rtnl_route_get_nh_id(route_obj);\r\n      |                       ^~~~~~~~~~~~~~~~~~~~\r\n      |                       rtnl_route_get_iif\r\n"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2024-09-29T03:19:27Z",
+        "comment_author": "eddieruan-alibaba",
+        "comment_body": "@ntt-omw can you rebase your branch and trigger recompile? You need https://github.com/sonic-net/sonic-swss/pull/3105 's changes to fix the compile issue @kperumalbfn  pointed out."
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2024-10-21T06:40:10Z",
+        "comment_author": "nakano-omw",
+        "comment_body": "@dgsudharsan @kperumalbfn \r\nThe test will be implemented in Phoenix Wing. @eddieruan-alibaba , let me know if you have any additional information."
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2024-10-28T00:45:34Z",
+        "comment_author": "eddieruan-alibaba",
+        "comment_body": "> @dgsudharsan @kperumalbfn The test will be implemented in Phoenix Wing. @eddieruan-alibaba , let me know if you have any additional information.\r\n\r\n@ntt-omw can you help to get swss sanity check passed? \r\n\r\nFailed: 3 (0.35%)\r\n\r\ntest_rebind_eni_route_group\r\nAssertionError: Field SAI_ENI_ATTR_OUTBOUND_ROUTING_GROUP_ID in ASIC_DB table ASIC_STATE:SAI_OBJECT_TYPE_ENI not equal to oid:0x14008000000617\r\nhttps://github.com/sonic-net/sonic-swss/pull/2919/checks?check_run_id=31324424340\r\n\r\nMight be related to your changes."
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2024-10-29T23:01:00Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "@nakano-omw libnl 3.10 will have support for getting/setting the nexthop ID attribute, but the API is a little bit different. See https://github.com/thom311/libnl/commit/3e0806317b5116bca7a097a0cb9b7a9cbebc465a for details. It looks like in the version of code that has been committed, it's `nhid` instead of `nh_id`.\r\n\r\nFor ease of upgrades, it would be good if the same API syntax is used. Would you be able to rework this PR to use that new API instead?"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2024-11-03T23:15:34Z",
+        "comment_author": "eddieruan-alibaba",
+        "comment_body": "@ntt-omw @nakano-omw can you rebase your branch to latest master?  You have \"This branch is out-of-date with the base branch\""
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2024-11-06T01:51:35Z",
+        "comment_author": "sugisono-omw",
+        "comment_body": "@eddieruan-alibaba \r\n\r\nWe are fixing this issue.   \r\n\r\n> > @dgsudharsan @kperumalbfn The test will be implemented in Phoenix Wing. @eddieruan-alibaba , let me know if you have any additional information.\r\n> \r\n> @ntt-omw can you help to get swss sanity check passed?\r\n> \r\n> Failed: 3 (0.35%)\r\n> \r\n> test_rebind_eni_route_group AssertionError: Field SAI_ENI_ATTR_OUTBOUND_ROUTING_GROUP_ID in ASIC_DB table ASIC_STATE:SAI_OBJECT_TYPE_ENI not equal to oid:0x14008000000617 https://github.com/sonic-net/sonic-swss/pull/2919/checks?check_run_id=31324424340\r\n> \r\n> Might be related to your changes.\r\n\r\n"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2024-11-06T01:53:33Z",
+        "comment_author": "sugisono-omw",
+        "comment_body": "@eddieruan-alibaba \r\n\r\nWe are rebasing our branch now. \r\n\r\n> @ntt-omw @nakano-omw can you rebase your branch to latest master? You have \"This branch is out-of-date with the base branch\"\r\n\r\n"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2024-11-06T23:59:15Z",
+        "comment_author": "eddieruan-alibaba",
+        "comment_body": "Following lines are missing test coverage.. Coverage Threshold is 80%.\r\n"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2024-11-19T04:22:11Z",
+        "comment_author": "nakano-omw",
+        "comment_body": "@saiarcot895 SONiC uses libnl3.5 instead of libnl3.10."
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2024-11-20T23:30:38Z",
+        "comment_author": "sugisono-omw",
+        "comment_body": "@saiarcot895 \r\n\r\nI'll elaborate on Kanji's comment.\r\nWe understand that our code should be libnl3.10-friendly for future updates.\r\nHowever, we are also concerned that many lines have to be rewritten for it and that it is difficult to do now due to lack of people. \r\nSo we think it would be good to do the rework for the new API you mentioned when SONiC adopts libnl 3.10 or later if this would not be urgent. \r\n\r\n\r\n> @saiarcot895 SONiC uses libnl3.5 instead of libnl3.10.\r\n\r\n"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2024-12-11T11:33:12Z",
+        "comment_author": "nakano-omw",
+        "comment_body": "@dgsudharsan \r\nCoverage of 80+ was achieved with the addition of UT.\r\nhttps://github.com/sonic-net/sonic-swss/pull/2919#pullrequestreview-2067364927"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2024-12-11T11:33:33Z",
+        "comment_author": "nakano-omw",
+        "comment_body": "@prsunny Please review and merge."
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2024-12-11T18:24:05Z",
+        "comment_author": "eddieruan-alibaba",
+        "comment_body": "@prsunny  can you help to retrigger sanity? \r\n\r\nIt stuck at \"Expected \u2014 Waiting for status to be reported\"? What is this sanity? Any reason why it gets stuck?"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2024-12-11T18:59:00Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "> @saiarcot895\r\n> \r\n> I'll elaborate on Kanji's comment. We understand that our code should be libnl3.10-friendly for future updates. However, we are also concerned that many lines have to be rewritten for it and that it is difficult to do now due to lack of people. So we think it would be good to do the rework for the new API you mentioned when SONiC adopts libnl 3.10 or later if this would not be urgent.\r\n> \r\n> > @saiarcot895 SONiC uses libnl3.5 instead of libnl3.10.\r\n\r\n@nakano-omw @sugisono-omw Understood. While this is not an urgent ask (and it does not need to be handled in this PR either), I would prefer that it be handled _before_ SONiC needs to adopt libnl 3.10 or newer. This is so that this doesn't become a blocker for upgrading to a newer version of libnl. Fortunately, as of right now, the next version of Debian will still be on libnl 3.7.0, so there's plenty of time."
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2024-12-12T16:55:47Z",
+        "comment_author": "eddieruan-alibaba",
+        "comment_body": "The PR's sanity is green now. Do we have any further comments?\r\n\r\n@prsunny  @dgsudharsan @hasan-brcm  can you help to review and sign off this PR? This is the first step to enable NHG handling in SONiC. "
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2025-01-06T07:07:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2025-01-06T07:07:33Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2025-01-06T18:57:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2025-01-06T18:57:43Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2025-01-06T18:58:03Z",
+        "comment_author": "prsunny",
+        "comment_body": "Retriggered the tests. "
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2025-01-22T16:40:04Z",
+        "comment_author": "eddieruan-alibaba",
+        "comment_body": "@ntt-omw @nakano-omw could you take care these comments from WG?"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2025-01-23T08:23:38Z",
+        "comment_author": "nanakanok",
+        "comment_body": "@eddieruan-alibaba \r\n\r\nSorry for late reply. I will attending a conference this week. I will respond to comments within the next week."
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2025-01-29T00:55:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2025-01-29T00:55:24Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2025-01-29T08:29:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2025-01-29T08:30:00Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2025-01-29T10:46:08Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2025-01-29T10:46:19Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2025-01-31T08:48:05Z",
+        "comment_author": "nakano-omw",
+        "comment_body": "@dgsudharsan The code has been corrected."
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2025-02-06T04:57:45Z",
+        "comment_author": "eddieruan-alibaba",
+        "comment_body": "@dgsudharsan can you help to review it again? @nakano-omw has already addressed your comments. @nakano-omw can you change the Sudharsan's review status to request for review? Currently, it is still \"requested changes\"\r\n"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2025-02-06T23:25:10Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2025-02-06T23:25:20Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2025-02-06T23:25:44Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "@eddieruan-alibaba Still one of my comments is not addressed. Left a comment on how to address that"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2025-02-06T23:42:46Z",
+        "comment_author": "eddieruan-alibaba",
+        "comment_body": "Thanks @dgsudharsan . @nakano-omw do you want to take a look again? "
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2025-02-07T03:58:09Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2025-02-07T03:58:19Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2025-02-07T04:39:52Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2025-02-07T04:40:04Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2025-02-07T04:43:29Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2025-02-07T04:43:39Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2025-02-07T07:56:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "comment_at": "2025-02-07T07:56:24Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2023-10-12T09:38:50Z",
+        "review_author": "zice312963205"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2023-10-12T09:42:40Z",
+        "review_author": "shuaishang"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2023-11-10T10:30:23Z",
+        "review_author": "nakano-omw"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2023-11-10T10:30:57Z",
+        "review_author": "nakano-omw"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-02-26T09:15:31Z",
+        "review_author": "zice312963205"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-05-21T03:18:04Z",
+        "review_author": "dgsudharsan"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-09-11T01:12:19Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-09-19T22:02:22Z",
+        "review_author": "kperumalbfn"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-09-19T22:03:35Z",
+        "review_author": "kperumalbfn"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-09-19T22:05:11Z",
+        "review_author": "kperumalbfn"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-09-29T07:36:41Z",
+        "review_author": "VladimirKuk"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-09-29T07:38:24Z",
+        "review_author": "VladimirKuk"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-09-30T12:09:53Z",
+        "review_author": "nakano-omw"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-09-30T12:13:07Z",
+        "review_author": "nakano-omw"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-09-30T12:13:56Z",
+        "review_author": "nakano-omw"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-09-30T12:14:24Z",
+        "review_author": "nakano-omw"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-09-30T12:14:30Z",
+        "review_author": "nakano-omw"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-10-02T01:20:24Z",
+        "review_author": "nakano-omw"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-10-02T01:21:02Z",
+        "review_author": "nakano-omw"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-11-08T02:13:31Z",
+        "review_author": "prvattem"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-11-08T02:19:56Z",
+        "review_author": "prvattem"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-11-23T00:20:57Z",
+        "review_author": "dgsudharsan"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-11-23T04:03:43Z",
+        "review_author": "dgsudharsan"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-12-03T03:53:21Z",
+        "review_author": "goomadao"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-12-03T03:59:32Z",
+        "review_author": "nakano-omw"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-12-04T08:31:37Z",
+        "review_author": "goomadao"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-12-10T20:08:33Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-12-10T20:20:12Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-12-10T20:23:27Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-12-10T20:24:43Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-12-11T01:20:20Z",
+        "review_author": "nakano-omw"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-12-11T01:20:39Z",
+        "review_author": "nakano-omw"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-12-11T01:20:55Z",
+        "review_author": "nakano-omw"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-12-11T01:34:18Z",
+        "review_author": "nakano-omw"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-12-11T01:36:50Z",
+        "review_author": "nakano-omw"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-12-11T01:37:45Z",
+        "review_author": "nakano-omw"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-12-11T01:38:08Z",
+        "review_author": "nakano-omw"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-12-11T01:39:29Z",
+        "review_author": "nakano-omw"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2024-12-11T18:21:26Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2025-01-09T17:33:09Z",
+        "review_author": "hasan-brcm"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2025-01-09T17:51:46Z",
+        "review_author": "hasan-brcm"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2025-01-10T01:07:24Z",
+        "review_author": "dgsudharsan"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2025-01-10T01:49:19Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2025-01-10T01:49:47Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2025-01-10T02:00:31Z",
+        "review_author": "dgsudharsan"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2025-01-10T02:32:21Z",
+        "review_author": "goomadao"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2025-01-10T02:36:19Z",
+        "review_author": "goomadao"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2025-01-10T21:49:23Z",
+        "review_author": "hasan-brcm"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2025-01-11T06:38:39Z",
+        "review_author": "goomadao"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2025-01-31T08:50:36Z",
+        "review_author": "nakano-omw"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2025-01-31T08:53:18Z",
+        "review_author": "nakano-omw"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2025-01-31T22:35:04Z",
+        "review_author": "hasan-brcm"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2025-02-06T23:20:15Z",
+        "review_author": "dgsudharsan"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2025-02-07T04:43:10Z",
+        "review_author": "dgsudharsan"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "review_at": "2025-02-07T20:59:43Z",
+        "review_author": "dgsudharsan"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "latestReview_at": "2024-09-19T22:05:11Z",
+        "latestReview_author": "kperumalbfn",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "latestReview_at": "2024-09-29T07:38:24Z",
+        "latestReview_author": "VladimirKuk",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "latestReview_at": "2025-01-11T06:38:39Z",
+        "latestReview_author": "goomadao",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "latestReview_at": "2023-10-12T09:42:40Z",
+        "latestReview_author": "shuaishang",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "latestReview_at": "2024-11-08T02:19:56Z",
+        "latestReview_author": "prvattem",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "latestReview_at": "2025-01-10T01:49:47Z",
+        "latestReview_author": "eddieruan-alibaba",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "latestReview_at": "2025-01-31T08:53:18Z",
+        "latestReview_author": "nakano-omw",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "latestReview_at": "2025-02-07T20:59:43Z",
+        "latestReview_author": "dgsudharsan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "latestReview_at": "2024-02-26T09:15:31Z",
+        "latestReview_author": "zice312963205",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2919,
+        "repo": "sonic-swss",
+        "latestReview_at": "2025-01-31T22:35:04Z",
+        "latestReview_author": "hasan-brcm",
+        "latestReview_state": "APPROVED"
     }
 ]
