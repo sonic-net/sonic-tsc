@@ -1,5 +1,26 @@
 [
     {
+        "number": 1528,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-02-10T17:50:08Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1528,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-02-10T17:50:08Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-sairedis/pull/1519"
+    },
+    {
+        "number": 1528,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-02-10T17:50:19Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
         "number": 1524,
         "repo": "sonic-sairedis",
         "comment_at": "2025-02-06T21:45:54Z",
@@ -312,6 +333,13 @@
         "comment_at": "2025-02-09T20:11:04Z",
         "comment_author": "r12f",
         "comment_body": "hi @kperumalbfn , do you mind to help get this PR merged into 202411?"
+    },
+    {
+        "number": 1519,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-02-10T17:50:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202411: https://github.com/sonic-net/sonic-sairedis/pull/1528"
     },
     {
         "number": 1519,
@@ -1015,6 +1043,249 @@
         "repo": "sonic-sairedis",
         "latestReview_at": "2025-01-17T17:32:29Z",
         "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-01-13T11:05:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-01-13T11:05:16Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-01-13T11:22:47Z",
+        "comment_author": "kcudnik",
+        "comment_body": "Please give detailed explanation why this is reverted, since previously we established that this indeed helped with stat performance."
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-01-13T11:32:26Z",
+        "comment_author": "stephenxs",
+        "comment_body": "> Please give detailed explanation why this is reverted, since previously we established that this indeed helped with stat performance.\r\n\r\nyes, will do"
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-01-14T07:12:24Z",
+        "comment_author": "stephenxs",
+        "comment_body": "> Please give detailed explanation why this is reverted, since previously we established that this indeed helped with stat performance.\r\n\r\nThere is a timeout between SAI and SDK when counters are polled in bulk mode. the timeout is estimated based on the fact that all SAI API calls from syncd's main thread or counter-polling threads wouldn't execute parallelly.\r\nnow, with the mutex on counter polling API calls removed, a bulk counter polling API call can execute parallelly with other SAI API calls from 1. syncd's main thread or 2. other counter polling threads\r\nif there are a heavy workload on SAI API calls from syncd's main thread, the bulk counter polling can get timeout\r\nwe need to extend the time out but we need to estimate how long the timeout should be in such scenario, which need more effort."
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-01-14T07:16:37Z",
+        "comment_author": "kcudnik",
+        "comment_body": "Which timeout to extend ? Syncd heavy use is only on boot scenario, when you see timeouts why pooling countes?"
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-01-15T10:47:16Z",
+        "comment_author": "stephenxs",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-01-15T10:47:18Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-01-15T10:47:30Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-01-15T11:45:24Z",
+        "comment_author": "stephenxs",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-01-15T11:45:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-01-15T11:45:36Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-01-15T14:43:22Z",
+        "comment_author": "kcudnik",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-01-15T14:43:35Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-01-16T10:18:05Z",
+        "comment_author": "kcudnik",
+        "comment_body": "since you touched previously not covered code, you will need to add unittests for this code to satisfy code coverage "
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-01-16T10:51:50Z",
+        "comment_author": "stephenxs",
+        "comment_body": "> since you touched previously not covered code, you will need to add unittests for this code to satisfy code coverage\r\n\r\nYes. I did. actually all lines were covered but somehow coverage reported they were uncovered"
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-01-16T10:56:02Z",
+        "comment_author": "kcudnik",
+        "comment_body": "doyou have them written in unittests/syncd/TestVendorSai.cpp ? and actually calling those stats ?"
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-01-20T06:51:48Z",
+        "comment_author": "stephenxs",
+        "comment_body": "> doyou have them written in unittests/syncd/TestVendorSai.cpp ? and actually calling those stats ?\r\n\r\nnot really but I've reviewed existing test cases and understood the APIs have been covered\r\n```\r\nThread 1 \"tests\" hit Breakpoint 4, operator() (counter_ids=0x55555590cb30, number_of_counters=1, object_id=5910974510923777, object_type=SAI_OBJECT_TYPE_QUEUE, __closure=0x555555901fb0) at TestFlexCounter.cpp:265\r\n265             clearCalled = true;\r\n(gdb) bt\r\n#0  operator() (counter_ids=0x55555590cb30, number_of_counters=1, object_id=5910974510923777, object_type=SAI_OBJECT_TYPE_QUEUE, __closure=0x555555901fb0) at TestFlexCounter.cpp:265\r\n#1  std::__invoke_impl<long int, FlexCounter_addRemoveCounter_Test::TestBody()::<lambda(sai_object_type_t, sai_object_id_t, uint32_t, const sai_stat_id_t*)>&, _sai_object_type_t, long unsigned int, unsigned int, unsigned int const*> (__f=...)\r\n    at /usr/include/c++/12/bits/invoke.h:61\r\n#2  std::__invoke_r<int, FlexCounter_addRemoveCounter_Test::TestBody()::<lambda(sai_object_type_t, sai_object_id_t, uint32_t, const sai_stat_id_t*)>&, _sai_object_type_t, long unsigned int, unsigned int, unsigned int const*> (__fn=...)\r\n    at /usr/include/c++/12/bits/invoke.h:142\r\n#3  std::_Function_handler<int(_sai_object_type_t, long unsigned int, unsigned int, unsigned int const*), FlexCounter_addRemoveCounter_Test::TestBody()::<lambda(sai_object_type_t, sai_object_id_t, uint32_t, const sai_stat_id_t*)> >::_M_invoke(const std::_Any_data &, _sai_object_type_t &&, unsigned long &&, unsigned int &&, const unsigned int *&&) (__functor=..., __args#0=@0x7fffffffd3e8: SAI_OBJECT_TYPE_QUEUE, __args#1=@0x7fffffffd3f0: 5910974510923777, __args#2=@0x7fffffffd3ec: 1, __args#3=@0x7fffffffd3f8: 0x55555590cb30)\r\n    at /usr/include/c++/12/bits/std_function.h:290\r\n#4  0x00005555555c4285 in std::function<int (_sai_object_type_t, unsigned long, unsigned int, unsigned int const*)>::operator()(_sai_object_type_t, unsigned long, unsigned int, unsigned int const*) const (__args#3=<optimized out>, __args#2=<optimized out>, \r\n    __args#1=<optimized out>, __args#0=<optimized out>, this=0x555555901fb0) at /usr/include/c++/12/bits/std_function.h:587\r\n#5  MockableSaiInterface::clearStats (this=0x555555901d50, object_type=SAI_OBJECT_TYPE_QUEUE, object_id=5910974510923777, number_of_counters=1, counter_ids=0x55555590cb30) at MockableSaiInterface.cpp:212\r\n#6  0x0000555555693277 in CounterContext<_sai_queue_stat_t>::collectData (this=this@entry=0x55555590d1b0, rid=rid@entry=5910974510923777, counter_ids=std::vector of length 1, capacity 1 = {...}, stats_mode=stats_mode@entry=SAI_STATS_MODE_READ_AND_CLEAR, \r\n    log_err=log_err@entry=false, stats=std::vector of length 1, capacity 1 = {...}) at FlexCounter.cpp:1115\r\n#7  0x00005555556b2c6e in CounterContext<_sai_queue_stat_t>::getSupportedCounters (this=this@entry=0x55555590d1b0, rid=rid@entry=5910974510923777, counter_ids=std::vector of length 2, capacity 2 = {...}, stats_mode=stats_mode@entry=SAI_STATS_MODE_READ_AND_CLEAR)\r\n    at /usr/include/c++/12/bits/new_allocator.h:90\r\n#8  0x00005555556d5965 in CounterContext<_sai_queue_stat_t>::updateSupportedCounters (stats_mode=SAI_STATS_MODE_READ_AND_CLEAR, counter_ids=std::vector of length 2, capacity 2 = {...}, rid=5910974510923777, this=0x55555590d1b0) at FlexCounter.cpp:1389\r\n#9  CounterContext<_sai_queue_stat_t>::addObject (this=this@entry=0x55555590d1b0, vid=<optimized out>, vid@entry=5910974510923777, rid=rid@entry=5910974510923777, idStrings=std::vector of length 2, capacity 2 = {...}, per_object_stats_mode=\"\") at FlexCounter.cpp:496\r\n#10 0x0000555555673382 in syncd::FlexCounter::addCounter (this=this@entry=0x7fffffffdc40, vid=5910974510923777, rid=5910974510923777, values=std::vector of length 1, capacity 4 = {...}) at FlexCounter.cpp:2609\r\n#11 0x00005555555d2884 in testAddRemoveCounter(unsigned int, _sai_object_type_t, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > const&, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > const&, std::function<void (swss::Table&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > const&, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > const&)>, bool, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool) (numOid=<optimized out>, numOid@entry=1, object_type=object_type@entry=SAI_OBJECT_TYPE_QUEUE, counterIdFieldName=\"QUEUE_COUNTER_ID_LIST\", \r\n    counterIdNames=std::vector of length 2, capacity 2 = {...}, expectedValues=std::vector of length 2, capacity 2 = {...}, verifyFunc=..., autoRemoveDbEntry=false, statsMode=\"STATS_MODE_READ_AND_CLEAR\", bulkAdd=false, bulkChunkSize=\"\", bulkChunkSizePerCounter=\"\", \r\n    bulkChunkSizeAfterPort=true, pluginName=\"\", immediatelyRemoveBulkChunkSizePerCounter=false) at TestFlexCounter.cpp:136\r\n#12 0x00005555555d44b7 in FlexCounter_addRemoveCounter_Test::TestBody (this=<optimized out>) at TestFlexCounter.cpp:269\r\n#13 0x00005555556522e7 in void testing::internal::HandleExceptionsInMethodIfSupported<testing::Test, void>(testing::Test*, void (testing::Test::*)(), char const*) ()\r\n#14 0x00005555556439de in testing::Test::Run() ()\r\n#15 0x0000555555643b95 in testing::TestInfo::Run() ()\r\n#16 0x0000555555644139 in testing::TestSuite::Run() ()\r\n#17 0x00005555556494df in testing::internal::UnitTestImpl::RunAllTests() ()\r\n#18 0x0000555555652857 in bool testing::internal::HandleExceptionsInMethodIfSupported<testing::internal::UnitTestImpl, bool>(testing::internal::UnitTestImpl*, bool (testing::internal::UnitTestImpl::*)(), char const*) ()\r\n#19 0x0000555555643c51 in testing::UnitTest::Run() ()\r\n#20 0x00005555555bca4b in RUN_ALL_TESTS () at /usr/include/gtest/gtest.h:2293\r\n#21 main (argc=<optimized out>, argv=<optimized out>) at main.cpp:13\r\n```\r\n\r\nLooking at stack frame # 6, clearStats is called. It does not show off in the backtrace maybe because of optimization.\r\n\r\n```\r\n#6  0x0000555555693277 in CounterContext<_sai_queue_stat_t>::collectData (this=this@entry=0x55555590d1b0, rid=rid@entry=5910974510923777, counter_ids=std::vector of length 1, capacity 1 = {...}, stats_mode=stats_mode@entry=SAI_STATS_MODE_READ_AND_CLEAR, \r\n    log_err=log_err@entry=false, stats=std::vector of length 1, capacity 1 = {...}) at FlexCounter.cpp:1115\r\n\r\n 1104             if (status != SAI_STATUS_SUCCESS)\r\n 1105             {\r\n 1106                 if (log_err)\r\n 1107                     SWSS_LOG_ERROR(\"Failed to get stats of %s 0x%\" PRIx64 \": %d\", m_name.c_str(), rid, status);\r\n 1108                 else\r\n 1109                     SWSS_LOG_INFO(\"Failed to get stats of %s 0x%\" PRIx64 \": %d\", m_name.c_str(), rid, status);\r\n 1110                 return false;\r\n 1111             }\r\n 1112 \r\n 1113             if (stats_mode == SAI_STATS_MODE_READ_AND_CLEAR)\r\n 1114             {\r\n 1115                 status = m_vendorSai->clearStats(\r\n 1116                         m_objectType,\r\n 1117                         rid,\r\n 1118                         static_cast<uint32_t>(counter_ids.size()),\r\n 1119                         reinterpret_cast<const sai_stat_id_t *>(counter_ids.data()));\r\n 1120                 if (status != SAI_STATUS_SUCCESS)\r\n 1121                 {\r\n```"
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-01-20T07:10:00Z",
+        "comment_author": "stephenxs",
+        "comment_body": "For `getStatsExt`\r\n\r\n```\r\nThread 1 \"tests\" hit Breakpoint 5, operator() (counters=0x55555590d410, number_of_counters=<optimized out>, __closure=0x555555901f90) at TestFlexCounter.cpp:624\r\n624                 counters[i] = (i + 1) * 10;\r\n(gdb) bt\r\n#0  operator() (counters=0x55555590d410, number_of_counters=<optimized out>, __closure=0x555555901f90) at TestFlexCounter.cpp:624\r\n#1  std::__invoke_impl<long int, FlexCounter_bulkCounter_Test::TestBody()::<lambda(sai_object_type_t, sai_object_id_t, uint32_t, const sai_stat_id_t*, sai_stats_mode_t, uint64_t*)>&, _sai_object_type_t, long unsigned int, unsigned int, unsigned int const*, _sai_stats_mode_t, long unsigned int*> (__f=...) at /usr/include/c++/12/bits/invoke.h:61\r\n#2  std::__invoke_r<int, FlexCounter_bulkCounter_Test::TestBody()::<lambda(sai_object_type_t, sai_object_id_t, uint32_t, const sai_stat_id_t*, sai_stats_mode_t, uint64_t*)>&, _sai_object_type_t, long unsigned int, unsigned int, unsigned int const*, _sai_stats_mode_t, long unsigned int*> (__fn=...) at /usr/include/c++/12/bits/invoke.h:142\r\n#3  std::_Function_handler<int(_sai_object_type_t, long unsigned int, unsigned int, unsigned int const*, _sai_stats_mode_t, long unsigned int*), FlexCounter_bulkCounter_Test::TestBody()::<lambda(sai_object_type_t, sai_object_id_t, uint32_t, const sai_stat_id_t*, sai_stats_mode_t, uint64_t*)> >::_M_invoke(const std::_Any_data &, _sai_object_type_t &&, unsigned long &&, unsigned int &&, const unsigned int *&&, _sai_stats_mode_t &&, unsigned long *&&) (__functor=..., __args#0=<optimized out>, __args#1=<optimized out>, \r\n    __args#2=<optimized out>, __args#3=@0x7fffffffd3e0: 0x55555590dc30, __args#4=@0x7fffffffd3d4: SAI_STATS_MODE_READ, __args#5=@0x7fffffffd3e8: 0x55555590d410) at /usr/include/c++/12/bits/std_function.h:290\r\n#4  0x00005555555c41d4 in std::function<int (_sai_object_type_t, unsigned long, unsigned int, unsigned int const*, _sai_stats_mode_t, unsigned long*)>::operator()(_sai_object_type_t, unsigned long, unsigned int, unsigned int const*, _sai_stats_mode_t, unsigned long*) const (__args#5=<optimized out>, __args#4=<optimized out>, __args#3=<optimized out>, __args#2=<optimized out>, __args#1=<optimized out>, __args#0=<optimized out>, this=0x555555901f90) at /usr/include/c++/12/bits/std_function.h:587\r\n#5  MockableSaiInterface::getStatsExt (this=0x555555901d50, object_type=SAI_OBJECT_TYPE_COUNTER, object_id=23643898043695105, number_of_counters=1, counter_ids=0x55555590dc30, mode=SAI_STATS_MODE_READ, counters=0x55555590d410) at MockableSaiInterface.cpp:197\r\n#6  0x000055555568c14c in CounterContext<_sai_counter_stat_t>::collectData (this=this@entry=0x55555590d1b0, rid=rid@entry=23643898043695105, counter_ids=std::vector of length 1, capacity 1 = {...}, stats_mode=stats_mode@entry=SAI_STATS_MODE_READ, \r\n    log_err=log_err@entry=false, stats=std::vector of length 1, capacity 1 = {...}) at FlexCounter.cpp:1142\r\n#7  0x00005555556afbae in CounterContext<_sai_counter_stat_t>::getSupportedCounters (this=this@entry=0x55555590d1b0, rid=rid@entry=23643898043695105, counter_ids=std::vector of length 2, capacity 2 = {...}, stats_mode=stats_mode@entry=SAI_STATS_MODE_READ)\r\n    at /usr/include/c++/12/bits/new_allocator.h:90\r\n#8  0x00005555556c4ea5 in CounterContext<_sai_counter_stat_t>::updateSupportedCounters (stats_mode=SAI_STATS_MODE_READ, counter_ids=std::vector of length 2, capacity 2 = {...}, rid=23643898043695105, this=0x55555590d1b0) at FlexCounter.cpp:1389\r\n#9  CounterContext<_sai_counter_stat_t>::addObject (this=this@entry=0x55555590d1b0, vid=<optimized out>, vid@entry=23643898043695105, rid=rid@entry=23643898043695105, idStrings=std::vector of length 2, capacity 2 = {...}, per_object_stats_mode=\"\")\r\n    at FlexCounter.cpp:496\r\n#10 0x0000555555673552 in syncd::FlexCounter::addCounter (this=this@entry=0x7fffffffdc40, vid=23643898043695105, rid=23643898043695105, values=std::vector of length 1, capacity 4 = {...}) at FlexCounter.cpp:2690\r\n#11 0x00005555555d2884 in testAddRemoveCounter(unsigned int, _sai_object_type_t, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > const&, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > const&, std::function<void (swss::Table&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > const&, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > const&)>, bool, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool) (numOid=<optimized out>, numOid@entry=2, object_type=object_type@entry=SAI_OBJECT_TYPE_COUNTER, counterIdFieldName=\"FLOW_COUNTER_ID_LIST\", \r\n    counterIdNames=std::vector of length 2, capacity 2 = {...}, expectedValues=std::vector of length 2, capacity 2 = {...}, verifyFunc=..., autoRemoveDbEntry=true, statsMode=\"STATS_MODE_READ\", bulkAdd=false, bulkChunkSize=\"\", bulkChunkSizePerCounter=\"\", \r\n    bulkChunkSizeAfterPort=true, pluginName=\"\", immediatelyRemoveBulkChunkSizePerCounter=false) at TestFlexCounter.cpp:136\r\n#12 0x00005555555d6ae5 in FlexCounter_bulkCounter_Test::TestBody (this=<optimized out>) at TestFlexCounter.cpp:677\r\n#13 0x00005555556522e7 in void testing::internal::HandleExceptionsInMethodIfSupported<testing::Test, void>(testing::Test*, void (testing::Test::*)(), char const*) ()\r\n#14 0x00005555556439de in testing::Test::Run() ()\r\n#15 0x0000555555643b95 in testing::TestInfo::Run() ()\r\n#16 0x0000555555644139 in testing::TestSuite::Run() ()\r\n#17 0x00005555556494df in testing::internal::UnitTestImpl::RunAllTests() ()\r\n#18 0x0000555555652857 in bool testing::internal::HandleExceptionsInMethodIfSupported<testing::internal::UnitTestImpl, bool>(testing::internal::UnitTestImpl*, bool (testing::internal::UnitTestImpl::*)(), char const*) ()\r\n#19 0x0000555555643c51 in testing::UnitTest::Run() ()\r\n#20 0x00005555555bca4b in RUN_ALL_TESTS () at /usr/include/gtest/gtest.h:2293\r\n#21 main (argc=<optimized out>, argv=<optimized out>) at main.cpp:13\r\n```\r\n\r\nStack frame # 6\r\n\r\n```\r\n#6  0x000055555568c14c in CounterContext<_sai_counter_stat_t>::collectData (this=this@entry=0x55555590d1b0, rid=rid@entry=23643898043695105, counter_ids=std::vector of length 1, capacity 1 = {...}, stats_mode=stats_mode@entry=SAI_STATS_MODE_READ, \r\n    log_err=log_err@entry=false, stats=std::vector of length 1, capacity 1 = {...}) at FlexCounter.cpp:1142\r\n\r\n 1135                     }\r\n 1136                     return false;\r\n 1137                 }\r\n 1138             }\r\n 1139         }\r\n 1140         else\r\n 1141         {\r\n 1142             status = m_vendorSai->getStatsExt(\r\n 1143                     m_objectType,\r\n 1144                     rid,\r\n 1145                     static_cast<uint32_t>(counter_ids.size()),\r\n 1146                     reinterpret_cast<const sai_stat_id_t *>(counter_ids.data()),\r\n 1147                     stats_mode,\r\n 1148                     stats.data());\r\n 1149             if (status != SAI_STATUS_SUCCESS)\r\n 1150             {\r\n 1151                 if (log_err)\r\n 1152                 {\r\n 1153                     SWSS_LOG_ERROR(\"Failed to get stats of %s 0x%\" PRIx64 \": %d\", m_name.c_str(), rid, status);\r\n 1154                 }\r\n 1155                 else\r\n 1156                 {\r\n 1157                     SWSS_LOG_INFO(\"Failed to get stats of %s 0x%\" PRIx64 \": %d\", m_name.c_str(), rid, status);\r\n 1158                 }\r\n 1159                 return false;\r\n\r\n```"
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-01-20T07:10:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-01-20T07:11:03Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-01-20T07:45:34Z",
+        "comment_author": "kcudnik",
+        "comment_body": "Interesting, but codecovrrage not sure. It's if its optimized, maybe you found a bug in codecoverage"
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-01-30T07:24:57Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-01-30T07:25:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-02-04T22:47:44Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-02-04T22:47:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-02-07T22:47:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-02-07T22:47:53Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-02-10T06:44:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-02-10T06:45:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-02-10T10:20:07Z",
+        "comment_author": "stephenxs",
+        "comment_body": "Hi @kcudnik \r\nall test passed. would you please approve and merge the PR? On top of a revert commit, I added a unit test commit to meet the coverage.\r\nthanks."
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "review_at": "2025-02-10T08:53:41Z",
+        "review_author": "Junchao-Mellanox"
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "review_at": "2025-02-10T11:24:32Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2025-02-10T11:24:32Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1498,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2025-02-10T08:53:41Z",
+        "latestReview_author": "Junchao-Mellanox",
         "latestReview_state": "APPROVED"
     },
     {
@@ -2154,6 +2425,13 @@
         "comment_at": "2025-02-09T20:11:21Z",
         "comment_author": "r12f",
         "comment_body": "hi @kperumalbfn , do you mind to help get this PR merged into 202411?"
+    },
+    {
+        "number": 1457,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-02-10T17:50:40Z",
+        "comment_author": "kperumalbfn",
+        "comment_body": "@stephenxs could you pls check the conflict in 202411?"
     },
     {
         "number": 1457,
