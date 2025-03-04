@@ -561,7 +561,7 @@ def pr_review_load():
                     if 'testCase' in pr and pr['testCase'] == 'yes':
                         test = True
                     ts = datetime.strptime(pr['mergedAt'], '%Y-%m-%dT%H:%M:%SZ')
-                    year = str(ts.year)
+                    merged_year = str(ts.year)
                     year_m = ts.strftime("%Y%m")
                     repo = pr['repo']
                     number = pr['number']
@@ -612,8 +612,8 @@ def pr_review_load():
                     if author == prs_map[ repo + ',' + str(number) ]['author']:
                         continue
                     year_m = ts.strftime("%Y%m")
-                    year = year_m[:4]
-                    if year not in year_weight:
+                    merged_year = year_m[:4]
+                    if merged_year not in year_weight:
                         continue
                     test = prs_map[ repo + ',' + str(number) ]['test']
                     # Use review count to judge S/M/L
