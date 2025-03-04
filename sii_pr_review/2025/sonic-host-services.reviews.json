@@ -1429,6 +1429,563 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2024-11-29T13:40:02Z",
+        "comment_author": "linux-foundation-easycla",
+        "comment_body": "<a href=\"https://easycla.lfx.linuxfoundation.org/#/?version=2\"><img src=\"https://s3.amazonaws.com/cla-project-logo-prod/cla-signed.svg\" alt=\"CLA Signed\" align=\"left\" height=\"28\" width=\"328\" ></a><br/><br />The committers listed above are authorized under a signed CLA.<ul><li>:white_check_mark: login: rkavitha-hcl  (c4a501339f3e7ae074585311f7fb63dd6d911503, 87738833128482632dd9b5af74b62c63e49e8598)</li></ul><!-- Date Modified: 2025-03-03 18:56:10.708162 -->"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2024-12-06T02:00:05Z",
+        "comment_author": "kishanps",
+        "comment_body": "@github76543 Joh, can you PTAL and signoff."
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2024-12-26T19:47:13Z",
+        "comment_author": "kishanps",
+        "comment_body": "> Can you please look at [ff73070](https://github.com/sonic-net/sonic-host-services/commit/ff73070d7def8689bc92dd0e28d3dab5d0254450) and see if this is something you can reuse?\r\n\r\nThanks @hdwhdw for the reference. The reboot dbus service also needs a request/response framework which is what this PR does and IIUC @vvolam went with the other one as a stop gap solution.\r\n\r\nAdding @github76543 (John) for additional inputs."
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2024-12-27T07:13:51Z",
+        "comment_author": "hdwhdw",
+        "comment_body": "@kishanps thanks for clarifying. If so consider renaming the service to something more general than gnoi_reboot. Maybe 'async_system'? Having one module for each gnoi service can clutter the dbus codebase.\n\nAlso does it make sense to add your api to systemd service and call it async reboot, alongside @vvolam API?"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-01-06T13:00:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-01-06T13:00:28Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-01-10T19:50:24Z",
+        "comment_author": "kishanps",
+        "comment_body": "> @kishanps thanks for clarifying. If so consider renaming the service to something more general than gnoi_reboot. Maybe 'async_system'? Having one module for each gnoi service can clutter the dbus codebase.\r\n> \r\n> Also does it make sense to add your api to systemd service and call it async reboot, alongside @vvolam API?\r\n\r\n@hdwhdw @github76543  @rkavitha-hcl @jaanah-hcl\r\n\r\nI discussed with John, Dawei Huang & @vvolam and we all agree that reboot will be a separate dbus service and hence rename gnoi_reboot to just reboot. And remove the commit id ff73070 alongwith this PR to avoid the duplication.\r\n\r\n"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-01-27T10:06:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-01-27T10:06:47Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nPull request contains merge conflicts.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-01-27T11:13:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-01-27T11:13:22Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-06T15:21:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-06T15:21:57Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-12T14:06:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-12T14:06:54Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-14T19:27:38Z",
+        "comment_author": "kishanps",
+        "comment_body": "@qiluo-msft For review and approval"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-19T11:51:57Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-19T11:52:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-19T11:59:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-19T11:59:32Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-19T12:14:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-19T12:15:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-20T14:19:30Z",
+        "comment_author": "bibhuprasad-hcl",
+        "comment_body": "@vvolam , could you please review"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-20T14:19:47Z",
+        "comment_author": "bibhuprasad-hcl",
+        "comment_body": "@hdwhdw , could you please review."
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-20T17:34:33Z",
+        "comment_author": "hdwhdw",
+        "comment_body": "Do we also need to merge https://github.com/rkavitha-hcl/sonic-host-services/pull/1 first?"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-25T11:39:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-25T11:39:14Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-26T11:37:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-26T11:38:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-27T05:05:30Z",
+        "comment_author": "vvolam",
+        "comment_body": "@kishanps @rkavitha-hcl Could you fix build failures as well?\r\n"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-27T05:29:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-27T05:29:59Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-27T05:32:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-27T05:32:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-27T05:38:46Z",
+        "comment_author": "rkavitha-hcl",
+        "comment_body": "\r\n\r\n\r\n\r\n> @kishanps @rkavitha-hcl Could you fix build failures as well?\r\n\r\nBuild is fixed and branch is rebased"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-27T10:39:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-27T10:39:40Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-27T11:06:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-27T11:06:50Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-27T11:25:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-27T11:25:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-27T11:27:14Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-27T11:27:26Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-28T16:12:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-02-28T16:12:34Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-03-03T14:06:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-03-03T14:06:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-03-03T18:56:10Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-03-03T18:56:20Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "review_at": "2024-12-06T01:59:52Z",
+        "review_author": "kishanps"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "review_at": "2024-12-06T04:47:35Z",
+        "review_author": "rkavitha-hcl"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "review_at": "2024-12-26T01:03:02Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "review_at": "2025-02-03T19:09:56Z",
+        "review_author": "kishanps"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "review_at": "2025-02-07T18:32:35Z",
+        "review_author": "vvolam"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "review_at": "2025-02-07T19:08:04Z",
+        "review_author": "vvolam"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "review_at": "2025-02-11T19:35:24Z",
+        "review_author": "vvolam"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "review_at": "2025-02-12T14:12:59Z",
+        "review_author": "rkavitha-hcl"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "review_at": "2025-02-12T14:13:54Z",
+        "review_author": "rkavitha-hcl"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "review_at": "2025-02-12T14:15:22Z",
+        "review_author": "rkavitha-hcl"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "review_at": "2025-02-20T16:39:51Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "review_at": "2025-02-20T16:43:13Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "review_at": "2025-02-20T16:49:24Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "review_at": "2025-02-25T11:46:07Z",
+        "review_author": "rkavitha-hcl"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "review_at": "2025-02-25T11:46:56Z",
+        "review_author": "rkavitha-hcl"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "review_at": "2025-02-25T11:47:23Z",
+        "review_author": "rkavitha-hcl"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "review_at": "2025-02-25T18:14:25Z",
+        "review_author": "vvolam"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "review_at": "2025-02-25T18:25:49Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "review_at": "2025-02-25T19:48:55Z",
+        "review_author": "kishanps"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "review_at": "2025-02-25T22:22:37Z",
+        "review_author": "vvolam"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "review_at": "2025-02-26T18:24:28Z",
+        "review_author": "vvolam"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "review_at": "2025-02-26T18:57:00Z",
+        "review_author": "kishanps"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "review_at": "2025-02-27T10:48:57Z",
+        "review_author": "bibhuprasad-hcl"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "review_at": "2025-02-27T10:49:40Z",
+        "review_author": "bibhuprasad-hcl"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "review_at": "2025-02-27T20:35:09Z",
+        "review_author": "kishanps"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "review_at": "2025-02-27T21:46:15Z",
+        "review_author": "vvolam"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "review_at": "2025-02-27T22:39:29Z",
+        "review_author": "kishanps"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "review_at": "2025-02-28T01:10:22Z",
+        "review_author": "vvolam"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "review_at": "2025-02-28T17:37:17Z",
+        "review_author": "vvolam"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "review_at": "2025-03-03T18:06:34Z",
+        "review_author": "vvolam"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "review_at": "2025-03-03T18:57:17Z",
+        "review_author": "bibhuprasad-hcl"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "latestReview_at": "2025-02-27T22:39:29Z",
+        "latestReview_author": "kishanps",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "latestReview_at": "2025-03-03T18:57:17Z",
+        "latestReview_author": "bibhuprasad-hcl",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "latestReview_at": "2025-02-25T18:25:49Z",
+        "latestReview_author": "hdwhdw",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 191,
+        "repo": "sonic-host-services",
+        "latestReview_at": "2025-03-03T18:06:34Z",
+        "latestReview_author": "vvolam",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 169,
         "repo": "sonic-host-services",
         "comment_at": "2024-12-05T19:53:02Z",
