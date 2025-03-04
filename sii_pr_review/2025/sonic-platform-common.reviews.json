@@ -1,5 +1,217 @@
 [
     {
+        "number": 550,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-03-03T18:24:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-platform-common/pull/548"
+    },
+    {
+        "number": 550,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-03-03T18:24:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 550,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-03-03T18:24:41Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 549,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-03-03T18:13:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-platform-common/pull/548"
+    },
+    {
+        "number": 549,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-03-03T18:13:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 549,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-03-03T18:14:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-02-28T00:06:09Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-02-28T00:06:18Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-02-28T00:32:09Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-02-28T00:32:17Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-02-28T00:53:00Z",
+        "comment_author": "mihirpat1",
+        "comment_body": "@prgeor Wondering if the current changeset requires special handling for SFF-8472 based transceivers since these transceivers have page select byte at byte 127, A2h instead of A0h."
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-02-28T02:43:19Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-02-28T02:43:27Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-02-28T02:58:55Z",
+        "comment_author": "prgeor",
+        "comment_body": "> @prgeor Wondering if the current changeset requires special handling for SFF-8472 based transceivers since these transceivers have page select byte at byte 127, A2h instead of A0h.\r\n\r\n@mihirpat1 Good question. I think we should be good in that case because 0xA0 address space offset > 127 is a reserved space. We don't have a use case today\r\n\r\n![image](https://github.com/user-attachments/assets/99acb3b7-26dd-4be8-9100-213b1ef97b2e)\r\n\r\n\r\nIn other words, all Access for offset > 127 will be in 0xA2 address space in SFP case."
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-03-01T05:46:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-03-01T05:46:31Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-03-03T17:02:00Z",
+        "comment_author": "yxieca",
+        "comment_body": "Why do you only need to reset the page code in 128-255 offset range? do you also need to reset the page code when offset is greater than 255?"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-03-03T18:03:14Z",
+        "comment_author": "prgeor",
+        "comment_body": "> Why do you only need to reset the page code in 128-255 offset range? do you also need to reset the page code when offset is greater than 255?\r\n\r\n@yxieca The optoe kernel driver before r/w to the page >=1 already sets the page selection register."
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-03-03T18:04:48Z",
+        "comment_author": "prgeor",
+        "comment_body": "@kperumalbfn could you help cherry pick to 202411\r\n@bingwang-ms could you help cherry pick to 202405 "
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-03-03T18:14:02Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-platform-common/pull/549"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-03-03T18:16:01Z",
+        "comment_author": "mihirpat1",
+        "comment_body": "@kperumalbfn @bingwang-ms \r\nMSFT ADO - 31626749"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-03-03T18:24:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202411: https://github.com/sonic-net/sonic-platform-common/pull/550"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-common",
+        "review_at": "2025-02-28T00:06:25Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-common",
+        "review_at": "2025-02-28T00:53:12Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-common",
+        "review_at": "2025-03-01T06:34:34Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-common",
+        "review_at": "2025-03-02T21:16:12Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-common",
+        "review_at": "2025-03-03T17:02:29Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-common",
+        "latestReview_at": "2025-02-28T00:06:25Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-common",
+        "latestReview_at": "2025-03-03T17:02:29Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-common",
+        "latestReview_at": "2025-03-02T21:16:12Z",
+        "latestReview_author": "vdahiya12",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-common",
+        "latestReview_at": "2025-03-01T06:34:34Z",
+        "latestReview_author": "mihirpat1",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 545,
         "repo": "sonic-platform-common",
         "comment_at": "2025-02-19T20:17:46Z",
