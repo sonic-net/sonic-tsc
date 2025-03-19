@@ -256,6 +256,208 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 2141,
+        "repo": "sai",
+        "comment_at": "2025-02-19T18:03:46Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2141,
+        "repo": "sai",
+        "comment_at": "2025-02-19T18:03:56Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2141,
+        "repo": "sai",
+        "comment_at": "2025-02-19T18:22:05Z",
+        "comment_author": "kcudnik",
+        "comment_body": "please add description and fix build errors"
+    },
+    {
+        "number": 2141,
+        "repo": "sai",
+        "comment_at": "2025-02-19T18:42:39Z",
+        "comment_author": "kcudnik",
+        "comment_body": "you created object dependency loop"
+    },
+    {
+        "number": 2141,
+        "repo": "sai",
+        "comment_at": "2025-02-20T04:08:06Z",
+        "comment_author": "rajkumar38",
+        "comment_body": "> you created object dependency loop\r\n\r\nHi @kcudnik ,\r\n\r\nHere Port associated with SAI_TAM_COLLECTOR_ATTR_DESTINATION will be different from TAM bind point. Here TAM DESTINATION refers to the network port reachable to external collector where reports are transmitted out. Can you suggest how to resolve this ?\r\n\r\n_WARN: LOOP DETECTED on object type: SAI_OBJECT_TYPE_PORT    **-----> Port where original traffic rx/tx**\r\nWARN:  SAI_OBJECT_TYPE_PORT: SAI_PORT_ATTR_QOS_INGRESS_BUFFER_PROFILE_LIST\r\nWARN:  SAI_OBJECT_TYPE_BUFFER_PROFILE: SAI_BUFFER_PROFILE_ATTR_POOL_ID\r\nWARN:  SAI_OBJECT_TYPE_BUFFER_POOL: SAI_BUFFER_POOL_ATTR_TAM\r\nWARN:  SAI_OBJECT_TYPE_TAM: SAI_TAM_ATTR_TELEMETRY_OBJECTS_LIST\r\nWARN:  SAI_OBJECT_TYPE_TAM_TELEMETRY: SAI_TAM_TELEMETRY_ATTR_COLLECTOR_LIST\r\nWARN:  SAI_OBJECT_TYPE_TAM_COLLECTOR: SAI_TAM_COLLECTOR_ATTR_DESTINATION **--> nw port connected to collector**\r\nWARN:  -> SAI_OBJECT_TYPE_PORT\r\n ASSERT FAILED (on line 4224): LOOP is detected, we can't have loops in graph, please fix attributes\r\nmake: *** [Makefile:93: all] Error 1_\r\n"
+    },
+    {
+        "number": 2141,
+        "repo": "sai",
+        "comment_at": "2025-02-20T12:47:50Z",
+        "comment_author": "kcudnik",
+        "comment_body": "loop detector is installed to not have loops in dependency graph, not sure how to resolve that, usually to prevent loops you can have objects marked as read_only\r\n\r\nthat validator is not checking whether port is actually the same port, it's checking that dependency is on port object type,\r\n\r\nlet's have this discussion on todays SAI meeting, will you be able to join ?"
+    },
+    {
+        "number": 2141,
+        "repo": "sai",
+        "comment_at": "2025-02-21T04:04:41Z",
+        "comment_author": "rajkumar38",
+        "comment_body": "> loop detector is installed to not have loops in dependency graph, not sure how to resolve that, usually to prevent loops you can have objects marked as read_only\r\n> \r\n> that validator is not checking whether port is actually the same port, it's checking that dependency is on port object type,\r\n> \r\n> let's have this discussion on todays SAI meeting, will you be able to join ?\r\n\r\nUnfortunately, I couldn't join the call yesterday. I will request a slot next week (02/27) to discuss the proposal."
+    },
+    {
+        "number": 2141,
+        "repo": "sai",
+        "comment_at": "2025-03-05T18:41:48Z",
+        "comment_author": "kcudnik",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2141,
+        "repo": "sai",
+        "comment_at": "2025-03-05T18:41:59Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2141,
+        "repo": "sai",
+        "comment_at": "2025-03-06T14:20:21Z",
+        "comment_author": "rajkumar38",
+        "comment_body": "> loop detector is installed to not have loops in dependency graph, not sure how to resolve that, usually to prevent loops you can have objects marked as read_only\r\n> \r\n> that validator is not checking whether port is actually the same port, it's checking that dependency is on port object type,\r\n> \r\n> let's have this discussion on todays SAI meeting, will you be able to join ?\r\n\r\nHi Kamil,\r\nAs discussed in last community meeting, I have added exception in saisanitycheck. Pls review."
+    },
+    {
+        "number": 2141,
+        "repo": "sai",
+        "comment_at": "2025-03-11T22:44:09Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "@rajkumar38 - could you please resolve branch conflicts?"
+    },
+    {
+        "number": 2141,
+        "repo": "sai",
+        "comment_at": "2025-03-12T09:44:47Z",
+        "comment_author": "rajkumar38",
+        "comment_body": "> @rajkumar38 - could you please resolve branch conflicts?\r\n\r\nDone."
+    },
+    {
+        "number": 2141,
+        "repo": "sai",
+        "comment_at": "2025-03-12T16:44:55Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2141,
+        "repo": "sai",
+        "comment_at": "2025-03-12T16:45:04Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2141,
+        "repo": "sai",
+        "review_at": "2025-02-27T17:19:26Z",
+        "review_author": "ashutosh-agrawal"
+    },
+    {
+        "number": 2141,
+        "repo": "sai",
+        "review_at": "2025-02-27T17:20:31Z",
+        "review_author": "ashutosh-agrawal"
+    },
+    {
+        "number": 2141,
+        "repo": "sai",
+        "review_at": "2025-03-06T13:01:44Z",
+        "review_author": "rajkumar38"
+    },
+    {
+        "number": 2141,
+        "repo": "sai",
+        "review_at": "2025-03-06T13:02:11Z",
+        "review_author": "rajkumar38"
+    },
+    {
+        "number": 2141,
+        "repo": "sai",
+        "review_at": "2025-03-06T14:47:17Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2141,
+        "repo": "sai",
+        "review_at": "2025-03-11T23:12:29Z",
+        "review_author": "ashutosh-agrawal"
+    },
+    {
+        "number": 2141,
+        "repo": "sai",
+        "review_at": "2025-03-12T09:44:31Z",
+        "review_author": "rajkumar38"
+    },
+    {
+        "number": 2141,
+        "repo": "sai",
+        "review_at": "2025-03-12T17:33:08Z",
+        "review_author": "ashutosh-agrawal"
+    },
+    {
+        "number": 2141,
+        "repo": "sai",
+        "review_at": "2025-03-13T09:48:01Z",
+        "review_author": "rajkumar38"
+    },
+    {
+        "number": 2141,
+        "repo": "sai",
+        "review_at": "2025-03-13T17:16:29Z",
+        "review_author": "ashutosh-agrawal"
+    },
+    {
+        "number": 2141,
+        "repo": "sai",
+        "review_at": "2025-03-14T08:25:46Z",
+        "review_author": "rajkumar38"
+    },
+    {
+        "number": 2141,
+        "repo": "sai",
+        "review_at": "2025-03-14T17:05:55Z",
+        "review_author": "ashutosh-agrawal"
+    },
+    {
+        "number": 2141,
+        "repo": "sai",
+        "review_at": "2025-03-15T08:17:44Z",
+        "review_author": "rajkumar38"
+    },
+    {
+        "number": 2141,
+        "repo": "sai",
+        "review_at": "2025-03-18T05:26:25Z",
+        "review_author": "ashutosh-agrawal"
+    },
+    {
+        "number": 2141,
+        "repo": "sai",
+        "review_at": "2025-03-18T05:26:37Z",
+        "review_author": "ashutosh-agrawal"
+    },
+    {
+        "number": 2141,
+        "repo": "sai",
+        "latestReview_at": "2025-03-18T05:26:37Z",
+        "latestReview_author": "ashutosh-agrawal",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2141,
+        "repo": "sai",
+        "latestReview_at": "2025-03-06T14:47:17Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 2138,
         "repo": "sai",
         "review_at": "2025-02-05T13:48:17Z",
