@@ -203,6 +203,516 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-13T23:46:09Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-13T23:46:16Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines will not run the associated pipelines, because the pull request was updated after the run command was issued. Review the pull request again and issue a new run command.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-14T00:32:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-14T00:32:43Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines will not run the associated pipelines, because the pull request was updated after the run command was issued. Review the pull request again and issue a new run command.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-14T01:08:58Z",
+        "comment_author": "stephenxs",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-14T01:09:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-14T01:09:12Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-14T01:42:10Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-14T01:42:20Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-14T05:08:23Z",
+        "comment_author": "stephenxs",
+        "comment_body": "BFD test fails\r\n```\r\n2025-03-14T03:57:49.5470953Z =================================== FAILURES ===================================\r\n2025-03-14T03:57:49.5471985Z _____________________ TestSoftBfd.test_addRemoveBfdSession _____________________\r\n2025-03-14T03:57:49.5472523Z \r\n2025-03-14T03:57:49.5473252Z self = <test_soft_bfd.TestSoftBfd object at 0x7f0b2d443d90>\r\n2025-03-14T03:57:49.5474372Z dvs = <conftest.DockerVirtualSwitch object at 0x7f0b2d465af0>\r\n2025-03-14T03:57:49.5475034Z \r\n2025-03-14T03:57:49.5475388Z     def test_addRemoveBfdSession(self, dvs):\r\n2025-03-14T03:57:49.5475728Z         self.setup_db(dvs)\r\n2025-03-14T03:57:49.5476089Z         bfd_session_key = \"default:default:10.0.0.2\"\r\n2025-03-14T03:57:49.5476473Z         bfdSessions = self.get_exist_bfd_session()\r\n2025-03-14T03:57:49.5476974Z     \r\n2025-03-14T03:57:49.5477128Z         # Create BFD session\r\n2025-03-14T03:57:49.5477328Z         fieldValues = {\"local_addr\": \"10.0.0.1\", \"tos\": \"64\", \"multiplier\": \"5\", \"tx_interval\": \"300\",\r\n2025-03-14T03:57:49.5477544Z                        \"rx_interval\": \"500\"}\r\n2025-03-14T03:57:49.5477732Z         self.create_bfd_session(bfd_session_key, fieldValues)\r\n2025-03-14T03:57:49.5478118Z >       self.sdb.wait_for_n_keys(SOFT_BFD_STATE_TABLE, len(bfdSessions) + 1)\r\n2025-03-14T03:57:49.5478246Z \r\n2025-03-14T03:57:49.5478612Z test_soft_bfd.py:48: \r\n2025-03-14T03:57:49.5480169Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \r\n2025-03-14T03:57:49.5480625Z \r\n2025-03-14T03:57:49.5481606Z self = <dvslib.dvs_database.DVSDatabase object at 0x7f0b2d478c70>\r\n2025-03-14T03:57:49.5482712Z table_name = 'BFD_SOFTWARE_SESSION_TABLE', num_keys = 1\r\n2025-03-14T03:57:49.5483392Z wait_at_least_n_keys = False\r\n2025-03-14T03:57:49.5484814Z polling_config = PollingConfig(polling_interval=0.01, timeout=20.0, strict=True)\r\n2025-03-14T03:57:49.5485263Z failure_message = None\r\n2025-03-14T03:57:49.5485577Z \r\n2025-03-14T03:57:49.5485915Z     def wait_for_n_keys(\r\n2025-03-14T03:57:49.5486372Z         self,\r\n2025-03-14T03:57:49.5486702Z         table_name: str,\r\n2025-03-14T03:57:49.5487170Z         num_keys: int,\r\n2025-03-14T03:57:49.5487559Z         wait_at_least_n_keys: bool = False,\r\n2025-03-14T03:57:49.5488097Z         polling_config: PollingConfig = PollingConfig(),\r\n2025-03-14T03:57:49.5488634Z         failure_message: str = None,\r\n2025-03-14T03:57:49.5489001Z     ) -> List[str]:\r\n2025-03-14T03:57:49.5489666Z         \"\"\"Wait for the specified number of keys to exist in the table.\r\n2025-03-14T03:57:49.5490127Z     \r\n2025-03-14T03:57:49.5490422Z         Args:\r\n2025-03-14T03:57:49.5492479Z             table_name: The name of the table from which to fetch the keys.\r\n2025-03-14T03:57:49.5492927Z             num_keys: The expected number of keys to retrieve from the table.\r\n2025-03-14T03:57:49.5493364Z             polling_config: The parameters to use to poll the db.\r\n2025-03-14T03:57:49.5493816Z             failure_message: The message to print if the call times out. This will only take effect\r\n2025-03-14T03:57:49.5494249Z                 if the PollingConfig is set to strict.\r\n2025-03-14T03:57:49.5494561Z     \r\n2025-03-14T03:57:49.5494828Z         Returns:\r\n2025-03-14T03:57:49.5495329Z             The keys stored in the table. If no keys are found, then an empty List is returned.\r\n2025-03-14T03:57:49.5495692Z         \"\"\"\r\n2025-03-14T03:57:49.5495929Z     \r\n2025-03-14T03:57:49.5496222Z         def access_function():\r\n2025-03-14T03:57:49.5496556Z             keys = self.get_keys(table_name)\r\n2025-03-14T03:57:49.5496897Z             if wait_at_least_n_keys:\r\n2025-03-14T03:57:49.5497271Z                 return (len(keys) >= num_keys, keys)\r\n2025-03-14T03:57:49.5497590Z             else:\r\n2025-03-14T03:57:49.5497913Z                 return (len(keys) == num_keys, keys)\r\n2025-03-14T03:57:49.5498180Z     \r\n2025-03-14T03:57:49.5498486Z         status, result = wait_for_result(\r\n2025-03-14T03:57:49.5498901Z             access_function, self._disable_strict_polling(polling_config)\r\n2025-03-14T03:57:49.5499251Z         )\r\n2025-03-14T03:57:49.5499499Z     \r\n2025-03-14T03:57:49.5499804Z         if not status:\r\n2025-03-14T03:57:49.5500135Z             message = failure_message or (\r\n2025-03-14T03:57:49.5500532Z                 f\"Unexpected number of keys: expected={num_keys}, received={len(result)} \"\r\n2025-03-14T03:57:49.5500921Z                 f'({result}), table=\"{table_name}\"'\r\n2025-03-14T03:57:49.5501224Z             )\r\n2025-03-14T03:57:49.5502873Z >           assert not polling_config.strict, message\r\n2025-03-14T03:57:49.5503813Z E           AssertionError: Unexpected number of keys: expected=1, received=0 ([]), table=\"BFD_SOFTWARE_SESSION_TABLE\"\r\n2025-03-14T03:57:49.5504133Z \r\n2025-03-14T03:57:49.5504518Z dvslib/dvs_database.py:414: AssertionError\r\n2025-03-14T03:57:49.5505732Z __________________ TestSoftBfd.test_addRemoveBfdSession_ipv6 ___________________\r\n2025-03-14T03:57:49.5506193Z \r\n2025-03-14T03:57:49.5507331Z self = <test_soft_bfd.TestSoftBfd object at 0x7f0b2d3a5250>\r\n2025-03-14T03:57:49.5507792Z dvs = <conftest.DockerVirtualSwitch object at 0x7f0b2d465af0>\r\n2025-03-14T03:57:49.5508016Z \r\n2025-03-14T03:57:49.5508700Z     def test_addRemoveBfdSession_ipv6(self, dvs):\r\n2025-03-14T03:57:49.5509072Z         self.setup_db(dvs)\r\n2025-03-14T03:57:49.5509529Z         bfd_session_key = \"default:default:2000::2\"\r\n2025-03-14T03:57:49.5521767Z         bfdSessions = self.get_exist_bfd_session()\r\n2025-03-14T03:57:49.5522239Z     \r\n2025-03-14T03:57:49.5522585Z         # Create BFD session\r\n2025-03-14T03:57:49.5523629Z         fieldValues = {\"local_addr\": \"2000::1\", \"multihop\": \"true\", \"multiplier\": \"3\", \"tx_interval\": \"400\",\r\n2025-03-14T03:57:49.5524097Z                        \"rx_interval\": \"200\"}\r\n2025-03-14T03:57:49.5524447Z         self.create_bfd_session(bfd_session_key, fieldValues)\r\n2025-03-14T03:57:49.5524952Z >       self.sdb.wait_for_n_keys(SOFT_BFD_STATE_TABLE, len(bfdSessions) + 1)\r\n2025-03-14T03:57:49.5525212Z \r\n2025-03-14T03:57:49.5525754Z test_soft_bfd.py:72: \r\n2025-03-14T03:57:49.5526226Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \r\n2025-03-14T03:57:49.5526787Z \r\n2025-03-14T03:57:49.5527496Z self = <dvslib.dvs_database.DVSDatabase object at 0x7f0b2d478c70>\r\n2025-03-14T03:57:49.5528202Z table_name = 'BFD_SOFTWARE_SESSION_TABLE', num_keys = 1\r\n2025-03-14T03:57:49.5528633Z wait_at_least_n_keys = False\r\n2025-03-14T03:57:49.5529255Z polling_config = PollingConfig(polling_interval=0.01, timeout=20.0, strict=True)\r\n2025-03-14T03:57:49.5529686Z failure_message = None\r\n2025-03-14T03:57:49.5529859Z \r\n2025-03-14T03:57:49.5530180Z     def wait_for_n_keys(\r\n2025-03-14T03:57:49.5530483Z         self,\r\n2025-03-14T03:57:49.5531118Z         table_name: str,\r\n2025-03-14T03:57:49.5531469Z         num_keys: int,\r\n2025-03-14T03:57:49.5531832Z         wait_at_least_n_keys: bool = False,\r\n2025-03-14T03:57:49.5532254Z         polling_config: PollingConfig = PollingConfig(),\r\n2025-03-14T03:57:49.5532668Z         failure_message: str = None,\r\n2025-03-14T03:57:49.5533014Z     ) -> List[str]:\r\n2025-03-14T03:57:49.5533386Z         \"\"\"Wait for the specified number of keys to exist in the table.\r\n2025-03-14T03:57:49.5533826Z     \r\n2025-03-14T03:57:49.5534093Z         Args:\r\n2025-03-14T03:57:49.5534487Z             table_name: The name of the table from which to fetch the keys.\r\n2025-03-14T03:57:49.5534965Z             num_keys: The expected number of keys to retrieve from the table.\r\n2025-03-14T03:57:49.5535426Z             polling_config: The parameters to use to poll the db.\r\n2025-03-14T03:57:49.5535924Z             failure_message: The message to print if the call times out. This will only take effect\r\n2025-03-14T03:57:49.5537355Z                 if the PollingConfig is set to strict.\r\n2025-03-14T03:57:49.5537785Z     \r\n2025-03-14T03:57:49.5538130Z         Returns:\r\n2025-03-14T03:57:49.5538592Z             The keys stored in the table. If no keys are found, then an empty List is returned.\r\n2025-03-14T03:57:49.5539126Z         \"\"\"\r\n2025-03-14T03:57:49.5539445Z     \r\n2025-03-14T03:57:49.5540021Z         def access_function():\r\n2025-03-14T03:57:49.5541019Z             keys = self.get_keys(table_name)\r\n2025-03-14T03:57:49.5541403Z             if wait_at_least_n_keys:\r\n2025-03-14T03:57:49.5541967Z                 return (len(keys) >= num_keys, keys)\r\n2025-03-14T03:57:49.5542293Z             else:\r\n2025-03-14T03:57:49.5542647Z                 return (len(keys) == num_keys, keys)\r\n2025-03-14T03:57:49.5542979Z     \r\n2025-03-14T03:57:49.5543313Z         status, result = wait_for_result(\r\n2025-03-14T03:57:49.5543756Z             access_function, self._disable_strict_polling(polling_config)\r\n2025-03-14T03:57:49.5544466Z         )\r\n2025-03-14T03:57:49.5544746Z     \r\n2025-03-14T03:57:49.5545049Z         if not status:\r\n2025-03-14T03:57:49.5545381Z             message = failure_message or (\r\n2025-03-14T03:57:49.5545820Z                 f\"Unexpected number of keys: expected={num_keys}, received={len(result)} \"\r\n2025-03-14T03:57:49.5546439Z                 f'({result}), table=\"{table_name}\"'\r\n2025-03-14T03:57:49.5546768Z             )\r\n2025-03-14T03:57:49.5547127Z >           assert not polling_config.strict, message\r\n2025-03-14T03:57:49.5547703Z E           AssertionError: Unexpected number of keys: expected=1, received=0 ([]), table=\"BFD_SOFTWARE_SESSION_TABLE\"\r\n2025-03-14T03:57:49.5547975Z \r\n2025-03-14T03:57:49.5548341Z dvslib/dvs_database.py:414: AssertionError\r\n2025-03-14T03:57:49.5548835Z ________________ TestSoftBfd.test_addRemoveBfdSession_interface ________________\r\n2025-03-14T03:57:49.5549071Z \r\n2025-03-14T03:57:49.5549442Z self = <test_soft_bfd.TestSoftBfd object at 0x7f0b2d314310>\r\n2025-03-14T03:57:49.5549916Z dvs = <conftest.DockerVirtualSwitch object at 0x7f0b2d465af0>\r\n2025-03-14T03:57:49.5550113Z \r\n2025-03-14T03:57:49.5550477Z     def test_addRemoveBfdSession_interface(self, dvs):\r\n2025-03-14T03:57:49.5550883Z         self.setup_db(dvs)\r\n2025-03-14T03:57:49.5551302Z         bfd_session_key = \"default:Ethernet0:10.0.0.2\"\r\n2025-03-14T03:57:49.5551759Z         bfdSessions = self.get_exist_bfd_session()\r\n2025-03-14T03:57:49.5552263Z     \r\n2025-03-14T03:57:49.5552564Z         # Create BFD session\r\n2025-03-14T03:57:49.5552991Z         fieldValues = {\"local_addr\": \"10.0.0.1\", \"dst_mac\": \"00:02:03:04:05:06\", \"type\": \"async_passive\"}\r\n2025-03-14T03:57:49.5553537Z         self.create_bfd_session(\"default:Ethernet0:10.0.0.2\", fieldValues)\r\n2025-03-14T03:57:49.5554048Z >       self.sdb.wait_for_n_keys(SOFT_BFD_STATE_TABLE, len(bfdSessions) + 1)\r\n2025-03-14T03:57:49.5554282Z \r\n2025-03-14T03:57:49.5554626Z test_soft_bfd.py:95: \r\n2025-03-14T03:57:49.5555000Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \r\n2025-03-14T03:57:49.5555199Z \r\n2025-03-14T03:57:49.5555570Z self = <dvslib.dvs_database.DVSDatabase object at 0x7f0b2d478c70>\r\n2025-03-14T03:57:49.5556032Z table_name = 'BFD_SOFTWARE_SESSION_TABLE', num_keys = 1\r\n2025-03-14T03:57:49.5556411Z wait_at_least_n_keys = False\r\n2025-03-14T03:57:49.5556859Z polling_config = PollingConfig(polling_interval=0.01, timeout=20.0, strict=True)\r\n2025-03-14T03:57:49.5558364Z failure_message = None\r\n2025-03-14T03:57:49.5558629Z \r\n2025-03-14T03:57:49.5559009Z     def wait_for_n_keys(\r\n2025-03-14T03:57:49.5559380Z         self,\r\n2025-03-14T03:57:49.5559745Z         table_name: str,\r\n2025-03-14T03:57:49.5560181Z         num_keys: int,\r\n2025-03-14T03:57:49.5560594Z         wait_at_least_n_keys: bool = False,\r\n2025-03-14T03:57:49.5561211Z         polling_config: PollingConfig = PollingConfig(),\r\n2025-03-14T03:57:49.5561640Z         failure_message: str = None,\r\n2025-03-14T03:57:49.5562006Z     ) -> List[str]:\r\n2025-03-14T03:57:49.5562557Z         \"\"\"Wait for the specified number of keys to exist in the table.\r\n2025-03-14T03:57:49.5563286Z     \r\n2025-03-14T03:57:49.5563566Z         Args:\r\n2025-03-14T03:57:49.5563945Z             table_name: The name of the table from which to fetch the keys.\r\n2025-03-14T03:57:49.5564410Z             num_keys: The expected number of keys to retrieve from the table.\r\n2025-03-14T03:57:49.5564864Z             polling_config: The parameters to use to poll the db.\r\n2025-03-14T03:57:49.5565367Z             failure_message: The message to print if the call times out. This will only take effect\r\n2025-03-14T03:57:49.5566013Z                 if the PollingConfig is set to strict.\r\n2025-03-14T03:57:49.5566348Z     \r\n2025-03-14T03:57:49.5566624Z         Returns:\r\n2025-03-14T03:57:49.5567044Z             The keys stored in the table. If no keys are found, then an empty List is returned.\r\n2025-03-14T03:57:49.5567444Z         \"\"\"\r\n2025-03-14T03:57:49.5567721Z     \r\n2025-03-14T03:57:49.5568042Z         def access_function():\r\n2025-03-14T03:57:49.5568415Z             keys = self.get_keys(table_name)\r\n2025-03-14T03:57:49.5569226Z             if wait_at_least_n_keys:\r\n2025-03-14T03:57:49.5569582Z                 return (len(keys) >= num_keys, keys)\r\n2025-03-14T03:57:49.5569920Z             else:\r\n2025-03-14T03:57:49.5570487Z                 return (len(keys) == num_keys, keys)\r\n2025-03-14T03:57:49.5571465Z     \r\n2025-03-14T03:57:49.5571935Z         status, result = wait_for_result(\r\n2025-03-14T03:57:49.5572555Z             access_function, self._disable_strict_polling(polling_config)\r\n2025-03-14T03:57:49.5572969Z         )\r\n2025-03-14T03:57:49.5573263Z     \r\n2025-03-14T03:57:49.5573552Z         if not status:\r\n2025-03-14T03:57:49.5573889Z             message = failure_message or (\r\n2025-03-14T03:57:49.5574117Z                 f\"Unexpected number of keys: expected={num_keys}, received={len(result)} \"\r\n2025-03-14T03:57:49.5574337Z                 f'({result}), table=\"{table_name}\"'\r\n2025-03-14T03:57:49.5574502Z             )\r\n2025-03-14T03:57:49.5574676Z >           assert not polling_config.strict, message\r\n2025-03-14T03:57:49.5575140Z E           AssertionError: Unexpected number of keys: expected=1, received=0 ([]), table=\"BFD_SOFTWARE_SESSION_TABLE\"\r\n2025-03-14T03:57:49.5575273Z \r\n2025-03-14T03:57:49.5575627Z dvslib/dvs_database.py:414: AssertionError\r\n2025-03-14T03:57:49.5575867Z _____________________ TestSoftBfd.test_multipleBfdSessions _____________________\r\n2025-03-14T03:57:49.5576140Z \r\n2025-03-14T03:57:49.5576318Z self = <test_soft_bfd.TestSoftBfd object at 0x7f0b2d4370d0>\r\n2025-03-14T03:57:49.5576735Z dvs = <conftest.DockerVirtualSwitch object at 0x7f0b2d443190>\r\n2025-03-14T03:57:49.5576826Z \r\n2025-03-14T03:57:49.5576997Z     def test_multipleBfdSessions(self, dvs):\r\n2025-03-14T03:57:49.5577251Z         self.setup_db(dvs)\r\n2025-03-14T03:57:49.5577810Z         bfdSessions = self.get_exist_bfd_session()\r\n2025-03-14T03:57:49.5578007Z     \r\n2025-03-14T03:57:49.5578171Z         # Create BFD session 1\r\n2025-03-14T03:57:49.5578375Z         key1 = \"default:default:10.0.0.2\"\r\n2025-03-14T03:57:49.5578572Z         fieldValues = {\"local_addr\": \"10.0.0.1\"}\r\n2025-03-14T03:57:49.5578988Z         self.create_bfd_session(key1, fieldValues)\r\n2025-03-14T03:57:49.5579224Z >       self.sdb.wait_for_n_keys(SOFT_BFD_STATE_TABLE, len(bfdSessions) + 1)\r\n2025-03-14T03:57:49.5579341Z \r\n2025-03-14T03:57:49.5579489Z test_soft_bfd.py:118: \r\n2025-03-14T03:57:49.5579705Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \r\n2025-03-14T03:57:49.5579808Z \r\n2025-03-14T03:57:49.5580798Z self = <dvslib.dvs_database.DVSDatabase object at 0x7f0b2d35ee20>\r\n2025-03-14T03:57:49.5581779Z table_name = 'BFD_SOFTWARE_SESSION_TABLE', num_keys = 1\r\n2025-03-14T03:57:49.5582236Z wait_at_least_n_keys = False\r\n2025-03-14T03:57:49.5582818Z polling_config = PollingConfig(polling_interval=0.01, timeout=20.0, strict=True)\r\n2025-03-14T03:57:49.5583028Z failure_message = None\r\n2025-03-14T03:57:49.5583126Z \r\n2025-03-14T03:57:49.5583444Z     def wait_for_n_keys(\r\n2025-03-14T03:57:49.5583599Z         self,\r\n2025-03-14T03:57:49.5583905Z         table_name: str,\r\n2025-03-14T03:57:49.5584089Z         num_keys: int,\r\n2025-03-14T03:57:49.5584439Z         wait_at_least_n_keys: bool = False,\r\n2025-03-14T03:57:49.5584832Z         polling_config: PollingConfig = PollingConfig(),\r\n2025-03-14T03:57:49.5585048Z         failure_message: str = None,\r\n2025-03-14T03:57:49.5585233Z     ) -> List[str]:\r\n2025-03-14T03:57:49.5585441Z         \"\"\"Wait for the specified number of keys to exist in the table.\r\n2025-03-14T03:57:49.5585636Z     \r\n2025-03-14T03:57:49.5586099Z         Args:\r\n2025-03-14T03:57:49.5586612Z             table_name: The name of the table from which to fetch the keys.\r\n2025-03-14T03:57:49.5587185Z             num_keys: The expected number of keys to retrieve from the table.\r\n2025-03-14T03:57:49.5587729Z             polling_config: The parameters to use to poll the db.\r\n2025-03-14T03:57:49.5588278Z             failure_message: The message to print if the call times out. This will only take effect\r\n2025-03-14T03:57:49.5588797Z                 if the PollingConfig is set to strict.\r\n2025-03-14T03:57:49.5589517Z     \r\n2025-03-14T03:57:49.5589829Z         Returns:\r\n2025-03-14T03:57:49.5590319Z             The keys stored in the table. If no keys are found, then an empty List is returned.\r\n2025-03-14T03:57:49.5590735Z         \"\"\"\r\n2025-03-14T03:57:49.5591043Z     \r\n2025-03-14T03:57:49.5591893Z         def access_function():\r\n2025-03-14T03:57:49.5592451Z             keys = self.get_keys(table_name)\r\n2025-03-14T03:57:49.5593017Z             if wait_at_least_n_keys:\r\n2025-03-14T03:57:49.5593427Z                 return (len(keys) >= num_keys, keys)\r\n2025-03-14T03:57:49.5593779Z             else:\r\n2025-03-14T03:57:49.5594338Z                 return (len(keys) == num_keys, keys)\r\n2025-03-14T03:57:49.5594688Z     \r\n2025-03-14T03:57:49.5594965Z         status, result = wait_for_result(\r\n2025-03-14T03:57:49.5595330Z             access_function, self._disable_strict_polling(polling_config)\r\n2025-03-14T03:57:49.5595785Z         )\r\n2025-03-14T03:57:49.5596097Z     \r\n2025-03-14T03:57:49.5596432Z         if not status:\r\n2025-03-14T03:57:49.5596835Z             message = failure_message or (\r\n2025-03-14T03:57:49.5597270Z                 f\"Unexpected number of keys: expected={num_keys}, received={len(result)} \"\r\n2025-03-14T03:57:49.5597501Z                 f'({result}), table=\"{table_name}\"'\r\n2025-03-14T03:57:49.5597679Z             )\r\n2025-03-14T03:57:49.5597859Z >           assert not polling_config.strict, message\r\n2025-03-14T03:57:49.5598121Z E           AssertionError: Unexpected number of keys: expected=1, received=0 ([]), table=\"BFD_SOFTWARE_SESSION_TABLE\"\r\n2025-03-14T03:57:49.5598254Z \r\n2025-03-14T03:57:49.5598450Z dvslib/dvs_database.py:414: AssertionError\r\n2025-03-14T03:57:49.5598692Z -- generated xml file: /agent/_work/1/s/sonic-swss/tests/test_soft_bfd_tr.xml --\r\n```"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-14T07:44:34Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-14T07:44:45Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-14T14:14:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-14T14:14:23Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-14T16:23:38Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-14T16:23:49Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-15T02:30:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-15T02:31:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-15T03:30:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-15T03:31:04Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-15T03:36:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-15T03:37:00Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-16T04:03:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-16T04:03:33Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-17T17:13:45Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "@prsunny @kcudnik  Could you help review?"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-18T08:14:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-18T08:15:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-18T10:01:07Z",
+        "comment_author": "stephenxs",
+        "comment_body": "making swss fail due to timeout. This is something we suffered on swss-common repo three months ago...\r\nwill retry for now"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-18T10:01:13Z",
+        "comment_author": "stephenxs",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-18T10:01:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-18T10:01:27Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-18T13:29:07Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-18T13:29:19Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-18T23:19:20Z",
+        "comment_author": "stephenxs",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-18T23:19:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-18T23:19:33Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-19T00:37:21Z",
+        "comment_author": "stephenxs",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-19T00:37:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-19T00:37:34Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-19T15:00:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-19T15:00:48Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-20T00:03:56Z",
+        "comment_author": "stephenxs",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-20T00:03:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-20T00:04:09Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-20T08:24:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-20T08:24:41Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-20T08:25:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-20T08:25:31Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-20T09:07:36Z",
+        "comment_author": "stephenxs",
+        "comment_body": "depending on #1556 to cherry-pick to 202412"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-20T11:12:26Z",
+        "comment_author": "stephenxs",
+        "comment_body": "@kcudnik could you review it again? I rebased according to #1556 to resolve the conflict and apply the same logic in another scenario."
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-20T22:04:39Z",
+        "comment_author": "stephenxs",
+        "comment_body": "@kcudnik could you check my answer to your questions? Let me know if you have further comments.\n\nThanks"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-21T13:51:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-21T13:51:56Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-21T14:02:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-21T14:02:53Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-21T14:43:52Z",
+        "comment_author": "stephenxs",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-21T14:43:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-21T14:44:03Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-24T04:46:30Z",
+        "comment_author": "stephenxs",
+        "comment_body": "Hi @kcudnik \r\nCould you please approve and merge it if you do not have further comments?\r\nAll comments have been resolved and all tests passed.\r\nThanks"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "review_at": "2025-03-15T03:03:56Z",
+        "review_author": "github-advanced-security"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "review_at": "2025-03-15T03:30:06Z",
+        "review_author": "stephenxs"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "review_at": "2025-03-17T17:28:12Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "review_at": "2025-03-17T17:32:18Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "review_at": "2025-03-20T17:31:11Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "review_at": "2025-03-20T17:32:00Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "review_at": "2025-03-20T17:32:23Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "review_at": "2025-03-20T21:53:09Z",
+        "review_author": "stephenxs"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "review_at": "2025-03-20T21:54:30Z",
+        "review_author": "stephenxs"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "review_at": "2025-03-20T22:00:43Z",
+        "review_author": "stephenxs"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "review_at": "2025-03-21T11:19:23Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "review_at": "2025-03-21T11:38:30Z",
+        "review_author": "stephenxs"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "review_at": "2025-03-21T11:41:12Z",
+        "review_author": "stephenxs"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "review_at": "2025-03-21T13:49:59Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "review_at": "2025-03-24T10:17:38Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1555,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2025-03-24T10:17:38Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 1553,
         "repo": "sonic-sairedis",
         "comment_at": "2025-03-12T03:44:51Z",
@@ -3161,6 +3671,13 @@
         "comment_at": "2025-02-21T19:53:34Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to msft-202412: https://github.com/Azure/sonic-sairedis.msft/pull/17"
+    },
+    {
+        "number": 1508,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-03-24T15:28:14Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "@r12f  This was reverted by you in 202412 branch. Can you please update labels so that it doesn't mislead stating the changes are included in 202412 branch?"
     },
     {
         "number": 1508,
