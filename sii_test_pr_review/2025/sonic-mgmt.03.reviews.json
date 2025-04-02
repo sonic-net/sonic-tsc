@@ -268,7 +268,13 @@
     {
         "number": 17728,
         "repo": "sonic-mgmt",
-        "latestReview_at": "2025-03-31T03:20:58Z",
+        "review_at": "2025-04-01T03:03:30Z",
+        "review_author": "congh-nvidia"
+    },
+    {
+        "number": 17728,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2025-04-01T03:03:30Z",
         "latestReview_author": "congh-nvidia",
         "latestReview_state": "COMMENTED"
     },
@@ -1568,6 +1574,13 @@
         "comment_at": "2025-03-26T02:54:16Z",
         "comment_author": "sdszhang",
         "comment_body": "> @sdszhang , are you going to run the script for nightly topos too?\r\n\r\none this is merged, going to update 7060x6 minimized topo."
+    },
+    {
+        "number": 17673,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-04-01T05:10:19Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202412: https://github.com/Azure/sonic-mgmt.msft/pull/176"
     },
     {
         "number": 17673,
@@ -3191,6 +3204,13 @@
     {
         "number": 17618,
         "repo": "sonic-mgmt",
+        "comment_at": "2025-04-01T01:36:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-mgmt/pull/17772"
+    },
+    {
+        "number": 17618,
+        "repo": "sonic-mgmt",
         "review_at": "2025-03-20T17:32:04Z",
         "review_author": "yxieca"
     },
@@ -4560,13 +4580,6 @@
     {
         "number": 17572,
         "repo": "sonic-mgmt",
-        "comment_at": "2025-03-31T13:54:01Z",
-        "comment_author": "ytzur1",
-        "comment_body": "I can add it to KVM test, but please note that each case runs for ~2 minutes due to logging and tcpdump capture. \r\nWe have 8 different cases (combinations of VRF type, source IP, and port), which would add about 16 minutes to the CI process. \r\nWould it be better to add just a few cases to minimize the impact on CI time?\r\n\r\n> Could ensure it is run in KVM test? so it will protect each PR.\r\n\r\n"
-    },
-    {
-        "number": 17572,
-        "repo": "sonic-mgmt",
         "comment_at": "2025-03-31T15:04:21Z",
         "comment_author": "mssonicbld",
         "comment_body": "/azp run"
@@ -4577,6 +4590,20 @@
         "comment_at": "2025-03-31T15:04:35Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 17572,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-04-01T06:21:10Z",
+        "comment_author": "ytzur1",
+        "comment_body": "@qiluo-msft \r\n<img width=\"1504\" alt=\"Screenshot 2025-04-01 at 9 16 32\" src=\"https://github.com/user-attachments/assets/2c52cdc7-f0b3-4761-9f60-e07dfb2d6c70\" />\r\nIt seems the test_syslog_source_ip is included in kvm test but its being skipped"
+    },
+    {
+        "number": 17572,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-04-01T06:58:11Z",
+        "comment_author": "ytzur1",
+        "comment_body": "> @ytzur1 Would it be possible to post screenshot of testcases passing since kvm tests will skip?\r\n\r\n<img width=\"727\" alt=\"Screenshot 2025-04-01 at 9 59 54\" src=\"https://github.com/user-attachments/assets/64fbb755-2146-42ba-b4f3-b5618035fb8e\" />\r\n\r\n\r\n\r\n"
     },
     {
         "number": 17572,
@@ -4860,6 +4887,13 @@
         "comment_at": "2025-03-26T01:34:44Z",
         "comment_author": "bingwang-ms",
         "comment_body": "LGTM. Thanks for the fix"
+    },
+    {
+        "number": 17570,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-04-01T17:23:47Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202411: https://github.com/sonic-net/sonic-mgmt/pull/17798"
     },
     {
         "number": 17570,
@@ -11270,6 +11304,20 @@
     {
         "number": 17426,
         "repo": "sonic-mgmt",
+        "comment_at": "2025-04-01T03:21:40Z",
+        "comment_author": "congh-nvidia",
+        "comment_body": "> Hi @congh-nvidia, can you help me understand why the upper_case/lower_case can impact traffic balancing?\r\n\r\nHi @bingwang-ms , it doesn't affect balancing. The same IPv6 address with different cases in config will be considered as different entries by sonic and lead to failure in creating/removing rif. This is a known issue in SONiC.\r\nAnd the generic hash test changes the default configuration when testing the layer2 keys, which has actions to remove/add IPv6 address.\r\nThe symptom of this failure is packet loss(actually the system crashes and restarts), not in the balancing check."
+    },
+    {
+        "number": 17426,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-04-01T23:53:29Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202411: https://github.com/sonic-net/sonic-mgmt/pull/17802"
+    },
+    {
+        "number": 17426,
+        "repo": "sonic-mgmt",
         "review_at": "2025-03-16T00:59:29Z",
         "review_author": "nhe-NV"
     },
@@ -11630,6 +11678,20 @@
         "comment_at": "2025-03-25T20:25:26Z",
         "comment_author": "baorliu",
         "comment_body": "hi @bingwang-ms, @prabhataravind, could you please help review this PR?"
+    },
+    {
+        "number": 17419,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-04-01T01:24:48Z",
+        "comment_author": "wsycqyz",
+        "comment_body": "@kevinskwang FYI"
+    },
+    {
+        "number": 17419,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-04-01T01:24:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202411: https://github.com/sonic-net/sonic-mgmt/pull/17771"
     },
     {
         "number": 17419,
@@ -17681,6 +17743,20 @@
         "comment_at": "2025-03-03T05:13:58Z",
         "comment_author": "liuh-80",
         "comment_body": "This test case only exist on master and 202411 branch."
+    },
+    {
+        "number": 17271,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-04-01T02:26:08Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@liuh-80 PR conflicts with 202411 branch"
+    },
+    {
+        "number": 17271,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-04-01T02:26:27Z",
+        "comment_author": "kperumalbfn",
+        "comment_body": "@liuh-80 Could you create a separate PR for 202411 branch?"
     },
     {
         "number": 17271,
@@ -24311,6 +24387,20 @@
     {
         "number": 16985,
         "repo": "sonic-mgmt",
+        "comment_at": "2025-04-01T05:24:58Z",
+        "comment_author": "r12f",
+        "comment_body": "hi @sdszhang , with this change, could we remove the change that Rick did to whilelist the d28u1 topo?"
+    },
+    {
+        "number": 16985,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-04-01T05:25:34Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202412: https://github.com/Azure/sonic-mgmt.msft/pull/177"
+    },
+    {
+        "number": 16985,
+        "repo": "sonic-mgmt",
         "review_at": "2025-02-17T03:36:14Z",
         "review_author": "nhe-NV"
     },
@@ -27290,6 +27380,20 @@
         "comment_at": "2025-01-21T10:44:36Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 16605,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-04-01T02:14:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202405: https://github.com/sonic-net/sonic-mgmt/pull/17774"
+    },
+    {
+        "number": 16605,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-04-01T02:20:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202411: https://github.com/sonic-net/sonic-mgmt/pull/17775"
     },
     {
         "number": 16605,
