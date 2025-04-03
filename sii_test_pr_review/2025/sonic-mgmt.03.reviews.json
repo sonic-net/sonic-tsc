@@ -57,6 +57,13 @@
     {
         "number": 17746,
         "repo": "sonic-mgmt",
+        "comment_at": "2025-04-02T02:02:08Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "@ganglyu I think this issue could be an image issue https://github.com/sonic-net/sonic-buildimage/issues/22201"
+    },
+    {
+        "number": 17746,
+        "repo": "sonic-mgmt",
         "review_at": "2025-03-31T03:52:56Z",
         "review_author": "liuh-80"
     },
@@ -5569,6 +5576,13 @@
     {
         "number": 17554,
         "repo": "sonic-mgmt",
+        "comment_at": "2025-04-02T14:00:55Z",
+        "comment_author": "nhe-NV",
+        "comment_body": "Hi @saiarcot895 IN the PR, I see you have such change:\r\n output = duthost.command(f\"systemctl show {systemd_service} --timestamp unix -P ExecMainStartTimestamp\")\r\n return datetime.datetime.utcfromtimestamp(int(output['stdout'][1:])) > start_time\r\n\r\nWhen the timezone on the DUT is not UTC, we may have failure. Now we get the failure in our regression due to we are not using the UTC timezone. "
+    },
+    {
+        "number": 17554,
+        "repo": "sonic-mgmt",
         "review_at": "2025-03-18T01:54:45Z",
         "review_author": "wen587"
     },
@@ -6003,6 +6017,13 @@
         "comment_at": "2025-03-17T03:38:30Z",
         "comment_author": "JibinBao",
         "comment_body": "cherry-pick https://github.com/sonic-net/sonic-mgmt/pull/17439"
+    },
+    {
+        "number": 17541,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-04-02T22:21:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202411: https://github.com/sonic-net/sonic-mgmt/pull/17825"
     },
     {
         "number": 17541,
@@ -14350,6 +14371,20 @@
         "comment_at": "2025-03-08T00:37:22Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 17356,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-04-02T08:41:21Z",
+        "comment_author": "nhe-NV",
+        "comment_body": "HI @ganglyu after the PR merged to our local, we start to have the test \"test_dns_resolv_conf\" failed \r\nFailed: Mismatch between expected and current nameservers! Expected: [10.7.77.135 10.211.0.124 10.211.0.121]. Current: [].\r\n\r\nI am wondering do you have the dns name server config in your mingraph? \r\n\r\nThanks"
+    },
+    {
+        "number": 17356,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-04-02T08:44:52Z",
+        "comment_author": "ganglyu",
+        "comment_body": "> HI @ganglyu after the PR merged to our local, we start to have the test \"test_dns_resolv_conf\" failed Failed: Mismatch between expected and current nameservers! Expected: [10.7.77.135 10.211.0.124 10.211.0.121]. Current: [].\r\n> \r\n> I am wondering do you have the dns name server config in your mingraph?\r\n> \r\n> Thanks\r\n\r\nWhy do you expect 10.7.77.135, 10.211.0.124, 10.211.0.121 for your testbed? Do you add these in minigraph?"
     },
     {
         "number": 17356,
