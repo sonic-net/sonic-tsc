@@ -16,6 +16,13 @@
     {
         "number": 3600,
         "repo": "sonic-swss",
+        "comment_at": "2025-04-11T09:16:25Z",
+        "comment_author": "Junchao-Mellanox",
+        "comment_body": "Hi @prgeor , could you please help cherry-pick to 202412?"
+    },
+    {
+        "number": 3600,
+        "repo": "sonic-swss",
         "review_at": "2025-04-09T05:18:52Z",
         "review_author": "stephenxs"
     },
@@ -37,6 +44,114 @@
         "repo": "sonic-swss",
         "latestReview_at": "2025-04-09T05:29:24Z",
         "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3595,
+        "repo": "sonic-swss",
+        "comment_at": "2025-04-07T20:31:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3595,
+        "repo": "sonic-swss",
+        "comment_at": "2025-04-07T20:31:16Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3595,
+        "repo": "sonic-swss",
+        "comment_at": "2025-04-07T23:54:05Z",
+        "comment_author": "vivekrnv",
+        "comment_body": "This test failed, but does not seem to be related\r\n\r\n```\r\n2025-04-07T22:00:03.9879286Z ___________________ TestMACsec.test_macsec_attribute_change ____________________\r\n2025-04-07T22:00:03.9879502Z \r\n2025-04-07T22:00:03.9879877Z self = <test_macsec.TestMACsec object at 0x7f173e52b820>\r\n2025-04-07T22:00:03.9880707Z dvs = <conftest.DockerVirtualSwitch object at 0x7f173e5889d0>, testlog = None\r\n2025-04-07T22:00:03.9880906Z \r\n2025-04-07T22:00:03.9881286Z     def test_macsec_attribute_change(self, dvs: conftest.DockerVirtualSwitch, testlog):\r\n2025-04-07T22:00:03.9881688Z         port_name = \"Ethernet0\"\r\n2025-04-07T22:00:03.9882029Z         local_mac_address = \"00-15-5D-78-FF-C1\"\r\n2025-04-07T22:00:03.9882390Z         peer_mac_address = \"00-15-5D-78-FF-C2\"\r\n2025-04-07T22:00:03.9882711Z         macsec_port_identifier = 1\r\n2025-04-07T22:00:03.9883043Z         macsec_port = \"macsec_eth1\"\r\n2025-04-07T22:00:03.9883352Z         sak = \"0\" * 32\r\n2025-04-07T22:00:03.9883642Z         auth_key = \"0\" * 32\r\n2025-04-07T22:00:03.9883943Z         packet_number = 1\r\n2025-04-07T22:00:03.9884261Z         ssci = 1\r\n2025-04-07T22:00:03.9884592Z         salt = \"0\" * 24\r\n2025-04-07T22:00:03.9885100Z     \r\n2025-04-07T22:00:03.9885391Z         wpa = WPASupplicantMock(dvs)\r\n2025-04-07T22:00:03.9885722Z         inspector = MACsecInspector(dvs)\r\n2025-04-07T22:00:03.9886015Z     \r\n2025-04-07T22:00:03.9886260Z         self.init_macsec(\r\n2025-04-07T22:00:03.9886538Z             wpa,\r\n2025-04-07T22:00:03.9886991Z             port_name,\r\n2025-04-07T22:00:03.9887291Z             local_mac_address,\r\n2025-04-07T22:00:03.9887770Z             macsec_port_identifier)\r\n2025-04-07T22:00:03.9888091Z         wpa.set_macsec_control(port_name, True)\r\n2025-04-07T22:00:03.9888482Z         wpa.config_macsec_port(port_name, {\"enable_encrypt\": False})\r\n2025-04-07T22:00:03.9888906Z         wpa.config_macsec_port(port_name, {\"cipher_suite\": \"GCM-AES-256\"})\r\n2025-04-07T22:00:03.9889273Z         self.establish_macsec(\r\n2025-04-07T22:00:03.9889557Z             wpa,\r\n2025-04-07T22:00:03.9889979Z             port_name,\r\n2025-04-07T22:00:03.9890244Z             local_mac_address,\r\n2025-04-07T22:00:03.9890536Z             peer_mac_address,\r\n2025-04-07T22:00:03.9890844Z             macsec_port_identifier,\r\n2025-04-07T22:00:03.9891149Z             0,\r\n2025-04-07T22:00:03.9891441Z             sak,\r\n2025-04-07T22:00:03.9891783Z             packet_number,\r\n2025-04-07T22:00:03.9892130Z             auth_key,\r\n2025-04-07T22:00:03.9892400Z             ssci,\r\n2025-04-07T22:00:03.9892839Z             salt)\r\n2025-04-07T22:00:03.9901472Z         macsec_info = inspector.get_macsec_port(macsec_port)\r\n2025-04-07T22:00:03.9912309Z >       assert(\"encrypt off\" in macsec_info)\r\n2025-04-07T22:00:03.9922765Z E       AssertionError: assert 'encrypt off' in ''\r\n```"
+    },
+    {
+        "number": 3595,
+        "repo": "sonic-swss",
+        "comment_at": "2025-04-07T23:56:10Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3595,
+        "repo": "sonic-swss",
+        "comment_at": "2025-04-07T23:56:20Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3595,
+        "repo": "sonic-swss",
+        "comment_at": "2025-04-08T05:18:28Z",
+        "comment_author": "liuh-80",
+        "comment_body": "If this PR is not fixing the issue, the issue may cause by a bug in current orchagent notification handling: the high priority port notification depends on low priority port event been handle first.\r\n\r\nI have a PR for the priority inversion issue, and in that PR I also make similar change as this PR:\r\nhttps://github.com/sonic-net/sonic-swss/pull/3582 "
+    },
+    {
+        "number": 3595,
+        "repo": "sonic-swss",
+        "comment_at": "2025-04-08T05:54:56Z",
+        "comment_author": "vivekrnv",
+        "comment_body": "Thanks @liuh-80 for the review. This PR is fixing the problem.\r\n\r\nLooks like you've added drain() API to Notifier class as well in your PR. So, your PR would also fix this. However, I would recommend merging this PR first and rebasing your changes"
+    },
+    {
+        "number": 3595,
+        "repo": "sonic-swss",
+        "comment_at": "2025-04-08T09:11:57Z",
+        "comment_author": "liuh-80",
+        "comment_body": "> Thanks @liuh-80 for the review. This PR is fixing the problem.\r\n> \r\n> Looks like you've added drain() API to Notifier class as well in your PR. So, your PR would also fix this. However, I would recommend merging this PR first and rebasing your changes\r\n\r\nYes. my PR still in draft, I will update after this PR merged."
+    },
+    {
+        "number": 3595,
+        "repo": "sonic-swss",
+        "review_at": "2025-04-07T23:55:12Z",
+        "review_author": "oleksandrivantsiv"
+    },
+    {
+        "number": 3595,
+        "repo": "sonic-swss",
+        "review_at": "2025-04-08T05:14:05Z",
+        "review_author": "liuh-80"
+    },
+    {
+        "number": 3595,
+        "repo": "sonic-swss",
+        "review_at": "2025-04-11T22:24:25Z",
+        "review_author": "prabhataravind"
+    },
+    {
+        "number": 3595,
+        "repo": "sonic-swss",
+        "review_at": "2025-04-11T22:26:03Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 3595,
+        "repo": "sonic-swss",
+        "latestReview_at": "2025-04-11T22:26:03Z",
+        "latestReview_author": "prsunny",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3595,
+        "repo": "sonic-swss",
+        "latestReview_at": "2025-04-07T23:55:12Z",
+        "latestReview_author": "oleksandrivantsiv",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3595,
+        "repo": "sonic-swss",
+        "latestReview_at": "2025-04-08T05:14:05Z",
+        "latestReview_author": "liuh-80",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3595,
+        "repo": "sonic-swss",
+        "latestReview_at": "2025-04-11T22:24:25Z",
+        "latestReview_author": "prabhataravind",
         "latestReview_state": "APPROVED"
     },
     {
@@ -354,6 +469,68 @@
         "comment_at": "2025-03-24T17:16:01Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3563,
+        "repo": "sonic-swss",
+        "comment_at": "2025-03-18T14:37:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3563,
+        "repo": "sonic-swss",
+        "comment_at": "2025-03-18T14:37:16Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3563,
+        "repo": "sonic-swss",
+        "comment_at": "2025-03-20T09:40:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3563,
+        "repo": "sonic-swss",
+        "comment_at": "2025-03-20T09:40:36Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3563,
+        "repo": "sonic-swss",
+        "comment_at": "2025-03-31T16:37:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3563,
+        "repo": "sonic-swss",
+        "comment_at": "2025-03-31T16:37:53Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3563,
+        "repo": "sonic-swss",
+        "comment_at": "2025-04-11T10:56:18Z",
+        "comment_author": "stepanblyschak",
+        "comment_body": "@prsunny Can this be merged ?"
+    },
+    {
+        "number": 3563,
+        "repo": "sonic-swss",
+        "review_at": "2025-03-31T16:37:27Z",
+        "review_author": "dgsudharsan"
+    },
+    {
+        "number": 3563,
+        "repo": "sonic-swss",
+        "latestReview_at": "2025-03-31T16:37:27Z",
+        "latestReview_author": "dgsudharsan",
+        "latestReview_state": "APPROVED"
     },
     {
         "number": 3559,
@@ -7185,6 +7362,13 @@
         "comment_at": "2025-04-10T16:59:02Z",
         "comment_author": "prsunny",
         "comment_body": "Bypassed coverage temporarily as this is an exception path. "
+    },
+    {
+        "number": 3432,
+        "repo": "sonic-swss",
+        "comment_at": "2025-04-11T11:44:30Z",
+        "comment_author": "bradh352",
+        "comment_body": "Please tag for backport to 202411 as well, or I can make a PR for that if needed."
     },
     {
         "number": 3432,
