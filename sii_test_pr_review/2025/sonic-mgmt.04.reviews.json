@@ -462,6 +462,67 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 17907,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-04-09T08:57:29Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 17907,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-04-09T08:57:41Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 17907,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-04-09T13:23:34Z",
+        "comment_author": "AntonHryshchuk",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 17907,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-04-09T13:23:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 17907,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-04-09T13:23:49Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 17907,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-04-10T08:42:10Z",
+        "review_author": "SavchukRomanLv"
+    },
+    {
+        "number": 17907,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-04-13T06:27:09Z",
+        "review_author": "liat-grozovik"
+    },
+    {
+        "number": 17907,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2025-04-10T08:42:10Z",
+        "latestReview_author": "SavchukRomanLv",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 17907,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2025-04-13T06:27:09Z",
+        "latestReview_author": "liat-grozovik",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 17906,
         "repo": "sonic-mgmt",
         "comment_at": "2025-04-09T08:01:57Z",
@@ -655,6 +716,13 @@
     {
         "number": 17898,
         "repo": "sonic-mgmt",
+        "comment_at": "2025-04-13T23:40:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202412: https://github.com/Azure/sonic-mgmt.msft/pull/189"
+    },
+    {
+        "number": 17898,
+        "repo": "sonic-mgmt",
         "review_at": "2025-04-09T04:46:41Z",
         "review_author": "r12f"
     },
@@ -794,6 +862,13 @@
         "comment_at": "2025-04-10T17:50:58Z",
         "comment_author": "byu343",
         "comment_body": "I got this change to run in our testing. One finding is that the peer devices (s4 in d18u8s4) are added to the routes, which were not before. They are 10.0.0.157 to 10.0.0.163 below from 'show ip route'. Is this intended? \r\n```\r\nB>*192.224.160.128/25 [20/0] via 10.0.0.57, PortChannel2002, 00:08:38\r\n 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 parse_prs.py parse_reviews.py pr_dump.sh via 10.0.0.59, PortChannel2004, 00:08:38\r\n 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 parse_prs.py parse_reviews.py pr_dump.sh via 10.0.0.61, PortChannel2006, 00:08:38\r\n 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 parse_prs.py parse_reviews.py pr_dump.sh via 10.0.0.63, PortChannel2008, 00:08:38\r\n 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 parse_prs.py parse_reviews.py pr_dump.sh via 10.0.0.65, PortChannel2009, 00:08:38\r\n 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 parse_prs.py parse_reviews.py pr_dump.sh via 10.0.0.67, PortChannel2010, 00:08:38\r\n 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 parse_prs.py parse_reviews.py pr_dump.sh via 10.0.0.69, PortChannel2011, 00:08:38\r\n 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 parse_prs.py parse_reviews.py pr_dump.sh via 10.0.0.71, PortChannel2012, 00:08:38\r\n 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 parse_prs.py parse_reviews.py pr_dump.sh via 10.0.0.157, Ethernet56, 00:08:38\r\n 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 parse_prs.py parse_reviews.py pr_dump.sh via 10.0.0.159, Ethernet60, 00:08:38\r\n 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 parse_prs.py parse_reviews.py pr_dump.sh via 10.0.0.161, Ethernet64, 00:08:38\r\n 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 parse_prs.py parse_reviews.py pr_dump.sh via 10.0.0.163, Ethernet68, 00:08:38 \r\n```\r\n\r\nAlso some testcases started to fail likely because of change, as certain packets are sent to the new routes which is not matching the expectation of some testcases. "
+    },
+    {
+        "number": 17888,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-04-13T23:52:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202412: https://github.com/Azure/sonic-mgmt.msft/pull/190"
     },
     {
         "number": 17888,
@@ -3018,6 +3093,46 @@
         "repo": "sonic-mgmt",
         "latestReview_at": "2025-04-03T12:21:39Z",
         "latestReview_author": "wangxin",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 17788,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-04-01T08:14:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 17788,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-04-01T08:14:31Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 17788,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-04-02T04:37:00Z",
+        "review_author": "stephenxs"
+    },
+    {
+        "number": 17788,
+        "repo": "sonic-mgmt",
+        "review_at": "2025-04-13T06:28:08Z",
+        "review_author": "liat-grozovik"
+    },
+    {
+        "number": 17788,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2025-04-02T04:37:00Z",
+        "latestReview_author": "stephenxs",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 17788,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2025-04-13T06:28:08Z",
+        "latestReview_author": "liat-grozovik",
         "latestReview_state": "APPROVED"
     },
     {
