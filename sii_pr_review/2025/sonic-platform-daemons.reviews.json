@@ -157,6 +157,100 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 601,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-25T15:53:38Z",
+        "comment_author": "linux-foundation-easycla",
+        "comment_body": "<a href=\"https://easycla.lfx.linuxfoundation.org/#/?version=2\"><img src=\"https://s3.amazonaws.com/cla-project-logo-prod/cla-signed.svg\" alt=\"CLA Signed\" align=\"left\" height=\"28\" width=\"328\" ><br ><ul><li>:white_check_mark:login: ymd-arista / (1dbf9219727af8fe4113333bc291f5520116a3a5)</li></ul><br>The committers listed above are authorized under a signed CLA."
+    },
+    {
+        "number": 601,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-25T15:53:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 601,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-25T15:53:52Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 601,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-02T17:34:06Z",
+        "comment_author": "arlakshm",
+        "comment_body": "@mlok-nokia , @anamehra @bmridul to help signoff on this change"
+    },
+    {
+        "number": 601,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-04T15:33:34Z",
+        "comment_author": "ymd-arista",
+        "comment_body": "/easycla"
+    },
+    {
+        "number": 601,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-09T17:32:17Z",
+        "comment_author": "judyjoseph",
+        "comment_body": "@bmridul @anamehra to review as well"
+    },
+    {
+        "number": 601,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-09T17:51:03Z",
+        "comment_author": "anamehra",
+        "comment_body": "Hi @ymd-arista , could you please add more details why we can't use the data in Chassis module table on redis_chassis.server? Please dd UT logs showing the dump of dbs etc."
+    },
+    {
+        "number": 601,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-14T20:26:58Z",
+        "comment_author": "ymd-arista",
+        "comment_body": "@anamehra : Our understanding is that PHYSICAL_ENTITY_TABLE should basically be a mirror/staging area for everything that we export via SNMP as opposed to having SNMP having to look in multiple places for all of the info it needs.\r\n\r\nDB dumps:\r\n\r\n1. After adding some more fields about module to 'CHASSIS_MODULE_TABLE`\r\n\r\n`CHASSIS_MODULE_TABLE|FABRIC-CARD0: {'desc': 'DCS-7804-FM', 'slot': '51', 'oper_status': 'Online', 'num_asics': '2', 'serial': 'SSN19430153', 'presence': 'True', 'is_replaceable': 'True', 'model': 'DCS-7804-FM'}`\r\n\r\n`CHASSIS_MODULE_TABLE|LINE-CARD1: {'desc': 'Unknown', 'slot': '4', 'oper_status': 'Empty', 'num_asics': '0', 'serial': 'N/A', 'presence': 'False', 'is_replaceable': 'True', 'model': 'N/A'}`\r\n\r\n2. After adding information about module to `PHYSICAL_ENTITY_INFO`\r\n\r\n`root@nfc405:/home/admin# sonic-db-cli STATE_DB hgetall \"PHYSICAL_ENTITY_INFO|fan5/1\"\r\n{'position_in_parent': '1', 'parent_name': 'FABRIC-CARD5'}`\r\n\r\n`root@nfc405:/home/admin# sonic-db-cli STATE_DB hgetall \"PHYSICAL_ENTITY_INFO|FABRIC-CARD5\"\r\n{'position_in_parent': '6', 'parent_name': 'chassis 1', 'serial': 'SSN20420826', 'model': '7808R3-FM', 'is_replaceable': 'True'}`"
+    },
+    {
+        "number": 601,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-02T17:49:04Z",
+        "review_author": "mlok-nokia"
+    },
+    {
+        "number": 601,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-02T20:21:19Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 601,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-02T20:21:48Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 601,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-04T15:30:23Z",
+        "review_author": "ymd-arista"
+    },
+    {
+        "number": 601,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-04-02T20:21:48Z",
+        "latestReview_author": "judyjoseph",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 601,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-04-02T17:49:04Z",
+        "latestReview_author": "mlok-nokia",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 595,
         "repo": "sonic-platform-daemons",
         "comment_at": "2025-03-17T19:54:33Z",
