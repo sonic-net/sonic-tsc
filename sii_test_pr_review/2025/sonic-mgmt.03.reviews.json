@@ -12143,6 +12143,13 @@
     {
         "number": 17406,
         "repo": "sonic-mgmt",
+        "comment_at": "2025-04-18T23:19:16Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202411: https://github.com/sonic-net/sonic-mgmt/pull/18048"
+    },
+    {
+        "number": 17406,
+        "repo": "sonic-mgmt",
         "review_at": "2025-03-07T01:45:56Z",
         "review_author": "lolyu"
     },
@@ -22347,6 +22354,20 @@
         "comment_at": "2025-04-14T09:43:07Z",
         "comment_author": "echuawu",
         "comment_body": "Hi @ZhaohuiS,\r\nThere are the output of \"systemctl status caclmgrd\"\r\n```\r\n\u00e2\u2014^O caclmgrd.service - Control Plane ACL configuration daemon\r\n Loaded: loaded (/lib/systemd/system/caclmgrd.service; enabled; preset: enabled)\r\n Active: active (running) since Mon 2025-04-14 13:13:16 IDT; 24s ago\r\n Main PID: 490292 (caclmgrd)\r\n Tasks: 1 (limit: 19014)\r\n Memory: 14.7M\r\n CGroup: /system.slice/caclmgrd.service\r\n \u00e2\u201d\u201d\u00e2\u201d\u20ac490292 /usr/bin/python3 /usr/local/bin/caclmgrd\r\n\r\nApr 14 13:13:18 nvidia_sn_4700 caclmgrd[490292]: iptables -t nat -A POSTROUTING --destination 192.168.0.47 --source 192.168.0.1 -j SNAT --to-source 10.1.0.38\r\nApr 14 13:13:18 nvidia_sn_4700 caclmgrd[490292]: iptables -t nat -A POSTROUTING --destination 192.168.0.11 --source 192.168.0.1 -j SNAT --to-source 10.1.0.38\r\nApr 14 13:13:18 nvidia_sn_4700 caclmgrd[490292]: iptables -t nat -A POSTROUTING --destination 192.168.0.13 --source 192.168.0.1 -j SNAT --to-source 10.1.0.38\r\nApr 14 13:13:18 nvidia_sn_4700 caclmgrd[490292]: iptables -t nat -A POSTROUTING --destination 192.168.0.15 --source 192.168.0.1 -j SNAT --to-source 10.1.0.38\r\nApr 14 13:13:18 nvidia_sn_4700 caclmgrd[490292]: iptables -t nat -A POSTROUTING --destination 192.168.0.17 --source 192.168.0.1 -j SNAT --to-source 10.1.0.38\r\nApr 14 13:13:18 nvidia_sn_4700 caclmgrd[490292]: iptables -t nat -A POSTROUTING --destination 192.168.0.19 --source 192.168.0.1 -j SNAT --to-source 10.1.0.38\r\nApr 14 13:13:18 nvidia_sn_4700 caclmgrd[490292]: iptables -t nat -A POSTROUTING --destination 192.168.0.21 --source 192.168.0.1 -j SNAT --to-source 10.1.0.38\r\nApr 14 13:13:18 nvidia_sn_4700 caclmgrd[490292]: iptables -t nat -A POSTROUTING --destination 192.168.0.5 --source 192.168.0.1 -j SNAT --to-source 10.1.0.38\r\nApr 14 13:13:18 nvidia_sn_4700 caclmgrd[490292]: iptables -t nat -A POSTROUTING --destination 192.168.0.23 --source 192.168.0.1 -j SNAT --to-source 10.1.0.38\r\nApr 14 13:13:18 nvidia_sn_4700 caclmgrd[490292]: iptables -t nat -A POSTROUTING --destination 192.168.0.25 --source 192.168.0.1 -j SNAT --to-source 10.1.0.38\r\n```\r\n\r\nAnd there are the output of \"iptables -S\":\r\n```\r\n-P INPUT ACCEPT\r\n-P FORWARD ACCEPT\r\n-P OUTPUT ACCEPT\r\n-N DHCP\r\n-A INPUT -s 127.0.0.1/32 -i lo -j ACCEPT\r\n-A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT\r\n-A INPUT -p icmp -m icmp --icmp-type 8 -j ACCEPT\r\n-A INPUT -p icmp -m icmp --icmp-type 0 -j ACCEPT\r\n-A INPUT -p icmp -m icmp --icmp-type 3 -j ACCEPT\r\n-A INPUT -p icmp -m icmp --icmp-type 11 -j ACCEPT\r\n-A INPUT -p udp -m udp --dport 67 -j DHCP\r\n-A INPUT -p udp -m udp --dport 67:68 -j ACCEPT\r\n-A INPUT -p udp -m udp --dport 546:547 -j ACCEPT\r\n-A INPUT -p tcp -m tcp --dport 179 -j ACCEPT\r\n-A INPUT -d 10.1.0.32/32 -j DROP\r\n-A INPUT -d 10.1.0.34/32 -j DROP\r\n-A INPUT -d 10.1.0.36/32 -j DROP\r\n-A INPUT -d 10.1.0.38/32 -j DROP\r\n-A INPUT -d 192.168.0.1/32 -j DROP\r\n-A INPUT -d 10.0.0.56/32 -j DROP\r\n-A INPUT -d 10.0.0.58/32 -j DROP\r\n-A INPUT -d 10.0.0.60/32 -j DROP\r\n-A INPUT -d 10.0.0.62/32 -j DROP\r\n-A INPUT -p icmp -m ttl --ttl-lt 2 -j ACCEPT\r\n-A INPUT -p udp -m ttl --ttl-lt 2 -m udp --dport 1025:65535 -j ACCEPT\r\n-A INPUT -p tcp -m ttl --ttl-lt 2 -m tcp --dport 1025:65535 -j ACCEPT\r\n-A DHCP -j RETURN\r\n```\r\n\r\nThere is no NAT rules found."
+    },
+    {
+        "number": 17143,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-04-18T02:22:19Z",
+        "comment_author": "echuawu",
+        "comment_body": "hi @ZhaohuiS , do you have any updates?"
+    },
+    {
+        "number": 17143,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-04-18T08:06:34Z",
+        "comment_author": "ZhaohuiS",
+        "comment_body": "@echuawu In your case, you need to check \"sudo iptables -t nat -S\", the iptable rules are there.\r\nSorry, I don't have NAT config as your scenario, could you please enhance the case to check if there is \"`iptables -t nat -A POSTROUTING`\" in `/var/log/syslog` or the output of `sudo systemctl status caclmgrd`.\r\n"
     },
     {
         "number": 17143,
