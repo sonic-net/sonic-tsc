@@ -21837,6 +21837,13 @@
     {
         "number": 14122,
         "repo": "sonic-mgmt",
+        "comment_at": "2025-04-21T20:43:39Z",
+        "comment_author": "rraghav-cisco",
+        "comment_body": "@amitpawar12 : Can you pls provide the variables.py and sonic_lab_links.csv that you used for this run ? Thanks.\r\n\r\nI keep running into this problem:\r\n```\r\n for testbed_subtype, rdma_ports in MIXED_SPEED_PORT_INFO[MULTIDUT_TESTBED].items():\r\n tx_port_count = port_map[0]\r\n rx_port_count = port_map[2]\r\n snappi_port_list = get_snappi_ports\r\n pytest_require(MULTIDUT_TESTBED == tbinfo['conf-name'],\r\n \"The testbed name from testbed file doesn't match with MULTIDUT_TESTBED in variables.py \")\r\n&gt; pytest_require(len(snappi_port_list) &gt;= tx_port_count + rx_port_count,\r\n \"Need Minimum of 2 ports defined in ansible/files/*links.csv file\")\r\nE TypeError: object of type 'NoneType' has no len()\r\n\r\n```\r\nThe snappi_port_list is None since I have different port speeds in sonic_lab_links.csv."
+    },
+    {
+        "number": 14122,
+        "repo": "sonic-mgmt",
         "review_at": "2024-08-21T23:29:36Z",
         "review_author": "sdszhang"
     },
