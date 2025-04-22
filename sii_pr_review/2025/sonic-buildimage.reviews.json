@@ -14,6 +14,62 @@
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
     },
     {
+        "number": 22377,
+        "repo": "sonic-buildimage",
+        "comment_at": "2025-04-19T03:05:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 22377,
+        "repo": "sonic-buildimage",
+        "comment_at": "2025-04-19T03:05:43Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 22377,
+        "repo": "sonic-buildimage",
+        "comment_at": "2025-04-20T03:06:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 22377,
+        "repo": "sonic-buildimage",
+        "comment_at": "2025-04-20T03:06:17Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 22377,
+        "repo": "sonic-buildimage",
+        "comment_at": "2025-04-21T03:06:03Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 22377,
+        "repo": "sonic-buildimage",
+        "comment_at": "2025-04-21T03:06:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 22377,
+        "repo": "sonic-buildimage",
+        "comment_at": "2025-04-21T10:26:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 22377,
+        "repo": "sonic-buildimage",
+        "comment_at": "2025-04-21T10:26:43Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
         "number": 22376,
         "repo": "sonic-buildimage",
         "comment_at": "2025-04-19T03:05:07Z",
@@ -40,6 +96,60 @@
         "comment_at": "2025-04-20T03:05:53Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 22374,
+        "repo": "sonic-buildimage",
+        "comment_at": "2025-04-18T20:29:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 22374,
+        "repo": "sonic-buildimage",
+        "comment_at": "2025-04-18T20:29:16Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 22374,
+        "repo": "sonic-buildimage",
+        "comment_at": "2025-04-19T01:42:17Z",
+        "comment_author": "prabhataravind",
+        "comment_body": "@liushilongbuaa please review and merge if ok"
+    },
+    {
+        "number": 22374,
+        "repo": "sonic-buildimage",
+        "comment_at": "2025-04-21T06:03:09Z",
+        "comment_author": "liushilongbuaa",
+        "comment_body": "I can't merge. Contact @bingwang-ms "
+    },
+    {
+        "number": 22374,
+        "repo": "sonic-buildimage",
+        "review_at": "2025-04-21T06:01:59Z",
+        "review_author": "liushilongbuaa"
+    },
+    {
+        "number": 22374,
+        "repo": "sonic-buildimage",
+        "review_at": "2025-04-21T17:20:31Z",
+        "review_author": "bingwang-ms"
+    },
+    {
+        "number": 22374,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2025-04-21T06:01:59Z",
+        "latestReview_author": "liushilongbuaa",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 22374,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2025-04-21T17:20:31Z",
+        "latestReview_author": "bingwang-ms",
+        "latestReview_state": "APPROVED"
     },
     {
         "number": 22369,
@@ -1192,6 +1302,13 @@
         "comment_at": "2025-04-16T14:51:00Z",
         "comment_author": "hdwhdw",
         "comment_body": "@ZhaohuiS No. This is suggesting we don't have a socket at `/var/run/sswsyncd/sswsyncd.socket`. I am not sure whether my OSS PR changes where bcmcmd looks for its default socket. @qiluo-msft any idea or on how to find where the socket actual is?"
+    },
+    {
+        "number": 22288,
+        "repo": "sonic-buildimage",
+        "comment_at": "2025-04-21T02:36:39Z",
+        "comment_author": "hdwhdw",
+        "comment_body": "@ZhaohuiS I was wrong. This patch indeed is related to the failure you see because we also hardcoded the path for dsserve:\r\n```\r\nadmin@str2-7060cx-32s-29:~$ docker exec syncd ps -efwww\r\nUID PID PPID C STIME TTY TIME CMD\r\nroot 1 0 0 00:24 pts/0 00:00:03 /usr/bin/python3 /usr/local/bin/supervisord\r\nroot 7 1 0 00:24 pts/0 00:00:24 python3 /usr/bin/supervisor-proc-exit-listener --container-name syncd\r\nroot 10 1 0 00:24 pts/0 00:00:00 /usr/sbin/rsyslogd -n -iNONE\r\nroot 18 1 0 00:24 pts/0 00:00:00 /usr/bin/dsserve /usr/bin/syncd --diag -u -s -B null -p /etc/sai.d/sai.profile -b /tmp/break_before_make_objects\r\n```\r\n\r\n```\r\nadmin@str2-7060cx-32s-29:~$ bcmcmd ps\r\nps\r\n ena/ speed/ link auto STP lrn inter max cut loop\r\n port link Lns duplex scan neg? state pause discrd ops face frame thru? back\r\n .......................\r\ndrivshell>\r\n```\r\n\r\nJust confirmed this fixes what we see.\r\n"
     },
     {
         "number": 22288,
