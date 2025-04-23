@@ -2118,5 +2118,160 @@
         "latestReview_at": "2025-03-26T22:56:07Z",
         "latestReview_author": "longhuan-cisco",
         "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-06-03T21:29:39Z",
+        "comment_author": "gechiang",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-06-03T21:29:45Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nCommenter does not have sufficient privileges for PR 446 in repo sonic-net/sonic-platform-daemons<br>\r\n\n</samp>"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-06-03T21:34:06Z",
+        "comment_author": "assrinivasan",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-06-03T22:27:23Z",
+        "comment_author": "assrinivasan",
+        "comment_body": "@gregoryboudreau useful addition. Couple questions:\r\n\r\n> If the get_name API is not implemented by vendors then will fall back to the original indexing schema. \r\nHas this been tested?\r\n\r\nAdditionally, please fix unit test failures that appear to be indexing related. Thanks!"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-06-04T03:14:02Z",
+        "comment_author": "prgeor",
+        "comment_body": "@gregoryboudreau can you please run sonic-mgmt test cases for PSU with all the changes. Attach the result to this PR?"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-07-08T12:35:25Z",
+        "comment_author": "gregoryboudreau",
+        "comment_body": "```\r\nplatform_tests/api/test_psu.py::TestPsuApi::test_get_name[mth64-m5-2] PASSED                                                                                                                                                                  [  7%]\r\nplatform_tests/api/test_psu.py::TestPsuApi::test_get_presence[mth64-m5-2] PASSED                                                                                                                                                              [ 14%]\r\nplatform_tests/api/test_psu.py::TestPsuApi::test_get_model[mth64-m5-2] PASSED                                                                                                                                                                 [ 21%]\r\nplatform_tests/api/test_psu.py::TestPsuApi::test_get_serial[mth64-m5-2] PASSED                                                                                                                                                                [ 28%]\r\nplatform_tests/api/test_psu.py::TestPsuApi::test_get_revision[mth64-m5-2] PASSED                                                                                                                                                              [ 35%]\r\nplatform_tests/api/test_psu.py::TestPsuApi::test_get_status[mth64-m5-2] PASSED                                                                                                                                                                [ 42%]\r\nplatform_tests/api/test_psu.py::TestPsuApi::test_get_position_in_parent[mth64-m5-2] PASSED                                                                                                                                                    [ 50%]\r\nplatform_tests/api/test_psu.py::TestPsuApi::test_is_replaceable[mth64-m5-2] PASSED                                                                                                                                                            [ 57%]\r\nplatform_tests/api/test_psu.py::TestPsuApi::test_fans[mth64-m5-2] PASSED                                                                                                                                                                      [ 64%]\r\nplatform_tests/api/test_psu.py::TestPsuApi::test_power[mth64-m5-2] SKIPPED (Unsupported platform API)                                                                                                                                         [ 71%]\r\nplatform_tests/api/test_psu.py::TestPsuApi::test_temperature[mth64-m5-2] PASSED                                                                                                                                                               [ 78%]\r\nplatform_tests/api/test_psu.py::TestPsuApi::test_led[mth64-m5-2] SKIPPED (On Cisco 8000, mellanox and Nokia 7215 platform, PSU led are unable to be controlled by software)                                                                   [ 85%]\r\nplatform_tests/api/test_psu.py::TestPsuApi::test_thermals[mth64-m5-2] PASSED                                                                                                                                                                  [ 92%]\r\nplatform_tests/api/test_psu.py::TestPsuApi::test_master_led[mth64-m5-2] PASSED                                                                                                                                                                [100%]\r\n```\r\n```\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_get_name[mth64-m5-2] PASSED                                                                                                                                                          [  4%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_get_presence[mth64-m5-2] PASSED                                                                                                                                                      [  8%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_get_model[mth64-m5-2] PASSED                                                                                                                                                         [ 12%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_get_serial[mth64-m5-2] PASSED                                                                                                                                                        [ 16%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_get_revision[mth64-m5-2] PASSED                                                                                                                                                      [ 20%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_get_status[mth64-m5-2] PASSED                                                                                                                                                        [ 25%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_get_position_in_parent[mth64-m5-2] PASSED                                                                                                                                            [ 29%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_is_replaceable[mth64-m5-2] PASSED                                                                                                                                                    [ 33%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_get_base_mac[mth64-m5-2] PASSED                                                                                                                                                      [ 37%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_get_system_eeprom_info[mth64-m5-2] PASSED                                                                                                                                            [ 41%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_get_reboot_cause[mth64-m5-2] PASSED                                                                                                                                                  [ 45%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_components[mth64-m5-2] PASSED                                                                                                                                                        [ 50%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_modules[mth64-m5-2] SKIPPED (No modules found on device)                                                                                                                             [ 54%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_fans[mth64-m5-2] PASSED                                                                                                                                                              [ 58%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_fan_drawers[mth64-m5-2] PASSED                                                                                                                                                       [ 62%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_psus[mth64-m5-2] PASSED                                                                                                                                                              [ 66%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_thermals[mth64-m5-2] PASSED                                                                                                                                                          [ 70%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_sfps[mth64-m5-2] PASSED                                                                                                                                                              [ 75%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_status_led[mth64-m5-2] PASSED                                                                                                                                                        [ 79%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_get_thermal_manager[mth64-m5-2] PASSED                                                                                                                                               [ 83%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_get_watchdog[mth64-m5-2] PASSED                                                                                                                                                      [ 87%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_get_eeprom[mth64-m5-2] PASSED                                                                                                                                                        [ 91%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_get_supervisor_slot[mth64-m5-2] SKIPPED (skipped as this test is applicable to modular chassis only)                                                                                 [ 95%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_get_my_slot[mth64-m5-2] SKIPPED (skipped as this test is applicable to modular chassis only)                                                                                         [100%]\r\n```\r\n```\r\nplatform_tests/daemon/test_psud.py::test_pmon_psud_running_status[mth64-m5-2] PASSED                                                                                                                                                          [ 25%]\r\nplatform_tests/daemon/test_psud.py::test_pmon_psud_stop_and_start_status[mth64-m5-2] PASSED                                                                                                                                                   [ 50%]\r\nplatform_tests/daemon/test_psud.py::test_pmon_psud_term_and_start_status[mth64-m5-2] PASSED                                                                                                                                                   [ 75%]\r\nplatform_tests/daemon/test_psud.py::test_pmon_psud_kill_and_start_status[mth64-m5-2] PASSED                                                                                                                                                   [100%]\r\n```\r\n```\r\nsnmp/test_snmp_psu.py::test_snmp_numpsu[mth64-m5-2] PASSED                                                                                                                                                                                    [ 50%]\r\nsnmp/test_snmp_psu.py::test_snmp_psu_status[mth64-m5-2] PASSED                                                                                                                                                                                [100%]\r\n```\r\nLet me know if there are other test cases that I missed in running, thanks!"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-07-08T13:04:05Z",
+        "comment_author": "gregoryboudreau",
+        "comment_body": "@assrinivasan with the get_name API implemented:\r\n```\r\nroot@mth64-m5-2:/home/cisco# show platform psustatus\r\nPSU    Model         Serial         HW Rev  Voltage (V)    Current (A)    Power (W)    Status    LED\r\n-----  ------------  -----------  --------  -------------  -------------  -----------  --------  -----\r\nPSU0   PSU650W-ACPE  LIT241955UQ      0.00  11.996         24.0           288.0        OK        green\r\nPSU1   PSU650W-ACPE  LIT241956QK      0.00  N/A            N/A            N/A          NOT OK    off\r\n```\r\nThis is with the get_name API overwritten to raise NotImplemented for PSUs:\r\n```\r\nroot@mth64-m5-2:/home/cisco# show plat psu\r\nPSU    Model         Serial         HW Rev  Voltage (V)    Current (A)    Power (W)    Status    LED\r\n-----  ------------  -----------  --------  -------------  -------------  -----------  --------  -----\r\nPSU 1  PSU650W-ACPE  LIT241955UQ      0.00  11.98          24.0           288.0        OK        green\r\nPSU 2  PSU650W-ACPE  LIT241956QK      0.00  N/A            N/A            N/A          NOT OK    off\r\n```\r\nThe only functional difference between the two is the key/naming"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-09-13T00:02:48Z",
+        "comment_author": "abdosi",
+        "comment_body": "@assrinivasan : can we please help with merge this. "
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-09-13T04:39:16Z",
+        "comment_author": "assrinivasan",
+        "comment_body": "@prgeor please help review/merge as appropriate"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-17T06:03:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-17T06:03:36Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-12T17:38:20Z",
+        "comment_author": "rlhui",
+        "comment_body": "@mlok-nokia "
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-19T17:45:38Z",
+        "comment_author": "arlakshm",
+        "comment_body": "@judyjoseph to help merge this PR"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-06-03T21:29:02Z",
+        "review_author": "gechiang"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-09-13T04:36:58Z",
+        "review_author": "assrinivasan"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-12T00:39:02Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-12T17:10:09Z",
+        "review_author": "gregoryboudreau"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-12T17:54:51Z",
+        "review_author": "mlok-nokia"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-22T23:46:32Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-04-22T23:46:32Z",
+        "latestReview_author": "judyjoseph",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2024-06-03T21:29:02Z",
+        "latestReview_author": "gechiang",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-03-12T17:54:51Z",
+        "latestReview_author": "mlok-nokia",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2024-09-13T04:36:58Z",
+        "latestReview_author": "assrinivasan",
+        "latestReview_state": "APPROVED"
     }
 ]
