@@ -287,6 +287,375 @@
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
     },
     {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-03-18T21:38:27Z",
+        "comment_author": "kcudnik",
+        "comment_body": "custom attributes are per vendor, and are not meant to be public, please remove those, and each vendor should implement its own custom attributes, please reffer to this PR: https://github.com/opencomputeproject/SAI/pull/2122 and take a look at its documentation "
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-03-18T21:44:18Z",
+        "comment_author": "longhuan-cisco",
+        "comment_body": "cc @prgeor "
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-03-19T00:14:04Z",
+        "comment_author": "longhuan-cisco",
+        "comment_body": "> custom attributes are per vendor, and are not meant to be public, please remove those, and each vendor should implement its own custom attributes, please reffer to this PR: #2122 and take a look at its documentation\r\n\r\n\r\nThanks for the pointer. \r\nPR https://github.com/opencomputeproject/SAI/pull/2122 seems to introduce a way to support custom attributes by allowing vendors to put vendor specific headers (containing custom attributes) under `SAI/custom` folder.\r\n\r\nBut the situation here is: The SAI requestor side, such as SONiC\u2019s orchagent (which is public, platform agnostic and independently built as separate docker), might not be able to include vendor specific headers.\r\nWe would need a way to support custom attributes without putting vendor specific headers at `SAI/custom` folder of the requestor side (e.g. SONiC orchagent). Thus raised the proposal of adding public dummy/placeholder serdes attributes in saiport.h to allow vendors to use them for whatever attributes if needed.\r\n\r\nIf today's enum range `SAI_PORT_SERDES_ATTR_CUSTOM_RANGE_START` is reserved only for the custom attributes supposed to be included in `SAI/custom/<headers>`.  Then, I'm wondering if we could add another enum range (e.g. `SAI_PORT_SERDES_ATTR_PUBLIC_CUSTOM_RANGE_START = 0x20000000`) dedicated for those dummy/placeholder serdes attributes?"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-03-19T09:57:05Z",
+        "comment_author": "kcudnik",
+        "comment_body": "your assumption is false, if OA will require custom headers then it will need to include them as metadata generated from headers is per vendor, so if 1st vendor will have custom attribute let say int, and 2nd vendor the same attribute as oid list, you will get crash right away.\r\n\r\nif OA want to use custom headers, it need to include them per vendor, and it needs to be compiled per vendor.\r\n\r\nAdding unnamed custom attributes make no sense, and it's unsolvable. that's why #2122 is introduced"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-03-19T21:44:51Z",
+        "comment_author": "longhuan-cisco",
+        "comment_body": "> your assumption is false, if OA will require custom headers then it will need to include them as metadata generated from headers is per vendor, so if 1st vendor will have custom attribute let say int, and 2nd vendor the same attribute as oid list, you will get crash right away.\r\n> \r\n> if OA want to use custom headers, it need to include them per vendor, and it needs to be compiled per vendor.\r\n> \r\n> Adding unnamed custom attributes make no sense, and it's unsolvable. that's why #2122 is introduced\r\n\r\nIn this particular case here (sai_port_serdes_attr_t), the values of SAI_PORT_SERDES_ATTR are always of type sai_s32_list_t where the count is number lanes in a port and the list specifies list of values to be applied to each lane, regardless of vendors. (I updated the diff by adding comments indicating the value type as `sai_s32_list_t` for all the new attributes, and making the enum range starting from `SAI_PORT_SERDES_ATTR_PUBLIC_CUSTOM_RANGE_START = 0x20000000` to avoid conflicts with https://github.com/opencomputeproject/SAI/pull/2122)\r\n\r\nAnd OA is platform agnostic, it would not be able to include any vendor specific headers.\r\n\r\nAny particular reasons to not be able to introduce dummy serdes attributes with the same value type? Is this a deviation from SAI design?\r\n\r\n\r\nAdd @prgeor for comments also"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-03-20T06:15:30Z",
+        "comment_author": "kcudnik",
+        "comment_body": "Custom range is for each vendor to use, and they are not compatoble, for public interface attributes should be added to main range. Lepsze discuss this on todays sai community meeting"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-03-21T21:06:05Z",
+        "comment_author": "longhuan-cisco",
+        "comment_body": "> Custom range is for each vendor to use, and they are not compatoble,\r\n\r\nI understood the [`SAI_PORT_SERDES_ATTR_CUSTOM_RANGE_START = 0x10000000`](https://github.com/opencomputeproject/SAI/blob/b8fbbcc8458a95dddabf9455541dbac08152d4a3/inc/saiport.h#L4113) is reserved for each vendor to use. That's why I updated my diff to put all the [public custom serdes attributers](https://github.com/opencomputeproject/SAI/blob/b8fbbcc8458a95dddabf9455541dbac08152d4a3/inc/saiport.h#L4132C5-L5419) in a separate range starting from [`SAI_PORT_SERDES_ATTR_PUBLIC_CUSTOM_RANGE_START = 0x20000000`](https://github.com/opencomputeproject/SAI/blob/b8fbbcc8458a95dddabf9455541dbac08152d4a3/inc/saiport.h#L4119). \r\n\r\nAnd, unlike most other types of attributes, a port serdes attribute is always inherently meant to be a list of integers (each integer represents a value for each serdes lane of the specific port), regardless of whether it's common or vendor-specific. That's why I predefined the type of all [public custom serdes attributers](https://github.com/opencomputeproject/SAI/blob/b8fbbcc8458a95dddabf9455541dbac08152d4a3/inc/saiport.h#L4132C5-L5419) as `sai_s32_list_t`, where I didn't see compatibility problem. \r\n\r\nOn the other hand, in today's SONiC, the serdes attributes are applied to SAI/SDK by OA on a per-platform basis: each platform/vendor defines its own [attribute abbreviation](https://github.com/sonic-net/sonic-platform-daemons/blob/29e65fe7f6d736841bb140150adea03a3e125132/sonic-xcvrd/tests/media_settings.json#L5)->[attribute value](https://github.com/sonic-net/sonic-platform-daemons/blob/29e65fe7f6d736841bb140150adea03a3e125132/sonic-xcvrd/tests/media_settings.json#L6-L9) in `/usr/share/sonic/device/<platform>/media_settings.json`, and only the ones defined in this file will get applied.\r\nWith these proposed [public custom serdes attributers](https://github.com/opencomputeproject/SAI/blob/b8fbbcc8458a95dddabf9455541dbac08152d4a3/inc/saiport.h#L4132C5-L5419), platform/vendor would be able to easily support large number of newly added proprietary vendor-specific serdes attributes by just updating `media_settings.json` (plus corresponding SDK support), without having to expose the original real names of the attributes to public, without having to change SONiC and SAI.\r\n\r\n> for public interface attributes should be added to main range. Lepsze discuss this on todays sai community meeting\r\n\r\n(Not sure if I'm understanding correctly) Or were you suggesting to put all the [public custom serdes attributers](https://github.com/opencomputeproject/SAI/blob/b8fbbcc8458a95dddabf9455541dbac08152d4a3/inc/saiport.h#L4132C5-L5419) at main range right after [`SAI_PORT_SERDES_ATTR_RX_PRECODING`](https://github.com/opencomputeproject/SAI/blob/b8fbbcc8458a95dddabf9455541dbac08152d4a3/inc/saiport.h#L4105)?"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-03-24T20:57:29Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "@kcudnik, @longhuan-cisco - do you want to discuss this in this week's SAI community meeting? "
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-03-24T21:39:21Z",
+        "comment_author": "longhuan-cisco",
+        "comment_body": "sure, let's discuss, could you please send me (longhuan@cisco.com) the link and include @prgeor also."
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-03-27T15:47:17Z",
+        "comment_author": "kcudnik",
+        "comment_body": "my proposal:\r\n```c\r\n    /**\r\n     * @brief custom vendor intersface\r\n     *\r\n     * vendor have 3 attributes: custom_1, custom_2, custom_3\r\n     *\r\n     * we carete json/ini/or vendor format:\r\n     *\r\n     * std::string s1 =\r\n     * {\r\n     * \"custom_1\": \"value1\"\r\n     * }\r\n     *\r\n     *\r\n     *\r\n     * sai_attribute_t a;\r\n     * a.id = SAI_PORT_SERDES_ATTR_CUSTOM_INTERFACE;\r\n     * a.value.s32list.count = s1.lenght();\r\n     * a.value.s32list.data = s1.data()\r\n     * portserdesapi->set_port_serteds_attribute(&a); // this will set custom_1\r\n     *\r\n     *\r\n     *\r\n     * std::string s2 =\r\n     * {\r\n     * \"custom_1\": \"value1\" // string, int, bool\r\n     * \"custom_2\": \"value2\"\r\n     * }\r\n     *\r\n     * foo=bar // old ini file format\r\n     *\r\n     *\r\n     * a.value.s32list.count = s2.lenght();\r\n     * a.value.s32list.data = s2.data()\r\n     * portserdesapi->set_port_serteds_attribute(&a); // this will set custom_1 and custom_@\r\n     *\r\n     * @type sai_s32_list_t\r\n     * @flags CREATE_AND_SET\r\n     * @default internal\r\n     */\r\n    SAI_PORT_SERDES_ATTR_CUSTOM_INTERFACE, // etc\r\n\r\n```"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-03-28T00:59:06Z",
+        "comment_author": "longhuan-cisco",
+        "comment_body": "Thanks @kcudnik for joining today's discussion and the proposal.\r\nI updated the diff as what you proposed, and modified the PR description to reflect the latest.\r\n\r\nBTW. Since it's your idea, just feel free to close mine, in case if you feel more comfortable to raise your own PR, "
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-03-29T19:11:48Z",
+        "comment_author": "kcudnik",
+        "comment_body": "> Thanks @kcudnik for joining today's discussion and the proposal. I updated the diff as what you proposed, and modified the PR description to reflect the latest.\r\n> \r\n> BTW. Since it's your idea, just feel free to close mine, in case if you feel more comfortable to raise your own PR,\r\n\r\nim ok for you to drive this change"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-04-08T06:06:19Z",
+        "comment_author": "lguohan",
+        "comment_body": "@prgeor , can you take a look?"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-04-14T18:18:14Z",
+        "comment_author": "longhuan-cisco",
+        "comment_body": "Hi @prgeor,\r\nJust a gentle follow-up \u2014 we went over it last week; just checking in on the merge when you get a chance."
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-04-14T21:23:51Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-04-14T21:24:00Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-04-15T07:17:34Z",
+        "comment_author": "kcudnik",
+        "comment_body": "please fix build isse:\r\n```\r\n\r\nWARNING: not expected number of spaces after * (1,4,8) saiport.h 4133:     *         \"sai_metadata\": {\r\nWARNING: not expected number of spaces after * (1,4,8) saiport.h 4134:     *           \"sai_attr_value_type\": \"SAI_ATTR_VALUE_TYPE_INT32_LIST\"\r\nWARNING: not expected number of spaces after * (1,4,8) saiport.h 4135:     *         },\r\nWARNING: not expected number of spaces after * (1,4,8) saiport.h 4136:     *         \"value\": [10, 10, 10, 10]\r\nWARNING: not expected number of spaces after * (1,4,8) saiport.h 4137:     *       },\r\nWARNING: not expected number of spaces after * (1,4,8) saiport.h 4138:     *       \"attr_abc\": {\r\nWARNING: not expected number of spaces after * (1,4,8) saiport.h 4139:     *         \"sai_metadata\": {\r\nWARNING: not expected number of spaces after * (1,4,8) saiport.h 4140:     *           \"sai_attr_value_type\": \"SAI_ATTR_VALUE_TYPE_INT32_LIST\"\r\nWARNING: not expected number of spaces after * (1,4,8) saiport.h 4141:     *         },\r\nWARNING: not expected number of spaces after * (1,4,8) saiport.h 4142:     *         \"value\": [20, 20, 20, 20]\r\nWARNING: not expected number of spaces after * (1,4,8) saiport.h 4143:     *       },\r\nWARNING: not expected number of spaces after * (1,4,8) saiport.h 4144:     *       ...\r\nWARNING: not expected number of spaces after * (1,4,8) saiport.h 4145:     *     }\r\nWARNING: not expected number of spaces after * (1,4,8) saiport.h 4146:     *   ]\r\n```"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-04-16T01:42:11Z",
+        "comment_author": "longhuan-cisco",
+        "comment_body": "Committed [change](https://github.com/opencomputeproject/SAI/pull/2156/commits/65d304c853d0f8ba881d84d1054bf4b29e0fb281) to: \r\n1.  Fix Doxygen complaint by adjusting the indentations and encapsulating JSON example with `verbatim` notation.\r\n2.  Fix the JSON example to exactly follow the `sai_json_t` grammar defined in `SAI_Proposal_Generic_Extensions.md`, by having each attribute as separate object under the array of the mandatory top-level key `attributes`\r\nhttps://github.com/opencomputeproject/SAI/blob/a56c38ed33aab0f81ec1c1e9f716ff722dc94f96/doc/SAI_Proposal_Generic_Extensions.md?plain=1#L179-L196 \r\n"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-04-16T01:43:12Z",
+        "comment_author": "longhuan-cisco",
+        "comment_body": "\r\nI saw [CodeQL run ](https://github.com/opencomputeproject/SAI/actions/runs/14482565056/job/40622251950?pr=2156)got canceled due to below two errors, which doesn't seem to be related to my change\r\n```\r\n1. This is a scheduled Ubuntu 20.04 retirement. Ubuntu 20.04 LTS runner will be removed on 2025-04-15. For more details, \r\n2. GitHub Actions has encountered an internal error when running your job.\r\n```\r\nWondering if there's a way to re-run it?\r\n"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-04-16T15:21:50Z",
+        "comment_author": "kcudnik",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-04-16T15:22:00Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-04-16T16:32:00Z",
+        "comment_author": "longhuan-cisco",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-04-16T16:32:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nCommenter does not have sufficient privileges for PR 2156 in repo opencomputeproject/SAI<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-04-16T16:41:29Z",
+        "comment_author": "prgeor",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-04-16T16:41:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-04-16T22:17:08Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-04-16T22:17:17Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-04-18T01:26:11Z",
+        "comment_author": "longhuan-cisco",
+        "comment_body": "[Build](https://dev.azure.com/mssonic/build/_build/results?buildId=827444&view=logs&j=83516c17-6666-5250-abde-63983ce72a49&t=1f6d5e21-f0ce-508d-13df-d1c50f7ea7b9&l=258) complained about `ERROR: FATAL: sai_attribute_value_t members were removed on commit a2eb597, NOT ALLOWED!` when running `./checkstructs.sh`:\r\n```\r\n2025-04-16T22:21:16.3547431Z ./checkstructs.sh\r\n2025-04-16T22:21:16.3615789Z ancestry graph\r\n2025-04-16T22:21:16.3642179Z * ae57c65 Merge 1dd1356b832da0ec560f034479d87bfdaf29199b into a56c38ed33aab0f81ec1c1e9f716ff722dc94f96\r\n2025-04-16T22:21:16.3642786Z * a56c38e Add a RIF attribute to specify if the corresponding My MAC entry should not be created.. (#2021)\r\n2025-04-16T22:21:16.3649214Z git rev list from 5f75d99 to HEAD\r\n2025-04-16T22:21:16.4561010Z git checkout work tree commits: 5f75d99 91ef792 97c8ed2 ad20062 ab47430 2602b2a d24cbb2 775254c 0aba236 61a1a29 b4358c7 1443ba8 b2be076 dc64a51 5ff3424 6168071 7157445 2a4b1ff 15cf7a2 ee6f49b 1784b9f 59e4d57 7df1c94 750cafa a3d6844 93d80b9 f9b1ddd 626b749 b8fbbcc e128c5b 1f2bca1 f4695e9 28751b9 8245ee6 1906d59 f3a8b04 46e8391 a2eb597 3ff76ad 9a343d7 d158311 2d7bb43 290c475 172c6f2 074e2e8 a56c38e 65d304c 406c0c7 1dd1356 ae57c65\r\n2025-04-16T22:21:19.1663835Z loaded history from structs.5f75d99.history\r\n2025-04-16T22:21:19.1664085Z processing commit 5f75d99\r\n2025-04-16T22:21:19.1664227Z processing commit 91ef792\r\n2025-04-16T22:21:19.1664418Z processing commit 97c8ed2\r\n2025-04-16T22:21:19.1664575Z processing commit ad20062\r\n2025-04-16T22:21:19.1664767Z updating sai_port_oper_status_notification_t since member count changed from 3 to 2\r\n2025-04-16T22:21:19.1664961Z processing commit ab47430\r\n2025-04-16T22:21:19.1665114Z processing commit 2602b2a\r\n2025-04-16T22:21:19.1665426Z updating sai_tam_api_t since member count changed from 48 to 50\r\n2025-04-16T22:21:19.1665597Z processing commit d24cbb2\r\n2025-04-16T22:21:19.1665745Z processing commit 775254c\r\n2025-04-16T22:21:19.1665904Z processing commit 0aba236\r\n2025-04-16T22:21:19.1666046Z processing commit 61a1a29\r\n2025-04-16T22:21:19.1666173Z processing commit b4358c7\r\n2025-04-16T22:21:19.1666319Z processing commit 1443ba8\r\n2025-04-16T22:21:19.1666557Z processing commit b2be076\r\n2025-04-16T22:21:19.1666703Z processing commit dc64a51\r\n2025-04-16T22:21:19.1666844Z processing commit 5ff3424\r\n2025-04-16T22:21:19.1666989Z processing commit 6168071\r\n2025-04-16T22:21:19.1667482Z processing commit 7157445\r\n2025-04-16T22:21:19.1667634Z processing commit 2a4b1ff\r\n2025-04-16T22:21:19.1667779Z processing commit 15cf7a2\r\n2025-04-16T22:21:19.1667925Z processing commit ee6f49b\r\n2025-04-16T22:21:19.1668069Z processing commit 1784b9f\r\n2025-04-16T22:21:19.1668236Z updating sai_port_oper_status_notification_t since member count changed from 2 to 3\r\n2025-04-16T22:21:19.1668414Z processing commit 59e4d57\r\n2025-04-16T22:21:19.1668560Z processing commit 7df1c94\r\n2025-04-16T22:21:19.1668701Z processing commit 750cafa\r\n2025-04-16T22:21:19.1668850Z processing commit a3d6844\r\n2025-04-16T22:21:19.1668977Z processing commit 93d80b9\r\n2025-04-16T22:21:19.1669118Z processing commit f9b1ddd\r\n2025-04-16T22:21:19.1669264Z processing commit 626b749\r\n2025-04-16T22:21:19.1669571Z processing commit b8fbbcc\r\n2025-04-16T22:21:19.1669709Z processing commit e128c5b\r\n2025-04-16T22:21:19.1669844Z processing commit 1f2bca1\r\n2025-04-16T22:21:19.1669964Z processing commit f4695e9\r\n2025-04-16T22:21:19.1670102Z processing commit 28751b9\r\n2025-04-16T22:21:19.1670242Z processing commit 8245ee6\r\n2025-04-16T22:21:19.1670405Z updating sai_attribute_value_t since member count changed from 58 to 59\r\n2025-04-16T22:21:19.1670564Z processing commit 1906d59\r\n2025-04-16T22:21:19.1670684Z processing commit f3a8b04\r\n2025-04-16T22:21:19.1670821Z processing commit 46e8391\r\n2025-04-16T22:21:19.1670955Z processing commit a2eb597\r\n2025-04-16T22:21:19.1671296Z ERROR: FATAL: sai_attribute_value_t members were removed on commit a2eb597, NOT ALLOWED!\r\n2025-04-16T22:21:19.1678288Z make: *** [Makefile:90: all] Error 1\r\n```\r\n\r\n\r\nBut none of my commits (including [a2eb597](https://github.com/opencomputeproject/SAI/pull/2156/commits/a2eb597f745e55fbcc68beeb24f7ab14865328a3)) touched `sai_attribute_value_t `. And I ran `./checkstructs.sh` locally, it went through fine, didn't hit the complaint:\r\n```\r\n $ ./checkstructs.sh\r\nancestry graph\r\n* 1dd1356 (HEAD -> serdes_attrs_ext, origin/serdes_attrs_ext) Remove unnecessary commas\r\n* 406c0c7 Fix parse.pl complaints for number of spaces after *\r\n* 65d304c Fix doxygen warnings\r\n* 172c6f2 Change flags back to CREATE_AND_SET for flexibility\r\n* 2d7bb43 Change flags to CREATE_ONLY to align with others\r\n* 9a343d7 Update the type as sai_json_t\r\n* 3ff76ad Use one single JSON-string attr to represent a collection of serdes attrs\r\n* a2eb597 Change RANGE_START to avoid conflict with the range reserved for DASH\r\n* b8fbbcc Add comment for each newly added attr\r\n* 626b749 Add custom attributes 1-100\r\n* 93d80b9 (origin/master, origin/HEAD, master) [TAM] SAI TAM enhancements (#2141)\r\ngit rev list from 5f75d99 to HEAD\r\ngit checkout work tree commits: 5f75d99 91ef792 97c8ed2 ad20062 ab47430 2602b2a d24cbb2 775254c 0aba236 61a1a29 b4358c7 1443ba8 b2be076 dc64a51 5ff3424 6168071 7157445 2a4b1ff 15cf7a2 ee6f49b 1784b9f 59e4d57 7df1c94 750cafa a3d6844 93d80b9 626b749 b8fbbcc a2eb597 3ff76ad 9a343d7 2d7bb43 172c6f2 65d304c 406c0c7 1dd1356\r\nloaded history from structs.5f75d99.history\r\nprocessing commit 5f75d99\r\nprocessing commit 91ef792\r\nprocessing commit 97c8ed2\r\nprocessing commit ad20062\r\nupdating sai_port_oper_status_notification_t since member count changed from 3 to 2\r\nprocessing commit ab47430\r\nprocessing commit 2602b2a\r\nupdating sai_tam_api_t since member count changed from 48 to 50\r\nprocessing commit d24cbb2\r\nprocessing commit 775254c\r\nprocessing commit 0aba236\r\nprocessing commit 61a1a29\r\nprocessing commit b4358c7\r\nprocessing commit 1443ba8\r\nprocessing commit b2be076\r\nprocessing commit dc64a51\r\nprocessing commit 5ff3424\r\nprocessing commit 6168071\r\nprocessing commit 7157445\r\nprocessing commit 2a4b1ff\r\nprocessing commit 15cf7a2\r\nprocessing commit ee6f49b\r\nprocessing commit 1784b9f\r\nupdating sai_port_oper_status_notification_t since member count changed from 2 to 3\r\nprocessing commit 59e4d57\r\nprocessing commit 7df1c94\r\nprocessing commit 750cafa\r\nprocessing commit a3d6844\r\nprocessing commit 93d80b9\r\nprocessing commit 626b749\r\nprocessing commit b8fbbcc\r\nprocessing commit a2eb597\r\nprocessing commit 3ff76ad\r\nprocessing commit 9a343d7\r\nprocessing commit 2d7bb43\r\nprocessing commit 172c6f2\r\nprocessing commit 65d304c\r\nprocessing commit 406c0c7\r\nprocessing commit 1dd1356\r\n```\r\n\r\nWondering if I shall do a force-push anyway to squash everything into one commit to give a try."
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-04-18T06:56:34Z",
+        "comment_author": "kcudnik",
+        "comment_body": "yes, you need to force push squashed "
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-04-21T20:08:44Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-04-21T20:08:54Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-04-21T20:30:51Z",
+        "comment_author": "longhuan-cisco",
+        "comment_body": "I did force-push squashed. \r\nIt's weird, [build](https://dev.azure.com/mssonic/build/_build/results?buildId=831598&view=logs&j=83516c17-6666-5250-abde-63983ce72a49&t=1f6d5e21-f0ce-508d-13df-d1c50f7ea7b9&l=260) still complained about below error, even though my commit simply adds one enum, it doesn't remove anything.\r\n```\r\nERROR: FATAL: sai_attribute_value_t members were removed on commit 03a9a17, NOT ALLOWED!\r\nmake: *** [Makefile:90: all] Error 1\r\n```"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-04-22T04:08:44Z",
+        "comment_author": "kcudnik",
+        "comment_body": "you will need to squash your commits and rebase to master and then force pushed, since it seems like you are behind master"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-04-22T18:38:37Z",
+        "comment_author": "longhuan-cisco",
+        "comment_body": "> you will need to squash your commits and rebase to master and then force pushed, since it seems like you are behind master\r\n\r\nThanks, rebased to latest master"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-04-22T21:59:15Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "comment_at": "2025-04-22T21:59:24Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "review_at": "2025-03-22T11:14:27Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "review_at": "2025-03-22T11:15:15Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "review_at": "2025-03-27T01:13:18Z",
+        "review_author": "longhuan-cisco"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "review_at": "2025-03-31T16:01:59Z",
+        "review_author": "harshitgulati18"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "review_at": "2025-04-01T05:01:16Z",
+        "review_author": "longhuan-cisco"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "review_at": "2025-04-02T08:26:10Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "review_at": "2025-04-03T01:26:05Z",
+        "review_author": "longhuan-cisco"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "review_at": "2025-04-07T16:24:57Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "review_at": "2025-04-09T20:37:42Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "review_at": "2025-04-09T21:38:22Z",
+        "review_author": "longhuan-cisco"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "review_at": "2025-04-10T00:51:14Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "review_at": "2025-04-10T00:57:27Z",
+        "review_author": "longhuan-cisco"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "review_at": "2025-04-10T01:21:51Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "review_at": "2025-04-14T21:21:38Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "review_at": "2025-04-14T21:57:24Z",
+        "review_author": "harshitgulati18"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "review_at": "2025-04-23T07:32:12Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "latestReview_at": "2025-04-23T07:32:12Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "latestReview_at": "2025-04-14T21:21:38Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2156,
+        "repo": "sai",
+        "latestReview_at": "2025-04-14T21:57:24Z",
+        "latestReview_author": "harshitgulati18",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 2155,
         "repo": "sai",
         "comment_at": "2025-03-18T18:43:08Z",
