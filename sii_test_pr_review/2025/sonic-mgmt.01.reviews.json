@@ -21851,6 +21851,13 @@
     {
         "number": 14122,
         "repo": "sonic-mgmt",
+        "comment_at": "2025-04-23T15:58:48Z",
+        "comment_author": "amitpawar12",
+        "comment_body": "Please find the info below:\r\n\r\nSnapshot of variables.py:\r\n\r\n```\r\nMIXED_SPEED_PORT_INFO = {MULTIDUT_TESTBED: (\r\n ({\r\n multiple-dut-any-asic': {\r\n 'rx_ports': [\r\n {'port_name': 'Ethernet0', 'hostname': \"board72\"},\r\n {'port_name': 'Ethernet8', 'hostname': \"board72\"},\r\n {'port_name': 'Ethernet16', 'hostname': \"board72\"}\r\n ],\r\n 'tx_ports': [\r\n {'port_name': 'Ethernet0', 'hostname': \"board73\"},\r\n {'port_name': 'Ethernet8', 'hostname': \"board73\"},\r\n {'port_name': 'Ethernet16', 'hostname': \"board73\"}\r\n ]\r\n }\r\n })\r\n)}\r\n\r\n```\r\n\r\nSnapshot of links.csv file:\r\n```\r\nStartDevice,StartPort,EndDevice,EndPort,BandWidth,VlanID,VlanMode\r\nboard72,Ethernet0,ixia-sonic3,Port10.1,100000,,Access\r\nboard72,Ethernet8,ixia-sonic3,Port10.2,100000,,Access\r\nboard72,Ethernet16,ixia-sonic3,Port10.3,100000,,Access\r\nboard72,Ethernet24,ixia-sonic3,Port10.4,100000,,Access\r\nboard73,Ethernet0,ixia-sonic3,Port1,400000,,Access\r\nboard73,Ethernet8,ixia-sonic3,Port2,400000,,Access\r\nboard73,Ethernet16,ixia-sonic3,Port5,400000,,Access\r\nboard73,Ethernet144,ixia-sonic3,Port3,400000,,Access\r\n\r\n```\r\n\r\nIn above case, board#72 has 100Gbps interfaces and board#73 has 400Gbps interfaces.\r\n\r\nThere are two things here:\r\n-\tAll existing Snappi testcases are designed for ONLY one single line-speed.\r\n-\tMixed-speed requires multiple-speeds.\r\n-\tHence, I have defined a different dictionary for mixed speed testcases, so that I don\u2019t jump on existing testcases definition in variables.py."
+    },
+    {
+        "number": 14122,
+        "repo": "sonic-mgmt",
         "review_at": "2024-08-21T23:29:36Z",
         "review_author": "sdszhang"
     },
