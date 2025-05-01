@@ -2942,6 +2942,284 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2024-10-17T10:07:37Z",
+        "comment_author": "puffc",
+        "comment_body": "@saiarcot895 Please review this PR. Thanks!"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2024-12-03T02:34:11Z",
+        "comment_author": "puffc",
+        "comment_body": "@qiluo-msft CVE-2024-3596"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-04T23:37:42Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "@a-barboza @adyeung  Could you help review?"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-07T21:21:13Z",
+        "comment_author": "adyeung",
+        "comment_body": "@asha-behera please help review"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-10T17:49:14Z",
+        "comment_author": "a-barboza",
+        "comment_body": "Looks good. Is there going to be a change to the sample output in the tests ?  Eg: https://github.com/sonic-net/sonic-host-services/blob/master/tests/hostcfgd/sample_output/RADIUS/common-auth-sonic  ?"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-11T02:16:30Z",
+        "comment_author": "puffc",
+        "comment_body": "@a-barboza will do. \r\n"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-11T09:04:59Z",
+        "comment_author": "puffc",
+        "comment_body": "@a-barboza first of all please refer below article: https://www.cisco.com/c/en/us/support/docs/security/identity-services-engine/222287-blast-radius-cve-2024-3596-protocol-sp.html \r\nIn this article, support message authentication attribute is a must. \r\n"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-11T09:34:26Z",
+        "comment_author": "asha-behera",
+        "comment_body": "In the article it is mentioned that  Keep in mind that different use cases from the same NAD can either include or not include Message-Authenticator.\" with examples for both though"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-11T09:55:28Z",
+        "comment_author": "puffc",
+        "comment_body": "> In the article it is mentioned that Keep in mind that different use cases from the same NAD can either include or not include Message-Authenticator.\" with examples for both though\r\n\r\n@a-barboza Let me know if my understanding is correct: you're thinking that maybe we can make the \"Message-Authenticator\" attribute configurable, so that replacing the RADIUS server is no longer mandatory? This is because not all RADIUS connections are exposed to this vulnerability?\r\n"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-11T10:00:33Z",
+        "comment_author": "asha-behera",
+        "comment_body": "Yes this is my opinion..@a-barboza can also comment on the same"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-11T10:17:46Z",
+        "comment_author": "puffc",
+        "comment_body": "> Yes this is my opinion..@a-barboza can also comment on the same\r\n\r\nHow about add an message-authenticator_require in the Radius server table schema?\r\n<pre>\r\nLet me know if my understanding is correct: you're thinking that maybe we can make the \"Message-Authenticator\" attribute configurable, so that replacing the RADIUS server is no longer mandatory?\r\nThis is because not all RADIUS connections are exposed to this vulnerability?\r\n\r\n; RADIUS per server configuration in the system.\r\n; Key\r\nserver_key           = NameOrIPAddress; RADIUS server's DNS name or IPv4|6 addr\r\n                                      ; * DNS name is Work In Progress(WIP) *\r\n                                      ; * in future phase                   *\r\n; Attributes\r\nauth_port            = 1*5DIGIT\r\npasskey              = 1*32VCHAR  ; per server shared secret\r\n                                  ; (Valid chars: ASCII printable except SPACE,\r\n                                  ; '#', and COMMA)\r\nauth_type            = \"pap\" / \"chap\" / \"mschapv2\"  ; method used for\r\n                                 ; authenticating the communication message\r\npriority             = 1*2DIGIT  ; specify RADIUS server's priority\r\ntimeout              = 1*2DIGIT\r\nretransmit           = 1*2DIGIT\r\nvrf                  = vrf_name  ; Use default vrf if not specified\r\nsrc_intf             = source_interface ; Eg: eth0, Loopback0... Use the first\r\n                                 ; IPAddress retrieved for interface for the\r\n                                 ; outgoing UDP/IP dgram. Default is\r\n                                 ; determined by routing stack\r\nMessage-Authenticator_required = \"true\" / \"false\"\r\n</pre>"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-15T08:25:21Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-15T08:25:30Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-15T19:57:05Z",
+        "comment_author": "a-barboza",
+        "comment_body": "> > Yes this is my opinion..@a-barboza can also comment on the same\r\n> \r\n> How about add an message-authenticator_require in the Radius server table schema?\r\n> \r\n> Let me know if my understanding is correct: you're thinking that maybe we can make the \"Message-Authenticator\" attribute configurable, so that replacing the RADIUS server is no longer mandatory?\r\n> This is because not all RADIUS connections are exposed to this vulnerability?\r\n> \r\n> ; RADIUS per server configuration in the system.\r\n> ; Key\r\n> server_key           = NameOrIPAddress; RADIUS server's DNS name or IPv4|6 addr\r\n>                                       ; * DNS name is Work In Progress(WIP) *\r\n>                                       ; * in future phase                   *\r\n> ; Attributes\r\n> auth_port            = 1*5DIGIT\r\n> passkey              = 1*32VCHAR  ; per server shared secret\r\n>                                   ; (Valid chars: ASCII printable except SPACE,\r\n>                                   ; '#', and COMMA)\r\n> auth_type            = \"pap\" / \"chap\" / \"mschapv2\"  ; method used for\r\n>                                  ; authenticating the communication message\r\n> priority             = 1*2DIGIT  ; specify RADIUS server's priority\r\n> timeout              = 1*2DIGIT\r\n> retransmit           = 1*2DIGIT\r\n> vrf                  = vrf_name  ; Use default vrf if not specified\r\n> src_intf             = source_interface ; Eg: eth0, Loopback0... Use the first\r\n>                                  ; IPAddress retrieved for interface for the\r\n>                                  ; outgoing UDP/IP dgram. Default is\r\n>                                  ; determined by routing stack\r\n> Message-Authenticator_required = \"true\" / \"false\"\r\n\r\n@puffc @asha-behera : 2 points\r\n\r\n (1)  The RFC says a server MUST honor the Message-Authenticator attribute. (https://datatracker.ietf.org/doc/html/rfc2869#section-5.14). So a RADIUS client including it should not in itself be an issue for a correctly behaving RADIUS server. If there are RADIUS servers not following the spec, then you might want to think of this knob. So the follow up question: are there any RADIUS servers out there that are not following the spec in this regard?  \r\n\r\n(2) If this knob is needed (and I probably think it is not), I'd keep it to all lower case, and use \"_\" (underscore to separate) the tokens in the knob (Eg: message_authenticator_required)."
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-16T09:02:01Z",
+        "comment_author": "puffc",
+        "comment_body": "@asha-behera @a-barboza Yes, according to the RFC the radius server must always honers the incoming require_message_authenticator attribute; however, after check with freeradius server, some earlier version before 2.0.0 does not support this attribute. But I do not know if there is any datacenter still use the very old release. \r\nFor this reason, my opinion is this knob is not needed. But still look forward to your profession opinion.\r\nhttps://www.freeradius.org/vul_notifications/2024/07/09/blastradius.html\r\n"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-16T18:53:41Z",
+        "comment_author": "a-barboza",
+        "comment_body": "@puffc Can the default of the option be to always send the message-authenticator attribute? "
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-17T02:38:25Z",
+        "comment_author": "puffc",
+        "comment_body": "@a-barboza understood."
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-17T05:34:53Z",
+        "comment_author": "asha-behera",
+        "comment_body": "@puffc : Agree with Arun's recommendation. The default can be to enable \"message authenticator\" . User can choose to disable it if required as per specific topology "
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-17T07:59:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-17T07:59:41Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-17T11:04:34Z",
+        "comment_author": "puffc",
+        "comment_body": "@a-barboza @asha-behera Sorry, it seems that the latest commit has some problem. please pending the review. Thanks!"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-17T13:03:16Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-17T13:03:25Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-17T13:12:07Z",
+        "comment_author": "puffc",
+        "comment_body": "@a-barboza @asha-behera The mentioned problem had been fixed and committed. Please review the code changes again. Thanks!"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-17T14:32:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-17T14:32:25Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-17T14:35:16Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-17T14:35:25Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-17T16:17:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-17T16:17:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-21T10:46:12Z",
+        "comment_author": "asha-behera",
+        "comment_body": "Changes look good . Can you please share the Unit Testcases that has been done for this ?"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-21T11:03:39Z",
+        "comment_author": "puffc",
+        "comment_body": "> Changes look good . Can you please share the Unit Testcases that has been done for this ?\r\n\r\n@asha-behera The latest commit passed all required test cases under the tests folder. Here is the test result summary provided by Azure pipeline:\r\n\r\n[Tests](https://dev.azure.com/mssonic/be1b070f-be15-4154-aade-b1d3bfb17054/_build/results?buildId=828218&view=ms.vss-test-web.build-test-results-tab)\r\n\r\nFailed: 0 (0.00%)\r\nPassed: 273 (100.00%)\r\nOther: 0 (0.00%)\r\nTotal: 273\r\n[Code coverage](https://dev.azure.com/mssonic/be1b070f-be15-4154-aade-b1d3bfb17054/_build/results?buildId=828218&_a=summary&tab=ms.vss-codecoverage-web.code-coverage-details)\r\n\r\n3029 of 3695 lines covered (81.98%)\r\n"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-23T22:01:34Z",
+        "comment_author": "puffc",
+        "comment_body": "@asha-behera I'm wondering if you have additional comments. If yes,please let me know. Many thanks!"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-24T05:52:45Z",
+        "comment_author": "asha-behera",
+        "comment_body": "Hi @puffc : Changes look good from my side. Once @a-barboza also approves you may proceed for merge\r\n"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-30T04:37:45Z",
+        "comment_author": "a-barboza",
+        "comment_body": "Hi @puffc @asha-behera Looks good from my side."
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-04-30T10:54:40Z",
+        "comment_author": "puffc",
+        "comment_body": "@asha-behera Would you please approve and merge this pr? Thanks!"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "review_at": "2025-04-11T08:53:50Z",
+        "review_author": "asha-behera"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "review_at": "2025-04-30T17:51:08Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "latestReview_at": "2025-04-11T08:53:50Z",
+        "latestReview_author": "asha-behera",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 172,
+        "repo": "sonic-host-services",
+        "latestReview_at": "2025-04-30T17:51:08Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 170,
         "repo": "sonic-host-services",
         "comment_at": "2025-01-02T01:46:56Z",
