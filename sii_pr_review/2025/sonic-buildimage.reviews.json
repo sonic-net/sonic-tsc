@@ -1377,6 +1377,13 @@
     {
         "number": 22432,
         "repo": "sonic-buildimage",
+        "comment_at": "2025-05-03T02:22:58Z",
+        "comment_author": "bhouse-nexthop",
+        "comment_body": "This PR appears to be causing build failures:\r\n```\r\n\t\t\t\t\t\techo \"eth$i:$lanes\" >> device/x86_64-kvm_x86_64-r0/$(basename $d)/$(basename $subdir)/lanemap.ini; \\\r\n\t\t\t\t\t\tif [ $num_columns -ge 9 ]; then \\\r\n\t\t\t\t\t\t\tcore=$(echo \"$line\" | awk '{print $8}'); \\\r\n\t\t\t\t\t\t\tcore_port=$(echo \"$line\" | awk '{print $9}'); \\\r\n\t\t\t\t\t\t\techo \"eth$i:$core,$core_port\" >> device/x86_64-kvm_x86_64-r0/$(basename $d)/$(basename $subdir)/coreportindexmap.ini; \\\r\n\t\t\t\t\t\tfi; \\\r\n\t\t\t\t\tfi; \\\r\n\t\t\t\tdone < device/x86_64-kvm_x86_64-r0/$(basename $d)/$(basename $subdir)/port_config.ini; \\\r\n\t\t\tfi; \\\r\n\t\t\tif [ -f $(dirname $d)/chassisdb.conf ]; then \\\r\n\t\t\t\tif [ -f device/x86_64-kvm_x86_64-r0/$(basename $d)/$(basename $subdir)/lanemap.ini ]; then \\\r\n\t\t\t\t\techo \"Cpu0:999\" >> device/x86_64-kvm_x86_64-r0/$(basename $d)/$(basename $subdir)/lanemap.ini; \\\r\n\t\t\t\t\ti=$(($i+1)); \\\r\n\t\t\t\tfi; \\\r\n\t\t\t\tif [ -f device/x86_64-kvm_x86_64-r0/$(basename $d)/$(basename $subdir)/coreportindexmap.ini ]; then \\\r\n\t\t\t\t\techo \"Cpu0:0,0\" >> device/x86_64-kvm_x86_64-r0/$(basename $d)/$(basename $subdir)/coreportindexmap.ini; \\\r\n\t\t\t\tfi; \\\r\n\t\t\tfi; \\\r\n\t\tfi; \\\r\n\tdone; \\\r\ndone;\r\n# Build the package\r\ndpkg-buildpackage -rfakeroot -b -us -uc -j4 --admindir /sonic/dpkg/tmp.IQr038n5JN\r\npopd\r\nmv sonic-device-data_1.0-1_all.deb /sonic/target/debs/bookworm/\r\n/sonic/src/sonic-device-data/src /sonic/src/sonic-device-data\r\ncp: cannot stat '../../../device/arista/x86_64-arista_7060x6_64pe/Arista-7060X6-64PE-O128/buffers_defaults_lt2.j2': No such file or directory\r\ncp: cannot stat '../../../device/arista/x86_64-arista_7060x6_64pe/Arista-7060X6-64PE-O128S2/buffers_defaults_lt2.j2': No such file or directory\r\nmake[1]: 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 parse_reviews.py pr_dump.sh repo_list.sh repos update.sh [Makefile:8: /sonic/target/debs/bookworm/sonic-device-data_1.0-1_all.deb] Error 1\r\nmake[1]: Leaving directory '/sonic/src/sonic-device-data'\r\n[ FAIL LOG END ] [ target/debs/bookworm/sonic-device-data_1.0-1_all.deb ]\r\n```"
+    },
+    {
+        "number": 22432,
+        "repo": "sonic-buildimage",
         "review_at": "2025-05-02T22:04:36Z",
         "review_author": "kperumalbfn"
     },
@@ -10758,6 +10765,19 @@
         "repo": "sonic-buildimage",
         "review_at": "2025-04-08T18:28:30Z",
         "review_author": "saiarcot895"
+    },
+    {
+        "number": 22153,
+        "repo": "sonic-buildimage",
+        "review_at": "2025-05-03T23:12:09Z",
+        "review_author": "paulmenzel"
+    },
+    {
+        "number": 22153,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2025-05-03T23:12:09Z",
+        "latestReview_author": "paulmenzel",
+        "latestReview_state": "COMMENTED"
     },
     {
         "number": 22153,
