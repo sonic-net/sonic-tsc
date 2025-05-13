@@ -64,6 +64,20 @@
     {
         "number": 3865,
         "repo": "sonic-utilities",
+        "comment_at": "2025-05-12T22:37:17Z",
+        "comment_author": "yejianquan",
+        "comment_body": "Hi @vishal-nokia  @arlakshm, this change causes a test failure on Cisco chassis(I believe the failure should be same on other chassis platform also):\r\n\r\nshow_techsupport/test_techsupport.py::test_techsupport_commands[xxx-lc2-1] FAILED [ 75%]\r\n\r\n\r\n=================================== FAILURES ===================================\r\n__________________ test_techsupport_commands[xxx-lc2-1] __________________\r\n\r\nduthosts = [<MultiAsicSonicHost xxx-lc2-1>]\r\nenum_rand_one_per_hwsku_frontend_hostname = 'xxx-lc2-1'\r\ncommands_to_check = {'bfd_cmds': [\"vtysh -n 0 -c 'show bfd peers'\", \"vtysh -n 1 -c 'show bfd peers'\", \"vtysh -n 2 -c 'show bfd peers'\", \"v... ['/proc/buddyinfo', '/proc/cmdline', '/proc/consoles', '/proc/cpuinfo', '/proc/devices', '/proc/diskstats', ...], ...}\r\nskip_on_dpu = None\r\n\r\n    def test_techsupport_commands(\r\n            duthosts, enum_rand_one_per_hwsku_frontend_hostname, commands_to_check, skip_on_dpu):  # noqa F811\r\n        \"\"\"\r\n        This test checks list of commands that will be run when executing\r\n        'show techsupport' CLI against a standard expected list of commands\r\n        to run.\r\n    \r\n        The test invokes show techsupport with noop option, which just\r\n        returns the list of commands that will be run when collecting\r\n        tech support data.\r\n    \r\n        Args:\r\n        commands_to_check: contains a dict of command groups with each\r\n        group containing a list of related commands.\r\n        \"\"\"\r\n    \r\n        cmd_not_found = defaultdict(list)\r\n        duthost = duthosts[enum_rand_one_per_hwsku_frontend_hostname]\r\n    \r\n        stdout = duthost.shell(r'sudo generate_dump -n | grep -v \"^mkdir\\|^rm\\|^tar\\|^gzip\"')\r\n    \r\n        pytest_assert(stdout['rc'] == 0, 'generate_dump command failed')\r\n    \r\n        cmd_list = stdout[\"stdout_lines\"]\r\n    \r\n        strbash_in_cmdlist = False\r\n        for command in cmd_list:\r\n            if \"bash -c\" in command:\r\n                strbash_in_cmdlist = True\r\n                break\r\n    \r\n        for cmd_group_name, cmd_group_to_check in list(commands_to_check.items()):\r\n            cmd_not_found.update(\r\n                check_cmds(cmd_group_name, cmd_group_to_check, cmd_list, strbash_in_cmdlist)\r\n            )\r\n    \r\n        error_message = ''\r\n        for key, commands in cmd_not_found.items():\r\n            error_message += \"Commands not found for '{}': \".format(key) + '; '.join(commands) + '\\n'\r\n    \r\n>       pytest_assert(len(cmd_not_found) == 0, error_message)\r\nE       Failed: Commands not found for 'misc_show_cmds': asic0 show queue counters; asic1 show queue counters; asic2 show queue counters\r\n\r\ncmd_group_name = 'docker_cmds'\r\ncmd_group_to_check = ['docker stats --no-stream', 'docker ps -a', 'docker top pmon', 'docker exec lldp0 lldpcli show statistics', 'docker exec lldp1 lldpcli show statistics', 'docker exec lldp2 lldpcli show statistics', ...]\r\ncmd_list   = ['Lock succesfully accquired and installed signal handlers', 'touch --date=@0 /tmp/reference', 'ln -s /usr/local/bin/g...2-1_20250511_090754/proc', 'echo cp  -r /proc/consoles /var/dump/sonic_dump_xxx-lc2-1_20250511_090754/proc', ...]\r\ncmd_not_found = defaultdict(<class 'list'>, {'misc_show_cmds': ['asic0 show queue counters', 'asic1 show queue counters', 'asic2 show queue counters']})\r\ncommand    = 'timeout --foreground 5m bash -c \"dummy_cleanup_method () '\r\ncommands   = ['asic0 show queue counters', 'asic1 show queue counters', 'asic2 show queue counters']\r\ncommands_to_check = {'bfd_cmds': [\"vtysh -n 0 -c 'show bfd peers'\", \"vtysh -n 1 -c 'show bfd peers'\", \"vtysh -n 2 -c 'show bfd peers'\", \"v... ['/proc/buddyinfo', '/proc/cmdline', '/proc/consoles', '/proc/cpuinfo', '/proc/devices', '/proc/diskstats', ...], ...}\r\nduthost    = <MultiAsicSonicHost xxx-lc2-1>\r\nduthosts   = [<MultiAsicSonicHost xxx-lc2-1>]\r\nenum_rand_one_per_hwsku_frontend_hostname = 'xxx-lc2-1'\r\nerror_message = \"Commands not found for 'misc_show_cmds': asic0 show queue counters; asic1 show queue counters; asic2 show queue counters\\n\"\r\nkey        = 'misc_show_cmds'\r\nskip_on_dpu = None\r\nstdout     = {'changed': True, 'stdout': 'Lock succesfully accquired and installed signal handlers\\ntouch --date=@0 /tmp/reference\\...or directory', 'ERR: RC:-1 observed on line 2294', 'Removing lock. Exit: 0'], '_ansible_no_log': None, 'failed': False}\r\nstrbash_in_cmdlist = True\r\n\r\nshow_techsupport/test_techsupport.py:614: Failed\r\n\r\n"
+    },
+    {
+        "number": 3865,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-05-12T22:38:22Z",
+        "comment_author": "yejianquan",
+        "comment_body": "@vishal-nokia  @arlakshm could you please enhance the test to align with the image change?\r\n"
+    },
+    {
+        "number": 3865,
+        "repo": "sonic-utilities",
         "review_at": "2025-04-24T19:23:59Z",
         "review_author": "mlok-nokia"
     },
@@ -278,6 +292,80 @@
         "latestReview_state": "DISMISSED"
     },
     {
+        "number": 3855,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-04-15T15:27:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3855,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-04-15T15:27:23Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3855,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-04-21T16:43:30Z",
+        "comment_author": "vivekrnv",
+        "comment_body": "@bingwang-ms Please help assign someone for review"
+    },
+    {
+        "number": 3855,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-04-21T16:57:31Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "@prabhataravind Could you please help review?"
+    },
+    {
+        "number": 3855,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-05-12T20:14:14Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "@prabhataravind Kindly ping on this"
+    },
+    {
+        "number": 3855,
+        "repo": "sonic-utilities",
+        "review_at": "2025-04-15T16:14:32Z",
+        "review_author": "vivekrnv"
+    },
+    {
+        "number": 3855,
+        "repo": "sonic-utilities",
+        "review_at": "2025-04-16T00:14:49Z",
+        "review_author": "dgsudharsan"
+    },
+    {
+        "number": 3855,
+        "repo": "sonic-utilities",
+        "review_at": "2025-05-12T20:25:00Z",
+        "review_author": "prabhataravind"
+    },
+    {
+        "number": 3855,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2025-04-16T00:14:49Z",
+        "latestReview_author": "dgsudharsan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3855,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2025-04-15T16:14:32Z",
+        "latestReview_author": "vivekrnv",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3855,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2025-05-12T20:25:00Z",
+        "latestReview_author": "prabhataravind",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 3853,
         "repo": "sonic-utilities",
         "comment_at": "2025-04-14T21:43:31Z",
@@ -385,6 +473,40 @@
         "comment_at": "2025-04-14T18:21:17Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3850,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-04-14T17:13:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3850,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-04-14T17:14:10Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3850,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-05-06T03:20:33Z",
+        "comment_author": "keboliu",
+        "comment_body": "Hi @saiarcot895 would you please review?"
+    },
+    {
+        "number": 3850,
+        "repo": "sonic-utilities",
+        "review_at": "2025-05-12T16:51:42Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 3850,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2025-05-12T16:51:42Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
     },
     {
         "number": 3849,
