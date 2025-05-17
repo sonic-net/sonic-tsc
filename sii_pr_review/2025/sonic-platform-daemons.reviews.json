@@ -1,5 +1,121 @@
 [
     {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-09T10:08:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-09T10:08:47Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-09T15:55:20Z",
+        "comment_author": "mihirpat1",
+        "comment_body": "@Junchao-Mellanox Can you please help in answering the below question in reference to the PR description?\r\n```\r\nIn CmisManagerTask, it calls cmis.set_lpmode for each logical port. The time wait causes a wait_time * num_of_logical_port delay in link up time. The PR is to optimize it.\r\n```\r\n\r\nQuestion\r\n1. From my understanding, the wait time should only apply to the first subport (specifically, the first subport to go through CMIS init for a breakout port group) of a physical port during CMIS initialization. For the remaining subports, the port should already be in high power mode, making the wait effectively a NOOP.\r\nIs the goal of this PR to reduce CMIS initialization time by allowing subsequent logical ports to proceed without waiting for the high power mode transition?\r\n\r\n2. Could you also share any performance metrics or stats that demonstrate the improvement from this change?"
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-10T19:04:12Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@prgeor kindly reminder to provide your feedback on this PR"
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-11T21:16:13Z",
+        "comment_author": "prgeor",
+        "comment_body": "> @prgeor kindly reminder to provide your feedback on this PR\r\n\r\n@liat-grozovik waiting for answers to Mihirs question"
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-11T22:04:25Z",
+        "comment_author": "prgeor",
+        "comment_body": "> @Junchao-Mellanox Can you please help in answering the below question in reference to the PR description?\r\n> \r\n> ```\r\n> In CmisManagerTask, it calls cmis.set_lpmode for each logical port. The time wait causes a wait_time * num_of_logical_port delay in link up time. The PR is to optimize it.\r\n> ```\r\n> \r\n> Question\r\n> \r\n> 1. From my understanding, the wait time should only apply to the first subport (specifically, the first subport to go through CMIS init for a breakout port group) of a physical port during CMIS initialization. For the remaining subports, the port should already be in high power mode, making the wait effectively a NOOP.\r\n>    Is the goal of this PR to reduce CMIS initialization time by allowing subsequent logical ports to proceed without waiting for the high power mode transition?\r\n> 2. Could you also share any performance metrics or stats that demonstrate the improvement from this change?\r\n\r\n@mihirpat1 [1]. I think at present set_lpmode() is a busy wait function, which means when you have 8 subports, Cmis Mgr will wait for module to transition from `LpMode` -> `ModuelReady`. This PR is removing this busy wait and making use of `CMIS_STATE_AP_CONF` state where Xcvrd checks for `ModuleReady` in a non-busy way.\r\n\r\n@Junchao-Mellanox We need to make sure\r\n\r\n1. If module is transitioning from `LpMode` -> `ModuleReady` , and there is a set_lpmod(False) called again(breakout scenario), does that impact the ongoing transition?\r\n2. If there is a timeout for `ModuleReady` , CMIS mgr does `force_cmis_reinit()`, can you confirm if this will eventually help to move the module to `ModuleReady` ?\r\n"
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-12T02:18:48Z",
+        "comment_author": "Junchao-Mellanox",
+        "comment_body": "Hi @mihirpat1 ,\r\n\r\nDue my test, set_lpmode takes about 0.5s when there is wait. And it takes about 0.01s when there is no wait. After applying this change, the link up time for 512 ports saves 20 to 30 seconds. You are right about the subport: only the first subport executes the wait. But it still took 64 * 0.5 = ~32 seconds. Also, the idea is that we don't need this wait in set_lpmode function since CmisManagerTask has already done the wait in state machine.\r\n\r\n"
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-12T02:22:51Z",
+        "comment_author": "Junchao-Mellanox",
+        "comment_body": "> > @Junchao-Mellanox Can you please help in answering the below question in reference to the PR description?\r\n> > ```\r\n> > In CmisManagerTask, it calls cmis.set_lpmode for each logical port. The time wait causes a wait_time * num_of_logical_port delay in link up time. The PR is to optimize it.\r\n> > ```\r\n> > \r\n> > \r\n> >     \r\n> >       \r\n> >     \r\n> > \r\n> >       \r\n> >     \r\n> > \r\n> >     \r\n> >   \r\n> > Question\r\n> > \r\n> > 1. From my understanding, the wait time should only apply to the first subport (specifically, the first subport to go through CMIS init for a breakout port group) of a physical port during CMIS initialization. For the remaining subports, the port should already be in high power mode, making the wait effectively a NOOP.\r\n> >    Is the goal of this PR to reduce CMIS initialization time by allowing subsequent logical ports to proceed without waiting for the high power mode transition?\r\n> > 2. Could you also share any performance metrics or stats that demonstrate the improvement from this change?\r\n> \r\n> @mihirpat1 [1]. I think at present set_lpmode() is a busy wait function, which means when you have 8 subports, Cmis Mgr will wait for module to transition from `LpMode` -> `ModuelReady`. This PR is removing this busy wait and making use of `CMIS_STATE_AP_CONF` state where Xcvrd checks for `ModuleReady` in a non-busy way.\r\n> \r\n> @Junchao-Mellanox We need to make sure\r\n> \r\n> 1. If module is transitioning from `LpMode` -> `ModuleReady` , and there is a set_lpmod(False) called again(breakout scenario), does that impact the ongoing transition?\r\n> 2. If there is a timeout for `ModuleReady` , CMIS mgr does `force_cmis_reinit()`, can you confirm if this will eventually help to move the module to `ModuleReady` ?\r\n\r\nHi @prgeor ,\r\n\r\nFor the first question, I suppose it does not matter. If user set module to low power mode during the transitioning from `LpMode` -> `ModuleReady`, the busy wait does not help either. Because set_lpmod(False) could be called right after busy wait succesfully return.\r\n\r\nFor the second question, my test never hit the timeout for `ModuleReady`. It usually takes no more than 0.5s to reach `ModuleReady`. I think if we reach such timetout, the issue is on module side."
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-12T08:18:30Z",
+        "comment_author": "prgeor",
+        "comment_body": "> > > @Junchao-Mellanox Can you please help in answering the below question in reference to the PR description?\r\n> > > ```\r\n> > > In CmisManagerTask, it calls cmis.set_lpmode for each logical port. The time wait causes a wait_time * num_of_logical_port delay in link up time. The PR is to optimize it.\r\n> > > ```\r\n> > > \r\n> > > \r\n> > >     \r\n> > >       \r\n> > >     \r\n> > > \r\n> > >       \r\n> > >     \r\n> > > \r\n> > >     \r\n> > >   \r\n> > > Question\r\n> > > \r\n> > > 1. From my understanding, the wait time should only apply to the first subport (specifically, the first subport to go through CMIS init for a breakout port group) of a physical port during CMIS initialization. For the remaining subports, the port should already be in high power mode, making the wait effectively a NOOP.\r\n> > >    Is the goal of this PR to reduce CMIS initialization time by allowing subsequent logical ports to proceed without waiting for the high power mode transition?\r\n> > > 2. Could you also share any performance metrics or stats that demonstrate the improvement from this change?\r\n> > \r\n> > \r\n> > @mihirpat1 [1]. I think at present set_lpmode() is a busy wait function, which means when you have 8 subports, Cmis Mgr will wait for module to transition from `LpMode` -> `ModuelReady`. This PR is removing this busy wait and making use of `CMIS_STATE_AP_CONF` state where Xcvrd checks for `ModuleReady` in a non-busy way.\r\n> > @Junchao-Mellanox We need to make sure\r\n> > \r\n> > 1. If module is transitioning from `LpMode` -> `ModuleReady` , and there is a set_lpmod(False) called again(breakout scenario), does that impact the ongoing transition?\r\n> > 2. If there is a timeout for `ModuleReady` , CMIS mgr does `force_cmis_reinit()`, can you confirm if this will eventually help to move the module to `ModuleReady` ?\r\n> \r\n> Hi @prgeor ,\r\n> \r\n> For the first question, I suppose it does not matter. If user set module to low power mode during the transitioning from `LpMode` -> `ModuleReady`, the busy wait does not help either. Because set_lpmod(False) could be called right after busy wait succesfully return.\r\n> \r\n> For the second question, my test never hit the timeout for `ModuleReady`. It usually takes no more than 0.5s to reach `ModuleReady`. I think if we reach such timetout, the issue is on module side.\r\n\r\n@Junchao-Mellanox [1] I am not looking for user perspective but during breakout scenario when the CMIS state machine is calling set_lpmode() N times for N-subports. "
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-12T08:21:33Z",
+        "comment_author": "Junchao-Mellanox",
+        "comment_body": "I will test and get back to you."
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-15T06:09:30Z",
+        "comment_author": "Junchao-Mellanox",
+        "comment_body": "Hi @prgeor , there is no issue for following case.\r\n```\r\nIf module is transitioning from LpMode -> ModuleReady , and there is a set_lpmod(False) called again(breakout scenario), does that impact the ongoing transition?\r\n```\r\n\r\n`set_lpmode(False)` does not change module state if module is already in high power."
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-05-09T10:13:21Z",
+        "review_author": "keboliu"
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-05-16T01:50:10Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-05-16T20:13:23Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-05-09T10:13:21Z",
+        "latestReview_author": "keboliu",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-05-16T20:13:23Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-05-16T01:50:10Z",
+        "latestReview_author": "mihirpat1",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 604,
         "repo": "sonic-platform-daemons",
         "comment_at": "2025-04-03T23:17:31Z",
