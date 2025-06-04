@@ -1,5 +1,1879 @@
 [
     {
+        "number": 619,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-28T20:02:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 619,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-28T20:02:48Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 619,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-29T21:56:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 619,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-29T21:56:28Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 619,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-06-03T01:21:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202505: https://github.com/sonic-net/sonic-platform-daemons/pull/620"
+    },
+    {
+        "number": 619,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-05-29T15:23:51Z",
+        "review_author": "rameshraghupathy"
+    },
+    {
+        "number": 619,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-05-29T21:57:20Z",
+        "review_author": "gpunathilell"
+    },
+    {
+        "number": 619,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-05-30T00:26:15Z",
+        "review_author": "rameshraghupathy"
+    },
+    {
+        "number": 619,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-06-02T17:09:47Z",
+        "review_author": "vvolam"
+    },
+    {
+        "number": 619,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-06-02T17:33:50Z",
+        "review_author": "rlhui"
+    },
+    {
+        "number": 619,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-05-30T00:26:15Z",
+        "latestReview_author": "rameshraghupathy",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 619,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-06-02T17:33:50Z",
+        "latestReview_author": "rlhui",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 619,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-06-02T17:09:47Z",
+        "latestReview_author": "vvolam",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-09T10:08:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-09T10:08:47Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-09T15:55:20Z",
+        "comment_author": "mihirpat1",
+        "comment_body": "@Junchao-Mellanox Can you please help in answering the below question in reference to the PR description?\r\n```\r\nIn CmisManagerTask, it calls cmis.set_lpmode for each logical port. The time wait causes a wait_time * num_of_logical_port delay in link up time. The PR is to optimize it.\r\n```\r\n\r\nQuestion\r\n1. From my understanding, the wait time should only apply to the first subport (specifically, the first subport to go through CMIS init for a breakout port group) of a physical port during CMIS initialization. For the remaining subports, the port should already be in high power mode, making the wait effectively a NOOP.\r\nIs the goal of this PR to reduce CMIS initialization time by allowing subsequent logical ports to proceed without waiting for the high power mode transition?\r\n\r\n2. Could you also share any performance metrics or stats that demonstrate the improvement from this change?"
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-10T19:04:12Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@prgeor kindly reminder to provide your feedback on this PR"
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-11T21:16:13Z",
+        "comment_author": "prgeor",
+        "comment_body": "> @prgeor kindly reminder to provide your feedback on this PR\r\n\r\n@liat-grozovik waiting for answers to Mihirs question"
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-11T22:04:25Z",
+        "comment_author": "prgeor",
+        "comment_body": "> @Junchao-Mellanox Can you please help in answering the below question in reference to the PR description?\r\n> \r\n> ```\r\n> In CmisManagerTask, it calls cmis.set_lpmode for each logical port. The time wait causes a wait_time * num_of_logical_port delay in link up time. The PR is to optimize it.\r\n> ```\r\n> \r\n> Question\r\n> \r\n> 1. From my understanding, the wait time should only apply to the first subport (specifically, the first subport to go through CMIS init for a breakout port group) of a physical port during CMIS initialization. For the remaining subports, the port should already be in high power mode, making the wait effectively a NOOP.\r\n>    Is the goal of this PR to reduce CMIS initialization time by allowing subsequent logical ports to proceed without waiting for the high power mode transition?\r\n> 2. Could you also share any performance metrics or stats that demonstrate the improvement from this change?\r\n\r\n@mihirpat1 [1]. I think at present set_lpmode() is a busy wait function, which means when you have 8 subports, Cmis Mgr will wait for module to transition from `LpMode` -> `ModuelReady`. This PR is removing this busy wait and making use of `CMIS_STATE_AP_CONF` state where Xcvrd checks for `ModuleReady` in a non-busy way.\r\n\r\n@Junchao-Mellanox We need to make sure\r\n\r\n1. If module is transitioning from `LpMode` -> `ModuleReady` , and there is a set_lpmod(False) called again(breakout scenario), does that impact the ongoing transition?\r\n2. If there is a timeout for `ModuleReady` , CMIS mgr does `force_cmis_reinit()`, can you confirm if this will eventually help to move the module to `ModuleReady` ?\r\n"
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-12T02:18:48Z",
+        "comment_author": "Junchao-Mellanox",
+        "comment_body": "Hi @mihirpat1 ,\r\n\r\nDue my test, set_lpmode takes about 0.5s when there is wait. And it takes about 0.01s when there is no wait. After applying this change, the link up time for 512 ports saves 20 to 30 seconds. You are right about the subport: only the first subport executes the wait. But it still took 64 * 0.5 = ~32 seconds. Also, the idea is that we don't need this wait in set_lpmode function since CmisManagerTask has already done the wait in state machine.\r\n\r\n"
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-12T02:22:51Z",
+        "comment_author": "Junchao-Mellanox",
+        "comment_body": "> > @Junchao-Mellanox Can you please help in answering the below question in reference to the PR description?\r\n> > ```\r\n> > In CmisManagerTask, it calls cmis.set_lpmode for each logical port. The time wait causes a wait_time * num_of_logical_port delay in link up time. The PR is to optimize it.\r\n> > ```\r\n> > \r\n> > \r\n> >     \r\n> >       \r\n> >     \r\n> > \r\n> >       \r\n> >     \r\n> > \r\n> >     \r\n> >   \r\n> > Question\r\n> > \r\n> > 1. From my understanding, the wait time should only apply to the first subport (specifically, the first subport to go through CMIS init for a breakout port group) of a physical port during CMIS initialization. For the remaining subports, the port should already be in high power mode, making the wait effectively a NOOP.\r\n> >    Is the goal of this PR to reduce CMIS initialization time by allowing subsequent logical ports to proceed without waiting for the high power mode transition?\r\n> > 2. Could you also share any performance metrics or stats that demonstrate the improvement from this change?\r\n> \r\n> @mihirpat1 [1]. I think at present set_lpmode() is a busy wait function, which means when you have 8 subports, Cmis Mgr will wait for module to transition from `LpMode` -> `ModuelReady`. This PR is removing this busy wait and making use of `CMIS_STATE_AP_CONF` state where Xcvrd checks for `ModuleReady` in a non-busy way.\r\n> \r\n> @Junchao-Mellanox We need to make sure\r\n> \r\n> 1. If module is transitioning from `LpMode` -> `ModuleReady` , and there is a set_lpmod(False) called again(breakout scenario), does that impact the ongoing transition?\r\n> 2. If there is a timeout for `ModuleReady` , CMIS mgr does `force_cmis_reinit()`, can you confirm if this will eventually help to move the module to `ModuleReady` ?\r\n\r\nHi @prgeor ,\r\n\r\nFor the first question, I suppose it does not matter. If user set module to low power mode during the transitioning from `LpMode` -> `ModuleReady`, the busy wait does not help either. Because set_lpmod(False) could be called right after busy wait succesfully return.\r\n\r\nFor the second question, my test never hit the timeout for `ModuleReady`. It usually takes no more than 0.5s to reach `ModuleReady`. I think if we reach such timetout, the issue is on module side."
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-12T08:18:30Z",
+        "comment_author": "prgeor",
+        "comment_body": "> > > @Junchao-Mellanox Can you please help in answering the below question in reference to the PR description?\r\n> > > ```\r\n> > > In CmisManagerTask, it calls cmis.set_lpmode for each logical port. The time wait causes a wait_time * num_of_logical_port delay in link up time. The PR is to optimize it.\r\n> > > ```\r\n> > > \r\n> > > \r\n> > >     \r\n> > >       \r\n> > >     \r\n> > > \r\n> > >       \r\n> > >     \r\n> > > \r\n> > >     \r\n> > >   \r\n> > > Question\r\n> > > \r\n> > > 1. From my understanding, the wait time should only apply to the first subport (specifically, the first subport to go through CMIS init for a breakout port group) of a physical port during CMIS initialization. For the remaining subports, the port should already be in high power mode, making the wait effectively a NOOP.\r\n> > >    Is the goal of this PR to reduce CMIS initialization time by allowing subsequent logical ports to proceed without waiting for the high power mode transition?\r\n> > > 2. Could you also share any performance metrics or stats that demonstrate the improvement from this change?\r\n> > \r\n> > \r\n> > @mihirpat1 [1]. I think at present set_lpmode() is a busy wait function, which means when you have 8 subports, Cmis Mgr will wait for module to transition from `LpMode` -> `ModuelReady`. This PR is removing this busy wait and making use of `CMIS_STATE_AP_CONF` state where Xcvrd checks for `ModuleReady` in a non-busy way.\r\n> > @Junchao-Mellanox We need to make sure\r\n> > \r\n> > 1. If module is transitioning from `LpMode` -> `ModuleReady` , and there is a set_lpmod(False) called again(breakout scenario), does that impact the ongoing transition?\r\n> > 2. If there is a timeout for `ModuleReady` , CMIS mgr does `force_cmis_reinit()`, can you confirm if this will eventually help to move the module to `ModuleReady` ?\r\n> \r\n> Hi @prgeor ,\r\n> \r\n> For the first question, I suppose it does not matter. If user set module to low power mode during the transitioning from `LpMode` -> `ModuleReady`, the busy wait does not help either. Because set_lpmod(False) could be called right after busy wait succesfully return.\r\n> \r\n> For the second question, my test never hit the timeout for `ModuleReady`. It usually takes no more than 0.5s to reach `ModuleReady`. I think if we reach such timetout, the issue is on module side.\r\n\r\n@Junchao-Mellanox [1] I am not looking for user perspective but during breakout scenario when the CMIS state machine is calling set_lpmode() N times for N-subports. "
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-12T08:21:33Z",
+        "comment_author": "Junchao-Mellanox",
+        "comment_body": "I will test and get back to you."
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-15T06:09:30Z",
+        "comment_author": "Junchao-Mellanox",
+        "comment_body": "Hi @prgeor , there is no issue for following case.\r\n```\r\nIf module is transitioning from LpMode -> ModuleReady , and there is a set_lpmod(False) called again(breakout scenario), does that impact the ongoing transition?\r\n```\r\n\r\n`set_lpmode(False)` does not change module state if module is already in high power."
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-21T03:04:44Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202412: https://github.com/Azure/sonic-platform-daemons.msft/pull/15"
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-05-09T10:13:21Z",
+        "review_author": "keboliu"
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-05-16T01:50:10Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-05-16T20:13:23Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-05-09T10:13:21Z",
+        "latestReview_author": "keboliu",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-05-16T20:13:23Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 613,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-05-16T01:50:10Z",
+        "latestReview_author": "mihirpat1",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 611,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-08T02:59:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 611,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-08T02:59:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 611,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-09T06:39:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 611,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-09T06:39:31Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 611,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-09T07:08:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 611,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-09T07:08:40Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 611,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-09T08:48:52Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 611,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-09T08:49:01Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 611,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-09T10:06:02Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 611,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-09T10:06:11Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 611,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-09T10:19:16Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 611,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-09T10:19:25Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 611,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-10T19:08:00Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@mihirpat1 @prgeor kindly hep to review and comment on this PR"
+    },
+    {
+        "number": 611,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-13T01:47:42Z",
+        "comment_author": "Junchao-Mellanox",
+        "comment_body": "> @Junchao-Mellanox please provide more details on the 2 optimization. What is the current perf number vs new with this change\r\n\r\nUpdated in description"
+    },
+    {
+        "number": 611,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-15T05:23:08Z",
+        "comment_author": "Junchao-Mellanox",
+        "comment_body": "Hi @prgeor , could you please help merge?"
+    },
+    {
+        "number": 611,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-21T03:04:55Z",
+        "comment_author": "r12f",
+        "comment_body": "hi @Junchao-Mellanox , do you mind to help create a manual pick to 202412?"
+    },
+    {
+        "number": 611,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-21T03:58:55Z",
+        "comment_author": "Junchao-Mellanox",
+        "comment_body": "> hi @Junchao-Mellanox , do you mind to help create a manual pick to 202412?\r\n\r\nPR ready: https://github.com/Azure/sonic-platform-daemons.msft/pull/16"
+    },
+    {
+        "number": 611,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-22T07:44:36Z",
+        "comment_author": "r12f",
+        "comment_body": "thanks Junchao. It is merged now."
+    },
+    {
+        "number": 611,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-05-09T14:12:45Z",
+        "review_author": "keboliu"
+    },
+    {
+        "number": 611,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-05-12T16:46:39Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 611,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-05-12T16:57:29Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 611,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-05-14T04:32:13Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 611,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-05-14T05:14:51Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 611,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-05-09T14:12:45Z",
+        "latestReview_author": "keboliu",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 611,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-05-14T04:32:13Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 611,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-05-14T05:14:51Z",
+        "latestReview_author": "mihirpat1",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-03T23:17:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-03T23:17:39Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-03T23:21:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-03T23:21:34Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-03T23:36:09Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-03T23:36:17Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-04T00:04:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-04T00:05:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-04T17:12:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-04T17:12:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-04T19:48:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-04T19:48:57Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-04T21:42:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-04T21:42:09Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-10T22:06:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-10T22:06:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-11T00:40:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-11T00:40:39Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-15T16:11:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-15T16:11:35Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-15T16:37:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-15T16:37:36Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-17T01:30:44Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-17T01:30:52Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-17T23:37:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-17T23:37:33Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-20T11:29:03Z",
+        "comment_author": "DavidZagury",
+        "comment_body": "@mihirpat1 can you please check and fix any conflicts there are for 202412?"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-22T17:42:03Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-22T17:42:11Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-22T20:05:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-22T20:05:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-23T17:10:40Z",
+        "comment_author": "arlakshm",
+        "comment_body": "@mihirpat1, @prgeor, is the review done on this PR? Can we merge this?"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-24T00:06:08Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-24T00:06:16Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-06T17:56:23Z",
+        "comment_author": "mihirpat1",
+        "comment_body": "@r12f Can you please help to cherry-pick this to 202412?\r\n202412 cherry-pick PR\r\nhttps://github.com/Azure/sonic-platform-daemons.msft/pull/14"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-09T07:30:45Z",
+        "comment_author": "r12f",
+        "comment_body": "hi @mihirpat1 , do you mind to help do a manual cherry pick to 202412?"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-09T08:02:07Z",
+        "comment_author": "mihirpat1",
+        "comment_body": "@r12f following is the 202412 cherry pick PR. Can you please help to merge this? \r\nhttps://github.com/Azure/sonic-platform-daemons.msft/pull/14"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-03T23:18:11Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-03T23:31:36Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-03T23:36:38Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-04T00:17:26Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-04T17:14:02Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-04T19:54:09Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-07T06:19:49Z",
+        "review_author": "Janetxxx"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-08T07:13:00Z",
+        "review_author": "keboliu"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-08T16:56:37Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-09T16:53:35Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-09T20:29:05Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-09T20:30:58Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-09T20:33:41Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-09T22:12:03Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-10T04:22:25Z",
+        "review_author": "Junchao-Mellanox"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-10T06:54:27Z",
+        "review_author": "keboliu"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-10T22:06:07Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-10T22:07:08Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-11T01:00:04Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-14T15:28:29Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-15T16:27:15Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-15T16:28:26Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-15T16:37:51Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-17T07:49:44Z",
+        "review_author": "Junchao-Mellanox"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-22T16:26:01Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-22T17:43:48Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-30T18:03:40Z",
+        "review_author": "arista-nwolfe"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-05-05T18:16:42Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-05-05T18:23:06Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-05-05T18:24:57Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-04-10T06:54:27Z",
+        "latestReview_author": "keboliu",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-04-07T06:19:49Z",
+        "latestReview_author": "Janetxxx",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-04-30T18:03:40Z",
+        "latestReview_author": "arista-nwolfe",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-04-15T16:37:51Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-05-05T18:24:57Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 604,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-04-17T07:49:44Z",
+        "latestReview_author": "Junchao-Mellanox",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 603,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-03T22:36:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 603,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-03T22:36:34Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 603,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-04T15:08:38Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 603,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-04T15:08:46Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 603,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-03T22:52:33Z",
+        "review_author": "vvolam"
+    },
+    {
+        "number": 603,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-04T02:24:35Z",
+        "review_author": "rameshraghupathy"
+    },
+    {
+        "number": 603,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-04T20:25:10Z",
+        "review_author": "vvolam"
+    },
+    {
+        "number": 603,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-24T01:00:52Z",
+        "review_author": "gpunathilell"
+    },
+    {
+        "number": 603,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-24T01:12:08Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 603,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-04-24T01:12:08Z",
+        "latestReview_author": "judyjoseph",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 603,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-04-24T01:00:52Z",
+        "latestReview_author": "gpunathilell",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 603,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-04-04T20:25:10Z",
+        "latestReview_author": "vvolam",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 602,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-26T23:32:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 602,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-26T23:32:20Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 602,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-27T01:22:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 602,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-27T01:23:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 602,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-27T04:21:03Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 602,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-27T04:21:11Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 602,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-01T05:11:31Z",
+        "comment_author": "r12f",
+        "comment_body": "hi @mihirpat1 , do you mind to help submit a PR to 202412 to resolve the conflict? thanks!"
+    },
+    {
+        "number": 602,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-01T05:18:20Z",
+        "comment_author": "mihirpat1",
+        "comment_body": "@r12f The PR has already been merged to 202412 via https://github.com/Azure/sonic-platform-daemons.msft/pull/12"
+    },
+    {
+        "number": 602,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-01T05:19:36Z",
+        "comment_author": "r12f",
+        "comment_body": "thanks Mihir! updating tag to reflect the state."
+    },
+    {
+        "number": 602,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-15T18:39:19Z",
+        "comment_author": "Pavan-Nokia",
+        "comment_body": "Can this PR be backported to 202411 branch please"
+    },
+    {
+        "number": 602,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-27T00:19:47Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 602,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-27T01:02:28Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 602,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-27T01:13:34Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 602,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-27T01:21:40Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 602,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-27T01:23:07Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 602,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-27T03:06:56Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 602,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-27T03:07:08Z",
+        "review_author": "vivekrnv"
+    },
+    {
+        "number": 602,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-27T03:30:02Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 602,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-27T04:23:40Z",
+        "review_author": "vivekrnv"
+    },
+    {
+        "number": 602,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-27T04:23:58Z",
+        "review_author": "vivekrnv"
+    },
+    {
+        "number": 602,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-27T16:27:27Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 602,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-03-27T00:19:47Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 602,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-03-27T04:23:58Z",
+        "latestReview_author": "vivekrnv",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 602,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-03-27T16:27:27Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 601,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-25T15:53:38Z",
+        "comment_author": "linux-foundation-easycla",
+        "comment_body": "<a href=\"https://easycla.lfx.linuxfoundation.org/#/?version=2\"><img src=\"https://s3.amazonaws.com/cla-project-logo-prod/cla-signed.svg\" alt=\"CLA Signed\" align=\"left\" height=\"28\" width=\"328\" ><br ><ul><li>:white_check_mark:login: ymd-arista / (1dbf9219727af8fe4113333bc291f5520116a3a5)</li></ul><br>The committers listed above are authorized under a signed CLA."
+    },
+    {
+        "number": 601,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-25T15:53:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 601,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-25T15:53:52Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 601,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-02T17:34:06Z",
+        "comment_author": "arlakshm",
+        "comment_body": "@mlok-nokia , @anamehra @bmridul to help signoff on this change"
+    },
+    {
+        "number": 601,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-04T15:33:34Z",
+        "comment_author": "ymd-arista",
+        "comment_body": "/easycla"
+    },
+    {
+        "number": 601,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-09T17:32:17Z",
+        "comment_author": "judyjoseph",
+        "comment_body": "@bmridul @anamehra to review as well"
+    },
+    {
+        "number": 601,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-09T17:51:03Z",
+        "comment_author": "anamehra",
+        "comment_body": "Hi @ymd-arista , could you please add more details why we can't use the data in Chassis module table on redis_chassis.server? Please dd UT logs showing the dump of dbs etc."
+    },
+    {
+        "number": 601,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-14T20:26:58Z",
+        "comment_author": "ymd-arista",
+        "comment_body": "@anamehra : Our understanding is that PHYSICAL_ENTITY_TABLE should basically be a mirror/staging area for everything that we export via SNMP as opposed to having SNMP having to look in multiple places for all of the info it needs.\r\n\r\nDB dumps:\r\n\r\n1. After adding some more fields about module to 'CHASSIS_MODULE_TABLE`\r\n\r\n`CHASSIS_MODULE_TABLE|FABRIC-CARD0: {'desc': 'DCS-7804-FM', 'slot': '51', 'oper_status': 'Online', 'num_asics': '2', 'serial': 'SSN19430153', 'presence': 'True', 'is_replaceable': 'True', 'model': 'DCS-7804-FM'}`\r\n\r\n`CHASSIS_MODULE_TABLE|LINE-CARD1: {'desc': 'Unknown', 'slot': '4', 'oper_status': 'Empty', 'num_asics': '0', 'serial': 'N/A', 'presence': 'False', 'is_replaceable': 'True', 'model': 'N/A'}`\r\n\r\n2. After adding information about module to `PHYSICAL_ENTITY_INFO`\r\n\r\n`root@nfc405:/home/admin# sonic-db-cli STATE_DB hgetall \"PHYSICAL_ENTITY_INFO|fan5/1\"\r\n{'position_in_parent': '1', 'parent_name': 'FABRIC-CARD5'}`\r\n\r\n`root@nfc405:/home/admin# sonic-db-cli STATE_DB hgetall \"PHYSICAL_ENTITY_INFO|FABRIC-CARD5\"\r\n{'position_in_parent': '6', 'parent_name': 'chassis 1', 'serial': 'SSN20420826', 'model': '7808R3-FM', 'is_replaceable': 'True'}`"
+    },
+    {
+        "number": 601,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-02T17:49:04Z",
+        "review_author": "mlok-nokia"
+    },
+    {
+        "number": 601,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-02T20:21:19Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 601,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-02T20:21:48Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 601,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-04T15:30:23Z",
+        "review_author": "ymd-arista"
+    },
+    {
+        "number": 601,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-04-02T20:21:48Z",
+        "latestReview_author": "judyjoseph",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 601,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-04-02T17:49:04Z",
+        "latestReview_author": "mlok-nokia",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 595,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-17T19:54:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 595,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-17T19:54:41Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 595,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-17T20:16:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 595,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-17T20:16:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 595,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-17T21:25:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 595,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-17T21:25:31Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 595,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-17T21:26:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 595,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-17T21:28:43Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 595,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-18T02:45:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202412: https://github.com/Azure/sonic-platform-daemons.msft/pull/11"
+    },
+    {
+        "number": 595,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-17T22:48:48Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 595,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-18T00:58:51Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 595,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-03-17T22:48:48Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 595,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-03-18T00:58:51Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 593,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-16T23:38:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 593,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-16T23:38:34Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 593,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-17T00:48:50Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 593,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-17T00:48:58Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 593,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-17T02:20:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 593,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-17T02:21:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 593,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-17T02:43:10Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 593,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-17T02:43:19Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 593,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-17T03:07:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 593,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-17T03:07:35Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 593,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-17T03:23:18Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 593,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-17T03:23:27Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 593,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-17T03:46:57Z",
+        "comment_author": "prgeor",
+        "comment_body": "@mihirpat1 verified the xcvrd wheel package now has the dom/utilities/vdm and dom/utilitites/db/\r\n\r\n\r\n![image](https://github.com/user-attachments/assets/7e6f6ac2-3c21-42fc-ada1-bb048d203fa2)\r\n"
+    },
+    {
+        "number": 593,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-17T03:53:37Z",
+        "comment_author": "r12f",
+        "comment_body": "thanks Prince! this looks great!"
+    },
+    {
+        "number": 593,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-17T04:15:17Z",
+        "comment_author": "mihirpat1",
+        "comment_body": "@prgeor Thank you!"
+    },
+    {
+        "number": 593,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-22T19:34:13Z",
+        "comment_author": "r12f",
+        "comment_body": "Removing 202412 tag, since it is already merged."
+    },
+    {
+        "number": 593,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-17T03:53:25Z",
+        "review_author": "r12f"
+    },
+    {
+        "number": 593,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-17T04:15:30Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 593,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-03-17T03:53:25Z",
+        "latestReview_author": "r12f",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 593,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-03-17T04:15:30Z",
+        "latestReview_author": "mihirpat1",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 592,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-28T18:10:08Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 592,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-28T18:10:17Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 592,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-02T01:59:02Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202405: https://github.com/Azure/sonic-platform-daemons.msft/pull/13"
+    },
+    {
+        "number": 592,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-04T01:21:06Z",
+        "review_author": "longhuan-cisco"
+    },
+    {
+        "number": 592,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-04T02:16:19Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 592,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-03-04T02:16:19Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 592,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-03-04T01:21:06Z",
+        "latestReview_author": "longhuan-cisco",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-25T22:35:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-25T22:35:49Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-25T22:44:19Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-25T22:44:29Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-25T23:01:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-25T23:01:35Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-26T00:24:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-26T00:24:35Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-27T17:36:42Z",
+        "comment_author": "prgeor",
+        "comment_body": "@bobbymcgonigle seems still in draft?"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-27T17:38:54Z",
+        "comment_author": "bobbymcgonigle",
+        "comment_body": "> @bobbymcgonigle seems still in draft?\r\n\r\nYes, need to make one amendment to my unit testing before taking this out of draft mode. Should be ready for review in the next day"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-05T02:43:21Z",
+        "comment_author": "prgeor",
+        "comment_body": "> > @bobbymcgonigle seems still in draft?\r\n> \r\n> Yes, need to make one amendment to my unit testing before taking this out of draft mode. Should be ready for review in the next day\r\n\r\nok. will review once out of draft"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-05T17:53:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-05T17:53:50Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-05T17:56:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-05T17:56:29Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-05T21:35:38Z",
+        "comment_author": "bobbymcgonigle",
+        "comment_body": "> > > @bobbymcgonigle seems still in draft?\r\n> > \r\n> > \r\n> > Yes, need to make one amendment to my unit testing before taking this out of draft mode. Should be ready for review in the next day\r\n> \r\n> ok. will review once out of draft\r\n\r\nHi Prince, I've added the test cases and it's now ready for review"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-17T01:02:04Z",
+        "comment_author": "prgeor",
+        "comment_body": "@bobbymcgonigle can you confirm the optical SI setting will be applicable to following media types as well?\r\n\r\n1. Active AEC cables\r\n2. Active AOC cables"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-17T01:04:35Z",
+        "comment_author": "prgeor",
+        "comment_body": "@bobbymcgonigle do you think it would be better to specify the Speed in GB instead of bytes? IMO, COPPER50 is more easily readable as 50G Copper than me counting the number of ZEROS carefully?"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-17T01:05:19Z",
+        "comment_author": "prgeor",
+        "comment_body": "@tshalvi @eddyk-nvidia @liat-grozovik do you guys want to review?"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-28T17:34:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-28T17:35:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-28T17:41:58Z",
+        "comment_author": "bobbymcgonigle",
+        "comment_body": "> @bobbymcgonigle can you confirm the optical SI setting will be applicable to following media types as well?\r\n> \r\n> 1. Active AEC cables\r\n> 2. Active AOC cables\r\n\r\nHi Prince. I can confirm.\r\n\r\nmedium type will only be copper for passive_copper_media_interface. both AEC and AOC will be optical."
+    },
+    {
+        "number": 591,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-28T18:03:17Z",
+        "comment_author": "bobbymcgonigle",
+        "comment_body": "> @bobbymcgonigle do you think it would be better to specify the Speed in GB instead of bytes? IMO, COPPER50 is more easily readable as 50G Copper than me counting the number of ZEROS carefully?\r\n\r\n@prgeor I agree, GB is a lot more readable; I've made the changes\r\n\r\n"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-29T18:32:29Z",
+        "comment_author": "arista-hpandya",
+        "comment_body": "Can we port this to msft-202503? Thanks!"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-02T01:49:21Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-02T01:52:04Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-04-02T01:49:21Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-04-02T01:52:04Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 590,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-19T20:18:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 590,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-19T20:18:10Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 590,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-20T18:20:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 590,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-20T18:20:11Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 590,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-20T18:31:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 590,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-20T18:31:22Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 590,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-21T20:12:58Z",
+        "comment_author": "prgeor",
+        "comment_body": "@mihirpat1 can you review"
+    },
+    {
+        "number": 590,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-15T02:27:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202412: https://github.com/Azure/sonic-platform-daemons.msft/pull/9"
+    },
+    {
+        "number": 590,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-02-21T20:12:34Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 590,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-02-25T21:25:56Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 590,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-02-21T20:12:34Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 590,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-02-25T21:25:56Z",
+        "latestReview_author": "mihirpat1",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 588,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-09T01:30:02Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 588,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-09T01:30:10Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 588,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-11T19:41:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 588,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-11T19:41:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 588,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-14T02:48:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 588,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-14T02:48:28Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 588,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-19T17:57:33Z",
+        "comment_author": "vvolam",
+        "comment_body": "@rameshraghupathy  could you update fixes tag in description to point to https://github.com/sonic-net/sonic-buildimage/issues/21459?"
+    },
+    {
+        "number": 588,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-20T15:59:31Z",
+        "comment_author": "rameshraghupathy",
+        "comment_body": "> Fixes: sonic-net/sonic-platform-daemons#21459\r\n\r\n@vvolam Done\r\n"
+    },
+    {
+        "number": 588,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-25T03:38:21Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 588,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-25T03:38:30Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 588,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-02-20T17:31:14Z",
+        "review_author": "gpunathilell"
+    },
+    {
+        "number": 588,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-02-26T15:26:41Z",
+        "review_author": "rameshraghupathy"
+    },
+    {
+        "number": 588,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-02-26T15:30:26Z",
+        "review_author": "gpunathilell"
+    },
+    {
+        "number": 588,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-10T13:10:23Z",
+        "review_author": "gpunathilell"
+    },
+    {
+        "number": 588,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-10T16:22:55Z",
+        "review_author": "vvolam"
+    },
+    {
+        "number": 588,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-10T16:45:36Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 588,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-03-10T16:45:36Z",
+        "latestReview_author": "judyjoseph",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 588,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-03-10T13:10:23Z",
+        "latestReview_author": "gpunathilell",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 588,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-03-10T16:22:55Z",
+        "latestReview_author": "vvolam",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 585,
         "repo": "sonic-platform-daemons",
         "comment_at": "2025-01-29T18:41:03Z",
@@ -318,6 +2192,247 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-12-24T00:52:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-12-24T00:52:51Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-01-07T08:27:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-01-07T08:27:31Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-01-10T00:24:18Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-01-10T00:24:28Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-10T21:58:16Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-10T21:58:26Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-11T07:00:40Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-11T07:01:45Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-13T16:30:10Z",
+        "comment_author": "prgeor",
+        "comment_body": "@mihirpat1 can you make this log as debug log?\r\nhttps://github.com/sonic-net/sonic-platform-daemons/blob/master/sonic-xcvrd/xcvrd/xcvrd_utilities/port_event_helper.py#L147"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-14T05:59:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-14T05:59:52Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-14T19:22:50Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-14T19:23:00Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-14T19:23:54Z",
+        "comment_author": "mihirpat1",
+        "comment_body": "> @mihirpat1 can you make this log as debug log? https://github.com/sonic-net/sonic-platform-daemons/blob/master/sonic-xcvrd/xcvrd/xcvrd_utilities/port_event_helper.py#L147\r\n\r\n@prgeor I have addressed this now."
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-04T19:37:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-04T19:37:24Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-05T02:11:44Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-05T02:11:53Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-06T01:09:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-06T01:09:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-22T19:34:56Z",
+        "comment_author": "r12f",
+        "comment_body": "removing tag, since it is already merged."
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-02-13T03:19:24Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-02-14T19:23:38Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-05T20:09:01Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-05T23:26:23Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-06T00:05:48Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-06T00:06:01Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-06T00:06:15Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-06T00:09:35Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-06T01:08:37Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-06T01:15:48Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-06T19:25:16Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-03-05T23:26:23Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 582,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-03-06T19:25:16Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 550,
         "repo": "sonic-platform-daemons",
         "comment_at": "2024-10-22T18:46:53Z",
@@ -458,6 +2573,291 @@
         "repo": "sonic-platform-daemons",
         "latestReview_at": "2024-12-16T17:20:33Z",
         "latestReview_author": "mihirpat1",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-10-10T21:35:29Z",
+        "comment_author": "prgeor",
+        "comment_body": "@Staphylo could you please help review?"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-10-17T23:16:07Z",
+        "comment_author": "prgeor",
+        "comment_body": "@assrinivasan @vvolam please review"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-10-18T20:20:44Z",
+        "comment_author": "vvolam",
+        "comment_body": "@prgeor nit: spelling issue in PR description.\r\n\r\n![image](https://github.com/user-attachments/assets/84ddc6ba-0a4c-46cc-88d4-803dcd75e683)\r\n\r\nAlso, could you fix the build failure?"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-15T19:33:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-15T19:33:14Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-15T20:28:07Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-15T20:28:16Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-15T23:24:12Z",
+        "comment_author": "prgeor",
+        "comment_body": "> @prgeor nit: spelling issue in PR description.\r\n> \r\n> ![image](https://private-user-images.githubusercontent.com/163894573/378001330-84ddc6ba-0a4c-46cc-88d4-803dcd75e683.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Mzk2NjIwODgsIm5iZiI6MTczOTY2MTc4OCwicGF0aCI6Ii8xNjM4OTQ1NzMvMzc4MDAxMzMwLTg0ZGRjNmJhLTBhNGMtNDZjYy04OGQ0LTgwM2RjZDc1ZTY4My5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwMjE1JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDIxNVQyMzIzMDhaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0zOTIyODQ2YWFhM2VlN2U2OTgwNzkzZTZmYTkwZjQ3MDQzNDVjMWViYjhmY2U0ZjJiMDI4NGY2ZjA4ZDA4NDhiJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.pesbra6G3aHKikzSolm2aim2VqTDtXhFGTOE-YdZXMI)\r\n> \r\n> Also, could you fix the build failure?\r\n\r\n@vvolam fixed"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-23T06:43:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-23T06:43:23Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-26T03:38:14Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-26T03:38:23Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-04T17:01:46Z",
+        "comment_author": "prgeor",
+        "comment_body": "@davidm-arista @bobbymcgonigle can someone review this PR?"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-22T16:23:07Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-22T16:23:16Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-22T16:46:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-22T16:46:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-22T22:56:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-22T22:56:40Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-23T02:11:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-23T02:12:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-23T22:39:40Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-23T22:39:48Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-10-19T00:33:22Z",
+        "review_author": "ashwnsri"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-10-21T20:34:51Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-10-21T20:51:27Z",
+        "review_author": "ashwnsri"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-02-18T16:50:20Z",
+        "review_author": "vvolam"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-04T22:55:50Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-04T23:00:45Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-05T01:05:58Z",
+        "review_author": "byu343"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-23T02:10:59Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-23T18:03:53Z",
+        "review_author": "byu343"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-23T19:44:56Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-23T19:47:05Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-23T19:49:41Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-23T22:30:20Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-23T22:37:21Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-23T23:00:55Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-23T23:01:17Z",
+        "review_author": "vdahiya12"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2024-10-21T20:51:27Z",
+        "latestReview_author": "ashwnsri",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-02-18T16:50:20Z",
+        "latestReview_author": "vvolam",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-04-23T18:03:53Z",
+        "latestReview_author": "byu343",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 548,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-04-23T23:01:17Z",
+        "latestReview_author": "vdahiya12",
         "latestReview_state": "APPROVED"
     },
     {
@@ -741,6 +3141,389 @@
         "repo": "sonic-platform-daemons",
         "latestReview_at": "2025-02-04T19:05:20Z",
         "latestReview_author": "gpunathilell",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-06-14T02:53:13Z",
+        "comment_author": "linux-foundation-easycla",
+        "comment_body": "<a href=\"https://easycla.lfx.linuxfoundation.org/#/?version=2\"><img src=\"https://s3.amazonaws.com/cla-project-logo-prod/cla-signed.svg\" alt=\"CLA Signed\" align=\"left\" height=\"28\" width=\"328\" ></a><br/><br />The committers listed above are authorized under a signed CLA.<ul><li>:white_check_mark: login: ishidawataru / name: Wataru Ishida  (7639be71212c69fb807f1f8d1434d0017d5e311a, 824d0594074b3c0a1ffd435ee4ee863d08b25e82, 33566ec63496856acb83a54bd83217748b752aea, 95ae842f65441d7c713c40d68f71a9139322160e)</li></ul><!-- Date Modified: 2025-03-15 01:26:50.132361 -->"
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-06-18T18:33:33Z",
+        "comment_author": "mihirpat1",
+        "comment_body": "@ishidawataru Can you please fix the code coverage check failure?"
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-06-19T10:16:16Z",
+        "comment_author": "ishidawataru",
+        "comment_body": "@mihirpat1 I'm still communicating with the original reporter of this issue to check the fix actually works. After that I'll fix the code coverage failure."
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-06-25T09:51:11Z",
+        "comment_author": "ishidawataru",
+        "comment_body": "@mihirpat1 Confirmed that the fix resolved the issue. Also, I fixed the coverage test failure. Please review."
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-07-06T01:49:47Z",
+        "comment_author": "ishidawataru",
+        "comment_body": "@prgeor This PR fixes https://github.com/sonic-net/sonic-buildimage/issues/18893. It is not about the application selection. The current `CmisManagerTask` implementation doesn't delete the port info from `port_dict` when ports are deleted due to DPB configuration, which causes a crash."
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-09-17T02:03:19Z",
+        "comment_author": "ishidawataru",
+        "comment_body": "@longhuan-cisco @mihirpat1 I updated the PR based on @longhuan-cisco 's suggestion. Please review.\r\n\r\nI used force-push and removed the original commits. I backed up the original branch [here](https://github.com/ishidawataru/sonic-platform-daemons/tree/fix-xcvrd-dpb-bak)."
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-10-29T06:11:41Z",
+        "comment_author": "ishidawataru",
+        "comment_body": "@prgeor Hi, just a gentle ping to check if I need to do something to get this PR merged."
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-15T01:26:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-15T01:27:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-15T01:49:36Z",
+        "comment_author": "ishidawataru",
+        "comment_body": "@prgeor I fixed the conflicts. Please take a look."
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-18T05:34:33Z",
+        "comment_author": "prgeor",
+        "comment_body": "@ishidawataru will you be able to test this on a real hardware with breakout enabled and do insertion and removal of the optics?"
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-20T04:54:29Z",
+        "comment_author": "ishidawataru",
+        "comment_body": "@prgeor Sorry, I don\u2019t have access to real hardware to test this PR. I performed insertion and removal testing using the xcvr emulator in last October. I can redo those tests and provide the logs if needed."
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-26T22:54:51Z",
+        "comment_author": "longhuan-cisco",
+        "comment_body": "@prgeor \r\n\r\nI have done OIR tests with the latest diff. \r\n\r\nTried below sequence on 400G AOC:\r\n1. Move from non-breakout mode (1x400G) to 4x100G breakout mode via DPB CLI\r\n2. Perform OIR\r\n3. Move back to non-breakout mode (1x400G) via DPB CLI\r\n4. Perform OIR\r\n\r\nNo xcvrd crash. link comes up fine with module ready state. `show interface` CLI shows correct interface entries."
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-05-28T11:49:42Z",
+        "comment_author": "Keshavg-marvell",
+        "comment_body": "@ishidawataru @prgeor Can you please backport this change to 202411?"
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-07-05T16:55:05Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-08-07T19:07:19Z",
+        "review_author": "longhuan-cisco"
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-08-07T20:54:06Z",
+        "review_author": "longhuan-cisco"
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-08-07T21:30:37Z",
+        "review_author": "longhuan-cisco"
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-08-14T21:33:32Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-09-13T07:21:06Z",
+        "review_author": "ishidawataru"
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-09-17T01:58:19Z",
+        "review_author": "ishidawataru"
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-09-17T01:59:06Z",
+        "review_author": "ishidawataru"
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-09-26T07:05:46Z",
+        "review_author": "chiourung"
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-09-26T07:41:28Z",
+        "review_author": "ishidawataru"
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-10-03T03:44:53Z",
+        "review_author": "ishidawataru"
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-20T20:50:19Z",
+        "review_author": "longhuan-cisco"
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-25T03:20:29Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-25T04:03:03Z",
+        "review_author": "ishidawataru"
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-26T22:55:50Z",
+        "review_author": "longhuan-cisco"
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-26T22:56:07Z",
+        "review_author": "longhuan-cisco"
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-27T03:06:00Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2024-09-26T07:05:46Z",
+        "latestReview_author": "chiourung",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-03-27T03:06:00Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 500,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-03-26T22:56:07Z",
+        "latestReview_author": "longhuan-cisco",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-06-03T21:29:39Z",
+        "comment_author": "gechiang",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-06-03T21:29:45Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nCommenter does not have sufficient privileges for PR 446 in repo sonic-net/sonic-platform-daemons<br>\r\n\n</samp>"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-06-03T21:34:06Z",
+        "comment_author": "ashwnsri",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-06-03T22:27:23Z",
+        "comment_author": "ashwnsri",
+        "comment_body": "@gregoryboudreau useful addition. Couple questions:\r\n\r\n> If the get_name API is not implemented by vendors then will fall back to the original indexing schema. \r\nHas this been tested?\r\n\r\nAdditionally, please fix unit test failures that appear to be indexing related. Thanks!"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-06-04T03:14:02Z",
+        "comment_author": "prgeor",
+        "comment_body": "@gregoryboudreau can you please run sonic-mgmt test cases for PSU with all the changes. Attach the result to this PR?"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-07-08T12:35:25Z",
+        "comment_author": "gregoryboudreau",
+        "comment_body": "```\r\nplatform_tests/api/test_psu.py::TestPsuApi::test_get_name[mth64-m5-2] PASSED                                                                                                                                                                  [  7%]\r\nplatform_tests/api/test_psu.py::TestPsuApi::test_get_presence[mth64-m5-2] PASSED                                                                                                                                                              [ 14%]\r\nplatform_tests/api/test_psu.py::TestPsuApi::test_get_model[mth64-m5-2] PASSED                                                                                                                                                                 [ 21%]\r\nplatform_tests/api/test_psu.py::TestPsuApi::test_get_serial[mth64-m5-2] PASSED                                                                                                                                                                [ 28%]\r\nplatform_tests/api/test_psu.py::TestPsuApi::test_get_revision[mth64-m5-2] PASSED                                                                                                                                                              [ 35%]\r\nplatform_tests/api/test_psu.py::TestPsuApi::test_get_status[mth64-m5-2] PASSED                                                                                                                                                                [ 42%]\r\nplatform_tests/api/test_psu.py::TestPsuApi::test_get_position_in_parent[mth64-m5-2] PASSED                                                                                                                                                    [ 50%]\r\nplatform_tests/api/test_psu.py::TestPsuApi::test_is_replaceable[mth64-m5-2] PASSED                                                                                                                                                            [ 57%]\r\nplatform_tests/api/test_psu.py::TestPsuApi::test_fans[mth64-m5-2] PASSED                                                                                                                                                                      [ 64%]\r\nplatform_tests/api/test_psu.py::TestPsuApi::test_power[mth64-m5-2] SKIPPED (Unsupported platform API)                                                                                                                                         [ 71%]\r\nplatform_tests/api/test_psu.py::TestPsuApi::test_temperature[mth64-m5-2] PASSED                                                                                                                                                               [ 78%]\r\nplatform_tests/api/test_psu.py::TestPsuApi::test_led[mth64-m5-2] SKIPPED (On Cisco 8000, mellanox and Nokia 7215 platform, PSU led are unable to be controlled by software)                                                                   [ 85%]\r\nplatform_tests/api/test_psu.py::TestPsuApi::test_thermals[mth64-m5-2] PASSED                                                                                                                                                                  [ 92%]\r\nplatform_tests/api/test_psu.py::TestPsuApi::test_master_led[mth64-m5-2] PASSED                                                                                                                                                                [100%]\r\n```\r\n```\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_get_name[mth64-m5-2] PASSED                                                                                                                                                          [  4%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_get_presence[mth64-m5-2] PASSED                                                                                                                                                      [  8%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_get_model[mth64-m5-2] PASSED                                                                                                                                                         [ 12%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_get_serial[mth64-m5-2] PASSED                                                                                                                                                        [ 16%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_get_revision[mth64-m5-2] PASSED                                                                                                                                                      [ 20%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_get_status[mth64-m5-2] PASSED                                                                                                                                                        [ 25%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_get_position_in_parent[mth64-m5-2] PASSED                                                                                                                                            [ 29%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_is_replaceable[mth64-m5-2] PASSED                                                                                                                                                    [ 33%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_get_base_mac[mth64-m5-2] PASSED                                                                                                                                                      [ 37%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_get_system_eeprom_info[mth64-m5-2] PASSED                                                                                                                                            [ 41%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_get_reboot_cause[mth64-m5-2] PASSED                                                                                                                                                  [ 45%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_components[mth64-m5-2] PASSED                                                                                                                                                        [ 50%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_modules[mth64-m5-2] SKIPPED (No modules found on device)                                                                                                                             [ 54%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_fans[mth64-m5-2] PASSED                                                                                                                                                              [ 58%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_fan_drawers[mth64-m5-2] PASSED                                                                                                                                                       [ 62%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_psus[mth64-m5-2] PASSED                                                                                                                                                              [ 66%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_thermals[mth64-m5-2] PASSED                                                                                                                                                          [ 70%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_sfps[mth64-m5-2] PASSED                                                                                                                                                              [ 75%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_status_led[mth64-m5-2] PASSED                                                                                                                                                        [ 79%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_get_thermal_manager[mth64-m5-2] PASSED                                                                                                                                               [ 83%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_get_watchdog[mth64-m5-2] PASSED                                                                                                                                                      [ 87%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_get_eeprom[mth64-m5-2] PASSED                                                                                                                                                        [ 91%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_get_supervisor_slot[mth64-m5-2] SKIPPED (skipped as this test is applicable to modular chassis only)                                                                                 [ 95%]\r\nplatform_tests/api/test_chassis.py::TestChassisApi::test_get_my_slot[mth64-m5-2] SKIPPED (skipped as this test is applicable to modular chassis only)                                                                                         [100%]\r\n```\r\n```\r\nplatform_tests/daemon/test_psud.py::test_pmon_psud_running_status[mth64-m5-2] PASSED                                                                                                                                                          [ 25%]\r\nplatform_tests/daemon/test_psud.py::test_pmon_psud_stop_and_start_status[mth64-m5-2] PASSED                                                                                                                                                   [ 50%]\r\nplatform_tests/daemon/test_psud.py::test_pmon_psud_term_and_start_status[mth64-m5-2] PASSED                                                                                                                                                   [ 75%]\r\nplatform_tests/daemon/test_psud.py::test_pmon_psud_kill_and_start_status[mth64-m5-2] PASSED                                                                                                                                                   [100%]\r\n```\r\n```\r\nsnmp/test_snmp_psu.py::test_snmp_numpsu[mth64-m5-2] PASSED                                                                                                                                                                                    [ 50%]\r\nsnmp/test_snmp_psu.py::test_snmp_psu_status[mth64-m5-2] PASSED                                                                                                                                                                                [100%]\r\n```\r\nLet me know if there are other test cases that I missed in running, thanks!"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-07-08T13:04:05Z",
+        "comment_author": "gregoryboudreau",
+        "comment_body": "@assrinivasan with the get_name API implemented:\r\n```\r\nroot@mth64-m5-2:/home/cisco# show platform psustatus\r\nPSU    Model         Serial         HW Rev  Voltage (V)    Current (A)    Power (W)    Status    LED\r\n-----  ------------  -----------  --------  -------------  -------------  -----------  --------  -----\r\nPSU0   PSU650W-ACPE  LIT241955UQ      0.00  11.996         24.0           288.0        OK        green\r\nPSU1   PSU650W-ACPE  LIT241956QK      0.00  N/A            N/A            N/A          NOT OK    off\r\n```\r\nThis is with the get_name API overwritten to raise NotImplemented for PSUs:\r\n```\r\nroot@mth64-m5-2:/home/cisco# show plat psu\r\nPSU    Model         Serial         HW Rev  Voltage (V)    Current (A)    Power (W)    Status    LED\r\n-----  ------------  -----------  --------  -------------  -------------  -----------  --------  -----\r\nPSU 1  PSU650W-ACPE  LIT241955UQ      0.00  11.98          24.0           288.0        OK        green\r\nPSU 2  PSU650W-ACPE  LIT241956QK      0.00  N/A            N/A            N/A          NOT OK    off\r\n```\r\nThe only functional difference between the two is the key/naming"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-09-13T00:02:48Z",
+        "comment_author": "abdosi",
+        "comment_body": "@assrinivasan : can we please help with merge this. "
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2024-09-13T04:39:16Z",
+        "comment_author": "ashwnsri",
+        "comment_body": "@prgeor please help review/merge as appropriate"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-17T06:03:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-02-17T06:03:36Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-12T17:38:20Z",
+        "comment_author": "rlhui",
+        "comment_body": "@mlok-nokia "
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-03-19T17:45:38Z",
+        "comment_author": "arlakshm",
+        "comment_body": "@judyjoseph to help merge this PR"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-04-29T19:12:59Z",
+        "comment_author": "gregoryboudreau",
+        "comment_body": "@abdosi can this be brought into msft 202405?"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-06-03T21:29:02Z",
+        "review_author": "gechiang"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2024-09-13T04:36:58Z",
+        "review_author": "ashwnsri"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-12T00:39:02Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-12T17:10:09Z",
+        "review_author": "gregoryboudreau"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-03-12T17:54:51Z",
+        "review_author": "mlok-nokia"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-04-22T23:46:32Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-04-22T23:46:32Z",
+        "latestReview_author": "judyjoseph",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2024-06-03T21:29:02Z",
+        "latestReview_author": "gechiang",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-03-12T17:54:51Z",
+        "latestReview_author": "mlok-nokia",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2024-09-13T04:36:58Z",
+        "latestReview_author": "ashwnsri",
         "latestReview_state": "APPROVED"
     }
 ]
