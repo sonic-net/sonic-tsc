@@ -868,6 +868,13 @@
     {
         "number": 562,
         "repo": "sonic-platform-common",
+        "comment_at": "2025-06-19T01:53:32Z",
+        "comment_author": "jianyuewu",
+        "comment_body": "> hi @jianyuewu , do you mind to help create manual cherry-pick PR to 202412?\r\n\r\nYes, the PR is https://github.com/Azure/sonic-platform-common.msft/pull/86"
+    },
+    {
+        "number": 562,
+        "repo": "sonic-platform-common",
         "review_at": "2025-05-09T01:29:43Z",
         "review_author": "Junchao-Mellanox"
     },
@@ -1797,6 +1804,34 @@
         "comment_at": "2025-05-09T07:30:15Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to msft-202412: https://github.com/Azure/sonic-platform-common.msft/pull/82"
+    },
+    {
+        "number": 556,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-06-19T15:42:38Z",
+        "comment_author": "infn-ke",
+        "comment_body": "@mihirpat1 this PR removes several alarm flags, trying to understand if they are renamed  or completed removed? E.g. where did `osnrhighalarm_flag`, `esnrlowalarm_flag`, `rxsigpowerlowalarm_flag` etc. go?"
+    },
+    {
+        "number": 556,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-06-19T16:10:41Z",
+        "comment_author": "mihirpat1",
+        "comment_body": "> @mihirpat1 this PR removes several alarm flags, trying to understand if they are renamed or completed removed? E.g. where did `osnrhighalarm_flag`, `esnrlowalarm_flag`, `rxsigpowerlowalarm_flag` etc. go?\r\n\r\n@infn-ke All these flags were moved to VDM related flag tables. Please refer to the below HLD for further details.\r\n\r\nhttps://github.com/sonic-net/SONiC/blob/master/doc/platform_api/CMIS_Diagnostic_Monitoring_Overview_in_SONiC.md#3-state_db-schema-for-cmis-diagnostic-monitoring\r\n\r\nSpecifically, the VDM flags are now moved to TRANSCEIVER_VDM_HALARM_FLAG, TRANSCEIVER_VDM_LALARM_FLAG etc tables."
+    },
+    {
+        "number": 556,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-06-19T16:26:12Z",
+        "comment_author": "infn-ke",
+        "comment_body": "> Specifically, the VDM flags are now moved to TRANSCEIVER_VDM_HALARM_FLAG, TRANSCEIVER_VDM_LALARM_FLAG etc tables.\r\n\r\nI see, does that mean they were duplicated in two apis earlier? So they would be in the `get_transceiver_vdm_flags` api now? And thanks for the reference!"
+    },
+    {
+        "number": 556,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-06-19T18:18:01Z",
+        "comment_author": "mihirpat1",
+        "comment_body": "> > Specifically, the VDM flags are now moved to TRANSCEIVER_VDM_HALARM_FLAG, TRANSCEIVER_VDM_LALARM_FLAG etc tables.\r\n> \r\n> I see, does that mean they were duplicated in two apis earlier? So they would be in the `get_transceiver_vdm_flags` api now? And thanks for the reference!\r\n\r\n@infn-ke Yes, that's correct."
     },
     {
         "number": 556,
