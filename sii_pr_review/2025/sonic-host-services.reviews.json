@@ -1,5 +1,39 @@
 [
     {
+        "number": 272,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-06-20T06:53:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 272,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-06-20T06:53:35Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 272,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-06-20T21:37:37Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "This is a clean reverting PR, so the coverage check should not block. I will bypapss coverage checker and merge"
+    },
+    {
+        "number": 272,
+        "repo": "sonic-host-services",
+        "review_at": "2025-06-20T07:27:55Z",
+        "review_author": "yejianquan"
+    },
+    {
+        "number": 272,
+        "repo": "sonic-host-services",
+        "latestReview_at": "2025-06-20T07:27:55Z",
+        "latestReview_author": "yejianquan",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 269,
         "repo": "sonic-host-services",
         "comment_at": "2025-06-11T04:40:58Z",
@@ -1579,6 +1613,13 @@
         "comment_at": "2025-06-19T01:12:22Z",
         "comment_author": "zbud-msft",
         "comment_body": "Hi @stepanblyschak seems like featured is trying to stop telemetry.service that is already disabled in public image. Seems like this PR is responsible for that change and needs to be fixed."
+    },
+    {
+        "number": 234,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-06-20T07:29:16Z",
+        "comment_author": "stepanblyschak",
+        "comment_body": "@zbud-msft Featured does not do anything special with telemetry.\r\n\r\nErrors:\r\n```\r\nE               Match Messages:\r\nE               2025 Jun  8 06:54:56.883029 vlab-03 ERR featured: ['sudo', 'systemctl', 'enable', 'frr_bmp.service'] - failed: return code - 1, output:\r\nE               \r\nE               2025 Jun  8 06:54:56.883076 vlab-03 ERR featured: Feature 'frr_bmp.service' failed to be enabled and started\r\nE               \r\nE               2025 Jun  8 06:55:11.159750 vlab-03 ERR featured: ['sudo', 'systemctl', 'stop', 'telemetry.service'] - failed: return code - 5, output:\r\nE               \r\nE               2025 Jun  8 06:55:11.159991 vlab-03 ERR featured: Feature 'telemetry.service' failed to be stopped and disabled\r\n```\r\n\r\ncould happen only if user provided telemetry in CONFIG_DB when telemetry is not built in the image and correctly reports the issue."
     },
     {
         "number": 234,
