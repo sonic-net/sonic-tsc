@@ -61,6 +61,8 @@ org_map = {
     'xflow research':           'xFlow Research',
     'max-planck-institut':      'Max-Planck-Institut',
     'internet initiative japan':'Internet Initiative Japan',
+    'nexthop':       'Nexthop',
+    'nexthop-ai':    'Nexthop',
 }
 
 automation_account = ['microsoft-github-policy-service', 'linux-foundation-easycla','lgtm-com','mssonicbld','azure-pipelines','svc-acs','msftclas']
