@@ -14953,6 +14953,20 @@
     {
         "number": 18793,
         "repo": "sonic-mgmt",
+        "comment_at": "2025-07-07T15:22:40Z",
+        "comment_author": "vkjammala-arista",
+        "comment_body": "Hi @auspham, these changes doesn't look right to me and is causing regression for T0 (tgen-t0-3).\r\n\r\nif the testbed data is not there in `snappi_tests/variables.override.yml`, we want dynamic port selection to happen as per [HLD](https://github.com/sonic-net/sonic-mgmt/blob/master/tests/snappi_tests/static_vs_dynamic_port_selection.md) but the code changes are doing opposite. Can you explain why we made this change (sounds like this is temporary fix for T1 but we shouldn't left T0 broken)?"
+    },
+    {
+        "number": 18793,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-07-08T01:56:41Z",
+        "comment_author": "auspham",
+        "comment_body": "Hi @vkjammala-arista, we haven't officially support dynamic port selection for t0/t1 yet so we temporary disable it. Does variables.override.yml not working for your end?"
+    },
+    {
+        "number": 18793,
+        "repo": "sonic-mgmt",
         "review_at": "2025-06-04T07:40:02Z",
         "review_author": "sdszhang"
     },
