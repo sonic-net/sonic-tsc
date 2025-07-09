@@ -14967,6 +14967,55 @@
     {
         "number": 18793,
         "repo": "sonic-mgmt",
+        "comment_at": "2025-07-08T04:00:46Z",
+        "comment_author": "vkjammala-arista",
+        "comment_body": ">> we haven't officially support dynamic port selection for t0/t1 yet so we temporary disable it. \r\n\r\nI'm not aware that dynamic port selection isn't supported for t0/t1 (thus , as I saw `tgen_port_info` fixtures being used I expected it to work. Any known issues here?\r\n\r\nI had run tests with this PR changes reverted, i don't see any obvious issues with dynamic port selection though.\r\n\r\n>> Does variables.override.yml not working for your end?\r\n\r\nI got to know about this file very recently, and thought this is not needed with dynamic port selection enabled."
+    },
+    {
+        "number": 18793,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-07-08T04:38:04Z",
+        "comment_author": "auspham",
+        "comment_body": "> I'm not aware that dynamic port selection isn't supported for t0/t1 (thus , as I saw tgen_port_info fixtures being used I expected it to work. Any known issues here?\r\n\r\nIt supposed to support t0/t1 as well, however when we saw some issue that blocking us to run the test so we toggle it off for t0/t1 and marking this as a todo come back and investigate using this PR.\r\n\r\n> I got to know about this file very recently, and thought this is not needed with dynamic port selection enabled.\r\n\r\nYes it is supposed to behave this way.\r\n\r\nIf we revert this PR here does it work from your end? "
+    },
+    {
+        "number": 18793,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-07-08T04:41:53Z",
+        "comment_author": "vkjammala-arista",
+        "comment_body": "> If we revert this PR here does it work from your end?\r\n\r\nYeah, atleast port selection seems fine (snappi_ports are populated correctly as per test requirements).\r\n\r\n> It supposed to support t0/t1 as well, however when we saw some issue that blocking us to run the test so we toggle it off for t0/t1\r\n\r\nWhat type of issues you were seeing, do you have some logs/written documents somewhere that I can check. Thanks!"
+    },
+    {
+        "number": 18793,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-07-08T04:46:11Z",
+        "comment_author": "auspham",
+        "comment_body": "We saw something like this on T0 T1\r\n\r\n![image](https://github.com/user-attachments/assets/662454da-5aef-41f5-a695-738ac71d6780)\r\n"
+    },
+    {
+        "number": 18793,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-07-08T04:58:43Z",
+        "comment_author": "vkjammala-arista",
+        "comment_body": "We have seen this failure and looking more into this, but atleast as per my understanding this failure doesn't have anything to do with dynamic port selection (as the code path `setup_dut_ports` is common for both dynamic port selection and static port selection)\r\n\r\nDid you confirmed that the failure is related to dynamic port selection? and you're not seeing this failure after switching to static port selection?"
+    },
+    {
+        "number": 18793,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-07-08T05:29:38Z",
+        "comment_author": "kamalsahu0001",
+        "comment_body": "Error mentioned by @auspham is different and is not related to dynamic ports selection. That error comes when all three sections are enabled under snappi_fixtures.py code. In general, it should check for either of them. But if we enable, all three it will complain about vlan interfaces not configured, if the DUT has routed ports instead of vlans. If there are no vlans, then we can comment that section in snappi_fixtures.py. Attaching the snapshot for reference. \r\n![snappi_fixtures_screenshot](https://github.com/user-attachments/assets/3f8ffbd3-e02f-4183-bdbd-a2753230dc64)\r\n"
+    },
+    {
+        "number": 18793,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-07-08T05:57:03Z",
+        "comment_author": "sdszhang",
+        "comment_body": "@vkjammala-arista is the snappi test cases passing for you without dynamic-port-selection?\r\n"
+    },
+    {
+        "number": 18793,
+        "repo": "sonic-mgmt",
         "review_at": "2025-06-04T07:40:02Z",
         "review_author": "sdszhang"
     },
@@ -16938,6 +16987,13 @@
         "comment_at": "2025-07-07T00:20:35Z",
         "comment_author": "prabhataravind",
         "comment_body": "@kperumalbfn could you pls help add this in 202411 as well?"
+    },
+    {
+        "number": 18748,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-07-08T20:04:01Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202411: https://github.com/sonic-net/sonic-mgmt/pull/19473"
     },
     {
         "number": 18748,
@@ -24007,7 +24063,7 @@
         "number": 18129,
         "repo": "sonic-mgmt",
         "review_at": "2025-04-28T17:12:50Z",
-        "review_author": "divyagayathris"
+        "review_author": "divyagayathri-hcl"
     },
     {
         "number": 18129,
@@ -24032,7 +24088,7 @@
         "number": 18129,
         "repo": "sonic-mgmt",
         "latestReview_at": "2025-04-28T17:12:50Z",
-        "latestReview_author": "divyagayathris",
+        "latestReview_author": "divyagayathri-hcl",
         "latestReview_state": "APPROVED"
     },
     {
@@ -24172,7 +24228,7 @@
         "number": 18128,
         "repo": "sonic-mgmt",
         "review_at": "2025-04-28T17:12:25Z",
-        "review_author": "divyagayathris"
+        "review_author": "divyagayathri-hcl"
     },
     {
         "number": 18128,
@@ -24197,7 +24253,7 @@
         "number": 18128,
         "repo": "sonic-mgmt",
         "latestReview_at": "2025-04-28T17:12:25Z",
-        "latestReview_author": "divyagayathris",
+        "latestReview_author": "divyagayathri-hcl",
         "latestReview_state": "APPROVED"
     },
     {
@@ -24832,7 +24888,7 @@
         "number": 18122,
         "repo": "sonic-mgmt",
         "review_at": "2025-04-28T17:11:06Z",
-        "review_author": "divyagayathris"
+        "review_author": "divyagayathri-hcl"
     },
     {
         "number": 18122,
@@ -24851,7 +24907,7 @@
         "number": 18122,
         "repo": "sonic-mgmt",
         "latestReview_at": "2025-04-28T17:11:06Z",
-        "latestReview_author": "divyagayathris",
+        "latestReview_author": "divyagayathri-hcl",
         "latestReview_state": "APPROVED"
     },
     {
@@ -24963,7 +25019,7 @@
         "number": 18097,
         "repo": "sonic-mgmt",
         "review_at": "2025-04-28T17:07:06Z",
-        "review_author": "divyagayathris"
+        "review_author": "divyagayathri-hcl"
     },
     {
         "number": 18097,
@@ -24982,7 +25038,7 @@
         "number": 18097,
         "repo": "sonic-mgmt",
         "latestReview_at": "2025-04-28T17:07:06Z",
-        "latestReview_author": "divyagayathris",
+        "latestReview_author": "divyagayathri-hcl",
         "latestReview_state": "APPROVED"
     },
     {
