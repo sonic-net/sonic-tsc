@@ -9365,6 +9365,20 @@
     {
         "number": 17469,
         "repo": "sonic-mgmt",
+        "comment_at": "2025-07-22T06:14:39Z",
+        "comment_author": "sdszhang",
+        "comment_body": "@rraghav-cisco which test case are hitting this issue? "
+    },
+    {
+        "number": 17469,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-07-22T15:52:43Z",
+        "comment_author": "rraghav-cisco",
+        "comment_body": "@sdszhang , I hit it while running snappi_tests/pfcwd/test_pfcwd_actions.py::test_pfcwd_drop_90_10[multidut_port_info1-port_map1] in 400G testbed.\r\n\r\n```\r\nfailed on teardown with \"Failed: Processes \"['analyze_logs--<MultiAsicSonicHost yy39top-lc4>', 'analyze_logs--<MultiAsicSonicHost yy39top-lc2>']\" failed with exit code \"1\"\r\nException:\r\nmatch: 1\r\nexpected_match: 0\r\nexpected_missing_match: 0\r\n\r\nMatch Messages:\r\n2025 Jul 12 07:35:00.863800 yy39top-lc4 ERR teamd1#teamsyncd: :- readData: netlink reports an error=-33 on reading a netlink socket\r\n\r\nTraceback:\r\nTraceback (most recent call last):\r\n File \"/data/tests/common/helpers/parallel.py\", line 35, in run\r\n Process.run(self)\r\n File \"/usr/lib/python3.8/multiprocessing/process.py\", line 108, in run\r\n self._target(*self._args, **self._kwargs)\r\n File \"/data/tests/common/helpers/parallel.py\", line 245, in wrapper\r\n target(*args, **kwargs)\r\n File \"/data/tests/common/plugins/loganalyzer/__init__.py\", line 45, in analyze_logs\r\n dut_analyzer.analyze(markers[node.hostname], fail_test, store_la_logs=store_la_logs)\r\n File \"/data/tests/common/plugins/loganalyzer/loganalyzer.py\", line 417, in analyze\r\n self._verify_log(analyze\r\n```\r\n\r\nThanks,\r\nrraghav"
+    },
+    {
+        "number": 17469,
+        "repo": "sonic-mgmt",
         "review_at": "2025-03-12T02:23:10Z",
         "review_author": "bingwang-ms"
     },
