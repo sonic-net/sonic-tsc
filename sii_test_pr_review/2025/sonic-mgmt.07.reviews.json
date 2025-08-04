@@ -1778,6 +1778,20 @@
     {
         "number": 19855,
         "repo": "sonic-mgmt",
+        "comment_at": "2025-08-03T17:41:12Z",
+        "comment_author": "gshemesh2",
+        "comment_body": "Hi @yutongzhang-microsoft ,\r\nAfter the changes you made to `remove_topo.yml` and `destroy_vm_network.yml`,\r\nrunning `remove_topo` fails with the following error:\r\n\r\nfatal: [*****]: FAILED! => {\"reason\": \"Could not find or access '/root/mars/workspace/sonic-mgmt/ansible/destory_vm_network.yml' on the Ansible Controller.\"}\r\n\r\nThe directory path is incorrect. After fixing the directory, another error occurs because `destroy_vm_network.yml` uses `throttle: 1`, which is not a valid attribute:\r\n\r\n](fatal: [*****]: FAILED! => {\"reason\": \"'throttle' is not a valid attribute for a Task\\n\\nThe error appears to be in '/root/mars/workspace/sonic-mgmt/ansible/roles/vm_set/tasks/destroy_vm_network.yml': line 1, column 3, but may\\nbe elsewhere in the file depending on the exact syntax problem.\\n\\nThe offending line appears to be:\\n\\n\\n- name: Destroy VMs network {{ vm_name }}\\n ^ here\\nWe could be wrong, but this one looks like it might be an issue with\\nmissing quotes. Always quote template expression brackets when they\\nstart a value. For instance:\\n\\n with_items:\\n - {{ foo }}\\n\\nShould be written as:\\n\\n with_items:\\n - \\\"{{ foo }}\\\"\\n\\nThis error can be suppressed as a warning using the \\\"invalid_task_attribute_failed\\\" configuration\"})\r\n\r\nAfter correcting these two issues (fixing the directory path and removing the invalid `throttle` attribute), `remove_topo` runs successfully.\r\n\r\n"
+    },
+    {
+        "number": 19855,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-08-04T01:37:47Z",
+        "comment_author": "yutongzhang-microsoft",
+        "comment_body": "Hi, @gshemesh2 , I noticed the first issue was a typo, which has already been fixed in PR #19334. I believe the second error was also caused by the same problem, as I've tested it multiple times in my local environment without encountering any failures. Thanks for bringing it to my attention."
+    },
+    {
+        "number": 19855,
+        "repo": "sonic-mgmt",
         "review_at": "2025-07-30T01:49:34Z",
         "review_author": "wangxin"
     },
