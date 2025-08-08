@@ -94,7 +94,7 @@ reviews_map = {}
 author_org = {}
 author_org_dup = {}
 
-def sii_calculate(predict: False):
+def sii_calculate(predict: False, brief: False, author_filter=None, org_filter=None):
     ret = {}
     if predict:
         global year_weight,year_weight_predict
@@ -106,35 +106,37 @@ def sii_calculate(predict: False):
         author_output_file = 'sii_author.csv'
 
     issue_score, issue_triage_score = calculate_issue()
-    print('issue score:')
-    print(json.dumps(round_floats(summ_author_scores(issue_score))))
-    print('issue triage score:')
-    print(json.dumps(round_floats(issue_triage_score)))
+    if not brief:
+        print('issue score:')
+        print(json.dumps(round_floats(summ_author_scores(issue_score))))
+        print('issue triage score:')
+        print(json.dumps(round_floats(issue_triage_score)))
 
     pr_score,test_pr_score = calculate_pr()
-    print('pr score:')
-    print(json.dumps(round_floats(summ_author_scores(pr_score))))
-
-    print('test pr score:')
-    print(json.dumps(round_floats(summ_author_scores(test_pr_score))))
+    if not brief:
+        print('pr score:' )
+        print(json.dumps(round_floats(summ_author_scores(pr_score))))
+        print('test pr score:')
+        print(json.dumps(round_floats(summ_author_scores(test_pr_score))))
 
     pr_review_score,test_pr_review_score = calculate_review()
-    print('pr review score:')
-    print(json.dumps(round_floats(summ_author_scores(pr_review_score))))
-
-    print('test pr review score:')
-    print(json.dumps(round_floats(summ_author_scores(test_pr_review_score))))
+    if not brief:
+        print('pr review score:')
+        print(json.dumps(round_floats(summ_author_scores(pr_review_score))))
+        print('test pr review score:')
+        print(json.dumps(round_floats(summ_author_scores(test_pr_review_score))))
 
     hld_doc_score,testplan_hld_score = calculate_hld()
-    print('hld&doc score:')
-    print(json.dumps(round_floats(summ_author_scores(hld_doc_score))))
-
-    print('test plan hld score:')
-    print(json.dumps(round_floats(summ_author_scores(testplan_hld_score))))
+    if not brief:
+        print('hld&doc score:')
+        print(json.dumps(round_floats(summ_author_scores(hld_doc_score))))
+        print('test plan hld score:')
+        print(json.dumps(round_floats(summ_author_scores(testplan_hld_score))))
 
     input_score = calculate_input()
-    print('input score:')
-    print(json.dumps(round_floats(input_score)))
+    if not brief:
+        print('input score:')
+        print(json.dumps(round_floats(input_score)))
 
     print('Organization,Score', file=open(org_output_file, 'w'))
     summ = summ_dict_scores( \
@@ -147,6 +149,31 @@ def sii_calculate(predict: False):
             summ_org_scores(hld_doc_score), \
             summ_org_scores(testplan_hld_score), \
             input_score)
+
+    predictPrefix = "Predicted " if predict else ""
+    if org_filter:
+        
+        print( predictPrefix + "Score breakdown for", org_filter )
+        print( "  Total Issue Score: ",
+               round_floats(total_dict_value(summ_org_scores(issue_score), org_filter)))
+        print( "  Issue Triage Score: ",
+               round_floats(total_dict_value(issue_triage_score, org_filter)))
+        print( "  PR Score: ",
+               round_floats(total_dict_value( summ_org_scores(pr_score), org_filter)))
+        print( "  Test PR Score: ",
+               round_floats(total_dict_value( summ_org_scores(test_pr_score), org_filter)))
+        print( "  PR Review Score: ",
+               round_floats(total_dict_value( summ_org_scores(pr_review_score), org_filter)))
+        print( "  Test PR Review Score: ",
+               round_floats(total_dict_value( summ_org_scores(test_pr_review_score), org_filter)))
+        print( "  HLD Score: ",
+               round_floats(total_dict_value( summ_org_scores(hld_doc_score), org_filter)))
+        print( "  Test Plan HLD Score: ",
+               round_floats(total_dict_value( summ_org_scores(testplan_hld_score), org_filter)))        
+        print( "  Input Score: ",
+               round_floats(total_dict_value( input_score, org_filter)))
+        print( "  Total: ", round_floats(summ[ org_filter ] ))
+
     for i in sorted(summ.items(), key=lambda x: (-x[1], x[0])):
         print('%s,%.2f' % i, file=open(org_output_file, 'a'))
 
@@ -170,6 +197,24 @@ def sii_calculate(predict: False):
             org = author.split('(')[1][:-1]
             author = author.split('(')[0]
 
+        if author_filter and author_filter==author:
+            print( predictPrefix + "Author Score Breakdown for", author_filter, ":", org )
+            print("  Issue Score:",
+                  round_floats(total_dict_value(summ_author_scores(issue_score), author_filter)))
+            print("  PR Score:",
+                  round_floats(total_dict_value(summ_author_scores(pr_score), author_filter)))
+            print("  Test PR Score:",
+                  round_floats(total_dict_value(summ_author_scores(test_pr_score), author_filter)))
+            print("  PR Review Score:",
+                  round_floats(total_dict_value(summ_author_scores(pr_review_score), author_filter)))
+            print("  Test PR Review Score:",
+                  round_floats(total_dict_value(summ_author_scores(test_pr_review_score), author_filter)))
+            print("  HLD DOC Score:",
+                  round_floats(total_dict_value(summ_author_scores(hld_doc_score), author_filter)))
+            print("  Testplan HLD Score:",
+                  round_floats(total_dict_value(summ_author_scores(testplan_hld_score), author_filter))) 
+            print("  Total:", round_floats(i[1]))
+            
         print('{},{},'.format(author, org) + "%.2f" % i[1], file=open(author_output_file, 'a'))
 
 
@@ -402,27 +447,29 @@ def calculate_issue():
     return ret_issue, ret_issue_t
 
 
-def init():
+def init(use_local=False, brief=False):
     ret = {}
-    if os.path.isdir(repo_name):
-        os.system(update_cmd)
-    else:
-        os.system(clone_cmd)
+    if not use_local:
+        if os.path.isdir(repo_name):
+            os.system(update_cmd)
+        else:
+            os.system(clone_cmd)
 
     author_org_load()
 
     pr_review_load() 
     print()
-    print('author count:', len(author_org))
-    print(random.choice(list(author_org.items())))
-    print(author_org_dup)
-    print('pr count:' ,len(prs_map))
-    print(random.choice(list(prs_map.items())))
-    print('review count:', len(reviews_map))
-    print(random.choice(list(reviews_map.items())))
 
+    if not brief:
+        print('author count:', len(author_org))
+        print(random.choice(list(author_org.items())))
+        print(author_org_dup)
+        print('pr count:' ,len(prs_map))
+        print(random.choice(list(prs_map.items())))
+        print('review count:', len(reviews_map))
+        print(random.choice(list(reviews_map.items())))
 
-def author_org_load():
+def author_org_load(org_filter=None, author_filter=None):
     global author_org,author_org_dup
     with open('sii_author_map/author.csv') as f:
         content = f.read()
@@ -528,6 +575,9 @@ def summ_dict_scores(*args):
 
     return ret
 
+def total_dict_value(arg, filter_key=None):
+    return sum( [ v for k, v in arg.items() if not filter_key or filter_key==k ] )
+               
 def round_floats(o):
     if isinstance(o, float): return round(o, 2)
     if isinstance(o, dict): return {k: round_floats(v) for k, v in o.items()}
@@ -625,8 +675,30 @@ def pr_review_load():
 
 
 if __name__ == '__main__':
-    init()
-    sii_calculate(False)
-    sii_calculate(True)
+
+    use_local = False # Don't update after initial pull. Allows testing of local changes
+    brief = False # Skip extraneous prints
+    org = None # Filter by Org
+    author = None # Filter by Author
+    predict = True # Calculate score prediction
+    while True:
+        if len( sys.argv ) == 0:
+            break
+        arg = sys.argv.pop(0)
+        if arg == "-b":
+            brief = True
+        elif arg == "-l":
+            use_local = True
+        elif arg == "-s":
+            predict = False
+        elif arg == "-o":
+            org = sys.argv.pop(0)            
+        elif arg == "-a":
+            author = sys.argv.pop(0)        
+
+    init(use_local=use_local, brief=brief)
+    sii_calculate(False, brief=brief, org_filter=org, author_filter=author)
+    if predict:
+        sii_calculate(True, brief=brief, org_filter=org, author_filter=author)    
 
 
