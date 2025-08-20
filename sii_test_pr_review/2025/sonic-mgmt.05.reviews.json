@@ -21979,6 +21979,20 @@
     {
         "number": 17700,
         "repo": "sonic-mgmt",
+        "comment_at": "2025-08-19T18:02:48Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "Hi @nhe-NV, the skip condition is a little confusing. Can you help me understand and confirm\r\n1. The change only skipped `everflow_per_interface` test when mirroring packet is `IPV6`. \r\n2. The test for using `IPv6` as mirror session is **not** skipped. This is a required scenario in prod.\r\n\r\ncc @r12f "
+    },
+    {
+        "number": 17700,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-08-20T02:04:01Z",
+        "comment_author": "nhe-NV",
+        "comment_body": "> Hi @nhe-NV, the skip condition is a little confusing. Can you help me understand and confirm\r\n> \r\n> 1. The change only skipped `everflow_per_interface` test when mirroring packet is `IPV6`.\r\n> 2. The test for using `IPv6` as mirror session is **not** skipped. This is a required scenario in prod.\r\n> \r\n> cc @r12f\r\n\r\nHI @bingwang-ms \r\n\r\nThere are 2 parms in the test case, and 4 sub test cases generted due to it:\r\nip_ver: \"ipv4\"\uff0c \"ipv6\"\r\nerspan_ip_ver\uff1a \"erspan_ipv4\", \"erspan_ipv6\"\r\n\r\nHere are the 4 test cases. \r\ntest_everflow_per_interface[ipv4-erspan_ipv4-default]\r\ntest_everflow_per_interface[ipv6-erspan_ipv4-default]. (need to be skipped as prev)\r\ntest_everflow_per_interface[ipv6-erspan_ipv6-default] (need to be skipped as prev)\r\ntest_everflow_per_interface[ipv4-erspan_ipv6-default]\r\n\r\nso it only skipped the when the ip_ver is ipv6. \r\n\r\n"
+    },
+    {
+        "number": 17700,
+        "repo": "sonic-mgmt",
         "review_at": "2025-04-07T08:49:29Z",
         "review_author": "roy-sror"
     },
