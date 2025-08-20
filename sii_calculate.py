@@ -63,6 +63,7 @@ org_map = {
     'internet initiative japan':'Internet Initiative Japan',
     'nexthop':       'Nexthop',
     'nexthop-ai':    'Nexthop',
+    'micas':         'Micas',
 }
 
 automation_account = ['microsoft-github-policy-service', 'linux-foundation-easycla','lgtm-com','mssonicbld','azure-pipelines','svc-acs','msftclas']
