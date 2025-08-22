@@ -173,6 +173,13 @@
     {
         "number": 590,
         "repo": "sonic-platform-common",
+        "comment_at": "2025-08-21T20:44:00Z",
+        "comment_author": "snider-nokia",
+        "comment_body": "@mihirpat1, After this change we now have sonic-mgmt test failures occurring.\r\n\r\n.../platform_tests/api/test_sfp.py::TestSfpApi::test_get_transceiver_info\r\n.../platform_tests/api/test_sfp.py::TestSfpApi::test_get_transceiver_threshold_info\r\n \r\nif info_dict[\"type_abbrv_name\"] in [\"QSFP-DD\", \"OSFP-8X\"]:\r\n    expected_keys += self.QSFPDD_EXPECTED_XCVR_THRESHOLD_INFO_KEYS\r\nE   KeyError: 'media_interface_code'\r\nE   KeyError: 'host_lane_assignment_option'\r\nE   KeyError: 'host_electrical_interface'\r\nE   KeyError: 'media_lane_assignment_option',\r\n\r\nThese tests need to be modified to account for above changes (field removals)."
+    },
+    {
+        "number": 590,
+        "repo": "sonic-platform-common",
         "review_at": "2025-08-06T23:22:06Z",
         "review_author": "copilot-pull-request-reviewer"
     },
