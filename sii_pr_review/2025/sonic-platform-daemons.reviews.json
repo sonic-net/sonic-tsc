@@ -1,5 +1,66 @@
 [
     {
+        "number": 677,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-09-08T16:14:24Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 677,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-09-08T16:14:33Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 677,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-09-09T02:18:01Z",
+        "comment_author": "ZhaohuiS",
+        "comment_body": "@yejianquan  could you pls help merge?"
+    },
+    {
+        "number": 677,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-09-09T00:40:05Z",
+        "review_author": "ZhaohuiS"
+    },
+    {
+        "number": 677,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-09-09T00:40:05Z",
+        "latestReview_author": "ZhaohuiS",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 675,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-09-08T03:31:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 675,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-09-08T03:31:34Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 675,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-09-08T05:31:47Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 675,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-09-08T05:31:47Z",
+        "latestReview_author": "StormLiangMS",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 673,
         "repo": "sonic-platform-daemons",
         "comment_at": "2025-09-05T18:32:31Z",
@@ -335,6 +396,13 @@
         "comment_at": "2025-09-03T07:53:54Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202505: https://github.com/sonic-net/sonic-platform-daemons/pull/671"
+    },
+    {
+        "number": 666,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-09-08T02:12:51Z",
+        "comment_author": "lolyu",
+        "comment_body": "Hi @ryanzhu706, this is causing a regression on dualtor with `20250510.17` image that `xcvrd` cannot start:\r\n```\r\n2025 Sep  8 01:34:59.964212 svcstr-7050-acs-2 ERR pmon#xcvrd[2342]: Exception occured at SfpStateUpdateTask thread due to TypeError(\"argument of type 'NoneType' is not iterable\")\r\n2025 Sep  8 01:34:59.968996 svcstr-7050-acs-2 ERR pmon#xcvrd[2342]: Traceback (most recent call last):\r\n2025 Sep  8 01:34:59.970704 svcstr-7050-acs-2 ERR pmon#xcvrd[2342]:   File \"/usr/local/lib/python3.11/dist-packages/xcvrd/xcvrd.py\", line 1875, in run\r\n2025 Sep  8 01:34:59.971297 svcstr-7050-acs-2 ERR pmon#xcvrd[2342]:     self.task_worker(self.task_stopping_event, self.sfp_error_event)\r\n2025 Sep  8 01:34:59.971665 svcstr-7050-acs-2 ERR pmon#xcvrd[2342]:   File \"/usr/local/lib/python3.11/dist-packages/xcvrd/xcvrd.py\", line 1646, in task_worker\r\n2025 Sep  8 01:34:59.972062 svcstr-7050-acs-2 ERR pmon#xcvrd[2342]:     self.init()\r\n2025 Sep  8 01:34:59.972369 svcstr-7050-acs-2 ERR pmon#xcvrd[2342]:   File \"/usr/local/lib/python3.11/dist-packages/xcvrd/xcvrd.py\", line 1565, in init\r\n2025 Sep  8 01:34:59.976170 svcstr-7050-acs-2 ERR pmon#xcvrd[2342]:     self.retry_eeprom_set = self._post_port_sfp_info_and_dom_thr_to_db_once(port_mapping_data, self.xcvr_table_helper, self.main_thread_stop_event)\r\n2025 Sep  8 01:34:59.977367 svcstr-7050-acs-2 ERR pmon#xcvrd[2342]:                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n2025 Sep  8 01:34:59.980861 svcstr-7050-acs-2 ERR pmon#xcvrd[2342]:   File \"/usr/local/lib/python3.11/dist-packages/xcvrd/xcvrd.py\", line 1506, in _post_port_sfp_info_and_dom_thr_to_db_once\r\n2025 Sep  8 01:34:59.982074 svcstr-7050-acs-2 ERR pmon#xcvrd[2342]:     is_warm_start = is_syncd_warm_restore_complete()\r\n2025 Sep  8 01:34:59.983236 svcstr-7050-acs-2 ERR pmon#xcvrd[2342]:                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n2025 Sep  8 01:34:59.983811 svcstr-7050-acs-2 ERR pmon#xcvrd[2342]:   File \"/usr/local/lib/python3.11/dist-packages/xcvrd/xcvrd.py\", line 473, in is_syncd_warm_restore_complete\r\n2025 Sep  8 01:34:59.984373 svcstr-7050-acs-2 ERR pmon#xcvrd[2342]:     return int(restore_count.strip()) > 0 or \"true\" in system_enabled\r\n2025 Sep  8 01:34:59.985410 svcstr-7050-acs-2 ERR pmon#xcvrd[2342]:                                              ^^^^^^^^^^^^^^^^^^^^^^^^\r\n2025 Sep  8 01:34:59.985698 svcstr-7050-acs-2 ERR pmon#xcvrd[2342]: TypeError: argument of type 'NoneType' is not iterable\r\n2025 Sep  8 01:34:59.986617 svcstr-7050-acs-2 ERR pmon#xcvrd[2342]: Xcvrd: exception found at child thread SfpStateUpdateTask due to TypeError(\"argument of type 'NoneType' is not iterable\")\r\n2025 Sep  8 01:34:59.986932 svcstr-7050-acs-2 ERR pmon#xcvrd[2342]: Exiting main loop as child thread raised exception!\r\n```"
     },
     {
         "number": 666,
@@ -8628,6 +8696,13 @@
     {
         "number": 446,
         "repo": "sonic-platform-daemons",
+        "comment_at": "2025-09-08T12:18:21Z",
+        "comment_author": "ZhaohuiS",
+        "comment_body": "@gregoryboudreau  for non-chassis platforms, it has the following error.\r\n\r\n```\r\n2025 Sep  8 01:01:11.161900 bjw2-can-7260-11 ERR snmp#snmp-subagent [sonic_ax_impl] ERROR: fan_name = psu2/1 get fan parent failed\r\n2025 Sep  8 01:01:18.169043 bjw2-can-7260-11 ERR snmp#snmp-subagent [sonic_ax_impl] ERROR: fan_name = psu1/1 get fan parent failed\r\n```\r\n\r\non 202411:\r\n\r\n```\r\nadmin@bjw-can-2700-4:~$ sonic-db-cli STATE_DB HGETALL \"PHYSICAL_ENTITY_INFO|psu2\"\r\n{}\r\nadmin@bjw-can-2700-4:~$ sonic-db-cli STATE_DB HGETALL \"PHYSICAL_ENTITY_INFO|PSU 2\"\r\n{'position_in_parent': '2', 'parent_name': 'chassis 1'}\r\n\r\n```\r\n\r\non 202505:\r\n```\r\nadmin@bjw2-can-7260-12:~$ sonic-db-cli STATE_DB HGETALL \"PHYSICAL_ENTITY_INFO|psu2\"\r\n{'position_in_parent': '2', 'parent_name': 'chassis 1'}\r\nadmin@bjw2-can-7260-12:~$ sonic-db-cli STATE_DB HGETALL \"PHYSICAL_ENTITY_INFO|PSU 2\"\r\n{}\r\n\r\n```"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
         "review_at": "2024-06-03T21:29:02Z",
         "review_author": "gechiang"
     },
@@ -8660,6 +8735,37 @@
         "repo": "sonic-platform-daemons",
         "review_at": "2025-04-22T23:46:32Z",
         "review_author": "judyjoseph"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-09-08T12:19:57Z",
+        "review_author": "ZhaohuiS"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-09-08T16:02:56Z",
+        "review_author": "gregoryboudreau"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-09-08T16:04:03Z",
+        "review_author": "gregoryboudreau"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-09-08T16:14:51Z",
+        "review_author": "gregoryboudreau"
+    },
+    {
+        "number": 446,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-09-08T12:19:57Z",
+        "latestReview_author": "ZhaohuiS",
+        "latestReview_state": "COMMENTED"
     },
     {
         "number": 446,
