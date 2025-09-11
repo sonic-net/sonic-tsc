@@ -11465,6 +11465,124 @@
         "latestReview_state": "DISMISSED"
     },
     {
+        "number": 3862,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-04-23T07:43:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3862,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-04-23T07:44:00Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3862,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-04-23T08:25:52Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3862,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-04-23T08:26:03Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3862,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-04-23T08:52:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3862,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-04-23T08:52:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3862,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-04-23T16:34:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3862,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-04-23T16:34:14Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3862,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-05-29T04:49:50Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3862,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-05-29T04:49:59Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3862,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-05-29T05:13:54Z",
+        "comment_author": "anders-nexthop",
+        "comment_body": "@prsunny can you please review this PR?"
+    },
+    {
+        "number": 3862,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-06-03T16:26:21Z",
+        "comment_author": "prsunny",
+        "comment_body": "@anders-nexthop , do you know if this issue was caused by any recent PRs? "
+    },
+    {
+        "number": 3862,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-06-09T19:09:04Z",
+        "comment_author": "anders-nexthop",
+        "comment_body": "> @anders-nexthop , do you know if this issue was caused by any recent PRs?\r\n\r\nThis seems to have been part of the original design (https://github.com/sonic-net/sonic-utilities/pull/1534).\r\n\r\nHere is a snippet from that PR which shows that the empty string is expected for nexthop-vrf:\r\n```\r\n    def test_simple_static_route(self):\r\n        db = Db()\r\n        runner = CliRunner()\r\n        obj = {'config_db':db.cfgdb}\r\n\r\n        # config route add prefix 1.2.3.4/32 nexthop 30.0.0.5\r\n        result = runner.invoke(config.config.commands[\"route\"].commands[\"add\"], \\\r\n        [\"prefix\", \"1.2.3.4/32\", \"nexthop\", \"30.0.0.5\"], obj=obj)\r\n        print(result.exit_code, result.output)\r\n        assert ('1.2.3.4/32') in db.cfgdb.get_table('STATIC_ROUTE')\r\n        assert db.cfgdb.get_entry('STATIC_ROUTE', '1.2.3.4/32') == {'nexthop': '30.0.0.5', 'blackhole': 'false', 'distance': '0', 'ifname': '', 'nexthop-vrf': ''}\r\n\r\n        # config route del prefix 1.2.3.4/32 nexthop 30.0.0.5\r\n        result = runner.invoke(config.config.commands[\"route\"].commands[\"del\"], \\\r\n        [\"prefix\", \"1.2.3.4/32\", \"nexthop\", \"30.0.0.5\"], obj=obj)\r\n        print(result.exit_code, result.output)\r\n        assert not '1.2.3.4/32' in db.cfgdb.get_table('STATIC_ROUTE')\r\n```\r\n\r\nThe yang model was added later in https://github.com/sonic-net/sonic-buildimage/pull/11932. That change seems to assume that the nexthop-vrf will not be the empty string, and none of the test cases added there test for it. There was a recent change to the pattern (in https://github.com/sonic-net/sonic-buildimage/pull/21642), but I think the issue existed before then.\r\n"
+    },
+    {
+        "number": 3862,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-07-02T15:09:02Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "@prsunny Can you please help check again?"
+    },
+    {
+        "number": 3862,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-08-12T19:15:09Z",
+        "comment_author": "anders-nexthop",
+        "comment_body": "@prsunny can we get this request merged please?"
+    },
+    {
+        "number": 3862,
+        "repo": "sonic-utilities",
+        "review_at": "2025-07-14T23:25:52Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 3862,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2025-07-14T23:25:52Z",
+        "latestReview_author": "prsunny",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 3861,
         "repo": "sonic-utilities",
         "comment_at": "2025-04-23T00:50:14Z",
