@@ -187,6 +187,13 @@
     {
         "number": 590,
         "repo": "sonic-platform-common",
+        "comment_at": "2025-09-10T06:10:06Z",
+        "comment_author": "xixuej",
+        "comment_body": "Hello @mihirpat1 , there's still remaining failure that is caused by this PR, can you please also address that? Thanks\r\n\r\n```\r\nplatform_tests/api/test_sfp.py:906: \r\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \r\n\r\nself = <tests.platform_tests.api.test_sfp.TestSfpApi object at 0x7fb4bf45f370>\r\nxcvr_info_dict = {'active_apsel_hostlane1': 1, 'active_apsel_hostlane2': 1, 'active_apsel_hostlane3': 1, 'active_apsel_hostlane4': 1, ...}\r\n\r\n    def is_xcvr_support_lpmode(self, xcvr_info_dict):\r\n        \"\"\"Returns True if transceiver is support low power mode, False if not supported\"\"\"\r\n        xcvr_type = xcvr_info_dict[\"type\"]\r\n        ext_identifier = xcvr_info_dict[\"ext_identifier\"]\r\n        if (\"QSFP\" not in xcvr_type and \"OSFP\" not in xcvr_type) or \"Power Class 1\" in ext_identifier:\r\n            return False\r\n    \r\n        # Temporarily add this logic to skip lpmode test for some transceivers with known issue\r\n        for xcvr_to_skip in self.LPMODE_SKIP_LIST:\r\n            if (xcvr_info_dict[\"manufacturer\"].strip() == xcvr_to_skip[\"manufacturer\"] and\r\n>                   xcvr_info_dict[\"host_electrical_interface\"].strip() == xcvr_to_skip[\"host_electrical_interface\"]):\r\nE                   KeyError: 'host_electrical_interface'\r\n```\r\n\r\nI opened https://github.com/sonic-net/sonic-mgmt/issues/20597 to track this issue"
+    },
+    {
+        "number": 590,
+        "repo": "sonic-platform-common",
         "review_at": "2025-08-06T23:22:06Z",
         "review_author": "copilot-pull-request-reviewer"
     },
