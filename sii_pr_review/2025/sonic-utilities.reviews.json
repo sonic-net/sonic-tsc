@@ -8465,6 +8465,13 @@
     {
         "number": 3889,
         "repo": "sonic-utilities",
+        "comment_at": "2025-09-15T04:27:40Z",
+        "comment_author": "yejianquan",
+        "comment_body": "Hi @qiluo-msft , it looks like a slight new feature, could you please comment if it is must-have for 202505 branch?"
+    },
+    {
+        "number": 3889,
+        "repo": "sonic-utilities",
         "review_at": "2025-05-22T20:10:52Z",
         "review_author": "zjswhhh"
     },
@@ -20688,6 +20695,13 @@
         "comment_at": "2025-07-09T17:35:01Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3778,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-09-16T01:10:10Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "This change will break sonic-mgmt testcase. @peterbailey-arista Could you fix the testcase?\r\n```python\r\ndef extract_pfcwd_config(duthost, start_pfcwd):\r\n    \"\"\"\r\n    Extract pfcwd info from running config\r\n\r\n    Args:\r\n        duthost: DUT host object\r\n\r\n    Yields:\r\n        pfcwd_config: dict of dicts with interface as the 1st level key and 'action', 'detect_time',\r\n                      'restore_time' as the 2nd level keys\r\n    \"\"\"\r\n    output = duthost.command('show pfcwd config')\r\n    pytest_assert('Ethernet' in output['stdout'], 'No ports found in the pfcwd config')\r\n\r\n    pfcwd_config = defaultdict()\r\n    for line in output['stdout_lines']:\r\n        if line.strip().startswith('Ethernet'):\r\n            port, action, detect, restore = line.split()\r\n            pfcwd_config.update({port: {'action': action,\r\n                                        'detect_time': detect,\r\n                                        'restore_time': restore}})\r\n\r\n    yield pfcwd_config\r\n```\r\n\r\n```\r\n12/09/2025 05:44:18 __init__._fixture_generator_decorator    L0088 ERROR  | \r\nValueError('too many values to unpack (expected 4)')\r\nTraceback (most recent call last):\r\n  File \"/var/src/sonic-mgmt/tests/common/plugins/log_section_start/__init__.py\", line 84, in _fixture_generator_decorator\r\n    res = next(it)\r\n  File \"/var/src/sonic-mgmt/tests/generic_config_updater/test_pfcwd_status.py\", line 162, in extract_pfcwd_config\r\n    port, action, detect, restore = line.split()\r\nValueError: too many values to unpack (expected 4)\r\n```"
     },
     {
         "number": 3778,
