@@ -20519,6 +20519,13 @@
     {
         "number": 3779,
         "repo": "sonic-utilities",
+        "comment_at": "2025-09-16T19:04:46Z",
+        "comment_author": "vaibhavhd",
+        "comment_body": "@peterbailey-arista  I think this PR has introduced a test regression that is preventing submodule update PR from passing the PR tests.\r\n\r\nI checked the failure logs and it seems like this PR from Arista is causing OA to not process the stats\r\nSubmodule update PR that is blocked - https://github.com/sonic-net/sonic-buildimage/pull/23557\r\n\r\nExample of the failed run - https://elastictest.org/scheduler/testplan/68c920ad288a03159090b019?testcase=generic_config_updater%2Ftest_pfcwd_status.py%7C%7C%7C2&type=console\r\n\r\nSyslog errors from the failed run:\r\n```\r\n'2025 Sep 16 09:31:04.158401 vlab-01 ERR swss#orchagent: :- createEntry: Failed to parse PFC Watchdog Ethernet4 configuration. Unknown attribute pfc_stat_history.\\n',\r\n'2025 Sep 16 09:31:04.159063 vlab-01 ERR swss#orchagent: :- doTask: Failed to process PFC watchdog SET task, invalid entry\\n',\r\n\r\n``` \r\nThere is another issue that I suspect here - None/ Null in the config that leads to config check failure:\r\n`extract_pfcwd_config = defaultdict(None, {'Ethernet4': {'action': 'drop', 'detect_time': '200', 'restore_time': '200'}`\r\n \r\n```\r\nDEBUG:tests.conftest:core_dump_and_config_check failed, check_result:\r\n\"config_db_check\": {\"failed\": true,\r\n\"inconsistent_config\": {\"vlab-01\": {\"null\": {}}}}}\r\n```"
+    },
+    {
+        "number": 3779,
+        "repo": "sonic-utilities",
         "review_at": "2025-04-01T20:42:27Z",
         "review_author": "maipbui"
     },
