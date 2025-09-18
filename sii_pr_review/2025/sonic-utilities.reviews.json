@@ -4378,6 +4378,20 @@
     {
         "number": 3950,
         "repo": "sonic-utilities",
+        "comment_at": "2025-09-17T22:10:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202412: https://github.com/Azure/sonic-utilities.msft/pull/240"
+    },
+    {
+        "number": 3950,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-09-18T00:07:00Z",
+        "comment_author": "yejianquan",
+        "comment_body": "from Mihir:\r\n<img width=\"835\" height=\"147\" alt=\"image\" src=\"https://github.com/user-attachments/assets/6a5ac6ab-5872-4227-9d67-7d919b40454a\" />\r\n"
+    },
+    {
+        "number": 3950,
+        "repo": "sonic-utilities",
         "review_at": "2025-07-22T17:15:56Z",
         "review_author": "copilot-pull-request-reviewer"
     },
@@ -8468,6 +8482,13 @@
         "comment_at": "2025-09-15T04:27:40Z",
         "comment_author": "yejianquan",
         "comment_body": "Hi @qiluo-msft , it looks like a slight new feature, could you please comment if it is must-have for 202505 branch?"
+    },
+    {
+        "number": 3889,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-09-17T19:10:48Z",
+        "comment_author": "zjswhhh",
+        "comment_body": "Hi @yejianquan - the feature is already merged into 202505. So if we can have this show cmd merged too into 202505 that will be great."
     },
     {
         "number": 3889,
@@ -20522,6 +20543,13 @@
         "comment_at": "2025-09-16T19:04:46Z",
         "comment_author": "vaibhavhd",
         "comment_body": "@peterbailey-arista  I think this PR has introduced a test regression that is preventing submodule update PR from passing the PR tests.\r\n\r\nI checked the failure logs and it seems like this PR from Arista is causing OA to not process the stats\r\nSubmodule update PR that is blocked - https://github.com/sonic-net/sonic-buildimage/pull/23557\r\n\r\nExample of the failed run - https://elastictest.org/scheduler/testplan/68c920ad288a03159090b019?testcase=generic_config_updater%2Ftest_pfcwd_status.py%7C%7C%7C2&type=console\r\n\r\nSyslog errors from the failed run:\r\n```\r\n'2025 Sep 16 09:31:04.158401 vlab-01 ERR swss#orchagent: :- createEntry: Failed to parse PFC Watchdog Ethernet4 configuration. Unknown attribute pfc_stat_history.\\n',\r\n'2025 Sep 16 09:31:04.159063 vlab-01 ERR swss#orchagent: :- doTask: Failed to process PFC watchdog SET task, invalid entry\\n',\r\n\r\n``` \r\nThere is another issue that I suspect here - None/ Null in the config that leads to config check failure:\r\n`extract_pfcwd_config = defaultdict(None, {'Ethernet4': {'action': 'drop', 'detect_time': '200', 'restore_time': '200'}`\r\n \r\n```\r\nDEBUG:tests.conftest:core_dump_and_config_check failed, check_result:\r\n\"config_db_check\": {\"failed\": true,\r\n\"inconsistent_config\": {\"vlab-01\": {\"null\": {}}}}}\r\n```"
+    },
+    {
+        "number": 3779,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-09-17T19:05:08Z",
+        "comment_author": "peterbailey-arista",
+        "comment_body": "@vaibhavhd I see that https://github.com/sonic-net/sonic-buildimage/pull/23491 which contains submodule bump up with the orchagent change to process the pfc stat history param is also unmerged.\r\n\r\nThank you for bringing this to my attention, the fix for the syslog errors is for the swss change to merge first. Is that possible?\r\n\r\nFor the generic_config_updater test I see https://github.com/sonic-net/sonic-mgmt/pull/20667 has already been made to handle the problem. So the fix should be to include this commit (70648ef) in the submodule bump up as well"
     },
     {
         "number": 3779,
