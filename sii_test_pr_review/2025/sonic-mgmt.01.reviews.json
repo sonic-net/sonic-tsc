@@ -1939,6 +1939,13 @@
     {
         "number": 16662,
         "repo": "sonic-mgmt",
+        "comment_at": "2025-09-24T11:32:23Z",
+        "comment_author": "weiguo-nvidia",
+        "comment_body": "Hi @bingwang-ms \r\n\r\nI see you set `time.sleep(0.001)` in function `add_arp`, but set `time.sleep(0.01)` in other places. May I ask why sleep 0.001s in `add_arp`.\r\n\r\nWe encounter an issue, when run case `test_ipv4_arp` on a weaker CPU server, the case fail when sending packets. From the error log, already sent 8512 packets and then fail as 'Connection timed out'.\r\nSeems the failure due to PTF socket or other resources are exhausted. If update the sleep time to **0.01s**, the case can pass the weaker server\r\n\r\n```\r\narp/test_stress_arp.py:129: \r\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \r\narp/test_stress_arp.py:86: in add_arp\r\n testutils.send_packet(ptfadapter, intf1_index, pkt)\r\n arp_request_ip = '172.16.33.65'\r\n arp_src_mac = '00:00:01:02:24:43'\r\n intf1_index = 0\r\n ip_num = 8512\r\n pkt = <Ether dst=ff:ff:ff:ff:ff:ff src=00:00:01:02:24:43 type=ARP |<ARP op=is-at hwsrc=00:00:01:02:24:43 psrc=172.16.33.65...:ff:ff:ff pdst=172.16.33.65 |<Raw load='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00' |>>>\r\n ptf_intf_ipv4_addr = [IPv4Address('172.16.0.2'), IPv4Address('172.16.0.3'), IPv4Address('172.16.0.4'), IPv4Address('172.16.0.5'), IPv4Address('172.16.0.6'), IPv4Address('172.16.0.7'), ...]\r\n ptfadapter = <tests.common.plugins.ptfadapter.ptfadapter.PtfTestAdapter testMethod=runTest>\r\n\r\n\r\n def convert(rc, value=None):\r\n if rc < 0:\r\n error_no = nanomsg.nn_errno()\r\n chars = nanomsg.nn_strerror(error_no)\r\n msg = ffi.string(chars).decode()\r\n> raise NNError(error_no, msg)\r\nE nnpy.errors.NNError: Connection timed out\r\n\r\nchars = <cdata 'char *' 0x7f46f2515eea>\r\nerror_no = 110\r\nmsg = 'Connection timed out'\r\nrc = -1\r\nvalue = -1\r\n```"
+    },
+    {
+        "number": 16662,
+        "repo": "sonic-mgmt",
         "review_at": "2025-01-24T01:52:08Z",
         "review_author": "yutongzhang-microsoft"
     },
