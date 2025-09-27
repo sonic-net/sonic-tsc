@@ -1,5 +1,32 @@
 [
     {
+        "number": 4069,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-09-26T07:30:07Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4069,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-09-26T07:30:19Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4069,
+        "repo": "sonic-utilities",
+        "review_at": "2025-09-26T07:37:09Z",
+        "review_author": "yaqiangz"
+    },
+    {
+        "number": 4069,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2025-09-26T07:37:09Z",
+        "latestReview_author": "yaqiangz",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 4063,
         "repo": "sonic-utilities",
         "comment_at": "2025-09-19T00:52:41Z",
@@ -7643,6 +7670,301 @@
         "repo": "sonic-utilities",
         "latestReview_at": "2025-06-05T05:45:07Z",
         "latestReview_author": "keboliu",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-05-29T03:37:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-05-29T03:37:34Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-05-29T04:16:57Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-05-29T04:17:06Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-05-29T04:20:10Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-05-29T04:20:20Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-06-23T20:39:18Z",
+        "comment_author": "anders-nexthop",
+        "comment_body": "@qiluo-msft it looks like you were assigned to take a look at this issue awhile back, please review it if you have time or assign another reviewer if not."
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-07-02T15:09:50Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "@qiluo-msft Can you please review or find someone to review this change? Thanks"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-07-02T22:21:35Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "> def remove(ctx, interface_name, ip_addr):\r\n\r\nIs there a bug in \"config interface ip remove\" implementation? should it \"detect these invalid entries\" ? #Closed\r\n\r\n---\r\nRefers to: config/main.py:5323 in c4e3812. [](commit_id = c4e3812644647b08834bb084276d8135a85a1aa3, deletion_comment = False)"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-07-03T02:11:44Z",
+        "comment_author": "anders-nexthop",
+        "comment_body": "> > def remove(ctx, interface_name, ip_addr):\r\n> \r\n> Is there a bug in \"config interface ip remove\" implementation? should it \"detect these invalid entries\" ?\r\n> \r\n> Refers to: config/main.py:5323 in [c4e3812](https://github.com/sonic-net/sonic-utilities/commit/c4e3812644647b08834bb084276d8135a85a1aa3). [](commit_id = [c4e3812](https://github.com/sonic-net/sonic-utilities/commit/c4e3812644647b08834bb084276d8135a85a1aa3), deletion_comment = False)\r\n\r\nI thought about whether to address this in `remove()` but decided not to. These entries should never have been put into ConfigDB, and they break YANG validation. Adding code into `remove()` to handle invalid cases seems like the wrong way to address the problem, since it would cover up a real error. Even if all we do is detect these entries and warn about them, that's still a lot of defensive coding.\r\n\r\nThat was my thinking, but maybe there's a precedent for `config` functions handling invalid configuration data? Is the expectation that functions should try to do something smart in these cases? Even if that's just to try and detect bad config state and warn the user about it?"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-07-07T16:39:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-07-07T16:39:43Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-07-07T17:57:52Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-07-07T17:58:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-07-14T20:11:32Z",
+        "comment_author": "prsunny",
+        "comment_body": "lgtm, please fix the PR checker failures. "
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-08-14T20:36:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-08-14T20:36:51Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-08-14T23:03:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-08-14T23:03:33Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-08-14T23:17:14Z",
+        "comment_author": "anders-nexthop",
+        "comment_body": "@manoharan-nexthop thanks for the review, I've made the change you requested. @prsunny @qiluo-msft can I please get another code owner to have a look? thanks!"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-09-10T16:05:28Z",
+        "comment_author": "anders-nexthop",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-09-10T16:05:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-09-10T16:05:41Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-09-11T03:59:01Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-09-11T03:59:11Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-09-24T15:56:37Z",
+        "comment_author": "anders-nexthop",
+        "comment_body": "@qiluo-msft @prsunny if there are no further comments, can we get this PR approved and merged please?"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-09-25T00:58:47Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "Please try reduce force-push in your PR commits. We will frequently compare code between commits to understand what is new (especially I have approved it before, and you add new code). Force-pushed code is difficult to review."
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-09-25T15:03:55Z",
+        "comment_author": "anders-nexthop",
+        "comment_body": "> Please try reduce force-push in your PR commits. We will frequently compare code between commits to understand what is new (especially I have approved it before, and you add new code). Force-pushed code is difficult to review.\r\n\r\nSure, I will retain the commit structure going forward in this and future PRs."
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "review_at": "2025-07-02T22:18:50Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "review_at": "2025-07-02T22:19:31Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "review_at": "2025-07-03T21:26:06Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "review_at": "2025-07-07T16:39:37Z",
+        "review_author": "anders-nexthop"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "review_at": "2025-07-07T16:39:46Z",
+        "review_author": "anders-nexthop"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "review_at": "2025-07-07T16:41:29Z",
+        "review_author": "anders-nexthop"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "review_at": "2025-07-14T20:55:43Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "review_at": "2025-07-18T16:16:37Z",
+        "review_author": "manoharan-nexthop"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "review_at": "2025-08-14T22:26:48Z",
+        "review_author": "anders-nexthop"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "review_at": "2025-08-15T02:46:33Z",
+        "review_author": "manoharan-nexthop"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "review_at": "2025-09-25T00:56:08Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "review_at": "2025-09-25T15:03:01Z",
+        "review_author": "anders-nexthop"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "review_at": "2025-09-26T01:28:15Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2025-07-02T22:18:50Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2025-09-26T01:28:15Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 3901,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2025-08-15T02:46:33Z",
+        "latestReview_author": "manoharan-nexthop",
         "latestReview_state": "APPROVED"
     },
     {
