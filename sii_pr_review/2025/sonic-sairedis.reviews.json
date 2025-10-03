@@ -117,6 +117,138 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 1654,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-08-30T04:28:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1654,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-08-30T04:28:32Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1654,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-08-30T04:31:18Z",
+        "comment_author": "selva-nexthop",
+        "comment_body": "# Fix hardcoded object type in DECLARE_BULK_SET_ENTRY macro\r\n\r\n## Description\r\n\r\nThis PR fixes a critical bug in the `DECLARE_BULK_SET_ENTRY` macro in `ClientSai.cpp` where the object type was hardcoded to `SAI_OBJECT_TYPE_ROUTE_ENTRY` instead of using the parameterized object type.\r\n\r\n## Motivation and Context\r\n\r\nThe `DECLARE_BULK_SET_ENTRY` macro is used to generate bulk set operations for all entry types that support bulk APIs (route_entry, neighbor_entry, fdb_entry, nat_entry, inseg_entry, and various DASH entries). However, the macro incorrectly hardcoded the object type to `SAI_OBJECT_TYPE_ROUTE_ENTRY` in the `bulkSet()` call, causing all bulk set operations for non-route entries to fail.\r\n\r\n### Bug Details\r\n\r\n**Before (Buggy Code):**\r\n```cpp\r\n#define DECLARE_BULK_SET_ENTRY(OT,ot)                                                                     \\\r\nsai_status_t ClientSai::bulkSet(                                                                          \\\r\n        _In_ uint32_t object_count,                                                                       \\\r\n        _In_ const sai_ ## ot ## _t *ot,                                                                  \\\r\n        _In_ const sai_attribute_t *attr_list,                                                            \\\r\n        _In_ sai_bulk_op_error_mode_t mode,                                                               \\\r\n        _Out_ sai_status_t *object_statuses)                                                              \\\r\n{                                                                                                         \\\r\n    /* ... */                                                                                             \\\r\n    return bulkSet(SAI_OBJECT_TYPE_ROUTE_ENTRY, serializedObjectIds, attr_list, mode, object_statuses);   \\\r\n    /*             ^^^^^^^^^^^^^^^^^^^^^^^^^ HARDCODED! */                                               \\\r\n}\r\n```\r\n\r\n**After (Fixed Code):**\r\n```cpp\r\n#define DECLARE_BULK_SET_ENTRY(OT,ot)                                                                     \\\r\nsai_status_t ClientSai::bulkSet(                                                                          \\\r\n        _In_ uint32_t object_count,                                                                       \\\r\n        _In_ const sai_ ## ot ## _t *ot,                                                                  \\\r\n        _In_ const sai_attribute_t *attr_list,                                                            \\\r\n        _In_ sai_bulk_op_error_mode_t mode,                                                               \\\r\n        _Out_ sai_status_t *object_statuses)                                                              \\\r\n{                                                                                                         \\\r\n    /* ... */                                                                                             \\\r\n    return bulkSet((sai_object_type_t)SAI_OBJECT_TYPE_ ## OT, serializedObjectIds, attr_list, mode, object_statuses); \\\r\n    /*             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ PARAMETERIZED! */                             \\\r\n}\r\n```\r\n\r\n### Impact\r\n\r\nThis bug affects **ALL** bulk set operations for entry types except route entries:\r\n\r\n- \u274c **sai_neighbor_entry_t** - Neighbor entries bulk set operations fail\r\n- \u274c **sai_fdb_entry_t** - FDB entries bulk set operations fail  \r\n- \u274c **sai_nat_entry_t** - NAT entries bulk set operations fail\r\n- \u274c **sai_inseg_entry_t** - MPLS in-segment entries bulk set operations fail\r\n- \u274c **Various DASH entries** - All DASH bulk set operations fail\r\n- \u2705 **sai_route_entry_t** - Works by accident due to hardcoded type matching\r\n\r\n### Root Cause\r\n\r\nThe bug was introduced because:\r\n1. The `DECLARE_BULK_REMOVE_ENTRY` macro correctly uses `(sai_object_type_t)SAI_OBJECT_TYPE_ ## OT`\r\n2. The `DECLARE_BULK_SET_ENTRY` macro incorrectly hardcoded `SAI_OBJECT_TYPE_ROUTE_ENTRY`\r\n3. Other implementations (`RedisRemoteSaiInterface.cpp`, `Meta.cpp`) correctly use the parameterized type\r\n\r\n### Runtime Failures\r\n\r\nThis bug causes bulk set operations to fail with errors such as:\r\n- `SAI_STATUS_INVALID_PARAMETER`\r\n- `SAI_STATUS_INVALID_OBJECT_TYPE`\r\n- Metadata validation failures\r\n- Incorrect serialization/deserialization\r\n\r\n## How Has This Been Tested?\r\n\r\n- \u2705 Code review confirms the fix aligns with other correct implementations\r\n- \u2705 Pattern matches `DECLARE_BULK_REMOVE_ENTRY` which works correctly\r\n- \u2705 Verified other files (`RedisRemoteSaiInterface.cpp`, `Meta.cpp`) use the correct pattern\r\n- \u2705 No other files have this bug - only `ClientSai.cpp` was affected\r\n\r\n## Types of changes\r\n\r\n- [x] Bug fix (non-breaking change which fixes an issue)\r\n- [ ] New feature (non-breaking change which adds functionality)\r\n- [ ] Breaking change (fix or feature that would cause existing functionality to change)\r\n\r\n## Checklist:\r\n\r\n- [x] My code follows the code style of this project\r\n- [x] My change requires a change to the documentation\r\n- [x] I have updated the documentation accordingly\r\n- [x] I have read the **CONTRIBUTING** document\r\n- [x] I have added tests to cover my changes\r\n- [x] All new and existing tests passed\r\n\r\n## Additional Notes\r\n\r\nThis is a critical bug fix that should be prioritized as it affects the functionality of bulk operations for multiple SAI entry types. The fix is minimal, safe, and follows the established pattern used in other parts of the codebase.\r\n\r\nThe change is backward compatible and only fixes the incorrect behavior - no API changes are involved.\r\n"
+    },
+    {
+        "number": 1654,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-09-19T18:39:33Z",
+        "comment_author": "selva-nexthop",
+        "comment_body": "@kcudnik thanks for approval.  Do we  know who is the maintainer for this repo?  I am not able to add any reviewers for this PR to get it approved and merged."
+    },
+    {
+        "number": 1654,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-09-19T19:03:14Z",
+        "comment_author": "kcudnik",
+        "comment_body": "Please also @lguohan "
+    },
+    {
+        "number": 1654,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-09-30T04:14:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1654,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-09-30T04:14:54Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1654,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-09-30T18:36:46Z",
+        "comment_author": "selva-nexthop",
+        "comment_body": "/azp run\r\n\r\n"
+    },
+    {
+        "number": 1654,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-09-30T18:36:52Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nCommenter does not have sufficient privileges for PR 1654 in repo sonic-net/sonic-sairedis<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1654,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-10-01T02:13:25Z",
+        "comment_author": "lolyu",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1654,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-10-01T02:13:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1654,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-10-01T02:18:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1654,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-10-01T02:18:57Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1654,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-10-01T05:20:44Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1654,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-10-01T05:20:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1654,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-10-01T23:46:51Z",
+        "comment_author": "lolyu",
+        "comment_body": "\r\n/azp run\r\n\r\n"
+    },
+    {
+        "number": 1654,
+        "repo": "sonic-sairedis",
+        "comment_at": "2025-10-01T23:47:03Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1654,
+        "repo": "sonic-sairedis",
+        "review_at": "2025-08-30T11:50:50Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1654,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2025-08-30T11:50:50Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 1653,
         "repo": "sonic-sairedis",
         "comment_at": "2025-08-29T04:40:14Z",
