@@ -4342,6 +4342,103 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 3989,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-07-21T13:11:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3989,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-07-21T13:11:35Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3989,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-07-21T22:13:18Z",
+        "comment_author": "bhouse-nexthop",
+        "comment_body": "@ycoheNvidia since you contributed the signing validation for sonic images, can you review this PR modification?"
+    },
+    {
+        "number": 3989,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-07-23T10:20:54Z",
+        "comment_author": "ycoheNvidia",
+        "comment_body": "Adding @davidpil2002 @DavidZagury @Yarden-Z as well"
+    },
+    {
+        "number": 3989,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-07-23T11:58:11Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3989,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-07-23T11:58:21Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3989,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-07-23T12:03:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3989,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-07-23T12:04:09Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3989,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-07-30T15:46:50Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "@qiluo-msft - could you please help with the review?"
+    },
+    {
+        "number": 3989,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-10-16T02:45:57Z",
+        "comment_author": "bhouse-nexthop",
+        "comment_body": "@Yarden-Z any comments?\r\n@qiluo-msft any reason not to merge this?"
+    },
+    {
+        "number": 3989,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-10-17T22:11:05Z",
+        "comment_author": "bhouse-nexthop",
+        "comment_body": "@hdwhdw can you possibly take a look at this?"
+    },
+    {
+        "number": 3989,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-10-18T22:29:35Z",
+        "comment_author": "lguohan",
+        "comment_body": "Here\u2019s a review of the changes made to `verify_image_sign_common.sh` in the referenced pull request:\r\n\r\n### Summary of Changes\r\n\r\n- The image signature verification logic has been refactored to try **two different verification methods** using `openssl cms -verify`:\r\n  - **Method 1:** Standard certificate chain verification (`-CAfile`), expecting the DB Key as a self-signed root and the image signed with an intermediate certificate.\r\n  - **Method 2:** Direct verification assuming the DB key signed the image (`-nointern -noverify -certfile`), skipping root CA checks.\r\n\r\n- The code now loops over both methods, returning success if either verification approach works.\r\n\r\n### Detailed Feedback\r\n\r\n**Positives:**\r\n- **Robustness Improved:** By verifying the image signature using two different approaches, the script is now more resilient to different signing setups, covering cases where the DB key is either a root CA or just a trusted signer.\r\n- **Clear Documentation:** The added comments clearly explain the rationale for the two verification modes, making the logic easier to understand and maintain.\r\n- **Backward Compatibility:** The fallback ensures that existing images signed with either method will be accepted, reducing risk of verification failures due to changing certificate hierarchies.\r\n\r\n**Suggestions:**\r\n- **Variable Naming:** The loop variable `variant` is slightly misleading since it sometimes contains multiple flags. Consider naming it `verify_opts` or similar for clarity.\r\n- **Error Handling:** If both verification methods fail, the script proceeds to clean up and returns 1 as before, which is appropriate. However, you might want to log which verification method(s) failed for troubleshooting.\r\n- **Quoting Variables:** For safety, it\u2019s good practice to quote variables in shell scripts, e.g. `\"${CMS_SIG_FILE}\"`, `\"${DATA_FILE}\"`, and `\"${EFI_CERTS_DIR}/cert.pem\"` to avoid issues if paths contain spaces.\r\n- **Hardcoded Paths:** The use of `/tmp/efi_certs` is unchanged. Ensure this path is appropriate for all environments where the script is used.\r\n\r\n**Example Logging Improvement:**\r\n```bash\r\nLOG=$(openssl cms -verify $no_check_time -noout ${variant} \"$EFI_CERTS_DIR/cert.pem\" -binary -in \"${CMS_SIG_FILE}\" -content \"${DATA_FILE}\" -inform pem 2>&1 > /dev/null )\r\nif [ $VALIDATION_RES -eq 0 ]; then\r\n    RESULT=\"CMS Verified OK (${variant})\"\r\n    return 0\r\nfi\r\n```\r\n\r\n### Final Assessment\r\n\r\n**The change is well-justified and improves signature verification compatibility.**  \r\nMinor improvements for safety and diagnostics could be considered, but the new logic is solid and clearly documented.\r\n\r\nIf you need a more formal approval or additional suggestions, let me know!"
+    },
+    {
+        "number": 3989,
+        "repo": "sonic-utilities",
+        "review_at": "2025-08-03T11:19:02Z",
+        "review_author": "ycoheNvidia"
+    },
+    {
+        "number": 3989,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2025-08-03T11:19:02Z",
+        "latestReview_author": "ycoheNvidia",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 3988,
         "repo": "sonic-utilities",
         "comment_at": "2025-07-19T00:56:46Z",
