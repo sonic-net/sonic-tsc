@@ -1,5 +1,75 @@
 [
     {
+        "number": 315,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-10-24T20:30:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-host-services/pull/237"
+    },
+    {
+        "number": 315,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-10-24T20:30:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 315,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-10-24T20:30:33Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 315,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-10-24T20:57:24Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "@arista-nwolfe, @mlok-nokia - could you help check the UT failures on this?"
+    },
+    {
+        "number": 315,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-10-24T22:16:40Z",
+        "comment_author": "arista-nwolfe",
+        "comment_body": "> @arista-nwolfe, @mlok-nokia - could you help check the UT failures on this?\r\n\r\n`AssertionError: 'check_call' does not contain all of (call(['sonic-kdump-config', '--remote', 'false']), call(['sonic-kdump-config', '--ssh_string', 'user@localhost']), call(['sonic-kdump-config', '--ssh_path', '/a/b/c'])) in its call list, found [] instead`\r\n\r\nIt looks like the PRs which added the arguments `--remote` `--ssh_string` and `--ssh_path` aren't in msft_202503\r\nhttps://github.com/sonic-net/sonic-host-services/pull/166\r\nhttps://github.com/sonic-net/sonic-host-services/pull/216\r\nhttps://github.com/sonic-net/sonic-host-services/pull/209\r\n\r\nYou'll probably need to remove those expected calls from the test case\r\n```\r\n                call(['sonic-kdump-config', '--remote', 'false']),  # Covering remote\r\n                call(['sonic-kdump-config', '--ssh_string', 'user@localhost']),  # Covering ssh_string\r\n                call(['sonic-kdump-config', '--ssh_path', '/a/b/c'])  # Covering ssh_path\r\n```"
+    },
+    {
+        "number": 315,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-10-27T17:29:01Z",
+        "comment_author": "mlok-nokia",
+        "comment_body": "> > @arista-nwolfe, @mlok-nokia - could you help check the UT failures on this?\r\n> \r\n> `AssertionError: 'check_call' does not contain all of (call(['sonic-kdump-config', '--remote', 'false']), call(['sonic-kdump-config', '--ssh_string', 'user@localhost']), call(['sonic-kdump-config', '--ssh_path', '/a/b/c'])) in its call list, found [] instead`\r\n> \r\n> It looks like the PRs which added the arguments `--remote` `--ssh_string` and `--ssh_path` aren't in msft_202503 #166 #216 #209\r\n> \r\n> You'll probably need to remove those expected calls from the test case\r\n> \r\n> ```\r\n>                 call(['sonic-kdump-config', '--remote', 'false']),  # Covering remote\r\n>                 call(['sonic-kdump-config', '--ssh_string', 'user@localhost']),  # Covering ssh_string\r\n>                 call(['sonic-kdump-config', '--ssh_path', '/a/b/c'])  # Covering ssh_path\r\n> ```\r\n\r\nCorrect.  These 3 default setting are not in 202503 branch. \r\n```\r\n            \"remote\": \"false\",            # New feature: remote, default is \"false\"\r\n            \"ssh_string\": \"user@localhost\",   # New feature: SSH key, default value\r\n            \"ssh_path\": \"/a/b/c\"          # New feature: SSH path, default value\r\n```"
+    },
+    {
+        "number": 315,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-10-27T18:34:44Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 315,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-10-27T18:34:52Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 315,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-10-27T18:36:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 315,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-10-27T18:36:34Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
         "number": 311,
         "repo": "sonic-host-services",
         "comment_at": "2025-09-19T16:37:33Z",
@@ -397,6 +467,13 @@
         "comment_at": "2025-10-17T17:58:05Z",
         "comment_author": "gpunathilell",
         "comment_body": "@qiluo-msft can it be merged?"
+    },
+    {
+        "number": 301,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-10-27T16:56:16Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "@yejianquan Can you help check the cherry-pick request to 202505 branch?"
     },
     {
         "number": 301,
