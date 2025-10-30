@@ -3655,6 +3655,273 @@
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
     },
     {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-06-28T00:50:08Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-06-28T00:50:16Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-09-10T20:33:15Z",
+        "comment_author": "gregoryboudreau",
+        "comment_body": "would it make more sense to do this via a config file like was done for sensormond? https://github.com/sonic-net/sonic-platform-daemons/blob/master/sonic-sensormond/scripts/sensormond#L485"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-09-10T22:02:06Z",
+        "comment_author": "lotus-nexthop",
+        "comment_body": "> would it make more sense to do this via a config file like was done for sensormond? https://github.com/sonic-net/sonic-platform-daemons/blob/master/sonic-sensormond/scripts/sensormond#L485\r\n\r\nHi Gregory,\r\n\r\nWe currently have the config set by the existing pmon_daemon_control.json config file:\r\nhttps://github.com/search?q=repo%3Asonic-net%2Fsonic-buildimage+path%3Apmon_daemon_control.json&type=code\r\n\r\nExample usage of this new config:\r\nhttps://github.com/sonic-net/sonic-buildimage/blob/30d2b7881971ad38fdc0b242f57c9efdb6f93693/device/nexthop/common/pmon_daemon_control.json#L5-L8\r\n\r\nPR which adds new config flags to thermalctld:\r\nhttps://github.com/sonic-net/sonic-platform-daemons/pull/635\r\n\r\nPR which sets new config flags using  pmon_daemon_control.json:\r\nhttps://github.com/sonic-net/sonic-buildimage/pull/23139/files\r\n\r\nWhen we were working on this initially we thought pmon_daemon_control.json would be the most fitting place to put the configuration.\r\n\r\nWe hadn't seen your change to use platform_env.conf yet.\r\n\r\nWhat are your thoughts on platform_env.conf vs pmon_daemon_control.json?\r\n"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-09-10T22:10:18Z",
+        "comment_author": "gregoryboudreau",
+        "comment_body": "> > would it make more sense to do this via a config file like was done for sensormond? https://github.com/sonic-net/sonic-platform-daemons/blob/master/sonic-sensormond/scripts/sensormond#L485\r\n> \r\n> Hi Gregory,\r\n> \r\n> We currently have the config set by the existing pmon_daemon_control.json config file: https://github.com/search?q=repo%3Asonic-net%2Fsonic-buildimage+path%3Apmon_daemon_control.json&type=code\r\n> \r\n> Example usage of this new config: https://github.com/sonic-net/sonic-buildimage/blob/30d2b7881971ad38fdc0b242f57c9efdb6f93693/device/nexthop/common/pmon_daemon_control.json#L5-L8\r\n> \r\n> PR which adds new config flags to thermalctld: #635\r\n> \r\n> PR which sets new config flags using pmon_daemon_control.json: https://github.com/sonic-net/sonic-buildimage/pull/23139/files\r\n> \r\n> When we were working on this initially we thought pmon_daemon_control.json would be the most fitting place to put the configuration.\r\n> \r\n> We hadn't seen your change to use platform_env.conf yet.\r\n> \r\n> What are your thoughts on platform_env.conf vs pmon_daemon_control.json?\r\n\r\nI had actually originally tried the same thing using the pmon daemon control to act as a further input for this to the supervisord configuration: https://github.com/sonic-net/sonic-platform-daemons/pull/600/commits/9e917891794e1b2d3ec502e287b79b280947d6ea#diff-195551a342dbd08efef0aa4f3e21a4f4e24e2ee87cadcc27070299e9fc4a0390R560. General community sentiment though was to use the platform_env.conf for platform specific configurability (at least when this was discussed in the chassis call when we reviewed it originally)."
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-09-10T22:20:52Z",
+        "comment_author": "gregoryboudreau",
+        "comment_body": "Chassisd also uses it for a timing related configuration: https://github.com/sonic-net/sonic-platform-daemons/blob/master/sonic-chassisd/scripts/chassisd#L312. Probably best to keep it consistent across the different daemons. Imo you should join next weeks chassis call and bring it up for discussion if you feel strongly towards the pmon_daemon_control method."
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-09-10T22:46:22Z",
+        "comment_author": "lotus-nexthop",
+        "comment_body": "Thanks Gregory, I will join next week and get more ideas before refactoring this."
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-09-25T21:16:08Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-09-25T21:16:17Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-09-25T22:35:47Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-09-25T22:35:57Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-10-01T17:41:08Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-10-01T17:41:18Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-10-29T01:21:48Z",
+        "comment_author": "judyjoseph",
+        "comment_body": "to merge following this PR merge  : https://github.com/sonic-net/sonic-buildimage/pull/23139"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-10-29T05:19:49Z",
+        "comment_author": "lotus-nexthop",
+        "comment_body": "> might be good to add a test case that mocks the args path to ensure its working as expected, up to you\r\n\r\nThanks @gregoryboudreau , will skip on the test case for now.\r\n\r\nWe should merge this soon as https://github.com/sonic-net/sonic-buildimage/pull/23139 has been merged."
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-10-29T22:26:50Z",
+        "comment_author": "lotus-nexthop",
+        "comment_body": "Hi @judyjoseph please merge this when you get a chance, thanks!"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-09-23T23:03:02Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-09-23T23:14:48Z",
+        "review_author": "gregoryboudreau"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-09-23T23:21:59Z",
+        "review_author": "lotus-nexthop"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-09-25T21:19:08Z",
+        "review_author": "louis-nexthop"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-09-25T21:52:53Z",
+        "review_author": "gregoryboudreau"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-09-25T22:38:17Z",
+        "review_author": "louis-nexthop"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-09-30T01:50:28Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-09-30T02:13:36Z",
+        "review_author": "lotus-nexthop"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-09-30T03:06:44Z",
+        "review_author": "gregoryboudreau"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-10-01T17:06:35Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-10-01T17:07:42Z",
+        "review_author": "gregoryboudreau"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-10-01T17:24:47Z",
+        "review_author": "louis-nexthop"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-10-01T17:45:29Z",
+        "review_author": "louis-nexthop"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-10-13T21:54:56Z",
+        "review_author": "spilkey-cisco"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-10-28T17:23:47Z",
+        "review_author": "lotus-nexthop"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-10-28T19:49:09Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-10-28T19:53:43Z",
+        "review_author": "spilkey-cisco"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-10-28T19:55:24Z",
+        "review_author": "spilkey-cisco"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-10-29T03:34:07Z",
+        "review_author": "gregoryboudreau"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-10-29T22:27:19Z",
+        "review_author": "lotus-nexthop"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-10-28T19:55:24Z",
+        "latestReview_author": "spilkey-cisco",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-10-01T17:45:29Z",
+        "latestReview_author": "louis-nexthop",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-10-29T03:34:07Z",
+        "latestReview_author": "gregoryboudreau",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-10-28T19:49:09Z",
+        "latestReview_author": "judyjoseph",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 635,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-10-29T22:27:19Z",
+        "latestReview_author": "lotus-nexthop",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 634,
         "repo": "sonic-platform-daemons",
         "comment_at": "2025-06-27T09:04:52Z",
