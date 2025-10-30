@@ -17731,6 +17731,20 @@
     {
         "number": 19194,
         "repo": "sonic-mgmt",
+        "comment_at": "2025-10-29T06:38:24Z",
+        "comment_author": "anders-nexthop",
+        "comment_body": "> Hi @anders-nexthop, the test case generic_config_updater/test_eth_interface.py::test_replace_lanes is reproducible and causes apply-patch to enter an infinite recursion while sorting moves, which leads to a submodule merge failure. I am still investigating the root cause, but I recommend reverting the current PR that enabled this test case to unblock other pending PRs.\r\n\r\nInteresting. We run this test on our testing infrastructure regularly and have never seen an issue with it. By all means, revert the change. Is there an Issue that discusses the failure you are seeing? Or can you point me to a PR run that failed due to this test? I'd like to have a look at the logs if possible."
+    },
+    {
+        "number": 19194,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-10-29T16:21:40Z",
+        "comment_author": "xincunli-sonic",
+        "comment_body": "> > Hi @anders-nexthop, the test case generic_config_updater/test_eth_interface.py::test_replace_lanes is reproducible and causes apply-patch to enter an infinite recursion while sorting moves, which leads to a submodule merge failure. I am still investigating the root cause, but I recommend reverting the current PR that enabled this test case to unblock other pending PRs.\r\n> \r\n> Interesting. We run this test on our testing infrastructure regularly and have never seen an issue with it. By all means, revert the change. Is there an Issue that discusses the failure you are seeing? Or can you point me to a PR run that failed due to this test? I'd like to have a look at the logs if possible.\r\n\r\nHi @anders-nexthop , here is the issue description, https://github.com/sonic-net/sonic-mgmt/issues/21130"
+    },
+    {
+        "number": 19194,
+        "repo": "sonic-mgmt",
         "review_at": "2025-09-03T07:29:28Z",
         "review_author": "roy-sror"
     },
