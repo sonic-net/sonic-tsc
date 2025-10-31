@@ -519,6 +519,20 @@
     {
         "number": 3931,
         "repo": "sonic-swss",
+        "comment_at": "2025-10-30T20:44:10Z",
+        "comment_author": "kperumalbfn",
+        "comment_body": "@jianyuewu please include this in 202505"
+    },
+    {
+        "number": 3931,
+        "repo": "sonic-swss",
+        "comment_at": "2025-10-30T20:46:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202505: https://github.com/sonic-net/sonic-swss/pull/3965"
+    },
+    {
+        "number": 3931,
+        "repo": "sonic-swss",
         "review_at": "2025-10-10T18:16:40Z",
         "review_author": "dgsudharsan"
     },
@@ -10175,7 +10189,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-09-02T01:07:37Z",
         "comment_author": "yejianquan",
-        "comment_body": "add 202505 label to see whether it fix the unit test failure in\r\nhttps://github.com/sonic-net/sonic-swss/pull/3843\r\n\r\nhttps://dev.azure.com/mssonic/build/_build/results?buildId=935100&view=logs&jobId=80130f07-32fc-5c19-809b-35051dcc5ef5&j=80130f07-32fc-5c19-809b-35051dcc5ef5&t=cef16533-2186-5392-d596-cb28cc45bbb3\r\n\r\n```\r\n[----------] Global test environment tear-down\r\n[==========] 233 tests from 42 test suites ran. (6182 ms total)\r\n[ PASSED ] 232 tests.\r\n[ FAILED ] 1 test, listed below:\r\n[ FAILED ] MuxRollbackTest.StandbyToActiveExceptionRollbackToStandby\r\n\r\n```\r\n "
+        "comment_body": "add 202505 label to see whether it fix the unit test failure in\r\nhttps://github.com/sonic-net/sonic-swss/pull/3843\r\n\r\nhttps://dev.azure.com/mssonic/build/_build/results?buildId=935100&view=logs&jobId=80130f07-32fc-5c19-809b-35051dcc5ef5&j=80130f07-32fc-5c19-809b-35051dcc5ef5&t=cef16533-2186-5392-d596-cb28cc45bbb3\r\n\r\n```\r\n[----------] Global test environment tear-down\r\n[==========] 233 tests from 42 test suites ran. (6182 ms total)\r\n[  PASSED  ] 232 tests.\r\n[  FAILED  ] 1 test, listed below:\r\n[  FAILED  ] MuxRollbackTest.StandbyToActiveExceptionRollbackToStandby\r\n\r\n```\r\n "
     },
     {
         "number": 3788,
@@ -10431,7 +10445,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-07-28T22:13:04Z",
         "comment_author": "vaibhavhd",
-        "comment_body": "```\r\n # create port channel member\r\n ConfigTable(dvs, \"PORTCHANNEL_MEMBER\")[\"PortChannel001|Ethernet0\"] = {\"NULL\": \"NULL\"}\r\n ConfigTable(dvs, \"PORTCHANNEL_INTERFACE\")[\"PortChannel001\"] = {\"NULL\": \"NULL\"}\r\n ConfigTable(dvs, \"PORTCHANNEL_INTERFACE\")[\"PortChannel001|40.0.0.0/31\"] = {\"NULL\": \"NULL\"}\r\n time.sleep(3)\r\n \r\n # Check Portchannel member in ASIC db that shouldn't been created before MACsec enabled\r\n lagmtbl = swsscommon.Table(swsscommon.DBConnector(1, dvs.redis_sock, 0), \"ASIC_STATE:SAI_OBJECT_TYPE_LAG_MEMBER\")\r\n lagms = lagmtbl.getKeys()\r\n> assert len(lagms) == 0\r\nE AssertionError: assert 1 == 0\r\nE + where 1 = len(('oid:0x1b000000000641',))\r\n```"
+        "comment_body": "```\r\n        # create port channel member\r\n        ConfigTable(dvs, \"PORTCHANNEL_MEMBER\")[\"PortChannel001|Ethernet0\"] = {\"NULL\": \"NULL\"}\r\n        ConfigTable(dvs, \"PORTCHANNEL_INTERFACE\")[\"PortChannel001\"] = {\"NULL\": \"NULL\"}\r\n        ConfigTable(dvs, \"PORTCHANNEL_INTERFACE\")[\"PortChannel001|40.0.0.0/31\"] = {\"NULL\": \"NULL\"}\r\n        time.sleep(3)\r\n    \r\n        # Check Portchannel member in ASIC db that shouldn't been created before MACsec enabled\r\n        lagmtbl = swsscommon.Table(swsscommon.DBConnector(1, dvs.redis_sock, 0), \"ASIC_STATE:SAI_OBJECT_TYPE_LAG_MEMBER\")\r\n        lagms = lagmtbl.getKeys()\r\n>       assert len(lagms) == 0\r\nE       AssertionError: assert 1 == 0\r\nE        +  where 1 = len(('oid:0x1b000000000641',))\r\n```"
     },
     {
         "number": 3783,
@@ -10512,7 +10526,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-07-22T18:44:02Z",
         "comment_author": "vivekrnv",
-        "comment_body": "@prabhataravind, @prsunny, @liuh-80 FYI. \r\n\r\n"
+        "comment_body": "@prabhataravind, @prsunny, @liuh-80  FYI. \r\n\r\n"
     },
     {
         "number": 3780,
@@ -11760,7 +11774,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-07-12T19:00:19Z",
         "comment_author": "linux-foundation-easycla",
-        "comment_body": "<a href=\"https://easycla.lfx.linuxfoundation.org/#/?version=2\"><img src=\"https://s3.amazonaws.com/cla-project-logo-prod/cla-signed.svg?v=2\" alt=\"CLA Signed\" align=\"left\" height=\"28\" width=\"328\" ></a><br/><br />The committers listed above are authorized under a signed CLA.<ul><li>:white_check_mark: login: meghtony (41eb0dfb22a1e870492118b55a1b30867146594c, f4d52beddaf812cec6f72f22d34cf4134cea1716, 06c379ff8a1adbb026c5cb12727d6fa1126bc3e0, 9dcb2d9f3d543701623466d9fc4c26b6c050c9af, 52a24327c87630a212e19eaf68a2c0546d45f22c, 2a93888ee09d314787cb5cdce3399b8290366bb4, dca327a3af7e131f41828a3f491dfc044c0d32d9, ededa865ec11a4c8755e5fcb84c434624a2c5ffd, 7cd513ff9be54cef7490675a6fc2b23b07c2e783, 91ab945bcb5e4d5d6e85d233f8565c28a95e470b, 0ee7310b56a6ea2f0dd064ca791f9aa5fa4668fb, 0d79a8716088fd37645c7df4054fa808277115e0, e4d2fa5be91a937edc318d526d4f3efbdcb6e3ea, d7dec7925b1a21e4aafb8f302610bb390f56796b, 977cda0086c0e22ccf159079d4182de438ddeae4, bff0f1d0e52a7ef0acf9050ad738fa42be11dc5f, fc3a1663e6c0fdf68aedcfd8d9ed773005c81ea2, 548c4da7232840cf2dcc3754eea60f40283adbb0, 87e5f1cf02e8f28786c050fbc319b53eedaccd1a)</li><li>:white_check_mark: login: prsunny / name: Prince Sunny (e48fd2d73d911abfa13bb59917dd6aace19eb8ef, 8e44332954b65481954d4da0dbb1355c5bae283d, b673ea5e234955ddc2a19b6b33ff7115e2a38611, 31179d59b52006dddd94e55bf2ee4c4bcff4431c)</li><li>:white_check_mark: login: prabhataravind (7b9fd02bfa3afb86dca47a152fd7a74f85b71635, 7d58bba5d5ce1ac65ee49e0f90ed7ede23e9cd48, 8503d17103c7783ed17dfc98d5aecc0754c4db56)</li></ul><!-- Date Modified: 2025-07-31 02:12:18.716428 -->"
+        "comment_body": "<a href=\"https://easycla.lfx.linuxfoundation.org/#/?version=2\"><img src=\"https://s3.amazonaws.com/cla-project-logo-prod/cla-signed.svg?v=2\" alt=\"CLA Signed\" align=\"left\" height=\"28\" width=\"328\" ></a><br/><br />The committers listed above are authorized under a signed CLA.<ul><li>:white_check_mark: login: meghtony  (41eb0dfb22a1e870492118b55a1b30867146594c, f4d52beddaf812cec6f72f22d34cf4134cea1716, 06c379ff8a1adbb026c5cb12727d6fa1126bc3e0, 9dcb2d9f3d543701623466d9fc4c26b6c050c9af, 52a24327c87630a212e19eaf68a2c0546d45f22c, 2a93888ee09d314787cb5cdce3399b8290366bb4, dca327a3af7e131f41828a3f491dfc044c0d32d9, ededa865ec11a4c8755e5fcb84c434624a2c5ffd, 7cd513ff9be54cef7490675a6fc2b23b07c2e783, 91ab945bcb5e4d5d6e85d233f8565c28a95e470b, 0ee7310b56a6ea2f0dd064ca791f9aa5fa4668fb, 0d79a8716088fd37645c7df4054fa808277115e0, e4d2fa5be91a937edc318d526d4f3efbdcb6e3ea, d7dec7925b1a21e4aafb8f302610bb390f56796b, 977cda0086c0e22ccf159079d4182de438ddeae4, bff0f1d0e52a7ef0acf9050ad738fa42be11dc5f, fc3a1663e6c0fdf68aedcfd8d9ed773005c81ea2, 548c4da7232840cf2dcc3754eea60f40283adbb0, 87e5f1cf02e8f28786c050fbc319b53eedaccd1a)</li><li>:white_check_mark: login: prsunny / name: Prince Sunny  (e48fd2d73d911abfa13bb59917dd6aace19eb8ef, 8e44332954b65481954d4da0dbb1355c5bae283d, b673ea5e234955ddc2a19b6b33ff7115e2a38611, 31179d59b52006dddd94e55bf2ee4c4bcff4431c)</li><li>:white_check_mark: login: prabhataravind  (7b9fd02bfa3afb86dca47a152fd7a74f85b71635, 7d58bba5d5ce1ac65ee49e0f90ed7ede23e9cd48, 8503d17103c7783ed17dfc98d5aecc0754c4db56)</li></ul><!-- Date Modified: 2025-07-31 02:12:18.716428 -->"
     },
     {
         "number": 3760,
@@ -12194,7 +12208,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-07-21T13:10:38Z",
         "comment_author": "Pterosaur",
-        "comment_body": "@r12f @prsunny Please help to review this PR."
+        "comment_body": "@r12f  @prsunny Please help to review this PR."
     },
     {
         "number": 3759,
@@ -13058,7 +13072,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-07-05T03:38:17Z",
         "comment_author": "liuh-80",
-        "comment_body": "Test failed because test_PortMirrorQueue failed, there are fix in swss and sairedis, waiting for fix ready.\r\n\r\n2025-07-05T02:32:54.5213921Z =========================== short test summary info ============================\r\n2025-07-05T02:32:54.5214559Z FAILED test_mirror_port_span.py::TestMirror::test_PortMirrorQueue - Assertion...\r\n2025-07-05T02:32:54.5215073Z =================== 1 failed, 9 passed in 156.99s (0:02:36) ===================="
+        "comment_body": "Test failed because test_PortMirrorQueue  failed, there are fix in swss and sairedis, waiting for fix ready.\r\n\r\n2025-07-05T02:32:54.5213921Z =========================== short test summary info ============================\r\n2025-07-05T02:32:54.5214559Z FAILED test_mirror_port_span.py::TestMirror::test_PortMirrorQueue - Assertion...\r\n2025-07-05T02:32:54.5215073Z =================== 1 failed, 9 passed in 156.99s (0:02:36) ===================="
     },
     {
         "number": 3746,
@@ -13906,7 +13920,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-06-27T06:17:29Z",
         "comment_author": "theasianpianist",
-        "comment_body": "@mukeshmv for viz"
+        "comment_body": "@mukeshmv  for viz"
     },
     {
         "number": 3731,
@@ -14780,7 +14794,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-06-30T22:49:22Z",
         "comment_author": "vmittal-msft",
-        "comment_body": "> @vmittal-msft , possible to fix coverage?\r\n\r\n@prsunny It's hard to cover this code. Can we push ?"
+        "comment_body": "> @vmittal-msft , possible to fix coverage?\r\n\r\n@prsunny  It's hard to cover this code. Can we push ?"
     },
     {
         "number": 3719,
@@ -15331,7 +15345,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-07-09T09:30:37Z",
         "comment_author": "nazariig",
-        "comment_body": "> test_PortMirrorQueue\r\n\r\n@liuh-80 i do not see any issue with `sonic-sairedis` part:\r\nhttps://github.com/sonic-net/sonic-sairedis/pull/1623\r\n\r\nI think that is because master is not using the latest `sonic-sairedis` artifacts.\r\nPlease re-trigger this build: https://dev.azure.com/mssonic/build/_build/results?buildId=893506&view=results\r\n\r\nFYI:\r\n```\r\nhttps://dev.azure.com/mssonic/be1b070f-be15-4154-aade-b1d3bfb17054/_apis/build/builds/895646/logs/202\r\n\r\n2025-07-08T11:24:06.4166911Z + echo 'Running the py test for tests: test_mirror_port_span.py, 1/3...'\r\n2025-07-08T11:24:06.4167238Z + py.test -v --force-flaky --junitxml=test_mirror_port_span_tr.xml --imgname=docker-sonic-vs:Azure.sonic-sairedis.20250708.3.asan-False test_mirror_port_span.py\r\n2025-07-08T11:24:06.4167547Z Running the py test for tests: test_mirror_port_span.py, 1/3...\r\n2025-07-08T11:24:06.8722567Z ============================= test session starts ==============================\r\n2025-07-08T11:24:06.8723186Z platform linux -- Python 3.10.12, pytest-8.4.1, pluggy-1.6.0 -- /usr/bin/python3\r\n2025-07-08T11:24:06.8723548Z cachedir: .pytest_cache\r\n2025-07-08T11:24:06.8723908Z rootdir: /agent/_work/1/s/sonic-swss/tests\r\n2025-07-08T11:24:06.8724220Z plugins: flaky-3.8.1\r\n2025-07-08T11:24:06.9123457Z collecting ... collected 10 items\r\n2025-07-08T11:24:06.9123775Z \r\n2025-07-08T11:24:08.6362270Z test_mirror_port_span.py::TestMirror::test_PortMirrorQueue PASSED [ 64%]\r\n2025-07-08T11:24:14.7437583Z test_interface.py::TestRouterInterface::test_LagInterfaceIpv6LinkLocalOnly PASSED [ 67%]\r\n2025-07-08T11:24:19.6826396Z test_interface.py::TestRouterInterface::test_VLanInterfaceIpv6LinkLocalOnly PASSED [ 62%]\r\n2025-07-08T11:24:24.4298991Z test_mirror_ipv6_separate.py::TestMirror::test_AclBindMirrorV6Reorder2 PASSED [ 80%]\r\n2025-07-08T11:24:26.1041020Z test_mirror_ipv6_combined.py::test_nonflaky_dummy PASSED [100%]\r\n2025-07-08T11:24:26.1041774Z \r\n2025-07-08T11:24:26.1042469Z - generated xml file: /agent/_work/1/s/sonic-swss/tests/test_mirror_ipv6_combined_tr.xml -\r\n2025-07-08T11:24:26.1043233Z ===Flaky Test Report===\r\n2025-07-08T11:24:26.1051261Z \r\n2025-07-08T11:24:26.1051823Z test_CombinedMirrorTableCreation passed 1 out of the required 1 times. Success!\r\n2025-07-08T11:24:26.1052638Z test_AclBindMirrorV6Combined passed 1 out of the required 1 times. Success!\r\n2025-07-08T11:24:26.1053110Z test_AclBindMirrorV6Reorder1 passed 1 out of the required 1 times. Success!\r\n2025-07-08T11:24:26.1053552Z test_AclBindMirrorV6Reorder2 passed 1 out of the required 1 times. Success!\r\n2025-07-08T11:24:26.1053971Z test_nonflaky_dummy passed 1 out of the required 1 times. Success!\r\n```\r\n\r\nP.S: the latest used artifact is:\r\n##[debug]PipelineId from non-trigerringBuild: 880464\r\nWhich is: https://dev.azure.com/mssonic/build/_build/results?buildId=880464&view=results\r\n\r\nThis is the root cause of failures.\r\nPlease have a look and fix build environment"
+        "comment_body": "> test_PortMirrorQueue\r\n\r\n@liuh-80 i do not see any issue with `sonic-sairedis` part:\r\nhttps://github.com/sonic-net/sonic-sairedis/pull/1623\r\n\r\nI think that is because master is not using the latest `sonic-sairedis` artifacts.\r\nPlease re-trigger this build: https://dev.azure.com/mssonic/build/_build/results?buildId=893506&view=results\r\n\r\nFYI:\r\n```\r\nhttps://dev.azure.com/mssonic/be1b070f-be15-4154-aade-b1d3bfb17054/_apis/build/builds/895646/logs/202\r\n\r\n2025-07-08T11:24:06.4166911Z + echo 'Running the py test for tests: test_mirror_port_span.py, 1/3...'\r\n2025-07-08T11:24:06.4167238Z + py.test -v --force-flaky --junitxml=test_mirror_port_span_tr.xml --imgname=docker-sonic-vs:Azure.sonic-sairedis.20250708.3.asan-False test_mirror_port_span.py\r\n2025-07-08T11:24:06.4167547Z Running the py test for tests: test_mirror_port_span.py, 1/3...\r\n2025-07-08T11:24:06.8722567Z ============================= test session starts ==============================\r\n2025-07-08T11:24:06.8723186Z platform linux -- Python 3.10.12, pytest-8.4.1, pluggy-1.6.0 -- /usr/bin/python3\r\n2025-07-08T11:24:06.8723548Z cachedir: .pytest_cache\r\n2025-07-08T11:24:06.8723908Z rootdir: /agent/_work/1/s/sonic-swss/tests\r\n2025-07-08T11:24:06.8724220Z plugins: flaky-3.8.1\r\n2025-07-08T11:24:06.9123457Z collecting ... collected 10 items\r\n2025-07-08T11:24:06.9123775Z \r\n2025-07-08T11:24:08.6362270Z test_mirror_port_span.py::TestMirror::test_PortMirrorQueue PASSED [ 64%]\r\n2025-07-08T11:24:14.7437583Z test_interface.py::TestRouterInterface::test_LagInterfaceIpv6LinkLocalOnly PASSED [ 67%]\r\n2025-07-08T11:24:19.6826396Z test_interface.py::TestRouterInterface::test_VLanInterfaceIpv6LinkLocalOnly PASSED [ 62%]\r\n2025-07-08T11:24:24.4298991Z test_mirror_ipv6_separate.py::TestMirror::test_AclBindMirrorV6Reorder2 PASSED [ 80%]\r\n2025-07-08T11:24:26.1041020Z test_mirror_ipv6_combined.py::test_nonflaky_dummy PASSED                 [100%]\r\n2025-07-08T11:24:26.1041774Z \r\n2025-07-08T11:24:26.1042469Z - generated xml file: /agent/_work/1/s/sonic-swss/tests/test_mirror_ipv6_combined_tr.xml -\r\n2025-07-08T11:24:26.1043233Z ===Flaky Test Report===\r\n2025-07-08T11:24:26.1051261Z \r\n2025-07-08T11:24:26.1051823Z test_CombinedMirrorTableCreation passed 1 out of the required 1 times. Success!\r\n2025-07-08T11:24:26.1052638Z test_AclBindMirrorV6Combined passed 1 out of the required 1 times. Success!\r\n2025-07-08T11:24:26.1053110Z test_AclBindMirrorV6Reorder1 passed 1 out of the required 1 times. Success!\r\n2025-07-08T11:24:26.1053552Z test_AclBindMirrorV6Reorder2 passed 1 out of the required 1 times. Success!\r\n2025-07-08T11:24:26.1053971Z test_nonflaky_dummy passed 1 out of the required 1 times. Success!\r\n```\r\n\r\nP.S: the latest used artifact is:\r\n##[debug]PipelineId from non-trigerringBuild: 880464\r\nWhich is: https://dev.azure.com/mssonic/build/_build/results?buildId=880464&view=results\r\n\r\nThis is the root cause of failures.\r\nPlease have a look and fix build environment"
     },
     {
         "number": 3712,
@@ -15872,7 +15886,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-07-15T15:07:34Z",
         "comment_author": "dgsudharsan",
-        "comment_body": "@r12f Here is the PR https://github.com/Azure/sonic-swss.msft/pull/105"
+        "comment_body": "@r12f  Here is the PR https://github.com/Azure/sonic-swss.msft/pull/105"
     },
     {
         "number": 3705,
@@ -16456,7 +16470,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-07-03T23:11:44Z",
         "comment_author": "dgsudharsan",
-        "comment_body": "@prabhataravind @yejianquan I am noticing this failure in 202505 as well https://dev.azure.com/mssonic/build/_build/results?buildId=891584&view=ms.vss-test-web.build-test-results-tab&runId=3830007&resultId=100359&paneView=debug\r\n\r\nI am adding cherry-pick tag"
+        "comment_body": "@prabhataravind @yejianquan  I am noticing this failure in 202505 as well https://dev.azure.com/mssonic/build/_build/results?buildId=891584&view=ms.vss-test-web.build-test-results-tab&runId=3830007&resultId=100359&paneView=debug\r\n\r\nI am adding cherry-pick tag"
     },
     {
         "number": 3687,
@@ -16560,7 +16574,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-06-11T18:39:04Z",
         "comment_author": "dgsudharsan",
-        "comment_body": "@prsunny Updated the description"
+        "comment_body": "@prsunny  Updated the description"
     },
     {
         "number": 3686,
@@ -16841,7 +16855,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-06-25T17:55:11Z",
         "comment_author": "rlhui",
-        "comment_body": "@stephenxs , would you update the branch? @prsunny please help review"
+        "comment_body": "@stephenxs , would you update the branch?  @prsunny  please help review"
     },
     {
         "number": 3681,
@@ -16911,7 +16925,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-07-02T17:29:45Z",
         "comment_author": "rlhui",
-        "comment_body": "@prsunny remindre on this, thanks"
+        "comment_body": "@prsunny  remindre on this, thanks"
     },
     {
         "number": 3681,
@@ -16960,7 +16974,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-07-04T06:40:49Z",
         "comment_author": "stephenxs",
-        "comment_body": "Failure isn't relevant to PR itself\r\n```\r\nself = <test_mirror_port_span.TestMirror object at 0x751410390d60>\r\ndvs = <conftest.DockerVirtualSwitch object at 0x751410392050>, testlog = None\r\n\r\n def test_PortMirrorQueue(self, dvs, testlog):\r\n \"\"\"\r\n This test covers valid and invalid values of the queue parameter. All sessions have source & dest port.\r\n Operation flow:\r\n 1. Create mirror session with queue 0, verify session becomes active and error not written to log.\r\n 2. Create mirror session with queue max valid value, verify session becomes active and error not written to log.\r\n 3. Create mirror session with queue max valid value + 1, verify session doesnt get created and error written to log.\r\n Due to lag in table operations, verify_no_mirror is necessary at the end of each step, to ensure cleanup before next step.\r\n Note that since orchagent caches max valid value during initialization, this test cannot simulate a value from SAI, e.g.\r\n by calling setReadOnlyAttr, because orchagent has already completed initialization and would never read the simulated value.\r\n Therefore, the default value must be used, MIRROR_SESSION_DEFAULT_NUM_TC which is defined in mirrororch.cpp as 255.\r\n \"\"\"\r\n \r\n session = \"TEST_SESSION\"\r\n dst_port = \"Ethernet16\"\r\n src_ports = \"Ethernet12\"\r\n \r\n # Sub Test 1\r\n marker = dvs.add_log_marker()\r\n self.dvs_mirror.create_span_session(session, dst_port, src_ports, direction=\"BOTH\", queue=\"0\")\r\n self.dvs_mirror.verify_session_status(session)\r\n self.dvs_mirror.remove_mirror_session(session)\r\n self.dvs_mirror.verify_no_mirror()\r\n self.check_syslog(dvs, marker, \"Failed to get valid queue 0\", 0)\r\n \r\n # Sub Test 2\r\n marker = dvs.add_log_marker()\r\n self.dvs_mirror.create_span_session(session, dst_port, src_ports, direction=\"RX\", queue=\"15\")\r\n self.dvs_mirror.verify_session_status(session)\r\n self.dvs_mirror.remove_mirror_session(session)\r\n self.dvs_mirror.verify_no_mirror()\r\n self.check_syslog(dvs, marker, \"Failed to get valid queue 15\", 0)\r\n \r\n # Sub Test 3\r\n marker = dvs.add_log_marker()\r\n self.dvs_mirror.create_span_session(session, dst_port, src_ports, direction=\"TX\", queue=\"16\")\r\n self.dvs_mirror.verify_session_status(session, expected=0)\r\n self.dvs_mirror.remove_mirror_session(session)\r\n self.dvs_mirror.verify_no_mirror()\r\n> self.check_syslog(dvs, marker, \"Failed to get valid queue 16\", 1)\r\n\r\ntest_mirror_port_span.py:55: \r\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \r\n\r\nself = <test_mirror_port_span.TestMirror object at 0x751410390d60>\r\ndvs = <conftest.DockerVirtualSwitch object at 0x751410392050>\r\nmarker = '=== start marker 2025-07-04T02:26:07.975787 ==='\r\nlog = 'Failed to get valid queue 16', expected_cnt = 1\r\n\r\n def check_syslog(self, dvs, marker, log, expected_cnt):\r\n (ec, out) = dvs.runcmd(['sh', '-c', \"awk \\'/%s/,ENDFILE {print;}\\' /var/log/syslog | grep \\'%s\\' | wc -l\" % (marker, log)])\r\n> assert out.strip() == str(expected_cnt)\r\nE AssertionError: assert '0' == '1'\r\nE \r\nE - 1\r\nE + 0\r\n\r\ntest_mirror_port_span.py:13: AssertionError\r\n```"
+        "comment_body": "Failure isn't relevant to PR itself\r\n```\r\nself = <test_mirror_port_span.TestMirror object at 0x751410390d60>\r\ndvs = <conftest.DockerVirtualSwitch object at 0x751410392050>, testlog = None\r\n\r\n    def test_PortMirrorQueue(self, dvs, testlog):\r\n        \"\"\"\r\n        This test covers valid and invalid values of the queue parameter.  All sessions have source & dest port.\r\n        Operation flow:\r\n        1. Create mirror session with queue 0, verify session becomes active and error not written to log.\r\n        2. Create mirror session with queue max valid value, verify session becomes active and error not written to log.\r\n        3. Create mirror session with queue max valid value + 1, verify session doesnt get created and error written to log.\r\n        Due to lag in table operations, verify_no_mirror is necessary at the end of each step, to ensure cleanup before next step.\r\n        Note that since orchagent caches max valid value during initialization, this test cannot simulate a value from SAI, e.g.\r\n        by calling setReadOnlyAttr, because orchagent has already completed initialization and would never read the simulated value.\r\n        Therefore, the default value must be used, MIRROR_SESSION_DEFAULT_NUM_TC which is defined in mirrororch.cpp as 255.\r\n        \"\"\"\r\n    \r\n        session = \"TEST_SESSION\"\r\n        dst_port = \"Ethernet16\"\r\n        src_ports = \"Ethernet12\"\r\n    \r\n        # Sub Test 1\r\n        marker = dvs.add_log_marker()\r\n        self.dvs_mirror.create_span_session(session, dst_port, src_ports, direction=\"BOTH\", queue=\"0\")\r\n        self.dvs_mirror.verify_session_status(session)\r\n        self.dvs_mirror.remove_mirror_session(session)\r\n        self.dvs_mirror.verify_no_mirror()\r\n        self.check_syslog(dvs, marker, \"Failed to get valid queue 0\", 0)\r\n    \r\n        # Sub Test 2\r\n        marker = dvs.add_log_marker()\r\n        self.dvs_mirror.create_span_session(session, dst_port, src_ports, direction=\"RX\", queue=\"15\")\r\n        self.dvs_mirror.verify_session_status(session)\r\n        self.dvs_mirror.remove_mirror_session(session)\r\n        self.dvs_mirror.verify_no_mirror()\r\n        self.check_syslog(dvs, marker, \"Failed to get valid queue 15\", 0)\r\n    \r\n        # Sub Test 3\r\n        marker = dvs.add_log_marker()\r\n        self.dvs_mirror.create_span_session(session, dst_port, src_ports, direction=\"TX\", queue=\"16\")\r\n        self.dvs_mirror.verify_session_status(session, expected=0)\r\n        self.dvs_mirror.remove_mirror_session(session)\r\n        self.dvs_mirror.verify_no_mirror()\r\n>       self.check_syslog(dvs, marker, \"Failed to get valid queue 16\", 1)\r\n\r\ntest_mirror_port_span.py:55: \r\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \r\n\r\nself = <test_mirror_port_span.TestMirror object at 0x751410390d60>\r\ndvs = <conftest.DockerVirtualSwitch object at 0x751410392050>\r\nmarker = '=== start marker 2025-07-04T02:26:07.975787 ==='\r\nlog = 'Failed to get valid queue 16', expected_cnt = 1\r\n\r\n    def check_syslog(self, dvs, marker, log, expected_cnt):\r\n        (ec, out) = dvs.runcmd(['sh', '-c', \"awk \\'/%s/,ENDFILE {print;}\\' /var/log/syslog | grep \\'%s\\' | wc -l\" % (marker, log)])\r\n>       assert out.strip() == str(expected_cnt)\r\nE       AssertionError: assert '0' == '1'\r\nE         \r\nE         - 1\r\nE         + 0\r\n\r\ntest_mirror_port_span.py:13: AssertionError\r\n```"
     },
     {
         "number": 3681,
@@ -17548,7 +17562,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-06-02T18:37:05Z",
         "comment_author": "prsunny",
-        "comment_body": "@saiarcot895 , @theasianpianist, @liushilongbuaa for viz"
+        "comment_body": "@saiarcot895 , @theasianpianist, @liushilongbuaa  for viz"
     },
     {
         "number": 3669,
@@ -18283,7 +18297,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-05-30T18:51:58Z",
         "comment_author": "dgsudharsan",
-        "comment_body": "> I think the exception message is used for alerts etc. Can we catch the exception and return non-zero error code?\r\n\r\nThe message comes as an info log. So if we are catching for error logs this won't be caught. If you want log, i can catch and rethrow the exception but the problem is the core then will not have proper backtrace as the trace will be from the throw command and not the actual place that caused exception which would create difficulty in debugging\r\n\r\n```\r\n2025 Apr 26 13:50:43.043425 r-bison-04 INFO bgp#supervisord: fpmsyncd Exception \"stoul\" had been thrown in daemon\r\n\r\n```"
+        "comment_body": "> I think the exception message is used for alerts etc. Can we catch the exception and return non-zero error code?\r\n\r\nThe message comes as an info log.   So if we are catching for error logs this won't be caught. If you want log, i can catch and rethrow the exception but the problem is the core then will not have proper backtrace as the trace will be from the throw command and not the actual place that caused exception which would create difficulty in debugging\r\n\r\n```\r\n2025 Apr 26 13:50:43.043425 r-bison-04 INFO bgp#supervisord: fpmsyncd Exception \"stoul\" had been thrown in daemon\r\n\r\n```"
     },
     {
         "number": 3657,
@@ -18988,7 +19002,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-05-19T03:33:35Z",
         "comment_author": "linux-foundation-easycla",
-        "comment_body": "<a href=\"https://easycla.lfx.linuxfoundation.org/#/?version=2\"><img src=\"https://s3.amazonaws.com/cla-project-logo-prod/cla-signed.svg\" alt=\"CLA Signed\" align=\"left\" height=\"28\" width=\"328\" ></a><br/><br />The committers listed above are authorized under a signed CLA.<ul><li>:white_check_mark: login: manoharan-nexthop / name: Manoharan Sundaramoorthy (169de3d0f567dfd1f7e160c5aaec2d669bd7e6b3)</li><li>:white_check_mark: login: prsunny / name: Prince Sunny (70a36ae68d57399655719e9f2bab94860aeab9c1, 90250dd6f39892fcd9098883c5ad57834c03105c)</li></ul><!-- Date Modified: 2025-06-11 17:36:03.806334 -->"
+        "comment_body": "<a href=\"https://easycla.lfx.linuxfoundation.org/#/?version=2\"><img src=\"https://s3.amazonaws.com/cla-project-logo-prod/cla-signed.svg\" alt=\"CLA Signed\" align=\"left\" height=\"28\" width=\"328\" ></a><br/><br />The committers listed above are authorized under a signed CLA.<ul><li>:white_check_mark: login: manoharan-nexthop / name: Manoharan Sundaramoorthy  (169de3d0f567dfd1f7e160c5aaec2d669bd7e6b3)</li><li>:white_check_mark: login: prsunny / name: Prince Sunny  (70a36ae68d57399655719e9f2bab94860aeab9c1, 90250dd6f39892fcd9098883c5ad57834c03105c)</li></ul><!-- Date Modified: 2025-06-11 17:36:03.806334 -->"
     },
     {
         "number": 3652,
@@ -19125,7 +19139,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-05-28T20:49:53Z",
         "comment_author": "zjswhhh",
-        "comment_body": "> Also, this change handles the case where the packet is already encapped and redirected from the other NPU.\r\n> \r\n> Is the logic already present to encap and redirect the packet? Who handles this part?\r\n\r\nYes, the logic is already present. `vnetorch` will trigger a vxlan tunnel creation in `vxlantunnelorch`, when primary is the remote dpu, next hop will be pointing to that tunnel. "
+        "comment_body": "> Also, this change handles the case where the packet is already encapped and redirected from the other NPU.\r\n> \r\n> Is the logic already present to encap and redirect the packet? Who handles this part?\r\n\r\nYes, the logic is already present. `vnetorch` will trigger a vxlan tunnel creation in `vxlantunnelorch`, when primary is the remote dpu, next hop will be pointing to that tunnel.    "
     },
     {
         "number": 3651,
@@ -21020,7 +21034,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-05-21T02:38:45Z",
         "comment_author": "liuh-80",
-        "comment_body": "This PR depends on:\r\nhttps://github.com/sonic-net/sonic-swss/pull/3644\r\n Fix code bug in next hop, which will block merge validation.\r\nhttps://github.com/sonic-net/sonic-swss/pull/3619\r\n Some code change in lib/orch_zmq_config.h need use by this PR."
+        "comment_body": "This PR depends on:\r\nhttps://github.com/sonic-net/sonic-swss/pull/3644\r\n    Fix code bug in next hop, which will block merge validation.\r\nhttps://github.com/sonic-net/sonic-swss/pull/3619\r\n    Some code change in lib/orch_zmq_config.h need use by this PR."
     },
     {
         "number": 3632,
@@ -21229,7 +21243,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-05-20T18:41:35Z",
         "comment_author": "sundar-pds",
-        "comment_body": "@prsunny , @theasianpianist , @prabhataravind . \r\nCould you please review this PR. The option to add reviewers to the PR seems to be disabled."
+        "comment_body": "@prsunny , @theasianpianist , @prabhataravind .  \r\nCould you please review this  PR.  The option to add reviewers to the PR seems to be disabled."
     },
     {
         "number": 3631,
@@ -21306,7 +21320,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-07-25T06:05:56Z",
         "comment_author": "sundar-pds",
-        "comment_body": "@vivekrnv / All , the review comments are addressed. PTAL . Thanks."
+        "comment_body": "@vivekrnv / All ,  the review comments are addressed. PTAL . Thanks."
     },
     {
         "number": 3631,
@@ -21439,21 +21453,21 @@
         "repo": "sonic-swss",
         "comment_at": "2025-07-27T18:17:11Z",
         "comment_author": "sundar-pds",
-        "comment_body": "@vivekrnv / All, the review comments are addressed. PTAL . Thanks."
+        "comment_body": "@vivekrnv / All,  the review comments are addressed. PTAL . Thanks."
     },
     {
         "number": 3631,
         "repo": "sonic-swss",
         "comment_at": "2025-07-28T15:54:18Z",
         "comment_author": "sundar-pds",
-        "comment_body": "@prsunny , PR is ready to go. Pls merge when possible."
+        "comment_body": "@prsunny , PR is ready to go.  Pls merge when possible."
     },
     {
         "number": 3631,
         "repo": "sonic-swss",
         "comment_at": "2025-07-29T15:21:54Z",
         "comment_author": "sundar-pds",
-        "comment_body": "@prsunny @prabhataravind , Could you pls merge the PR . Hoping to avoid another rebasing / conflict resolution before PR merge happens. Thanks. "
+        "comment_body": "@prsunny @prabhataravind , Could you pls merge the PR .  Hoping to avoid another rebasing / conflict resolution before PR merge happens. Thanks. "
     },
     {
         "number": 3631,
@@ -22035,7 +22049,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-06-10T17:48:58Z",
         "comment_author": "rminnikanti",
-        "comment_body": "> > Addressed review comments. PR checks failed because of dependency on - [sonic-net/sonic-swss-common#1010](https://github.com/sonic-net/sonic-swss-common/pull/1010)\r\n> \r\n> @rminnikanti PR #1010 is already merged. Why its still a dependency?\r\n\r\n@prsunny, unsure why. Below is the error, where it failed to find the macro that is added as part of [sonic-net/sonic-swss-common#1010]\r\n```\r\n../../../orchagent/copporch.cpp: In constructor 'CoppOrch::CoppOrch(swss::DBConnector*, std::string)':\r\n../../../orchagent/copporch.cpp:199:78: error: 'STATE_COPP_TRAP_CAPABILITY_TABLE_NAME' was not declared in this scope; did you mean 'STATE_SWITCH_CAPABILITY_TABLE_NAME'?\r\n 199 | m_trapCapabilityTable(std::unique_ptr<Table>(new Table(m_state_db.get(), STATE_COPP_TRAP_CAPABILITY_TABLE_NAME))),\r\n | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n | STATE_SWITCH_CAPABILITY_TABLE_NAME\r\n```"
+        "comment_body": "> > Addressed review comments. PR checks failed because of dependency on - [sonic-net/sonic-swss-common#1010](https://github.com/sonic-net/sonic-swss-common/pull/1010)\r\n> \r\n> @rminnikanti PR #1010 is already merged. Why its still a dependency?\r\n\r\n@prsunny, unsure why. Below is the error, where it failed to find the macro that is added as part of [sonic-net/sonic-swss-common#1010]\r\n```\r\n../../../orchagent/copporch.cpp: In constructor 'CoppOrch::CoppOrch(swss::DBConnector*, std::string)':\r\n../../../orchagent/copporch.cpp:199:78: error: 'STATE_COPP_TRAP_CAPABILITY_TABLE_NAME' was not declared in this scope; did you mean 'STATE_SWITCH_CAPABILITY_TABLE_NAME'?\r\n  199 |     m_trapCapabilityTable(std::unique_ptr<Table>(new Table(m_state_db.get(), STATE_COPP_TRAP_CAPABILITY_TABLE_NAME))),\r\n      |                                                                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n      |                                                                              STATE_SWITCH_CAPABILITY_TABLE_NAME\r\n```"
     },
     {
         "number": 3624,
@@ -22147,7 +22161,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-06-22T18:14:53Z",
         "comment_author": "rminnikanti",
-        "comment_body": "@prsunny @prabhataravind \r\n\r\nCan you please help find why PR Build fails even though dependent sonic-swss-common change is merged?\r\nBuild unable to find new macro introduced in sonic-swss-common repo, even after the PR is merged.\r\nI am able to build debian locally without any issues. \r\n\r\n```\r\n./../../orchagent/copporch.cpp:199:78: error: 'STATE_COPP_TRAP_CAPABILITY_TABLE_NAME' was not declared in this scope; did you mean 'STATE_SWITCH_CAPABILITY_TABLE_NAME'?\r\n 199 | m_trapCapabilityTable(std::unique_ptr<Table>(new Table(m_state_db.get(), STATE_COPP_TRAP_CAPABILITY_TABLE_NAME))),\r\n```"
+        "comment_body": "@prsunny @prabhataravind \r\n\r\nCan you please help find why PR Build fails even though dependent sonic-swss-common change is merged?\r\nBuild unable to find new macro introduced in sonic-swss-common repo, even after the PR is merged.\r\nI am able to build debian locally without any issues. \r\n\r\n```\r\n./../../orchagent/copporch.cpp:199:78: error: 'STATE_COPP_TRAP_CAPABILITY_TABLE_NAME' was not declared in this scope; did you mean 'STATE_SWITCH_CAPABILITY_TABLE_NAME'?\r\n  199 |     m_trapCapabilityTable(std::unique_ptr<Table>(new Table(m_state_db.get(), STATE_COPP_TRAP_CAPABILITY_TABLE_NAME))),\r\n```"
     },
     {
         "number": 3624,
@@ -22203,7 +22217,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-06-28T03:22:07Z",
         "comment_author": "rminnikanti",
-        "comment_body": "@prsunny, Checks on this PR failing because `libswsscommon-dev_1.0.0_amd64.deb` being downloaded doesn't include my https://github.com/sonic-net/sonic-swss-common/pull/1010 PR. **sonic-swss-common pipeline is failing since May 28th with libyang3 error**:\r\n\r\nThis is the libswsscommon-dev debian link being downloaded by this PR build:\r\nhttps://sonic-build.azurewebsites.net/api/sonic/artifacts?branchName=master&definitionId=9&artifactName=sonic-swss-common-bookworm&target=libswsscommon-dev_1.0.0_amd64.deb\r\n\r\n"
+        "comment_body": "@prsunny, Checks on this PR failing because `libswsscommon-dev_1.0.0_amd64.deb` being downloaded doesn't include my https://github.com/sonic-net/sonic-swss-common/pull/1010 PR.  **sonic-swss-common pipeline is failing since May 28th with libyang3 error**:\r\n\r\nThis is the libswsscommon-dev debian link being downloaded by this PR build:\r\nhttps://sonic-build.azurewebsites.net/api/sonic/artifacts?branchName=master&definitionId=9&artifactName=sonic-swss-common-bookworm&target=libswsscommon-dev_1.0.0_amd64.deb\r\n\r\n"
     },
     {
         "number": 3624,
@@ -22378,7 +22392,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-07-16T11:18:55Z",
         "comment_author": "yejianquan",
-        "comment_body": "@prsunny @prabhataravind please suggest whether it's safe to go to 202505,\r\nIf so I prefer so take it, since most changes for Neighbor miss trap(https://github.com/sonic-net/SONiC/pull/1943) has been in 202505 branch "
+        "comment_body": "@prsunny  @prabhataravind please suggest whether it's safe to go to 202505,\r\nIf so I prefer so take it, since most changes for Neighbor miss trap(https://github.com/sonic-net/SONiC/pull/1943) has been in 202505 branch "
     },
     {
         "number": 3624,
@@ -23230,7 +23244,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-06-11T15:53:14Z",
         "comment_author": "KrisNey-MSFT",
-        "comment_body": "hi @prabhataravind - checking in to see if you would be able to review? "
+        "comment_body": "hi @prabhataravind  - checking in to see if you would be able to review?  "
     },
     {
         "number": 3619,
@@ -23662,7 +23676,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-04-18T01:47:31Z",
         "comment_author": "sivanuka",
-        "comment_body": "Hi @prsunny,\r\n SA checks are failing at step \"install libnl3, sonic swss common and sairedis\".\r\n How to resolve it ?\r\n is it due to any change in the PR ?\r\nThanks !!\r\n \r\n"
+        "comment_body": "Hi @prsunny,\r\n     SA checks are failing at step \"install libnl3, sonic swss common and sairedis\".\r\n     How to resolve it ?\r\n     is it due to any change in the PR ?\r\nThanks !!\r\n     \r\n"
     },
     {
         "number": 3611,
@@ -23697,14 +23711,14 @@
         "repo": "sonic-swss",
         "comment_at": "2025-04-24T01:11:32Z",
         "comment_author": "judyjoseph",
-        "comment_body": "@sivanuka could you share the exact steps you tried to reproduce this issue ? were you using sonic CLI's ? or was it done via sonic_db_cli or other tools ?"
+        "comment_body": "@sivanuka  could you share the exact steps you tried to reproduce this issue ? were you using sonic CLI's ? or was it done via sonic_db_cli or other tools ?"
     },
     {
         "number": 3611,
         "repo": "sonic-swss",
         "comment_at": "2025-04-24T03:07:45Z",
         "comment_author": "sivanuka",
-        "comment_body": "Hi @judyjoseph,\r\n While running sonic-mgmt macsec tests between( Sonic - cEOS ), we seen macsecmgrd crashing.\r\n sonic-mgmt tests replacing a macsec profile with new profile while running the test https://github.com/sonic-net/sonic-mgmt/blob/master/tests/common/macsec/macsec_config_helper.py#L119 ( tests using **sonic-db-cli** )\r\n We captured the valgrind logs on macsecmgrd process while running macsec sonic-mgmt tests, incorporated in https://github.com/sonic-net/sonic-swss/issues/3610.\r\nThanks !\r\n "
+        "comment_body": "Hi @judyjoseph,\r\n     While running sonic-mgmt macsec tests between( Sonic - cEOS ), we seen macsecmgrd  crashing.\r\n     sonic-mgmt tests replacing a macsec profile with new profile while running the test https://github.com/sonic-net/sonic-mgmt/blob/master/tests/common/macsec/macsec_config_helper.py#L119 ( tests using **sonic-db-cli** )\r\n      We captured the valgrind logs on macsecmgrd process while running macsec sonic-mgmt tests, incorporated in https://github.com/sonic-net/sonic-swss/issues/3610.\r\nThanks !\r\n     "
     },
     {
         "number": 3611,
@@ -24950,7 +24964,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-07-22T04:06:11Z",
         "comment_author": "prsunny",
-        "comment_body": "Thanks @madhupalu , @divyachandralekha , @prhoskot for the reviews. @wajahatrazi , merged the PR and thanks for the good contribution. You can address the minor comments in a different PR"
+        "comment_body": "Thanks @madhupalu , @divyachandralekha , @prhoskot for the reviews.  @wajahatrazi , merged the PR and thanks for the good contribution. You can address the minor comments in a different PR"
     },
     {
         "number": 3606,
@@ -27496,7 +27510,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-06-14T00:57:17Z",
         "comment_author": "dgsudharsan",
-        "comment_body": "Waiting for @stephenxs to close on the [comment](https://github.com/sonic-net/sonic-swss/pull/3587#discussion_r2133237345) . Rest of the comments are addressed."
+        "comment_body": "Waiting for @stephenxs  to close on the [comment](https://github.com/sonic-net/sonic-swss/pull/3587#discussion_r2133237345) . Rest of the comments are addressed."
     },
     {
         "number": 3587,
@@ -30622,7 +30636,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-05-07T17:26:51Z",
         "comment_author": "judyjoseph",
-        "comment_body": "@prsunny could you review and merge pls "
+        "comment_body": "@prsunny  could you review and merge pls "
     },
     {
         "number": 3553,
@@ -33870,7 +33884,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-03-21T16:49:26Z",
         "comment_author": "KrisNey-MSFT",
-        "comment_body": "hi @theasianpianist , @prabhataravind and @prsunny - can this one be looked at this week, in order to unblock us? "
+        "comment_body": "hi @theasianpianist , @prabhataravind and @prsunny - can this one be looked at this week, in order to unblock us?  "
     },
     {
         "number": 3534,
@@ -33884,7 +33898,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-04-21T19:01:43Z",
         "comment_author": "KrisNey-MSFT",
-        "comment_body": "hi @theasianpianist - could we have an update on this one for our meeting today? TY, Kristina"
+        "comment_body": "hi @theasianpianist  - could we have an update on this one for our meeting today?  TY, Kristina"
     },
     {
         "number": 3534,
@@ -34248,7 +34262,7 @@
         "repo": "sonic-swss",
         "comment_at": "2025-05-12T20:47:18Z",
         "comment_author": "KrisNey-MSFT",
-        "comment_body": "@oleksandrivantsiv - curious if this is ok from your perspective? TY..."
+        "comment_body": "@oleksandrivantsiv  - curious if this is ok from your perspective?  TY..."
     },
     {
         "number": 3534,
