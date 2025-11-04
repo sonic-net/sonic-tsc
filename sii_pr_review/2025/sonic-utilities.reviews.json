@@ -18914,6 +18914,341 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-04-07T16:13:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-04-07T16:13:22Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-05-13T18:12:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-05-13T18:12:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-05-13T18:12:59Z",
+        "comment_author": "bhouse-nexthop",
+        "comment_body": "I just rebased against master to force a new build."
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-05-14T12:52:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-05-14T12:52:57Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-05-15T12:38:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-05-15T12:38:23Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-05-15T14:14:02Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-05-15T14:14:14Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-05-15T14:25:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-05-15T14:25:36Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-05-15T14:34:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-05-15T14:34:34Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-05-20T13:43:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-05-20T13:44:05Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-05-20T14:07:00Z",
+        "comment_author": "bhouse-nexthop",
+        "comment_body": "@qiluo-msft this PR is pretty well cleaned up, however it is depending on https://github.com/sonic-net/sonic-buildimage/pull/21907 and https://github.com/sonic-net/sonic-utilities/pull/3814 which haven't been merged yet.  Once those merge the tests that are failing due to the inability to resolve the paths that are imported via the uses clause will be fixed.\r\n\r\nIt would be great to get all this into 202505.\r\n\r\nAll GCU test cases pass when I run them with this PR *and* those 2 dependent PRs:\r\n```\r\nbrad@a59a25f02d1a:/sonic/src/sonic-utilities$ pytest tests/generic_config_updater/\r\n================================== test session starts ==================================\r\nplatform linux -- Python 3.11.2, pytest-7.2.1, pluggy-1.0.0+repack\r\nrootdir: /sonic/src/sonic-utilities/tests, configfile: pytest.ini\r\nplugins: pyfakefs-5.8.0, cov-4.0.0\r\ncollected 348 items\r\n\r\ntests/generic_config_updater/change_applier_test.py ..                            [  0%]\r\ntests/generic_config_updater/field_operation_validator_test.py .................. [  5%]\r\n......................                                                            [ 12%]\r\ntests/generic_config_updater/gcu_feature_patch_application_test.py ..             [ 12%]\r\ntests/generic_config_updater/generic_updater_test.py ............................ [ 20%]\r\n...............                                                                   [ 25%]\r\ntests/generic_config_updater/gu_common_test.py .................................. [ 34%]\r\n....................................                                              [ 45%]\r\ntests/generic_config_updater/multiasic_change_applier_test.py ......              [ 46%]\r\ntests/generic_config_updater/multiasic_generic_updater_test.py .                  [ 47%]\r\ntests/generic_config_updater/patch_sorter_test.py ............................... [ 56%]\r\n................................................................................. [ 79%]\r\n......................................................................            [ 99%]\r\ntests/generic_config_updater/service_validator_test.py ..                         [100%]\r\n\r\n================================= 348 passed in 13.38s ==================================\r\n```"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-06-26T02:48:52Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-06-26T02:49:01Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-06-26T02:50:03Z",
+        "comment_author": "bhouse-nexthop",
+        "comment_body": "I just rebased this to force a rebuild now that https://github.com/sonic-net/sonic-buildimage/pull/21907 has merged.  Likely will fail until #3814 is merged however."
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-07-07T01:27:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-07-07T01:27:15Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-07-08T00:42:33Z",
+        "comment_author": "bhouse-nexthop",
+        "comment_body": "@qiluo-msft now that the dependent PRs have merged, this is passing all test cases.  Any chance you could do a final review and merge?"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-08-14T05:23:56Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@qiluo-msft @bhouse-nexthop what is the next step to approve this pr? as we already missed 202505 lets aim for the next release better to have it in master much earlier to ensure all is working."
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-10-16T02:47:00Z",
+        "comment_author": "bhouse-nexthop",
+        "comment_body": "@qiluo-msft we really need to get this merged.  This is a huge performance fix that makes GCU actually usable."
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-10-17T17:17:57Z",
+        "comment_author": "bhouse-nexthop",
+        "comment_body": "Hi @saiarcot895, nice meeting you at the Sonic workshop today.  I mentioned this PR and you said you might be able to take a look at it.  Thanks!\r\n-Brad"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-10-17T22:10:44Z",
+        "comment_author": "bhouse-nexthop",
+        "comment_body": "@hdwhdw can you help as well?"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-10-18T23:11:00Z",
+        "comment_author": "bhouse-nexthop",
+        "comment_body": "Hi @lguohan thanks for triggering copilot on this.  I left one open that I need to look at when I'm not jet lagged.  I'll do that tomorrow am.  Thanks!"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-10-24T14:52:35Z",
+        "comment_author": "bhouse-nexthop",
+        "comment_body": "@lguohan can you review now that I've addressed?"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-10-24T14:53:32Z",
+        "comment_author": "lguohan",
+        "comment_body": "will do"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-11-02T14:31:13Z",
+        "comment_author": "bradh352",
+        "comment_body": "@lguohan had a chance to review this yet?"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "review_at": "2025-04-22T22:44:01Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "review_at": "2025-04-22T22:56:07Z",
+        "review_author": "bhouse-nexthop"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "review_at": "2025-04-22T23:11:56Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "review_at": "2025-04-22T23:28:00Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "review_at": "2025-04-22T23:42:05Z",
+        "review_author": "bhouse-nexthop"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "review_at": "2025-04-22T23:44:31Z",
+        "review_author": "bhouse-nexthop"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "review_at": "2025-10-18T22:43:16Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "review_at": "2025-10-18T23:03:06Z",
+        "review_author": "bhouse-nexthop"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "review_at": "2025-10-18T23:04:36Z",
+        "review_author": "bhouse-nexthop"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "review_at": "2025-10-18T23:06:35Z",
+        "review_author": "bhouse-nexthop"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "review_at": "2025-10-18T23:10:07Z",
+        "review_author": "bhouse-nexthop"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "review_at": "2025-10-24T14:52:09Z",
+        "review_author": "bhouse-nexthop"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "review_at": "2025-11-03T05:41:20Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "review_at": "2025-11-03T19:15:51Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "review_at": "2025-11-03T19:23:59Z",
+        "review_author": "bhouse-nexthop"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2025-11-03T19:15:51Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2025-10-18T22:43:16Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 3831,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2025-11-03T05:41:20Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 3830,
         "repo": "sonic-utilities",
         "comment_at": "2025-04-06T19:20:59Z",
