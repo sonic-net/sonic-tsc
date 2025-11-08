@@ -5186,6 +5186,192 @@
         "comment_body": "202412 CP: https://github.com/Azure/sonic-platform-daemons.msft/pull/20"
     },
     {
+        "number": 622,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-06-05T20:53:22Z",
+        "comment_author": "mihirpat1",
+        "comment_body": "/azpw run\r\n"
+    },
+    {
+        "number": 622,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-06-05T20:53:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Only PR owner can use /azpw run"
+    },
+    {
+        "number": 622,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-06-05T20:53:40Z",
+        "comment_author": "mihirpat1",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 622,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-06-05T20:53:46Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nCommenter does not have sufficient privileges for PR 622 in repo sonic-net/sonic-platform-daemons<br>\r\n\n</samp>"
+    },
+    {
+        "number": 622,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-06-05T21:12:11Z",
+        "comment_author": "mihirpat1",
+        "comment_body": "@Keshavg-marvell Where is the below log defined? Asking since I couldn't find it in xcvrd\r\n```\r\nsonic ERR pmon#chassis: Get value by key from STATE_DB: Unable to\r\n find key NPU_SI_SETTINGS_SYNC_STATUS state_port_table_fvs_dict\r\n {'host_tx_ready': 'false', 'state': 'ok', 'netdev_oper_status':\r\n 'down', 'admin_status': 'down', 'mtu': '9100', 'supported_speeds':\r\n '50000,100000', 'supported_fecs': 'rs'} for lport Ethernet448\r\n```"
+    },
+    {
+        "number": 622,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-06-06T04:46:08Z",
+        "comment_author": "Keshavg-marvell",
+        "comment_body": "> @Keshavg-marvell Where is the below log defined? Asking since I couldn't find it in xcvrd\r\n> \r\n> ```\r\n> sonic ERR pmon#chassis: Get value by key from STATE_DB: Unable to\r\n>  find key NPU_SI_SETTINGS_SYNC_STATUS state_port_table_fvs_dict\r\n>  {'host_tx_ready': 'false', 'state': 'ok', 'netdev_oper_status':\r\n>  'down', 'admin_status': 'down', 'mtu': '9100', 'supported_speeds':\r\n>  '50000,100000', 'supported_fecs': 'rs'} for lport Ethernet448\r\n> ```\r\n\r\nthis logs get printed in below code. \r\n\r\nhttps://github.com/sonic-net/sonic-platform-daemons/blob/master/sonic-xcvrd/xcvrd/xcvrd_utilities/xcvr_table_helper.py#L216"
+    },
+    {
+        "number": 622,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-06-06T17:38:42Z",
+        "comment_author": "mihirpat1",
+        "comment_body": "> > @Keshavg-marvell Where is the below log defined? Asking since I couldn't find it in xcvrd\r\n> > ```\r\n> > sonic ERR pmon#chassis: Get value by key from STATE_DB: Unable to\r\n> >  find key NPU_SI_SETTINGS_SYNC_STATUS state_port_table_fvs_dict\r\n> >  {'host_tx_ready': 'false', 'state': 'ok', 'netdev_oper_status':\r\n> >  'down', 'admin_status': 'down', 'mtu': '9100', 'supported_speeds':\r\n> >  '50000,100000', 'supported_fecs': 'rs'} for lport Ethernet448\r\n> > ```\r\n> \r\n> this logs get printed in below code.\r\n> \r\n> https://github.com/sonic-net/sonic-platform-daemons/blob/master/sonic-xcvrd/xcvrd/xcvrd_utilities/xcvr_table_helper.py#L216\r\n\r\n@Keshavg-marvell Wondering why are we seeing `chassis` instead of `xcvrd` in the process log.\r\nAlso, the changes look good to me."
+    },
+    {
+        "number": 622,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-06-16T14:14:14Z",
+        "comment_author": "Keshavg-marvell",
+        "comment_body": "> > > @Keshavg-marvell Where is the below log defined? Asking since I couldn't find it in xcvrd\r\n> > > ```\r\n> > > sonic ERR pmon#chassis: Get value by key from STATE_DB: Unable to\r\n> > >  find key NPU_SI_SETTINGS_SYNC_STATUS state_port_table_fvs_dict\r\n> > >  {'host_tx_ready': 'false', 'state': 'ok', 'netdev_oper_status':\r\n> > >  'down', 'admin_status': 'down', 'mtu': '9100', 'supported_speeds':\r\n> > >  '50000,100000', 'supported_fecs': 'rs'} for lport Ethernet448\r\n> > > ```\r\n> > \r\n> > \r\n> > this logs get printed in below code.\r\n> > https://github.com/sonic-net/sonic-platform-daemons/blob/master/sonic-xcvrd/xcvrd/xcvrd_utilities/xcvr_table_helper.py#L216\r\n> \r\n> @Keshavg-marvell Wondering why are we seeing `chassis` instead of `xcvrd` in the process log. Also, the changes look good to me.\r\n\r\n@mihirpat1 I believe this chassis is appended from common syslog infra used by xcvrd. if changes looks good. Can you please review and merge this PR."
+    },
+    {
+        "number": 622,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-06-17T03:37:36Z",
+        "comment_author": "Keshavg-marvell",
+        "comment_body": "/azpw run Azure.sonic-platform-daemons"
+    },
+    {
+        "number": 622,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-06-17T03:37:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run Azure.sonic-platform-daemons"
+    },
+    {
+        "number": 622,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-06-17T03:37:48Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 622,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-06-18T04:25:10Z",
+        "comment_author": "Keshavg-marvell",
+        "comment_body": "Thanks @mihirpat1 for the review. I have retrigged the pipelines, and now all checks are passing. Can you please merge this PR now?"
+    },
+    {
+        "number": 622,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-06-26T11:37:17Z",
+        "comment_author": "Keshavg-marvell",
+        "comment_body": "@prgeor Can you please review and merge this PR?"
+    },
+    {
+        "number": 622,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-11-06T10:02:57Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 622,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2025-11-06T10:03:06Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 622,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-06-03T16:05:33Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 622,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-06-04T04:17:07Z",
+        "review_author": "Keshavg-marvell"
+    },
+    {
+        "number": 622,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-06-05T02:08:50Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 622,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-06-16T16:18:27Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 622,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-06-30T20:25:36Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 622,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-07-02T04:41:35Z",
+        "review_author": "Keshavg-marvell"
+    },
+    {
+        "number": 622,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-07-02T04:41:41Z",
+        "review_author": "Keshavg-marvell"
+    },
+    {
+        "number": 622,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-07-30T03:58:45Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 622,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-11-05T22:45:48Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 622,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2025-11-07T05:27:44Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 622,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-06-05T02:08:50Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 622,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-11-07T05:27:44Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 622,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2025-06-16T16:18:27Z",
+        "latestReview_author": "mihirpat1",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 620,
         "repo": "sonic-platform-daemons",
         "comment_at": "2025-06-03T01:21:29Z",
