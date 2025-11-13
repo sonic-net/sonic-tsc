@@ -20,7 +20,7 @@
 ## 4. This repo stores raw data to calculate SII scores and data dump script.
 
 - [High Level Design](sii_hld)
-- [Contributor Organization Map](sii_author_map)
+- [Contributor Organization Map](https://github.com/sonic-net/sonic-contributor-map/blob/main/contributors.json)
 - [Issue related data](sii_issue)
 - [Normal PRs and Reviews](sii_pr_review)
 - [Test case related PRs and Reviews](sii_test_pr_review)
@@ -49,9 +49,9 @@
 
 ## 6. Raw Data store path and data dump script
 Author Organization Map:
->   Author Organization Map: [sii_author_map/author.csv](sii_author_map/author.csv)
->
->   Author Org info dump script: [sii_author_map/dump_author.sh](sii_author_map/dump_author.sh)
+>   Author Organization Map: [contributors.json](https://github.com/sonic-net/sonic-contributor-map/blob/main/contributors.json)
+>     - ***NOTE***: Do not use the legacy [authors.csv](sii_author_map/authors.csv) / [authors.list](sii_author_map/authors.list)
+
 
 Three HLD file data:
 >   dash HLD: [dash HLD](sii_hld/dash_hld.csv)
