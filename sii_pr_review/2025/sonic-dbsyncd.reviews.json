@@ -1,0 +1,133 @@
+[
+    {
+        "number": 75,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2025-10-20T22:48:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 75,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2025-10-20T22:48:21Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 75,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2025-10-20T23:41:50Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "@ZhaohuiS  Can you please review?"
+    },
+    {
+        "number": 75,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2025-10-21T14:44:17Z",
+        "comment_author": "gpunathilell",
+        "comment_body": "PR is required for 202505 branch as well"
+    },
+    {
+        "number": 75,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2025-10-22T02:58:07Z",
+        "comment_author": "keboliu",
+        "comment_body": "@ZhaohuiS would you please help to label this PR as \"Request for 202505 branch\"?"
+    },
+    {
+        "number": 75,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2025-10-22T07:53:50Z",
+        "comment_author": "ZhaohuiS",
+        "comment_body": "@keboliu is it a must fix for 202505? As the description said, there is a rare condition to trigger it.\r\nI suggest not merge it to 202505, since 202511 is coming soon. \r\n\r\n@yejianquan for vis."
+    },
+    {
+        "number": 75,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2025-10-22T08:06:37Z",
+        "comment_author": "keboliu",
+        "comment_body": "> @keboliu is it a must fix for 202505? As the description said, there is a rare condition to trigger it. I suggest not merge it to 202505, since 202511 is coming soon.\r\n> \r\n> @yejianquan for vis.\r\n\r\nHi @ZhaohuiS, we observed test case failure(https://github.com/sonic-net/sonic-mgmt/blob/master/tests/snmp/test_snmp_lldp.py) in our daily regression while qualifying the 202505 branch, and identified this issue. This is why I asked for cherry-picking."
+    },
+    {
+        "number": 75,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2025-10-22T08:51:51Z",
+        "comment_author": "ZhaohuiS",
+        "comment_body": "interesting, normally, the chassis info is not changed after system boots up. how did you hit this failure?\r\nThis is our results for the past 30 days on 202505.\r\n\r\n<img width=\"325\" height=\"138\" alt=\"image\" src=\"https://github.com/user-attachments/assets/a886bfcc-9e1b-4d7b-9a27-b9f21a178b07\" />\r\n\r\nThe only failure is not related to chassis info.\r\n"
+    },
+    {
+        "number": 75,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2025-10-22T14:22:22Z",
+        "comment_author": "gpunathilell",
+        "comment_body": "> interesting, normally, the chassis info is not changed after system boots up. how did you hit this failure? This is our results for the past 30 days on 202505.\r\n> \r\n> <img alt=\"image\" width=\"325\" height=\"138\" src=\"https://private-user-images.githubusercontent.com/94606222/504092708-a886bfcc-9e1b-4d7b-9a27-b9f21a178b07.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NjExNDI4NDAsIm5iZiI6MTc2MTE0MjU0MCwicGF0aCI6Ii85NDYwNjIyMi81MDQwOTI3MDgtYTg4NmJmY2MtOWUxYi00ZDdiLTlhMjctYjlmMjFhMTc4YjA3LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTEwMjIlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUxMDIyVDE0MTU0MFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWNmZWJiOTMzMjZlNDEyNWZkZWYyOTJmMjk0YWU3YmIzMGY5ZDQzOGRiOGRiNWYzNjk5MDhlNGMwZWQ5N2MyOGImWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.qJjQgfqgmuOKZ7XI5fjlaUDAPkV2jX1z9S_KRZv1EMo\">\r\n> The only failure is not related to chassis info.\r\n\r\n@ZhaohuiS we observed the test failure only once and it was not reproducible, Chassis info is not changed, but the sync function is called every 10 seconds which means there is data deletion and addition every 10 seconds, which is not necessary if there is no change to the data, which is why the cache is used"
+    },
+    {
+        "number": 75,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2025-10-22T15:15:55Z",
+        "comment_author": "gpunathilell",
+        "comment_body": "/azpw run\r\n\r\n"
+    },
+    {
+        "number": 75,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2025-10-22T15:15:57Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 75,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2025-10-22T15:16:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 75,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2025-10-29T23:10:18Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "@ZhaohuiS Can we merge this?"
+    },
+    {
+        "number": 75,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2025-10-30T01:30:55Z",
+        "comment_author": "ZhaohuiS",
+        "comment_body": "I don't have permission to merge.\r\n@StormLiangMS @qiluo-msft  could you pls help?"
+    },
+    {
+        "number": 75,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2025-11-10T18:25:35Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "@StormLiangMS Can you please help check & merge?"
+    },
+    {
+        "number": 75,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2025-10-20T23:41:35Z",
+        "review_author": "dgsudharsan"
+    },
+    {
+        "number": 75,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2025-10-22T02:09:56Z",
+        "review_author": "ZhaohuiS"
+    },
+    {
+        "number": 75,
+        "repo": "sonic-dbsyncd",
+        "latestReview_at": "2025-10-20T23:41:35Z",
+        "latestReview_author": "dgsudharsan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 75,
+        "repo": "sonic-dbsyncd",
+        "latestReview_at": "2025-10-22T02:09:56Z",
+        "latestReview_author": "ZhaohuiS",
+        "latestReview_state": "APPROVED"
+    }
+]
