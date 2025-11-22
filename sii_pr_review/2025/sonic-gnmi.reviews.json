@@ -1553,6 +1553,486 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-02T04:17:57Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-02T04:18:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-06T21:20:27Z",
+        "comment_author": "hdwhdw",
+        "comment_body": "Can you paste your actual test bash prompt for testing. Please use gnoic or grpcurl to issue the rpc. It should also include cases that forbid removing config_db.json or /etc/passwd. These can break the system."
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-06T22:27:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-06T22:27:39Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-06T22:55:03Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-06T22:55:14Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-06T22:56:13Z",
+        "comment_author": "yeluriravali",
+        "comment_body": "#### What was changed\r\n\r\n- Refactored file removal logic in `gnoi_file.go` to use a dedicated handler in `pkg/gnoi/file/handler.go`.\r\n- Added whitelist (only allow files in `/tmp/` and `/var/tmp/`), blacklist (`/etc/sonic/config_db.json`, `/etc/passwd`), and path traversal checks.\r\n- Added logging for all file removal attempts and outcomes.\r\n\r\n#### How to verify\r\n\r\n**Allowed:**\r\n```bash\r\ngnoic file remove --path /tmp/testfile\r\n```\r\n\r\n**Forbidden (blacklisted):**\r\n```bash\r\ngnoic file remove --path /etc/sonic/config_db.json\r\n```\r\n\r\n**Forbidden (not whitelisted):**\r\n```bash\r\ngnoic file remove --path /home/user/file\r\n```\r\n\r\n**Forbidden (path traversal):**\r\n```bash\r\ngnoic file remove --path /tmp/../etc/passwd\r\n```"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-06T22:58:14Z",
+        "comment_author": "ravaliyel",
+        "comment_body": "Hi @hdwhdw, I have made the requested changes. Please let me know if any further changes/modifications are required. Thank you"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-06T23:04:52Z",
+        "comment_author": "hdwhdw",
+        "comment_body": "@ravaliyel Thanks. Can you take a closer look at https://github.com/sonic-net/sonic-gnmi/pull/521 especially how the handler work? Basically, we want to create a handleFileRemove that has identical signature to the remove function in gnoi_file.go, and move most of the logic, except for the authentication into handleFileRemove(). In that case, we can actually add the package to pure.mk and build it in generic linux environment. "
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-08T19:01:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-08T19:01:50Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-08T19:04:51Z",
+        "comment_author": "ravaliyel",
+        "comment_body": "Hi @hdwhdw , Please review latest changes, thank you"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-08T21:48:07Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-08T21:48:16Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-08T21:59:35Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-08T21:59:45Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-13T19:11:34Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-13T19:11:44Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-13T19:26:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-13T19:26:24Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-13T19:38:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-13T19:38:56Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-13T19:49:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-13T19:49:53Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-22T22:07:19Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-22T22:07:30Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-22T22:45:18Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-22T22:45:27Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-23T18:36:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-23T18:36:36Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-23T19:22:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-23T19:22:25Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-23T19:25:24Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-23T19:25:34Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-23T19:38:24Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-23T19:38:33Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-23T23:07:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-23T23:08:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-23T23:16:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-23T23:16:49Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-28T21:04:11Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-28T21:04:22Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-28T21:47:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-28T21:47:41Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-28T22:00:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-28T22:00:42Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-29T22:26:09Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-29T22:26:20Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-01T05:40:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-01T05:40:32Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-18T00:34:07Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-18T00:34:17Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-19T19:44:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-19T19:45:04Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-19T20:37:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-19T20:38:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-19T22:49:08Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-19T22:49:18Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-20T20:39:02Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-20T20:39:12Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-20T21:31:57Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-20T21:32:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-20T22:04:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-20T22:04:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "review_at": "2025-10-08T21:54:31Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "review_at": "2025-10-29T20:06:36Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "review_at": "2025-11-21T19:00:49Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 522,
+        "repo": "sonic-gnmi",
+        "latestReview_at": "2025-11-21T19:00:49Z",
+        "latestReview_author": "hdwhdw",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 521,
         "repo": "sonic-gnmi",
         "comment_at": "2025-10-01T20:52:43Z",
@@ -3217,6 +3697,1001 @@
         "repo": "sonic-gnmi",
         "latestReview_at": "2025-08-18T09:20:05Z",
         "latestReview_author": "ganglyu",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-08-14T12:20:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-08-14T12:21:05Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-08-14T12:23:52Z",
+        "comment_author": "jayaragini-hcl",
+        "comment_body": "@[kanchanavelusamy](https://github.com/kanchanavelusamy) ,@[rkavitha-hcl](https://github.com/rkavitha-hcl) could you please review the PR"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-08-19T12:34:08Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-08-19T12:34:19Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-08-19T13:44:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-08-19T13:44:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-08-19T14:37:44Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-08-19T14:37:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-08-20T09:25:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-08-20T09:25:52Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-08-29T10:17:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-08-29T10:17:37Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-08-29T11:06:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-08-29T11:06:33Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-01T07:24:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-01T07:24:43Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-02T05:48:54Z",
+        "comment_author": "jayaragini-hcl",
+        "comment_body": "@ndas7 , @kishanps could you please review the PR"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-08T07:21:07Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-08T07:21:16Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-08T07:49:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-08T07:50:11Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-08T08:09:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-08T08:10:01Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-08T08:34:19Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-08T08:34:29Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-08T17:15:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-08T17:15:32Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-08T17:50:10Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-08T17:50:20Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-09T04:24:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-09T04:24:11Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-16T08:24:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-16T08:24:24Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-16T10:06:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-16T10:06:34Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-19T07:16:49Z",
+        "comment_author": "jayaragini-hcl",
+        "comment_body": "@ndas7 , @kishanps: All the review comments have been closed. Could you please review the updated PR and share your feedback?"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-23T07:33:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-23T07:34:06Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-23T16:13:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-23T16:14:09Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-23T16:53:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-23T16:54:03Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-23T19:20:16Z",
+        "comment_author": "jayaragini-hcl",
+        "comment_body": "@ndas7 , @kishanps: All the review comments have been closed. Could you please review the updated PR and share your feedback?"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-27T13:25:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-27T13:25:26Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-27T14:07:29Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-27T14:07:39Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-27T14:49:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-27T14:49:23Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-28T04:55:34Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-28T04:55:44Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-28T05:16:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-28T05:16:10Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-28T06:13:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-28T06:14:01Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-28T07:10:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-28T07:11:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-12T15:26:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-12T15:26:24Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines will not run the associated pipelines, because the pull request was updated after the run command was issued. Review the pull request again and issue a new run command.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-13T07:14:38Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-13T07:14:47Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-13T07:20:14Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-13T07:20:24Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-13T07:34:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-13T07:35:00Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-13T07:57:24Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-13T07:57:34Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-13T10:52:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-13T10:52:41Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-18T11:59:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-18T11:59:37Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "review_at": "2025-09-05T16:56:35Z",
+        "review_author": "kanchanavelusamy"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "review_at": "2025-10-01T15:14:02Z",
+        "review_author": "ndas7"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "review_at": "2025-10-10T03:39:09Z",
+        "review_author": "ndas7"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "review_at": "2025-10-24T18:04:01Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "review_at": "2025-11-21T17:37:25Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "latestReview_at": "2025-11-21T17:37:25Z",
+        "latestReview_author": "hdwhdw",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "latestReview_at": "2025-10-10T03:39:09Z",
+        "latestReview_author": "ndas7",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 486,
+        "repo": "sonic-gnmi",
+        "latestReview_at": "2025-09-05T16:56:35Z",
+        "latestReview_author": "kanchanavelusamy",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-08-14T10:01:10Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-08-14T10:01:21Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-08-14T12:23:21Z",
+        "comment_author": "jayaragini-hcl",
+        "comment_body": "@[kanchanavelusamy](https://github.com/kanchanavelusamy) ,@[rkavitha-hcl](https://github.com/rkavitha-hcl) could you please review the PR"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-08-19T11:00:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-08-19T11:00:25Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-08-20T09:24:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-08-20T09:24:41Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-08-29T10:14:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-08-29T10:15:04Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-08-31T21:14:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-08-31T21:14:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-08-31T21:41:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-08-31T21:41:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-08-31T21:58:35Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-08-31T21:58:45Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-02T05:48:12Z",
+        "comment_author": "jayaragini-hcl",
+        "comment_body": "@ndas7 , @kishanps could you please review the PR"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-08T17:11:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-08T17:12:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-08T17:48:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-08T17:48:36Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-16T08:01:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-16T08:01:47Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-16T08:50:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-16T08:50:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-16T09:14:11Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-16T09:14:21Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-19T07:15:59Z",
+        "comment_author": "jayaragini-hcl",
+        "comment_body": "@ndas7 , @kishanps: All the review comments have been closed. Could you please review the updated PR and share your feedback?"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-23T07:32:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-23T07:33:04Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-23T16:09:19Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-23T16:09:29Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-23T16:48:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-23T16:48:58Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-09-23T18:57:33Z",
+        "comment_author": "jayaragini-hcl",
+        "comment_body": "@ndas7 , @kishanps: All the review comments have been closed. Could you please review the updated PR and share your feedback?"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-14T05:45:08Z",
+        "comment_author": "kanchanavelusamy",
+        "comment_body": "@hdwhdw: Could you please review the PR and share your feedback?"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-27T13:17:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-27T13:18:04Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-27T13:20:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-27T13:20:50Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-27T13:46:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-27T13:46:31Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-27T14:04:16Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-27T14:04:27Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-27T14:48:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-10-27T14:48:15Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-06T12:03:24Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-06T12:03:33Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-07T12:21:27Z",
+        "comment_author": "jayaragini-hcl",
+        "comment_body": "@hdwhdw: Your review comments has been addressed. Could you please review the updated PR and share your feedback?"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-12T15:53:21Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-12T15:53:31Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-13T06:50:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-13T06:50:30Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-18T11:57:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "comment_at": "2025-11-18T11:58:04Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "review_at": "2025-09-05T16:55:09Z",
+        "review_author": "kanchanavelusamy"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "review_at": "2025-09-26T18:34:16Z",
+        "review_author": "ndas7"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "review_at": "2025-10-24T17:57:32Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "review_at": "2025-11-07T12:03:52Z",
+        "review_author": "jayaragini-hcl"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "review_at": "2025-11-07T12:05:19Z",
+        "review_author": "jayaragini-hcl"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "review_at": "2025-11-07T12:18:55Z",
+        "review_author": "jayaragini-hcl"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "review_at": "2025-11-07T12:20:16Z",
+        "review_author": "jayaragini-hcl"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "review_at": "2025-11-21T17:35:50Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "latestReview_at": "2025-11-21T17:35:50Z",
+        "latestReview_author": "hdwhdw",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 485,
+        "repo": "sonic-gnmi",
+        "latestReview_at": "2025-09-05T16:55:09Z",
+        "latestReview_author": "kanchanavelusamy",
         "latestReview_state": "APPROVED"
     },
     {
