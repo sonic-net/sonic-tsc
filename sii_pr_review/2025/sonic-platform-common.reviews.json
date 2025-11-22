@@ -1,5 +1,349 @@
 [
     {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-10-31T23:52:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-10-31T23:52:39Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-11-01T00:19:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-11-01T00:19:54Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-11-01T00:36:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-11-01T00:36:51Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-11-01T05:51:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-11-01T05:51:14Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-11-04T01:43:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-11-04T01:43:44Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-11-04T23:58:14Z",
+        "comment_author": "vvolam",
+        "comment_body": "@rameshraghupathy @gpunathilell could you please review this latest PR"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-11-05T20:28:19Z",
+        "comment_author": "rameshraghupathy",
+        "comment_body": "@vvolam A mechanism to indicate the completion of \"module_pre_shutdown\" to \"gnoi_shutdown_daemon\" is needed in module_base.py  so that the gnoi request can be sent to the DPU."
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-11-05T20:39:33Z",
+        "comment_author": "rameshraghupathy",
+        "comment_body": "@vvolam The graceful_shutdown_handler in module_base should check for the completion of gnoi from the gnoi_shutdown_daemon before proceeding to trigger set_admin_state(False)"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-11-05T21:57:00Z",
+        "comment_author": "vvolam",
+        "comment_body": "> @vvolam The graceful_shutdown_handler in module_base should check for the completion of gnoi from the gnoi_shutdown_daemon before proceeding to trigger set_admin_state(False)\r\n\r\n@rameshraghupathy I think this is not considered in the HLD as we are not protecting whole state transition using transition_in_progress. Let introduce a new field gnoi_halt_in_progress to start and complete gnoi HALT and update the PR. Thank you for pointing this out"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-11-06T00:19:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-11-06T00:19:32Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-11-06T00:23:02Z",
+        "comment_author": "vvolam",
+        "comment_body": "> > @vvolam The graceful_shutdown_handler in module_base should check for the completion of gnoi from the gnoi_shutdown_daemon before proceeding to trigger set_admin_state(False)\r\n> \r\n> @rameshraghupathy I think this is not considered in the HLD as we are now protecting whole state transition using transition_in_progress. Let introduce a new field gnoi_halt_in_progress to start and complete gnoi HALT and update the PR. Thank you for pointing this out\r\n\r\n@rameshraghupathy Updated code to isolate gnoi progress to start and monitor using `gnoi_halt_in_progress` field. And timeout will be `dpu_halt_services_timeout` similar to reboot.\r\n\r\n"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-11-07T00:16:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-11-07T00:16:20Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-11-08T19:51:09Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-11-08T19:51:17Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-11-14T17:41:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-11-14T17:41:49Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-11-19T05:59:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-11-19T05:59:53Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-11-19T21:44:02Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-11-19T21:44:10Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-11-19T23:36:23Z",
+        "comment_author": "rameshraghupathy",
+        "comment_body": "@vvolam  Mostly LGTM.  I'll approve, but take care of the following?  I guess, @gpunathilell also has raised this.   get_module_state_transition() does not check for timeout, while set_module_state_transition() does. This creates an inconsistency where: get_module_state_transition() returns True if the flag is set, even if the transition has timed out\r\nCallers in sonic-utilities rely on this to make decisions about whether to proceed with operations\r\nThis could lead to blocking operations indefinitely or incorrect state assumptions\r\nThe function should validate timeout before returning the transition state, similar to how set_module_state_transition() handles it."
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "comment_at": "2025-11-20T01:09:46Z",
+        "comment_author": "vvolam",
+        "comment_body": "> @vvolam Mostly LGTM. I'll approve, but take care of the following? I guess, @gpunathilell also has raised this. get_module_state_transition() does not check for timeout, while set_module_state_transition() does. This creates an inconsistency where: get_module_state_transition() returns True if the flag is set, even if the transition has timed out Callers in sonic-utilities rely on this to make decisions about whether to proceed with operations This could lead to blocking operations indefinitely or incorrect state assumptions The function should validate timeout before returning the transition state, similar to how set_module_state_transition() handles it.\r\n\r\n@rameshraghupathy latest PR commit is handling timeout condition in get_module_state_transition(). Please check lines at 705 in module_base.py. Thank you"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "review_at": "2025-11-01T00:10:08Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "review_at": "2025-11-05T00:20:06Z",
+        "review_author": "gpunathilell"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "review_at": "2025-11-05T00:30:18Z",
+        "review_author": "gpunathilell"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "review_at": "2025-11-05T02:25:11Z",
+        "review_author": "vvolam"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "review_at": "2025-11-05T02:26:56Z",
+        "review_author": "vvolam"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "review_at": "2025-11-07T23:23:35Z",
+        "review_author": "vvolam"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "review_at": "2025-11-08T19:58:49Z",
+        "review_author": "vvolam"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "review_at": "2025-11-13T11:09:46Z",
+        "review_author": "rameshraghupathy"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "review_at": "2025-11-13T15:36:34Z",
+        "review_author": "rameshraghupathy"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "review_at": "2025-11-13T19:30:12Z",
+        "review_author": "vvolam"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "review_at": "2025-11-13T19:31:40Z",
+        "review_author": "vvolam"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "review_at": "2025-11-17T21:26:21Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "review_at": "2025-11-18T22:13:21Z",
+        "review_author": "gpunathilell"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "review_at": "2025-11-19T05:15:52Z",
+        "review_author": "vvolam"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "review_at": "2025-11-19T05:25:36Z",
+        "review_author": "vvolam"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "review_at": "2025-11-19T05:31:58Z",
+        "review_author": "vvolam"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "review_at": "2025-11-19T05:32:23Z",
+        "review_author": "vvolam"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "review_at": "2025-11-19T05:33:14Z",
+        "review_author": "vvolam"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "review_at": "2025-11-19T23:37:21Z",
+        "review_author": "rameshraghupathy"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "review_at": "2025-11-20T21:23:57Z",
+        "review_author": "gpunathilell"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "latestReview_at": "2025-11-17T21:26:21Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "latestReview_at": "2025-11-19T23:37:21Z",
+        "latestReview_author": "rameshraghupathy",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 608,
+        "repo": "sonic-platform-common",
+        "latestReview_at": "2025-11-20T21:23:57Z",
+        "latestReview_author": "gpunathilell",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 607,
         "repo": "sonic-platform-common",
         "comment_at": "2025-10-29T17:54:23Z",
