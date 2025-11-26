@@ -1,5 +1,59 @@
 [
     {
+        "number": 322,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-11-25T04:58:35Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 322,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-11-25T04:58:44Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 322,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-11-25T18:59:09Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "> Why I did it\r\n> \r\n> The gNOI shutdown daemon service was causing loganalyzer test failures on non-SmartSwitch platforms (e.g., vlab-01). The service attempted to start via ExecStartPre=/usr/local/bin/check_platform.py, which exited with code 1 on incompatible platforms. This caused systemd to log ERROR messages like: ERR systemd[1]: Failed to start gnoi-shutdown.service - gNOI based DPU Graceful Shutdown Daemon These errors blocked CI/CD submodule updates due to loganalyzer failures.\r\n> \r\n> How I did it Changed the service file to use ExecCondition= instead of ExecStartPre= for platform checking:\r\n> \r\n> ExecCondition=/usr/bin/python3 /usr/local/bin/check_platform.py runs before service start When check_platform.py returns exit code 1 on non-SmartSwitch platforms, systemd treats this as a condition not met rather than a failure Service is gracefully skipped without error logs on incompatible platforms Changed Restart=always to Restart=on-failure to avoid unnecessary restart attempts when conditions aren't met\r\n> \r\n> How to verify it On SmartSwitch NPU platform: Service starts normally and handles DPU graceful shutdown [sonic-net/sonic-buildimage#24609](https://github.com/sonic-net/sonic-buildimage/pull/24609) is run with this change\r\n> \r\n> Which release branch to backport [x]202506 [x]202511\r\n\r\nthere is no 202506 branch in this repo. Do you mean 202505?"
+    },
+    {
+        "number": 322,
+        "repo": "sonic-host-services",
+        "comment_at": "2025-11-25T19:12:56Z",
+        "comment_author": "rameshraghupathy",
+        "comment_body": "> Which release branch to backport [x]202506 [x]202511\r\nthere is no 202506 branch in this repo. Do you mean 202505?  \r\n@qiluo-msft   We need it only in 202511.  We don't need it in with 202505 or 202506.  Fixed the description.\r\n"
+    },
+    {
+        "number": 322,
+        "repo": "sonic-host-services",
+        "review_at": "2025-11-25T06:06:14Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 322,
+        "repo": "sonic-host-services",
+        "review_at": "2025-11-25T16:58:11Z",
+        "review_author": "vvolam"
+    },
+    {
+        "number": 322,
+        "repo": "sonic-host-services",
+        "latestReview_at": "2025-11-25T06:06:14Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 322,
+        "repo": "sonic-host-services",
+        "latestReview_at": "2025-11-25T16:58:11Z",
+        "latestReview_author": "vvolam",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 321,
         "repo": "sonic-host-services",
         "comment_at": "2025-11-24T02:08:50Z",
