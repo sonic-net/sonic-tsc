@@ -1,5 +1,47 @@
 [
     {
+        "number": 1114,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-25T22:53:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1114,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-25T22:54:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1114,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-25T23:14:11Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1114,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-25T23:14:23Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1114,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-28T00:28:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1114,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-28T00:29:06Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
         "number": 1113,
         "repo": "sonic-swss-common",
         "comment_at": "2025-11-25T00:44:09Z",
@@ -82,6 +124,34 @@
         "comment_at": "2025-11-26T20:52:32Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1113,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-12-01T03:15:01Z",
+        "comment_author": "liushilongbuaa",
+        "comment_body": "@qiluo-msft , It seems this PR breaks official build.\r\nWhy we didn't update submodule ref but it takes this commit?"
+    },
+    {
+        "number": 1113,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-12-01T14:42:49Z",
+        "comment_author": "yue-fred-gao",
+        "comment_body": "> @qiluo-msft , It seems this PR breaks official build. Why we didn't update submodule ref but it takes this commit?\r\n\r\nI think this is because sonic-dash-ha and all rust components are pulling swss-common master. See https://github.com/sonic-net/sonic-dash-ha/blob/b38d8fb68c7e1a1d3c866fdb65e840c7da1021d8/Cargo.toml#L100. sonic-dash-ha has been updated to accommodate the change in swss-common. We need to update its ref in sonic-buildimage. "
+    },
+    {
+        "number": 1113,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-12-01T15:00:12Z",
+        "comment_author": "yue-fred-gao",
+        "comment_body": "> @qiluo-msft , It seems this PR breaks official build. Why we didn't update submodule ref but it takes this commit?\r\n\r\nI saw the error in sonic-buildimage. The issue is that libswsscommon is built from src/sonic-swss-common mounted by sonic-buildimage but rust is pulled directly from swss-common master branch. libswsscommon lags behind rust swss-common crate and causes the compilation error. We need to update ref of swss-common in sonic-buildimage to the latest.\r\n\r\nGoing forward, probably we should change the way rust components pulling swss-common. Instead of always from the latest of the branch, they can use relative path to find swss-common in sonic-buildimage. When we cut a new branch, we don't need to update cargo.toml to the new branch (otherwise, they always use swss-common master branch)."
+    },
+    {
+        "number": 1113,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-12-01T16:13:53Z",
+        "comment_author": "yue-fred-gao",
+        "comment_body": "@qiluo-msft , I submitted PR https://github.com/sonic-net/sonic-buildimage/pull/24663 to fix the issue. And let's discuss the long term fix I proposed above."
     },
     {
         "number": 1113,
@@ -229,6 +299,342 @@
         "latestReview_at": "2025-11-26T22:19:27Z",
         "latestReview_author": "yue-fred-gao",
         "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1108,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-14T06:42:01Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1108,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-14T06:42:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1108,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-17T06:12:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1108,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-17T06:13:03Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1108,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-17T06:33:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1108,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-17T06:33:29Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1108,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-18T00:18:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1108,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-18T00:19:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1108,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-18T00:44:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1108,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-18T00:44:18Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1108,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-18T02:09:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1108,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-18T02:11:03Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1108,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-19T03:25:07Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1108,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-19T03:25:19Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1108,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-19T04:58:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1108,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-19T04:58:56Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1108,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-19T22:14:50Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1108,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-19T22:15:05Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1107,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-14T06:41:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1107,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-14T06:42:10Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1107,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-17T06:06:29Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1107,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-17T06:06:42Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1107,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-17T06:15:35Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1107,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-17T06:15:48Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1107,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-17T06:32:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1107,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-17T06:32:54Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1107,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-17T23:03:44Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1107,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-17T23:03:57Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1107,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-17T23:32:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1107,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-17T23:32:43Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1107,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-18T00:12:03Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1107,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-18T00:12:14Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1107,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-18T00:44:57Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1107,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-18T00:45:09Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1107,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-18T02:08:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1107,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-18T02:10:10Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1107,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-19T04:00:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1107,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-19T04:01:00Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1107,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-19T05:00:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1107,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-19T05:00:39Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1107,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-19T22:13:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1107,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-19T22:13:40Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1103,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-12T07:36:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1103,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-12T07:36:34Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1103,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-12T07:44:08Z",
+        "comment_author": "yijingyan2",
+        "comment_body": "Hi @liushilongbuaa ,could you please help me review this pr? Thanks!"
+    },
+    {
+        "number": 1103,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-17T03:58:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1103,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-17T03:59:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1103,
+        "repo": "sonic-swss-common",
+        "comment_at": "2025-11-17T22:34:52Z",
+        "comment_author": "yijingyan2",
+        "comment_body": "Hi @StormLiangMS, could you please help force merge this pr? There is no pipeline issue."
     },
     {
         "number": 1102,
