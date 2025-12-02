@@ -15540,6 +15540,20 @@
     {
         "number": 20379,
         "repo": "sonic-mgmt",
+        "comment_at": "2025-12-01T09:55:25Z",
+        "comment_author": "weiguo-nvidia",
+        "comment_body": "Hi @Pterosaur ,\r\n\r\nMay I ask why call `self.generate_dummy_hft_config_db(config)` in `ansible/library/generate_golden_config_db.py`?\r\n\r\nI find an issue when I run the case, this is the steps:\r\n1. Deploy testbed, generate and deploy minigraph. Because you add `self.generate_dummy_hft_config_db(config)` in `ansible/library/generate_golden_config_db.py`, so the default config_db.json includes HFT config\r\n```\r\n \"HIGH_FREQUENCY_TELEMETRY_GROUP\": {\r\n \"default|PORT\": {}\r\n },\r\n \"HIGH_FREQUENCY_TELEMETRY_PROFILE\": {\r\n \"default\": {\r\n \"poll_interval\": \"10000\",\r\n \"stream_state\": \"disabled\"\r\n }\r\n }\r\n```\r\n2. Run HTF cases, it try to clear HTF config, but it did not work \r\n```\r\nredis-cli -n 4 del \"HIGH_FREQUENCY_TELEMETRY_PROFILE|default\"\r\nredis-cli -n 4 del \"HIGH_FREQUENCY_TELEMETRY_GROUP|default|PORT\"\r\n```\r\n3. The HFT case try to create profile 'port_profile' by this command\r\n```\r\nredis-cli -n 4 HSET \"HIGH_FREQUENCY_TELEMETRY_PROFILE|port_profile\" \"poll_interval\" \"10000\" \"stream_state\" \"enabled\"\r\n```\r\n4. But because the `HIGH_FREQUENCY_TELEMETRY_PROFILE` already exist in step1, so create profile generated this error log and HFT case fail.\r\nIf we did not create HFT profile in `ansible/library/generate_golden_config_db.py`, the issue will not be seen.\r\n```\r\n2025 Dec 1 09:22:31.463045 router ERR syncd#SDK: [SAI_TAM.ERR] ./src/mlnx_sai_tam.c[2599]- mlnx_tam_set_telemetry_objects_list: Only one TAM telemetry is supported.\r\n```\r\n"
+    },
+    {
+        "number": 20379,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-12-02T02:15:06Z",
+        "comment_author": "Pterosaur",
+        "comment_body": "> Hi @Pterosaur ,\r\n> \r\n> May I ask why call `self.generate_dummy_hft_config_db(config)` in `ansible/library/generate_golden_config_db.py`?\r\n> \r\n> I find an issue when I run the case, this is the steps:\r\n> \r\n> 1. Deploy testbed, generate and deploy minigraph. Because you add `self.generate_dummy_hft_config_db(config)` in `ansible/library/generate_golden_config_db.py`, so the default config_db.json includes HFT config\r\n> \r\n> ```\r\n> \"HIGH_FREQUENCY_TELEMETRY_GROUP\": {\r\n> \"default|PORT\": {}\r\n> },\r\n> \"HIGH_FREQUENCY_TELEMETRY_PROFILE\": {\r\n> \"default\": {\r\n> \"poll_interval\": \"10000\",\r\n> \"stream_state\": \"disabled\"\r\n> }\r\n> }\r\n> ```\r\n> \r\n> 2. Run HTF cases, it try to clear HTF config, but it did not work\r\n> \r\n> ```\r\n> redis-cli -n 4 del \"HIGH_FREQUENCY_TELEMETRY_PROFILE|default\"\r\n> redis-cli -n 4 del \"HIGH_FREQUENCY_TELEMETRY_GROUP|default|PORT\"\r\n> ```\r\n> \r\n> 3. The HFT case try to create profile 'port_profile' by this command\r\n> \r\n> ```\r\n> redis-cli -n 4 HSET \"HIGH_FREQUENCY_TELEMETRY_PROFILE|port_profile\" \"poll_interval\" \"10000\" \"stream_state\" \"enabled\"\r\n> ```\r\n> \r\n> 4. But because the `HIGH_FREQUENCY_TELEMETRY_PROFILE` already exist in step1, so create profile generated this error log and HFT case fail.\r\n> If we did not create HFT profile in `ansible/library/generate_golden_config_db.py`, the issue will not be seen.\r\n> \r\n> ```\r\n> 2025 Dec 1 09:22:31.463045 router ERR syncd#SDK: [SAI_TAM.ERR] ./src/mlnx_sai_tam.c[2599]- mlnx_tam_set_telemetry_objects_list: Only one TAM telemetry is supported.\r\n> ```\r\n\r\nHi @weiguo-nvidia , I was aware of this issue. That's due to a flaky bug of swss. This PR: https://github.com/sonic-net/sonic-swss/pull/4025 is for fixing this issue."
+    },
+    {
+        "number": 20379,
+        "repo": "sonic-mgmt",
         "review_at": "2025-09-08T14:25:36Z",
         "review_author": "DavidZagury"
     },
