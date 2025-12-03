@@ -7143,6 +7143,13 @@
     {
         "number": 21145,
         "repo": "sonic-mgmt",
+        "comment_at": "2025-12-03T03:31:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202506: https://github.com/Azure/sonic-mgmt.msft/pull/909"
+    },
+    {
+        "number": 21145,
+        "repo": "sonic-mgmt",
         "review_at": "2025-11-01T09:47:10Z",
         "review_author": "nhe-NV"
     },
@@ -10564,6 +10571,13 @@
     {
         "number": 20998,
         "repo": "sonic-mgmt",
+        "comment_at": "2025-12-03T03:28:14Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202506: https://github.com/Azure/sonic-mgmt.msft/pull/908"
+    },
+    {
+        "number": 20998,
+        "repo": "sonic-mgmt",
         "review_at": "2025-10-20T21:42:41Z",
         "review_author": "theasianpianist"
     },
@@ -11469,6 +11483,13 @@
         "comment_at": "2025-11-19T21:36:04Z",
         "comment_author": "mssonicbld",
         "comment_body": "@dayouliu1 PR conflicts with 202505 branch"
+    },
+    {
+        "number": 20942,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-12-02T19:56:42Z",
+        "comment_author": "mannytaheri",
+        "comment_body": "@dayouliu1 @StormLiangMS This PR is causing all platform_tests/api (150 testcases) to error out in setup.\r\nThis PR will not work for a chassis with multiple hardware SKUs.\r\n\r\n> res = localhost.wait_for(host=dut_ip, port=SERVER_PORT, state='started', delay=1, timeout=10)\r\ncommon/platform/device_utils.py:1133: \r\n\r\n if (res.is_failed or 'exception' in res) and not module_ignore_errors:\r\n> raise RunAnsibleModuleFail(\"run module {} failed\".format(self.module_name), res)\r\nE tests.common.errors.RunAnsibleModuleFail: run module wait_for failed, Ansible Results =>\r\nE failed = True\r\nE elapsed = 10\r\nE msg = Timeout when waiting for 100.117.29.23:8000\r\nE invocation = {'module_args': {'host': '100.117.29.23', 'port': 8000, 'state': 'started', 'delay': 1, 'timeout': 10, 'connect_timeout': 5, 'active_connection_states': ['ESTABLISHED', 'FIN_WAIT1', 'FIN_WAIT2', 'SYN_RECV', 'SYN_SENT', 'TIME_WAIT'], 'sleep': 1, 'path': None, 'search_regex': None, 'exclude_hosts': None, 'msg': None}}\r\nE _ansible_no_log = None\r\nE changed = False\r\nE stdout =\r\nE stderr =\r\ncommon/devices/base.py:134: RunAnsibleModuleFail\r\n"
     },
     {
         "number": 20942,
@@ -14861,6 +14882,13 @@
         "comment_at": "2025-11-09T20:51:57Z",
         "comment_author": "AharonMalkin",
         "comment_body": "> @AharonMalkin - why this test is not supported on t1?\r\n\r\nT1 switches doesnt include vlans, so vlan-subnet-based neighbor miss scenarios don't apply.\r\nA previous PR enables this test by mistake on t1, this PR reverts it."
+    },
+    {
+        "number": 20433,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-12-02T18:14:38Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202412: https://github.com/Azure/sonic-mgmt.msft/pull/902"
     },
     {
         "number": 20433,
