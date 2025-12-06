@@ -13881,6 +13881,13 @@
     {
         "number": 20619,
         "repo": "sonic-mgmt",
+        "comment_at": "2025-12-05T13:12:35Z",
+        "comment_author": "balanokia",
+        "comment_body": "cc: @prgeor \r\nHi @apoorv-arista \r\nWe need to add some resilience for the error declaration for the error ratio (symbol vs correctable errors) since the sampling quanta does not satisfy the following conditions in our platforms,\r\n` # FEC correctable codeword errors should always be less than actual FEC symbol errors, check it\r\n if fec_corr_int > 0 and fec_corr_int > fec_symbol_err_int:`\r\nThis test case failed at random times with symbol error = correctable error + 1 but it gets updated in the next sample and it became equal. I would propose to take multiple samples with error tolerance to declare the FEC error consistently. Pls share your thoughts. Also if you could share test outcome if you have tested using bcm shell in your test instead of redis cache, it would be helpful. Thanks"
+    },
+    {
+        "number": 20619,
+        "repo": "sonic-mgmt",
         "review_at": "2025-11-10T06:22:17Z",
         "review_author": "prgeor"
     },
