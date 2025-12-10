@@ -7456,6 +7456,20 @@
     {
         "number": 21140,
         "repo": "sonic-mgmt",
+        "comment_at": "2025-12-10T01:44:13Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "hi @dayouliu1 this PR causing flaky failures of gnmi on T2, we'd have to revert to unblock first, you may check the failure and fix, then resubmit. \r\n\r\nrevert PR\r\nhttps://github.com/sonic-net/sonic-mgmt/pull/21579\r\n\r\nfailure case.\r\nhttps://elastictest.org/scheduler/testplan/69376eb7bcc3fac23371ac20?testcase=gnmi_e2e%2Ftest_gnmi_auth.py&type=console"
+    },
+    {
+        "number": 21140,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-12-10T01:46:22Z",
+        "comment_author": "xwjiang-ms",
+        "comment_body": "Failure info here:\r\n<img width=\"1743\" height=\"618\" alt=\"image\" src=\"https://github.com/user-attachments/assets/b20f8a8f-befc-4fd5-80e1-1a3d829b223e\" />\r\n"
+    },
+    {
+        "number": 21140,
+        "repo": "sonic-mgmt",
         "review_at": "2025-10-30T18:03:29Z",
         "review_author": "anders-nexthop"
     },
@@ -9574,6 +9588,13 @@
         "comment_at": "2025-11-03T18:29:07Z",
         "comment_author": "anamehra",
         "comment_body": "Hi @yejianquan , for your viz. Thanks"
+    },
+    {
+        "number": 21057,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-12-10T04:16:24Z",
+        "comment_author": "anamehra",
+        "comment_body": "Hi @cyw233 , please cherry-pick this PR for msft branch. Thanks"
     },
     {
         "number": 21057,
@@ -14321,6 +14342,13 @@
     {
         "number": 20606,
         "repo": "sonic-mgmt",
+        "comment_at": "2025-12-09T20:10:51Z",
+        "comment_author": "r12f",
+        "comment_body": "hi @gshemesh2 , do you mind to help pick this change to 202412?"
+    },
+    {
+        "number": 20606,
+        "repo": "sonic-mgmt",
         "review_at": "2025-09-16T12:24:18Z",
         "review_author": "AharonMalkin"
     },
@@ -15739,6 +15767,20 @@
         "comment_at": "2025-12-02T02:15:06Z",
         "comment_author": "Pterosaur",
         "comment_body": "> Hi @Pterosaur ,\r\n> \r\n> May I ask why call `self.generate_dummy_hft_config_db(config)` in `ansible/library/generate_golden_config_db.py`?\r\n> \r\n> I find an issue when I run the case, this is the steps:\r\n> \r\n> 1. Deploy testbed, generate and deploy minigraph. Because you add `self.generate_dummy_hft_config_db(config)` in `ansible/library/generate_golden_config_db.py`, so the default config_db.json includes HFT config\r\n> \r\n> ```\r\n> \"HIGH_FREQUENCY_TELEMETRY_GROUP\": {\r\n> \"default|PORT\": {}\r\n> },\r\n> \"HIGH_FREQUENCY_TELEMETRY_PROFILE\": {\r\n> \"default\": {\r\n> \"poll_interval\": \"10000\",\r\n> \"stream_state\": \"disabled\"\r\n> }\r\n> }\r\n> ```\r\n> \r\n> 2. Run HTF cases, it try to clear HTF config, but it did not work\r\n> \r\n> ```\r\n> redis-cli -n 4 del \"HIGH_FREQUENCY_TELEMETRY_PROFILE|default\"\r\n> redis-cli -n 4 del \"HIGH_FREQUENCY_TELEMETRY_GROUP|default|PORT\"\r\n> ```\r\n> \r\n> 3. The HFT case try to create profile 'port_profile' by this command\r\n> \r\n> ```\r\n> redis-cli -n 4 HSET \"HIGH_FREQUENCY_TELEMETRY_PROFILE|port_profile\" \"poll_interval\" \"10000\" \"stream_state\" \"enabled\"\r\n> ```\r\n> \r\n> 4. But because the `HIGH_FREQUENCY_TELEMETRY_PROFILE` already exist in step1, so create profile generated this error log and HFT case fail.\r\n> If we did not create HFT profile in `ansible/library/generate_golden_config_db.py`, the issue will not be seen.\r\n> \r\n> ```\r\n> 2025 Dec 1 09:22:31.463045 router ERR syncd#SDK: [SAI_TAM.ERR] ./src/mlnx_sai_tam.c[2599]- mlnx_tam_set_telemetry_objects_list: Only one TAM telemetry is supported.\r\n> ```\r\n\r\nHi @weiguo-nvidia , I was aware of this issue. That's due to a flaky bug of swss. This PR: https://github.com/sonic-net/sonic-swss/pull/4025 is for fixing this issue."
+    },
+    {
+        "number": 20379,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-12-09T20:08:32Z",
+        "comment_author": "r12f",
+        "comment_body": "not seeing 202412 PR. checking with @Pterosaur on picking."
+    },
+    {
+        "number": 20379,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-12-09T20:10:33Z",
+        "comment_author": "Pterosaur",
+        "comment_body": "Cherry-picked into 202412 by : https://github.com/Azure/sonic-mgmt.msft/pull/894"
     },
     {
         "number": 20379,
