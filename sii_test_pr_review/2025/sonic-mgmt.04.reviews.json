@@ -2854,6 +2854,13 @@
     {
         "number": 18029,
         "repo": "sonic-mgmt",
+        "comment_at": "2025-12-11T18:58:17Z",
+        "comment_author": "markx-arista",
+        "comment_body": "@sdszhang \r\nCould you explain why `ipv6_address_pattern: 2064:100:0::%02X%02X:%02X%02X:0/120` is added for v6 topo?\r\nThis pattern is used to generate routes in `ansible/library/announce_routes.py`.\r\nAnd this makes test_acl.py fail in `ipv6-ingress-uplink->downlink` case on v6 topos because dest ip `20c0:a800::1` is not included in the pattern, so default route is used to forward the packet to the upstream port.\r\nNon-v6 topo doesn't have ipv6_address_pattern set, so default `IPV6_ADDRESS_PATTERN_DEFAULT_VALUE = '20%02X:%02X%02X:0:%02X::/64'` is used, which covers the dest ip.\r\nI think I can change the dest ip in test_acl.py to make it pass. I just wonder why we have the pattern set for v6 topos."
+    },
+    {
+        "number": 18029,
+        "repo": "sonic-mgmt",
         "review_at": "2025-04-17T14:59:51Z",
         "review_author": "r12f"
     },
