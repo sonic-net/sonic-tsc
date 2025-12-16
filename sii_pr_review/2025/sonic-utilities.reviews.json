@@ -1100,6 +1100,13 @@
     {
         "number": 4119,
         "repo": "sonic-utilities",
+        "comment_at": "2025-12-15T22:05:21Z",
+        "comment_author": "deepak-singhal0408",
+        "comment_body": "in 202405, this check is only run , when big_suppress_fib_pending feature is enabled(which is not)..\r\n \r\n    if is_bgp_suppress_fib_pending_enabled(namespace):\r\n        rt_frr_miss = check_frr_pending_routes(namespace)\r\n \r\nAlso this command internally executes, \"show ip route json\", which is risky and known to have memory spike on scaled route systems.. hence, this PR cant go in 202405 branch."
+    },
+    {
+        "number": 4119,
+        "repo": "sonic-utilities",
         "review_at": "2025-11-05T06:09:51Z",
         "review_author": "copilot-pull-request-reviewer"
     },
@@ -3289,6 +3296,13 @@
         "comment_at": "2025-12-14T18:07:13Z",
         "comment_author": "yxieca",
         "comment_body": "Issue: https://github.com/sonic-net/sonic-mgmt/issues/21690\r\n\r\nTest failure: https://elastictest.org/scheduler/testplan/693d87a8be086527515c111d"
+    },
+    {
+        "number": 4089,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-12-15T04:06:45Z",
+        "comment_author": "stephenxs",
+        "comment_body": "> Issue: [sonic-net/sonic-mgmt#21690](https://github.com/sonic-net/sonic-mgmt/issues/21690)\r\n> \r\n> Test failure: https://elastictest.org/scheduler/testplan/693d87a8be086527515c111d\r\n\r\nDraft a PR to fix it: https://github.com/sonic-net/sonic-utilities/pull/4159"
     },
     {
         "number": 4089,
