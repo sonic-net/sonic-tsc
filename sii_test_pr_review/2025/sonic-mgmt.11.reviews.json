@@ -846,6 +846,13 @@
     {
         "number": 21384,
         "repo": "sonic-mgmt",
+        "comment_at": "2025-12-15T14:30:31Z",
+        "comment_author": "mannytaheri",
+        "comment_body": "@bingwang-ms @AndoniSanguesa All everflow/test_everflow_ipv6.py are erroring out after the merge of this PR with the message \"Acl rule counters are not ready\"\r\n```\r\n def setup_acl_table(self, setup_info, setup_mirror_session, config_method, setup_mirror_session_dest_ip_route): # noqa F811\r\n...\r\n...\r\n> self.apply_ip_type_rule(duthost, 6)\r\neverflow/test_everflow_ipv6.py:212\r\n\r\ndef apply_non_openconfig_acl_rle(self, duthost, extra_vars, rule_file):\r\n...\r\n...\r\n if duthost.facts['asic_type'] != 'vs':\r\n> pytest_assert(wait_until(60, 2, 0, self.check_rule_counters, duthost), \"Acl rule counters are not ready\")\r\nE \r\neverflow/everflow_test_utilities.py:1040: Failed\r\n```"
+    },
+    {
+        "number": 21384,
+        "repo": "sonic-mgmt",
         "review_at": "2025-11-21T17:12:40Z",
         "review_author": "bingwang-ms"
     },
