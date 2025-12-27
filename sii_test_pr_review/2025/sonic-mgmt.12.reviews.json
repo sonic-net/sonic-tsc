@@ -7925,6 +7925,13 @@
     {
         "number": 21393,
         "repo": "sonic-mgmt",
+        "comment_at": "2025-12-25T06:51:29Z",
+        "comment_author": "congh-nvidia",
+        "comment_body": "Hi @yue-fred-gao , I have find another issue caused by this PR. Since the default route is removed, we are not able to ssh to the DPU from the switch, because there is no route to the NPU mgmt IP:\r\n\r\nadmin@sonic:~$ sudo tcpdump -i eth0-midplane tcp dst port 22 -vvv\r\n[ 4334.346618] device eth0-midplane entered promiscuous mode\r\ntcpdump: listening on eth0-midplane, link-type EN10MB (Ethernet), snapshot length 262144 bytes\r\n06:06:03.992403 IP (tos 0x0, ttl 62, id 22881, offset 0, flags [DF], proto TCP (6), length 60)\r\n **10.210.24.178**.37242 > 169.254.200.1.ssh: Flags [S], cksum 0x8334 (correct), seq 1884908377, win 64240, options \r\n\r\nadmin@r-SN4280-10:~$ show ip interface | grep eth0\r\neth0 **10.210.24.178**/22 up/up N/A N/A\r\n\r\nMay I ask where do you configure the route to the NPU mgmt IP?"
+    },
+    {
+        "number": 21393,
+        "repo": "sonic-mgmt",
         "review_at": "2025-12-03T01:18:34Z",
         "review_author": "zjswhhh"
     },
@@ -10725,7 +10732,7 @@
         "repo": "sonic-mgmt",
         "comment_at": "2025-12-24T02:03:23Z",
         "comment_author": "weiguo-nvidia",
-        "comment_body": "Hi @wrideout-arista ,\r\n\r\nWe run the acl case on topo t1-isolated-v6-d56u1-lag with this fix, but case fail. Could you help check if the case can pass on side?\r\n\r\n```\r\nAssertionError: Received expected packet on port 97 for device 0, but it should have arrived on one of these ports: [0, 8, 108, 120, 128, 136, 144, 152, 160, 168, 176, 184, 16, 192, 200, 208, 216, 224, 232, 240, 248, 256, 264, 24, 272, 280, 288, 296, 304, 312, 320, 332, 340, 352, 32, 360, 368, 376, 384, 392, 400, 408, 416, 424, 432, 40, 440, 448, 456, 48, 56, 64, 72, 80, 88, 100].\r\n========== RECEIVED ==========\r\n0000 3E 2B 66 F5 DE 7F 38 25 F3 75 98 0A 86 DD 60 00 >+f...8%.u....`.\r\n0010 00 00 00 2E 06 3F 60 C0 A8 00 00 00 00 00 00 00 .....?`.........\r\n0020 00 00 00 00 00 05 20 C0 A8 00 00 00 00 00 00 00 ...... .........\r\n0030 00 00 00 00 00 14 43 21 00 51 00 00 00 00 00 00 ......C!.Q......\r\n0040 00 00 50 02 20 00 5D A2 00 00 74 65 73 74 5F 61 ..P. .]...test_a\r\n0050 63 6C 20 74 65 73 74 5F 61 63 6C 20 74 65 73 74 cl test_acl test\r\n0060 5F 61 63 6C _acl\r\n==============================\r\n```"
+        "comment_body": "Hi @wrideout-arista ,\r\n\r\nWe run the acl case on topo t1-isolated-v6-d56u1-lag with this fix, but case fail. Could you help check if the case can pass on side?\r\nCreate another github issue to track it.\r\nhttps://github.com/sonic-net/sonic-mgmt/issues/21788\r\n\r\n```\r\nAssertionError: Received expected packet on port 97 for device 0, but it should have arrived on one of these ports: [0, 8, 108, 120, 128, 136, 144, 152, 160, 168, 176, 184, 16, 192, 200, 208, 216, 224, 232, 240, 248, 256, 264, 24, 272, 280, 288, 296, 304, 312, 320, 332, 340, 352, 32, 360, 368, 376, 384, 392, 400, 408, 416, 424, 432, 40, 440, 448, 456, 48, 56, 64, 72, 80, 88, 100].\r\n========== RECEIVED ==========\r\n0000 3E 2B 66 F5 DE 7F 38 25 F3 75 98 0A 86 DD 60 00 >+f...8%.u....`.\r\n0010 00 00 00 2E 06 3F 60 C0 A8 00 00 00 00 00 00 00 .....?`.........\r\n0020 00 00 00 00 00 05 20 C0 A8 00 00 00 00 00 00 00 ...... .........\r\n0030 00 00 00 00 00 14 43 21 00 51 00 00 00 00 00 00 ......C!.Q......\r\n0040 00 00 50 02 20 00 5D A2 00 00 74 65 73 74 5F 61 ..P. .]...test_a\r\n0050 63 6C 20 74 65 73 74 5F 61 63 6C 20 74 65 73 74 cl test_acl test\r\n0060 5F 61 63 6C _acl\r\n==============================\r\n```"
     },
     {
         "number": 21155,
