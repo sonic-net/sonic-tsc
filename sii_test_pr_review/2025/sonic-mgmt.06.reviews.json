@@ -13578,7 +13578,7 @@
         "repo": "sonic-mgmt",
         "comment_at": "2025-06-09T02:08:34Z",
         "comment_author": "opcoder0",
-        "comment_body": "> Hi @developfast , could you add more context on why it should be skipped from PR testing? And now we enabled compatced-area based test, I'm not sure whether removal in the list will actually skip in test.\r\n> \r\n> 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 parse_prs.py parse_reviews.py pr_dump.sh @yutongzhang-microsoft to confirm, maybe the right way to skip is to assert platform is vs in conditional mark?\r\n\r\nThe recommended way to skip a test is to use condition mark. The format is documented here https://github.com/sonic-net/sonic-mgmt/blob/master/tests/common/plugins/conditional_mark/README.md#format-of-the-conditions-file. For this case a `xfail` section needs to be added to `tests_mark_conditions.yaml` with the condition pointing to an open GitHub issue for this failure."
+        "comment_body": "> Hi @developfast , could you add more context on why it should be skipped from PR testing? And now we enabled compatced-area based test, I'm not sure whether removal in the list will actually skip in test.\r\n> \r\n> 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026 parse_prs.py parse_reviews.py pr_dump.sh @yutongzhang-microsoft to confirm, maybe the right way to skip is to assert platform is vs in conditional mark?\r\n\r\nThe recommended way to skip a test is to use condition mark. The format is documented here https://github.com/sonic-net/sonic-mgmt/blob/master/tests/common/plugins/conditional_mark/README.md#format-of-the-conditions-file. For this case a `xfail` section needs to be added to `tests_mark_conditions.yaml` with the condition pointing to an open GitHub issue for this failure."
     },
     {
         "number": 18832,
@@ -17506,7 +17506,7 @@
         "repo": "sonic-mgmt",
         "comment_at": "2025-06-02T16:32:15Z",
         "comment_author": "zhixzhu",
-        "comment_body": "Failures on \"Test impacted-area-kvmtest-multi-asic-t1\":\r\nhttps://elastictest.org/scheduler/testplan/683b45dd2c5eba77d26f0ef6\r\n\r\n```\r\nTASK [Sync DUT system time with NTP server] ************************************\r\nSaturday 31 May 2025 18:19:21 +0000 (0:00:02.175) 0:00:56.719 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 parse_prs.py parse_reviews.py pr_dump.sh \r\nASYNC POLL on vlab-08: jid=563713969127.20028 started=1 finished=0\r\nASYNC FAILED on vlab-08: jid=563713969127.20028\r\n```\r\n```\r\ntest_pretest.py::test_disable_rsyslog_rate_limit \r\n-------------------------------- live log setup --------------------------------\r\n18:26:12 memory_utilization.execute_command L0039 WARNING| Command 'vtysh -c \"show memory bgp\"' returned no output\r\n18:26:12 memory_utilization.parse_frr_memory_outp L0481 WARNING| Empty output for FRR memory command, returning empty values\r\n18:26:13 memory_utilization.execute_command L0039 WARNING| Command 'vtysh -c \"show memory zebra\"' returned no output\r\n18:26:13 memory_utilization.parse_frr_memory_outp L0481 WARNING| Empty output for FRR memory command, returning empty values\r\nFAILED [ 46%]\r\n```"
+        "comment_body": "Failures on \"Test impacted-area-kvmtest-multi-asic-t1\":\r\nhttps://elastictest.org/scheduler/testplan/683b45dd2c5eba77d26f0ef6\r\n\r\n```\r\nTASK [Sync DUT system time with NTP server] ************************************\r\nSaturday 31 May 2025 18:19:21 +0000 (0:00:02.175) 0:00:56.719 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026 parse_prs.py parse_reviews.py pr_dump.sh \r\nASYNC POLL on vlab-08: jid=563713969127.20028 started=1 finished=0\r\nASYNC FAILED on vlab-08: jid=563713969127.20028\r\n```\r\n```\r\ntest_pretest.py::test_disable_rsyslog_rate_limit \r\n-------------------------------- live log setup --------------------------------\r\n18:26:12 memory_utilization.execute_command L0039 WARNING| Command 'vtysh -c \"show memory bgp\"' returned no output\r\n18:26:12 memory_utilization.parse_frr_memory_outp L0481 WARNING| Empty output for FRR memory command, returning empty values\r\n18:26:13 memory_utilization.execute_command L0039 WARNING| Command 'vtysh -c \"show memory zebra\"' returned no output\r\n18:26:13 memory_utilization.parse_frr_memory_outp L0481 WARNING| Empty output for FRR memory command, returning empty values\r\nFAILED [ 46%]\r\n```"
     },
     {
         "number": 18735,
@@ -18752,7 +18752,7 @@
         "repo": "sonic-mgmt",
         "comment_at": "2025-06-04T07:47:35Z",
         "comment_author": "sdszhang",
-        "comment_body": "> @sdszhang - It will be good if we can have logs for following:\r\n> \r\n> 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 parse_prs.py parse_reviews.py pr_dump.sh Single DUT, dynamic and static ports.\r\n> 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 parse_prs.py parse_reviews.py pr_dump.sh Multi DUT, dynamic and static ports.\r\n> \r\n> That way, it is ensured that it is not breaking any combination.\r\n> \r\n> Thanks, -A\r\n\r\nRight now, current test case having issue support T1-tgen testbed. There is a PR #18793 to disable it first, then working on it separately to avoid blocking T1-tgen testing.\r\n"
+        "comment_body": "> @sdszhang - It will be good if we can have logs for following:\r\n> \r\n> 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026 parse_prs.py parse_reviews.py pr_dump.sh Single DUT, dynamic and static ports.\r\n> 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026 parse_prs.py parse_reviews.py pr_dump.sh Multi DUT, dynamic and static ports.\r\n> \r\n> That way, it is ensured that it is not breaking any combination.\r\n> \r\n> Thanks, -A\r\n\r\nRight now, current test case having issue support T1-tgen testbed. There is a PR #18793 to disable it first, then working on it separately to avoid blocking T1-tgen testing.\r\n"
     },
     {
         "number": 18673,
@@ -23688,7 +23688,7 @@
         "repo": "sonic-mgmt",
         "comment_at": "2025-05-06T06:17:06Z",
         "comment_author": "JibinBao",
-        "comment_body": "> @JibinBao,\r\n> \r\n> 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 parse_prs.py parse_reviews.py pr_dump.sh So DPU is down and unpingable after kernel panic or memory exhaustion which is checked by the unprintable function.\r\n> 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 parse_prs.py parse_reviews.py pr_dump.sh Then upon post dpu checks, dpu is expected to come up and singable ?\r\n@nissampa , yes.\r\n"
+        "comment_body": "> @JibinBao,\r\n> \r\n> 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026 parse_prs.py parse_reviews.py pr_dump.sh So DPU is down and unpingable after kernel panic or memory exhaustion which is checked by the unprintable function.\r\n> 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026 parse_prs.py parse_reviews.py pr_dump.sh Then upon post dpu checks, dpu is expected to come up and singable ?\r\n@nissampa , yes.\r\n"
     },
     {
         "number": 18185,
