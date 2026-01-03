@@ -37,6 +37,13 @@
     {
         "number": 4160,
         "repo": "sonic-utilities",
+        "comment_at": "2026-01-02T20:35:55Z",
+        "comment_author": "vvolam",
+        "comment_body": "I think we need this in 202511 as well right?"
+    },
+    {
+        "number": 4160,
+        "repo": "sonic-utilities",
         "review_at": "2025-12-16T02:22:16Z",
         "review_author": "dgsudharsan"
     },
@@ -7301,6 +7308,67 @@
         "comment_at": "2025-08-19T23:17:44Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4034,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-08-19T20:12:19Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4034,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-08-19T20:12:30Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4034,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-12-18T22:45:58Z",
+        "comment_author": "prsunny",
+        "comment_body": "@StormLiangMS , could you please review/merge?"
+    },
+    {
+        "number": 4034,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-12-23T07:26:17Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "hi @sudarshankumar4893  \r\nCould you help clarify the use case for deleting the BGP_PEER_CONFIGURED_TABLE after a config reload?\r\n\r\nMy understanding is that entries in the State DB should be added when they are set in the CONFIG_DB and removed when they are deleted from the CONFIG_DB. Based on this model, I am trying to understand why additional cleanup logic is required directly in the State DB.\r\n\r\nIt would be helpful to get more context on the specific scenario this cleanup is intended to address."
+    },
+    {
+        "number": 4034,
+        "repo": "sonic-utilities",
+        "comment_at": "2025-12-29T18:08:35Z",
+        "comment_author": "sudarshankumar4893",
+        "comment_body": "> hi @sudarshankumar4893 Could you help clarify the use case for deleting the BGP_PEER_CONFIGURED_TABLE after a config reload?\r\n> \r\n> My understanding is that entries in the State DB should be added when they are set in the CONFIG_DB and removed when they are deleted from the CONFIG_DB. Based on this model, I am trying to understand why additional cleanup logic is required directly in the State DB.\r\n> \r\n> It would be helpful to get more context on the specific scenario this cleanup is intended to address.\r\n\r\nHey Storm, capturing our discussion here:\r\nWhen a bgp peer is deleted via sudo config bgp peer command the delete mechanism in bgpcfgd (managers_bgp.py) kicks in and deletes the peer from state db too. Also, when a peer is removed from config_db.json and a sonic-cfggen is run to reevaluate, the peer deletion in bgpcfgd kicks in again. However, if the peer is removed from config_db.json and a config reload is triggered, that case is handled by config/main.py. Hence I needed to address that case.\r\n\r\nYou mentioned that ideally we would want to address all BGP peer related actions using bgpcfgd. In the future we also want to limit the json interaction (editing it directly) and have the ability to configure/delete/modify BGP peers using CLI. This is not the preferred approach but given the current design and limitations, we are doing ahead with this cleanup for now."
+    },
+    {
+        "number": 4034,
+        "repo": "sonic-utilities",
+        "review_at": "2025-12-18T20:20:42Z",
+        "review_author": "anish-n"
+    },
+    {
+        "number": 4034,
+        "repo": "sonic-utilities",
+        "review_at": "2025-12-30T07:53:25Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 4034,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2025-12-18T20:20:42Z",
+        "latestReview_author": "anish-n",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4034,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2025-12-30T07:53:25Z",
+        "latestReview_author": "StormLiangMS",
+        "latestReview_state": "APPROVED"
     },
     {
         "number": 4033,
