@@ -1,5 +1,164 @@
 [
     {
+        "number": 1749,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-01-22T02:23:40Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1749,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-01-22T02:23:51Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1749,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-01-22T02:41:21Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1749,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-01-22T02:41:35Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1749,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-01-22T03:23:58Z",
+        "comment_author": "vivekrnv",
+        "comment_body": "@saiarcot895 , @tjchadaga This seems like a generic build failure in 202511, Can you please take a look\r\n\r\n```\r\n      |                                             ^~~~~\r\nIn file included from vpp/SwitchVpp.h:8,\r\n                 from VirtualSwitchSaiInterfaceFdb.cpp:4:\r\nvpp/TunnelManager.h:104:32: error: field 'm_router_mac' has incomplete type 'std::array<unsigned char, 6>'\r\n  104 |         std::array<uint8_t, 6> m_router_mac;\r\n      |                                ^~~~~~~~~~~~\r\nIn file included from /usr/include/c++/12/bits/stl_map.h:63,\r\n                 from /usr/include/c++/12/map:61,\r\n                 from LaneMap.h:7,\r\n                 from SwitchConfig.h:3,\r\n                 from SwitchState.h:8,\r\n                 from SwitchStateBase.h:3,\r\n                 from VirtualSwitchSaiInterface.h:3,\r\n                 from VirtualSwitchSaiInterfaceFdb.cpp:1:\r\n/usr/include/c++/12/tuple:1595:45: note: declaration of 'struct std::array<unsigned char, 6>'\r\n 1595 |   template<typename _Tp, size_t _Nm> struct array;\r\n      |                                             ^~~~~\r\n```"
+    },
+    {
+        "number": 1749,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-01-22T17:49:47Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "> @saiarcot895 , @tjchadaga This seems like a generic build failure in 202511, Can you please take a look\r\n> \r\n> ```\r\n>       |                                             ^~~~~\r\n> In file included from vpp/SwitchVpp.h:8,\r\n>                  from VirtualSwitchSaiInterfaceFdb.cpp:4:\r\n> vpp/TunnelManager.h:104:32: error: field 'm_router_mac' has incomplete type 'std::array<unsigned char, 6>'\r\n>   104 |         std::array<uint8_t, 6> m_router_mac;\r\n>       |                                ^~~~~~~~~~~~\r\n> In file included from /usr/include/c++/12/bits/stl_map.h:63,\r\n>                  from /usr/include/c++/12/map:61,\r\n>                  from LaneMap.h:7,\r\n>                  from SwitchConfig.h:3,\r\n>                  from SwitchState.h:8,\r\n>                  from SwitchStateBase.h:3,\r\n>                  from VirtualSwitchSaiInterface.h:3,\r\n>                  from VirtualSwitchSaiInterfaceFdb.cpp:1:\r\n> /usr/include/c++/12/tuple:1595:45: note: declaration of 'struct std::array<unsigned char, 6>'\r\n>  1595 |   template<typename _Tp, size_t _Nm> struct array;\r\n>       |                                             ^~~~~\r\n> ```\r\n\r\n@vivekrnv - this is known and should be fixed with this PR - https://github.com/sonic-net/sonic-sairedis/pull/1745\r\n\r\nThere is also another issue with the libswsscommon build which is preventing merging of the above PR into 202511. We are currently looking into that"
+    },
+    {
+        "number": 1749,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-01-22T17:51:25Z",
+        "comment_author": "vivekrnv",
+        "comment_body": "> > @saiarcot895 , @tjchadaga This seems like a generic build failure in 202511, Can you please take a look\r\n> > ```\r\n> >       |                                             ^~~~~\r\n> > In file included from vpp/SwitchVpp.h:8,\r\n> >                  from VirtualSwitchSaiInterfaceFdb.cpp:4:\r\n> > vpp/TunnelManager.h:104:32: error: field 'm_router_mac' has incomplete type 'std::array<unsigned char, 6>'\r\n> >   104 |         std::array<uint8_t, 6> m_router_mac;\r\n> >       |                                ^~~~~~~~~~~~\r\n> > In file included from /usr/include/c++/12/bits/stl_map.h:63,\r\n> >                  from /usr/include/c++/12/map:61,\r\n> >                  from LaneMap.h:7,\r\n> >                  from SwitchConfig.h:3,\r\n> >                  from SwitchState.h:8,\r\n> >                  from SwitchStateBase.h:3,\r\n> >                  from VirtualSwitchSaiInterface.h:3,\r\n> >                  from VirtualSwitchSaiInterfaceFdb.cpp:1:\r\n> > /usr/include/c++/12/tuple:1595:45: note: declaration of 'struct std::array<unsigned char, 6>'\r\n> >  1595 |   template<typename _Tp, size_t _Nm> struct array;\r\n> >       |                                             ^~~~~\r\n> > ```\r\n> \r\n> @vivekrnv - this is known and should be fixed with this PR - #1745\r\n> \r\n> There is also another issue with the libswsscommon build which is preventing merging of the above PR into 202511. We are currently looking into that\r\n\r\nI see, thanks"
+    },
+    {
+        "number": 1749,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-01-23T09:12:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1749,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-01-23T09:13:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1749,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-01-23T19:42:02Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1749,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-01-23T19:42:14Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1749,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-01-24T00:37:00Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "@vivekrnv - build issues are all resolved now. PR is now failing for coverage"
+    },
+    {
+        "number": 1749,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-01-24T00:49:13Z",
+        "comment_author": "vivekrnv",
+        "comment_body": "> @vivekrnv - build issues are all resolved now. PR is now failing for coverage\r\n\r\nWill add an UT for this"
+    },
+    {
+        "number": 1749,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-01-24T01:24:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1749,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-01-24T01:24:16Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1749,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-01-24T01:26:40Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1749,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-01-24T01:26:52Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1749,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-01-24T01:27:38Z",
+        "comment_author": "vivekrnv",
+        "comment_body": "> @vivekrnv - build issues are all resolved now. PR is now failing for coverage\r\n\r\nThere is no infra to add UT's around SwitchNotifications class. For now, make the callback as nullptr. That should solve the compilation and coverage issues"
+    },
+    {
+        "number": 1749,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-01-26T15:20:36Z",
+        "comment_author": "vivekrnv",
+        "comment_body": "@tjchadaga , Can you signoff on this?"
+    },
+    {
+        "number": 1749,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-01-22T02:27:19Z",
+        "review_author": "dgsudharsan"
+    },
+    {
+        "number": 1749,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-01-26T19:44:37Z",
+        "review_author": "tjchadaga"
+    },
+    {
+        "number": 1749,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-01-22T02:27:19Z",
+        "latestReview_author": "dgsudharsan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1749,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-01-26T19:44:37Z",
+        "latestReview_author": "tjchadaga",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 1746,
         "repo": "sonic-sairedis",
         "comment_at": "2026-01-21T00:21:34Z",
@@ -283,6 +442,13 @@
         "comment_at": "2026-01-22T16:24:17Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to msft-202412: https://github.com/Azure/sonic-sairedis.msft/pull/102"
+    },
+    {
+        "number": 1734,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-01-26T17:55:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202511: https://github.com/sonic-net/sonic-sairedis/pull/1752"
     },
     {
         "number": 1734,
