@@ -1,5 +1,101 @@
 [
     {
+        "number": 105,
+        "repo": "sonic-wpa-supplicant",
+        "comment_at": "2026-01-16T09:37:16Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 105,
+        "repo": "sonic-wpa-supplicant",
+        "comment_at": "2026-01-16T09:37:24Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 105,
+        "repo": "sonic-wpa-supplicant",
+        "comment_at": "2026-01-16T09:37:40Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 105,
+        "repo": "sonic-wpa-supplicant",
+        "comment_at": "2026-01-16T09:37:49Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 105,
+        "repo": "sonic-wpa-supplicant",
+        "comment_at": "2026-01-16T09:41:42Z",
+        "comment_author": "rajshekhar-nexthop",
+        "comment_body": "@judyjoseph @arista-nwolfe Please help review this PR. Thanks"
+    },
+    {
+        "number": 105,
+        "repo": "sonic-wpa-supplicant",
+        "comment_at": "2026-01-30T04:37:29Z",
+        "comment_author": "rajshekhar-nexthop",
+        "comment_body": "+ @lguohan Please review this PR. Thanks"
+    },
+    {
+        "number": 105,
+        "repo": "sonic-wpa-supplicant",
+        "comment_at": "2026-01-30T04:57:12Z",
+        "comment_author": "lguohan",
+        "comment_body": "@Pterosaur , can you review ?"
+    },
+    {
+        "number": 105,
+        "repo": "sonic-wpa-supplicant",
+        "comment_at": "2026-02-02T10:42:22Z",
+        "comment_author": "Pterosaur",
+        "comment_body": "Hi @rajshekhar-nexthop , thanks so much for your detail analysis and fixing. I think your PR is good. But I don't fully understand how it happened.\r\nDo you mean the entries in APPL_DB are correct, but they are not correct in ASIC_DB?\r\nIt surprised me, could you please share the sairedis.rec and swss.rec on the bad side?"
+    },
+    {
+        "number": 105,
+        "repo": "sonic-wpa-supplicant",
+        "comment_at": "2026-02-03T17:50:12Z",
+        "comment_author": "rajshekhar-nexthop",
+        "comment_body": "> Hi @rajshekhar-nexthop , thanks so much for your detail analysis and fixing. I think your PR is good. But I don't fully understand how it happened. Do you mean the entries in APPL_DB are correct, but they are not correct in ASIC_DB? It surprised me, could you please share the sairedis.rec and swss.rec on the bad side?\r\n\r\n   Thanks @Pterosaur !\r\n\r\n     > Do you mean the entries in APPL_DB are correct, but they are not correct in ASIC_DB?\r\n   Yes. In this case CONFIG_DB/APPL_DB were correct on both DUT and VM (XPN\u2011256 profile, non\u2011zero SALT/SSCI in MACSEC_*_SA_TABLE), and the VM\u2019s ASIC_DB matched that. On the DUT only, the ASIC_DB SAs were wrong: they had the right SAK but SALT=0, SSCI=0, and the SCs still showed the non\u2011XPN cipher. That mismatch (control plane says XPN with SALT/SSCI, but ASIC has non\u2011XPN + zero SALT/SSCI) is what caused all packets to be rejected on the peer.\r\n   \r\n     > could you please share the sairedis.rec and swss.rec on the bad side?\r\n   I didn\u2019t capture the full sairedis.rec / swss.rec for the original failure, only snippets showing the SC being created with GCM_AES_128 and later a SET to GCM_AES_XPN_* that didn\u2019t take effect in ASIC_DB. I\u2019ll try to reproduce this issue again on the hardware platform, capture the full sairedis.rec and swss.rec, and then attach those complete logs to this PR for you to review.  But even if the SC cipher SET had taken effect, the SAs on the DUT were already created during the non\u2011XPN window with SALT=0 / SSCI=0, and those attributes are CREATE_ONLY in SAI, so they would still remain zero and keep breaking dataplane"
+    },
+    {
+        "number": 105,
+        "repo": "sonic-wpa-supplicant",
+        "comment_at": "2026-02-04T19:50:42Z",
+        "comment_author": "arlakshm",
+        "comment_body": "@vmittal-msft, can you please approve this PR for 202511"
+    },
+    {
+        "number": 105,
+        "repo": "sonic-wpa-supplicant",
+        "review_at": "2026-01-16T17:23:02Z",
+        "review_author": "arista-nwolfe"
+    },
+    {
+        "number": 105,
+        "repo": "sonic-wpa-supplicant",
+        "review_at": "2026-02-04T00:18:32Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 105,
+        "repo": "sonic-wpa-supplicant",
+        "latestReview_at": "2026-02-04T00:18:32Z",
+        "latestReview_author": "Pterosaur",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 105,
+        "repo": "sonic-wpa-supplicant",
+        "latestReview_at": "2026-01-16T17:23:02Z",
+        "latestReview_author": "arista-nwolfe",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 102,
         "repo": "sonic-wpa-supplicant",
         "comment_at": "2025-12-24T05:34:37Z",
