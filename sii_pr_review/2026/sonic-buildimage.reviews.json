@@ -1,5 +1,40 @@
 [
     {
+        "number": 25744,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-28T03:04:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25744,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-28T03:04:47Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25741,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-28T01:23:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-buildimage/pull/25451"
+    },
+    {
+        "number": 25741,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-28T01:24:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25741,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-28T01:24:16Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
         "number": 25724,
         "repo": "sonic-buildimage",
         "comment_at": "2026-02-27T04:15:25Z",
@@ -1146,6 +1181,223 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-24T19:33:13Z",
+        "comment_author": "rustiqly",
+        "comment_body": "@copilot review"
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-24T19:33:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-24T19:33:31Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-24T21:13:57Z",
+        "comment_author": "tirupatihemanth",
+        "comment_body": "@rustiqly @lihuay \r\n\r\nI agree with using flock to serialize dpkg operations instead of the current atomic mkdir based implementation. However I have some concerns:\r\n\r\n1. The uninstallation of deb packages is still based on mkdir based serialization and it could do dpkg uninstallation parallel to the flock based installation. \r\n\r\ncheck rules/function: https://github.com/sonic-net/sonic-buildimage/blob/5425a55cf98f08b3ca3060341fa04e741dd70e7e/rules/functions#L157C1-L165C6\r\n\r\n```\r\ndefine UNINSTALL_DEBS\r\nif [ -n \"$(1)\" ]; then \\\r\n while true; do \\\r\n if mkdir $(DEBS_PATH)/dpkg_lock &> /dev/null; then \\\r\n\t\t { sudo DEBIAN_FRONTEND=noninteractive dpkg -P $(foreach deb,$(1),$(firstword $(subst _, ,$(basename $(deb))))) $(LOG) && rm -d $(DEBS_PATH)/dpkg_lock && break; } || { rm -d $(DEBS_PATH)/dpkg_lock && exit 1 ; } \\\r\n fi; \\\r\n done; \\\r\nfi\r\nendef\r\n``` \r\nWe should move this to flock as well.\r\n\r\n2. Mellanox mft compilation also uses mkdir that needs to be moved to flock as well or else we could see intermittent failures during parallel builds.\r\n\r\ncheck mft/Makefile: https://github.com/sonic-net/sonic-buildimage/blob/5425a55cf98f08b3ca3060341fa04e741dd70e7e/platform/mellanox/mft/Makefile#L80\r\n\r\n```\r\n\twhile true; do\r\n\tif mkdir $(DEST)/dpkg_lock &> /dev/null; then\r\n\t{ sudo dpkg -i $(SRC_DEB) && rm -d $(DEST)/dpkg_lock && break; } || { rm -d $(DEST)/dpkg_lock && exit 1 ; }\r\n\tfi\r\n\tdone\r\n```\r\n\r\nCC: As this affects mellanox platform @dgsudharsan"
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-24T22:28:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-24T22:29:11Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-24T22:30:05Z",
+        "comment_author": "rustiqly",
+        "comment_body": "Great catches @tirupatihemanth! Both fixed in the latest commit:\n\n1. **`rules/functions` \u2014 `UNINSTALL_DEBS`**: Converted from mkdir/busy-wait to `flock` using the same `dpkg_lock.lk` file, so installs and uninstalls are properly serialized against each other.\n\n2. **`platform/mellanox/mft/Makefile`**: Same conversion \u2014 the dpkg install during MFT DKMS build now uses `flock` too.\n\nAlso confirmed there are no other `mkdir dpkg_lock` or `mkdir pip_lock` patterns remaining anywhere in the repo (`grep -rn` across all Makefiles, .mk files, and templates comes up empty)."
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-24T22:30:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-24T22:30:18Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-25T14:57:37Z",
+        "comment_author": "rustiqly",
+        "comment_body": "@tirupatihemanth Both points addressed in the latest push:\n\n1. **UNINSTALL_DEBS** \u2014 converted to `flock` in `rules/functions`, same lock file so install/uninstall are serialized together.\n2. **Mellanox MFT Makefile** \u2014 also converted to `flock` with the shared lock file.\n\nCI is re-running. Thanks for the thorough review!"
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-25T15:07:11Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-25T15:07:23Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-25T18:11:50Z",
+        "comment_author": "rustiqly",
+        "comment_body": "@tirupatihemanth Both your points have been addressed \u2014 UNINSTALL_DEBS and Mellanox MFT are now using flock. Ready for re-review when you get a chance. \ud83d\ude4f"
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-25T18:13:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-25T18:13:25Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines failed to run 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-27T00:57:16Z",
+        "comment_author": "rustiqly",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-27T00:57:21Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nCommenter does not have sufficient privileges for PR 25648 in repo sonic-net/sonic-buildimage<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-28T06:34:49Z",
+        "comment_author": "yxieca",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-28T06:35:04Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-28T12:10:23Z",
+        "comment_author": "yxieca",
+        "comment_body": "CI still running/queued (Azure.sonic-buildimage BuildVS vs in progress). Will re-check once green.\\n\\nAI agent on behalf of Ying."
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-28T15:13:24Z",
+        "comment_author": "yxieca",
+        "comment_body": "CI is currently failing (Azure/Elastictest). Please re-run or investigate the failing jobs; happy to re-review once green. AI agent on behalf of Ying."
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-02-24T19:39:14Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-02-24T22:13:36Z",
+        "review_author": "tirupatihemanth"
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-02-27T21:24:46Z",
+        "review_author": "tirupatihemanth"
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-02-27T22:44:10Z",
+        "review_author": "lihuay"
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-02-28T00:11:08Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-02-28T03:09:44Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-02-28T06:09:23Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2026-02-24T19:39:14Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2026-02-27T22:44:10Z",
+        "latestReview_author": "lihuay",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2026-02-27T21:24:46Z",
+        "latestReview_author": "tirupatihemanth",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2026-02-28T06:09:23Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 25645,
         "repo": "sonic-buildimage",
         "comment_at": "2026-02-24T16:17:52Z",
@@ -1225,6 +1477,100 @@
         "repo": "sonic-buildimage",
         "latestReview_at": "2026-02-25T16:51:42Z",
         "latestReview_author": "yanmarkman",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 25644,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-24T15:52:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25644,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-24T15:52:28Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25644,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-24T16:02:07Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25644,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-24T16:02:21Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25644,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-24T17:12:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25644,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-24T17:13:06Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25644,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-26T08:58:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25644,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-26T08:58:56Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines failed to run 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25644,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-02-24T16:04:33Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 25644,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-02-26T08:58:43Z",
+        "review_author": "rustiqly"
+    },
+    {
+        "number": 25644,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-02-28T12:10:14Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 25644,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-02-28T15:13:14Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 25644,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2026-02-24T16:04:33Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 25644,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2026-02-28T15:13:14Z",
+        "latestReview_author": "yxieca",
         "latestReview_state": "APPROVED"
     },
     {
@@ -3240,6 +3586,75 @@
         "comment_at": "2026-02-20T03:02:38Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25568,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-18T23:05:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-buildimage/pull/24999"
+    },
+    {
+        "number": 25568,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-18T23:06:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25568,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-18T23:06:28Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25568,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-25T19:15:47Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25568,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-25T19:16:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25568,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-28T00:10:11Z",
+        "comment_author": "arista-nwolfe",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 25568,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-28T00:10:14Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 25568,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-28T00:10:28Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25568,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-02-25T23:21:22Z",
+        "review_author": "vmittal-msft"
+    },
+    {
+        "number": 25568,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2026-02-25T23:21:22Z",
+        "latestReview_author": "vmittal-msft",
+        "latestReview_state": "APPROVED"
     },
     {
         "number": 25567,
@@ -5702,6 +6117,20 @@
     {
         "number": 25451,
         "repo": "sonic-buildimage",
+        "comment_at": "2026-02-28T01:23:44Z",
+        "comment_author": "sdszhang",
+        "comment_body": "retrigger 202511 cherry-pick due to previous pipeline error."
+    },
+    {
+        "number": 25451,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-28T01:23:50Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202511: https://github.com/sonic-net/sonic-buildimage/pull/25741"
+    },
+    {
+        "number": 25451,
+        "repo": "sonic-buildimage",
         "review_at": "2026-02-11T22:51:11Z",
         "review_author": "sdszhang"
     },
@@ -5858,6 +6287,172 @@
         "comment_at": "2026-02-13T23:55:59Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25442,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-11T15:45:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25442,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-11T15:46:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25442,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-11T16:11:31Z",
+        "comment_author": "rustiqly",
+        "comment_body": "## Verified on sonic-vs VM\n\n**Environment:** SONiC master (fcf18f7e0), Python 3.13.5, Debian 13.3\n\n**Bug reproduction (unpatched) \u2014 /31 mgmt subnet:**\n```\n broadcast None \u2190 invalid\n```\n\n**Fix verification (patched `prefix_attr()` + template guard):**\n\n/31 subnet \u2014 broadcast correctly omitted:\n```\niface eth0 inet static\n address 10.10.4.13\n netmask 255.255.255.254\n network 10.10.4.12\n ########## management network policy routing rules\n```\n\n/24 subnet \u2014 broadcast preserved (regression check):\n```\niface eth0 inet static\n address 10.0.0.100\n netmask 255.255.255.0\n network 10.0.0.0\n broadcast 10.0.0.255\n ########## management network policy routing rules\n```\n\nIPv6 /64 \u2014 broadcast preserved (regression check):\n```\niface eth0 inet6 static\n address 2603:10e2:0:2902::8\n netmask 64\n network 2603:10e2:0:2902::\n broadcast 2603:10e2:0:2902:ffff:ffff:ffff:ffff\n ########## management network policy routing rules\n```"
+    },
+    {
+        "number": 25442,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-13T00:06:11Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25442,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-13T00:06:23Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25442,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-13T05:49:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25442,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-13T05:49:37Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25442,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-13T12:49:47Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25442,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-13T12:50:00Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25442,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-23T16:59:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25442,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-23T17:00:04Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25442,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-24T15:02:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25442,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-24T15:03:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25442,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-24T17:04:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25442,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-24T17:05:10Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25442,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-25T15:03:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25442,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-25T15:03:54Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25442,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-26T15:05:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25442,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-26T15:05:26Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25442,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-28T15:13:33Z",
+        "comment_author": "yxieca",
+        "comment_body": "CI is currently failing (Azure/Elastictest). Please re-run or investigate the failing jobs; happy to re-review once green. AI agent on behalf of Ying."
+    },
+    {
+        "number": 25442,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-02-11T17:50:01Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 25442,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-02-28T12:10:22Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 25442,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2026-02-11T17:50:01Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 25442,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2026-02-28T12:10:22Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
     },
     {
         "number": 25440,
