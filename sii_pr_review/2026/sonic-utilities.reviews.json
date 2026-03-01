@@ -1,5 +1,32 @@
 [
     {
+        "number": 4321,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-02-28T18:51:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4321,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-02-28T18:52:01Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4321,
+        "repo": "sonic-utilities",
+        "review_at": "2026-02-28T18:57:56Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 4321,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2026-02-28T18:57:56Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 4311,
         "repo": "sonic-utilities",
         "comment_at": "2026-02-27T00:51:25Z",
@@ -776,6 +803,27 @@
         "comment_at": "2026-02-27T04:45:17Z",
         "comment_author": "rustiqly",
         "comment_body": "Addressing Copilot review feedback:\n\n1. **Breaking change in BGP summary header**: Good catch \u2014 changing 'Neighbhor' \u2192 'Neighbor' in `bgp_util.py:339` affects CLI output parsed by automation scripts. However, 'Neighbhor' is clearly a typo, and keeping it creates tech debt. The test expectations have been updated to match. Downstream consumers should use structured output (JSON) rather than parsing human-readable tables.\n\n2. **Additional typos caught**: Will fix 'route pattrn' \u2192 'route pattern', 'totla' \u2192 'total', and 'congiured' \u2192 'configured' in the next push \u2014 good finds."
+    },
+    {
+        "number": 4264,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-02-28T18:03:41Z",
+        "comment_author": "bhouse-nexthop",
+        "comment_body": "I'm all about spelling fixes, but why was this merged without passing utilities test cases?  Due to the spelling issues fixed in the code, but not fixed in the test cases that actually relied on the bad spelling means tests are failing now.\r\n\r\nThis was the first spelling correction PR, and other ones cause even more tests to fail.\r\n\r\nThis one introduced these:\r\n```\r\nFAILED tests/bgp_commands_test.py::TestBgpCommandsSingleAsic::test_bgp_summary_v4[v4]\r\nFAILED tests/bgp_commands_test.py::TestBgpCommandsSingleAsic::test_bgp_default_vrf_summary_v4[v4]\r\nFAILED tests/bgp_commands_test.py::TestBgpCommandsSingleAsic::test_bgp_vrf_summary_v4[v4_vrf]\r\nFAILED tests/bgp_commands_test.py::TestBgpCommandsSingleAsic::test_bgp_summary_v6[v6]\r\nFAILED tests/bgp_commands_test.py::TestBgpCommandsSingleAsic::test_bgp_default_vrf_summary_v6[v6]\r\nFAILED tests/bgp_commands_test.py::TestBgpCommandsSingleAsic::test_bgp_vrf_summary_v6[v6_vrf]\r\nFAILED tests/bgp_commands_test.py::TestBgpCommandsSingleAsic::test_bgp_summary_v4_chassis[v4]\r\nFAILED tests/bgp_commands_test.py::TestBgpCommandsSingleAsic::test_bgp_vrf_summary_v4_chassis[v4]\r\nFAILED tests/bgp_commands_test.py::TestBgpCommandsSingleAsic::test_bgp_summary_v6_chassis[v6]\r\nFAILED tests/bgp_commands_test.py::TestBgpCommandsSingleAsic::test_bgp_vrf_summary_v6_chassis[v6]\r\nFAILED tests/bgp_commands_test.py::TestBgpCommandsSingleAsic::test_bgp_summary_v4_all_chassis[v4]\r\nFAILED tests/bgp_commands_test.py::TestBgpCommandsSingleAsic::test_bgp_vrf_summary_v4_all_chassis[v4]\r\nFAILED tests/bgp_commands_test.py::TestBgpCommandsSingleAsic::test_bgp_summary_no_v4_neigh[show_bgp_summary_no_neigh]\r\nFAILED tests/bgp_commands_test.py::TestBgpCommandsSingleAsic::test_bgp_vrf_summary_no_v4_neigh[show_bgp_summary_no_neigh]\r\nFAILED tests/bgp_commands_test.py::TestBgpCommandsSingleAsic::test_bgp_summary_no_v6_neigh[show_bgp_summary_no_neigh]\r\nFAILED tests/bgp_commands_test.py::TestBgpCommandsSingleAsic::test_bgp_vrf_summary_no_v6_neigh[show_bgp_summary_no_neigh]\r\nFAILED tests/bgp_commands_test.py::TestBgpCommandsMultiAsic::test_bgp_summary_multi_asic_no_v4_neigh[show_bgp_summary_no_neigh]\r\nFAILED tests/bgp_commands_test.py::TestBgpCommandsMultiAsic::test_bgp_vrf_summary_multi_asic_no_v4_neigh[show_bgp_summary_no_neigh]\r\nFAILED tests/bgp_commands_test.py::TestBgpCommandsMultiAsic::test_bgp_summary_multi_asic_no_v6_neigh[show_bgp_summary_no_neigh]\r\nFAILED tests/bgp_commands_test.py::TestBgpCommandsMultiAsic::test_bgp_vrf_summary_multi_asic_no_v6_neigh[show_bgp_summary_no_neigh]\r\nFAILED tests/bgp_commands_test.py::TestBgpCommandsMultiAsic::test_bgp_summary_multi_asic_no_external_neighbors_on_all_asic[show_bgp_summary_no_ext_neigh_on_all_asic]\r\nFAILED tests/bgp_commands_test.py::TestBgpCommandsMultiAsic::test_bgp_vrf_summary_multi_asic_no_external_neighbors_on_all_asic[show_bgp_summary_no_ext_neigh_on_all_asic]\r\nFAILED tests/bgp_commands_test.py::TestBgpCommandsMultiAsic::test_bgp_summary_multi_asic_no_external_neighbor_on_asic1[show_bgp_summary_no_ext_neigh_on_asic1]\r\nFAILED tests/bgp_commands_test.py::TestBgpCommandsMultiAsic::test_bgp_vrf_summary_multi_asic_no_external_neighbor_on_asic1[show_bgp_summary_no_ext_neigh_on_asic1]\r\nFAILED tests/bgp_commands_test.py::TestBgpCommandsMultiAsic::test_bgp_summary_multi_asic_display_with_no_external_neighbor[show_bgp_summary_no_ext_neigh_on_all_asic]\r\nFAILED tests/bgp_commands_test.py::TestBgpCommandsMultiAsic::test_bgp_vrf_summary_multi_asic_display_with_no_external_neighbor[show_bgp_summary_no_ext_neigh_on_all_asic]\r\nFAILED tests/remote_cli_test.py::TestRemoteExec::test_rexec_error - Assertion...\r\nFAILED tests/remote_cli_test.py::TestRemoteCLI::test_rcli_error - AssertionEr...\r\n```\r\n\r\n@lihuay it appears you are the one that merged this.\r\n\r\n@lguohan @saiarcot895 @qiluo-msft for viz"
+    },
+    {
+        "number": 4264,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-02-28T21:46:35Z",
+        "comment_author": "lguohan",
+        "comment_body": "Let me check. We should pass the test."
+    },
+    {
+        "number": 4264,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-02-28T21:50:11Z",
+        "comment_author": "bhouse-nexthop",
+        "comment_body": "@lguohan this has now been fixed in https://github.com/sonic-net/sonic-utilities/pull/4321"
     },
     {
         "number": 4264,
