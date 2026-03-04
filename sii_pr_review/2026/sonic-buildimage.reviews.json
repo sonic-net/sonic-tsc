@@ -1,5 +1,26 @@
 [
     {
+        "number": 25843,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-03-02T23:23:38Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-buildimage/pull/25549"
+    },
+    {
+        "number": 25843,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-03-02T23:23:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25843,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-03-02T23:24:12Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
         "number": 25750,
         "repo": "sonic-buildimage",
         "comment_at": "2026-03-01T08:41:55Z",
@@ -1080,6 +1101,173 @@
         "repo": "sonic-buildimage",
         "latestReview_at": "2026-02-25T11:42:12Z",
         "latestReview_author": "noaOrMlnx",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 25672,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-25T07:12:21Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25672,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-25T07:12:33Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25672,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-26T09:00:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25672,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-26T09:00:50Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines failed to run 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25672,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-27T06:24:57Z",
+        "comment_author": "Gfrom2016",
+        "comment_body": "> @Gfrom2016 LGTM. Clean SAI version bump with thorough verification on TH5 and TD3. Kernel module change for 5.15+ do_siocdevprivate\\ looks correct.\r\n> \r\n> One question: The #ifndef SIOCDEVPRIVATE\\ fallback define (line 103) appears **after** its first usage on line 100 (#define NGKNET_IOC_SVTAG_SET (SIOCDEVPRIVATE + 0)). Can you confirm this compiles cleanly on kernel 5.15+ where \\SIOCDEVPRIVATE\\ is removed from userspace headers? If it relies on the kernel header still providing it internally, a brief comment would help.\r\n\r\nhi @StormLiangMS , thanks for the review.\r\nLine 100 is a macro definition, not a macro expansion:\r\n\r\n #define NGKNET_IOC_SVTAG_SET (SIOCDEVPRIVATE + 0)\r\n\r\n The C preprocessor stores (SIOCDEVPRIVATE + 0) as a literal token sequence at this point \u2014 it does not resolve SIOCDEVPRIVATE here. SIOCDEVPRIVATE is only substituted when NGKNET_IOC_SVTAG_SET is actually used in code later, by which time the #ifndef fallback on line 103 has already been processed. This is standard C preprocessor behavior.\r\n\r\n Additionally, since this is a kernel module (not a userspace program), it includes <linux/sockios.h> (kernel-internal), not <uapi/linux/sockios.h>. SIOCDEVPRIVATE (0x89F0) was removed from the UAPI headers in kernel 5.15+ but remains available in the kernel-internal headers \u2014 so the #ifndef guard is actually redundant here, though harmless as extra safety.\r\n\r\n That said, your suggestion to move the #ifndef block above the #define NGKNET_IOC_SVTAG_SET line is still a readability improvement \u2014 it makes the intent clearer to readers unfamiliar with preprocessor expansion rules. However, at the same time, I want this code to be consistent with the code provided by Broadcom."
+    },
+    {
+        "number": 25672,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-27T06:57:03Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25672,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-27T06:57:15Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25672,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-02-25T07:16:43Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 25672,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-02-27T03:33:44Z",
+        "review_author": "Gfrom2016"
+    },
+    {
+        "number": 25672,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-02-27T05:10:47Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 25672,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2026-02-25T07:16:43Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 25672,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2026-02-27T05:10:47Z",
+        "latestReview_author": "StormLiangMS",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 25671,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-25T06:36:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25671,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-25T06:36:34Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25671,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-25T23:50:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25671,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-25T23:50:58Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines failed to run 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25671,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-26T01:27:11Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25671,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-26T01:27:23Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25671,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-02-25T06:39:37Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 25671,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-02-25T23:28:39Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 25671,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-02-25T23:30:37Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 25671,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-02-26T00:01:17Z",
+        "review_author": "mramezani95"
+    },
+    {
+        "number": 25671,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-02-26T01:01:15Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 25671,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2026-02-25T06:39:37Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 25671,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2026-02-26T00:01:17Z",
+        "latestReview_author": "mramezani95",
         "latestReview_state": "APPROVED"
     },
     {
@@ -7155,6 +7343,13 @@
     {
         "number": 25436,
         "repo": "sonic-buildimage",
+        "comment_at": "2026-03-03T01:49:56Z",
+        "comment_author": "ZhaohuiS",
+        "comment_body": "@vmittal-msft could you please help approve the cherry-pick to 202511?"
+    },
+    {
+        "number": 25436,
+        "repo": "sonic-buildimage",
         "review_at": "2026-02-11T03:08:49Z",
         "review_author": "copilot-pull-request-reviewer"
     },
@@ -11988,6 +12183,13 @@
     {
         "number": 25330,
         "repo": "sonic-buildimage",
+        "comment_at": "2026-03-03T03:46:23Z",
+        "comment_author": "vivekrnv",
+        "comment_body": "> Looks good to me. As discussed in #25279 we need to ensure that binding to mgmt_ip is not necessary any more.\r\n\r\n@rustiqly Can you make a change in sonic-swss to remove the option of '-v mgmt'. Added here https://github.com/sonic-net/sonic-swss/pull/3299"
+    },
+    {
+        "number": 25330,
+        "repo": "sonic-buildimage",
         "review_at": "2026-02-03T17:22:50Z",
         "review_author": "dgsudharsan"
     },
@@ -12436,6 +12638,13 @@
         "comment_at": "2026-02-12T05:48:25Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25324,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-03-03T01:49:23Z",
+        "comment_author": "ZhaohuiS",
+        "comment_body": "@vmittal-msft could you please help approve the cherry-pick to 202511?"
     },
     {
         "number": 25324,
@@ -17515,6 +17724,312 @@
         "comment_at": "2026-01-26T17:56:44Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-01-26T12:28:35Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-01-26T12:28:49Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-01-26T12:30:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-01-26T12:30:58Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-01-30T01:47:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-01-30T01:48:09Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-01-30T03:09:01Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-01-30T03:09:15Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-01-30T03:30:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-01-30T03:31:01Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-01-30T06:45:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-01-30T06:45:28Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-01-30T06:46:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-01-30T06:46:40Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-21T04:59:19Z",
+        "comment_author": "Ryangwaite",
+        "comment_body": "Hi @lipxu what do you think about adding a `-th` suffix throughout the new \"legacy\" naming introduced in this PR? For example docker-syncd-brcm-legacy -> docker-syncd-brcm-legacy-th\r\n\r\nThis should reduce confusion in future when there is a second brcm platform that is EOL which would become another but different legacy version."
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-23T13:16:24Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "hi @lipxu Would you clarify why we need to change so many files like what we discussed in the description part? Did you test this change with master branch?"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-24T23:05:30Z",
+        "comment_author": "lipxu",
+        "comment_body": "> Hi @lipxu what do you think about adding a `-th` suffix throughout the new \"legacy\" naming introduced in this PR? For example docker-syncd-brcm-legacy -> docker-syncd-brcm-legacy-th\r\n> \r\n> This should reduce confusion in future when there is a second brcm platform that is EOL which would become another but different legacy version.\r\n\r\nThanks for your suggestion. The image was originally named legacy rather than legacy-th because it was intended for a special-case scenario and was expected to be used rarely.\r\nWe may consider renaming it to legacy-th if we think a similar solution is needed for other platforms in the future. "
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-24T23:13:44Z",
+        "comment_author": "lipxu",
+        "comment_body": "> hi @lipxu Would you clarify why we need to change so many files like what we discussed in the description part? Did you test this change with master branch?\r\n\r\nSince the legacy ASIC type uses a compatible SAI binary built with a different Broadcom SDK version, we need to include the matching kernel modules and drivers. Thanks.\r\nI haven\u2019t tested it on the master branch yet. I only built a private image based on 202511 and ran the nightly tests.\r\nHowever, since the PR has passed all the PR checks, I believe it should also work fine on the master branch."
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-25T03:58:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-25T03:59:00Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-26T03:10:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-26T03:11:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-27T00:59:46Z",
+        "comment_author": "lipxu",
+        "comment_body": "> @lipxu Review comments:\r\n> \r\n> **Blockers:**\r\n> \r\n> 1. *_Hardcoded kernel version in \\debian/opennsl-modules.install*_ \u2014 Install paths reference \\lib/modules/6.12.41+deb13-sonic-amd64/extra. This will break on any kernel version change. Should be generated from \\KVERSION\\ at build time.\r\n> 2. *_\\sudo\\ in \\debian/rules*_ \u2014 Package build uses \\sudo\\ to mutate host paths under /lib/modules\\ and /usr/src. This is unsafe in CI and may fail in non-root build containers. Should use \\KDIR/\\KERNDIR\\ to pass kernel header paths instead.\r\n> \r\n> **Question:**\r\n> \r\n> 3. **~580 vendored source files** \u2014 The entire \\saibcm-modules-legacy/\\ kernel module source tree is checked into the repo. Is there a submodule or package alternative to avoid carrying this in-tree? If vendoring is the only option, please confirm in the PR description.\r\n\r\nThank you for your detailed review @StormLiangMS ! I'd like to clarify the scope:\r\n\r\n### Blockers:\r\n\r\n**1. Hardcoded kernel version in `debian/opennsl-modules.install`**\r\n**2. `sudo` in `debian/rules`**\r\n\r\nBoth of these are **pre-existing issues** that have existed in the codebase since the original implementation and are currently present in:\r\n- `platform/broadcom/saibcm-modules/debian/` (XGS family - in production)\r\n- `platform/broadcom/saibcm-modules-dnx/debian/` (DNX family - in production)\r\n\r\n**Key points:**\r\n- These patterns were **not introduced by this PR** \r\n- These modules have been **building and running successfully in production for a long time** without issues reported\r\n- This PR maintains **consistency** with the established codebase patterns\r\n\r\n**Risk Assessment:**\r\nGiven that both existing modules work correctly with these patterns, the risk is minimal. \r\n\r\n**Recommendation:**\r\n1. **Merge this PR** - It follows established patterns and adds Legacy ASIC support without introducing new technical debt\r\n2. **Create a follow-up task** - Address these architectural concerns across all three modules (saibcm-modules, saibcm-modules-dnx, and saibcm-modules-legacy) in a unified refactoring effort\r\n\r\nThis approach ensures we don't block the Legacy ASIC feature while acknowledging the technical debt can be improved across the board.\r\n\r\n### Question:\r\n\r\n**~665 vendored source files**\r\n\r\nThe `saibcm-modules-legacy` source tree is currently vendored directly (not a submodule), consistent with the existing `saibcm-modules` module.\r\n\r\n**Future plan:**\r\nWe plan to follow the `saibcm-modules-dnx` pattern and convert this to a git submodule in the future. However, this refactoring would:\r\n- Require significant effort and a long time to set up a separate repository\r\n- Need thorough validation across all xgs and legacy ASIC platforms\r\n\r\n**Recommendation:**\r\nWe prefer to merge the current implementation now (matching the established `saibcm-modules` pattern) to unblock Legacy ASIC support, then improve it in a follow-up effort. "
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-02-27T12:14:09Z",
+        "comment_author": "lipxu",
+        "comment_body": "> > Hi @lipxu what do you think about adding a `-th` suffix throughout the new \"legacy\" naming introduced in this PR? For example docker-syncd-brcm-legacy -> docker-syncd-brcm-legacy-th\r\n> > This should reduce confusion in future when there is a second brcm platform that is EOL which would become another but different legacy version.\r\n> \r\n> Thanks for your suggestion. The image was originally named legacy rather than legacy-th because it was intended for a special-case scenario and was expected to be used rarely. We may consider renaming it to legacy-th if we think a similar solution is needed for other platforms in the future.\r\n\r\nHi, @Ryangwaite , \r\nI agree with your suggestion and plan to use legacy-th instead of legacy.\r\nHowever, this change will affect many files and require rebuilding the image and running verification tests, which may take some additional time.\r\nWould it be possible to merge this PR first? I can then create a follow-up PR to handle the renaming.\r\nThanks a lot for your understanding and support."
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-03-02T01:49:07Z",
+        "comment_author": "Ryangwaite",
+        "comment_body": "> > > Hi @lipxu what do you think about adding a `-th` suffix throughout the new \"legacy\" naming introduced in this PR? For example docker-syncd-brcm-legacy -> docker-syncd-brcm-legacy-th\r\n> > > This should reduce confusion in future when there is a second brcm platform that is EOL which would become another but different legacy version.\r\n> > \r\n> > \r\n> > Thanks for your suggestion. The image was originally named legacy rather than legacy-th because it was intended for a special-case scenario and was expected to be used rarely. We may consider renaming it to legacy-th if we think a similar solution is needed for other platforms in the future.\r\n> \r\n> Hi, @Ryangwaite , I agree with your suggestion and plan to use legacy-th instead of legacy. However, this change will affect many files and require rebuilding the image and running verification tests, which may take some additional time. Would it be possible to merge this PR first? I can then create a follow-up PR to handle the renaming. Thanks a lot for your understanding and support.\r\n\r\nYeah, that's a good approach"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-03-02T02:34:09Z",
+        "comment_author": "lipxu",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-03-02T02:34:16Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nCommenter does not have sufficient privileges for PR 25192 in repo sonic-net/sonic-buildimage<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-03-02T02:35:11Z",
+        "comment_author": "lipxu",
+        "comment_body": "/azpw run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-03-02T02:35:14Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run Azure.sonic-buildimage"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-03-02T02:35:29Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-03-03T03:13:32Z",
+        "comment_author": "lipxu",
+        "comment_body": "PR tests blocked, all PR test cases had been passed in previous run.\r\n<img width=\"452\" height=\"560\" alt=\"image\" src=\"https://github.com/user-attachments/assets/c1859173-6890-41ec-8fd3-ffc1b8d97e9d\" />\r\n"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-03-04T05:45:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202511: https://github.com/sonic-net/sonic-buildimage/pull/25878"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-02-04T00:19:13Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-02-21T04:55:24Z",
+        "review_author": "Ryangwaite"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-02-24T23:02:26Z",
+        "review_author": "lipxu"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-02-26T03:12:40Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-02-26T09:28:54Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-02-26T09:29:31Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-02-27T09:24:47Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-02-27T11:54:18Z",
+        "review_author": "Gfrom2016"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-03-02T01:49:59Z",
+        "review_author": "Ryangwaite"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2026-02-26T03:12:40Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2026-03-02T01:49:59Z",
+        "latestReview_author": "Ryangwaite",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2026-02-27T11:54:18Z",
+        "latestReview_author": "Gfrom2016",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 25192,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2026-02-27T09:24:47Z",
+        "latestReview_author": "StormLiangMS",
+        "latestReview_state": "APPROVED"
     },
     {
         "number": 25191,
@@ -44990,6 +45505,60 @@
         "repo": "sonic-buildimage",
         "latestReview_at": "2026-01-09T21:22:49Z",
         "latestReview_author": "kperumalbfn",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 23241,
+        "repo": "sonic-buildimage",
+        "comment_at": "2025-07-07T05:20:29Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 23241,
+        "repo": "sonic-buildimage",
+        "comment_at": "2025-07-07T05:20:36Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines could not run because the pipeline triggers exclude this branch/path.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 23241,
+        "repo": "sonic-buildimage",
+        "review_at": "2025-07-14T08:34:25Z",
+        "review_author": "liushilongbuaa"
+    },
+    {
+        "number": 23241,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2025-07-14T08:34:25Z",
+        "latestReview_author": "liushilongbuaa",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 23240,
+        "repo": "sonic-buildimage",
+        "comment_at": "2025-07-07T03:41:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 23240,
+        "repo": "sonic-buildimage",
+        "comment_at": "2025-07-07T03:42:03Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines could not run because the pipeline triggers exclude this branch/path.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 23240,
+        "repo": "sonic-buildimage",
+        "review_at": "2025-07-14T08:34:55Z",
+        "review_author": "liushilongbuaa"
+    },
+    {
+        "number": 23240,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2025-07-14T08:34:55Z",
+        "latestReview_author": "liushilongbuaa",
         "latestReview_state": "APPROVED"
     },
     {
