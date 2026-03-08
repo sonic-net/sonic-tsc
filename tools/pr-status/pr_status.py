@@ -868,6 +868,100 @@ def _shorten_blocker(text):
     return text
 
 
+def _md_to_wa(text):
+    """Convert markdown text to WhatsApp formatting.
+
+    Uses py-whatsapp-formatter for bold/italic/strike/mono conversion,
+    plus custom handling for [text](url) → text (url).
+    Falls back to simple regex replacement if library not installed.
+    """
+    # Convert markdown links [text](url) → text (url)
+    text = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'\1 (\2)', text)
+    try:
+        from whatsapp_formatter import convert_markdown_to_whatsapp
+        return convert_markdown_to_whatsapp(text)
+    except ImportError:
+        # Fallback: **bold** → *bold*, *italic* → _italic_
+        text = re.sub(r'\*\*(.+?)\*\*', r'*\1*', text)
+        return text
+
+
+def format_whatsapp_compact(results):
+    """Compact WhatsApp message format — meant to be sent as a text message, not attachment.
+
+    Uses py-whatsapp-formatter (https://github.com/TejasAmbhore/whatsapp_formatter)
+    for markdown→WhatsApp conversion (bold/italic/strike/mono), plus custom link
+    handling: [text](url) → text (url) with clickable URLs.
+
+    Groups PRs by category with compact one-line-per-PR summaries.
+    """
+    import datetime as dt
+    timestamp = dt.datetime.now(dt.timezone.utc).strftime('%Y-%m-%d %H:%M UTC')
+
+    lines = [f"*PR Status Report* — {len(results)} open PRs ({timestamp})", ""]
+
+    grouped = {}
+    for r in results:
+        cat = r["category"]
+        grouped.setdefault(cat, []).append(r)
+
+    for cat in CATEGORY_ORDER:
+        prs = grouped.get(cat, [])
+        if not prs:
+            continue
+
+        lines.append(f"*{CATEGORY_LABELS[cat]}* ({len(prs)})")
+        lines.append("")
+
+        for r in sorted(prs, key=lambda x: x["number"]):
+            repo_short = r.get("repo", "").split("/")[-1]
+            if repo_short.startswith("sonic-"):
+                repo_short = repo_short[6:]
+
+            title = r["title"]
+            if len(title) > 50:
+                title = title[:47] + "..."
+
+            # CI counts
+            passed = sum(1 for c in r["checks"].values()
+                         if c["conclusion"] in ("success", "neutral", "skipped"))
+            failed = sum(1 for c in r["checks"].values()
+                         if c["conclusion"] in ("failure", "error", "cancelled", "timed_out"))
+            pending = sum(1 for c in r["checks"].values()
+                          if c["status"] in ("queued", "in_progress", "pending"))
+            missing = len(r.get("missing_checks", []))
+
+            ci_parts = []
+            if passed: ci_parts.append(f"✅{passed}")
+            if failed: ci_parts.append(f"❌{failed}")
+            if pending: ci_parts.append(f"⏳{pending}")
+            if missing: ci_parts.append(f"🚫{missing}")
+            ci_str = " ".join(ci_parts) if ci_parts else "—"
+
+            # Reviews compact
+            approvals = [rv["user"] for rv in r["reviews"] if rv["state"] == "APPROVED"]
+            review_str = f"✅{','.join(approvals)}" if approvals else "no review"
+
+            # Unblock — convert markdown formatting to WhatsApp
+            unblock = _md_to_wa(_compute_unblock(r))
+
+            lines.append(f"• *{repo_short}#{r['number']}* ({r['url']})")
+            lines.append(f"  _{title}_")
+            lines.append(f"  {ci_str} | {review_str}")
+            lines.append(f"  ➡️ {unblock}")
+            lines.append("")
+
+    # Summary
+    cat_counts = []
+    for cat in CATEGORY_ORDER:
+        count = len(grouped.get(cat, []))
+        if count:
+            cat_counts.append(f"{CATEGORY_LABELS[cat].split()[0]} {count}")
+    lines.append("*Summary:* " + " | ".join(cat_counts))
+
+    return "\n".join(lines)
+
+
 def format_json(results):
     """JSON output."""
     return json.dumps(results, indent=2)
@@ -892,7 +986,8 @@ def main():
     parser.add_argument("--repos", nargs="+", default=DEFAULT_REPOS,
                         help="Repos to check (default: sonic-buildimage, sonic-sairedis, sonic-mgmt)")
     parser.add_argument("--json", dest="json_output", action="store_true", help="JSON output")
-    parser.add_argument("--whatsapp", action="store_true", help="WhatsApp-formatted output")
+    parser.add_argument("--whatsapp", action="store_true", help="WhatsApp-formatted output (verbose, for file)")
+    parser.add_argument("--whatsapp-msg", action="store_true", help="Compact WhatsApp message format")
     parser.add_argument("--markdown", "--md", action="store_true", help="Markdown table output")
     parser.add_argument("--output", "-o", help="Write output to file instead of stdout")
     parser.add_argument("--verbose", "-v", action="store_true", help="Show all check details")
@@ -957,6 +1052,8 @@ def main():
         output = format_json(all_results)
     elif args.whatsapp:
         output = format_whatsapp(all_results)
+    elif args.whatsapp_msg:
+        output = format_whatsapp_compact(all_results)
     elif args.markdown:
         main_report, ci_detail = format_markdown(all_results)
         if args.output:
