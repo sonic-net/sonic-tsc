@@ -1,5 +1,87 @@
 [
     {
+        "number": 4345,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-03-10T16:00:09Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4345,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-03-10T16:00:23Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4345,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-03-10T16:29:36Z",
+        "comment_author": "oleksandrivantsiv",
+        "comment_body": "@saiarcot895 FYI. Fix the UT issue caused by https://github.com/sonic-net/sonic-utilities/pull/4230."
+    },
+    {
+        "number": 4345,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-03-10T16:40:29Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "Do we know how #4230 passed UTs, but later caused UT to fail?"
+    },
+    {
+        "number": 4345,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-03-10T16:43:17Z",
+        "comment_author": "oleksandrivantsiv",
+        "comment_body": "We are trying to understand this now "
+    },
+    {
+        "number": 4345,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-03-10T16:59:05Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "Looks like it is because of #4299; it added Vlan100 and Vlan200 into the asic 0 config_db."
+    },
+    {
+        "number": 4345,
+        "repo": "sonic-utilities",
+        "review_at": "2026-03-10T16:59:37Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 4345,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2026-03-10T16:59:37Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4342,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-03-10T03:34:47Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4342,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-03-10T03:34:57Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4342,
+        "repo": "sonic-utilities",
+        "review_at": "2026-03-10T05:33:14Z",
+        "review_author": "vmittal-msft"
+    },
+    {
+        "number": 4342,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2026-03-10T05:33:14Z",
+        "latestReview_author": "vmittal-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 4340,
         "repo": "sonic-utilities",
         "comment_at": "2026-03-09T19:05:45Z",
@@ -61,6 +143,68 @@
         "comment_at": "2026-03-09T18:29:32Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4336,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-03-09T09:19:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4336,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-03-09T09:20:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4336,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-03-09T15:32:36Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "hi @stephenxs  could you check the PR failures?"
+    },
+    {
+        "number": 4336,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-03-10T02:14:24Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "Hi @stephenxs, I analyzed the CI failure and found an **off-by-one error** in the \\mock_run_command.call_count\\ assertions in 3 tests:\n\n**Root Cause:**\nThe first mock (\\mock_run_command_side_effect\\) now returns \\'sonic.target\\nswss\\nfeatured.timer'\\ for forward deps (was \\'sonic.target\\nswss'\\), which adds an extra \\systemctl reset-failed featured.timer\\ call. Combined with the new reverse deps call (\\pmon\\), the actual delta from original is **+3** calls (1 list-deps reverse + 1 reset-failed \\\featured.timer\\ + 1 reset-failed \\pmon\\), not +2.\n\n**Failing assertions:**\n- \\\test_load_minigraph\\: actual 19, expected 18 \u2192 should be **19**\n- \\\test_load_minigraph_bypass_lock\\: actual 15, expected 14 \u2192 should be **15**\n- \\\test_load_minigraph_platform_plugin\\: actual 15, expected 14 \u2192 should be **15**\n\n**Fix:** Increment each \\call_count\\ assertion by 1 in \\\tests/config_test.py\\.\n\nI've also raised a parallel PR with the fix applied (#4340 forthcoming) in case this can't be addressed today, so we can unblock CI."
+    },
+    {
+        "number": 4336,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-03-10T02:19:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4336,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-03-10T02:19:57Z",
+        "comment_author": "stephenxs",
+        "comment_body": "> Hi @stephenxs, I analyzed the CI failure and found an **off-by-one error** in the \\mock_run_command.call_count\\ assertions in 3 tests:\r\n> \r\n> **Root Cause:** The first mock (\\mock_run_command_side_effect) now returns 'sonic.target\\nswss\\nfeatured.timer'\\ for forward deps (was 'sonic.target\\nswss'), which adds an extra \\systemctl reset-failed featured.timer\\ call. Combined with the new reverse deps call (\\pmon), the actual delta from original is **+3** calls (1 list-deps reverse + 1 reset-failed \\\featured.timer\\ + 1 reset-failed \\pmon), not +2.\r\n> \r\n> **Failing assertions:**\r\n> \r\n> * \\\test_load_minigraph: actual 19, expected 18 \u2192 should be **19**\r\n> * \\\test_load_minigraph_bypass_lock: actual 15, expected 14 \u2192 should be **15**\r\n> * \\\test_load_minigraph_platform_plugin: actual 15, expected 14 \u2192 should be **15**\r\n> \r\n> **Fix:** Increment each \\call_count\\ assertion by 1 in \\ ests/config_test.py.\r\n> \r\n> I've also raised a parallel PR with the fix applied (#4340 forthcoming) in case this can't be addressed today, so we can unblock CI.\r\n\r\nThanks @StormLiangMS \r\nFixed"
+    },
+    {
+        "number": 4336,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-03-10T02:20:06Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4336,
+        "repo": "sonic-utilities",
+        "review_at": "2026-03-10T05:33:42Z",
+        "review_author": "vmittal-msft"
+    },
+    {
+        "number": 4336,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2026-03-10T05:33:42Z",
+        "latestReview_author": "vmittal-msft",
+        "latestReview_state": "APPROVED"
     },
     {
         "number": 4335,
@@ -623,6 +767,13 @@
         "comment_at": "2026-03-03T08:58:13Z",
         "comment_author": "bingwang-ms",
         "comment_body": "The offending PR https://github.com/sonic-net/sonic-utilities/pull/4204 is not merged to 202511 yet"
+    },
+    {
+        "number": 4323,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-03-10T04:56:13Z",
+        "comment_author": "AnantKishorSharma",
+        "comment_body": "Hi @bingwang-ms - can we update the buildimage master to include this?\r\n"
     },
     {
         "number": 4323,
@@ -1707,6 +1858,13 @@
     {
         "number": 4312,
         "repo": "sonic-utilities",
+        "comment_at": "2026-03-10T03:35:58Z",
+        "comment_author": "prajjwal-arista",
+        "comment_body": "@prgeor @vmittal-msft \r\n[202511-PR](https://github.com/sonic-net/sonic-utilities/pull/4342)"
+    },
+    {
+        "number": 4312,
+        "repo": "sonic-utilities",
         "review_at": "2026-03-06T06:10:23Z",
         "review_author": "dhanasekar-arista"
     },
@@ -2552,6 +2710,20 @@
     {
         "number": 4289,
         "repo": "sonic-utilities",
+        "comment_at": "2026-03-10T07:49:15Z",
+        "comment_author": "cyw233",
+        "comment_body": "Hi @oleksandrivantsiv , I'm seeing multiple PR tests failure after your recent multi-asic tests improvement, for example, this no-op PR https://github.com/sonic-net/sonic-utilities/pull/4344 has the following failed tests. Could you please check? Thanks\r\n\r\n<img width=\"2087\" height=\"339\" alt=\"image\" src=\"https://github.com/user-attachments/assets/988b06c5-6c40-4676-9105-704d76543d28\" />\r\n"
+    },
+    {
+        "number": 4289,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-03-10T14:22:20Z",
+        "comment_author": "oleksandrivantsiv",
+        "comment_body": "> Hi @oleksandrivantsiv , I'm seeing multiple PR tests failure after your recent multi-asic tests improvement, for example, this no-op PR https://github.com/sonic-net/sonic-utilities/pull/4344 has the following failed tests. Could you please check? Thanks\n> \n> \n> \n> <img width=\"2087\" height=\"339\" alt=\"image\" src=\"https://github.com/user-attachments/assets/988b06c5-6c40-4676-9105-704d76543d28\" />\n> \n> \n\nChecking "
+    },
+    {
+        "number": 4289,
+        "repo": "sonic-utilities",
         "review_at": "2026-02-20T01:16:27Z",
         "review_author": "oleksandrivantsiv"
     },
@@ -2844,6 +3016,47 @@
         "repo": "sonic-utilities",
         "latestReview_at": "2026-02-18T19:27:28Z",
         "latestReview_author": "vvolam",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4281,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-02-16T20:31:07Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-utilities/pull/4240"
+    },
+    {
+        "number": 4281,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-03-10T22:39:03Z",
+        "comment_author": "vmittal-msft",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 4281,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-03-10T22:39:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/AzurePipelines run"
+    },
+    {
+        "number": 4281,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-03-10T22:39:16Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4281,
+        "repo": "sonic-utilities",
+        "review_at": "2026-03-09T22:01:23Z",
+        "review_author": "vmittal-msft"
+    },
+    {
+        "number": 4281,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2026-03-09T22:01:23Z",
+        "latestReview_author": "vmittal-msft",
         "latestReview_state": "APPROVED"
     },
     {
@@ -4375,6 +4588,68 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 4257,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-02-09T19:14:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4257,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-02-09T19:14:41Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4257,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-02-12T05:22:03Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4257,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-02-12T05:22:14Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4257,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-03-10T02:44:27Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "LGTM. Simple one-line addition of `Arista-7050CX3-32C-C28S4` to the td3 ASIC list in `gcu_field_operation_validators.conf.json`. This follows the same pattern as the existing `7050CX3-32S-C28S4` entry. CI is fully green. Ready to merge."
+    },
+    {
+        "number": 4257,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-03-10T03:31:36Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "hi @byu343 is this required for 202511?"
+    },
+    {
+        "number": 4257,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-03-10T16:58:24Z",
+        "comment_author": "byu343",
+        "comment_body": "Yes. It is needed by 202511 and even 202505 if still possible.\r\n\r\n> hi @byu343 is this required for 202511?\r\n\r\n"
+    },
+    {
+        "number": 4257,
+        "repo": "sonic-utilities",
+        "review_at": "2026-02-12T05:21:47Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 4257,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2026-02-12T05:21:47Z",
+        "latestReview_author": "StormLiangMS",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 4256,
         "repo": "sonic-utilities",
         "comment_at": "2026-02-06T22:31:53Z",
@@ -5842,6 +6117,20 @@
         "comment_at": "2026-03-09T21:29:39Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4230,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-03-10T16:16:39Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "@oleksandrivantsiv I am suspecting that this PR is causing sonic-utilities tests to fail. I've created a revert PR at #4346."
+    },
+    {
+        "number": 4230,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-03-10T16:18:20Z",
+        "comment_author": "oleksandrivantsiv",
+        "comment_body": "> @oleksandrivantsiv I am suspecting that this PR is causing sonic-utilities tests to fail. I've created a revert PR at #4346.\n\nWe are working on the fix. The issue will be resolved ASAP"
     },
     {
         "number": 4230,
@@ -9065,6 +9354,13 @@
         "comment_at": "2026-01-05T23:19:35Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4177,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-03-10T22:14:48Z",
+        "comment_author": "r12f",
+        "comment_body": "Pick to 202412: https://github.com/Azure/sonic-utilities.msft/commit/b589a539e02275154b580f8035d0f8635d742e41"
     },
     {
         "number": 4177,
