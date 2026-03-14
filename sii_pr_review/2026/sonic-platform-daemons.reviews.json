@@ -686,6 +686,134 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 757,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-02-20T02:02:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 757,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-02-20T02:02:37Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 757,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-02-20T02:03:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 757,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-02-20T02:03:46Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 757,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-02-20T02:04:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 757,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-02-20T02:04:46Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 757,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-03-11T17:03:28Z",
+        "comment_author": "aditya-nexthop",
+        "comment_body": "> @aditya-nexthop @prgeor This change looks correct for fixing the interval anchoring. However, a broader question: if each port takes ~1s to update DOM data and there are 64 ports, the loop takes ~64s per iteration. With DOM_INFO_UPDATE_PERIOD_SECS potentially shorter than that, are we okay with the loop running back-to-back with no sleep/yield? Could there be a concern about starving other tasks or excessive CPU usage in that scenario?\r\n\r\nHi @mihirpat1, as per #758 the wait is primarily due to the time waiting for select to timeout.\r\n\r\nWe don't need to merge this PR if we merge #758 as #758 includes these changes.\r\nI thought it useful to review the effect of this change as well as #758 independently to understand the impact.\r\n\r\nI will close this PR once #758 merges."
+    },
+    {
+        "number": 757,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-03-11T23:51:34Z",
+        "comment_author": "prgeor",
+        "comment_body": "> @aditya-nexthop @prgeor This change looks correct for fixing the interval anchoring. However, a broader question: if each port takes ~1s to update DOM data and there are 64 ports, the loop takes ~64s per iteration. With DOM_INFO_UPDATE_PERIOD_SECS potentially shorter than that, are we okay with the loop running back-to-back with no sleep/yield? Could there be a concern about starving other tasks or excessive CPU usage in that scenario?\r\n\r\n@mihirpat1 in that case we may have to define `DOM_INFO_UPDATE_PERIOD_SECS ` per platform basis? As the polling period of default 60 seconds does NOT work universally?"
+    },
+    {
+        "number": 757,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-03-12T06:05:31Z",
+        "comment_author": "mihirpat1",
+        "comment_body": "> > @aditya-nexthop @prgeor This change looks correct for fixing the interval anchoring. However, a broader question: if each port takes ~1s to update DOM data and there are 64 ports, the loop takes ~64s per iteration. With DOM_INFO_UPDATE_PERIOD_SECS potentially shorter than that, are we okay with the loop running back-to-back with no sleep/yield? Could there be a concern about starving other tasks or excessive CPU usage in that scenario?\r\n> \r\n> @mihirpat1 in that case we may have to define `DOM_INFO_UPDATE_PERIOD_SECS ` per platform basis? As the polling period of default 60 seconds does NOT work universally?\r\n\r\n@prgeor That's correct - defining it per platform can help in addressing this."
+    },
+    {
+        "number": 757,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-03-12T18:09:41Z",
+        "comment_author": "prgeor",
+        "comment_body": "@aditya-nexthop can you make this a platform adjusted variable? `DOM_INFO_UPDATE_PERIOD_SECS` "
+    },
+    {
+        "number": 757,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-03-12T21:42:22Z",
+        "comment_author": "aditya-nexthop",
+        "comment_body": "> @aditya-nexthop can you make this a platform adjusted variable? `DOM_INFO_UPDATE_PERIOD_SECS`\r\n\r\nYes, that's a good idea, created https://github.com/sonic-net/sonic-platform-daemons/issues/774 to work on this in a new PR."
+    },
+    {
+        "number": 757,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2026-03-10T22:07:50Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 757,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2026-03-10T22:40:41Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 757,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2026-03-10T22:40:56Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 757,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2026-03-10T22:57:55Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 757,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2026-03-12T23:00:43Z",
+        "review_author": "aditya-nexthop"
+    },
+    {
+        "number": 757,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2026-03-10T22:40:56Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 757,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2026-03-10T22:57:55Z",
+        "latestReview_author": "mihirpat1",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 757,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2026-03-10T22:07:50Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
         "number": 755,
         "repo": "sonic-platform-daemons",
         "comment_at": "2026-02-19T23:40:33Z",
