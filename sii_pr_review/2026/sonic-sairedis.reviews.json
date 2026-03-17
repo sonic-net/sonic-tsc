@@ -1,5 +1,32 @@
 [
     {
+        "number": 1797,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-16T09:06:50Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1797,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-16T09:07:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1797,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-03-16T21:23:44Z",
+        "review_author": "vmittal-msft"
+    },
+    {
+        "number": 1797,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-03-16T21:23:44Z",
+        "latestReview_author": "vmittal-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 1791,
         "repo": "sonic-sairedis",
         "comment_at": "2026-03-13T00:10:12Z",
@@ -19,6 +46,250 @@
         "comment_at": "2026-03-13T00:10:36Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1789,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-11T02:22:11Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1789,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-11T02:22:22Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1789,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-11T04:46:23Z",
+        "comment_author": "Gfrom2016",
+        "comment_body": "**Review: Two items to address**\n\n1. **Merge conflict with PR #1788**: This PR's `VendorSai.cpp` diff includes the identical `HAVE_SAI_QUERY_STATS_ST_CAPABILITY` guard block from #1788. If both merge independently, there will be a git conflict. Suggest either combining them into one PR, or merging #1788 first and rebasing this one on top.\n\n2. **Companion buildimage PR sonic-net/sonic-buildimage#26013 is missing `SAI_STATS_EXT_SWITCH_SUPPORTED=0`**: The `sai.profile` changes in #26013 only add `SAI_STATS_ST_CAPABILITY_SUPPORTED=0` (for the #1788 fix), but do not add `SAI_STATS_EXT_SWITCH_SUPPORTED=0` (needed by this PR). Without it, the `sai_get_stats_ext` crash on TH1 switch objects would still happen after all three PRs merge. Please update #26013 to include this key as well."
+    },
+    {
+        "number": 1789,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-11T05:19:58Z",
+        "comment_author": "lipxu",
+        "comment_body": "Thanks for the review @Gfrom2016!\n\n**Item 1 \u2014 Merge conflict with #1788:**\n\nThis is intentional \u2014 #1789 is stacked on top of #1788's branch to avoid a cherry-pick conflict on \\VendorSai.cpp\\ (both PRs modify the same function). The plan is:\n1. Merge #1788 into master first\n2. Rebase this branch (\\\fix/brcm-legacy-compat-master-issue2\\) onto the updated master and force-push\n3. The \\HAVE_SAI_QUERY_STATS_ST_CAPABILITY\\ block will then appear as pre-existing context in the diff, not as added lines \u2014 no conflict\n\nWill rebase after #1788 lands.\n\n**Item 2 \u2014 \\SAI_STATS_EXT_SWITCH_SUPPORTED=0\\ in buildimage:**\n\nThis key is present \u2014 it is in a separate companion PR [sonic-net/sonic-buildimage#26014](https://github.com/sonic-net/sonic-buildimage/pull/26014), which is the buildimage counterpart specifically for this PR (#1789). [sonic-net/sonic-buildimage#26013](https://github.com/sonic-net/sonic-buildimage/pull/26013) is the companion for PR #1788 (the \\SAI_STATS_ST_CAPABILITY_SUPPORTED\\ fix) and intentionally only contains that key.\n\nSummary of PR pairing:\n| sairedis PR | buildimage PR | sai.profile key |\n|---|---|---|\n| #1788 | sonic-buildimage#26013 | \\SAI_STATS_ST_CAPABILITY_SUPPORTED=0\\ |\n| #1789 (this PR) | sonic-buildimage#26014 | \\SAI_STATS_EXT_SWITCH_SUPPORTED=0\\ |\n\nI will update the PR description to make the buildimage companion link explicit."
+    },
+    {
+        "number": 1789,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-11T05:41:50Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1789,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-11T05:42:01Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1789,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-11T12:56:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1789,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-11T12:57:03Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1789,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-11T22:10:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1789,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-11T22:10:59Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1789,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-16T04:01:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1789,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-16T04:01:42Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1789,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-03-13T03:21:51Z",
+        "review_author": "Gfrom2016"
+    },
+    {
+        "number": 1789,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-03-16T03:23:51Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 1789,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-03-16T03:35:29Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 1789,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-03-16T07:26:10Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 1789,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-03-16T07:26:10Z",
+        "latestReview_author": "StormLiangMS",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1789,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-03-13T03:21:51Z",
+        "latestReview_author": "Gfrom2016",
+        "latestReview_state": "DISMISSED"
+    },
+    {
+        "number": 1789,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-03-16T03:23:51Z",
+        "latestReview_author": "lolyu",
+        "latestReview_state": "DISMISSED"
+    },
+    {
+        "number": 1788,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-11T02:20:47Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1788,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-11T02:20:59Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1788,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-11T05:48:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1788,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-11T05:48:17Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1788,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-11T12:57:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1788,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-11T12:57:25Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1788,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-11T22:06:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1788,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-11T22:07:10Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1788,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-11T23:47:57Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1788,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-11T23:48:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1788,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-03-13T03:19:58Z",
+        "review_author": "Gfrom2016"
+    },
+    {
+        "number": 1788,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-03-16T03:16:25Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 1788,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-03-16T03:20:17Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 1788,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-03-16T03:35:29Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 1788,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-03-16T03:35:29Z",
+        "latestReview_author": "StormLiangMS",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 1788,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-03-13T03:19:58Z",
+        "latestReview_author": "Gfrom2016",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1788,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-03-16T03:20:17Z",
+        "latestReview_author": "lolyu",
+        "latestReview_state": "APPROVED"
     },
     {
         "number": 1786,
