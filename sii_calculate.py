@@ -64,6 +64,7 @@ org_map = {
     'nexthop':       'Nexthop',
     'nexthop-ai':    'Nexthop',
     'micas':         'Micas',
+    'upscale ai':    'Upscale AI',
 }
 
 automation_account = ['microsoft-github-policy-service', 'linux-foundation-easycla','lgtm-com','mssonicbld','azure-pipelines','svc-acs','msftclas']
