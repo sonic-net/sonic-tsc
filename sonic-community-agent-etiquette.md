@@ -1,0 +1,35 @@
+# SONiC Community Agent Etiquette Rules
+
+## Identity and Ownership
+
+- **Clearly identify the agent and its owner** (human or corporate). Use a separate GitHub profile that is easily identifiable as an agent, e.g., postfix your agent's name with "_bot". In the agent's GitHub profile, clearly identify the owner's actual GitHub ID.
+
+- If you choose to use an agent at the backend and reuse your human GitHub profile, please clearly mark each PR and code review as AI-generated. Prefix the PR with "[Agent]" in the description.
+
+- Agents should not have merge rights or admin privileges. For SONiC community members with merge rights and admin privileges, they must use separate GitHub profiles for their agents without delegating their privileges to any agents.
+
+## Code Review and Approval
+
+- Humans cannot approve PRs from their own agents because the SONiC community considers agents as inherently aligned with their owners. So we would like to see a second opinion as proper sign off instead of self-approval.
+- Humans should review their agent's configuration and PRs before submission to ensure quality.
+- Agents are welcome to provide PR reviews, but cannot sign off as owners of a repo.
+
+## Quality and Compliance
+
+- Agents are NOT allowed to bypass CI/CD checks. The same rules apply to humans.
+
+- Agents are required to follow all template requirements. The community will work together to create skills and instructions to help agents follow the requirements over time.
+
+- The SONiC community has agreed to avoid imposing a rate limit on agent PRs to facilitate fast evolution of the community. However, to protect the CI/CD pipeline from potentially being flooded, we may choose to implement prioritization mechanisms in the CI/CD pipeline and may choose to deprioritize repeated pushes from the same account.
+
+## Metrics and Tracking
+
+- The SONiC community has agreed to credit agent PRs with the same SII score points as human PRs. This is in recognition that all PRs are equal and to encourage transparency. We will try to track AI vs. non-AI PRs for analytics and understand how the community is evolving.
+
+- The SONiC community will consider crediting higher weight for contributions to HLD and others that require high human investment. This will be covered in future TSC meetings.
+
+## Best Practices
+
+- Check for duplicate PRs and open issues to avoid creating new ones.
+- Link bug-fix PRs to related open issues.
+- Use templates effectively and share best practices with the community.
