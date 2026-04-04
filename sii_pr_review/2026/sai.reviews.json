@@ -1,5 +1,32 @@
 [
     {
+        "number": 2270,
+        "repo": "sai",
+        "comment_at": "2026-04-02T17:37:00Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2270,
+        "repo": "sai",
+        "comment_at": "2026-04-02T17:37:09Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2270,
+        "repo": "sai",
+        "review_at": "2026-04-02T19:59:07Z",
+        "review_author": "prabhataravind"
+    },
+    {
+        "number": 2270,
+        "repo": "sai",
+        "latestReview_at": "2026-04-02T19:59:07Z",
+        "latestReview_author": "prabhataravind",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 2264,
         "repo": "sai",
         "comment_at": "2026-03-20T16:08:28Z",
@@ -320,6 +347,240 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 2256,
+        "repo": "sai",
+        "comment_at": "2026-03-11T21:09:14Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "@prafull-brcm - are you able to discuss this in the SAI community meeting on 3/12?"
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "comment_at": "2026-03-12T03:01:13Z",
+        "comment_author": "prafull-brcm",
+        "comment_body": "@tjchadaga I can discuss this on 3/12 meeting in SAI community meeting."
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "comment_at": "2026-03-12T17:23:42Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "@prafull-brcm - As discussed in the community meeting, please update the PR with a detailed description of the types and usage examples "
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "comment_at": "2026-03-12T17:23:56Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "comment_at": "2026-03-12T17:24:06Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "comment_at": "2026-03-12T17:32:55Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "Please also address the metachecker failure by adding CEILR & CEIMR to meta/acronyms\r\n\r\n```\r\nWARNING: Word 'CEILR' is misspelled or is acronym, add to acronyms.txt? saiport.h 513:    /** Interface type CEILR */\r\nWARNING: Word 'CEIMR' is misspelled or is acronym, add to acronyms.txt? saiport.h 510:    /** Interface type CEIMR */\r\n```"
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "comment_at": "2026-03-13T06:34:37Z",
+        "comment_author": "prafull-brcm",
+        "comment_body": "@tjchadaga @vmittal-msft \r\nAs discussed adding usage details for these new interfaces:\r\nThe inteface type is set during create port using attribute SAI_PORT_ATTR_INTERFACE_TYPE and new interfaces (CEILR, CEILR_ER and CEIMR) are added to enum sai_port_interface_type_t.\r\nHere is the ussage detail:\r\n/**\r\n     * @brief Configure Interface type\r\n     *\r\n     * @type sai_port_interface_type_t\r\n     * @flags CREATE_AND_SET\r\n     * @default SAI_PORT_INTERFACE_TYPE_NONE\r\n     */\r\n    SAI_PORT_ATTR_INTERFACE_TYPE,\r\n\r\nLine side attributes are set like this:\t\r\nline_attr[2].id = sys_attr[2].id = SAI_PORT_ATTR_INTERFACE_TYPE;\r\nline_attr[2].value.u32 = sys_attr[2].value.u32 = SAI_PORT_INTERFACE_TYPE_KR;\r\n\r\nNewly added interfaces can be configured  similar way:\r\nline_attr[2].value.u32 = sys_attr[2].value.u32 = SAI_PORT_INTERFACE_TYPE_CEILR;\r\n\r\nCall the create port using line side attribute:\r\nrv = pai_port_apis_ptr->create_port(&line_port_id[phy_index], switch_id[phy_index], \r\n                COUNTOF(line_attr),\r\n                line_attr);\r\n"
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "comment_at": "2026-03-16T08:42:42Z",
+        "comment_author": "prafull-brcm",
+        "comment_body": "@vmittal-msft Updated the usage of new variable."
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "comment_at": "2026-03-25T21:05:30Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "@prafull-brcm - please squash your commits and force push for the metachecker to run"
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "comment_at": "2026-03-25T21:06:22Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "@prgeor, @eddyk-nvidia - could you please help sign off on this?"
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "comment_at": "2026-03-26T17:53:39Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "@prafull-brcm - gentle reminder to squash your commits"
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "comment_at": "2026-03-30T10:09:16Z",
+        "comment_author": "prafull-brcm",
+        "comment_body": "> @prafull-brcm - gentle reminder to squash your commits\r\n\r\n@tjchadaga Commits are squashed in single commit."
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "comment_at": "2026-03-30T17:16:24Z",
+        "comment_author": "apogedik",
+        "comment_body": "What SAI version will this request be part of?  When will the new version be released?  We have customers waiting for this change."
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "comment_at": "2026-03-30T18:19:19Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "comment_at": "2026-03-30T18:19:30Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "comment_at": "2026-03-30T18:28:52Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "@prafull-brcm - could you please help place the new acronyms in the correct alphabetical order? Seeing this meta check failure\r\n\r\nWARNING: Acronyms are not sorted: XPN, CEIMR\r\nWARNING: Acronyms are not sorted: CEIMR, CEILR\r\nWARNING: Acronyms are not sorted: XPN, CEIMR\r\nWARNING: Acronyms are not sorted: CEIMR, CEILR\r\n"
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "comment_at": "2026-03-30T22:53:00Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "> What SAI version will this request be part of? When will the new version be released? We have customers waiting for this change.\r\n\r\n@prafull-brcm, @apogedik - Since the PR is already reviewed, if the meta checker issue is resolved today, we can include it in v1.18.1 header release (to be available later today)."
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "comment_at": "2026-03-31T02:36:47Z",
+        "comment_author": "prafull-brcm",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "comment_at": "2026-03-31T02:36:54Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nCommenter does not have sufficient privileges for PR 2256 in repo opencomputeproject/SAI<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "comment_at": "2026-03-31T05:59:18Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "comment_at": "2026-03-31T05:59:28Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "review_at": "2026-02-24T06:37:02Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "review_at": "2026-02-24T07:49:40Z",
+        "review_author": "eddyk-nvidia"
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "review_at": "2026-02-24T09:36:36Z",
+        "review_author": "prafull-brcm"
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "review_at": "2026-02-24T10:59:05Z",
+        "review_author": "prafull-brcm"
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "review_at": "2026-02-24T11:30:01Z",
+        "review_author": "eddyk-nvidia"
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "review_at": "2026-02-25T09:14:50Z",
+        "review_author": "prafull-brcm"
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "review_at": "2026-03-12T07:04:40Z",
+        "review_author": "prafull-brcm"
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "review_at": "2026-03-13T06:13:25Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "review_at": "2026-03-13T06:14:46Z",
+        "review_author": "prafull-brcm"
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "review_at": "2026-03-30T18:57:38Z",
+        "review_author": "eddyk-nvidia"
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "review_at": "2026-03-31T06:16:00Z",
+        "review_author": "tjchadaga"
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "latestReview_at": "2026-03-13T06:13:25Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "latestReview_at": "2026-03-31T06:16:00Z",
+        "latestReview_author": "tjchadaga",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2256,
+        "repo": "sai",
+        "latestReview_at": "2026-03-30T18:57:38Z",
+        "latestReview_author": "eddyk-nvidia",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 2255,
         "repo": "sai",
         "comment_at": "2026-02-25T07:16:53Z",
@@ -612,6 +873,13 @@
         "comment_at": "2026-03-24T20:58:17Z",
         "comment_author": "dgsudharsan",
         "comment_body": "@marian-pritsak and @itaibaz Can you please review and share if you have any concerns?"
+    },
+    {
+        "number": 2251,
+        "repo": "sai",
+        "comment_at": "2026-03-30T21:15:53Z",
+        "comment_author": "prsunny",
+        "comment_body": "@tjchadaga , request for tagging this to v1.18.1"
     },
     {
         "number": 2251,

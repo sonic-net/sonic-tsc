@@ -1,5 +1,39 @@
 [
     {
+        "number": 365,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-03-27T07:59:10Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 365,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-03-27T07:59:19Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 365,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-03-27T20:24:18Z",
+        "comment_author": "deepak-singhal0408",
+        "comment_body": "## \u2705 Testing Results \u2014 VS Image with Fix\n\n### Test Environment\n- **DUT Image**: `SONiC.master.0-34af19e3a` (Debian 13, kernel 6.12.41)\n- **Testbed**: cSONiC KVM virtual testbed (T0 topology, 4 neighbors)\n- **Platform**: `x86_64-kvm_x86_64-r0` (Force10-S6000 hwsku)\n\n### Fix Verification\n- \u2705 `wait_for_service_stable()` method confirmed present in `/usr/local/bin/featured` on running DUT\n- \u2705 All SONiC containers healthy (database, swss, syncd, bgp, teamd, lldp, pmon, gnmi, snmp, radv)\n\n### BGP Session Status\n- \u2705 **8/8 BGP sessions Established** (4 IPv4 + 4 IPv6)\n\n| Neighbor | IPv4 | IPv6 | Status |\n|----------|------|------|--------|\n| ARISTA01T1 | 10.0.0.57 | fc00::72 | \u2705 Established |\n| ARISTA02T1 | 10.0.0.59 | fc00::76 | \u2705 Established |\n| ARISTA03T1 | 10.0.0.61 | fc00::7a | \u2705 Established |\n| ARISTA04T1 | 10.0.0.63 | fc00::7e | \u2705 Established |\n\n### sonic-mgmt Test Results\n\n| Test Module | Result | Notes |\n|-------------|--------|-------|\n| `bgp/test_bgp_fact.py` | \u2705 **1 passed** | All BGP facts verified |\n| `lldp/test_lldp.py` | \u26a0\ufe0f 3 failed, 2 errors | Expected \u2014 testbed infra limitation (no `team` kernel module on Azure host, direct interface wiring instead of PortChannels) |\n\n### Unit Tests\n- \u2705 **38/38 passed** (32 existing + 6 new tests for `wait_for_service_stable()`)\n\n### Summary\nThe DUT boots cleanly with the fix and establishes all BGP neighbor sessions without orphaned containers. The `wait_for_service_stable()` fix does not cause regressions in normal service startup.\n"
+    },
+    {
+        "number": 365,
+        "repo": "sonic-host-services",
+        "review_at": "2026-03-31T20:10:48Z",
+        "review_author": "BYGX-wcr"
+    },
+    {
+        "number": 365,
+        "repo": "sonic-host-services",
+        "latestReview_at": "2026-03-31T20:10:48Z",
+        "latestReview_author": "BYGX-wcr",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 364,
         "repo": "sonic-host-services",
         "comment_at": "2026-03-24T17:43:38Z",
