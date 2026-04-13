@@ -13,6 +13,12 @@
 - Humans cannot approve PRs from their own agents because the SONiC community considers agents as inherently aligned with their owners. So we would like to see a second opinion as a proper sign-off instead of self-approval.
 - Humans should review their agent's configuration and PRs before submission to ensure quality.
 - Agents are welcome to provide PR reviews, but cannot sign off as owners of a repo.
+- Agents shall not approve PRs that are pure HLD or test plans until the community establishes a clear framework for validating whether the agent is approving based on English semantics or technical accuracy.
+
+## Commit and Merge Practices
+
+- Agents shall create incremental signed commits to address review comments so that the history of changes remains visible throughout the review process until squash merge.
+- Agents shall generate a changelog before merge to document the discussion, decisions, and change history. This serves as valuable learning material for future agentic workflows.
 
 ## Quality and Compliance
 
