@@ -44,6 +44,13 @@
     {
         "number": 798,
         "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-28T17:15:19Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202511: https://github.com/sonic-net/sonic-platform-daemons/pull/803"
+    },
+    {
+        "number": 798,
+        "repo": "sonic-platform-daemons",
         "review_at": "2026-04-17T17:45:55Z",
         "review_author": "copilot-pull-request-reviewer"
     },
@@ -474,6 +481,119 @@
         "repo": "sonic-platform-daemons",
         "latestReview_at": "2026-04-07T21:09:09Z",
         "latestReview_author": "vvolam",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 785,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-02T01:42:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 785,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-02T01:42:41Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 785,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-03T21:06:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 785,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-03T21:07:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 785,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-10T04:39:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 785,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-10T04:40:05Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 785,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-22T19:39:24Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 785,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-22T19:39:34Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 785,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-23T23:55:21Z",
+        "comment_author": "judyjoseph",
+        "comment_body": "changes LGTM ...though there are few scnario's we there could have some latency as we have a single thread handling all these timers ..  If we have asic timer at 5sec .. and for SFP it is 60sec, the same thread does a redis get for a large number of SFP modules (on a DUT with say 512 interfaces) will affect the next polling cycle of asic timer -- since this operation could take > 5 sec ? \r\n\r\nMay be we should remove the SFP polling from redis .. now that we would like this optics temperature to be polled by xcvrd itself. We can add a separate thread thermalctld in future if we really need to get the xcvr temperature in thermalctld. \r\n\r\n@vvolam @Junchao-Mellanox  let me know thoughts"
+    },
+    {
+        "number": 785,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-24T17:12:47Z",
+        "comment_author": "vvolam",
+        "comment_body": "Thanks @judyjoseph for the review and the good callout!\r\n\r\nYou're right that on high-port-count platforms (e.g. 512 SFPs), the SFP Redis reads could add up and potentially delay the next fast-polling cycle. Today each SFP costs 3-5 Redis round-trips per cycle, so at scale that's non-trivial.\r\n\r\nThat said, this concern exists independent of this PR \u2014 the SFP polling already runs in the same thread at 60s today. The per-component interval feature doesn't make it worse; it just makes the impact more visible when you have a fast-polling sensor like ASIC at 5s.\r\n\r\nI agree the right approach is to remove SFP temperature polling from thermalctld entirely and let xcvrd own it (there's already a TODO in the code for this). I'd prefer to handle that as a separate PR since it's a different scope of change.\r\n\r\nWould it be okay to merge this as-is and I'll file a follow-up to remove the SFP polling path?"
+    },
+    {
+        "number": 785,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2026-04-02T04:12:26Z",
+        "review_author": "Junchao-Mellanox"
+    },
+    {
+        "number": 785,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2026-04-03T21:07:24Z",
+        "review_author": "vvolam"
+    },
+    {
+        "number": 785,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2026-04-09T02:25:53Z",
+        "review_author": "Junchao-Mellanox"
+    },
+    {
+        "number": 785,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2026-04-10T04:41:55Z",
+        "review_author": "vvolam"
+    },
+    {
+        "number": 785,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2026-04-10T04:42:03Z",
+        "review_author": "vvolam"
+    },
+    {
+        "number": 785,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2026-04-23T00:03:24Z",
+        "review_author": "Junchao-Mellanox"
+    },
+    {
+        "number": 785,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2026-04-23T00:03:24Z",
+        "latestReview_author": "Junchao-Mellanox",
         "latestReview_state": "APPROVED"
     },
     {
