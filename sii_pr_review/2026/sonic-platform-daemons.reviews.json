@@ -1,5 +1,88 @@
 [
     {
+        "number": 807,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-29T20:41:50Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-platform-daemons/pull/715"
+    },
+    {
+        "number": 807,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-29T20:42:03Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 807,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-29T20:42:12Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 807,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2026-04-29T21:00:50Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 807,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2026-04-29T21:00:50Z",
+        "latestReview_author": "mihirpat1",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 806,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-29T19:33:21Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-platform-daemons/pull/789"
+    },
+    {
+        "number": 806,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-29T19:33:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 806,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-29T19:33:42Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 803,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-28T17:15:14Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-platform-daemons/pull/798"
+    },
+    {
+        "number": 803,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-29T01:52:50Z",
+        "comment_author": "prgeor",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 803,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-29T01:52:59Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 803,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-29T01:53:13Z",
+        "comment_author": "prgeor",
+        "comment_body": "@vmittal-msft can you review/approve/merge?"
+    },
+    {
         "number": 798,
         "repo": "sonic-platform-daemons",
         "comment_at": "2026-04-17T17:42:16Z",
@@ -473,6 +556,13 @@
     {
         "number": 789,
         "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-29T19:33:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202511: https://github.com/sonic-net/sonic-platform-daemons/pull/806"
+    },
+    {
+        "number": 789,
+        "repo": "sonic-platform-daemons",
         "review_at": "2026-04-07T21:09:09Z",
         "review_author": "vvolam"
     },
@@ -552,6 +642,20 @@
         "comment_at": "2026-04-24T17:12:47Z",
         "comment_author": "vvolam",
         "comment_body": "Thanks @judyjoseph for the review and the good callout!\r\n\r\nYou're right that on high-port-count platforms (e.g. 512 SFPs), the SFP Redis reads could add up and potentially delay the next fast-polling cycle. Today each SFP costs 3-5 Redis round-trips per cycle, so at scale that's non-trivial.\r\n\r\nThat said, this concern exists independent of this PR \u2014 the SFP polling already runs in the same thread at 60s today. The per-component interval feature doesn't make it worse; it just makes the impact more visible when you have a fast-polling sensor like ASIC at 5s.\r\n\r\nI agree the right approach is to remove SFP temperature polling from thermalctld entirely and let xcvrd own it (there's already a TODO in the code for this). I'd prefer to handle that as a separate PR since it's a different scope of change.\r\n\r\nWould it be okay to merge this as-is and I'll file a follow-up to remove the SFP polling path?"
+    },
+    {
+        "number": 785,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-29T01:59:55Z",
+        "comment_author": "Junchao-Mellanox",
+        "comment_body": "Hi @vvolam , could you please also update sonic-platform-daemon submodule pointer from master? Thanks!"
+    },
+    {
+        "number": 785,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-29T04:49:10Z",
+        "comment_author": "vvolam",
+        "comment_body": "@judyjoseph This automated submodule update PR https://github.com/sonic-net/sonic-buildimage/pull/27053 updates the sonic-platform-daemons submodule pointer in master branch."
     },
     {
         "number": 785,
@@ -891,6 +995,13 @@
     {
         "number": 772,
         "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-29T04:00:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The change is not in 202511 yet. @gpunathilell, please manually create the cherry pick PR for branch 202511.<br>You can ping the release branch owner(github account: ) to approve your cherry pick PR.<br>If this change is already in 202511, please comment \"already in 202511\". Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 772,
+        "repo": "sonic-platform-daemons",
         "review_at": "2026-03-11T15:13:32Z",
         "review_author": "dgsudharsan"
     },
@@ -912,6 +1023,109 @@
         "repo": "sonic-platform-daemons",
         "latestReview_at": "2026-03-11T18:34:58Z",
         "latestReview_author": "vvolam",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 770,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-03-24T17:49:57Z",
+        "comment_author": "ymd-arista",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 770,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-03-24T17:50:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 770,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-03-24T17:50:02Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "No Azure DevOps builds found for sonic-net/sonic-platform-daemons#770."
+    },
+    {
+        "number": 770,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-03-24T17:57:30Z",
+        "comment_author": "ymd-arista",
+        "comment_body": "Closing and re-opening this review to re-trigger 'Azure.sonic-platform-daemons' & 'coverage.Azure.sonic-platform-daemons.build_test' checks which are stuck from long time."
+    },
+    {
+        "number": 770,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-03-24T17:57:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 770,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-03-24T17:57:51Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 770,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-22T17:06:59Z",
+        "comment_author": "rlhui",
+        "comment_body": "@judyjoseph , can we review please? thx"
+    },
+    {
+        "number": 770,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-27T21:55:38Z",
+        "comment_author": "bmridul",
+        "comment_body": "Does chassisd need similar changes?"
+    },
+    {
+        "number": 770,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-29T16:57:08Z",
+        "comment_author": "judyjoseph",
+        "comment_body": "> Does chassisd need similar changes?\r\n\r\n@ymd-arista could you check.. I am merging this PR as it is open for a while. Will try to get in 202511"
+    },
+    {
+        "number": 770,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-29T16:58:38Z",
+        "comment_author": "ymd-arista",
+        "comment_body": "No, chassisd doesn't need similar changes. We only delete specific information populated by chassisd from the `PHYSICAL_ENTITY_INFO` table."
+    },
+    {
+        "number": 770,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-29T18:05:47Z",
+        "comment_author": "bmridul",
+        "comment_body": "> No, chassisd doesn't need similar changes. We only delete specific information populated by chassisd from the `PHYSICAL_ENTITY_INFO` table.\r\n\r\nPls check, Looks like same issue might be here. Chassisd is deleting entries on module removal (OIR) not process kill (unless  I am missing something)\r\n\r\nhttps://github.com/sonic-net/sonic-platform-daemons/blob/e5da370eab1a1d424b8d6e02aa7353ad3ff0e6da/sonic-chassisd/scripts/chassisd#L400"
+    },
+    {
+        "number": 770,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2026-03-18T18:31:51Z",
+        "review_author": "mlok-nokia"
+    },
+    {
+        "number": 770,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2026-04-29T16:55:39Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 770,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2026-04-29T16:55:39Z",
+        "latestReview_author": "judyjoseph",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 770,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2026-03-18T18:31:51Z",
+        "latestReview_author": "mlok-nokia",
         "latestReview_state": "APPROVED"
     },
     {
