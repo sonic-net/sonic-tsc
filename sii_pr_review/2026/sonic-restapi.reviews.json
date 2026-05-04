@@ -1,5 +1,107 @@
 [
     {
+        "number": 185,
+        "repo": "sonic-restapi",
+        "comment_at": "2026-04-30T01:02:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-restapi/pull/184"
+    },
+    {
+        "number": 185,
+        "repo": "sonic-restapi",
+        "comment_at": "2026-04-30T01:02:34Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 185,
+        "repo": "sonic-restapi",
+        "comment_at": "2026-04-30T01:02:43Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 184,
+        "repo": "sonic-restapi",
+        "comment_at": "2026-04-26T11:38:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 184,
+        "repo": "sonic-restapi",
+        "comment_at": "2026-04-26T11:38:57Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 184,
+        "repo": "sonic-restapi",
+        "comment_at": "2026-04-27T01:26:34Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 184,
+        "repo": "sonic-restapi",
+        "comment_at": "2026-04-27T01:26:43Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 184,
+        "repo": "sonic-restapi",
+        "comment_at": "2026-04-27T02:00:52Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "## \ud83d\udfe2 Approve as a hotfix \u2014 small, correct, well-justified\r\n\r\nThe bug is real and the fix is minimal. Discarding `os.Lstat()` errors and immediately calling `.ModTime()` on a nil `FileInfo` is a textbook Go nil-deref. The PR adds proper error handling at all 6 call sites with the right policy split:\r\n\r\n- **Startup (3 sites)** \u2192 `log.Fatalf` \u2192 fail fast with a clear message instead of panicking with an opaque SIGSEGV.\r\n- **Monitor loop (3 sites)** \u2192 `log.Printf` + `time.Sleep` + `continue` \u2192 tolerate transient cert rotation gracefully.\r\n\r\n### \u2705 What works\r\n\r\n- Behavior preserved: previous code crashed on missing cert; new code at startup exits the process with a descriptive error \u2014 same observable effect, much better diagnostics.\r\n- Loop policy is conservative (skip this cycle, retry next), exactly right for cert rotation where there's a brief unlink/rename window.\r\n- `prev_*_mtime` correctly *not* updated when stat fails \u2014 so when the cert reappears with a new mtime, the next cycle still detects it and triggers reload.\r\n- Goroutine-safe: each iteration's `:=` is scoped to the loop body, no inter-iteration shadowing.\r\n- ADO 37693847 + Elastictest job link in the description gives a clean repro reference.\r\n\r\n### \ud83d\udfe8 Suggestions (non-blocking)\r\n\r\n**1. Reduce duplication with a tiny helper.** Six near-identical blocks invite bit-rot:\r\n\r\n```go\r\nfunc statOrFatal(path, label string) os.FileInfo {\r\n    fi, err := os.Lstat(path)\r\n    if err != nil {\r\n        log.Fatalf(\"error: couldn't stat %s file %s: %s\", label, path, err)\r\n    }\r\n    return fi\r\n}\r\n\r\nfunc statOrSkip(path, label string) (os.FileInfo, bool) {\r\n    fi, err := os.Lstat(path)\r\n    if err != nil {\r\n        log.Printf(\"error: couldn't stat %s file %s: %s\", label, path, err)\r\n        return nil, false\r\n    }\r\n    return fi, true\r\n}\r\n```\r\n\r\nEach call site becomes one line. Optional \u2014 six explicit blocks are also readable.\r\n\r\n**2. Existing typo `sever_key_*` is preserved.** Variable is `sever_key_finfo` / `sever_key_mtime` rather than `server_key_*`. Not introduced by this PR but the PR is touching every one of those lines, so it's the cheapest moment to rename. If a backport is in scope, leave it alone here to keep the patch minimal and fix it in a follow-up master-only PR.\r\n\r\n**3. Sleep placement worth a quick double-check.** Each `continue` adds a `time.Sleep(CERT_MONITOR_FREQUENCY)` then jumps to the loop condition. If the existing sleep is at the bottom of the loop body, cycle time is preserved (the trailing sleep is skipped by `continue`). If instead it's in a post-statement (`for ; ; time.Sleep(...)`), the error path sleeps twice. Worth confirming.\r\n\r\n**4. Goroutine cleanup on `log.Fatalf`.** `os.Exit` doesn't run deferred functions, so `defer wgroup.Done()` won't fire. Acceptable here because we're terminating the whole process \u2014 but if `monitor_certs` is ever launched by a test harness expecting clean teardown, the wait-group leaks. If startup-time cert validation is ever deemed worth surfacing as an error to the caller, switching to `messenger <- ERR; return` would be cleaner. Not blocking.\r\n\r\n**5. A regression test would be nice but isn't required.** A single-file Go test that points the cert flag at a non-existent path and confirms the process logs and exits (rather than panicking) would prevent this regression class returning. Easy to skip for a hotfix.\r\n\r\n### Backport\r\n\r\n202511 box is checked and the crash repro is on `20251110.22`, so the cherry-pick to 202511 is justified. Earlier branches likely have the same bug (this code looks old) \u2014 if the same `monitor_certs` exists on 202505 / 202411 and they're still maintained, consider tagging them too. Otherwise 202511-only is fine.\r\n\r\n---\r\n\r\n**TL;DR**: Approve and merge. Optional polish (helper-fn dedup + `sever_key` typo) can be a follow-up PR.\r\n"
+    },
+    {
+        "number": 184,
+        "repo": "sonic-restapi",
+        "comment_at": "2026-04-30T01:02:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202511: https://github.com/sonic-net/sonic-restapi/pull/185"
+    },
+    {
+        "number": 184,
+        "repo": "sonic-restapi",
+        "review_at": "2026-04-27T03:04:59Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 184,
+        "repo": "sonic-restapi",
+        "review_at": "2026-04-29T01:06:18Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 184,
+        "repo": "sonic-restapi",
+        "review_at": "2026-04-29T22:14:05Z",
+        "review_author": "mramezani95"
+    },
+    {
+        "number": 184,
+        "repo": "sonic-restapi",
+        "latestReview_at": "2026-04-29T01:06:18Z",
+        "latestReview_author": "prsunny",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 184,
+        "repo": "sonic-restapi",
+        "latestReview_at": "2026-04-27T03:04:59Z",
+        "latestReview_author": "StormLiangMS",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 184,
+        "repo": "sonic-restapi",
+        "latestReview_at": "2026-04-29T22:14:05Z",
+        "latestReview_author": "mramezani95",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 183,
         "repo": "sonic-restapi",
         "comment_at": "2026-02-11T06:09:03Z",
