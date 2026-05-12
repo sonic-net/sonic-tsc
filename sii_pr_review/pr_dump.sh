@@ -80,26 +80,41 @@ dump_by_year(){
     return 0
 }
 
-dump_by_10day(){
+dump_by_5day(){
     a=$year/$repo.$month.a.$dump_type.json
     b=$year/$repo.$month.b.$dump_type.json
     c=$year/$repo.$month.c.$dump_type.json
 
-    echo "            dump by 10 days"
-    result=$(gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-01..$year-$month-10")
+    echo "            dump by 5 days"
+    result=$(gh pr list -R $org_repo -L 10000 -s merged --json number -S "merged:$year-$month-01..$year-$month-05")
     [[ "$result" == "" ]] && return 1
     echo $result | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}]" > $a
-    echo "            $year-$month-01..$year-$month-10,$(cat $a | jq length)"
+    echo "            $year-$month-01..$year-$month-05,$(cat $a | jq length)"
     sleep $interval
-    result=$(gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-11..$year-$month-20")
+    result=$(gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-06..$year-$month-10")
+    [[ "$result" == "" ]] && return 1
+    echo $result | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}]" > $a
+    echo "            $year-$month-06..$year-$month-10,$(cat $a | jq length)"
+    sleep $interval
+    result=$(gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-11..$year-$month-15")
     [[ "$result" == "" ]] && return 1
     echo $result | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}]" > $b
-    echo "            $year-$month-11..$year-$month-20,$(cat $b | jq length)"
+    echo "            $year-$month-11..$year-$month-15,$(cat $b | jq length)"
     sleep $interval
-    result=$(gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-21..$end")
+    result=$(gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-16..$year-$month-20")
     [[ "$result" == "" ]] && return 1
     echo $result | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}]" > $c
-    echo "            $year-$month-21..$end,$(cat $c | jq length)"
+    echo "            $year-$month-16..$year-$month-20,$(cat $c | jq length)"
+    sleep $interval
+    result=$(gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-21..$year-$month-25")
+    [[ "$result" == "" ]] && return 1
+    echo $result | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}]" > $c
+    echo "            $year-$month-21..$year-$month-25,$(cat $c | jq length)"
+    sleep $interval
+    result=$(gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-26..$end")
+    [[ "$result" == "" ]] && return 1
+    echo $result | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}]" > $c
+    echo "            $year-$month-26..$end,$(cat $c | jq length)"
     sleep $interval
     jq -s 'add | sort_by(-.number)' --indent 4 $a $b $c > $file_by_month
     rm -rf $a $b $c
@@ -133,13 +148,13 @@ do
                 [[ "$(cat $file_by_month | jq length)" != "$pr_count" ]] && echo "        pr count not match! $(cat $file_by_month | jq length) $pr_count" || continue
             fi
 
-            # try dump by 10 days, when dump by month failed
+            # try dump by 5 days, when dump by month failed
             while true; do
-                dump_by_10day && break
+                dump_by_5day && break
                 sleep 60
             done
         done    
-        if [[ "$repo" != "sonic-mgmt" ]]; then
+        if [[ "$repo" != "sonic-buildimage" && "$repo" != "sonic-mgmt" ]]; then
             jq -s 'add | sort_by(-.number)' --indent 4 $year/$repo.*.$dump_type.json > $file_by_year
             rm $year/$repo.*.$dump_type.json -rf
         else
