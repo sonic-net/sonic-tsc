@@ -40,6 +40,7 @@ jobs:
   - bash: |
       set -ex
 
+      git reset origin/master --hard
       cd sii_hld
       ./dump_hld_data.sh
       git add dash_hld.csv sai_hld.csv sonic_hld.csv
@@ -56,6 +57,7 @@ jobs:
   - bash: |
       set -ex
 
+      git reset origin/master --hard
       cd sii_issue
       ./issues_dump.sh
       git add issues.json
@@ -72,6 +74,7 @@ jobs:
   - bash: |
       set -ex
 
+      git reset origin/master --hard
       cd sii_testplan_hld
       ./generate_testplan_hld_data.sh
       git add sonic-mgmt_hld.csv
@@ -88,6 +91,7 @@ jobs:
   - bash: |
       set -ex
 
+      git reset origin/master --hard
       cd sii_pr_review
       for repo in $(cat repos)
       do
@@ -116,6 +120,7 @@ jobs:
   - bash: |
       set -ex
 
+      git reset origin/master --hard
       cd sii_test_pr_review
       current=$(date -I)
       year=${current:0:4}
