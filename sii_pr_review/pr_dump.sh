@@ -86,7 +86,7 @@ dump_by_5day(){
     c=$year/$repo.$month.c.$dump_type.json
 
     echo "            dump by 5 days"
-    result=$(gh pr list -R $org_repo -L 10000 -s merged --json number -S "merged:$year-$month-01..$year-$month-05")
+    result=$(gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-01..$year-$month-05")
     [[ "$result" == "" ]] && return 1
     echo $result | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}]" > $a
     echo "            $year-$month-01..$year-$month-05,$(cat $a | jq length)"
