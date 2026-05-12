@@ -98,7 +98,7 @@ dump_adaptive_by_month(){
     while (( start_day <= month_last_day ))
     do
         ok="n"
-        for step in 10 5 3
+        for step in 10 5 3 1
         do
             end_day=$(( start_day + step - 1 ))
             (( end_day > month_last_day )) && end_day=$month_last_day
@@ -118,10 +118,13 @@ dump_adaptive_by_month(){
                 break
             fi
 
-            echo "            range failed with ${step}-day window, fallback"
+            echo "            range failed with ${step}-day window, narrowing down..."
         done
 
-        [[ "$ok" == "y" ]] || return 1
+        if [[ "$ok" != "y" ]]; then
+            echo "FATAL: All chunk sizes failed for $range_start..$range_end in $year-$month. Exiting to prevent data loss." >&2
+            exit 1
+        fi
     done
 
     jq -s 'add | sort_by(-.number)' --indent 4 "${tmp_files[@]}" > "$file_by_month" || return $?
