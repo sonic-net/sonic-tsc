@@ -1,5 +1,59 @@
 [
     {
+        "number": 814,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-05-12T01:57:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 814,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-05-12T01:57:40Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 814,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-05-12T02:00:01Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 814,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-05-12T02:00:39Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 814,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2026-05-12T05:58:05Z",
+        "review_author": "rookie-who"
+    },
+    {
+        "number": 814,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2026-05-12T05:58:41Z",
+        "review_author": "vaibhavhd"
+    },
+    {
+        "number": 814,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2026-05-12T05:58:41Z",
+        "latestReview_author": "vaibhavhd",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 814,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2026-05-12T05:58:05Z",
+        "latestReview_author": "rookie-who",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 812,
         "repo": "sonic-platform-daemons",
         "comment_at": "2026-05-07T17:49:05Z",
@@ -102,6 +156,269 @@
         "comment_at": "2026-04-29T01:53:13Z",
         "comment_author": "prgeor",
         "comment_body": "@vmittal-msft can you review/approve/merge?"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-21T07:28:10Z",
+        "comment_author": "linux-foundation-easycla",
+        "comment_body": "<a href=\"https://easycla.lfx.linuxfoundation.org/#/?version=2\"><img src=\"https://s3.amazonaws.com/cla-project-logo-prod/cla-signed.svg?v=2\" alt=\"CLA Signed\" align=\"left\" height=\"28\" width=\"328\" ></a><br/><br />The committers listed above are authorized under a signed CLA.<ul><li>:white_check_mark: login: Pruthvi-Gowni / name: PruthviGowni  (383c8d0d42f9e5006687c9dbd835590fd9296af4, 3a4522a577fa2ff8e803a42835ed339e5c76d207, 3feade367e0f83cf2d47863fa5009fa748494b65, 40f9daeeefdbca42c28f340856ec75cafdef06b5, 504d87c482184ab959c757474fdf9b64be8b979d, 62e94144fedcd433f7ece5cac899bafab2c3b021, b2bd0dc5cc70d70079c61cf3cc63b135c1dff24c)</li></ul>"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-21T07:28:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-21T07:28:22Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-27T08:14:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-27T08:14:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-27T08:22:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-27T08:22:14Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-29T15:54:07Z",
+        "comment_author": "tirupatihemanth",
+        "comment_body": "@Pruthvi-Gowni @saiarcot895 \r\n\r\nBoth test_DaemonPcied.py and test_pcied.py call load_source(\"pcied\", ...) which creates different module objects each time. When pytest imports both files, the second load_source call replaces sys.modules[\"pcied\"] with a NEW module object. Then mock.patch(\"pcied.load_platform_pcieutil\", ...) patches the NEW module, while DaemonPcied.__init__.__globals__ points to the OLD module's dict. So the mock doesn't affect the actual function that DaemonPcied.__init__ calls, causing it to run the real load_platform_pcieutil which returns None in the test environment (no platform paths available).\r\n\r\nThe fix: prevent double-loading by using conftest so we load the module only once across the tests for one daemon\r\nWe need to do this at least for all daemons where we have multiple test files."
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-30T07:32:14Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-30T07:32:24Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-30T07:34:43Z",
+        "comment_author": "Pruthvi-Gowni",
+        "comment_body": "> @Pruthvi-Gowni @saiarcot895\r\n> \r\n> Both test_DaemonPcied.py and test_pcied.py call load_source(\"pcied\", ...) which creates different module objects each time. When pytest imports both files, the second load_source call replaces sys.modules[\"pcied\"] with a NEW module object. Then mock.patch(\"pcied.load_platform_pcieutil\", ...) patches the NEW module, while DaemonPcied.**init**.**globals** points to the OLD module's dict. So the mock doesn't affect the actual function that DaemonPcied.**init** calls, causing it to run the real load_platform_pcieutil which returns None in the test environment (no platform paths available).\r\n> \r\n> The fix: prevent double-loading by using conftest so we load the module only once across the tests for one daemon We need to do this at least for all daemons where we have multiple test files.\r\n\r\nAddressed"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-30T15:17:59Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-04-30T15:18:09Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-05-01T08:37:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-05-01T08:37:48Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-05-01T08:38:07Z",
+        "comment_author": "Pruthvi-Gowni",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-05-01T08:38:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nCommenter does not have sufficient privileges for PR 801 in repo sonic-net/sonic-platform-daemons<br>\r\n\n</samp>"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-05-04T05:48:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-05-04T05:49:01Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-05-05T05:14:21Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-05-05T05:14:30Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-05-05T06:22:14Z",
+        "comment_author": "Pruthvi-Gowni",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-05-05T06:22:21Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nCommenter does not have sufficient privileges for PR 801 in repo sonic-net/sonic-platform-daemons<br>\r\n\n</samp>"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-05-05T06:23:23Z",
+        "comment_author": "Pruthvi-Gowni",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-05-05T06:23:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-05-05T06:23:29Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1105626:\n\n\n\u2705Stage **__default**:"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-05-05T06:48:37Z",
+        "comment_author": "Pruthvi-Gowni",
+        "comment_body": " /azpw retry"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-05-05T06:48:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-05-05T06:48:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1105626:\n\n\n\u2705Stage **__default**:"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-05-09T18:16:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-05-09T18:16:54Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-05-09T18:34:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-05-09T18:34:46Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-05-11T01:48:34Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "@tirupatihemanth can you review as well?"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2026-05-05T23:36:36Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2026-05-09T18:17:27Z",
+        "review_author": "Pruthvi-Gowni"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2026-05-11T01:48:13Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 801,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2026-05-11T01:48:13Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
     },
     {
         "number": 798,
