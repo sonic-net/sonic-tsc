@@ -2578,6 +2578,293 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-26T21:02:57Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-27T01:01:52Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-27T01:02:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-27T09:28:06Z",
+        "comment_author": "kcudnik",
+        "comment_body": "@saksarav-nokia hey, i took a look at your implementaion and it seems too complex for me, i made a proposal for serialization method for you: https://github.com/kcudnik/sonic-sairedis/commit/7ecbac8b\r\ni forgot to add test case in Test where flags == 0\r\n\r\ni assumed that meta->valuesnames[0] in each struct enum is always zero, but this will not be the case untill SAI submodule will be updated, so this extra check would need to be added in this serialieze, and i made fix here to support both case scenarios: https://github.com/kcudnik/sonic-sairedis/commit/3dc4b1c8215c98d7cd76322ee8572da1a7082f8b\r\n\r\ni also added deserialize here:https://github.com/kcudnik/sonic-sairedis/commit/6749a44d its more flexible since it can support 0x  token inside string not only at the end, but it don't support ignored values, and i didn't actually tested id xD you can do that :) its also flawed, if you give it empty string you will get 0 as return also if you give it strings with all pipes \"|||\" it will also return zero, it can be ether bug or feature :) for example \"FOO||BAR\" will be correctly deserialized, but serialize will not produce such string, and any missing value which is not in enum will be silently ignored which we probalby want to add warning or throw "
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-30T14:14:32Z",
+        "comment_author": "saksarav-nokia",
+        "comment_body": "> @saksarav-nokia hey, i took a look at your implementaion and it seems too complex for me, i made a proposal for serialization method for you: [kcudnik@7ecbac8b](https://github.com/kcudnik/sonic-sairedis/commit/7ecbac8b) i forgot to add test case in Test where flags == 0\r\n> \r\n> i assumed that meta->valuesnames[0] in each struct enum is always zero, but this will not be the case untill SAI submodule will be updated, so this extra check would need to be added in this serialieze, and i made fix here to support both case scenarios: [kcudnik@3dc4b1c](https://github.com/kcudnik/sonic-sairedis/commit/3dc4b1c8215c98d7cd76322ee8572da1a7082f8b)\r\n> \r\n> i also added deserialize here:[kcudnik@6749a44d](https://github.com/kcudnik/sonic-sairedis/commit/6749a44d) its more flexible since it can support 0x token inside string not only at the end, but it don't support ignored values, and i didn't actually tested id xD you can do that :) its also flawed, if you give it empty string you will get 0 as return also if you give it strings with all pipes \"|||\" it will also return zero, it can be ether bug or feature :) for example \"FOO||BAR\" will be correctly deserialized, but serialize will not produce such string, and any missing value which is not in enum will be silently ignored which we probalby want to add warning or throw\r\n\r\nThanks @kcudnik .  Do you want me to create a PR and i can close mine. Or do you want me to take your changes, test it and update this PR with the new changes?. Anyway i am pulling your changes, update the unit test for deserialize and testing it. So let me know"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-31T01:51:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-31T01:51:49Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-31T01:54:58Z",
+        "comment_author": "saksarav-nokia",
+        "comment_body": "@kcudnik , i took your changes and fixed minor issues and also added LOG_WARNING in deserialize. also added unit test for deserialize. Tested in the BCM platform based chassis switch."
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-31T13:37:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-31T13:38:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-31T16:10:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-31T16:10:14Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-31T19:14:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-31T19:15:00Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-31T19:15:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-31T19:15:19Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-31T20:31:52Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-03-31T20:32:06Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-04-01T01:31:29Z",
+        "comment_author": "saksarav-nokia",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-04-01T01:31:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-04-01T01:31:34Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1076076:\n\n\n\u2705Stage **BuildAsan**:\n- Job amd64: retried."
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-04-13T14:54:24Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-04-13T14:54:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-01T00:28:21Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-01T00:28:31Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-15T00:29:02Z",
+        "comment_author": "saksarav-nokia",
+        "comment_body": "@kcudnik , could you please complete the review and merge it if you are ok with the changes\r\n"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-15T13:06:48Z",
+        "comment_author": "saksarav-nokia",
+        "comment_body": "Thanks @kcudnik . Could you please merge it. Since there is a cherry-pick conflict for 202511, i will create a different PR for 202511"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-15T13:46:02Z",
+        "comment_author": "saksarav-nokia",
+        "comment_body": "Created https://github.com/sonic-net/sonic-sairedis/pull/1892 for 202511"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-03-27T07:41:07Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-03-27T07:41:23Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-03-27T07:45:46Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-03-31T17:54:31Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-03-31T17:55:03Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-03-31T18:16:14Z",
+        "review_author": "saksarav-nokia"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-03-31T19:05:34Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-03-31T19:08:58Z",
+        "review_author": "saksarav-nokia"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-04-01T06:18:00Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-04-01T12:59:35Z",
+        "review_author": "saksarav-nokia"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-04-10T20:16:54Z",
+        "review_author": "saksarav-nokia"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-04-11T08:08:05Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-04-13T14:55:43Z",
+        "review_author": "saksarav-nokia"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-05-15T08:54:14Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1817,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-05-15T08:54:14Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 1816,
         "repo": "sonic-sairedis",
         "comment_at": "2026-03-26T17:16:57Z",
@@ -7711,6 +7998,27 @@
         "comment_at": "2026-03-24T13:54:39Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1751,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-15T18:59:22Z",
+        "comment_author": "eder-arista",
+        "comment_body": "@Bojun-Feng @deepak-singhal0408 can we cast this change to 202511? We're seeing the timeout errors on QuartzDD which is voq."
+    },
+    {
+        "number": 1751,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-15T19:12:30Z",
+        "comment_author": "Bojun-Feng",
+        "comment_body": "> @Bojun-Feng @deepak-singhal0408 can we cast this change to 202511? We're seeing the timeout errors on QuartzDD which is voq.\r\n\r\nI believe there's a process starting with adding the `Request for 202511 branch` tag.  I do not have permission to tag this PR though. Maybe @deepak-singhal0408 can add the tag?\r\n\r\nHappy to manually open a back port PR if that's needed."
+    },
+    {
+        "number": 1751,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-15T19:23:27Z",
+        "comment_author": "deepak-singhal0408",
+        "comment_body": "> > @Bojun-Feng @deepak-singhal0408 can we cast this change to 202511? We're seeing the timeout errors on QuartzDD which is voq.\r\n> \r\n> I believe there's a process starting with adding the `Request for 202511 branch` tag. I do not have permission to tag this PR though. Maybe @deepak-singhal0408 can add the tag?\r\n> \r\n> Happy to manually open a back port PR if that's needed.\r\n\r\nadded the request label for 202511..\r\nHi @vmittal-msft, can we take this change in 202511? "
     },
     {
         "number": 1751,
