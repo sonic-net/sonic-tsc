@@ -1570,6 +1570,13 @@
     {
         "number": 783,
         "repo": "sonic-platform-daemons",
+        "comment_at": "2026-05-18T06:26:35Z",
+        "comment_author": "vivekverma-arista",
+        "comment_body": "```\r\n    # Determine switch host serial number\r\n    if platform_chassis.is_bmc():\r\n        # BMC must also populate the switch host serial number\r\n        switch_host_serial = try_get(platform_chassis.get_switch_host_serial)\r\n```\r\n```\r\nroot@dut8:~# docker exec -it pmon /usr/local/bin/chassis_db_init\r\nTraceback (most recent call last):\r\nFile \"/usr/local/bin/chassis_db_init\", line 113, in\r\nmain()\r\nFile \"/usr/local/bin/chassis_db_init\", line 110, in main\r\nprovision_db(platform_chassis, log)\r\nFile \"/usr/local/bin/chassis_db_init\", line 77, in provision_db\r\nswitch_host_serial = try_get(platform_chassis.get_switch_host_serial)\r\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nAttributeError: 'Chassis' object has no attribute 'get_switch_host_serial'\r\n```\r\n\r\nWe don't seem to be having this function in chassis_base.py @judyjoseph @chander-nexthop "
+    },
+    {
+        "number": 783,
+        "repo": "sonic-platform-daemons",
         "review_at": "2026-04-24T01:36:56Z",
         "review_author": "judyjoseph"
     },
