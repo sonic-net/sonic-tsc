@@ -1,5 +1,59 @@
 [
     {
+        "number": 4565,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-12T06:11:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4565,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-12T06:11:33Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4565,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-15T19:07:20Z",
+        "comment_author": "prsunny",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4565,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-15T19:07:31Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4565,
+        "repo": "sonic-swss",
+        "review_at": "2026-05-12T06:16:38Z",
+        "review_author": "abelamit"
+    },
+    {
+        "number": 4565,
+        "repo": "sonic-swss",
+        "review_at": "2026-05-13T18:00:46Z",
+        "review_author": "r12f"
+    },
+    {
+        "number": 4565,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-05-13T18:00:46Z",
+        "latestReview_author": "r12f",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4565,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-05-12T06:16:38Z",
+        "latestReview_author": "abelamit",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 4561,
         "repo": "sonic-swss",
         "comment_at": "2026-05-11T02:42:54Z",
@@ -528,6 +582,62 @@
     {
         "number": 4543,
         "repo": "sonic-swss",
+        "comment_at": "2026-05-20T01:29:33Z",
+        "comment_author": "yijingyan2",
+        "comment_body": "Hi @venu-nexthop, the sonic-swss submodule advance PR is blocked at the moment https://github.com/sonic-net/sonic-buildimage/pull/27442. Could you please help check the build failures related to your changes https://dev.azure.com/mssonic/build/_build/results?buildId=1117273&view=logs&jobId=618cdd86-3a55-5536-cbf2-915e654a5cd8&j=618cdd86-3a55-5536-cbf2-915e654a5cd8&t=21f5e61c-7c7c-5fa7-6b79-94888d7a2c64? Thanks!"
+    },
+    {
+        "number": 4543,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-20T04:21:50Z",
+        "comment_author": "venu-nexthop",
+        "comment_body": "> Hi @venu-nexthop, the sonic-swss submodule advance PR is blocked at the moment [sonic-net/sonic-buildimage#27442](https://github.com/sonic-net/sonic-buildimage/pull/27442). Could you please help check the build failures related to your changes https://dev.azure.com/mssonic/build/_build/results?buildId=1117273&view=logs&jobId=618cdd86-3a55-5536-cbf2-915e654a5cd8&j=618cdd86-3a55-5536-cbf2-915e654a5cd8&t=21f5e61c-7c7c-5fa7-6b79-94888d7a2c64? Thanks!\r\n\r\n@yijingyan2 I could not see exactly what is failing from the log. Can you please let me know what test is failing?"
+    },
+    {
+        "number": 4543,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-20T04:38:51Z",
+        "comment_author": "yijingyan2",
+        "comment_body": "> > Hi @venu-nexthop, the sonic-swss submodule advance PR is blocked at the moment [sonic-net/sonic-buildimage#27442](https://github.com/sonic-net/sonic-buildimage/pull/27442). Could you please help check the build failures related to your changes https://dev.azure.com/mssonic/build/_build/results?buildId=1117273&view=logs&jobId=618cdd86-3a55-5536-cbf2-915e654a5cd8&j=618cdd86-3a55-5536-cbf2-915e654a5cd8&t=21f5e61c-7c7c-5fa7-6b79-94888d7a2c64? Thanks!\r\n> \r\n> @yijingyan2 I could not see exactly what is failing from the log. Can you please let me know what test is failing?\r\n\r\nHi @venu-nexthop, here is what I can see from the log\r\n```\r\nmake[5]: Entering directory '/sonic/src/sonic-swss/tests/mock_tests'\r\nmake[6]: Entering directory '/sonic/src/sonic-swss/tests/mock_tests'\r\nmake[6]: *** [Makefile:5512: tests.log] Error 1\r\nmake[6]: Leaving directory '/sonic/src/sonic-swss/tests/mock_tests'\r\nmake[5]: *** [Makefile:5494: check-TESTS] Error 2\r\nmake[5]: Leaving directory '/sonic/src/sonic-swss/tests/mock_tests'\r\nmake[4]: *** [Makefile:5615: check-am] Error 2\r\nmake[4]: Leaving directory '/sonic/src/sonic-swss/tests/mock_tests'\r\nmake[3]: *** [Makefile:744: check-recursive] Error 1\r\nmake[3]: Leaving directory '/sonic/src/sonic-swss/tests'\r\nmake[2]: *** [Makefile:420: check-recursive] Error 1\r\nmake[2]: Leaving directory '/sonic/src/sonic-swss'\r\ndh_auto_test: error: make -j4 check \"TESTSUITEFLAGS=-j4 --verbose\" VERBOSE=1 returned exit code 2\r\n```\r\nIt only shows that the failing one is from mock_tests, there is no information on which test is failing. most likely the new tests added in portphyattr_ut.cpp by your changes. The build failure only occurred on arm64 platform. Copilot is suggesting that this is because PHY attributes are not supported in this arm64 env (I'm not familiar with these, so need your help to take a look into this, thanks).\r\n"
+    },
+    {
+        "number": 4543,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-20T04:48:29Z",
+        "comment_author": "venu-nexthop",
+        "comment_body": "> > > Hi @venu-nexthop, the sonic-swss submodule advance PR is blocked at the moment [sonic-net/sonic-buildimage#27442](https://github.com/sonic-net/sonic-buildimage/pull/27442). Could you please help check the build failures related to your changes https://dev.azure.com/mssonic/build/_build/results?buildId=1117273&view=logs&jobId=618cdd86-3a55-5536-cbf2-915e654a5cd8&j=618cdd86-3a55-5536-cbf2-915e654a5cd8&t=21f5e61c-7c7c-5fa7-6b79-94888d7a2c64? Thanks!\r\n> > \r\n> > \r\n> > @yijingyan2 I could not see exactly what is failing from the log. Can you please let me know what test is failing?\r\n> \r\n> Hi @venu-nexthop, here is what I can see from the log\r\n> \r\n> ```\r\n> make[5]: Entering directory '/sonic/src/sonic-swss/tests/mock_tests'\r\n> make[6]: Entering directory '/sonic/src/sonic-swss/tests/mock_tests'\r\n> make[6]: *** [Makefile:5512: tests.log] Error 1\r\n> make[6]: Leaving directory '/sonic/src/sonic-swss/tests/mock_tests'\r\n> make[5]: *** [Makefile:5494: check-TESTS] Error 2\r\n> make[5]: Leaving directory '/sonic/src/sonic-swss/tests/mock_tests'\r\n> make[4]: *** [Makefile:5615: check-am] Error 2\r\n> make[4]: Leaving directory '/sonic/src/sonic-swss/tests/mock_tests'\r\n> make[3]: *** [Makefile:744: check-recursive] Error 1\r\n> make[3]: Leaving directory '/sonic/src/sonic-swss/tests'\r\n> make[2]: *** [Makefile:420: check-recursive] Error 1\r\n> make[2]: Leaving directory '/sonic/src/sonic-swss'\r\n> dh_auto_test: error: make -j4 check \"TESTSUITEFLAGS=-j4 --verbose\" VERBOSE=1 returned exit code 2\r\n> ```\r\n> \r\n> It only shows that the failing one is from mock_tests, there is no information on which test is failing. most likely the new tests added in portphyattr_ut.cpp by your changes. The build failure only occurred on arm64 platform. Copilot is suggesting that this is because PHY attributes are not supported in this arm64 env (I'm not familiar with these, so need your help to take a look into this, thanks).\r\n\r\n@yijingyan2  All the unit tests passed on my local build as well as on the merge PR checks. It would have helped if there is some log. Do you know there is any way to get the actual test log? Thanks"
+    },
+    {
+        "number": 4543,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-20T12:06:24Z",
+        "comment_author": "yijingyan2",
+        "comment_body": "> @yijingyan2 All the unit tests passed on my local build as well as on the merge PR checks. It would have helped if there is some log. Do you know there is any way to get the actual test log? Thanks\r\n\r\nHi @venu-nexthop, seems these following two tests failed\r\n```\r\ntests.log:[ RUN      ] PortsOrchTest.PortBulkCreateRemove\r\ntests.log-portsorch_ut.cpp:562: Failure\r\ntests.log-Value of: taskList.empty()\r\ntests.log-  Actual: false\r\ntests.log-Expected: true\r\ntests.log:[  FAILED  ] PortsOrchTest.PortBulkCreateRemove (111 ms)\r\n\r\ntests.log:[ RUN      ] PortsOrchTest.PortAttributeSetOnCreation\r\ntests.log-portsorch_ut.cpp:1199: Failure\r\ntests.log-Expected equality of these values:\r\ntests.log-  0x00000000L\r\ntests.log-    Which is: 0\r\ntests.log-  sai_port_api->get_port_attribute(p.m_port_id, 1, &attr)\r\ntests.log-    Which is: -15\r\ntests.log-portsorch_ut.cpp:1200: Failure\r\ntests.log-Expected equality of these values:\r\ntests.log-  attr.value.u16\r\ntests.log-    Which is: 1\r\n--\r\ntests.log-  attr.value.u8\r\ntests.log-    Which is: '\\0'\r\ntests.log-  0xff\r\ntests.log-    Which is: 255\r\ntests.log-portsorch_ut.cpp:1213: Failure\r\ntests.log-Expected equality of these values:\r\ntests.log-  set_port_auto_neg_count\r\ntests.log-    Which is: 0\r\ntests.log-  _sai_set_port_auto_neg_count\r\ntests.log-    Which is: 1\r\ntests.log:[  FAILED  ] PortsOrchTest.PortAttributeSetOnCreation (151 ms)\r\n\r\ntests.log-[==========] 452 tests from 67 test suites ran. (25437 ms total)\r\ntests.log-[  PASSED  ] 450 tests.\r\ntests.log-[  FAILED  ] 2 tests, listed below:\r\ntests.log-[  FAILED  ] PortsOrchTest.PortBulkCreateRemove\r\ntests.log:[  FAILED  ] PortsOrchTest.PortAttributeSetOnCreation\r\n```\r\n"
+    },
+    {
+        "number": 4543,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-20T15:05:08Z",
+        "comment_author": "venu-nexthop",
+        "comment_body": "> > @yijingyan2 All the unit tests passed on my local build as well as on the merge PR checks. It would have helped if there is some log. Do you know there is any way to get the actual test log? Thanks\r\n> \r\n> Hi @venu-nexthop, seems these following two tests failed\r\n> \r\n> ```\r\n> tests.log:[ RUN      ] PortsOrchTest.PortBulkCreateRemove\r\n> tests.log-portsorch_ut.cpp:562: Failure\r\n> tests.log-Value of: taskList.empty()\r\n> tests.log-  Actual: false\r\n> tests.log-Expected: true\r\n> tests.log:[  FAILED  ] PortsOrchTest.PortBulkCreateRemove (111 ms)\r\n> \r\n> tests.log:[ RUN      ] PortsOrchTest.PortAttributeSetOnCreation\r\n> tests.log-portsorch_ut.cpp:1199: Failure\r\n> tests.log-Expected equality of these values:\r\n> tests.log-  0x00000000L\r\n> tests.log-    Which is: 0\r\n> tests.log-  sai_port_api->get_port_attribute(p.m_port_id, 1, &attr)\r\n> tests.log-    Which is: -15\r\n> tests.log-portsorch_ut.cpp:1200: Failure\r\n> tests.log-Expected equality of these values:\r\n> tests.log-  attr.value.u16\r\n> tests.log-    Which is: 1\r\n> --\r\n> tests.log-  attr.value.u8\r\n> tests.log-    Which is: '\\0'\r\n> tests.log-  0xff\r\n> tests.log-    Which is: 255\r\n> tests.log-portsorch_ut.cpp:1213: Failure\r\n> tests.log-Expected equality of these values:\r\n> tests.log-  set_port_auto_neg_count\r\n> tests.log-    Which is: 0\r\n> tests.log-  _sai_set_port_auto_neg_count\r\n> tests.log-    Which is: 1\r\n> tests.log:[  FAILED  ] PortsOrchTest.PortAttributeSetOnCreation (151 ms)\r\n> \r\n> tests.log-[==========] 452 tests from 67 test suites ran. (25437 ms total)\r\n> tests.log-[  PASSED  ] 450 tests.\r\n> tests.log-[  FAILED  ] 2 tests, listed below:\r\n> tests.log-[  FAILED  ] PortsOrchTest.PortBulkCreateRemove\r\n> tests.log:[  FAILED  ] PortsOrchTest.PortAttributeSetOnCreation\r\n> ```\r\n\r\nLooks like some flakiness. I am trying to reproduce."
+    },
+    {
+        "number": 4543,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-20T17:15:56Z",
+        "comment_author": "venu-nexthop",
+        "comment_body": "> > > @yijingyan2 All the unit tests passed on my local build as well as on the merge PR checks. It would have helped if there is some log. Do you know there is any way to get the actual test log? Thanks\r\n> > \r\n> > \r\n> > Hi @venu-nexthop, seems these following two tests failed\r\n> > ```\r\n> > tests.log:[ RUN      ] PortsOrchTest.PortBulkCreateRemove\r\n> > tests.log-portsorch_ut.cpp:562: Failure\r\n> > tests.log-Value of: taskList.empty()\r\n> > tests.log-  Actual: false\r\n> > tests.log-Expected: true\r\n> > tests.log:[  FAILED  ] PortsOrchTest.PortBulkCreateRemove (111 ms)\r\n> > \r\n> > tests.log:[ RUN      ] PortsOrchTest.PortAttributeSetOnCreation\r\n> > tests.log-portsorch_ut.cpp:1199: Failure\r\n> > tests.log-Expected equality of these values:\r\n> > tests.log-  0x00000000L\r\n> > tests.log-    Which is: 0\r\n> > tests.log-  sai_port_api->get_port_attribute(p.m_port_id, 1, &attr)\r\n> > tests.log-    Which is: -15\r\n> > tests.log-portsorch_ut.cpp:1200: Failure\r\n> > tests.log-Expected equality of these values:\r\n> > tests.log-  attr.value.u16\r\n> > tests.log-    Which is: 1\r\n> > --\r\n> > tests.log-  attr.value.u8\r\n> > tests.log-    Which is: '\\0'\r\n> > tests.log-  0xff\r\n> > tests.log-    Which is: 255\r\n> > tests.log-portsorch_ut.cpp:1213: Failure\r\n> > tests.log-Expected equality of these values:\r\n> > tests.log-  set_port_auto_neg_count\r\n> > tests.log-    Which is: 0\r\n> > tests.log-  _sai_set_port_auto_neg_count\r\n> > tests.log-    Which is: 1\r\n> > tests.log:[  FAILED  ] PortsOrchTest.PortAttributeSetOnCreation (151 ms)\r\n> > \r\n> > tests.log-[==========] 452 tests from 67 test suites ran. (25437 ms total)\r\n> > tests.log-[  PASSED  ] 450 tests.\r\n> > tests.log-[  FAILED  ] 2 tests, listed below:\r\n> > tests.log-[  FAILED  ] PortsOrchTest.PortBulkCreateRemove\r\n> > tests.log:[  FAILED  ] PortsOrchTest.PortAttributeSetOnCreation\r\n> > ```\r\n> \r\n> Looks like some flakiness. I am trying to reproduce.\r\n\r\nHi @yijingyan2 I tried without my changes and I am still able to reproduce this when tests run in certain order. So looks like it is not introduced by my changes but the issue already exists. Some of the tests are not cleaning up ports properly at the end. I have a test fix to improve on avoiding flakiness. Should I post the PR with the fix?\r\n\r\nhttps://github.com/sonic-net/sonic-swss/pull/4589"
+    },
+    {
+        "number": 4543,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-20T23:14:27Z",
+        "comment_author": "yijingyan2",
+        "comment_body": "> Hi @yijingyan2 I tried without my changes and I am still able to reproduce this when tests run in certain order. So looks like it is not introduced by my changes but the issue already exists. Some of the tests are not cleaning up ports properly at the end. I have a test fix to improve on avoiding flakiness. Should I post the PR with the fix?\r\n> \r\n> #4589\r\nHi @venu-nexthop, thanks for looking into this issue and posting the fix PR, really appreciated!\r\n"
+    },
+    {
+        "number": 4543,
+        "repo": "sonic-swss",
         "review_at": "2026-05-18T04:03:47Z",
         "review_author": "arlakshm"
     },
@@ -594,6 +704,71 @@
         "repo": "sonic-swss",
         "latestReview_at": "2026-05-02T04:10:05Z",
         "latestReview_author": "dgsudharsan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4540,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-01T21:44:21Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4540,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-01T21:44:31Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4540,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-04T16:26:49Z",
+        "comment_author": "prsunny",
+        "comment_body": "@theasianpianist , could you share the DB output in description"
+    },
+    {
+        "number": 4540,
+        "repo": "sonic-swss",
+        "review_at": "2026-05-01T21:49:09Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4540,
+        "repo": "sonic-swss",
+        "review_at": "2026-05-01T22:47:25Z",
+        "review_author": "theasianpianist"
+    },
+    {
+        "number": 4540,
+        "repo": "sonic-swss",
+        "review_at": "2026-05-08T17:53:47Z",
+        "review_author": "prabhataravind"
+    },
+    {
+        "number": 4540,
+        "repo": "sonic-swss",
+        "review_at": "2026-05-18T16:12:03Z",
+        "review_author": "theasianpianist"
+    },
+    {
+        "number": 4540,
+        "repo": "sonic-swss",
+        "review_at": "2026-05-20T21:21:39Z",
+        "review_author": "prabhataravind"
+    },
+    {
+        "number": 4540,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-05-01T21:49:09Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 4540,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-05-20T21:21:39Z",
+        "latestReview_author": "prabhataravind",
         "latestReview_state": "APPROVED"
     },
     {
