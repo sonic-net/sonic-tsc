@@ -23456,6 +23456,20 @@
     {
         "number": 23623,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-05-22T05:13:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@vishal-nokia cherry pick PR didn't pass PR checker after retry. Please help check! Thanks.<br>https://github.com/sonic-net/sonic-mgmt/pull/24712\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 23623,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-05-22T13:49:14Z",
+        "comment_author": "vishal-nokia",
+        "comment_body": "@anamehra @vmittal-msft  This PR should not be cherry-picked to 2511.\r\n\r\nIt will cause a regression since the sonic-utilities PR [#4269](https://github.com/sonic-net/sonic-utilities/pull/4269) is not in 2511.\r\nThat PR adds a `-n/--namespace` option to `config route` and makes it required on multi-asic platforms.\r\nThis change is only in master as of now.\r\nThe 2511 image does not recognise the `-n` flag for the same command.\r\n\r\n2511:\r\n``` bash\r\nadmin@ixre-egl-board1:~$ sudo config route -n asic0 -h\r\nUsage: config route [OPTIONS] COMMAND [ARGS]...\r\nTry 'config route -h' for help.\r\n\r\nError: No such option: -n\r\n```\r\n\r\nMaster:\r\n``` bash\r\nadmin@ixre-egl-board3:~$ sudo config route -h\r\nUsage: config route [OPTIONS] COMMAND [ARGS]...\r\n\r\n  route-related configuration tasks\r\n\r\nOptions:\r\n  -n, --namespace [asic0|asic1]  Namespace name  [required]\r\n  -h, -?, --help                 Show this message and exit.\r\n\r\nCommands:\r\n  add  Add route command\r\n  del  Del route command\r\n```\r\nPlease check."
+    },
+    {
+        "number": 23623,
+        "repo": "sonic-mgmt",
         "review_at": "2026-04-13T17:01:24Z",
         "review_author": "arlakshm"
     },
