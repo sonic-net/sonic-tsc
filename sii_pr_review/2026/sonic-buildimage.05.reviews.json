@@ -1,5 +1,32 @@
 [
     {
+        "number": 27513,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-05-22T03:05:14Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 27513,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-05-22T03:05:26Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 27513,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-05-22T03:07:23Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 27513,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2026-05-22T03:07:23Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
         "number": 27493,
         "repo": "sonic-buildimage",
         "comment_at": "2026-05-21T06:36:30Z",
@@ -3048,6 +3075,182 @@
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
     },
     {
+        "number": 27332,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-05-13T01:29:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 27332,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-05-13T01:29:24Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 27332,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-05-13T03:21:47Z",
+        "comment_author": "xq9mend",
+        "comment_body": "@DavidZagury @ds952811 \u2014 could you please review this? This follows the same pattern as #23457 (pmon container hardening)."
+    },
+    {
+        "number": 27332,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-05-14T20:56:35Z",
+        "comment_author": "vmittal-msft",
+        "comment_body": "@eswaran-nexthop @saravanan-nexthop please have Arpit check this."
+    },
+    {
+        "number": 27332,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-05-14T22:34:20Z",
+        "comment_author": "saravanan-nexthop",
+        "comment_body": "> @eswaran-nexthop @saravanan-nexthop please have Arpit check this.\r\n@arpit-nexthop please review \r\n"
+    },
+    {
+        "number": 27332,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-05-18T17:39:28Z",
+        "comment_author": "abdosi",
+        "comment_body": "@bmridul : please help review this. @anamehra also please check"
+    },
+    {
+        "number": 27332,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-05-18T18:24:13Z",
+        "comment_author": "bmridul",
+        "comment_body": "@gregoryboudreau @anoopkamath\r\n"
+    },
+    {
+        "number": 27332,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-05-19T01:01:50Z",
+        "comment_author": "ds952811",
+        "comment_body": "+Jiahua Wang ***@***.***> +Babu Rajaram\r\n***@***.***>\r\n\r\nHi Jiahua,\r\n\r\nExcuse me, but could you triage further? Thank you\r\n\r\nBest Wishes,\r\n\r\nDante (Kuo-Jung) Su\r\n\r\n\r\nOn Tue, May 19, 2026 at 8:22\u202fAM arpit-nexthop ***@***.***>\r\nwrote:\r\n\r\n> ***@***.**** requested changes on this pull request.\r\n>\r\n> gbsyncd should ideally follow syncd's privileges. With this change I am\r\n> noticing that the mdio access for nexthop platform is failing.\r\n>\r\n> brcm_pai_switch.c:467 mdio_read: :- MDIO_READ: Failed to open /sys/class/mdio_bus/pci-mdio-2/mdio_access for write.\r\n>\r\n> We will need permission to allow the gbsyncd to do the reads/writes on\r\n> /sys paths.\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/sonic-net/sonic-buildimage/pull/27332#pullrequestreview-4314859260>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AMLISKNGNBNE4RJY7TI5YPT43OSMXAVCNFSM6AAAAACY3SLBKSVHI2DSMVQWIX3LMV43YUDVNRWFEZLROVSXG5CSMV3GSZLXHM2DGMJUHA2TSMRWGA>\r\n> .\r\n> Triage notifications on the go with GitHub Mobile for iOS\r\n> <https://apps.apple.com/app/apple-store/id1477376905?ct=notification-email&mt=8&pt=524675>\r\n> or Android\r\n> <https://play.google.com/store/apps/details?id=com.github.android&referrer=utm_campaign%3Dnotification-email%26utm_medium%3Demail%26utm_source%3Dgithub>.\r\n>\r\n> You are receiving this because you were mentioned.Message ID:\r\n> ***@***.***>\r\n>\r\n"
+    },
+    {
+        "number": 27332,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-05-19T04:29:04Z",
+        "comment_author": "ds952811",
+        "comment_body": "Can we try to mount the specific sysfs subdirectory, e.g.\r\n\r\n$(DOCKER_GBSYNCD_AGERA2)_RUN_OPT += -v\r\n/sys/class/mdio_bus/pci-mdio-2/mdio_access:/sys/class/mdio_bus/pci-mdio-2/mdio_access\r\n\r\nand etc.\r\n\r\n\r\nOn Mon, May 18, 2026 at 6:01\u202fPM Dante Su ***@***.***> wrote:\r\n\r\n> +Jiahua Wang ***@***.***> +Babu Rajaram\r\n> ***@***.***>\r\n>\r\n> Hi Jiahua,\r\n>\r\n> Excuse me, but could you triage further? Thank you\r\n>\r\n> Best Wishes,\r\n>\r\n> Dante (Kuo-Jung) Su\r\n>\r\n>\r\n> On Tue, May 19, 2026 at 8:22\u202fAM arpit-nexthop ***@***.***>\r\n> wrote:\r\n>\r\n>> ***@***.**** requested changes on this pull request.\r\n>>\r\n>> gbsyncd should ideally follow syncd's privileges. With this change I am\r\n>> noticing that the mdio access for nexthop platform is failing.\r\n>>\r\n>> brcm_pai_switch.c:467 mdio_read: :- MDIO_READ: Failed to open /sys/class/mdio_bus/pci-mdio-2/mdio_access for write.\r\n>>\r\n>> We will need permission to allow the gbsyncd to do the reads/writes on\r\n>> /sys paths.\r\n>>\r\n>> \u2014\r\n>> Reply to this email directly, view it on GitHub\r\n>> <https://github.com/sonic-net/sonic-buildimage/pull/27332#pullrequestreview-4314859260>,\r\n>> or unsubscribe\r\n>> <https://github.com/notifications/unsubscribe-auth/AMLISKNGNBNE4RJY7TI5YPT43OSMXAVCNFSM6AAAAACY3SLBKSVHI2DSMVQWIX3LMV43YUDVNRWFEZLROVSXG5CSMV3GSZLXHM2DGMJUHA2TSMRWGA>\r\n>> .\r\n>> Triage notifications on the go with GitHub Mobile for iOS\r\n>> <https://apps.apple.com/app/apple-store/id1477376905?ct=notification-email&mt=8&pt=524675>\r\n>> or Android\r\n>> <https://play.google.com/store/apps/details?id=com.github.android&referrer=utm_campaign%3Dnotification-email%26utm_medium%3Demail%26utm_source%3Dgithub>.\r\n>>\r\n>> You are receiving this because you were mentioned.Message ID:\r\n>> ***@***.***>\r\n>>\r\n>\r\n"
+    },
+    {
+        "number": 27332,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-05-19T04:32:10Z",
+        "comment_author": "jiahua-wang",
+        "comment_body": "Can we try to mount the specific sysfs subdirectory, e.g.\r\n\r\n$(DOCKER_GBSYNCD_AGERA2)_RUN_OPT += -v\r\n/sys/class/mdio_bus/pci-mdio-2/mdio_access:/sys/class/mdio_bus/pci-mdio-2/mdio_access\r\n\r\nand etc."
+    },
+    {
+        "number": 27332,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-05-19T06:41:57Z",
+        "comment_author": "bmridul",
+        "comment_body": "> Can we try to mount the specific sysfs subdirectory, e.g.\r\n> \r\n> $(DOCKER_GBSYNCD_AGERA2)_RUN_OPT += -v /sys/class/mdio_bus/pci-mdio-2/mdio_access:/sys/class/mdio_bus/pci-mdio-2/mdio_access\r\n> \r\n> and etc.\r\n\r\nPls check https://github.com/sonic-net/sonic-buildimage/issues/25142 \r\nRemoval of the flag has some side affects. If the sysfs path were to change due to some reason (say OIR of a module), one could possibly run into some problems (as noted in the issue). \r\nAs of now, I dont think Cisco platforms have this issue for Gearbox devices but it could become an issue for future platforms if gearbox devices were on FRU-able modules."
+    },
+    {
+        "number": 27332,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-05-19T14:21:00Z",
+        "comment_author": "arpit-nexthop",
+        "comment_body": "> Can we try to mount the specific sysfs subdirectory, e.g.\r\n> \r\n> $(DOCKER_GBSYNCD_AGERA2)_RUN_OPT += -v /sys/class/mdio_bus/pci-mdio-2/mdio_access:/sys/class/mdio_bus/pci-mdio-2/mdio_access\r\n> \r\n> and etc.\r\n\r\nThe mounts should be at the generic path like \"/sys/class/mdio_bus\" as different gearboxes has different subfolder to that they use for Nexthop device.\r\nAlso consider the fact that this implementation is vendor dependent, so it is not uniform across devices. What flags are we deciding to run the syncd on? The gbsyncd should get similar flags"
+    },
+    {
+        "number": 27332,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-05-20T17:15:08Z",
+        "comment_author": "arpit-nexthop",
+        "comment_body": "> Can we try to mount the specific sysfs subdirectory, e.g.\r\n> \r\n> $(DOCKER_GBSYNCD_AGERA2)_RUN_OPT += -v /sys/class/mdio_bus/pci-mdio-2/mdio_access:/sys/class/mdio_bus/pci-mdio-2/mdio_access\r\n> \r\n> and etc.\r\n\r\nCan we add this? This will allow nexthop NH-5010 using agera2 gbsyncd to be able to do mdio read and writes.\r\n```\r\n  diff --git a/platform/components/docker-gbsyncd-agera2.mk b/platform/components/docker-gbsyncd-agera2.mk\r\n  index 9dfa71c2d7..3f2944fe4c 100644\r\n  --- a/platform/components/docker-gbsyncd-agera2.mk\r\n  +++ b/platform/components/docker-gbsyncd-agera2.mk\r\n  @@ -34,6 +34,8 @@ SONIC_INSTALL_DOCKER_DBG_IMAGES += $(DOCKER_GBSYNCD_AGERA2_DBG)\r\n\r\n \u00a0 $(DOCKER_GBSYNCD_AGERA2)_CONTAINER_NAME = gbsyncd\r\n \u00a0 $(DOCKER_GBSYNCD_AGERA2)_RUN_OPT += --cap-add=SYS_RAWIO --cap-add=SYS_ADMIN --cap-add=NET_ADMIN -t --security-opt apparmor=unconfined --security-opt=\"systempaths=unconfined\"\r\n  +$(DOCKER_GBSYNCD_AGERA2)_RUN_OPT += -v /sys/class/mdio_bus:/sys/class/mdio_bus\r\n  +$(DOCKER_GBSYNCD_AGERA2)_RUN_OPT += -v /sys/devices:/sys/devices\r\n \u00a0 $(DOCKER_GBSYNCD_AGERA2)_RUN_OPT += -v /host/machine.conf:/etc/machine.conf\r\n \u00a0 $(DOCKER_GBSYNCD_AGERA2)_RUN_OPT += -v /etc/sonic:/etc/sonic:ro\r\n \u00a0 $(DOCKER_GBSYNCD_AGERA2)_RUN_OPT += -v /host/warmboot:/var/warmboot\r\n```"
+    },
+    {
+        "number": 27332,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-05-20T17:44:00Z",
+        "comment_author": "abdosi",
+        "comment_body": "@arista-hpandya to also review\r\n\r\n@qiluo-msft : Nexthop have some comment on changes. They need below for their platforms. Can you help check on this\r\n\r\n +$(DOCKER_GBSYNCD_AGERA2)_RUN_OPT += -v /sys/class/mdio_bus:/sys/class/mdio_bus\r\n  +$(DOCKER_GBSYNCD_AGERA2)_RUN_OPT += -v /sys/devices:/sys/devices"
+    },
+    {
+        "number": 27332,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-05-20T18:19:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 27332,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-05-20T18:19:52Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 27332,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-05-18T17:41:48Z",
+        "review_author": "abdosi"
+    },
+    {
+        "number": 27332,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-05-18T18:01:38Z",
+        "review_author": "maipbui"
+    },
+    {
+        "number": 27332,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-05-19T00:22:13Z",
+        "review_author": "arpit-nexthop"
+    },
+    {
+        "number": 27332,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-05-20T18:20:28Z",
+        "review_author": "arpit-nexthop"
+    },
+    {
+        "number": 27332,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-05-22T20:23:13Z",
+        "review_author": "abdosi"
+    },
+    {
+        "number": 27332,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-05-22T20:57:17Z",
+        "review_author": "arista-hpandya"
+    },
+    {
+        "number": 27332,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2026-05-22T20:23:13Z",
+        "latestReview_author": "abdosi",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 27332,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2026-05-22T20:57:17Z",
+        "latestReview_author": "arista-hpandya",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 27332,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2026-05-20T18:20:28Z",
+        "latestReview_author": "arpit-nexthop",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 27332,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2026-05-18T18:01:38Z",
+        "latestReview_author": "maipbui",
+        "latestReview_state": "DISMISSED"
+    },
+    {
         "number": 27331,
         "repo": "sonic-buildimage",
         "comment_at": "2026-05-13T01:22:32Z",
@@ -3606,6 +3809,90 @@
         "repo": "sonic-buildimage",
         "latestReview_at": "2026-05-11T15:26:17Z",
         "latestReview_author": "Pavan-Nokia",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 27303,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-05-11T08:38:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 27303,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-05-11T08:38:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 27303,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-05-19T04:53:19Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 27303,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-05-19T04:53:31Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 27303,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-05-11T08:42:24Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 27303,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-05-12T05:22:13Z",
+        "review_author": "Blueve"
+    },
+    {
+        "number": 27303,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-05-12T05:22:53Z",
+        "review_author": "Blueve"
+    },
+    {
+        "number": 27303,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-05-12T05:24:37Z",
+        "review_author": "Blueve"
+    },
+    {
+        "number": 27303,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-05-12T07:28:11Z",
+        "review_author": "Gfrom2016"
+    },
+    {
+        "number": 27303,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-05-12T07:28:31Z",
+        "review_author": "Gfrom2016"
+    },
+    {
+        "number": 27303,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-05-19T01:33:57Z",
+        "review_author": "Blueve"
+    },
+    {
+        "number": 27303,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2026-05-11T08:42:24Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 27303,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2026-05-19T01:33:57Z",
+        "latestReview_author": "Blueve",
         "latestReview_state": "APPROVED"
     },
     {
@@ -20823,6 +21110,20 @@
         "comment_at": "2026-05-17T15:15:53Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 26584,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-05-22T02:17:43Z",
+        "comment_author": "yutongzhang-microsoft",
+        "comment_body": "Hi, @bhouse-nexthop , this PR will cause the issue https://dev.azure.com/mssonic/build/_build/results?buildId=1119863&view=logs&j=5562265b-363f-5c64-5cff-7b508c285721&t=2a766db5-c3a4-56e8-abe6-434d5e07f32d, which block the CI, can you please check?"
+    },
+    {
+        "number": 26584,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-05-22T11:05:19Z",
+        "comment_author": "bradh352",
+        "comment_body": "> Hi, @bhouse-nexthop , this PR will cause the issue https://dev.azure.com/mssonic/build/_build/results?buildId=1119863&view=logs&j=5562265b-363f-5c64-5cff-7b508c285721&t=2a766db5-c3a4-56e8-abe6-434d5e07f32d, which block the CI, can you please check?\r\n\r\nThis PR is the proper fix:\r\nhttps://github.com/sonic-net/sonic-swss-common/pull/973"
     },
     {
         "number": 26584,
