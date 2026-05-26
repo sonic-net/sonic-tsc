@@ -1,5 +1,91 @@
 [
     {
+        "number": 235,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-05-19T13:23:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 235,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-05-19T13:23:43Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 235,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-05-20T04:10:03Z",
+        "comment_author": "yejianquan",
+        "comment_body": "Hi @yue-fred-gao  @lolyu , could you please help to review the HLD and related PRs?"
+    },
+    {
+        "number": 235,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-05-22T10:58:57Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 235,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-05-22T10:59:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 235,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-05-22T11:06:59Z",
+        "comment_author": "yejianquan",
+        "comment_body": "> ### \ud83d\udcca Overview\r\n> **Files Changed**: 1 (`docs/HLD/vpp-inner-aware-flow-hash.md`) **Lines**: +860\r\n> \r\n> HLD-only PR documenting the inner-aware flow hash feature for SONiC-VPP. The document is well-structured, technically precise, and covers the design space thoroughly.\r\n> \r\n> ### \u2705 Strengths\r\n> * **Two-surface architecture** (IP-layer opt-in + LAG always-on with fallback) is clearly motivated and diagrammed \u2014 the ASCII packet-flow diagrams in \u00a74.2 make the separation immediately obvious.\r\n> * **\u00a74.4 LAG rationale is solid.** The ABI/CRC compatibility argument against introducing a new `BOND_API_LB_ALGO` enumerator is correct and well-explained. Adding a new enum value would require regenerating libsaivs against the patched VPP headers and bumping the sonic-buildimage submodule _before_ any deployment \u2014 the `always-on with safe fallback` approach avoids all of that while being a strict generalisation of the prior behaviour (non-tunnel packets are unaffected). I read the concern raised in the inline thread, and the HLD's \u00a74.4 counter-argument holds: the \"new algo\" path would impose an ABI and deployment dependency that the always-on-with-fallback path cleanly avoids.\r\n> * **\u00a74.5 What Is Not Hashed** is a good addition \u2014 VxLAN, Geneve, fragmented outers, ESP, and NVGRE VLAN-tagged inner are all documented.\r\n> * **End-to-end test results** (16/16 pass on vlab-vpp-01) and **\u00a75.2 DUT verification commands** are exactly what a hardware operator needs to validate the deployment.\r\n> * **Appendix B** (VPP Flow-Hash + Hash Function API Reference) is a nice addition that will outlive this PR as a reference.\r\n> \r\n> ### \ud83d\udcdd Review Findings\r\n> #### \ud83d\udcdd Minor Issues\r\n> **SRv6 missing from \u00a72 Scope exclusions and \u00a74.5 What Is Not Hashed** (also flagged inline by yue-fred-gao on line 33)\r\n> \r\n> SRv6 uses the IPv6 Routing Extension Header (Next Header = 43, SRH Type 4). The current implementation's outer-IPv6 extension-header walker in `ip6_compute_flow_hash` only handles HBH (0) and Fragment (44) headers \u2014 it does not walk past an SRH. As a result:\r\n> \r\n> * An SRv6-encapsulated packet will fall through to the outer-only hash (protocol 43 is neither IP-in-IP nor GRE), which is safe but means the inner flow entropy is not used.\r\n> * This is the correct safe-fallback behaviour, but a reader might wonder whether SRv6 inner peek is intentionally excluded or simply an oversight.\r\n> \r\n> Recommended fix: add SRv6 as an explicit entry in \u00a72 and \u00a74.5:\r\n> \r\n> | SRv6 (IPv6 RH type 4) | The outer Routing Extension Header (NH=43) is not walked by the current implementation. SRv6 inner peek is out of scope for this revision; falls back to outer-only hash. |\r\n> \r\n> This also directly answers the open question raised inline.\r\n> \r\n> ### \ud83d\udca1 Suggestions\r\n> * \u00a79 Known Issues already tracks the compile-time guard on `flow_hash_config_t` bit overflow \u2014 consider adding SRv6 inner peek as a follow-up item there too, so it doesn't get lost.\r\n> \r\n> ### Status\r\n> \u26a0\ufe0f Approved with minor suggestions \u2014 the SRv6 exclusion should be documented before merge, but no blocking issues.\r\n\r\nupdated, excluded SRv6 explicitly."
+    },
+    {
+        "number": 235,
+        "repo": "sonic-platform-vpp",
+        "review_at": "2026-05-20T18:55:31Z",
+        "review_author": "yue-fred-gao"
+    },
+    {
+        "number": 235,
+        "repo": "sonic-platform-vpp",
+        "review_at": "2026-05-21T02:35:13Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 235,
+        "repo": "sonic-platform-vpp",
+        "review_at": "2026-05-22T11:06:18Z",
+        "review_author": "yejianquan"
+    },
+    {
+        "number": 235,
+        "repo": "sonic-platform-vpp",
+        "review_at": "2026-05-22T11:06:31Z",
+        "review_author": "yejianquan"
+    },
+    {
+        "number": 235,
+        "repo": "sonic-platform-vpp",
+        "review_at": "2026-05-25T14:29:47Z",
+        "review_author": "yue-fred-gao"
+    },
+    {
+        "number": 235,
+        "repo": "sonic-platform-vpp",
+        "latestReview_at": "2026-05-21T02:35:13Z",
+        "latestReview_author": "lolyu",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 235,
+        "repo": "sonic-platform-vpp",
+        "latestReview_at": "2026-05-25T14:29:47Z",
+        "latestReview_author": "yue-fred-gao",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 231,
         "repo": "sonic-platform-vpp",
         "comment_at": "2026-05-12T20:54:11Z",
