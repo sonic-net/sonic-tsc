@@ -1,5 +1,150 @@
 [
     {
+        "number": 1191,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-05-19T23:03:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1191,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-05-19T23:03:39Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1191,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-05-25T16:24:17Z",
+        "comment_author": "lguohan",
+        "comment_body": "@senthil-nexthop , can you check the comments, and also why pr is failing?"
+    },
+    {
+        "number": 1191,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-05-25T17:24:38Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1191,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-05-25T17:24:50Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1191,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-05-25T19:15:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1191,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-05-25T19:16:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1191,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-05-25T19:34:44Z",
+        "comment_author": "senthil-nexthop",
+        "comment_body": "> ### \ud83d\udd34 High Priority Issues\r\n> **1. LRU reordering changes drain semantics**\r\n> \r\n> * Adding a stronger warning in the `NotificationQueuePolicy::LruDedup` enum doc that **ordering is not preserved**\r\n>\r\nAdded a comment in the LruDedup policy explaining the drain semantics.\r\n\r\n> * Consider whether a simpler \"deduplicate but preserve original arrival order\" policy (keep first seen position, drop subsequent duplicates) would be safer as the default dedup strategy\r\n>\r\nDeduplication while preserving original order will lead to incorrect state for FDB events. For example, let's say the events received are: (A) LEARN(mac1, port1), (B) LEARN(mac1, port2) and (C) LEARN(mac1, port1). \r\nLruDedup drain order: B, C. (A and C are collapsed and moved to end).\r\nFinal State: mac1 on port1, matches ASIC\r\nFirstSeenDedup drain order: A, B (A and C are collapsed, order preserved).\r\nFinal State: mac1 on port2, does NOT match ASIC.\r\n\r\n> **2. `m_idx` uses full message string as key \u2014 O(n) hash on large payloads**\r\n>  \r\n> * Documenting that this policy is most effective when dedup hit rate is high\r\n>\r\nThe amortized cost is lower when dedup hit rate is high, which is observed to be 90%+ in the tests. Added a comment to reflect that.\r\n\r\n> **3. `push()` is defined inline in the header**\r\n> \r\n> Move to the `.cpp` file alongside `maybeLogStats()` for consistency and to reduce header bloat.\r\n> \r\nGood catch, done.\r\n\r\n> ### \ud83d\udfe1 Medium Priority Issues\r\n> **4. `subscribeWithRetry()` infinite loop with no backoff**\r\n> \r\nOutside the scope of this PR, we should take this up as a separate issue and add optimizations.\r\n\r\n> * Checking only every N-th message (e.g., `if (m_received % 1024 == 0)`)\r\n>\r\nDone, added a N-th message check to minimize cost of reading clock.\r\n\r\n> **6. No maximum queue depth enforcement**\r\n> \r\n> LruDedup bounds depth to `count(distinct payloads)` which is better than unbounded FIFO, but under a MAC storm with 100k distinct MACs (different source MACs flapping), the queue still grows to 100k entries. Consider an optional `max_depth` parameter that drops oldest entries when exceeded (true LRU eviction), or at minimum document this limitation.\r\n>\r\nAdded a comment to document this.\r\n \r\n> **7. Thread safety documentation**\r\n> \r\nDone, updated the comment.\r\n> \r\n> ### \ud83d\udfe2 Minor / Style\r\n>\r\nUpdated the comments to address the style issue. Promoted peekOp() to make a testable function.\r\n \r\n> \r\n> ### Questions\r\n> * Has the LRU reordering (issue #1) been validated as safe for _all_ currently-opted-in consumers? For FDB it's fine, but port_state_change notifications where UP\u2192DOWN\u2192UP could collapse DOWN+UP into just UP (if the payloads are byte-identical, which they wouldn't be since state differs) \u2014 actually this is safe since different states = different byte strings. Worth a comment though.\r\n>\r\nBoth FDB and link state events are idempotent and safe.\r\n\r\n> * What's the measured overhead of `steady_clock::now()` per message on the target platform? On x86 with vDSO it's ~20ns, but on some ARM platforms it can be 200ns+.\r\n>\r\nAdded a N-th message gate to minimize cost.\r\n\r\n> * Is there a plan to expose `max_depth` as a configurable parameter, or is \"bounded by distinct payloads\" considered sufficient?\r\n> \r\nThis is strictly not necessary for FDB and ports event, but it's a good optimization to add for future event types.\r\n\r\n> ### Test Coverage\r\n> * No test for `peekOp()` edge cases (empty string, malformed JSON, missing closing quote)\r\n> * No test for `setOpAllowList` filtering behavior (would need a mock Redis or the full `NotificationConsumer` wired up)\r\n>\r\nAdded these tests.\r\n\r\n> **Verdict:** Well-designed foundational change with good ABI compatibility story and clean abstraction. The LRU reordering semantics (issue #1) should be more prominently documented, and the inline `push()` definition (issue #3) should move to the .cpp. The `steady_clock::now()` per-message overhead (issue #5) is worth measuring under load. Overall good to merge with minor fixes \u2014 this unblocks the companion sairedis and swss PRs.\r\n\r\n"
+    },
+    {
+        "number": 1191,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-05-25T19:47:54Z",
+        "comment_author": "senthil-nexthop",
+        "comment_body": "> @senthil-nexthop , can you check the comments, and also why pr is failing?\r\n\r\n@lguohan I've addressed the comments, added new tests and updated the PR. The DCO PR failure is fixed, but the pr is failing because of an upstream issue that is affecting all PRs."
+    },
+    {
+        "number": 1191,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-05-28T04:07:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1191,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-05-28T04:08:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1191,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-05-28T07:57:20Z",
+        "comment_author": "lguohan",
+        "comment_body": "@senthil-nexthop , can you check a little bit about the coverage?"
+    },
+    {
+        "number": 1191,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-05-28T16:37:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1191,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-05-28T16:38:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1191,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-05-28T17:08:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1191,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-05-28T17:09:01Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1191,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-05-28T20:25:44Z",
+        "comment_author": "senthil-nexthop",
+        "comment_body": "> @senthil-nexthop , can you check a little bit about the coverage?\r\n\r\n@lguohan , added more test cases to increase coverage and all the checks have passed. The other PRs in sonic-swss and sonic-sairedis are failing because they have a dependency on symbols introduced by this PR. Once you approve and merge this, I can monitor the other 2 PRs and make sure the checks pass."
+    },
+    {
+        "number": 1191,
+        "repo": "sonic-swss-common",
+        "review_at": "2026-05-25T05:58:10Z",
+        "review_author": "securely1g"
+    },
+    {
+        "number": 1191,
+        "repo": "sonic-swss-common",
+        "review_at": "2026-05-29T09:08:56Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 1191,
+        "repo": "sonic-swss-common",
+        "latestReview_at": "2026-05-25T05:58:10Z",
+        "latestReview_author": "securely1g",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 1191,
+        "repo": "sonic-swss-common",
+        "latestReview_at": "2026-05-29T09:08:56Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 1190,
         "repo": "sonic-swss-common",
         "comment_at": "2026-05-19T02:26:39Z",
@@ -65,6 +210,101 @@
         "repo": "sonic-swss-common",
         "latestReview_at": "2026-05-15T18:55:00Z",
         "latestReview_author": "prsunny",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1188,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-05-14T16:14:14Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1188,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-05-14T16:14:29Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1188,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-05-19T23:32:06Z",
+        "comment_author": "prabhataravind",
+        "comment_body": "@hdwhdw could you check PR checker failures?"
+    },
+    {
+        "number": 1188,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-05-20T14:55:56Z",
+        "comment_author": "hdwhdw",
+        "comment_body": "/azpw run Azure.sonic-swss-common\n\nRe-running to confirm the `Build amd64` failure on a Rust ZMQ reconnect test (`zmq_consumer_producer_state_tables_sync_api_connect_late_reconnect`, sync.rs:223 expected `Data`, got `Timeout` within 2 s) is a flake unrelated to this PR. This PR only touches `pyext/swsscommon.i` \u2014 the Rust crates wrap the C++ API directly and don't go through SWIG, so the changed surface cannot affect this test. The `Build amd64/ubuntu-22.04` job passed."
+    },
+    {
+        "number": 1188,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-05-20T14:56:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 1188,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-05-20T14:56:03Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1113708:\n\n\n\u2705Stage **Build**:\n- Job amd64: retried."
+    },
+    {
+        "number": 1188,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-05-21T14:40:31Z",
+        "comment_author": "hdwhdw",
+        "comment_body": "Re-run results: the previous `Build amd64` Rust late-reconnect flake cleared (now PASS), but `Test vstest` fails on `test_inband_intf_mgmt_vrf.py::TestInbandInterface::test_InbandIntf[PortChannel5]` and `[Loopback1]` (line 128: `assert status == True` after `INTF_TABLE` lookup) \u2014 `Ethernet4` and `Vlan100` parametrisations pass.\n\nThis is independent of this PR. The change is a pure SWIG `%inline` addition in `pyext/swsscommon.i` \u2014 no existing C++, Python, or Go symbol is modified; only three new exports (`zmqProducerBatchedSet/Del/Send`) are added. The `test_InbandIntf` test uses `swsscommon.Table('INTF_TABLE')` and doesn't touch `ZmqProducerStateTable` at all. The flaky plugin retried 3 times and produced the same two failures, so it's likely an underlying intfmgr/portsorch timing issue that surfaces for these two interface kinds on the Azure DVS runner.\n\nCross-check: unrelated PR #1191 (`LruDedup queue policy for Notification Consumer`) also has a failing vstest run with different symptoms (`docker.errors.APIError: 500 Server Error` in fixture setup), and the same vstest job passes on most recent merged PRs (#1170, #1177). The vstest pipeline is unstable on the Azure runners this week.\n\n/azpw run Azure.sonic-swss-common"
+    },
+    {
+        "number": 1188,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-05-29T01:05:38Z",
+        "comment_author": "prabhataravind",
+        "comment_body": "@prsunny for viz as this is needed for 202605."
+    },
+    {
+        "number": 1188,
+        "repo": "sonic-swss-common",
+        "review_at": "2026-05-14T16:18:00Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 1188,
+        "repo": "sonic-swss-common",
+        "review_at": "2026-05-28T22:50:42Z",
+        "review_author": "prabhataravind"
+    },
+    {
+        "number": 1188,
+        "repo": "sonic-swss-common",
+        "review_at": "2026-05-29T01:09:19Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1188,
+        "repo": "sonic-swss-common",
+        "latestReview_at": "2026-05-14T16:18:00Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 1188,
+        "repo": "sonic-swss-common",
+        "latestReview_at": "2026-05-29T01:09:19Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1188,
+        "repo": "sonic-swss-common",
+        "latestReview_at": "2026-05-28T22:50:42Z",
+        "latestReview_author": "prabhataravind",
         "latestReview_state": "APPROVED"
     },
     {

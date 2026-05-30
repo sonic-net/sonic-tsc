@@ -1,5 +1,366 @@
 [
     {
+        "number": 1916,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-28T21:54:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1916,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-28T21:54:42Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1916,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-28T22:16:08Z",
+        "comment_author": "prsunny",
+        "comment_body": "@saiarcot895 , please help merge"
+    },
+    {
+        "number": 1916,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-28T22:35:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1916,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-28T22:36:04Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1916,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-05-28T22:15:52Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 1916,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-05-28T22:33:31Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 1916,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-05-29T00:39:19Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 1916,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-05-29T01:17:51Z",
+        "review_author": "liushilongbuaa"
+    },
+    {
+        "number": 1916,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-05-29T02:36:56Z",
+        "review_author": "GaladrielZhao"
+    },
+    {
+        "number": 1916,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-05-29T01:17:51Z",
+        "latestReview_author": "liushilongbuaa",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1916,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-05-29T00:39:19Z",
+        "latestReview_author": "lolyu",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1916,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-05-29T02:36:56Z",
+        "latestReview_author": "GaladrielZhao",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1916,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-05-28T22:33:31Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "DISMISSED"
+    },
+    {
+        "number": 1916,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-05-28T22:15:52Z",
+        "latestReview_author": "prsunny",
+        "latestReview_state": "DISMISSED"
+    },
+    {
+        "number": 1899,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-19T23:08:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1899,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-19T23:08:24Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1899,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-25T20:12:11Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1899,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-25T20:12:23Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1899,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-25T20:16:39Z",
+        "comment_author": "senthil-nexthop",
+        "comment_body": "> ### \ud83d\udfe1 Medium Priority Issues\r\n> **1. No `setOpAllowList` set on this consumer**\r\n>\r\nThe RedisChannel consumer should see ALL notification, so an op allow list is not needed. \r\n\r\n> **2. No registration with `gNotifConsumerStatsOrch`**\r\n> \r\n> The companion swss PR registers each consumer with the stats orch for COUNTERS_DB publication. This consumer lives in libsairedis (a library), not in orchagent, so it can't directly reference `gNotifConsumerStatsOrch`. The `setStatsLabel` is set but nobody publishes its stats to COUNTERS_DB. Is the intent to only emit syslog-level stats, or is there a plan for libsairedis to self-publish? Worth noting in the PR description.\r\n>\r\nThe syslog notification would still provide the dedup stats under storm.\r\n \r\n> **3. Two commits \u2014 should squash**\r\n> \r\nDone.\r\n\r\n> ### Questions\r\n> * Under storm conditions with LruDedup active, what's the observed peak queue depth now? (The PR description mentions 1.5 GB at peak with FIFO \u2014 what does it drop to with dedup?)\r\n>\r\nUnder FDB storm, the peek queue depth was 4000 (for 1000 MACs moving between 2 ports, at 50K/second).\r\n\r\n> * Is there concern about the notification thread's `pop()` latency increasing due to the LRU index maintenance, or is the dedup lookup O(1) amortized?\r\n>\r\nThe cost is amortized.\r\n\r\n> * The `REDIS_TABLE_NOTIFICATIONS_PER_DB(dbAsic)` macro \u2014 does this resolve to different channel names per DB instance, or is it always `\"NOTIFICATIONS\"`? If always the same, this consumer and orchagent's consumers are all on the same channel (redundant fan-out).\r\n> \r\nIt resolves to NOTIFICATIONS channel, same as all the other orchs.\r\n"
+    },
+    {
+        "number": 1899,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-28T16:39:19Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1899,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-28T16:39:31Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1899,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-28T18:53:29Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1899,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-28T18:53:41Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1899,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-29T03:57:29Z",
+        "comment_author": "lolyu",
+        "comment_body": "\r\n/azp run\r\n\r\n"
+    },
+    {
+        "number": 1899,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-29T03:57:40Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1899,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-29T04:14:07Z",
+        "comment_author": "senthil-nexthop",
+        "comment_body": "> Azure Pipelines successfully started running 1 pipeline(s).\r\n\r\n@lolyu Just FYI, this PR has a dependency on https://github.com/sonic-net/sonic-swss-common/pull/1191, which adds a symbol needed by this PR. So the build will fail until swss-common merges."
+    },
+    {
+        "number": 1899,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-29T09:39:21Z",
+        "comment_author": "lguohan",
+        "comment_body": "/azp run\r\n"
+    },
+    {
+        "number": 1899,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-29T09:39:34Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1899,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-29T16:23:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1899,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-29T16:23:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1899,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-05-25T05:56:54Z",
+        "review_author": "securely1g"
+    },
+    {
+        "number": 1899,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-05-29T18:45:47Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 1899,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-05-25T05:56:54Z",
+        "latestReview_author": "securely1g",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 1899,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-05-29T18:45:47Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1893,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-18T21:29:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1893,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-18T21:29:36Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1893,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-19T20:27:24Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1893,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-19T20:27:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1893,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-20T01:20:16Z",
+        "comment_author": "vivekrnv",
+        "comment_body": "/azpw retry Azure.sonic-sairedis"
+    },
+    {
+        "number": 1893,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-20T01:22:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 1893,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-20T01:25:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1117882:\n\n\n\u2705Stage **BuildTrixie**:\n- Job amd64: retried.\n\n\n\u2705Stage **Test**:\n- Job vstest: retried.\n- Job vstest: retried.\n\n\n\u2705Stage **TestAsan**:\n- Job vstest: retried."
+    },
+    {
+        "number": 1893,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-21T00:11:10Z",
+        "comment_author": "vivekrnv",
+        "comment_body": "/azpw retry Azure.sonic-sairedis"
+    },
+    {
+        "number": 1893,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-21T00:11:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 1893,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-21T00:11:16Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1117882:\n\n\n\u2705Stage **TestAsan**:\n- Job vstest: retried.\n\n\n\u2705Stage **Test**:\n- Job vstest: retried.\n- Job vstest: retried."
+    },
+    {
+        "number": 1893,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-21T23:17:13Z",
+        "comment_author": "vivekrnv",
+        "comment_body": "@zjswhhh, @prsunny Would you help sign-off?"
+    },
+    {
+        "number": 1893,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-28T17:31:39Z",
+        "comment_author": "prsunny",
+        "comment_body": "@lolyu can you help merge? @prabhataravind for viz"
+    },
+    {
+        "number": 1893,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-05-19T18:58:23Z",
+        "review_author": "dgsudharsan"
+    },
+    {
+        "number": 1893,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-05-28T17:31:17Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 1893,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-05-28T17:53:02Z",
+        "review_author": "BYGX-wcr"
+    },
+    {
+        "number": 1893,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-05-19T18:58:23Z",
+        "latestReview_author": "dgsudharsan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1893,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-05-28T17:31:17Z",
+        "latestReview_author": "prsunny",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1893,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-05-28T17:53:02Z",
+        "latestReview_author": "BYGX-wcr",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 1887,
         "repo": "sonic-sairedis",
         "comment_at": "2026-05-10T13:09:28Z",
@@ -215,6 +576,128 @@
         "repo": "sonic-sairedis",
         "latestReview_at": "2026-04-28T21:43:11Z",
         "latestReview_author": "dypet",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1873,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-04-28T03:39:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1873,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-04-28T03:39:17Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1873,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-04-28T05:21:24Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1873,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-04-28T05:21:36Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1873,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-04-28T10:31:16Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1873,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-04-28T10:31:28Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1873,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-04-29T04:01:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1873,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-04-29T04:01:56Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1873,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-21T18:33:18Z",
+        "comment_author": "radha-danda",
+        "comment_body": "@purush-nexthop, can you please review the PR?"
+    },
+    {
+        "number": 1873,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-25T05:46:02Z",
+        "comment_author": "radha-danda",
+        "comment_body": "@purush-nexthop, your comment has been addressed. Please confirm if you have any additional feedback"
+    },
+    {
+        "number": 1873,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-27T15:59:49Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "@lolyu could you merge this?"
+    },
+    {
+        "number": 1873,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-29T02:11:02Z",
+        "comment_author": "radha-danda",
+        "comment_body": "@lolyu, can you please merge the PR?"
+    },
+    {
+        "number": 1873,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-05-11T03:31:37Z",
+        "review_author": "purush-nexthop"
+    },
+    {
+        "number": 1873,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-05-11T03:42:01Z",
+        "review_author": "rminnikanti"
+    },
+    {
+        "number": 1873,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-05-22T09:01:54Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 1873,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-05-27T06:05:41Z",
+        "review_author": "purush-nexthop"
+    },
+    {
+        "number": 1873,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-05-22T09:01:54Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1873,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-05-27T06:05:41Z",
+        "latestReview_author": "purush-nexthop",
         "latestReview_state": "APPROVED"
     },
     {
@@ -8113,6 +8596,13 @@
         "comment_at": "2026-05-15T19:23:27Z",
         "comment_author": "deepak-singhal0408",
         "comment_body": "> > @Bojun-Feng @deepak-singhal0408 can we cast this change to 202511? We're seeing the timeout errors on QuartzDD which is voq.\r\n> \r\n> I believe there's a process starting with adding the `Request for 202511 branch` tag. I do not have permission to tag this PR though. Maybe @deepak-singhal0408 can add the tag?\r\n> \r\n> Happy to manually open a back port PR if that's needed.\r\n\r\nadded the request label for 202511..\r\nHi @vmittal-msft, can we take this change in 202511? "
+    },
+    {
+        "number": 1751,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-05-29T16:59:51Z",
+        "comment_author": "deepak-singhal0408",
+        "comment_body": "> > > @Bojun-Feng @deepak-singhal0408 can we cast this change to 202511? We're seeing the timeout errors on QuartzDD which is voq.\r\n> > \r\n> > \r\n> > I believe there's a process starting with adding the `Request for 202511 branch` tag. I do not have permission to tag this PR though. Maybe @deepak-singhal0408 can add the tag?\r\n> > Happy to manually open a back port PR if that's needed.\r\n> \r\n> added the request label for 202511.. Hi @vmittal-msft, can we take this change in 202511?\r\n\r\nHi @vmittal-msft, @StormLiangMS  please let me know your decision on this.\r\nGiven that 202511 branch would be used for chassis as well, I recommend we take this change.\r\n\r\nif there are any concerns, let me know.\r\n\r\ncc: @rlhui as well.\r\n"
     },
     {
         "number": 1751,
