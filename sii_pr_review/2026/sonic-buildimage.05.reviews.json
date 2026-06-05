@@ -1781,6 +1781,13 @@
     {
         "number": 27516,
         "repo": "sonic-buildimage",
+        "comment_at": "2026-06-04T11:13:38Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request for branch(es): 202511.<br>Added label(s) for branch(es) 202511.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 27516,
+        "repo": "sonic-buildimage",
         "review_at": "2026-05-22T09:23:16Z",
         "review_author": "keboliu"
     },
@@ -7603,6 +7610,20 @@
         "comment_at": "2026-05-15T00:15:39Z",
         "comment_author": "yxieca",
         "comment_body": "> @saiarcot895 @yxieca-admin Who can test this change? Can we add UT?\r\n\r\n@dgsudharsan can you check the PR comments, is your concern addressed there?"
+    },
+    {
+        "number": 27368,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-06-04T20:42:24Z",
+        "comment_author": "DannyIsa",
+        "comment_body": "Hi\r\nAfter your change we started seeing hsflowd crash with a stack overflow (SIGSEGV) on switches with many ports (this one has 514). On a 32-port box it's fine, which is why it passed in testing. I followed the call chain starting from your function and here's what happens:\r\n\r\n1. mapPorts() now loops over all ports at once and, for each one, calls db_getIfIndexMap(), so on this box that's 514 Redis queries fired back-to-back with no pause.\r\n\r\n2. Each db_getIfIndexMap() calls redisAsyncCommand(). This adds the query to hiredis's outgoing buffer and then calls our write hook db_addWriteCB().\r\n\r\n3. db_addWriteCB() tries to send the data right away.\r\n\r\n4. With 514 queries piling up, the socket's send buffer fills up. send() then returns EWOULDBLOCK (\"buffer full, try later\"), so nothing gets sent and hiredis sees the buffer is still not empty.\r\n\r\n5. Because the buffer isn't empty, hiredis calls our db_addWriteCB() again, which tries to send again, buffer is still full, so it calls db_addWriteCB() again. And so on. This becomes infinite recursion.\r\n\r\n6. It can never escape, because the buffer only empties if we return to the event loop so Redis can read the socket, but db_addWriteCB() keeps retrying in place and never returns. Each retry adds to the call stack until the stack runs out and the process crashes with SIGSEGV.\r\n\r\nThe real problem is that db_addWriteCB does the socket write synchronously (it calls redisAsyncHandleWrite() directly). That's what lets a full send buffer turn into infinite recursion."
+    },
+    {
+        "number": 27368,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-06-04T20:44:18Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "@yxieca  Please check the last comment. We re now noticing a crash."
     },
     {
         "number": 27368,
