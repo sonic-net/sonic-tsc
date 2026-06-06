@@ -44,6 +44,13 @@
     {
         "number": 1926,
         "repo": "sonic-sairedis",
+        "comment_at": "2026-06-05T15:48:35Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-sairedis/pull/1932"
+    },
+    {
+        "number": 1926,
+        "repo": "sonic-sairedis",
         "review_at": "2026-06-03T22:19:38Z",
         "review_author": "theasianpianist"
     },
@@ -52,6 +59,109 @@
         "repo": "sonic-sairedis",
         "latestReview_at": "2026-06-03T22:19:38Z",
         "latestReview_author": "theasianpianist",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1922,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-02T17:24:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1922,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-02T17:24:18Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1922,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-02T18:36:10Z",
+        "comment_author": "deepak-singhal0408",
+        "comment_body": "**Merge order**: This PR can merge independently. Once merged, sonic-buildimage PR #27674 will bump the sairedis submodule.\n\nCompanion PRs:\n- sonic-swss: https://github.com/sonic-net/sonic-swss/pull/4630\n- sonic-buildimage: https://github.com/sonic-net/sonic-buildimage/pull/27674\n- sonic-net/SONiC (doc): https://github.com/sonic-net/SONiC/pull/2359"
+    },
+    {
+        "number": 1922,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-02T21:55:16Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1922,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-02T21:55:30Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1922,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-02T23:59:03Z",
+        "comment_author": "deepak-singhal0408",
+        "comment_body": "## CI Failure Analysis \u2014 Build [1129081](https://dev.azure.com/mssonic/be1b070f-be15-4154-aade-b1d3bfb17054/_build/results?buildId=1129081)\r\n\r\n**Not PR-induced. Caused by [sonic-net/sonic-platform-vpp#225](https://github.com/sonic-net/sonic-platform-vpp/pull/225) (Trixie migration).**\r\n\r\n### Root Cause\r\n\r\n[sonic-platform-vpp#225](https://github.com/sonic-net/sonic-platform-vpp/pull/225) (\"sonic-platform-vpp trixie migration\", merged 2026-06-02 20:36 UTC) updated the VPP build from Bookworm to Trixie. The sairedis CI pipeline uses `runVersion: 'latestFromBranch'` to pull VPP artifacts, so it now downloads Trixie-compiled packages. The CI agent still runs Bookworm (glibc 2.36), causing:\r\n\r\n```\r\nlibvppinfra depends on libc6 (>= 2.38); however:\r\n  Version of libc6:amd64 on system is 2.36-9+deb12u14.\r\n```\r\n\r\n### Timeline\r\n\r\n| Time (UTC) | Event |\r\n|------------|-------|\r\n| 20:24 | PR #1921 build [1129024](https://dev.azure.com/mssonic/be1b070f-be15-4154-aade-b1d3bfb17054/_build/results?buildId=1129024) downloads VPP `26.02-rc0~143` (Bookworm) \u2192 \u2705 **passes** |\r\n| 20:36 | [sonic-platform-vpp#225](https://github.com/sonic-net/sonic-platform-vpp/pull/225) merges \u2192 VPP artifacts updated to `26.10-rc0~31` (Trixie) |\r\n| 22:05 | PR #1922 build [1129081](https://dev.azure.com/mssonic/be1b070f-be15-4154-aade-b1d3bfb17054/_build/results?buildId=1129081) downloads VPP `26.10-rc0~31` (Trixie) \u2192 \u274c **fails on glibc mismatch** |\r\n\r\n### Impact\r\n\r\nAll sairedis PRs using the current pipeline will fail. PR #1923 (unrelated change) has the same failure.\r\n\r\nThis PR only modifies `syncd/scripts/syncd_init_common.sh` (a shell script) \u2014 completely unrelated to VPP or glibc. Will re-trigger CI once the pipeline is fixed.\r\n\r\ncc @dypet \u2014 the corresponding buildimage change is https://github.com/sonic-net/sonic-buildimage/pull/27013, but the sairedis CI pipeline still runs on a Bookworm agent.\r\n\r\n @vaibhavhd @rlhui @prsunny for viz"
+    },
+    {
+        "number": 1922,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-04T18:24:31Z",
+        "comment_author": "deepak-singhal0408",
+        "comment_body": "/azpw run Azure.sonic-sairedis"
+    },
+    {
+        "number": 1922,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-04T18:24:34Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 1922,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-04T18:24:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1129081:\n\n\n\u2705Stage **Build**:\n- Job amd64: retried.\n- Job amd64: retried.\n\n\n\u2705Stage **BuildAsan**:\n- Job amd64: retried."
+    },
+    {
+        "number": 1922,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-05T02:43:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1922,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-05T02:43:41Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1922,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-06-02T23:44:04Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 1922,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-06-03T00:04:40Z",
+        "review_author": "prabhataravind"
+    },
+    {
+        "number": 1922,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-06-02T23:44:04Z",
+        "latestReview_author": "prsunny",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1922,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-06-03T00:04:40Z",
+        "latestReview_author": "prabhataravind",
         "latestReview_state": "APPROVED"
     },
     {
