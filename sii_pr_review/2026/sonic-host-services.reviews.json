@@ -42,6 +42,159 @@
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
     },
     {
+        "number": 380,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-05-05T17:06:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-05-05T17:06:46Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-05-26T05:44:49Z",
+        "comment_author": "judyjoseph",
+        "comment_body": "LGTM, @shreyansh-nexthop can you add sonic-mgmt test case to cover this.\r\nAlso can you refer may be this PR : https://github.com/sonic-net/sonic-host-services/pull/9 to check tests using acl-loader for this new ACL type ?"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-05-26T11:47:32Z",
+        "comment_author": "shreyansh-nexthop",
+        "comment_body": "> LGTM, @shreyansh-nexthop can you add sonic-mgmt test case to cover this. Also can you refer may be this PR : #9 to check tests using acl-loader for this new ACL type ?\r\n\r\nSure @judyjoseph, will add sonic-mgmt test cases. Thanks!"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-06-02T06:59:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-06-02T06:59:21Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-06-03T02:25:39Z",
+        "comment_author": "ZhaohuiS",
+        "comment_body": "@shreyansh-nexthop could you pls run sonic-mgmt cacl related case to see if need to update them or add new cases to cover this new scenario?"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-06-03T08:19:46Z",
+        "comment_author": "shreyansh-nexthop",
+        "comment_body": "> @shreyansh-nexthop could you pls run sonic-mgmt cacl related case to see if need to update them or add new cases to cover this new scenario?\r\n\r\n@ZhaohuiS, the sonic-mgmt CACL testcases needs modification. I have done the code changes internally, currently testing it. Will soon raise the PR for it."
+    },
+    {
+        "number": 380,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-06-07T19:31:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-06-07T19:31:37Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-06-07T20:45:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-06-07T20:45:56Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-06-07T20:53:12Z",
+        "comment_author": "shreyansh-nexthop",
+        "comment_body": "> Nice, tightly-scoped change overall \u2014 `caclmgrd` test pattern is followed cleanly and the PR description clears the description-as-merge-gate (root cause + fix + verification). One blocker plus a couple of questions before merge.\r\n> \r\n> ### Blocking\r\n> **1. `REDFISH` is platform-specific but `ACL_SERVICES` registration is unconditional (`scripts/caclmgrd:111-115`)**\r\n> \r\n> All other entries in `ACL_SERVICES` (`SSH`, `NTP`, `SNMP`, `EXTERNAL_CLIENT`) describe services that exist on **every** SONiC platform \u2014 their `dst_ports` always correspond to a real listener. `REDFISH` is the first entry whose listener (bmcweb in `docker-sonic-redfish`) only ships on BMC-equipped platforms.\r\n> \r\n> Today, on a non-BMC platform, an operator-defined `ACL_TABLE|REDFISH_ACL` with `services=[\"REDFISH\"]` gets logged as `\"unrecognized service\"` and is silently dropped. After this PR, the same configuration on a non-BMC platform will:\r\n> \r\n> * emit `iptables -A INPUT -p tcp --dport 443 ...` rules, and\r\n> * once `num_ctrl_plane_acl_rules > 0`, append the default-deny tail of the INPUT chain.\r\n> \r\n> If anything else happens to listen on tcp/443 on that platform (future HTTPS REST, gRPC-TLS, NetConf-over-TLS, telemetry-over-HTTPS, a third-party agent), the operator's \"Redfish ACL\" template silently governs that traffic instead \u2014 or worse, locks them out. This is exactly the kind of fleet-template-meets-mixed-SKU foot-gun the framework should refuse to load itself into.\r\n> \r\n> Please gate the REDFISH handling on platform/feature presence. Two reasonable shapes:\r\n> \r\n> * **Feature-gated dispatch:** in `get_acl_rules_and_translate_to_iptables_commands` (or at `ACL_SERVICES` init), skip/warn for `REDFISH` unless `FEATURE.redfish` is enabled \u2014 analogous to how `bfdAllowed` / `VxlanAllowed` already gate other code paths in this same file.\r\n> * **Conditional registration:** only insert the REDFISH entry into `ACL_SERVICES` when the Redfish FEATURE / docker is present at daemon init.\r\n> \r\n> Either makes `services=[\"REDFISH\"]` on a non-BMC platform behave the same as it does today (warn + ignore), so a shared CTRLPLANE template across mixed SKUs doesn't accidentally program iptables on the wrong boxes.\r\n> \r\n> ### Please clarify\r\n> **2. Companion sonic-buildimage PR? (PR description)**\r\n> \r\n> The body references \"the docker-sonic-redfish rules in sonic-buildimage\" that bind `0.0.0.0:443:18080`. Without that change, this entry is dormant; with it, the BMC-platform gating story above depends on how docker-sonic-redfish is FEATURE-gated. Please link the buildimage PR so we can verify the two changes ship together and the FEATURE table is set up the way the gating in (1) would check.\r\n> \r\n> **3. Why a SONiC switch CACL for a BMC-hosted service?**\r\n> \r\n> A one-line addition to the description (\"on integrated chassis the BMC mgmt IP is reachable via the switch CPU mgmt path; this lets operators filter inbound 443 at the switch\") would prevent reviewer confusion and make the platform-gating assumption explicit.\r\n> \r\n> ### Non-blocking nits\r\n> * `scripts/caclmgrd:111-115` \u2014 `multi_asic_ns_to_host_fwd: False` is the only False in the visible neighborhood. A one-line comment naming the assumption (Redfish container binds the host net on `0.0.0.0:443:18080`, no per-namespace forward needed) would save a future reader from chasing the buildimage docker config.\r\n> * `tests/caclmgrd/test_redfish_acl_vectors.py:65-76` \u2014 IPv6 vector covers ACCEPT only; the IPv4 vector covers ACCEPT + DROP. Adding a v6 DROP row exercises the `ip6tables ... -j DROP` translation path symmetrically.\r\n> \r\n> Reviewed by AI agent on behalf of Ying.\r\n\r\nThanks @yxieca, addressed in the latest revision:\r\n\r\n**(1) Blocking (platform gating):** REDFISH is now gated on `FEATURE.redfish` state \u2014 `RedfishAllowed` flag checked in the walker, flipped by a `FEATURE` table subscriber. On non-BMC platforms a `services=[\"REDFISH\"]` template is a no-op (warn + ignore), same as today's \"unrecognized service\" path. Details in the updated PR description.\r\n\r\n**(2) Companion buildimage PR:** https://github.com/sonic-net/sonic-buildimage/pull/27349 \u2014 adds Redfish as a feature and creates the `FEATURE.redfish` row.\r\n\r\n**(3) Why a CACL for a BMC service:** the BMC runs its own SONiC instance, so `caclmgrd` and the Redfish docker are co-located on the BMC \u2014 caclmgrd filters inbound 443 on the BMC directly, same as it does for SSH/SNMP/NTP.\r\n\r\n**Nits:** added the v6 DROP vector"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-host-services",
+        "review_at": "2026-06-02T05:28:27Z",
+        "review_author": "ZhaohuiS"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-host-services",
+        "review_at": "2026-06-02T05:33:33Z",
+        "review_author": "ZhaohuiS"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-host-services",
+        "review_at": "2026-06-02T06:26:27Z",
+        "review_author": "shreyansh-nexthop"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-host-services",
+        "review_at": "2026-06-02T06:38:41Z",
+        "review_author": "shreyansh-nexthop"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-host-services",
+        "review_at": "2026-06-02T07:01:09Z",
+        "review_author": "shreyansh-nexthop"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-host-services",
+        "review_at": "2026-06-03T02:24:01Z",
+        "review_author": "ZhaohuiS"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-host-services",
+        "review_at": "2026-06-03T20:49:54Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-host-services",
+        "review_at": "2026-06-07T23:07:08Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-host-services",
+        "latestReview_at": "2026-06-07T23:07:08Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 380,
+        "repo": "sonic-host-services",
+        "latestReview_at": "2026-06-03T02:24:01Z",
+        "latestReview_author": "ZhaohuiS",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 376,
         "repo": "sonic-host-services",
         "comment_at": "2026-04-16T20:46:31Z",
