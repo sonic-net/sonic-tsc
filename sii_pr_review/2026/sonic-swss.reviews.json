@@ -1,5 +1,302 @@
 [
     {
+        "number": 4657,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-09T20:34:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4657,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-09T20:34:12Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4657,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-10T02:39:12Z",
+        "comment_author": "prsunny",
+        "comment_body": "@eddieruan-alibaba for viz"
+    },
+    {
+        "number": 4657,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-10T06:18:16Z",
+        "comment_author": "eddieruan-alibaba",
+        "comment_body": "@prsunny This revert doesn't make sense, right? We are on the way to upstream RIB/FIB codes. Thsi revert would break those PRs."
+    },
+    {
+        "number": 4657,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-10T16:28:42Z",
+        "comment_author": "theasianpianist",
+        "comment_body": "> @prsunny This revert doesn't make sense, right? We are on the way to upstream RIB/FIB codes. Thsi revert would break those PRs.\r\n\r\nThis change was breaking CI as it added a dependency on `libnexthopgroup` which stopped getting built by the common-lib pipeline, but current SWSS master branch doesn't actually need `libnexthopgroup`.\r\n\r\nThere's no reason to update the build dependency for SWSS before it's actually in use. This change can be included in the main RIB/FIB SWSS PR. Please check my comment here: https://github.com/sonic-net/sonic-swss/pull/4395#issuecomment-4663828947"
+    },
+    {
+        "number": 4657,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-10T23:07:11Z",
+        "comment_author": "eddieruan-alibaba",
+        "comment_body": "> > @prsunny This revert doesn't make sense, right? We are on the way to upstream RIB/FIB codes. Thsi revert would break those PRs.\r\n> \r\n> This change was breaking CI as it added a dependency on `libnexthopgroup` which stopped getting built by the common-lib pipeline, but current SWSS master branch doesn't actually need `libnexthopgroup`.\r\n> \r\n> There's no reason to update the build dependency for SWSS before it's actually in use. This change can be included in the main RIB/FIB SWSS PR. Please check my comment here: [#4395 (comment)](https://github.com/sonic-net/sonic-swss/pull/4395#issuecomment-4663828947)\r\n\r\nhttps://github.com/sonic-net/sonic-swss/pull/4394 PR was raised in Mar 26 and merged 3 weeks ago with all sanity pass. \r\n\r\nIf  CI was fail, how to make this CI fail expose to PR phase ? @prsunny  \r\n\r\nAlso, why not contact the owner to fix it instead of immediate revert? What is the revert protocol here? @prsunny  It is NOT  a good practice to revert PR which has been there for some time.  We should respect other folks contributions, especially considering the community PR takes a long time to get reviewed. We need to discuss this issue. \r\n\r\nWe need to enable the compile due to this lib would be used in the following PRs. \r\n\r\n"
+    },
+    {
+        "number": 4657,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-10T23:53:05Z",
+        "comment_author": "prsunny",
+        "comment_body": "ack @eddieruan-alibaba , this is a temporary WA to unblock other PRs.  As I understand corresponding sonic-buildimage changes caused this regression. Could you check the notes on description? Once that's built, we can revert this PR. \r\n\r\n@theasianpianist , could you share any other details on the issue and how we can get this back? "
+    },
+    {
+        "number": 4657,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-10T23:55:01Z",
+        "comment_author": "prsunny",
+        "comment_body": "I do see this note from @theasianpianist - @eddieruan-alibaba , can you check?\r\n\r\n> > @prsunny This revert doesn't make sense, right? We are on the way to upstream RIB/FIB codes. Thsi revert would break those PRs.\r\n> \r\n> This change was breaking CI as it added a dependency on `libnexthopgroup` which stopped getting built by the common-lib pipeline, but current SWSS master branch doesn't actually need `libnexthopgroup`.\r\n> \r\n> There's no reason to update the build dependency for SWSS before it's actually in use. This change can be included in the main RIB/FIB SWSS PR. Please check my comment here: [#4395 (comment)](https://github.com/sonic-net/sonic-swss/pull/4395#issuecomment-4663828947)\r\n\r\n"
+    },
+    {
+        "number": 4657,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-11T00:42:17Z",
+        "comment_author": "eddieruan-alibaba",
+        "comment_body": "> I do see this note from @theasianpianist - @eddieruan-alibaba , can you check?\r\n> \r\n> > > @prsunny This revert doesn't make sense, right? We are on the way to upstream RIB/FIB codes. Thsi revert would break those PRs.\r\n> > \r\n> > \r\n> > This change was breaking CI as it added a dependency on `libnexthopgroup` which stopped getting built by the common-lib pipeline, but current SWSS master branch doesn't actually need `libnexthopgroup`.\r\n> > There's no reason to update the build dependency for SWSS before it's actually in use. This change can be included in the main RIB/FIB SWSS PR. Please check my comment here: [#4395 (comment)](https://github.com/sonic-net/sonic-swss/pull/4395#issuecomment-4663828947)\r\n\r\nI saw his comments was made yesterday almost the same time as reverting happening. \r\n\r\nMy concern is on this revert event.\r\n\r\n1. How does other folks get aware what kind of CI outage is and why it happend 3 weeks later after the commit. \r\n2. Should we leave some time to the owner to response after giving comments? Basically please respect other folks contributions. What kind of revert protocol we should follow.\r\n\r\n"
+    },
+    {
+        "number": 4657,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-11T00:51:19Z",
+        "comment_author": "prsunny",
+        "comment_body": "1. Typically, we tag the owner and reviewer for such issues causing revert. The submitter can respond saying that a fix will be provided in `<x>` time and we can evaluate if that's good.\r\n2. Sure, noted the feedback. "
+    },
+    {
+        "number": 4657,
+        "repo": "sonic-swss",
+        "review_at": "2026-06-09T20:35:29Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4657,
+        "repo": "sonic-swss",
+        "review_at": "2026-06-09T23:13:26Z",
+        "review_author": "darius-nexthop"
+    },
+    {
+        "number": 4657,
+        "repo": "sonic-swss",
+        "review_at": "2026-06-10T02:38:44Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 4657,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-06-09T20:35:29Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 4657,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-06-10T02:38:44Z",
+        "latestReview_author": "prsunny",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4657,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-06-09T23:13:26Z",
+        "latestReview_author": "darius-nexthop",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4654,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-08T11:10:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4654,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-08T11:10:56Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4654,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-08T21:43:14Z",
+        "comment_author": "prsunny",
+        "comment_body": "@dgsudharsan for review/merge"
+    },
+    {
+        "number": 4654,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-09T02:27:53Z",
+        "comment_author": "linux-foundation-easycla",
+        "comment_body": "<a href=\"https://easycla.lfx.linuxfoundation.org/#/?version=2\"><img src=\"https://s3.amazonaws.com/cla-project-logo-prod/cla-signed.svg?v=2\" alt=\"CLA Signed\" align=\"left\" height=\"28\" width=\"328\" ></a><br >The committers listed above are authorized under a signed CLA.<ul><li>:white_check_mark: login: stephenxs / name: Stephen Sun (45c1ca3ca665c66270dde84a208ef1bed551301a, ee0d5b7f3a789dc5de7b36a5c79d3e4646be2e84)</li></ul>"
+    },
+    {
+        "number": 4654,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-09T02:28:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4654,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-09T02:28:09Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4654,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-09T02:41:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4654,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-09T02:42:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4654,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-09T02:43:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4654,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-09T02:43:25Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4654,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-09T06:41:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4654,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-09T06:42:05Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4654,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-09T12:32:00Z",
+        "comment_author": "stephenxs",
+        "comment_body": "ASAN build time out. Will try once more."
+    },
+    {
+        "number": 4654,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-09T12:32:05Z",
+        "comment_author": "stephenxs",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 4654,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-09T12:32:08Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 4654,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-09T12:32:10Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1134060:\n\n\n\u2705Stage **BuildAsan**:\n- Job amd64: retried."
+    },
+    {
+        "number": 4654,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-09T19:21:03Z",
+        "comment_author": "Sourabh-Kumar7",
+        "comment_body": "@dgsudharsan could you please help review the change? thanks."
+    },
+    {
+        "number": 4654,
+        "repo": "sonic-swss",
+        "review_at": "2026-06-08T11:20:55Z",
+        "review_author": "DavidZagury"
+    },
+    {
+        "number": 4654,
+        "repo": "sonic-swss",
+        "review_at": "2026-06-08T21:46:27Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4654,
+        "repo": "sonic-swss",
+        "review_at": "2026-06-09T01:35:43Z",
+        "review_author": "stephenxs"
+    },
+    {
+        "number": 4654,
+        "repo": "sonic-swss",
+        "review_at": "2026-06-09T01:43:40Z",
+        "review_author": "stephenxs"
+    },
+    {
+        "number": 4654,
+        "repo": "sonic-swss",
+        "review_at": "2026-06-09T02:45:29Z",
+        "review_author": "stephenxs"
+    },
+    {
+        "number": 4654,
+        "repo": "sonic-swss",
+        "review_at": "2026-06-09T21:09:55Z",
+        "review_author": "dgsudharsan"
+    },
+    {
+        "number": 4654,
+        "repo": "sonic-swss",
+        "review_at": "2026-06-10T03:47:27Z",
+        "review_author": "stephenxs"
+    },
+    {
+        "number": 4654,
+        "repo": "sonic-swss",
+        "review_at": "2026-06-10T04:13:46Z",
+        "review_author": "dgsudharsan"
+    },
+    {
+        "number": 4654,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-06-08T21:46:27Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 4654,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-06-10T04:13:46Z",
+        "latestReview_author": "dgsudharsan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4654,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-06-08T11:20:55Z",
+        "latestReview_author": "DavidZagury",
+        "latestReview_state": "DISMISSED"
+    },
+    {
         "number": 4653,
         "repo": "sonic-swss",
         "comment_at": "2026-06-08T10:19:42Z",
@@ -5160,6 +5457,211 @@
         "repo": "sonic-swss",
         "latestReview_at": "2026-05-12T22:43:20Z",
         "latestReview_author": "BYGX-wcr",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4557,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-08T18:32:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4557,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-08T18:32:25Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4557,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-08T18:50:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4557,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-08T18:50:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4557,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-08T19:13:14Z",
+        "comment_author": "zjswhhh",
+        "comment_body": "Moving to draft. Need to evaluate the DPU driven scenario (change should be done upon sai events). "
+    },
+    {
+        "number": 4557,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-13T06:31:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4557,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-13T06:31:57Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4557,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-13T06:38:37Z",
+        "comment_author": "zjswhhh",
+        "comment_body": "Hi @vivekrnv - please sign off again."
+    },
+    {
+        "number": 4557,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-13T17:17:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4557,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-13T17:18:04Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4557,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-13T23:24:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4557,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-13T23:24:56Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4557,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-15T17:35:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4557,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-15T17:35:24Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4557,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-10T18:17:08Z",
+        "comment_author": "vivekrnv",
+        "comment_body": "@zjswhhh we need this change. What are we waiting for?"
+    },
+    {
+        "number": 4557,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-10T18:24:45Z",
+        "comment_author": "zjswhhh",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 4557,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-10T18:24:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 4557,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-10T18:24:50Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Build not found. Please close and reopen the PR or rebase your branch to trigger a new build."
+    },
+    {
+        "number": 4557,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-10T18:25:51Z",
+        "comment_author": "zjswhhh",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4557,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-10T18:26:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4557,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-10T18:27:26Z",
+        "comment_author": "zjswhhh",
+        "comment_body": "> @zjswhhh we need this change. What are we waiting for?\r\n\r\nvstest failing for flakiness, just triggered a rerun.  "
+    },
+    {
+        "number": 4557,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-10T22:27:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-swss/pull/4659"
+    },
+    {
+        "number": 4557,
+        "repo": "sonic-swss",
+        "review_at": "2026-05-08T18:34:57Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4557,
+        "repo": "sonic-swss",
+        "review_at": "2026-05-08T23:53:38Z",
+        "review_author": "vivekrnv"
+    },
+    {
+        "number": 4557,
+        "repo": "sonic-swss",
+        "review_at": "2026-05-15T18:54:21Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 4557,
+        "repo": "sonic-swss",
+        "review_at": "2026-06-10T18:09:55Z",
+        "review_author": "vivekrnv"
+    },
+    {
+        "number": 4557,
+        "repo": "sonic-swss",
+        "review_at": "2026-06-10T22:26:11Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 4557,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-05-08T18:34:57Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 4557,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-06-10T22:26:11Z",
+        "latestReview_author": "prsunny",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4557,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-06-10T18:09:55Z",
+        "latestReview_author": "vivekrnv",
         "latestReview_state": "APPROVED"
     },
     {
