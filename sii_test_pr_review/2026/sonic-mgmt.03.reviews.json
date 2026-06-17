@@ -18659,6 +18659,13 @@
     {
         "number": 22902,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-06-16T16:23:40Z",
+        "comment_author": "prabhataravind",
+        "comment_body": "@nnelluri-cisco @rameshraghupathy this PR introduced the VLAN-based dataplane config for SmartSwitch \u2014 DPC ports (Ethernet224/232/240/248) become untagged Vlan55 members, and the IP 20.0.200.254/24 is on Vlan55, not on the individual ports.\r\n\r\nThis created two connected routes in ASIC_DB:\r\n\r\n20.0.200.0/24 (subnet)\r\n20.0.200.254/32 (gateway/local)\r\n\r\nBut the ARP test's _get_back_plane_port_ips() predates this change \u2014 it was written when DPC ports had IPs directly on them. After PR#22902 moved everything to Vlan55, the function runs ip addr show Ethernet224 \u2192 empty \u2192 no filter IPs \u2192 routes not excluded \u2192 timeout. The fix for _get_back_plane_port_ips() should query the Vlan55 IP from config_db (or use smartswitch_vlan_config) instead of ip addr show on DPC ports. Could you make this corresponding sonic-mgmt change?"
+    },
+    {
+        "number": 22902,
+        "repo": "sonic-mgmt",
         "review_at": "2026-03-12T13:46:01Z",
         "review_author": "yue-fred-gao"
     },
