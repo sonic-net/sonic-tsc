@@ -1,5 +1,108 @@
 [
     {
+        "number": 587,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-06-05T11:30:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 587,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-06-05T11:31:03Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 587,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-06-05T12:36:29Z",
+        "comment_author": "vivekverma-arista",
+        "comment_body": "@chander-nexthop @yxieca @judyjoseph"
+    },
+    {
+        "number": 587,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-06-08T00:29:28Z",
+        "comment_author": "yxieca",
+        "comment_body": "Thanks for the focused fix and the verifiable dmesg evidence \u2014 the two kernel patches are byte-identical to the AspeedTech-BMC upstream commits, which made the verification easy.\n\nOne process suggestion before approval, on **patch hygiene** for the two cherry-picked kernel patches:\n\nBoth patches currently have `From: Prajjwal Singh` and drop the original `Signed-off-by: Cool Lee <cool_lee@aspeedtech.com>` chain. For patches cherry-picked verbatim from another tree, the kernel-community convention (see `Documentation/process/submitting-patches.rst` \u00a711) is to preserve the original author + SOB, and add your own SOB plus a cherry-pick / upstream trailer.\n\nConcrete suggestion: from a local clone of `AspeedTech-BMC/linux`, run\n\n```\ngit format-patch -1 e3532140fbe86fe88abacde37aebbbd5520fbc9d\ngit format-patch -1 5fa88b13a96cf0059009f13cdf0b5b8b7b9c51ea\n```\n\nThat gives you patch files that already carry the original `From:` and `Signed-off-by: Cool Lee`. Then amend each commit message with:\n\n```\n(cherry picked from commit <upstream-sha>)\nUpstream: https://github.com/AspeedTech-BMC/linux/commit/<sha>\nSigned-off-by: Prajjwal Singh <...>\n```\n\nThis preserves `git log`/`git blame` attribution and makes it easy for future maintainers to drop the local patch after a kernel rebase by diffing against upstream.\n\nTwo smaller asks that would help reviewers:\n\n1. **Backport story** \u2014 which stable branches does Goldfinch ship on? If any, this fix likely needs to go there too. Even a one-line \"master only, Goldfinch not yet on a release branch\" in the PR description clears the question.\n\n2. **Cross-board confirmation** \u2014 the two kernel patches modify `drivers/mmc/host/sdhci-of-aspeed.c`, which is shared with the other AST2700 boards in this tree (nexthop b27, Nokia BMC H6-128). The new `aspeed_sdhci_voltage_switch` in particular now writes a register that was previously untouched. Could you confirm no regression on the other AST2700 boards (or tag those platform owners for sign-off)?\n\nNone of these are blockers on correctness \u2014 happy to approve once the patch headers are regenerated and the two questions above have a line of answer.\n"
+    },
+    {
+        "number": 587,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-06-08T09:23:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 587,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-06-08T09:23:23Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 587,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-06-08T10:16:11Z",
+        "comment_author": "prajjwal-arista",
+        "comment_body": "@yxieca Thank you for reviewing\r\nI have addressed your comments, and also added the backport info (required in 202605).\r\n\r\nRequesting @chander-nexthop @nats-nokia @oleksandrivantsiv  to please review these changes.\r\n\r\n"
+    },
+    {
+        "number": 587,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-06-12T20:14:51Z",
+        "comment_author": "yxieca",
+        "comment_body": "@saiarcot895 please review / merge. Thanks."
+    },
+    {
+        "number": 587,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-06-16T23:19:17Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "Will fix conflicts and merge after #586 goes in."
+    },
+    {
+        "number": 587,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-06-17T16:03:44Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 587,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-06-17T16:03:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 587,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2026-06-12T20:13:42Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 587,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2026-06-18T23:34:07Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 587,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2026-06-18T23:34:07Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 587,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2026-06-12T20:13:42Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "DISMISSED"
+    },
+    {
         "number": 586,
         "repo": "sonic-linux-kernel",
         "comment_at": "2026-06-05T08:16:24Z",
