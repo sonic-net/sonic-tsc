@@ -95,6 +95,75 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 25471,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-19T01:14:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 25471,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-19T01:14:40Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25471,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-21T07:07:38Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 25471,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-21T07:07:52Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25471,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-21T07:08:01Z",
+        "comment_author": "securely1g",
+        "comment_body": "### \u2705 Verified on a live cSONiC testbed\n\nRan the focused test on a deployed `vms-kvm-t0-csonic` testbed (DUT `vlab-01` + 4 cSONiC `docker-sonic-vs` neighbors, all 4 BGP sessions established):\n\n```\ntests/bgp/test_bgp_route_neigh_learning.py::test_bgp_neighbor_route_learnning[vlab-01] -> PASSED\nSUMMARY  tests=1  failures=0  errors=0  skipped=0  time=50.28s\n```\n\nRoute `77.88.99.1` injected on the neighbors was learned by the DUT (`ROUTE_TABLE:77.88.99.1` nexthops `10.0.0.57,10.0.0.59`); core-dump and config checks passed; post-test sanity passed.\n\n### Follow-up commit\nPushed an incremental commit (`792024e6`) extending the route-propagation wait from `wait_until(10, 2)` \u2192 `wait_until(60, 5)`. cSONiC propagates the route to the DUT slightly slower than EOS, and the 10s budget occasionally flaked with \"Route did not propagate to the DUT\". This makes the check reliable across neighbor types without slowing the already-propagated case.\n\nTracking issue: #25525"
+    },
+    {
+        "number": 25471,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-21T16:46:24Z",
+        "comment_author": "lguohan",
+        "comment_body": "/azpw retry"
+    },
+    {
+        "number": 25471,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-21T16:46:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 25471,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-21T16:46:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1144764:\n\n\n\u2705Stage **Test**:\n- Job impacted-area-kvmtest-t2 by Elastictest: retried."
+    },
+    {
+        "number": 25471,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-06-21T18:33:08Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 25471,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-06-21T18:33:08Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 25470,
         "repo": "sonic-mgmt",
         "comment_at": "2026-06-18T23:05:04Z",
@@ -292,6 +361,69 @@
         "latestReview_at": "2026-06-19T06:40:50Z",
         "latestReview_author": "yyynini",
         "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 25448,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-18T08:19:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-mgmt/pull/25421"
+    },
+    {
+        "number": 25448,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-18T08:19:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 25448,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-18T08:20:01Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25448,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-19T00:12:34Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-mgmt"
+    },
+    {
+        "number": 25448,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-19T00:12:48Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25448,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-21T09:12:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This cherry pick PR has been opened for more than 3 days. The mssonicbld will attempt to retry.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25448,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-21T09:12:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azpw retry"
+    },
+    {
+        "number": 25448,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-21T09:12:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 25448,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-21T09:13:01Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1142730:\n\n\n\u2705Stage **Test**:\n- Job impacted-area-kvmtest-t2 by Elastictest: retried.\n- Job impacted-area-kvmtest-t1-lag by Elastictest: retried."
     },
     {
         "number": 25445,
