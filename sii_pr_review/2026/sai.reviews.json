@@ -348,6 +348,229 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 2274,
+        "repo": "sai",
+        "comment_at": "2026-04-13T21:42:54Z",
+        "comment_author": "JaiOCP",
+        "comment_body": "> _ No description provided. _\r\n\r\nPleas provide description of the PR"
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "comment_at": "2026-04-13T21:43:48Z",
+        "comment_author": "JaiOCP",
+        "comment_body": "@mobinmohan Is it an ingress mirror or egress mirror copy match condition."
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "comment_at": "2026-04-14T00:05:48Z",
+        "comment_author": "mobinmohan",
+        "comment_body": "> @mobinmohan Is it an ingress mirror or egress mirror copy match condition.\r\n\r\nThe attribute was to match both ingress and egress mirror copies. However, I can change the type from `bool` to `sai_acl_mirror_copy_type_t` to allow selective matching, if the underlying hardware supports it. Please let me know your recommendation.\r\n\r\n```\r\n+/**\r\n+ * @brief Mirror copy type for ACL matching\r\n+ */\r\n+typedef enum _sai_acl_mirror_copy_type_t\r\n+{\r\n+    SAI_ACL_MIRROR_COPY_TYPE_NONE,\r\n+    SAI_ACL_MIRROR_COPY_TYPE_INGRESS,\r\n+    SAI_ACL_MIRROR_COPY_TYPE_EGRESS,\r\n+    SAI_ACL_MIRROR_COPY_TYPE_ANY\r\n+} sai_acl_mirror_copy_type_t;\r\n+\r\n+\r\n```"
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "comment_at": "2026-04-14T02:58:23Z",
+        "comment_author": "JaiOCP",
+        "comment_body": "> > @mobinmohan Is it an ingress mirror or egress mirror copy match condition.\r\n> \r\n> The attribute was to match both ingress and egress mirror copies. However, I can change the type from `bool` to `sai_acl_mirror_copy_type_t` to allow selective matching, if the underlying hardware supports it. Please let me know your recommendation.\r\n> \r\n> ```\r\n> +/**\r\n> + * @brief Mirror copy type for ACL matching\r\n> + */\r\n> +typedef enum _sai_acl_mirror_copy_type_t\r\n> +{\r\n> +    SAI_ACL_MIRROR_COPY_TYPE_NONE,\r\n> +    SAI_ACL_MIRROR_COPY_TYPE_INGRESS,\r\n> +    SAI_ACL_MIRROR_COPY_TYPE_EGRESS,\r\n> +    SAI_ACL_MIRROR_COPY_TYPE_ANY\r\n> +} sai_acl_mirror_copy_type_t;\r\n> +\r\n> +\r\n> ```\r\n\r\nI don't think we need to have type_t.\r\nIf the ACL table stage is ingress then the match action would apply to ingress mirror.\r\nIf the ACL table stage is egress then the match action would apply to egress mirror.\r\n\r\nTypically there is no case where ingress mirror copy needs an egress ACL rule for match action as the mirror copy is taken out to the mirror port directly but I am not very sure about it. Is that a use case for you?\r\n\r\n"
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "comment_at": "2026-04-23T06:03:30Z",
+        "comment_author": "mobinmohan",
+        "comment_body": "> > _ No description provided. _\r\n> \r\n> Pleas provide description of the PR\r\n\r\nAdded description."
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "comment_at": "2026-04-23T06:06:58Z",
+        "comment_author": "mobinmohan",
+        "comment_body": "> > > @mobinmohan Is it an ingress mirror or egress mirror copy match condition.\r\n> > \r\n> > \r\n> > The attribute was to match both ingress and egress mirror copies. However, I can change the type from `bool` to `sai_acl_mirror_copy_type_t` to allow selective matching, if the underlying hardware supports it. Please let me know your recommendation.\r\n> > ```\r\n> > +/**\r\n> > + * @brief Mirror copy type for ACL matching\r\n> > + */\r\n> > +typedef enum _sai_acl_mirror_copy_type_t\r\n> > +{\r\n> > +    SAI_ACL_MIRROR_COPY_TYPE_NONE,\r\n> > +    SAI_ACL_MIRROR_COPY_TYPE_INGRESS,\r\n> > +    SAI_ACL_MIRROR_COPY_TYPE_EGRESS,\r\n> > +    SAI_ACL_MIRROR_COPY_TYPE_ANY\r\n> > +} sai_acl_mirror_copy_type_t;\r\n> > +\r\n> > +\r\n> > ```\r\n> \r\n> I don't think we need to have type_t. If the ACL table stage is ingress then the match action would apply to ingress mirror. If the ACL table stage is egress then the match action would apply to egress mirror.\r\n> \r\n> Typically there is no case where ingress mirror copy needs an egress ACL rule for match action as the mirror copy is taken out to the mirror port directly but I am not very sure about it. Is that a use case for you?\r\n\r\nSounds good. We can continue with the default(bool)."
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "comment_at": "2026-04-24T09:44:05Z",
+        "comment_author": "Gnanapriya27",
+        "comment_body": "> _sai_acl_mirror_copy_type_t\r\n\r\nThe current bool definition still leaves ambiguity on what exactly is being matched.\r\nInterpreting this based on the stage as per ACL table,\r\nIngress ACL stage \u2192 match ingress-generated mirror copies only\r\nEgress ACL stage \u2192 match egress-generated mirror copies only\r\n\r\nthen SAI_ACL_ENTRY_ATTR_FIELD_MIRROR_COPY=true in an egress ACL table, does it mean only egress mirror copies, not any mirrored packet ? please clarify.\r\n\r\nModeling this stage/direction explicitly using sai_acl_mirror_copy_type_t (as proposed in this conversation) would make the semantics unambiguous and future-proof the design, enum capability query allows the vendor to announce their capabilities."
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "comment_at": "2026-04-24T16:00:31Z",
+        "comment_author": "JaiOCP",
+        "comment_body": "> > _sai_acl_mirror_copy_type_t\r\n> \r\n> The current bool definition still leaves ambiguity on what exactly is being matched. Interpreting this based on the stage as per ACL table, Ingress ACL stage \u2192 match ingress-generated mirror copies only Egress ACL stage \u2192 match egress-generated mirror copies only\r\n> \r\n> then SAI_ACL_ENTRY_ATTR_FIELD_MIRROR_COPY=true in an egress ACL table, does it mean only egress mirror copies, not any mirrored packet ? please clarify.\r\n> \r\n> Modeling this stage/direction explicitly using sai_acl_mirror_copy_type_t (as proposed in this conversation) would make the semantics unambiguous and future-proof the design, enum capability query allows the vendor to announce their capabilities.\r\n\r\nI agree and take my earlier statement back.\r\nJust providing the stage is not enough. Lets use the type_t"
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "comment_at": "2026-04-27T17:15:33Z",
+        "comment_author": "mobinmohan",
+        "comment_body": "> > _sai_acl_mirror_copy_type_t\r\n> \r\n> The current bool definition still leaves ambiguity on what exactly is being matched. Interpreting this based on the stage as per ACL table, Ingress ACL stage \u2192 match ingress-generated mirror copies only Egress ACL stage \u2192 match egress-generated mirror copies only\r\n> \r\n> then SAI_ACL_ENTRY_ATTR_FIELD_MIRROR_COPY=true in an egress ACL table, does it mean only egress mirror copies, not any mirrored packet ? please clarify.\r\n> \r\n> Modeling this stage/direction explicitly using sai_acl_mirror_copy_type_t (as proposed in this conversation) would make the semantics unambiguous and future-proof the design, enum capability query allows the vendor to announce their capabilities.\r\n\r\nI received a similar feedback during the weekly review meeting. I agree using sai_acl_mirror_copy_type_t makes the design future proof. I have updated the PR to use the enum type, though proper distinction will depend on the ASIC support. "
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "comment_at": "2026-04-27T17:16:47Z",
+        "comment_author": "mobinmohan",
+        "comment_body": "> > > _sai_acl_mirror_copy_type_t\r\n> > \r\n> > \r\n> > The current bool definition still leaves ambiguity on what exactly is being matched. Interpreting this based on the stage as per ACL table, Ingress ACL stage \u2192 match ingress-generated mirror copies only Egress ACL stage \u2192 match egress-generated mirror copies only\r\n> > then SAI_ACL_ENTRY_ATTR_FIELD_MIRROR_COPY=true in an egress ACL table, does it mean only egress mirror copies, not any mirrored packet ? please clarify.\r\n> > Modeling this stage/direction explicitly using sai_acl_mirror_copy_type_t (as proposed in this conversation) would make the semantics unambiguous and future-proof the design, enum capability query allows the vendor to announce their capabilities.\r\n> \r\n> I agree and take my earlier statement back. Just providing the stage is not enough. Lets use the type_t\r\n\r\nThanks for reviewing this during the weekly meeting. I have update the PR now. "
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "comment_at": "2026-05-05T19:29:17Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "comment_at": "2026-05-05T19:29:27Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "comment_at": "2026-06-22T22:34:06Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "comment_at": "2026-06-22T22:34:15Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "review_at": "2026-04-14T06:29:07Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "review_at": "2026-04-14T19:48:42Z",
+        "review_author": "JaiOCP"
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "review_at": "2026-04-14T20:04:53Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "review_at": "2026-04-24T09:47:47Z",
+        "review_author": "Gnanapriya27"
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "review_at": "2026-04-28T14:56:57Z",
+        "review_author": "JaiOCP"
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "review_at": "2026-04-28T16:39:48Z",
+        "review_author": "mikeberesford"
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "review_at": "2026-05-06T02:01:58Z",
+        "review_author": "Gnanapriya27"
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "review_at": "2026-05-06T06:38:56Z",
+        "review_author": "mobinmohan"
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "review_at": "2026-05-20T05:06:19Z",
+        "review_author": "Gnanapriya27"
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "review_at": "2026-05-21T01:38:06Z",
+        "review_author": "mobinmohan"
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "review_at": "2026-05-21T01:48:53Z",
+        "review_author": "Gnanapriya27"
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "review_at": "2026-05-21T02:07:36Z",
+        "review_author": "mobinmohan"
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "review_at": "2026-05-21T02:15:18Z",
+        "review_author": "mobinmohan"
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "review_at": "2026-05-22T10:57:54Z",
+        "review_author": "Gnanapriya27"
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "review_at": "2026-06-22T22:44:33Z",
+        "review_author": "tjchadaga"
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "latestReview_at": "2026-04-14T20:04:53Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "latestReview_at": "2026-04-28T14:56:57Z",
+        "latestReview_author": "JaiOCP",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "latestReview_at": "2026-04-28T16:39:48Z",
+        "latestReview_author": "mikeberesford",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "latestReview_at": "2026-06-22T22:44:33Z",
+        "latestReview_author": "tjchadaga",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2274,
+        "repo": "sai",
+        "latestReview_at": "2026-05-22T10:57:54Z",
+        "latestReview_author": "Gnanapriya27",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 2272,
         "repo": "sai",
         "comment_at": "2026-04-20T08:24:58Z",
