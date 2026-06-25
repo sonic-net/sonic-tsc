@@ -590,28 +590,36 @@ def round_floats(o):
     return o
 
 
-# Load PR-level overrides from JSON file
+# Load PR-level overrides from per-year JSON files
+# Each year directory under sii_pr_review/ and sii_test_pr_review/ may contain
+# its own override file:
+#   sii_pr_review/<year>/sii_pr_override.json
+#   sii_test_pr_review/<year>/sii_pr_override.json
 # Format: [{"repo": "sonic-swss", "number": 1234, "author": "new_author", "original_author": "old_author", "description": "..."}, ...]
-# These overrides reassign PR authorship BEFORE score calculation
+# These overrides reassign PR authorship BEFORE score calculation.
+# If a year has no override file, that year falls back to the normal process.
 def pr_overrides_load():
     global pr_overrides
-    override_file = 'sii_pr_override.json'
-    try:
-        with open(override_file) as f:
-            content = f.read()
-        overrides_list = json.loads(content)
-        for override in overrides_list:
-            repo = override.get('repo')
-            number = override.get('number')
-            if repo and number is not None:
-                key = repo + ',' + str(number)
-                pr_overrides[key] = {
-                    'author': override.get('author'),
-                    'original_author': override.get('original_author'),
-                    'description': override.get('description', '')
-                }
-    except FileNotFoundError:
-        pass  # Override file is optional
+    for year in year_weight:
+        paths = ['sii_pr_review/', 'sii_test_pr_review/']
+        for path in paths:
+            override_file = path + str(year) + '/sii_pr_override.json'
+            try:
+                with open(override_file) as f:
+                    content = f.read()
+            except FileNotFoundError:
+                continue  # Override file is optional per year
+            overrides_list = json.loads(content)
+            for override in overrides_list:
+                repo = override.get('repo')
+                number = override.get('number')
+                if repo and number is not None:
+                    key = repo + ',' + str(number)
+                    pr_overrides[key] = {
+                        'author': override.get('author'),
+                        'original_author': override.get('original_author'),
+                        'description': override.get('description', '')
+                    }
 
 
 # Apply PR-level author overrides to prs_map
