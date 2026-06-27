@@ -488,6 +488,107 @@
         "latestReview_state": "DISMISSED"
     },
     {
+        "number": 4602,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-06-11T05:03:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4602,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-06-11T05:03:15Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4602,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-06-11T05:16:44Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4602,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-06-11T05:16:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4602,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-06-15T09:58:44Z",
+        "comment_author": "chander-nexthop",
+        "comment_body": "IMHO, the fixes for set_fips, remove_image, verify_image_platform, and get_next_image (checking and returning the image set in boot_once) are generic to bring into UbootBootLoader itself.  In fact, we had the changes for get_next _image checking boot_once locally but for some reason, this fix was missed in the upstream pr we raised.\r\n\r\nRegarding set_default behavior to clear boot_once, IIUC, even grub.py is implemented as it's been done for uboot (default and boot_once remain orthogonal). Only Aboot seem to have taken a different approach. I am a little confused with the base Uboot class matching Grub's and the specialized Aspeed class matching Aboot's. In addition, assuming most of the existing deployments use Grub, I would prefer BMC to follow that model as customers workflow may not expect the BMC to behave differently than their grub based host (x86) or uboot based host (marvell)\r\n\r\nAdding @pavannaregundi @antony-rheneus for their inputs too."
+    },
+    {
+        "number": 4602,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-06-17T01:08:37Z",
+        "comment_author": "william8545",
+        "comment_body": "> chander-nexthop\r\n\r\n#### UbootBootLoader \r\n\r\nPR #4489 fixed `UbootBootloader` directly, but based on the discussion and feedback there: other vendors who use U-Boot claim the existing `UbootBootloader` works for them, and the issue only happens on BMC (which boots a FIT image), so they preferred not to modify it and risk introducing any degradation. I therefore closed #4489 and moved the work into a dedicated `BmcUbootBootloader`.\r\n\r\n#### One-shot mechanism\r\n\r\nBMC should behave like the operator's other hosts, and GRUB is the right reference.\r\nThat's actually the argument for clearing the one-shot on `set-default` \u2014 because that is what GRUB already does. The confusion is that the clearing isn't in `grub.py`; it's done inside the stock `grub-set-default` helper that `grub.py` shells out to:\r\n\r\n```python\r\ndef set_default_image(self, image):                 # sonic-installer set-default\r\n    run_command(['grub-set-default', '--boot-directory=/host', str(idx)])\r\ndef set_next_image(self, image):                     # sonic-installer set-next-boot\r\n    run_command(['grub-reboot', '--boot-directory=/host', str(idx)])\r\n```\r\n\r\n`grub.py` only delegates; `grub-set-default` itself unsets the one-shot.\r\n\r\n**1. GRUB source \u2014 `grub-set-default` unsets `next_entry`.** The operative lines (the final three `grub-editenv` calls) of [`util/grub-set-default.in`](https://cgit.git.savannah.gnu.org/cgit/grub.git/tree/util/grub-set-default.in):\r\n\r\n```sh\r\n$grub_editenv ${grubdir}/grubenv unset prev_saved_entry\r\n$grub_editenv ${grubdir}/grubenv unset next_entry      # <-- clears any pending grub-reboot (set-next-boot)\r\n$grub_editenv ${grubdir}/grubenv set saved_entry=\"$entry\"\r\n```\r\n\r\n`grub-reboot` (= `set-next-boot`), in the normal path, ultimately sets only `next_entry` and does not disturb the current persistent default ([`util/grub-reboot.in`](https://cgit.git.savannah.gnu.org/cgit/grub.git/tree/util/grub-reboot.in)):\r\n\r\n```sh\r\n$grub_editenv ${grubdir}/grubenv set next_entry=\"$entry\"   # saved_entry left as-is\r\n```\r\n\r\nSo the relationship is not orthogonal \u2014 it's deliberately asymmetric: `set-default` supersedes a pending `set-next-boot`; `set-next-boot` does not disturb the default.\r\n\r\n**2. This is long-standing GRUB behavior, not a recent or distro-specific quirk.** The `next_entry` one-shot model (and the `unset next_entry` in `grub-set-default`) was introduced upstream in 2013 by [commit `5945c2f8`](https://cgit.git.savannah.gnu.org/cgit/grub.git/commit/?id=5945c2f8496cab51b64ed9bd35d494dc04b8e5a6) \u2014 *\"Reimplement grub-reboot to not depend on saved_entry. Use next_entry variable for one time boot menu entry.\"* It is present from the `grub-2.02` tag through the current release `grub-2.14` and upstream master, and I verified it directly on the tested switch.\r\n\r\n**3. Verified on real hardware** \u2014 a GRUB x86 switch, driving the actual `sonic-installer` commands and reading `grub-editenv .../grubenv list` between steps:\r\n\r\n| Sequence | grubenv result | Effect |\r\n|---|---|---|\r\n| `set-next-boot B` then `set-default A` | `next_entry` **removed**, only `saved_entry=A` | **`set-default` erased the pending `set-next-boot`** \u2192 next boot = A |\r\n| `set-default A` then `set-next-boot B` | both `saved_entry=A` + `next_entry=B` present | `set-next-boot` kept the default \u2192 next boot = B once, then A |\r\n\r\nThis matches the source exactly.\r\n\r\n### What that means for this PR\r\n\r\n- **GRUB**: `set-default` clears the one-shot.\r\n- **Aboot**: `set_default_image()` writes both `SWI` and `SWI_DEFAULT`, i.e. it also overrides the pending one-shot.\r\n- **`BmcUbootBootloader` (this PR)**: `set_default_image()` writes `boot_next` and clears `boot_once` \u2014 **the same contract as GRUB and Aboot.**\r\n\r\nSo the genuinely orthogonal one is the current generic `UbootBootloader` (`set_default_image()` doesn't clear `boot_once`, and `get_next_image()` ignores `boot_once`) \u2014 that's the class that diverges from GRUB, Aboot and BMC.\r\n\r\n---\r\n\r\n### Reference links\r\n\r\n- GRUB `grub-set-default` source (unsets `next_entry`): https://cgit.git.savannah.gnu.org/cgit/grub.git/tree/util/grub-set-default.in\r\n- GRUB `grub-reboot` source (sets `next_entry`): https://cgit.git.savannah.gnu.org/cgit/grub.git/tree/util/grub-reboot.in\r\n- Introducing commit (2013), present from `grub-2.02` to HEAD: https://cgit.git.savannah.gnu.org/cgit/grub.git/commit/?id=5945c2f8496cab51b64ed9bd35d494dc04b8e5a6\r\n- SONiC writes this `grub.cfg` header itself (saved_entry/next_entry block): https://github.com/sonic-net/sonic-buildimage/blob/master/installer/default_platform.conf\r\n- Prior attempt to fix the generic class (closed): https://github.com/sonic-net/sonic-utilities/pull/4489\r\n"
+    },
+    {
+        "number": 4602,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-06-17T04:40:55Z",
+        "comment_author": "chander-nexthop",
+        "comment_body": "@william8545 Thank you for the details. I missed checking the GRUB source code and only went with grub.py. I don't have any more comments. Thanks for fixing this."
+    },
+    {
+        "number": 4602,
+        "repo": "sonic-utilities",
+        "review_at": "2026-06-11T23:18:11Z",
+        "review_author": "oleksandrivantsiv"
+    },
+    {
+        "number": 4602,
+        "repo": "sonic-utilities",
+        "review_at": "2026-06-12T21:56:43Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 4602,
+        "repo": "sonic-utilities",
+        "review_at": "2026-06-15T05:36:49Z",
+        "review_author": "shreyansh-nexthop"
+    },
+    {
+        "number": 4602,
+        "repo": "sonic-utilities",
+        "review_at": "2026-06-17T04:41:09Z",
+        "review_author": "chander-nexthop"
+    },
+    {
+        "number": 4602,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2026-06-11T23:18:11Z",
+        "latestReview_author": "oleksandrivantsiv",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4602,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2026-06-12T21:56:43Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4602,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2026-06-17T04:41:09Z",
+        "latestReview_author": "chander-nexthop",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4602,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2026-06-15T05:36:49Z",
+        "latestReview_author": "shreyansh-nexthop",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 4601,
         "repo": "sonic-utilities",
         "comment_at": "2026-06-10T19:36:41Z",
@@ -11628,6 +11729,27 @@
         "comment_at": "2026-05-19T15:22:18Z",
         "comment_author": "saksarav-nokia",
         "comment_body": "@vmittal-msft , could you please review"
+    },
+    {
+        "number": 4373,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-06-26T18:11:53Z",
+        "comment_author": "vmittal-msft",
+        "comment_body": "@saksarav-nokia please raise manual pr for msft-202601 as there are cherry-pick conflicts."
+    },
+    {
+        "number": 4373,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-06-26T20:13:45Z",
+        "comment_author": "saksarav-nokia",
+        "comment_body": "@vmittal-msft  , This PR is already present in 202511 and msft-2601 as part of https://github.com/sonic-net/sonic-utilities/pull/4328. So you can remove the label."
+    },
+    {
+        "number": 4373,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-06-26T20:17:37Z",
+        "comment_author": "peterbailey-arista",
+        "comment_body": "https://github.com/sonic-net/sonic-utilities/pull/4622\r\nI have a minor update for this change here too @vmittal-msft\r\n\r\n@saksarav-nokia has approved it so it just needs merging in master and should get the msft-202601 tag too in that case"
     },
     {
         "number": 4373,
