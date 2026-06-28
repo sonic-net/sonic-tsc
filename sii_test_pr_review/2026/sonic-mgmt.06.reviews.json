@@ -1,5 +1,115 @@
 [
     {
+        "number": 25708,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-27T01:05:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 25708,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-27T01:06:00Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25708,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-27T01:16:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 25708,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-27T01:16:51Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25708,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-27T01:30:22Z",
+        "comment_author": "securely1g",
+        "comment_body": "Reviewed the full diff against `master` plus the underlying `multi_asic.py` semantics. Net: clean, well-scoped DRY refactor, and the \"behavior-equivalent\" claim mostly checks out. A few nits and one error-path subtlety worth a look \u2014 nothing blocking.\n\n**Verified equivalences (good):**\n- The two `\"-n asic{N}\"` / `\"asic{N}\"` hardcodings you replaced (`verify_dut_configdb_tsa_value`, `test_prefix_list_suppress.py`) are genuinely equivalent: `sonic_asic.py` builds `self.namespace = \"{}{}\".format(NAMESPACE_PREFIX, asic_index)` with `NAMESPACE_PREFIX='asic'`, so `get_namespace_from_asic_id` returns exactly `asic{N}`. Going through the API is the right call.\n- `namespace_cli_arg` / `get_db_cli_prefix` reproduce the old `'-n ' + ns if ns else ''` strings 1:1, and `.rstrip()` keeps the no-trailing-space invariant the old `.strip()` callsites relied on.\n- No orphaned callers of the deleted `asic_ns_for_db_cli` / `asic_ns_for_vtysh` \u2014 all 6+6 refs on master live in `test_prefix_list_suppress.py` and are migrated here.\n\n**1. vtysh migration changes the error path (worth a comment at least).**\nThe old local `asic_ns_for_vtysh` was total \u2014 it returned `\"\"` for any non-multi-asic or `None` index and never raised. The new `get_vtysh_cmd_for_asic` -> `get_vtysh_cmd_for_namespace` -> `get_asic_id_from_namespace(namespace)`, which **raises `ValueError` on an unknown namespace**. For a valid frontend `asic_index` this never triggers, so in practice it's fine, but it is a real semantic difference from \"pure refactor.\" Fine to keep \u2014 just flagging it.\n\n**2. `get_vtysh_cmd_for_namespace` does a blind `cmd.replace('vtysh', ...)`.**\nThat's pre-existing behavior you're now routing more callers through. It string-replaces the *first* `vtysh` token, so a command embedding the substring elsewhere would be rewritten unexpectedly. All your current call strings (`vtysh -c \"show ...\"`) are safe, but the helper is less robust than its name implies. Not yours to fix here; noting for awareness.\n\n**3. Subtle index-vs-namespace asymmetry in the old vs new vtysh arg (no-op, but neat that it lines up).**\nOld `asic_ns_for_vtysh` emitted `-n {asic_index}` (the integer); `get_vtysh_cmd_for_namespace` emits `-n {asic_id}` where `asic_id = get_asic_id_from_namespace(ns)`. Those resolve to the same integer for standard naming, so output is unchanged \u2014 just worth knowing the two paths arrive there differently.\n\n**4. Minor consistency nit.**\nIn `remove_allow_list` you build `db_cli` inline with `\"sonic-db-cli {}\".format(namespace_cli_arg(namespace)).rstrip()` instead of reusing `get_db_cli_prefix`. That's because here you have a raw `namespace` (not an `asic_index`), so it's reasonable \u2014 but a `get_db_cli_prefix_for_namespace(namespace)` sibling helper would let both entry points share one formatter and kill the last open-coded copy. Optional.\n\n**5. Docs/scope (nit).** PR says `flake8 --max-line-length=120` clean and pre-existing hits on `bgp_helpers.py:916/918` are unrelated \u2014 confirmed those aren't touched here. Good call leaving `test_bgp_router_id.py` for #25683 cleanup; maybe add a `# TODO(#25683)` breadcrumb so the follow-up isn't lost.\n\nCI: green except the Elastictest impacted-area kvmtests still pending (normal for a fresh push) \u2014 since every migrated callsite is exercised by existing BGP regression coverage, those passing is the real proof of equivalence. Worth waiting for `multi-asic-t1` specifically given this is multi-ASIC plumbing.\n\nLGTM once the kvmtests come back green; items above are nits/non-blocking.\n"
+    },
+    {
+        "number": 25708,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-27T14:03:11Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 25708,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-27T14:03:27Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25708,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-27T14:03:27Z",
+        "comment_author": "BYGX-wcr",
+        "comment_body": "Thanks for the thorough review @securely1g \u2014 appreciate the verification work on the NAMESPACE_PREFIX='asic' equivalence; that's the assurance I wanted on the `\"asic{N}\"` \u2192 `get_namespace_from_asic_id` swap.\n\nWalking the nits:\n\n1. **ValueError on unknown namespace via get_vtysh_cmd_for_namespace** \u2014 agreed it's a real semantic delta from \"pure refactor\", but as you note it's unreachable from a valid frontend `asic_index`. Leaving as-is and flagging in the issue tracker so it doesn't surprise anyone who later passes a synthetic / non-frontend index.\n2. **Blind `cmd.replace('vtysh', ...)`** \u2014 agreed, pre-existing in `multi_asic.py`. Out of scope here; happy to file a tracking issue if you want it visible.\n3. **`-n {asic_index}` vs `-n {asic_id}`** \u2014 agreed, no-op for standard naming. Noted for posterity.\n4. **`remove_allow_list` inline construction / suggestion of `get_db_cli_prefix_for_namespace`** \u2014 done in 9463ee2. Added the sibling helper; the asic-index variant is now a 1-liner that delegates to it, and `remove_allow_list` uses the new name. The PR no longer contains an open-coded copy of the prefix string.\n5. **`# TODO(#25683)` breadcrumb** \u2014 I did **not** add this to `test_bgp_router_id.py` because that file is being modified in #25683 and any TODO line would conflict on rebase. Instead I'm dropping a comment on #25683 itself referencing this PR and the tracking issue (#25707) so the cleanup is captured in the right place. LMK if you'd rather see the breadcrumb in a different location.\n\nCI: green on the previous push (incl. multi-asic-t1 Elastictest at 3h59m). The new commit will run through the matrix again \u2014 will keep an eye on it."
+    },
+    {
+        "number": 25708,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-06-27T21:22:50Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 25708,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-06-27T21:22:50Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 25701,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-26T19:05:14Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 25701,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-26T19:05:30Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25701,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-26T19:11:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 25701,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-26T19:12:11Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25701,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-06-26T20:03:56Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 25701,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-06-26T20:03:56Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 25681,
         "repo": "sonic-mgmt",
         "comment_at": "2026-06-25T22:08:29Z",
@@ -37427,6 +37537,13 @@
         "comment_at": "2026-06-25T17:19:14Z",
         "comment_author": "harjotsinghpawra",
         "comment_body": "@anders-nexthop can we cherry pick it for 202605 ?"
+    },
+    {
+        "number": 20765,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-27T11:17:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request for branch(es): 202605.<br>Added label(s) for branch(es) 202605.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 20765,
