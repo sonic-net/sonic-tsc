@@ -88,6 +88,397 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-08T11:16:38Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-08T11:16:49Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-09T05:00:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-09T05:00:51Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-09T06:21:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-09T06:21:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-09T07:10:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-09T07:10:17Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-09T10:38:16Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-09T10:38:27Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-09T12:40:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-09T12:40:42Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-11T04:35:44Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-11T04:35:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-11T06:37:16Z",
+        "comment_author": "lolyu",
+        "comment_body": "\r\n/azp run\r\n\r\n"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-11T06:37:28Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-11T06:49:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-11T06:50:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-12T19:11:54Z",
+        "comment_author": "yxieca",
+        "comment_body": "## Multi-model review \u2014 [vpp][fdb] Add fdb support\n\nThanks for this \u2014 the core VPP FDB push-notification design is solid: the producer (VPP events thread) only touches the MAC-event queue mutex, the consumer drains under `m_apimutex`, the single FIFO preserves event ordering, and the FFI boundary is POD-only with `memcpy`/`memcmp` for the MAC key. A few things to address before merge.\n\n### Should-fix\n\n**1. `l2_macs_event` batch is truncated at 128, dropping FDB deltas** (`vslib/vpp/vppxlate/SaiVppXlate.c`, `vl_api_l2_macs_event_t_handler`)\n`l2_macs_event` carries `mac[n_macs]` with a `u32` count. When `n_macs > VPP_MAC_EVENT_BATCH_MAX (128)`, the handler logs an error and drops entries `[128..n)`. FDB events are state deltas, not telemetry: a dropped age leaves a stale MAC, a dropped learn means orchagent never learns it. `max_macs_in_event=10` makes >128 unlikely in practice, but please consume the full batch (e.g. process in chunks and invoke the callback repeatedly) rather than truncating.\n\n### Questions\n\n**2. Teardown ordering of `deinitFdbEventHandling()`**\nThe MAC-event callback is deregistered at the end of `~SwitchVpp`, after the aging thread is already joined. This is safe as long as `staticMacEventCb` is only ever dispatched on `m_vpp_thread` (which `~SwitchVpp` joins first). Can you confirm VPP's socket client doesn't deliver unsolicited `l2_macs_event` on a separate internal rx thread? If it can, there's a teardown window where the callback could run during/after destruction. Hoisting the deregistration to the start of `Sai::uninitialize` would remove the ambiguity.\n\n**3. Warm-boot reconciliation of `m_vpp_fdb_entries`**\nThe snapshot map is in-memory only and isn't persisted to the warm-boot file. After a warm reboot it starts empty while VPP's L2FIB still holds entries, so an age event for a pre-reboot MAC won't be in the snapshot and no aged notification is generated (stale MAC). How is the snapshot reconciled with VPP's L2FIB across warm boot?\n\n### Scope \u2014 unrelated change bundled here\n\n**4. `syncd/scripts/syncd_init_common.sh`** contains two changes unrelated to VPP FDB and not mentioned in the description:\n- The CONFIG_DB key read by the init script is renamed `orch_southbound_zmq_enabled` \u2192 `swss_zmq` (that key was added recently in #1835). If the producer side isn't renamed in lockstep this would silently disable southbound ZMQ on every syncd platform. Please confirm the coordinated change and call it out.\n- nvidia-bluefield hugepages bumped `11700` \u2192 `16000`.\n\n### Nits\n- Process-global FFI state `g_mac_event_cb` / `g_mac_event_ctx` / `g_mac_event_batch` vs per-switch `initFdbEventHandling`: the last registration wins and one switch's teardown nulls the callback for all. Latent today (single-switch), but worth an assert/comment documenting the single-switch assumption.\n- ADD path records `m_vpp_fdb_entries[key]` even when `generateFdbLearnedOrMoveEvent` early-returns on a port-resolve failure; a later DELETE then calls `generateFdbAgedEvent`, which won't find it in `m_fdb_info_set` and logs an ERROR on a benign race. Consider only recording the snapshot on a confirmed-generated event, or downgrading that log.\n- `Meta::objectHasAttribute()` (new in `meta/Meta.{cpp,h}`) has no production caller \u2014 it's only used by `TestMetaDash.cpp`.\n- The `Sai.fdbAgingWakeEvent` unit test is effectively a start/stop \"doesn't deadlock\" smoke test (100ms sleep, no MAC events injected); the comment over-states that it exercises the wake path.\n- The action codes `0`/`1`/`2` (ADD/DELETE/MOVE) are duplicated across the C struct comment, the trampoline, and the C++ switch \u2014 an enum would prevent drift.\n"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-15T06:45:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-15T06:45:32Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-15T11:22:38Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-15T11:22:51Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-16T04:48:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-16T04:48:31Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-16T05:20:50Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-16T05:21:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-16T22:09:40Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-16T22:09:52Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-18T05:14:34Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-18T05:14:46Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-18T05:18:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-18T05:19:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-18T06:04:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-18T06:04:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-19T04:39:14Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-19T04:39:25Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-22T02:52:41Z",
+        "comment_author": "lolyu",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-22T02:52:52Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-23T20:11:10Z",
+        "comment_author": "yxieca",
+        "comment_body": "## Follow-up review \u2014 [vpp][fdb] Add fdb support (re-reviewed at `94d2e66`)\n\nThanks for the rework \u2014 re-reviewed the updated branch. The items from the previous round are addressed:\n\n- \u2705 **Batch handling** \u2014 the `l2_macs_event` handler now consumes the full batch in chunks and invokes the callback per chunk, so events beyond 128 are no longer dropped.\n- \u2705 **Scope** \u2014 the unrelated `syncd_init_common.sh` and `meta/Meta` changes are gone; the PR is now a focused saivpp/vslib diff.\n- \u2705 **ADD snapshot** \u2014 `m_vpp_fdb_entries[key]` is now recorded only on a confirmed-generated event.\n- \u2705 **Teardown ordering** \u2014 `deinitFdbEventHandling()` now runs first in `~SwitchVpp`, before the events thread is joined.\n- \u2705 **Single-switch global cb** \u2014 documented + `assert`.\n\nA few live items remain:\n\n### Should-fix\n**`m_swif_to_port_id` cache is never invalidated.** `resolvePortIdFromSwIfIndex` memoizes `sw_if_index \u2192 SAI port OID` permanently \u2014 there's no `erase`/`clear` on the map. VPP recycles `sw_if_index` values after an interface is deleted, so the next interface reusing that index resolves to the *previous* port's OID. That mis-attributes FDB learn/move/age notifications, and `vpp_fdb_entries_invalidate_by_port` matches against the same stale cache. The companion `m_swif_to_bdid` is already untracked on port-leave via `swif_bdid_untrack` \u2014 suggest invalidating `m_swif_to_port_id[sw_if_index]` in the same place.\n\n### Questions\n1. **Teardown thread model.** Deregistering before the join is safe as long as `l2_macs_event` is only ever dispatched on the WR() polling loop (per the code comment). Can you confirm VPP's socket client never delivers it on a separate internal rx thread? If it can, there's still a window where `staticMacEventCb` could touch a half-destroyed switch.\n2. **Warm boot.** `m_vpp_fdb_entries` / `m_fdb_info_set` are in-memory only. After a warm reboot they start empty while VPP's L2FIB still holds entries, so an age for a pre-reboot MAC hits the \"unknown MAC, skipping\" path \u2192 no aged notification \u2192 stale FDB_TABLE in SONiC. How is the snapshot reconciled with VPP's L2FIB across warm boot, or is FDB warm-boot explicitly out of scope for saivpp?\n\n### Nits\n- The single-switch `assert(g_mac_event_cb == NULL ...)` is compiled out under `NDEBUG`; a second registration would silently clobber the global in a release build. Consider a runtime log + early-return alongside the assert.\n- `SwitchVpp.h` comment references `onVppMacEvent()`; the actual producer is `staticMacEventCb`.\n- The unit test exercises the aging thread's start/stop lifecycle; the queue-drain path in `processFdbEntriesForAging` isn't directly covered.\n"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-26T03:56:07Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-26T03:56:18Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-26T04:04:18Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-26T04:04:29Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-26T09:40:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-26T09:40:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-27T12:00:19Z",
+        "comment_author": "lolyu",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-06-27T12:00:40Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-06-16T22:57:12Z",
+        "review_author": "yue-fred-gao"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-06-17T15:37:07Z",
+        "review_author": "yue-fred-gao"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-06-18T06:04:54Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-06-18T06:05:17Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-06-18T06:05:34Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-06-18T14:18:17Z",
+        "review_author": "yue-fred-gao"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-06-18T14:18:57Z",
+        "review_author": "yue-fred-gao"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-06-26T15:10:04Z",
+        "review_author": "yue-fred-gao"
+    },
+    {
+        "number": 1934,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-06-26T15:10:04Z",
+        "latestReview_author": "yue-fred-gao",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 1932,
         "repo": "sonic-sairedis",
         "comment_at": "2026-06-05T15:48:30Z",
