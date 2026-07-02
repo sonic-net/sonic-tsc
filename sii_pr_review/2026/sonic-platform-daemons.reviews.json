@@ -1,5 +1,52 @@
 [
     {
+        "number": 844,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-07-01T15:20:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 844,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-07-01T15:21:03Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 844,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-07-01T15:34:58Z",
+        "comment_author": "nats-nokia",
+        "comment_body": "@judyjoseph\r\nWe found an issue with latest bmcctl that CLI \"config chassis modules <shutdown/startup> SWITCH-HOST\" events are not captured by Eventhandler untill PMON is restarted once after fresh onie-nos-install. \r\n\r\nAlso, in air-cooled systems, if switch-host is shutdown and saved in DB, this commit skips power-on the switch-host on startup. \r\n\r\nCould you please review the changes?\r\n\r\nError case Logs:\r\n2026 Apr 13 19:51:57.282641 h8-128-taj-bmc NOTICE pmon#bmcctld: bmcctld starting up\r\n2026 Apr 13 19:51:57.286578 h8-128-taj-bmc NOTICE pmon#bmcctld: STARTUP: Switch-Host already ONLINE (daemon restart); skipping boot sequence\r\n2026 Apr 13 19:51:57.287018 h8-128-taj-bmc INFO pmon#bmcctld.syslog[36]: Entering event subscription loop\r\n2026 Apr 13 19:51:57.291825 h8-128-taj-bmc NOTICE pmon#bmcctld: CHASSIS_MODULE change: key=SWITCH-HOST admin_status=up\r\n2026 Apr 13 19:51:57.292589 h8-128-taj-bmc INFO pmon#bmcctld.syslog[36]: NOTICE: CHASSIS_MODULE change: key=SWITCH-HOST admin_status=up\r\n2026 Apr 13 19:52:01.790813 h8-128-taj-bmc INFO pmon#supervisord 2026-04-13 19:52:01,790 INFO success: bmcctld entered RUNNING state, process has stayed up for > than 10 seconds (startsecs)\r\n\r\nWorking case Logs:\r\n2026 Apr 13 19:56:09.397595 sonic INFO pmon#bmcctld.syslog[29]: Entering event subscription loop\r\n2026 Apr 13 19:56:09.398274 sonic NOTICE pmon#bmcctld: CHASSIS_MODULE change: key=SWITCH-HOST admin_status=up\r\n2026 Apr 13 19:56:09.398983 sonic INFO pmon#bmcctld.syslog[29]: NOTICE: CHASSIS_MODULE change: key=SWITCH-HOST admin_status=up\r\n2026 Apr 13 19:56:09.401134 sonic NOTICE pmon#bmcctld: STARTUP: Switch-Host already ONLINE (daemon restart); skipping boot sequence\r\n2026 Apr 13 19:56:09.401429 sonic NOTICE pmon#bmcctld: CHASSIS_MODULE admin_up: key=SWITCH-HOST NOOP (Switch-Host already ONLINE)\r\n2026 Apr 13 19:56:16.679964 sonic INFO pmon#supervisord 2026-04-13 19:56:16,679 INFO success: bmcctld entered RUNNING state, process has stayed up for > than 10 seconds (startsecs)\r\n\r\n\r\n"
+    },
+    {
+        "number": 844,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2026-07-01T22:01:02Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 844,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2026-07-01T23:31:31Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 844,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2026-07-01T22:01:02Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 844,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2026-07-01T23:31:31Z",
+        "latestReview_author": "judyjoseph",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 839,
         "repo": "sonic-platform-daemons",
         "comment_at": "2026-06-16T21:26:34Z",
@@ -54,6 +101,13 @@
         "comment_at": "2026-06-18T17:06:07Z",
         "comment_author": "nats-nokia",
         "comment_body": "> @nats-nokia @Pavan-Nokia f.y.i\r\n\r\nThank you Judy. We have tested the changes and default switch-host state is set as admin-up.\r\nLGTM."
+    },
+    {
+        "number": 839,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-07-01T05:21:08Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202608: https://github.com/Azure/sonic-platform-daemons.msft/pull/71"
     },
     {
         "number": 839,
@@ -974,6 +1028,13 @@
         "comment_at": "2026-06-12T21:27:33Z",
         "comment_author": "judyjoseph",
         "comment_body": "Thanks @yxieca. will raise a follow up PR to fix the remaining no blocking comments."
+    },
+    {
+        "number": 818,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-07-01T04:26:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202608: https://github.com/Azure/sonic-platform-daemons.msft/pull/70"
     },
     {
         "number": 818,
