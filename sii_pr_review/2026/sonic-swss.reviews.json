@@ -1,5 +1,58 @@
 [
     {
+        "number": 4731,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-02T19:19:52Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4731,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-02T19:20:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4731,
+        "repo": "sonic-swss",
+        "review_at": "2026-07-02T19:21:32Z",
+        "review_author": "lguohan"
+    },
+    {
+        "number": 4731,
+        "repo": "sonic-swss",
+        "review_at": "2026-07-02T19:21:55Z",
+        "review_author": "theasianpianist"
+    },
+    {
+        "number": 4731,
+        "repo": "sonic-swss",
+        "review_at": "2026-07-02T19:59:33Z",
+        "review_author": "prabhataravind"
+    },
+    {
+        "number": 4731,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-07-02T19:21:32Z",
+        "latestReview_author": "lguohan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4731,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-07-02T19:21:55Z",
+        "latestReview_author": "theasianpianist",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4731,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-07-02T19:59:33Z",
+        "latestReview_author": "prabhataravind",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 4727,
         "repo": "sonic-swss",
         "comment_at": "2026-07-01T18:26:21Z",
@@ -16,6 +69,13 @@
     {
         "number": 4727,
         "repo": "sonic-swss",
+        "comment_at": "2026-07-02T07:30:24Z",
+        "comment_author": "rajkumar1-arista",
+        "comment_body": "This was intentionally not merged in master as it was just a temporary workaround, actual fix is still in review: https://github.com/sonic-net/sonic-sairedis/pull/1774 "
+    },
+    {
+        "number": 4727,
+        "repo": "sonic-swss",
         "review_at": "2026-07-02T00:51:05Z",
         "review_author": "prsunny"
     },
@@ -23,6 +83,95 @@
         "number": 4727,
         "repo": "sonic-swss",
         "latestReview_at": "2026-07-02T00:51:05Z",
+        "latestReview_author": "prsunny",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4724,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-01T02:12:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4724,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-01T02:13:09Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4724,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-02T19:23:24Z",
+        "comment_author": "theasianpianist",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4724,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-02T19:23:36Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4724,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-02T23:37:51Z",
+        "comment_author": "prsunny",
+        "comment_body": "how about \"azpw retry\" etc?"
+    },
+    {
+        "number": 4724,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-02T23:50:28Z",
+        "comment_author": "theasianpianist",
+        "comment_body": "/azpw retry"
+    },
+    {
+        "number": 4724,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-02T23:50:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 4724,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-02T23:50:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "No failed(or canceled) stages or jobs found in the most recent build 1154976."
+    },
+    {
+        "number": 4724,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-03T00:13:26Z",
+        "comment_author": "theasianpianist",
+        "comment_body": "> how about \"azpw retry\" etc?\r\n\r\nOnly the stages that previously failed and get retried would have the latest master branch pulled in. Stages that previously succeeded don't get re-run and wont' be updated. Depending on the type of issue that's causing CI failures this may or may not be sufficient.\r\n \r\nFor example, with the recent DVS changes that broke VS tests, the broken docker-sonic-vs image was downloaded in the 'BuildDocker' stage, which succeeded, but then the 'VSTest' stage failed. Once we pinned the docker-sonic-vs version in the master branch, `azpw retry` would not fix the problem since only the VSTest stage is re-run against latest master, but it's still using the DVS image from the old 'BuildDocker' stage which did not get re-run. In this case, we would need to re-run the entire pipeline to pickup the fix with `azp run`\r\n\r\n"
+    },
+    {
+        "number": 4724,
+        "repo": "sonic-swss",
+        "review_at": "2026-07-01T02:15:03Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4724,
+        "repo": "sonic-swss",
+        "review_at": "2026-07-02T23:59:41Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 4724,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-07-01T02:15:03Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 4724,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-07-02T23:59:41Z",
         "latestReview_author": "prsunny",
         "latestReview_state": "APPROVED"
     },
@@ -5972,6 +6121,109 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 4584,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-19T17:46:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4584,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-19T17:46:39Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4584,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-28T00:57:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4584,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-28T00:58:03Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4584,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-04T21:59:01Z",
+        "comment_author": "prsunny",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4584,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-04T21:59:11Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4584,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-24T21:50:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4584,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-24T21:51:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4584,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-30T01:51:03Z",
+        "comment_author": "anish-n",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4584,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-30T01:51:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nCommenter does not have sufficient privileges for PR 4584 in repo sonic-net/sonic-swss<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4584,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-01T00:06:08Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4584,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-01T00:06:18Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4584,
+        "repo": "sonic-swss",
+        "review_at": "2026-05-20T15:34:46Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 4584,
+        "repo": "sonic-swss",
+        "review_at": "2026-07-02T22:01:42Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 4584,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-07-02T22:01:42Z",
+        "latestReview_author": "prsunny",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 4582,
         "repo": "sonic-swss",
         "comment_at": "2026-05-18T13:13:21Z",
@@ -6186,6 +6438,13 @@
         "comment_at": "2026-06-23T00:07:16Z",
         "comment_author": "abdosi",
         "comment_body": "@venkit-nexthop : @deepak-singhal0408 : this is reversing the changes done here: https://github.com/sonic-net/sonic-swss/pull/3269\r\n\r\nHave we verified we are not regressing the previous behavior ?\r\n\r\n"
+    },
+    {
+        "number": 4578,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-02T20:36:15Z",
+        "comment_author": "venkit-nexthop",
+        "comment_body": "> @venkit-nexthop : @deepak-singhal0408 : this is reversing the changes done here: #3269\r\n> \r\n> Have we verified we are not regressing the previous behavior ?\r\n\r\n@abdosi sorry for the late response. I am catching up after my leave. \r\nMy change is only in ZmqOrch and the PR you pointed to appears to be for the regular orch (which handles redis).\r\nThe problem I am fixing has route download speed implications. But the most important thing is that memory grows unboundedly and causes OOM situation with this (due to lack of coalescing).\r\nPlease refer to the HLD I had written with proposal for a more complete fix here => https://github.com/sonic-net/SONiC/pull/2328"
     },
     {
         "number": 4578,
