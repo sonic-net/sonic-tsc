@@ -3597,6 +3597,13 @@
     {
         "number": 25536,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-02T06:58:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@yijingyan2 PR conflicts with 202511 branch"
+    },
+    {
+        "number": 25536,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-22T04:18:30Z",
         "review_author": "auspham"
     },
@@ -8733,6 +8740,13 @@
     {
         "number": 25303,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-03T00:35:09Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202608: https://github.com/Azure/sonic-mgmt.msft/pull/1277"
+    },
+    {
+        "number": 25303,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-11T08:52:15Z",
         "review_author": "copilot-pull-request-reviewer"
     },
@@ -8933,6 +8947,13 @@
         "comment_at": "2026-06-11T04:29:21Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25297,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-02T03:24:03Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202608: https://github.com/Azure/sonic-mgmt.msft/pull/1266"
     },
     {
         "number": 25297,
@@ -9916,6 +9937,20 @@
         "comment_at": "2026-06-16T06:23:36Z",
         "comment_author": "augusdn",
         "comment_body": "Thanks for the careful review, @yxieca \u2014 pushed an update (`aecf1f49a`) addressing all of it.\r\n\r\n**Unrestored process-wide alarm \u2014 fixed (made nest-safe).** To your question \"does anything else in the autorestart path arm `SIGALRM`?\": I grepped the whole `tests/` tree and this watchdog is the only `SIGALRM`/`signal.alarm` user, and `pytest-timeout` isn't in the harness \u2014 so nothing arms it concurrently today. But I agree it shouldn't clobber a process-global timer, so the CM now saves the previous alarm and restores it on exit, debited for the time it held it:\r\n\r\n```python\r\nprevious_alarm_remaining = 0\r\narmed_at = time.monotonic()\r\ntry:\r\n    previous_alarm_remaining = signal.alarm(timeout_secs)\r\n    yield\r\nfinally:\r\n    signal.alarm(0)\r\n    signal.signal(signal.SIGALRM, previous_handler)\r\n    if previous_alarm_remaining > 0:                       # re-arm the pre-existing alarm\r\n        elapsed = int(time.monotonic() - armed_at)\r\n        signal.alarm(max(1, previous_alarm_remaining - elapsed))\r\n```\r\n\r\nArming inside the `try` also covers your nit #1 \u2014 the handler is restored in `finally` even if `signal.alarm()` ever raised.\r\n\r\n**On `ContainerAutorestartTimeout` being swallowed by a broad `except Exception` (nit #2) \u2014 great catch, and it turned out to be more than theoretical.** In physical validation the timeout was raised inside `common.utilities.wait_until`, whose retry loop does `except Exception` \u2014 it swallowed the exception, consumed the one-shot alarm, and the case ran unbounded (~8h). It now subclasses **`BaseException`** (like `KeyboardInterrupt`/`SystemExit`/pytest's `OutcomeException`); a re-run then bounded the same hang to ~44 min with a clean junit failure naming the container, and a base-branch control (no watchdog) reproduced the original multi-hour phantom \"no xml file\". That change is in this pushed revision.\r\n\r\n**Other nits:** the recovery-failure path now uses `logger.exception(...)` so the traceback is captured (nit #3), and the docstring is reworded \u2014 the abort happens because the handler *raises* and that exception propagates out of the interrupted syscall, not via PEP 475 retry semantics (nit #4).\r\n\r\nThanks again for the thorough look!\r\n"
+    },
+    {
+        "number": 25269,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-02T01:32:10Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202608: https://github.com/Azure/sonic-mgmt.msft/pull/1265"
+    },
+    {
+        "number": 25269,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-02T16:23:20Z",
+        "comment_author": "vaibhavhd",
+        "comment_body": " \r\nHas anyone investigated why our containers are hanging during autorestart? I understand that the hung cases should die at some point and shouldn't block the overall run. But isn't the test giving something here that's worth investigating?\r\nThis seems concerning to me - \r\n` Physical hardware A/B (Arista-7060CX-32S, >t0): on this platform the bgp container reliably hangs during autorestart`\r\nReliably hanging should be a bad thing.\r\n"
     },
     {
         "number": 25269,
@@ -12663,6 +12698,20 @@
     {
         "number": 25174,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-02T11:14:20Z",
+        "comment_author": "weiguo-nvidia",
+        "comment_body": "> @liat-grozovik Is this change required to be cherry-picked to branch 202605 to fix a test failure? If so, please reference a github issue to the test failure.\r\n> \r\n> If not, it will be cherry-picked to 202608.\r\n\r\nHi @ediwibowo-msft \r\n\r\nThe PR related to BMC, need cherry-pick to 202608 instead of 202605"
+    },
+    {
+        "number": 25174,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-02T15:57:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202608: https://github.com/Azure/sonic-mgmt.msft/pull/1268"
+    },
+    {
+        "number": 25174,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-18T05:00:16Z",
         "review_author": "nhe-NV"
     },
@@ -14306,6 +14355,13 @@
     {
         "number": 25113,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-02T16:41:24Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202608: https://github.com/Azure/sonic-mgmt.msft/pull/1271"
+    },
+    {
+        "number": 25113,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-04T03:40:11Z",
         "review_author": "nhe-NV"
     },
@@ -15122,6 +15178,41 @@
         "comment_at": "2026-07-01T15:25:00Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to msft-202608: https://github.com/Azure/sonic-mgmt.msft/pull/1262"
+    },
+    {
+        "number": 25085,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-02T15:47:15Z",
+        "comment_author": "vaibhavhd",
+        "comment_body": "These kind of changes should be broken down into two PRs. There are two important and distinct changes here. Why is `Disable memory_utilization check for this test` this being done? Why is that not represented on the PR?"
+    },
+    {
+        "number": 25085,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-02T15:50:50Z",
+        "comment_author": "vaibhavhd",
+        "comment_body": "It seems to me that `memory_utilization check` needs to be made smarter to handle these kind of scenarios instead of blanket disabling them? Past cases (such as warm-reboot test) cannot be used as good examples for replicating the behavior. "
+    },
+    {
+        "number": 25085,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-02T15:53:57Z",
+        "comment_author": "vaibhavhd",
+        "comment_body": ">After restarting swss/syncd, the test currently waits a hardcoded time.sleep(60) before proceeding. On a DUT with many BGP neighbors (e.g., T1/T2 with 7050CX3), 60 seconds is not enough for bgpd to fully re-converge after the cascade restart.\r\n\r\nIs test surfacing something important - is it expected that 60s is not enough for bgp convergence? How is the BGP convergence criteria defined here? Should it be a function of something? Like neighbors?"
+    },
+    {
+        "number": 25085,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-02T15:55:58Z",
+        "comment_author": "vaibhavhd",
+        "comment_body": "@StormLiangMS , @lipxu can you follow up on the comments made here please? I am approving 202605 cherrypick to unblock CI."
+    },
+    {
+        "number": 25085,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-03T00:46:17Z",
+        "comment_author": "lipxu",
+        "comment_body": "> These kind of changes should be broken down into two PRs. There are two important and distinct changes here. Why is `Disable memory_utilization check for this test` this being done? Why is that not represented on the PR?\r\n\r\nHi, @vaibhavhd , thanks for your comments, \r\n\r\n- Why is `Disable memory_utilization check for this test` this being done?\r\n   This test performs a SWSS restart, which restarts all containers. As a result, the memory is reinitialized, making the before/after memory comparison inaccurate. Therefore, the memory utilization check is disabled for this test.\r\n\r\n- Why is that not represented on the PR?\r\n   The memory checker itself is harmless. We disable it only because the results would not be meaningful after the SWSS restart. Since the check cannot provide accurate data in this scenario, there is no benefit in spending additional time running it."
     },
     {
         "number": 25085,
@@ -16764,6 +16855,13 @@
     {
         "number": 25021,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-02T16:40:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202608: https://github.com/Azure/sonic-mgmt.msft/pull/1270"
+    },
+    {
+        "number": 25021,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-02T03:28:24Z",
         "review_author": "Blueve"
     },
@@ -17235,6 +17333,20 @@
         "comment_at": "2026-06-11T17:04:03Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25006,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-02T19:49:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@r12f PR conflicts with 202605 branch"
+    },
+    {
+        "number": 25006,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-02T21:44:40Z",
+        "comment_author": "r12f",
+        "comment_body": "Removing 202607, because it will go to 202605."
     },
     {
         "number": 25006,
@@ -19521,6 +19633,13 @@
         "comment_at": "2026-06-15T23:36:22Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 24963,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-02T23:16:03Z",
+        "comment_author": "wrideout-arista",
+        "comment_body": "Do we know if this breaks non-virtual runs with converged peers?  Has this be run on 202605 before we slam it in there?\r\n\r\n@r12f @davidm-arista "
     },
     {
         "number": 24963,
@@ -22157,6 +22276,13 @@
     {
         "number": 24822,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-02T22:47:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202512: https://github.com/Azure/sonic-mgmt.msft/pull/1275"
+    },
+    {
+        "number": 24822,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-10T19:18:36Z",
         "review_author": "wrideout-arista"
     },
@@ -24449,6 +24575,13 @@
         "comment_at": "2026-06-12T19:37:50Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 24665,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-02T22:41:13Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "@anders-nexthop Can you raise a PR to 202512 to address conflict?"
     },
     {
         "number": 24665,
@@ -27994,6 +28127,13 @@
         "comment_at": "2026-06-29T04:24:15Z",
         "comment_author": "weiguo-nvidia",
         "comment_body": "Hi @judyjoseph ,\r\n\r\nCould you help cherry-pick the PR to 202605 branch? Thanks!"
+    },
+    {
+        "number": 24453,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-02T16:39:50Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202608: https://github.com/Azure/sonic-mgmt.msft/pull/1269"
     },
     {
         "number": 24453,
@@ -31945,6 +32085,13 @@
     {
         "number": 23936,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-02T09:15:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/25847"
+    },
+    {
+        "number": 23936,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-10T12:37:50Z",
         "review_author": "StormLiangMS"
     },
@@ -34482,6 +34629,13 @@
     {
         "number": 23678,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-02T15:52:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202608: https://github.com/Azure/sonic-mgmt.msft/pull/1267"
+    },
+    {
+        "number": 23678,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-03T20:18:32Z",
         "review_author": "yxieca"
     },
@@ -35700,6 +35854,13 @@
         "comment_at": "2026-06-24T21:53:15Z",
         "comment_author": "ccroy-arista",
         "comment_body": "@StormLiangMS issue tracker opened and description updated."
+    },
+    {
+        "number": 23542,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-02T09:17:07Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/25848"
     },
     {
         "number": 23542,
