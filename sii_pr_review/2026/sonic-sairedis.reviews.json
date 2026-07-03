@@ -1,5 +1,357 @@
 [
     {
+        "number": 1966,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-02T12:17:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-sairedis/pull/1965"
+    },
+    {
+        "number": 1966,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-02T12:17:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1966,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-02T12:18:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1965,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-02T06:33:08Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1965,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-02T06:33:20Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1965,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-02T12:17:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-sairedis/pull/1966"
+    },
+    {
+        "number": 1965,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-07-02T06:35:03Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 1965,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-07-02T09:45:19Z",
+        "review_author": "yijingyan2"
+    },
+    {
+        "number": 1965,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-07-02T06:35:03Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 1965,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-07-02T09:45:19Z",
+        "latestReview_author": "yijingyan2",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-01T02:33:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-01T02:33:59Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-01T03:22:10Z",
+        "comment_author": "justin-wong-ce",
+        "comment_body": "Mirroring my reply from direct cast PR to 202605 (https://github.com/sonic-net/sonic-sairedis/pull/1955#issuecomment-4842198142):\r\n\r\n@StormLiangMS , regarding your concerns:\r\n\r\n> I have one concern before this merges: the PR description scopes the fix to Broadcom management-port `N/A` counters, but the implementation changes generic `FlexCounter` behavior. In the single-counter path, any `collectData()` failure now publishes zero-valued counters to COUNTERS_DB, which can mask real SAI read/clear failures on normal objects and makes unsupported/error/true-zero indistinguishable.\r\n\r\nI agree that there is a risk where failures are masked away - this is precisely why this was a temporary workaround limited to specific branches.  This is a compromise that has been acknowledged when this temporary workaround is done for the 202412 and 202505 branch. Counter values also cannot go negative as unsigned ints are used for its storage, and anything not a number will cause issues in testing (i.e. `N/A`). So the only way to make the value appear as a number wihle making sense is to set it to 0.\r\n\r\n\r\n> Could you either scope the zero-fill to the known Broadcom management-port unsupported-counter case, or confirm why it is safe for all single-counter `FlexCounter` failures on 202605?\r\n\r\nThe existing FlexCounter implementation is unable to distinguish between ports - there is no notion of multiple ports where all ports are treated as the same. This is precisely why the full fix is needed fast.\r\nDifferent topo/hwskus will have different number of interfaces, and interfaces are referenced by `VID`, which is generated during runtime. Ordering of interfaces in the vector of `VID`s is also not garunteed to match the port/lane numbering of the switch. This means there is  no good way to check for a port's type without making SAI calls and comparing an interface's counter support with another, which you may notice is similar to the full fix...\r\n\r\nAny sort of check on interfaces will involve so many parts that it will either be extremely inperformant or become the full fix itself.\r\n\r\n> One minor thing as well: the new `SWSS_LOG_INFO` messages use `0x%x` for `rid`/`vid`; these are `sai_object_id_t`-sized values, so please use `PRIx64` or `sai_serialize_object_id()` like nearby logs to avoid truncated IDs.\r\n\r\nWill do."
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-01T04:19:34Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-01T04:19:46Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-01T08:18:20Z",
+        "comment_author": "justin-wong-ce",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-01T08:18:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-01T08:18:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1153496:\n\n\n\u2705Stage **BuildTrixie**:\n- Job amd64: retried.\n\n\n\u2705Stage **Test**:\n- Job vstest: retried."
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-01T08:49:23Z",
+        "comment_author": "justin-wong-ce",
+        "comment_body": "/azpw retry"
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-01T08:49:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-01T08:49:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1153496:\n\n\n\u2705Stage **BuildTrixie**:\n- Job amd64: retried."
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-01T15:22:34Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "/azpw retry"
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-01T15:22:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-01T15:22:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1153496:\n\n\n\u2705Stage **Test**:\n- Job vstest: retried."
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-01T20:15:54Z",
+        "comment_author": "justin-wong-ce",
+        "comment_body": "/azpw retry"
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-01T20:15:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-01T20:15:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1153496:\n\n\n\u2705Stage **Test**:\n- Job vstest: retried."
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-01T22:56:01Z",
+        "comment_author": "justin-wong-ce",
+        "comment_body": "vs tests CI are failing with redis issues in infra @StormLiangMS @lolyu :\r\n```\r\n../../../../../../usr/lib/python3/dist-packages/redis/connection.py:2\r\n  /usr/lib/python3/dist-packages/redis/connection.py:2: DeprecationWarning: The distutils package is deprecated and slated for removal in Python 3.12. Use setuptools or check PEP 632 for potential alternatives\r\n    from distutils.version import StrictVersion\r\n\r\ntest_vnet.py::test_nonflaky_dummy\r\n  /usr/local/lib/python3.10/dist-packages/_pytest/unraisableexception.py:67: PytestUnraisableExceptionWarning: Exception ignored in: <function ApplDbValidator.__del__ at 0x72aff6b10ee0>\r\n  \r\n  Traceback (most recent call last):\r\n    File \"/agent/_work/1/s/sonic-swss/tests/conftest.py\", line 195, in __del__\r\n      neighbors = self.get_keys(self.NEIGH_TABLE)\r\n    File \"/agent/_work/1/s/sonic-swss/tests/dvslib/dvs_database.py\", line 138, in get_keys\r\n      table = swsscommon.Table(self.db_connection, table_name)\r\n    File \"/usr/lib/python3/dist-packages/swsscommon/swsscommon.py\", line 3435, in __init__\r\n      _swsscommon.Table_swiginit(self, _swsscommon.new_Table(*args))\r\n  RuntimeError: Unable to connect to redis (unix-socket) - No such file or directory(1): Cannot assign requested address\r\n  \r\n  Enable tracemalloc to get traceback where the object was allocated.\r\n  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.\r\n    warnings.warn(pytest.PytestUnraisableExceptionWarning(msg))\r\n\r\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\r\n---- generated xml file: /agent/_work/1/s/sonic-swss/tests/test_vnet_tr.xml ----\r\n============ 42 passed, 1 skipped, 2 warnings in 1616.38s (0:26:56) ============\r\n\r\n##[error]Bash exited with code '123'.\r\nFinishing: Run vs tests\r\n```"
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-02T01:04:18Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "Tracked the recurring VS/DVS CI failure as a sonic-swss infrastructure/test flake:\n- https://github.com/sonic-net/sonic-swss/issues/4728\n\nFailure signature from Azure build 1153496: DVS service readiness timeout with most services STOPPED (`start.sh`/`syncd` EXITED), followed by Redis unix-socket cleanup errors and DASH test cascades with `docker.errors.NotFound: No such container`."
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-02T01:15:27Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "Follow-up on the recurring VS/DVS CI flake: I opened a candidate sonic-swss test-infra fix:\n- https://github.com/sonic-net/sonic-swss/pull/4729\n\nRecent history suggests the VS test job is flaky, not consistently broken. `Test / Run vs tests` passed in recent Azure.sonic-sairedis builds such as `1153722`, `1152093`, and `1151868`, while the current build `1153496` shows the DVS startup timeout / Docker `No such container` cascade tracked in sonic-swss#4728."
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-02T01:21:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-02T01:21:31Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-02T04:37:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-02T04:37:56Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-02T05:19:30Z",
+        "comment_author": "justin-wong-ce",
+        "comment_body": "/azpw retry"
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-02T05:19:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-02T05:19:35Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1154487:\n\n\n\u2705Stage **Build**:\n- Job amd64: retried.\n- Job amd64: retried.\n\n\n\u2705Stage **BuildAsan**:\n- Job amd64: retried."
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-02T06:46:07Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "/azpw retry"
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-02T06:46:10Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-02T06:46:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1154487:\n\n\n\u2705Stage **Build**:\n- Job amd64: retried.\n- Job amd64: retried.\n\n\n\u2705Stage **BuildAsan**:\n- Job amd64: retried."
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-02T06:53:18Z",
+        "comment_author": "justin-wong-ce",
+        "comment_body": "/azpw retry"
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-02T06:53:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-02T06:53:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1154487:\n\n\n\u2705Stage **Build**:\n- Job amd64: retried.\n- Job amd64: retried.\n\n\n\u2705Stage **BuildAsan**:\n- Job amd64: retried."
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-02T10:33:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-02T10:34:03Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-02T15:34:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-sairedis/pull/1967"
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-07-01T03:16:05Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-07-01T04:46:53Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-07-01T05:29:07Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-07-01T05:29:07Z",
+        "latestReview_author": "lolyu",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1962,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-07-01T04:46:53Z",
+        "latestReview_author": "StormLiangMS",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 1958,
         "repo": "sonic-sairedis",
         "comment_at": "2026-06-26T03:00:53Z",
