@@ -15217,6 +15217,20 @@
     {
         "number": 25085,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-03T01:42:30Z",
+        "comment_author": "lipxu",
+        "comment_body": "> It seems to me that `memory_utilization check` needs to be made smarter to handle these kind of scenarios instead of blanket disabling them? Past cases (such as warm-reboot test) cannot be used as good examples for replicating the behavior.\r\n\r\nHi, @vaibhavhd, thanks for your suggestion. I fully agree a smarter memory checker would be the ideal solution. But we don't yet have a better option for this specific case.\r\nThis test restarts swss/syncd, which cascades to almost all containers. The checker compares memory before vs. after the test, so an intentional in-test restart leaves no valid baseline \u2014 the delta is just a process being re-created, not real growth. \r\nIf you have a better approach in mind, let's sync up and discuss it. I'm happy to improve the current solution.\r\nThanks a lot.\r\n"
+    },
+    {
+        "number": 25085,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-03T01:50:23Z",
+        "comment_author": "lipxu",
+        "comment_body": "> > After restarting swss/syncd, the test currently waits a hardcoded time.sleep(60) before proceeding. On a DUT with many BGP neighbors (e.g., T1/T2 with 7050CX3), 60 seconds is not enough for bgpd to fully re-converge after the cascade restart.\r\n> \r\n> Is test surfacing something important - is it expected that 60s is not enough for bgp convergence? How is the BGP convergence criteria defined here? Should it be a function of something? Like neighbors?\r\n\r\nHi, @vaibhavhd , Good questions \u2014 the short answer is that 60s was just an arbitrary value, not a meaningful threshold.\r\nWhether 60s is enough depends on scale. This change was driven by m1-128, which has 128 BGP neighbors \u2014 after a full swss/syncd restart, bringing all 128 sessions back to Established takes longer than 60s. On a small topology 60s would be plenty. So a single hardcoded sleep can't fit both.\r\nThat's why the fix drops the fixed sleep and waits for actual convergence instead: polls until all BGP neighbors on the DUT reach Established. So convergence = all neighbors Established, and it scales naturally with neighbor count \u2014 a few seconds on a small topology, longer on m1-128 \u2014 so we no longer need a per-topology tuned value.\r\nAdd @deepak-singhal0408 here to correct me if anything wrong, thanks a lot"
+    },
+    {
+        "number": 25085,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-03T06:21:07Z",
         "review_author": "ZhaohuiS"
     },
