@@ -5297,6 +5297,13 @@
     {
         "number": 25443,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-05T23:16:39Z",
+        "comment_author": "yxieca",
+        "comment_body": "@xwjiang-ms Following up on this merged change (also flagged on the open backport PR #25780) \u2014 a question about one of the sites this PR converted to `.get(\"failed\", False)`.\n\nIn `tests/common/devices/cisco.py`, `get_macsec_status_logs` (~line 1013 on master):\n```python\noutput = self.commands(commands=[command])[\"stdout\"][0]\nif not output.get(\"failed\", False):\n    return len(output[\"stdout_lines\"][0]) > 0, output[\"stdout\"][0]\nreturn False, str(output)\n```\nHere `output` is assigned `...[\"stdout\"][0]` \u2014 the stdout element (a string/list of log lines), not the full Ansible result dict. So on the success path `output.get(\"failed\", False)` looks like it would raise `AttributeError` (str/list has no `.get`), which the broad `except` in the method would swallow \u2014 making the helper report failure even when the `show logging` query succeeded. The following `output[\"stdout_lines\"]` / `output[\"stdout\"]` indexing would also only be valid on the full result dict.\n\nThis isn't introduced by this PR (the prior `output[\"failed\"]` form would have raised the same way), but since this PR touched the line and the pattern differs from the other sites here (which read `output = self.commands(...)` and index stdout only after the failed-check), I wanted to confirm: is `output` in this method really the stdout payload rather than the result dict? If so, this is potentially a blocking correctness bug and the fix would be to keep the full result:\n```python\nresult = self.commands(commands=[command])\nif not result.get(\"failed\", False):\n    return len(result[\"stdout_lines\"][0]) > 0, result[\"stdout\"][0]\nreturn False, str(result)\n```\nHappy to file a separate issue/PR if that's the preferred path \u2014 flagging here so it's captured.\n\n*Reviewed by AI agent on behalf of Ying.*\n"
+    },
+    {
+        "number": 25443,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-18T18:04:08Z",
         "review_author": "YatishSVC"
     },
@@ -15301,6 +15308,27 @@
         "comment_at": "2026-07-04T01:31:39Z",
         "comment_author": "weiguo-nvidia",
         "comment_body": "Hi @deepak-singhal0408 \r\n\r\nThe fix also need to cherry-pick to 202608 branch (https://github.com/Azure/sonic-mgmt.msft/tree/202608). Could you help add the label? Thanks!"
+    },
+    {
+        "number": 25083,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-05T20:48:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202608: https://github.com/Azure/sonic-mgmt.msft/pull/1280"
+    },
+    {
+        "number": 25083,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-05T20:49:57Z",
+        "comment_author": "yxieca",
+        "comment_body": "Notes: this PR is not strictly needed by 202608 branch. Cherry-pick this one to avoid conflict while cherry-picking https://github.com/sonic-net/sonic-mgmt/pull/25795. The scope of this change doesn't affect BMC testing, which is the primary goal for 202608 branch."
+    },
+    {
+        "number": 25083,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-05T20:58:45Z",
+        "comment_author": "yxieca",
+        "comment_body": "> Hi @deepak-singhal0408\r\n> \r\n> The fix also need to cherry-pick to 202608 branch (https://github.com/Azure/sonic-mgmt.msft/tree/202608). Could you help add the label? Thanks!\r\n\r\n@weiguo-nvidia can you elaborate the reason it is needed for 202608? This is not a BMC specific change, does it fix BMC test issues as well? (I cherry-picked to avoid conflict for another needed PR, but curious to know if there is a grounded need)."
     },
     {
         "number": 25083,
@@ -32109,6 +32137,13 @@
         "comment_at": "2026-07-02T09:15:58Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/25847"
+    },
+    {
+        "number": 23936,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-05T15:12:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@justin-wong-ce cherry pick PR didn't pass PR checker after retry. Please help check! Thanks.<br>https://github.com/sonic-net/sonic-mgmt/pull/25847\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 23936,
