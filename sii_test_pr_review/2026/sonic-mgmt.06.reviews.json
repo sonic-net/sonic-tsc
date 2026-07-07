@@ -15106,6 +15106,13 @@
     {
         "number": 25087,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-06T14:25:35Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@sireesha-arista @bingwang-ms this PR cause a degradation in the sonic-mgmt test. we should avoid such PRs without proper test update.\r\nPlease check the proposed fix and help to approve so we can merge it. It affect many branches."
+    },
+    {
+        "number": 25087,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-04T16:01:40Z",
         "review_author": "bingwang-ms"
     },
@@ -15329,6 +15336,13 @@
         "comment_at": "2026-07-05T20:58:45Z",
         "comment_author": "yxieca",
         "comment_body": "> Hi @deepak-singhal0408\r\n> \r\n> The fix also need to cherry-pick to 202608 branch (https://github.com/Azure/sonic-mgmt.msft/tree/202608). Could you help add the label? Thanks!\r\n\r\n@weiguo-nvidia can you elaborate the reason it is needed for 202608? This is not a BMC specific change, does it fix BMC test issues as well? (I cherry-picked to avoid conflict for another needed PR, but curious to know if there is a grounded need)."
+    },
+    {
+        "number": 25083,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-06T06:37:29Z",
+        "comment_author": "weiguo-nvidia",
+        "comment_body": "> > Hi @deepak-singhal0408\r\n> > The fix also need to cherry-pick to 202608 branch (https://github.com/Azure/sonic-mgmt.msft/tree/202608). Could you help add the label? Thanks!\r\n> \r\n> @weiguo-nvidia can you elaborate the reason it is needed for 202608? This is not a BMC specific change, does it fix BMC test issues as well? (I cherry-picked to avoid conflict for another needed PR, but curious to know if there is a grounded need).\r\n\r\nHi Ying ,\r\n\r\nBMC (dual-mgmt) deployment on 202608 fails at the \"deploy minigraph\" step, while the same deployment passes on develop.\r\n\r\nThe failing ansible task is config load_minigraph --override_config -y, which errors out with:\r\n```\r\ngolden_config_db.json fails YANG validation!\r\nAll Keys are not parsed in DEVICE_METADATA dict_keys(['orch_northbond_route_zmq_enabled'])\r\n```\r\nThis makes testbed-cli.sh deploy-mg return RC:2 and the whole deployment fails.\r\n\r\nRoot cause \u2014 Without this PR, update_zmq_config() in ansible/library/generate_golden_config_db.py still injects the deprecated key orch_northbond_route_zmq_enabled into DEVICE_METADATA|localhost of the golden config.\r\n\r\nOn newer images, these ZMQ switches have been consolidated into SYSTEM_DEFAULTS|swss_zmq, and the corresponding YANG leaf was removed from sonic-device_metadata.yang (sonic-buildimage#27674). As a result, the injected key no longer passes YANG validation, so config load_minigraph fails and deploy-mg returns RC:2.\r\n\r\nThis PR removes that injection, which is exactly what's needed to fix the failure \u2014 its commit message even describes this exact error\r\n"
     },
     {
         "number": 25083,
@@ -24521,6 +24535,13 @@
         "comment_at": "2026-06-30T20:35:06Z",
         "comment_author": "rbpittman",
         "comment_body": "@bingwang-ms @ansrajpu-git \r\nFiled an issue for some of the diff introduced in this PR: https://github.com/sonic-net/sonic-mgmt/issues/25791\r\nCauses QOS SAI regressions due to how if stmt evaluates. "
+    },
+    {
+        "number": 24668,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-06T11:26:40Z",
+        "comment_author": "zypgithub",
+        "comment_body": "Hi @ansrajpu-git, @bingwang-ms, this PR introduced many always true condition and failed Qos test cases. I just marked some of them, please help to check and see if you need to revert the PR or just provide a quick fix. thanks"
     },
     {
         "number": 24668,
