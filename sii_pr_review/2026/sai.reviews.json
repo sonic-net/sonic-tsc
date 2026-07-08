@@ -1,5 +1,128 @@
 [
     {
+        "number": 2308,
+        "repo": "sai",
+        "comment_at": "2026-07-02T13:08:04Z",
+        "comment_author": "kcudnik",
+        "comment_body": "Related: https://github.com/opencomputeproject/SAI/issues/1570 https://github.com/opencomputeproject/SAI/pull/1235"
+    },
+    {
+        "number": 2308,
+        "repo": "sai",
+        "comment_at": "2026-07-02T15:08:52Z",
+        "comment_author": "MoriLevinzon",
+        "comment_body": "Added check_status_attr_ranges() in meta/saisanitycheck.c (called from main), covering the corner cases from #1235 for all five attribute-error ranges:\r\n\r\nEncoding value: SAI_STATUS_<X>_0 + SAI_STATUS_CODE(index) == SAI_STATUS_CODE(base + index).\r\nClassification:  each indexed code matches its own SAI_STATUS_IS_* helper and no other (this also covers the SAI_STATUS_IS_UNKNOWN_ATTRIBUTE wrong-base fix).\r\nBoundaries: indices 0, 1, _MAX and _MAX-1 (the MAX-2 case from), plus the codes just below _0 and just above _MAX must not match.\r\nIndex round-trip: the decoded attribute index equals the input.\r\nSentinels must not match: SAI_STATUS_SUCCESS, SAI_STATUS_FAILURE, SAI_STATUS_NOT_EXECUTED, 1, -1.\r\n\r\nThe test passes with the fixed macros and fails against the current ones, so it guards the fix. Verified it compiles under the meta flags (-Wconversion -Werror)."
+    },
+    {
+        "number": 2308,
+        "repo": "sai",
+        "comment_at": "2026-07-07T08:26:32Z",
+        "comment_author": "kcudnik",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2308,
+        "repo": "sai",
+        "comment_at": "2026-07-07T08:26:41Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2308,
+        "repo": "sai",
+        "comment_at": "2026-07-07T08:33:19Z",
+        "comment_author": "kcudnik",
+        "comment_body": "update aspell:\r\n\r\n```\r\nWARNING: Word 'xFFFF' is misspelled ./saisanitycheck.c\r\n```"
+    },
+    {
+        "number": 2308,
+        "repo": "sai",
+        "comment_at": "2026-07-07T08:46:19Z",
+        "comment_author": "MoriLevinzon",
+        "comment_body": "> update aspell:\r\n> \r\n> ```\r\n> WARNING: Word 'xFFFF' is misspelled ./saisanitycheck.c\r\n> ```\r\nAdded xFFFF to meta/aspell.en.pws\r\n"
+    },
+    {
+        "number": 2308,
+        "repo": "sai",
+        "comment_at": "2026-07-07T08:46:39Z",
+        "comment_author": "kcudnik",
+        "comment_body": "/azp run\r\n"
+    },
+    {
+        "number": 2308,
+        "repo": "sai",
+        "comment_at": "2026-07-07T08:46:48Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2308,
+        "repo": "sai",
+        "comment_at": "2026-07-07T08:48:34Z",
+        "comment_author": "kcudnik",
+        "comment_body": "we could update aspell to automatically exclude all hexadecimal numbers instead of adding each one somewhere here https://github.com/opencomputeproject/SAI/blob/master/meta/aspellcheck.pl#L190"
+    },
+    {
+        "number": 2308,
+        "repo": "sai",
+        "comment_at": "2026-07-07T09:19:10Z",
+        "comment_author": "MoriLevinzon",
+        "comment_body": "> we could update aspell to automatically exclude all hexadecimal numbers instead of adding each one somewhere here https://github.com/opencomputeproject/SAI/blob/master/meta/aspellcheck.pl#L190\r\n\r\nUpdated meta/aspellcheck.pl to skip C-style hexadecimal literals and removed the one-off xFFFF entry from meta/aspell.en.pws, so future hex constants won't need dictionary additions"
+    },
+    {
+        "number": 2308,
+        "repo": "sai",
+        "comment_at": "2026-07-07T09:51:01Z",
+        "comment_author": "kcudnik",
+        "comment_body": "thanks"
+    },
+    {
+        "number": 2308,
+        "repo": "sai",
+        "comment_at": "2026-07-07T09:51:08Z",
+        "comment_author": "kcudnik",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2308,
+        "repo": "sai",
+        "comment_at": "2026-07-07T09:51:18Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2308,
+        "repo": "sai",
+        "comment_at": "2026-07-07T14:32:25Z",
+        "comment_author": "MoriLevinzon",
+        "comment_body": "Thanks @kcudnik! All checks are green and it's approved \u2014 please merge when you can"
+    },
+    {
+        "number": 2308,
+        "repo": "sai",
+        "review_at": "2026-07-02T13:09:07Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2308,
+        "repo": "sai",
+        "review_at": "2026-07-07T08:32:32Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2308,
+        "repo": "sai",
+        "review_at": "2026-07-07T09:50:51Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2308,
+        "repo": "sai",
+        "latestReview_at": "2026-07-07T09:50:51Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 2296,
         "repo": "sai",
         "comment_at": "2026-06-17T12:36:02Z",
