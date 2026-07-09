@@ -468,6 +468,13 @@
     {
         "number": 28110,
         "repo": "sonic-buildimage",
+        "comment_at": "2026-07-08T15:19:21Z",
+        "comment_author": "sreeiyer-1",
+        "comment_body": "\r\n@xq9mend, @zbud-msft We work on the sonic-alpine platform (https://github.com/sonic-net/SONiC/blob/master/doc/alpine/alpine_hld.md). These changes and https://github.com/sonic-net/sonic-gnmi/pull/712/files have broken some of our testing. \r\n\r\nAlpineVs is brought up in a KNE and qemu environment. Uses host forwarding to forward the packets into the vm from the wrapping container (https://github.com/sonic-net/sonic-alpine/blob/master/src/deploy/kne/vm/main.go#L62 ). The address of the eth0 interface is provided by the qemu via dhcp. The gNMI requests from the tests running outside the VM comes through eth0 and these are getting dropped now. \r\n\r\nPlease provide some alternate way to handle external gNMI requests as before. As a virtual platform, we do not have  strict security requirements. cc : @sonikajindal , @bocon13 \r\n\r\n"
+    },
+    {
+        "number": 28110,
+        "repo": "sonic-buildimage",
         "review_at": "2026-06-26T23:18:35Z",
         "review_author": "zbud-msft"
     },
@@ -1636,6 +1643,13 @@
         "comment_at": "2026-06-25T20:43:37Z",
         "comment_author": "deepak-singhal0408",
         "comment_body": "> @yizhenzha Tested this patch and we found it solves the bug. Once this PR is merged we can close the bug\r\n\r\nthanks @yizhenzha and @dgsudharsan for finding this regression coming from FRR 10.5.1->10.5.4 upgrade and validating the fix."
+    },
+    {
+        "number": 28043,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-07-08T05:02:57Z",
+        "comment_author": "deepak-singhal0408",
+        "comment_body": "### 202605 branch verification \u2705 (cherry-pick request)\n\nVerified this fix on the **202605 release branch** with a matched A/B on a KVM `t1-lag` testbed (vlab-03), 202605 nightly `202605.1157773-9c84048a4` (FRR 10.5.4, Debian 13/trixie) \u2014 BGP 24/24, ARISTA01T2 (10.0.0.1) on PortChannel102 = 6371 prefixes. The 202605 nightly is pre-fix (unfixed baseline); the container image is the only variable.\n\n**Trigger:** `sudo timeout 3 tcpdump -ni PortChannel102 'tcp port 179'` (promisc open+close).\n**Signal:** ROUTE_TABLE ops in `/var/log/swss/swss.rec` during the trigger window.\n\n| Build | tcpdump promisc toggle on PortChannel102 | ROUTE_TABLE ops |\n|---|---|---|\n| **UNFIXED** 202605 nightly | full RIB re-download | **25,488** |\n| **FIXED** (this PR's patch 0115, container-swap) | silent, no reset | **0** |\n\n`regression_confirmed = true`, `fix_confirmed = true` on 202605 \u2014 the promisc toggle drives a whole-RIB re-download on the unfixed nightly (25,488 ops), and **0** ops with the promiscuity-silent patch. The FRR pin is identical master\u2194202605 and the patch cherry-picks cleanly. Requesting cherry-pick approval to 202605.\n"
     },
     {
         "number": 28043,
@@ -21057,6 +21071,13 @@
         "comment_at": "2026-07-06T21:36:16Z",
         "comment_author": "bingwang-ms",
         "comment_body": "@vaibhavhd Can you help with cherry-pick to 202605?"
+    },
+    {
+        "number": 27504,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-07-08T16:14:31Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "@rgarofano-arista Can you please confirm if this change has been verified in 202605 branch so that @vaibhavhd can do the cherry-pick?"
     },
     {
         "number": 27504,
