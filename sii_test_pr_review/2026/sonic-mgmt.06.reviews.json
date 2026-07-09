@@ -2328,6 +2328,13 @@
     {
         "number": 25587,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-08T16:20:20Z",
+        "comment_author": "yenlu-keith",
+        "comment_body": "> > test_monitoring_critical_processes\r\n> \r\n> @yenlu-keith Since this PR has already been merged and it also conflicts with the current state of 202605, I will need to create a separate PR and get that one merged in to our release branch. Thanks for letting me know\r\n\r\nthanks for help. let us know the corresponding 202605 PR num."
+    },
+    {
+        "number": 25587,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-24T00:22:04Z",
         "review_author": "sdszhang"
     },
@@ -9461,6 +9468,13 @@
     {
         "number": 25279,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-08T10:30:01Z",
+        "comment_author": "augusdn",
+        "comment_body": "@aaronber0614 - could you add the **`Request for 202511 branch`** label to this PR so the cherry-pick bot backports it to `202511`?\n\nContext: nightly is flagging `ssh.test_ssh_ciphers::test_ssh_enc_ciphers` on **Nokia-7215** (image 20251110, i.e. release **202511**) with the opaque `TypeError: Failed expected string ... got 'TIMEOUT'` -- exactly the `pytest.fail(e)` -> `pytest.fail(str(e))` (+ real-hostname prompt) fix in your `tests/ssh/test_ssh_ciphers.py` change here. I confirmed `202511` still has the pre-fix code (`pytest.fail(e)` + `duthost.hostname`), so the backport is needed.\n\nHeads-up: `202511`'s `.azure-pipelines/pr_test_scripts.yaml` `t1-lag-vpp:` section differs from master, so a full cherry-pick of all 6 files may conflict there -- a targeted backport of just the `tests/ssh/test_ssh_ciphers.py` hunk would fully cover this. Happy to raise that manual cherry-pick if that's easier. Thanks!\r\n"
+    },
+    {
+        "number": 25279,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-10T18:57:25Z",
         "review_author": "github-advanced-security"
     },
@@ -11605,6 +11619,13 @@
         "comment_at": "2026-06-24T08:34:02Z",
         "comment_author": "StormLiangMS",
         "comment_body": "hi @rgarofano-arista could you have a github issue for cherrypick? "
+    },
+    {
+        "number": 25203,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-09T00:11:22Z",
+        "comment_author": "rgarofano-arista",
+        "comment_body": "created issue and updated description"
     },
     {
         "number": 25203,
@@ -18483,6 +18504,13 @@
     {
         "number": 24986,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-08T20:48:35Z",
+        "comment_author": "ronan-nexthop",
+        "comment_body": "Is there a reason we did not send this to 202605?"
+    },
+    {
+        "number": 24986,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-02T01:08:23Z",
         "review_author": "YatishSVC"
     },
@@ -19060,6 +19088,13 @@
         "comment_at": "2026-06-23T22:24:59Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202511: https://github.com/sonic-net/sonic-mgmt/pull/25601"
+    },
+    {
+        "number": 24972,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-08T22:10:57Z",
+        "comment_author": "arista-hpandya",
+        "comment_body": "HI @vmittal-msft can we backport this to 202605"
     },
     {
         "number": 24972,
@@ -24707,7 +24742,14 @@
         "repo": "sonic-mgmt",
         "comment_at": "2026-07-07T07:26:50Z",
         "comment_author": "anders-nexthop",
-        "comment_body": "@bingwang-ms Raised the 202512 backport: #25953. The auto cherry-pick conflicted in `fib_lt2_routes` \u2014 202512 still had the 4-block hardcode while this PR was written against master's 8-block version \u2014 so I resolved toward the dynamic `num_extra` scheme here, which matches current master and stays backward-compatible for existing topos.\n\n\u2014 anders-bot (AI-assisted, on behalf of @anders-nexthop)\n"
+        "comment_body": "@bingwang-ms Raised the 202512 backport [here](https://github.com/Azure/sonic-mgmt.msft/pull/1291). The auto cherry-pick conflicted in `fib_lt2_routes` \u2014 202512 still had the 4-block hardcode while this PR was written against master's 8-block version \u2014 so I resolved toward the dynamic `num_extra` scheme here, which matches current master and stays backward-compatible for existing topos.\r\n\r\n\u2014 anders-bot (AI-assisted, on behalf of @anders-nexthop)\r\n"
+    },
+    {
+        "number": 24665,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-08T06:25:50Z",
+        "comment_author": "anders-nexthop",
+        "comment_body": "> @bingwang-ms Raised the 202512 backport [here](https://github.com/Azure/sonic-mgmt.msft/pull/1291). The auto cherry-pick conflicted in `fib_lt2_routes` \u2014 202512 still had the 4-block hardcode while this PR was written against master's 8-block version \u2014 so I resolved toward the dynamic `num_extra` scheme here, which matches current master and stays backward-compatible for existing topos.\r\n> \r\n> \u2014 anders-bot (AI-assisted, on behalf of @anders-nexthop)\r\n\r\nBackport merged, thanks @bingwang-ms "
     },
     {
         "number": 24665,
@@ -31847,6 +31889,13 @@
     {
         "number": 24075,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-08T21:36:53Z",
+        "comment_author": "justin-wong-ce",
+        "comment_body": "This does not need a cherry-pick to 202605 as it is already included."
+    },
+    {
+        "number": 24075,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-08T21:19:50Z",
         "review_author": "thisptr-sh"
     },
@@ -38388,6 +38437,13 @@
         "comment_at": "2026-06-16T22:44:18Z",
         "comment_author": "mssonicbld",
         "comment_body": "@arista-setu PR conflicts with 202511 branch"
+    },
+    {
+        "number": 23005,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-09T00:57:43Z",
+        "comment_author": "LinJin23",
+        "comment_body": "Hi @arista-setu , could you please update this PR to resolve the merge conflicts? Thanks!\r\n"
     },
     {
         "number": 23005,
