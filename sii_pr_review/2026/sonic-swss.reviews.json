@@ -617,6 +617,176 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 4699,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-23T17:53:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4699,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-23T17:53:53Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4699,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-23T17:59:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4699,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-23T17:59:32Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4699,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-26T08:24:49Z",
+        "comment_author": "deepak-singhal0408",
+        "comment_body": "Reviewed the fix and the root cause in #4600. The analysis holds up:\n\nLetting `start()` return and running `~OrchDaemon` on graceful shutdown is unsafe because the reverse-order teardown reaches `~FlexCounterManager`, which issues `stopFlexCounterPolling() \u2192 set_switch_attribute()`. That's a synchronous SAI call over sairedis' ZMQ channel, so the main thread parks in `zmq_poll` while libzmq I/O threads are still live \u2014 but orchs destroyed earlier in the loop have already freed buffers those threads reference, corrupting the heap. This is a structural ordering problem, not something easily fixed by reordering destructors. Before #4400 orchagent always `_exit()`-ed on SIGTERM, so this path never ran.\n\nReverting to `_exit()` while draining the async swss recorder first is the right, minimal fix \u2014 it sidesteps the whole destructor chain and is robust to any future unsafe teardown. The drain path also looks sound: `setAsync(false) \u2192 stopAsyncWorker()` joins the worker, `drain()` only exits once the queue is empty, and records are written with `std::endl` so they're flushed before `_exit()`; `setAsync(false)` is a safe no-op if the worker never started.\n\nTwo optional nits, neither blocking:\n- After this change `start()` only returns on shutdown, so the trailing `return 0;` is now unreachable \u2014 a one-line comment noting that would help future readers.\n- `_exit(0)` reports a clean exit on signal termination; that matches the prior `return 0` intent, just flagging in case exit-status conventions ever matter.\n\nLGTM.\n"
+    },
+    {
+        "number": 4699,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-29T23:38:51Z",
+        "comment_author": "venkit-nexthop",
+        "comment_body": "tagging @vpandian-nokia @prsunny to approve."
+    },
+    {
+        "number": 4699,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-30T00:11:08Z",
+        "comment_author": "prsunny",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4699,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-30T00:11:19Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4699,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-30T15:22:25Z",
+        "comment_author": "vpandian-nokia",
+        "comment_body": "> tagging @vpandian-nokia @prsunny to approve.\r\n\r\nThanks for tagging me. The proposed fix in PR #4699 looks like the right minimal approach: drain the async recorder first, then use `_exit(0)` to avoid the destructor-chain teardown.\r\n\r\nI see the required coverage check is failing because the new shutdown branch is not covered. A small UT for the shutdown decision path would be useful if practical, but I would not expect the UT to reproduce the heap corruption itself.\r\n\r\nI am not currently on the reviewer list, so I cannot formally approve, but from my review, the fix looks reasonable."
+    },
+    {
+        "number": 4699,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-02T21:53:39Z",
+        "comment_author": "prsunny",
+        "comment_body": "@inder-nexthop , can you fix the coverage?"
+    },
+    {
+        "number": 4699,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-07T23:21:44Z",
+        "comment_author": "deepak-singhal0408",
+        "comment_body": "> @inder-nexthop , can you fix the coverage?\r\n\r\n@inder-nexthop, gentle ping on this. JFYI, there are some Ci failures observed in sonic-swss-common repo without this change.\r\ncc: @venkit-nexthop as well."
+    },
+    {
+        "number": 4699,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-09T02:53:47Z",
+        "comment_author": "prsunny",
+        "comment_body": "@deepak-singhal0408 , suggest revert the original PR since this fix is getting delayed. \r\n\r\n@inder-nexthop , @prabhataravind , @venkit-nexthop , @vpandian-nokia for viz. "
+    },
+    {
+        "number": 4699,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-09T03:03:26Z",
+        "comment_author": "deepak-singhal0408",
+        "comment_body": "> @deepak-singhal0408 , suggest revert the original PR since this fix is getting delayed.\r\n> \r\n> @inder-nexthop , @prabhataravind , @venkit-nexthop , @vpandian-nokia for viz.\r\n\r\n@prsunny had a teams chat with @inder-nexthop on this today. He is working on the code coverage part. lets wait till tomorrow? thanks, "
+    },
+    {
+        "number": 4699,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-09T03:27:28Z",
+        "comment_author": "prsunny",
+        "comment_body": "> > @deepak-singhal0408 , suggest revert the original PR since this fix is getting delayed.\r\n> > @inder-nexthop , @prabhataravind , @venkit-nexthop , @vpandian-nokia for viz.\r\n> \r\n> @prsunny had a teams chat with @inder-nexthop on this today. He is working on the code coverage part. lets wait till tomorrow? thanks,\r\n\r\nThanks. May I know why fixing coverage is taking more than a week? I would like to understand submitter feedback and if something can be improved on infra. @theasianpianist for viz. "
+    },
+    {
+        "number": 4699,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-09T17:49:44Z",
+        "comment_author": "inder-nexthop",
+        "comment_body": "> > > @deepak-singhal0408 , suggest revert the original PR since this fix is getting delayed.\r\n> > > @inder-nexthop , @prabhataravind , @venkit-nexthop , @vpandian-nokia for viz.\r\n> > \r\n> > \r\n> > @prsunny had a teams chat with @inder-nexthop on this today. He is working on the code coverage part. lets wait till tomorrow? thanks,\r\n> \r\n> Thanks. May I know why fixing coverage is taking more than a week? I would like to understand submitter feedback and if something can be improved on infra. @theasianpianist for viz.\r\n\r\nHi @prsunny , apologies for missing your initial comment. I was on PTO, working on resolving the comments mentioned in the review."
+    },
+    {
+        "number": 4699,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-09T18:23:35Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4699,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-09T18:23:49Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4699,
+        "repo": "sonic-swss",
+        "review_at": "2026-06-26T08:25:28Z",
+        "review_author": "deepak-singhal0408"
+    },
+    {
+        "number": 4699,
+        "repo": "sonic-swss",
+        "review_at": "2026-06-26T23:47:39Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4699,
+        "repo": "sonic-swss",
+        "review_at": "2026-06-27T23:02:57Z",
+        "review_author": "inder-nexthop"
+    },
+    {
+        "number": 4699,
+        "repo": "sonic-swss",
+        "review_at": "2026-07-09T18:42:49Z",
+        "review_author": "venkit-nexthop"
+    },
+    {
+        "number": 4699,
+        "repo": "sonic-swss",
+        "review_at": "2026-07-09T19:22:25Z",
+        "review_author": "deepak-singhal0408"
+    },
+    {
+        "number": 4699,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-06-26T23:47:39Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 4699,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-07-09T19:22:25Z",
+        "latestReview_author": "deepak-singhal0408",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4699,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-07-09T18:42:49Z",
+        "latestReview_author": "venkit-nexthop",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 4698,
         "repo": "sonic-swss",
         "comment_at": "2026-06-23T04:08:17Z",
@@ -3104,6 +3274,20 @@
     {
         "number": 4643,
         "repo": "sonic-swss",
+        "comment_at": "2026-07-09T05:23:00Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "hi @vaibhavhd could you help to cherrypick 202605?"
+    },
+    {
+        "number": 4643,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-09T22:12:38Z",
+        "comment_author": "vaibhavhd",
+        "comment_body": "@StormLiangMS  why is this a must-have on 202605? Seems like the concern that this is fixing is a logging issue, and not a functional issue? Do you still want to take it to 202605?"
+    },
+    {
+        "number": 4643,
+        "repo": "sonic-swss",
         "review_at": "2026-06-18T10:35:37Z",
         "review_author": "StormLiangMS"
     },
@@ -4146,6 +4330,129 @@
         "comment_at": "2026-06-01T20:13:23Z",
         "comment_author": "mssonicbld",
         "comment_body": "Retrying failed(or canceled) stages in build 1125907:\n\n\n\u2705Stage **BuildArm**:\n- Job arm64: retried."
+    },
+    {
+        "number": 4619,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-29T03:45:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4619,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-29T03:46:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4619,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-29T04:28:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4619,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-29T04:28:41Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4619,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-29T04:33:35Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4619,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-29T04:33:45Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4619,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-29T04:55:50Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4619,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-29T04:56:00Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4619,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-30T00:27:43Z",
+        "comment_author": "prsunny",
+        "comment_body": "@prabhataravind to review/signoff"
+    },
+    {
+        "number": 4619,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-08T18:27:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4619,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-08T18:27:33Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4619,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-08T19:06:14Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4619,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-08T19:06:25Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4619,
+        "repo": "sonic-swss",
+        "review_at": "2026-05-29T03:49:28Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4619,
+        "repo": "sonic-swss",
+        "review_at": "2026-07-08T18:40:32Z",
+        "review_author": "prabhataravind"
+    },
+    {
+        "number": 4619,
+        "repo": "sonic-swss",
+        "review_at": "2026-07-08T22:07:55Z",
+        "review_author": "prabhataravind"
+    },
+    {
+        "number": 4619,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-05-29T03:49:28Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 4619,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-07-08T22:07:55Z",
+        "latestReview_author": "prabhataravind",
+        "latestReview_state": "APPROVED"
     },
     {
         "number": 4618,
@@ -33080,6 +33387,494 @@
         "repo": "sonic-swss",
         "latestReview_at": "2026-02-11T23:25:08Z",
         "latestReview_author": "lihuay",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-02-10T22:45:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-02-10T22:46:00Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-02-11T02:01:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-02-11T02:01:30Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-02-11T06:32:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-02-11T06:33:05Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-02-11T22:17:23Z",
+        "comment_author": "arlakshm",
+        "comment_body": "@bingwang-ms @prsunny, can you please review this PR"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-02-24T01:13:58Z",
+        "comment_author": "prsunny",
+        "comment_body": "@bingwang-ms , could you review?"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-02T01:41:18Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "Thanks for this PR! The motivation is clear and the benchmark results (260s  44s) are impressive. Here are my review findings:\n\n---\n\n###  Critical: DEL priority extraction will always be 0\n\n`cpp\n// Extract priority for both SET and DEL operations\nfor (const auto& fv : kfvFieldsValues(t))\n{\n    if (attr_name == \"PRIORITY\") {\n        entry.priority = (uint32_t)stoul(fvValue(fv));\n        break;\n    }\n}\n`\n\nRedis **DEL operations do not carry field values**  only the key is present in kfvFieldsValues() for a DEL command. So ^[ntry.priority will always be ^@ for all DEL entries, making the ascending-priority sort for deletions completely ineffective.\n\n**Fix**: For DEL operations, look up the priority from the existing in-memory rule map:\n`cpp\nif (op == DEL_COMMAND) {\n    auto existingRule = getAclRule(table_id, rule_id);\n    if (existingRule) entry.priority = existingRule->getPriority();\n}\n`\n\n---\n\n###  Moderate: Tests don't verify programming ORDER\n\nThe 3 new DVS tests (\test_AclRulePriorityOrder, \test_AclRuleDeletionPriorityOrder, \test_AclRuleMixedPriorityOperations) only verify that rules are eventually created/deleted correctly  they don't assert the **order** of SAI calls. The core value of this PR is the ordering optimization, but that is left untested.\n\nConsider adding unit tests that verify the order of SAI calls (e.g., using mock SAI with call recording to confirm rules are programmed highest-priority-first).\n\n---\n\n###  Moderate: Optimization only effective for bulk updates\n\ndoAclRuleTask may be called with only 12 entries when the system is not under heavy programming load  the sort is a no-op in that case. Worth adding a comment explaining this is optimized for bulk-update scenarios, so future maintainers understand the intent.\n\n---\n\n###  Minor: Unnecessary memory copy of tuples\n\nEach RuleEntry stores a full copy of KeyOpFieldsValuesTuple. For 2369+ rules this doubles memory temporarily. Consider storing a reference or pointer to the entry in m_toSync instead.\n\n---\n\n###  Minor: Implicit behavior change  DEL before SET\n\nPreviously DEL and SET were interleaved in lexicographic key order. Now **all DELs are processed before all SETs**. This is fine for most cases, but could matter if a rule is deleted and re-added in the same batch (e.g., priority update). Worth a comment documenting this intentional ordering.\n\n---\n\n**Summary**: The approach and direction are solid. Please address the critical DEL priority bug before merging  it silently defeats the deletion ordering optimization. Happy to re-review once updated."
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-11T04:41:36Z",
+        "comment_author": "rlhui",
+        "comment_body": "@vinay-nexthop would you please check copilot review comments?"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-12T05:20:11Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-12T05:20:22Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-12T05:24:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-12T05:24:28Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-12T06:01:50Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-12T06:02:12Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-12T06:13:34Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-12T06:13:44Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-12T06:20:49Z",
+        "comment_author": "vinay-nexthop",
+        "comment_body": "> Thanks for this PR! The motivation is clear and the benchmark results (260s 44s) are impressive. Here are my review findings:\r\n> \r\n> ### Critical: DEL priority extraction will always be 0\r\n> `cpp // Extract priority for both SET and DEL operations for (const auto& fv : kfvFieldsValues(t)) { if (attr_name == \"PRIORITY\") { entry.priority = (uint32_t)stoul(fvValue(fv)); break; } } `\r\n> \r\n> Redis **DEL operations do not carry field values** only the key is present in kfvFieldsValues() for a DEL command. So \ufffdntry.priority will always be \ufffd for all DEL entries, making the ascending-priority sort for deletions completely ineffective.\r\n> \r\n> **Fix**: For DEL operations, look up the priority from the existing in-memory rule map: `cpp if (op == DEL_COMMAND) { auto existingRule = getAclRule(table_id, rule_id); if (existingRule) entry.priority = existingRule->getPriority(); } `\r\n> \r\n> ### Moderate: Tests don't verify programming ORDER\r\n> The 3 new DVS tests ( est_AclRulePriorityOrder, est_AclRuleDeletionPriorityOrder, est_AclRuleMixedPriorityOperations) only verify that rules are eventually created/deleted correctly they don't assert the **order** of SAI calls. The core value of this PR is the ordering optimization, but that is left untested.\r\n> \r\n> Consider adding unit tests that verify the order of SAI calls (e.g., using mock SAI with call recording to confirm rules are programmed highest-priority-first).\r\n> \r\n> ### Moderate: Optimization only effective for bulk updates\r\n> doAclRuleTask may be called with only 12 entries when the system is not under heavy programming load the sort is a no-op in that case. Worth adding a comment explaining this is optimized for bulk-update scenarios, so future maintainers understand the intent.\r\n> \r\n> ### Minor: Unnecessary memory copy of tuples\r\n> Each RuleEntry stores a full copy of KeyOpFieldsValuesTuple. For 2369+ rules this doubles memory temporarily. Consider storing a reference or pointer to the entry in m_toSync instead.\r\n> \r\n> ### Minor: Implicit behavior change DEL before SET\r\n> Previously DEL and SET were interleaved in lexicographic key order. Now **all DELs are processed before all SETs**. This is fine for most cases, but could matter if a rule is deleted and re-added in the same batch (e.g., priority update). Worth a comment documenting this intentional ordering.\r\n> \r\n> **Summary**: The approach and direction are solid. Please address the critical DEL priority bug before merging it silently defeats the deletion ordering optimization. Happy to re-review once updated.\r\n\r\nAddressed the comments, please take a look @bingwang-ms."
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-12T06:23:00Z",
+        "comment_author": "vinay-nexthop",
+        "comment_body": "> @vinay-nexthop would you please check copilot review comments?\r\n\r\nAddressed the comments, thanks!"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-12T06:23:07Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-12T06:23:19Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-18T06:16:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-18T06:16:22Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-19T04:37:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-19T04:37:15Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-19T04:38:16Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-19T04:38:27Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-26T18:19:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-26T18:21:52Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-27T22:37:48Z",
+        "comment_author": "yijingyan2",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-27T22:37:58Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-30T17:53:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-30T17:53:23Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-31T04:48:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-31T04:48:41Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-31T20:26:08Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-31T20:26:20Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-04-03T01:26:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-04-03T01:27:06Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-04-14T11:55:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-04-14T11:55:15Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-04-22T19:05:35Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-04-22T19:05:46Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-06T15:52:24Z",
+        "comment_author": "saravanan-nexthop",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-06T15:52:36Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-11T01:41:09Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "\u26a0\ufe0f **This review was performed by an AI agent** on behalf of @bingwang-ms. Please treat this as a preliminary review and verify independently.\n\n@vinay-nexthop thanks for addressing the earlier feedback \u2014 DEL priority lookup via `getAclRule()->getPriority()`, the new invalid-priority handling, the ordering-aware unit tests via `sairedis.rec`, and switching `RuleEntry` to hold `const KeyOpFieldsValuesTuple*` are all good improvements.\n\nOne thing still blocking signoff:\n\n**Invalid SET priority leaks in `m_toSync`** (`aclorch.cpp`, in the invalid-priority branch of `doAclRuleTask`):\n\n```cpp\nif (invalidPriority)\n{\n    it++;\n    continue;\n}\n```\n\nThe unknown-op branch immediately below correctly does `it = consumer.m_toSync.erase(it)`, but the invalid-priority branch only advances. The bad entry will sit in `m_toSync` and be reprocessed every consumer iteration, burning CPU and spamming syslog. Please erase it the same way as the unknown-op branch.\n\nSmaller note: please add a brief comment near where you process the DEL vector noting that captured `entry.iter` values remain valid across other erases because `m_toSync` is a `std::map` (only the erased iterator is invalidated, and it only holds one op per key) \u2014 that invariant is load-bearing for safety and worth documenting.\n\nHappy to re-approve once the invalid-priority erase is fixed.\n"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-11T01:41:10Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-11T01:41:17Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines will not run the associated pipelines, because the pull request was updated after the run command was issued. Review the pull request again and issue a new run command.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-06T23:06:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-06T23:06:16Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-07T01:42:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-07T01:42:36Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-07T11:19:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi, there are workflow run(s) waiting for approval, you may be first-time contributor. I will notify maintainers to help approve once PR is approved. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-07T15:39:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-07T15:40:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-07T20:20:46Z",
+        "comment_author": "vinay-nexthop",
+        "comment_body": "> \u26a0\ufe0f **This review was performed by an AI agent** on behalf of @bingwang-ms. Please treat this as a preliminary review and verify independently.\r\n> \r\n> @vinay-nexthop thanks for addressing the earlier feedback \u2014 DEL priority lookup via `getAclRule()->getPriority()`, the new invalid-priority handling, the ordering-aware unit tests via `sairedis.rec`, and switching `RuleEntry` to hold `const KeyOpFieldsValuesTuple*` are all good improvements.\r\n> \r\n> One thing still blocking signoff:\r\n> \r\n> **Invalid SET priority leaks in `m_toSync`** (`aclorch.cpp`, in the invalid-priority branch of `doAclRuleTask`):\r\n> \r\n> ```c++\r\n> if (invalidPriority)\r\n> {\r\n>     it++;\r\n>     continue;\r\n> }\r\n> ```\r\n> \r\n> The unknown-op branch immediately below correctly does `it = consumer.m_toSync.erase(it)`, but the invalid-priority branch only advances. The bad entry will sit in `m_toSync` and be reprocessed every consumer iteration, burning CPU and spamming syslog. Please erase it the same way as the unknown-op branch.\r\n> \r\n> Smaller note: please add a brief comment near where you process the DEL vector noting that captured `entry.iter` values remain valid across other erases because `m_toSync` is a `std::map` (only the erased iterator is invalidated, and it only holds one op per key) \u2014 that invariant is load-bearing for safety and worth documenting.\r\n> \r\n> Happy to re-approve once the invalid-priority erase is fixed.\r\n\r\n@bingwang-ms applied the above changes and all checks pass. Please take a look and approve if no further comments, thanks!"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-09T01:47:24Z",
+        "comment_author": "saravanan-nexthop",
+        "comment_body": "@bingwang-ms @prsunny please re-check the latest changes and approve, merge the PR\r\nThank you"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-09T21:30:58Z",
+        "comment_author": "vmittal-msft",
+        "comment_body": "@prsunny @bingwang-ms do we need this for 202511 ? Is it must have ?"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-09T21:52:14Z",
+        "comment_author": "prsunny",
+        "comment_body": "> @prsunny @bingwang-ms do we need this for 202511 ? Is it must have ?\r\n\r\nThis is more of an enhancement than a bug fix. "
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "review_at": "2026-03-04T19:10:26Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "review_at": "2026-03-12T06:15:29Z",
+        "review_author": "vinay-nexthop"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "review_at": "2026-03-12T06:16:15Z",
+        "review_author": "vinay-nexthop"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "review_at": "2026-03-12T06:17:37Z",
+        "review_author": "vinay-nexthop"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "review_at": "2026-03-12T06:17:52Z",
+        "review_author": "vinay-nexthop"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "review_at": "2026-03-20T22:28:21Z",
+        "review_author": "github-advanced-security"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "review_at": "2026-03-26T18:20:41Z",
+        "review_author": "vinay-nexthop"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "review_at": "2026-03-26T18:21:07Z",
+        "review_author": "vinay-nexthop"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "review_at": "2026-07-09T17:23:26Z",
+        "review_author": "bingwang-ms"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-03-04T19:10:26Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 4209,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-07-09T17:23:26Z",
+        "latestReview_author": "bingwang-ms",
         "latestReview_state": "APPROVED"
     },
     {
