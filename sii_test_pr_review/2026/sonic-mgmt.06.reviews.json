@@ -2335,6 +2335,13 @@
     {
         "number": 25587,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-09T05:06:19Z",
+        "comment_author": "sakshamkhurana21",
+        "comment_body": "Hey @yenlu-keith, I checked whether #25587 actually applies for 202605. The recovery code has diverged between master and 202605:\r\n\r\n\u2022 The flow this PR guards (dirty reboot \u2192 wait for \u00a0database_config.json\u00a0 \u2192 \u00a0config_reload\u00a0) only exists on master. It was added by `434e0e4c34`\u00a0(\"kill database container last\", 2026-06-10) and then hardened by #25587 (redis \u00a0PING\u00a0 before \u00a0config_reload\u00a0). Neither commit is on 202605.\r\n\r\n\u2022 On 202605, \u00a0recover_critical_processes\u00a0 for the database container reboots and then waits for critical processes + interfaces to come up; it never calls \u00a0config_reload\u00a0. So the \u00a0config reload -h\u00a0 \u2192 \u00a0Unable to connect to redis - Connection refused\u00a0 signature that #25587 fixes can't occur on 202605. That's also why the cherry-pick conflicts: the code being patched isn't there.\r\n\r\nConclusively, 202605 doesn't need a backport of this specific fix, a 21-day check shows no flaky occurrences of this test on 202605\u00a0. If 202605 does flake on this test it'd be a different post-reboot race, which would need its own change rather than this one. I will keep monitoring this one. "
+    },
+    {
+        "number": 25587,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-24T00:22:04Z",
         "review_author": "sdszhang"
     },
@@ -6065,6 +6072,13 @@
         "comment_at": "2026-06-18T08:19:40Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/25448"
+    },
+    {
+        "number": 25421,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-09T03:41:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202511: https://github.com/sonic-net/sonic-mgmt/pull/26003"
     },
     {
         "number": 25421,
@@ -12864,6 +12878,13 @@
     {
         "number": 25170,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-09T12:50:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/26023"
+    },
+    {
+        "number": 25170,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-18T04:00:38Z",
         "review_author": "davidm-arista"
     },
@@ -14025,6 +14046,13 @@
         "comment_at": "2026-07-07T20:45:39Z",
         "comment_author": "rgarofano-arista",
         "comment_body": "created github issue"
+    },
+    {
+        "number": 25124,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-09T12:48:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/26022"
     },
     {
         "number": 25124,
@@ -19099,6 +19127,13 @@
     {
         "number": 24972,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-09T04:04:36Z",
+        "comment_author": "vmittal-msft",
+        "comment_body": "please add request tag and @vaibhavhd can help"
+    },
+    {
+        "number": 24972,
+        "repo": "sonic-mgmt",
         "review_at": "2026-05-29T14:10:34Z",
         "review_author": "arlakshm"
     },
@@ -23321,6 +23356,20 @@
     {
         "number": 24790,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-09T11:35:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@ccroy-arista PR conflicts with 202605 branch"
+    },
+    {
+        "number": 24790,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-09T11:35:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@ccroy-arista PR conflicts with 202511 branch"
+    },
+    {
+        "number": 24790,
+        "repo": "sonic-mgmt",
         "review_at": "2026-05-21T22:55:13Z",
         "review_author": "wrideout-arista"
     },
@@ -24642,6 +24691,18 @@
     {
         "number": 24668,
         "repo": "sonic-mgmt",
+        "review_at": "2026-07-09T17:34:23Z",
+        "review_author": "bingwang-ms"
+    },
+    {
+        "number": 24668,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-07-09T17:36:41Z",
+        "review_author": "bingwang-ms"
+    },
+    {
+        "number": 24668,
+        "repo": "sonic-mgmt",
         "latestReview_at": "2026-05-18T17:23:18Z",
         "latestReview_author": "github-advanced-security",
         "latestReview_state": "COMMENTED"
@@ -24649,9 +24710,9 @@
     {
         "number": 24668,
         "repo": "sonic-mgmt",
-        "latestReview_at": "2026-06-24T17:52:05Z",
+        "latestReview_at": "2026-07-09T17:36:41Z",
         "latestReview_author": "bingwang-ms",
-        "latestReview_state": "APPROVED"
+        "latestReview_state": "COMMENTED"
     },
     {
         "number": 24665,
@@ -34512,6 +34573,13 @@
     {
         "number": 23725,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-09T07:46:17Z",
+        "comment_author": "LinJin23",
+        "comment_body": "Hi @YatishSVC, could you please update this PR to resolve the merge conflicts? Thanks!"
+    },
+    {
+        "number": 23725,
+        "repo": "sonic-mgmt",
         "review_at": "2026-04-13T21:47:12Z",
         "review_author": "wenyiz2021"
     },
@@ -38448,6 +38516,20 @@
     {
         "number": 23005,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-09T20:10:03Z",
+        "comment_author": "arista-setu",
+        "comment_body": "Opened manual backport reqquest for 202511 : https://github.com/sonic-net/sonic-mgmt/pull/26029 \r\ncc: @LinJin23 @vmittal-msft @rlhui "
+    },
+    {
+        "number": 23005,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-09T20:12:45Z",
+        "comment_author": "arista-setu",
+        "comment_body": "This PR also needs to be backported to 202605. I've verified the diff applies cleanly. \r\n\r\n@arlakshm @vmittal-msft can you please add 202605 backport request tag on this PR? Thanks!"
+    },
+    {
+        "number": 23005,
+        "repo": "sonic-mgmt",
         "review_at": "2026-04-19T01:13:03Z",
         "review_author": "rlhui"
     },
@@ -39618,6 +39700,20 @@
         "comment_at": "2026-06-24T02:57:12Z",
         "comment_author": "StormLiangMS",
         "comment_body": "hi @ccroy-arista could you have a github issue for cherrypick ask and update the description?"
+    },
+    {
+        "number": 22642,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-09T11:34:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@ccroy-arista PR conflicts with 202511 branch"
+    },
+    {
+        "number": 22642,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-09T11:34:44Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/26020"
     },
     {
         "number": 22642,
