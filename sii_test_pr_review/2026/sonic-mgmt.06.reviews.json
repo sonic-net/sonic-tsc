@@ -682,6 +682,13 @@
     {
         "number": 25721,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-10T02:27:44Z",
+        "comment_author": "yijingyan2",
+        "comment_body": "Hi @vmittal-msft, here is the cherry-pick PR for 202511: https://github.com/sonic-net/sonic-mgmt/pull/26047, could you please help review? Thanks"
+    },
+    {
+        "number": 25721,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-30T00:19:57Z",
         "review_author": "auspham"
     },
@@ -15589,6 +15596,20 @@
         "comment_at": "2026-06-04T06:17:52Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25066,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-10T13:07:59Z",
+        "comment_author": "lipxu",
+        "comment_body": "### \u2705 202605 backport verification\n\nThe **202605** backport checkbox on this PR was left unchecked, so this fix never reached the `202605` release branch. Consequently `qos/test_qos_probe.py::testQosHeadroomPoolProbe` was **failing on the 202605 nightly** (the positional-arg bug bound the `hdrm_pool_size` dict to `portSpeedCableLength`).\n\nI prepared a **byte-identical backport** of this PR onto `internal-202605` and verified it on real hardware:\n\n| Item | Value |\n|------|-------|\n| Testbed | `testbed-bjw3-can-t0-7060-7` (Arista-7060CX-32S-C32, TH) |\n| Image | `internal-202605` (broadcom legacy-th) |\n| Result | `testQosHeadroomPoolProbe[single_asic]` **PASSED** |\n| Module rollup | **6 passed, 44 skipped, 0 failed** (pretest 12\u2713 / posttest 5\u2713) |\n| Before fix (202605 nightly) | `1 failed (HeadroomPool), 5 passed, 44 skipped` |\n| `git range-diff` vs this PR | code **byte-identical** (only cherry-pick trailer added) |\n\nA dedicated backport PR targeting `202605` will follow.\r\n"
+    },
+    {
+        "number": 25066,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-10T13:10:02Z",
+        "comment_author": "lipxu",
+        "comment_body": "> ### \u2705 202605 backport verification\r\n> The **202605** backport checkbox on this PR was left unchecked, so this fix never reached the `202605` release branch. Consequently `qos/test_qos_probe.py::testQosHeadroomPoolProbe` was **failing on the 202605 nightly** (the positional-arg bug bound the `hdrm_pool_size` dict to `portSpeedCableLength`).\r\n> \r\n> I prepared a **byte-identical backport** of this PR onto `internal-202605` and verified it on real hardware:\r\n> \r\n> Item\tValue\r\n> Testbed\t`testbed-bjw3-can-t0-7060-7` (Arista-7060CX-32S-C32, TH)\r\n> Image\t`internal-202605` (broadcom legacy-th)\r\n> Result\t`testQosHeadroomPoolProbe[single_asic]` **PASSED**\r\n> Module rollup\t**6 passed, 44 skipped, 0 failed** (pretest 12\u2713 / posttest 5\u2713)\r\n> Before fix (202605 nightly)\t`1 failed (HeadroomPool), 5 passed, 44 skipped`\r\n> `git range-diff` vs this PR\tcode **byte-identical** (only cherry-pick trailer added)\r\n> A dedicated backport PR targeting `202605` will follow.\r\n\r\nHi, @vaibhavhd  @StormLiangMS , Could you please help to review and approve this PR for 202605 branch, thanks a lot"
     },
     {
         "number": 25066,
