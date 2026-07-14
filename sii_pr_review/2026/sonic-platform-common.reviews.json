@@ -1,5 +1,59 @@
 [
     {
+        "number": 707,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-07-09T00:50:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 707,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-07-09T00:50:43Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 707,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-07-10T21:35:13Z",
+        "comment_author": "yxieca",
+        "comment_body": "Reviewed via interactive multi-model review \u2014 the design is sound and I'd be comfortable with this going in; leaving a couple of non-blocking nits rather than a formal state.\n\nNice change: replacing the fixed `sleep(20) + 5\u00d7get_status()` ping loop with a Redfish-login readiness poll is a genuine improvement \u2014 a successful login proves the web server, auth backend, and L3 are all back, which is a stronger \"ready\" signal than a ping. The correctness details hold up well: the local-only `invalidate_session()` before the loop (so a cached token can't short-circuit `login()` into a false \"ready\", and no spurious ERROR-level DELETE), the 20s settle before polling, the `min(interval, remaining)` deadline cap, fail-fast only on the local-permanent `PASSWORD_UNAVAILABLE` while keeping AUTH_FAILURE/network codes transient, and the `login(*, log_errors=False)` quiet-poll flag that leaves existing callers untouched. Test coverage of the edge cases (first-try, retries, timeout, fail-fast, transient 401, sleep cap, cached-session drop, delegation/default-args) is excellent.\n\nNon-blocking nits:\n1. The two readiness docstrings for `wait_until_redfish_ready` are written as bare triple-quoted strings placed *above* the `def` (module-level string statements), so they aren't attached as the function's `__doc__`. This matches the existing style in this module, so it's consistent \u2014 just noting that if the intent was a real docstring, it would need to move inside the `def`.\n2. On timeout, `wait_until_redfish_ready` returns the last observed code (e.g. `-10 SERVER_UNREACHABLE`) rather than normalizing to `ERR_CODE_TIMEOUT (-6)`. The caller only checks `!= 0` and logs the code, so this is harmless \u2014 and returning the last real cause is arguably more useful for debugging than a generic timeout. Purely a readability call.\n\nNeither is required for merge.\n\nAI-assisted review, reviewed by Ying Xie (@yxieca)."
+    },
+    {
+        "number": 707,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-07-13T23:56:03Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202608: https://github.com/Azure/sonic-platform-common.msft/pull/118"
+    },
+    {
+        "number": 707,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-07-09T00:53:51Z",
+        "review_author": "oleksandrivantsiv"
+    },
+    {
+        "number": 707,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-07-13T20:14:45Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 707,
+        "repo": "sonic-platform-common",
+        "latestReview_at": "2026-07-09T00:53:51Z",
+        "latestReview_author": "oleksandrivantsiv",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 707,
+        "repo": "sonic-platform-common",
+        "latestReview_at": "2026-07-13T20:14:45Z",
+        "latestReview_author": "judyjoseph",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 704,
         "repo": "sonic-platform-common",
         "comment_at": "2026-07-02T00:15:00Z",
@@ -3321,6 +3375,67 @@
         "number": 663,
         "repo": "sonic-platform-common",
         "latestReview_at": "2026-05-11T14:23:14Z",
+        "latestReview_author": "prgeor",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 661,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-05-06T18:00:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 661,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-05-06T18:00:30Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 661,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-07-09T20:08:18Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 661,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-07-09T20:08:29Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 661,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-07-10T21:01:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 661,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-07-10T21:01:15Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 661,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-05-06T18:00:55Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 661,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-07-13T23:38:02Z",
+        "review_author": "prgeor"
+    },
+    {
+        "number": 661,
+        "repo": "sonic-platform-common",
+        "latestReview_at": "2026-07-13T23:38:02Z",
         "latestReview_author": "prgeor",
         "latestReview_state": "APPROVED"
     },
