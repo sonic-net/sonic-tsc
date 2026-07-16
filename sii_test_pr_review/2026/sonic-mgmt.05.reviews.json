@@ -7078,6 +7078,13 @@
     {
         "number": 24679,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-15T03:10:52Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "Removed `Request for 202605 branch` because this change is already present in `202605`.\n\nEvidence checked on `origin/202605`:\n- `ansible/roles/eos/tasks/ceos.yml` already uses YAML mapping form for `container_reachable: false`\n- `ansible/testbed_add_vm_topology.yml` already uses YAML mapping form for `topo_is_multi_vrf: false`\n- the relevant `when:` condition already uses boolean-safe handling such as `deploy_leaf | bool`\n\nSo no additional 202605 cherry-pick is needed."
+    },
+    {
+        "number": 24679,
+        "repo": "sonic-mgmt",
         "review_at": "2026-05-18T06:06:52Z",
         "review_author": "qiluo-msft"
     },
@@ -14028,6 +14035,13 @@
     {
         "number": 24477,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-15T03:10:50Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "Removed `Request for 202605 branch` because this change is already present in `202605`.\n\nEvidence checked on `origin/202605`:\n- `tests/common/devices/base.py` already contains `suppress_signal_registration_for_non_main_thread()` / signal-registration bypass for non-main threads\n- `tests/common/helpers/parallel.py` already checks `hasattr(WorkerProcess, \"_save_stdin\")` before calling `_save_stdin()`\n\nSo no additional 202605 cherry-pick is needed."
+    },
+    {
+        "number": 24477,
+        "repo": "sonic-mgmt",
         "review_at": "2026-05-08T08:12:34Z",
         "review_author": "wangxin"
     },
@@ -18431,6 +18445,13 @@
         "comment_at": "2026-06-09T21:24:59Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202511: https://github.com/sonic-net/sonic-mgmt/pull/25246"
+    },
+    {
+        "number": 24317,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-15T03:10:48Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "Removed `Request for 202605 branch` because this change is already present in `202605`.\n\nEvidence checked on `origin/202605`:\n- `tests/qos/qos_sai_base.py` already has the narrowed port-scope logic based on `hdrm_pool_size.src_port_ids` / `dst_port_id`\n- it already has SONiC fanout handling through `_apply_sonic_filter(...)`\n- it already tracks `sonic_lldp_stopped` and stops/restarts LLDP at fanout level\n- it already dispatches by `fanout_os`\n\nSo no additional 202605 cherry-pick is needed."
     },
     {
         "number": 24317,
