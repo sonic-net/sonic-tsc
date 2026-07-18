@@ -8598,6 +8598,13 @@
     {
         "number": 25311,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-17T03:53:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/26281"
+    },
+    {
+        "number": 25311,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-11T21:20:48Z",
         "review_author": "rawal01"
     },
@@ -20902,6 +20909,34 @@
     {
         "number": 24918,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-17T03:50:30Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "hi @deepak-singhal0408 would you help to take a look? Could this one fix the flaky issue for fib suppress?"
+    },
+    {
+        "number": 24918,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-17T03:51:34Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "hi @echuawu JFYI, Deepak has a PR to skip this test in 202605 and before, community is working on a refactor of suppress fib. Not sure do we still need to cherrypick this fix to 202511/202605?"
+    },
+    {
+        "number": 24918,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-17T04:00:39Z",
+        "comment_author": "echuawu",
+        "comment_body": "> hi @echuawu JFYI, Deepak has a PR to skip this test in 202605 and before, community is working on a refactor of suppress fib. Not sure do we still need to cherrypick this fix to 202511/202605?\r\n\r\nIt should be cherrypick to 202511.\r\nFor the skip in 202605, what's the skip reason? Is it would be skipped accros the full lifecycle of 202605?"
+    },
+    {
+        "number": 24918,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-17T04:58:42Z",
+        "comment_author": "deepak-singhal0408",
+        "comment_body": ">hi @deepak-singhal0408 would you help to take a look? Could this one fix the flaky issue for fib suppress?\r\n@StormLiangMS , checked this PR.  This is an orthogonal fix. It doesnt address the dynamic toggle offload/propagation race condition that we have been hitting. This addresses BGP session re-establishment flakiness across config reload.\r\n\r\n >For the skip in 202605, what's the skip reason? Is it would be skipped accros the full lifecycle of 202605?\r\n @echuawu Please refer this issue: https://github.com/sonic-net/sonic-mgmt/issues/26175 \r\nThere is an ongoing effort in community to make this command static. Has been discussed in routing-wg and concluded on this approach. We dont see a need for runtime toggle (where in flight routes will compete with this config knob toggle in fpmsyncd, and will have racy behavior).\r\n\r\n> Is it would be skipped accros the full lifecycle of 202605?\r\nYes, thats the plan, unless we take this PR set (https://github.com/sonic-net/sonic-swss/pull/4333 and related) in 202605. This is upto release managers to decide. But if it doesnt get picked up, this module will stay skipped for the full lifecycle of 202605."
+    },
+    {
+        "number": 24918,
+        "repo": "sonic-mgmt",
         "review_at": "2026-05-30T13:13:40Z",
         "review_author": "nhe-NV"
     },
@@ -21279,6 +21314,13 @@
         "comment_at": "2026-05-29T12:38:34Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 24910,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-17T03:54:09Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/26282"
     },
     {
         "number": 24910,
@@ -27986,6 +28028,13 @@
         "comment_at": "2026-06-08T21:28:50Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202511: https://github.com/sonic-net/sonic-mgmt/pull/25201"
+    },
+    {
+        "number": 24524,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-17T03:47:55Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "As Zhijian mentioned, this one causing regression on 7050cx3 M1, we may cherrypick the fix when the regression get fixed. @vitor-arista @justin-wong-ce FYI."
     },
     {
         "number": 24524,
@@ -36119,6 +36168,13 @@
     {
         "number": 23612,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-17T03:52:44Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@echuawu PR conflicts with 202605 branch"
+    },
+    {
+        "number": 23612,
+        "repo": "sonic-mgmt",
         "review_at": "2026-04-04T12:59:32Z",
         "review_author": "nhe-NV"
     },
@@ -36565,6 +36621,13 @@
         "comment_at": "2026-05-28T01:25:54Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 23470,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-17T03:54:34Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "hi @JibinBao could you test this on 202605 for the cherrypick ask?"
     },
     {
         "number": 23470,
