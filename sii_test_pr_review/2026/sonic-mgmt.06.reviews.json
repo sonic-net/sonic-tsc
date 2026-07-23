@@ -149,6 +149,34 @@
     {
         "number": 25773,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T03:24:54Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "hi @yijingyan2 could you test with 202605 release for cherrypick ask?"
+    },
+    {
+        "number": 25773,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:01:57Z",
+        "comment_author": "yijingyan2",
+        "comment_body": "> hi @yijingyan2 could you test with 202605 release for cherrypick ask?\r\n\r\n@StormLiangMS, updated the PR description to add test info for 202605. Thanks"
+    },
+    {
+        "number": 25773,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:35:52Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The **Tested branch** section has been ticked and **Test result** is provided for branch(es): 202605. Added label(s): Tested for 202605 Branch.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25773,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:35:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25773,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-30T07:34:21Z",
         "review_author": "auspham"
     },
@@ -492,6 +520,27 @@
         "comment_at": "2026-07-01T01:34:18Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202511: https://github.com/sonic-net/sonic-mgmt/pull/25806"
+    },
+    {
+        "number": 25730,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T03:26:00Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "hi @lizhijianrd @yejianquan could this be an issue for mgmt tor?"
+    },
+    {
+        "number": 25730,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T06:16:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): msft-202503, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202503: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25730,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:35:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202405,202411,202505,202511,msft-202603,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202405: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 25730,
@@ -1399,6 +1448,13 @@
         "comment_at": "2026-07-21T18:17:08Z",
         "comment_author": "mssonicbld",
         "comment_body": "This PR has backport request label(s) for branch(es): msft-202512, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202512: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25646,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:36:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202505,202511,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202505: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 25646,
@@ -2377,6 +2433,27 @@
     {
         "number": 25587,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T01:57:19Z",
+        "comment_author": "yenlu-keith",
+        "comment_body": "> Hey @yenlu-keith, I checked whether #25587 actually applies for 202605. The recovery code has diverged between master and 202605:\r\n> \r\n> \u2022 The flow this PR guards (dirty reboot \u2192 wait for \u00a0database_config.json\u00a0 \u2192 \u00a0config_reload\u00a0) only exists on master. It was added by `434e0e4c34`\u00a0(\"kill database container last\", 2026-06-10) and then hardened by #25587 (redis \u00a0PING\u00a0 before \u00a0config_reload\u00a0). Neither commit is on 202605.\r\n> \r\n> \u2022 On 202605, \u00a0recover_critical_processes\u00a0 for the database container reboots and then waits for critical processes + interfaces to come up; it never calls \u00a0config_reload\u00a0. So the \u00a0config reload -h\u00a0 \u2192 \u00a0Unable to connect to redis - Connection refused\u00a0 signature that #25587 fixes can't occur on 202605. That's also why the cherry-pick conflicts: the code being patched isn't there.\r\n> \r\n> Conclusively, 202605 doesn't need a backport of this specific fix, a 21-day check shows no flaky occurrences of this test on 202605\u00a0. If 202605 does flake on this test it'd be a different post-reboot race, which would need its own change rather than this one. I will keep monitoring this one.\r\n\r\n@sakshamkhurana21 \r\non 202605: <test result fails on process_monitoring/test_orchagent_heartbeat >)\r\n1 the entire testcase on MODULE TEARDOWN will still call config reload\r\n2 ensure_all_critical_processes_running()  is a one-shot start function, NOT poll\r\n\r\nhere is the flow:\r\n<img width=\"567\" height=\"508\" alt=\"Screenshot 2026-07-22 at 9 54 05\u202fAM\" src=\"https://github.com/user-attachments/assets/2e7f27c6-2f97-4d4c-ab40-c0e220cf4397\" />\r\n\r\nif u agree, we may consider to have diff solution for 202605 branch to consolidate on reboot.py. \r\nglad to hear any feedback."
+    },
+    {
+        "number": 25587,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:36:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25587,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T23:14:26Z",
+        "comment_author": "yenlu-keith",
+        "comment_body": "@sakshamkhurana21 \r\ni just found someone has this issue on 202605 also and \r\ntry to commit the sol on master around same time as this PR.\r\nit will be better to backport to 202605.\r\n\r\nhttps://github.com/sonic-net/sonic-mgmt/pull/25032\r\n\r\n-->\r\nFixes # (no GitHub issue filed; observed on internal nightly testplan t1.8102.202605.2_NightlyTest_20260601.2 for process_monitoring/test_critical_process_monitoring.py; root cause introduced by https://github.com/sonic-net/sonic-mgmt/pull/21889)\r\n\r\n---> also\r\nHow did you verify/test it?\r\nReproduced the original failure from testplan t1.8102.202605.2_NightlyTest_20260601.2 on testbed-bjw-can-8102-1 and testbed-bjw2-can-t1-8102-4. "
+    },
+    {
+        "number": 25587,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-24T00:22:04Z",
         "review_author": "sdszhang"
     },
@@ -2517,6 +2594,13 @@
         "comment_at": "2026-07-21T09:46:48Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/26409"
+    },
+    {
+        "number": 25581,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:36:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): msft-202603,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202603: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 25581,
@@ -3122,6 +3206,13 @@
     {
         "number": 25556,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:36:34Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25556,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-24T03:36:28Z",
         "review_author": "yifei-micas"
     },
@@ -3716,6 +3807,27 @@
     {
         "number": 25536,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:10:17Z",
+        "comment_author": "yijingyan2",
+        "comment_body": "> hi @yijingyan2 could you help to clarify why this is a must to have for 202605?\r\n\r\nHi @StormLiangMS, updated the PR description to add test info for 202605. Thanks"
+    },
+    {
+        "number": 25536,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:36:40Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The **Tested branch** section has been ticked and **Test result** is provided for branch(es): 202605. Added label(s): Tested for 202605 Branch.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25536,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:36:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25536,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-22T04:18:30Z",
         "review_author": "auspham"
     },
@@ -3968,6 +4080,13 @@
     {
         "number": 25505,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:36:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25505,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-22T20:36:55Z",
         "review_author": "zjswhhh"
     },
@@ -4019,6 +4138,13 @@
         "comment_at": "2026-07-20T14:05:37Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/26367"
+    },
+    {
+        "number": 25503,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:36:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 25503,
@@ -4264,6 +4390,13 @@
         "comment_at": "2026-07-20T14:03:25Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/26365"
+    },
+    {
+        "number": 25492,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:36:50Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 25492,
@@ -4520,6 +4653,20 @@
     {
         "number": 25487,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:36:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The **Tested branch** section has been ticked and **Test result** is provided for branch(es): 202605. Added label(s): Tested for 202605 Branch.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25487,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:36:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25487,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-19T07:10:04Z",
         "review_author": "auspham"
     },
@@ -4564,6 +4711,13 @@
         "comment_at": "2026-07-16T11:27:06Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/26254"
+    },
+    {
+        "number": 25482,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:36:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202505,202511,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202505: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 25482,
@@ -4968,6 +5122,13 @@
         "comment_at": "2026-07-21T14:44:48Z",
         "comment_author": "mssonicbld",
         "comment_body": "@zjswhhh PR conflicts with 202605 branch"
+    },
+    {
+        "number": 25463,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:37:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 25463,
@@ -5649,6 +5810,13 @@
     {
         "number": 25438,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:37:11Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25438,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-18T13:56:31Z",
         "review_author": "wsycqyz"
     },
@@ -5907,6 +6075,13 @@
         "comment_at": "2026-07-20T13:50:14Z",
         "comment_author": "mssonicbld",
         "comment_body": "@ediwibowo-msft PR conflicts with 202605 branch"
+    },
+    {
+        "number": 25427,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:37:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 25427,
@@ -6338,6 +6513,13 @@
         "comment_at": "2026-07-20T13:44:33Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/26361"
+    },
+    {
+        "number": 25419,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:37:16Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202505,202511,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202505: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 25419,
@@ -6808,6 +6990,13 @@
     {
         "number": 25405,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:37:18Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25405,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-16T20:38:23Z",
         "review_author": "deerao02"
     },
@@ -7047,6 +7236,13 @@
     {
         "number": 25390,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:37:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25390,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-16T16:47:50Z",
         "review_author": "deerao02"
     },
@@ -7210,6 +7406,13 @@
         "comment_at": "2026-07-20T13:40:09Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/26358"
+    },
+    {
+        "number": 25369,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:37:24Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 25369,
@@ -8485,6 +8688,13 @@
     {
         "number": 25317,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:37:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25317,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-23T15:13:38Z",
         "review_author": "LinJin23"
     },
@@ -8679,6 +8889,13 @@
         "comment_at": "2026-07-20T13:30:56Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/26355"
+    },
+    {
+        "number": 25313,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:37:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511,202605,msft-202601, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 25313,
@@ -9197,6 +9414,13 @@
     {
         "number": 25298,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:37:34Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25298,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-18T04:53:20Z",
         "review_author": "nhe-NV"
     },
@@ -9234,6 +9458,20 @@
         "comment_at": "2026-07-22T00:02:29Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/26442"
+    },
+    {
+        "number": 25297,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:37:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605,msft-202608, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25297,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T14:35:43Z",
+        "comment_author": "wrideout-arista",
+        "comment_body": "@yxieca do we know why the breaking change was not flagged by static-analysis in the azure pipeline?  This seems to me like a pretty important gap to fix in the toolchain which needs to be addressed.\r\n\r\n\r\n@anders-nexthop  @davidm-arista for vis "
     },
     {
         "number": 25297,
@@ -10611,6 +10849,13 @@
     {
         "number": 25255,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:37:38Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25255,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-10T01:00:13Z",
         "review_author": "xwjiang-ms"
     },
@@ -10744,6 +10989,13 @@
         "comment_at": "2026-07-20T13:42:34Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/26359"
+    },
+    {
+        "number": 25250,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:37:40Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 25250,
@@ -10982,6 +11234,13 @@
     {
         "number": 25239,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:37:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25239,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-10T16:36:29Z",
         "review_author": "bingwang-ms"
     },
@@ -11033,6 +11292,13 @@
         "comment_at": "2026-07-21T06:45:04Z",
         "comment_author": "mssonicbld",
         "comment_body": "This PR has backport request label(s) for branch(es): msft-202512, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202512: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25238,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:37:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 25238,
@@ -11311,6 +11577,13 @@
     {
         "number": 25216,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:37:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25216,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-10T00:01:41Z",
         "review_author": "abdosi"
     },
@@ -11552,6 +11825,13 @@
         "comment_at": "2026-07-20T14:08:05Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/26370"
+    },
+    {
+        "number": 25210,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:37:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 25210,
@@ -11941,6 +12221,13 @@
         "comment_at": "2026-07-20T13:43:14Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/26360"
+    },
+    {
+        "number": 25203,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:37:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 25203,
@@ -13436,6 +13723,13 @@
     {
         "number": 25161,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:38:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25161,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-12T20:18:27Z",
         "review_author": "kperumalbfn"
     },
@@ -14600,6 +14894,13 @@
     {
         "number": 25119,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:38:03Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25119,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-05T10:01:16Z",
         "review_author": "nhe-NV"
     },
@@ -14643,6 +14944,13 @@
         "comment_at": "2026-07-20T13:23:05Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/26352"
+    },
+    {
+        "number": 25116,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:38:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): msft-202603,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202603: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 25116,
@@ -15097,6 +15405,13 @@
     {
         "number": 25104,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:38:08Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25104,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-19T03:08:08Z",
         "review_author": "bingwang-ms"
     },
@@ -15162,6 +15477,13 @@
         "comment_at": "2026-07-21T06:45:14Z",
         "comment_author": "mssonicbld",
         "comment_body": "This PR has backport request label(s) for branch(es): msft-202512, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202512: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25103,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:38:10Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 25103,
@@ -15411,6 +15733,13 @@
     {
         "number": 25090,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:38:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25090,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-05T09:41:39Z",
         "review_author": "nhe-NV"
     },
@@ -15503,6 +15832,13 @@
         "comment_at": "2026-07-21T13:46:00Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/26415"
+    },
+    {
+        "number": 25089,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:38:14Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 25089,
@@ -15717,6 +16053,13 @@
         "comment_at": "2026-07-20T13:19:32Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/26348"
+    },
+    {
+        "number": 25085,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:38:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): msft-202603,202605,msft-202608, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202603: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 25085,
@@ -17830,6 +18173,13 @@
     {
         "number": 25008,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:38:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25008,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-05T09:28:55Z",
         "review_author": "nhe-NV"
     },
@@ -19473,6 +19823,13 @@
     {
         "number": 24973,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:38:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 24973,
+        "repo": "sonic-mgmt",
         "review_at": "2026-05-29T08:42:04Z",
         "review_author": "congh-nvidia"
     },
@@ -20330,6 +20687,13 @@
     {
         "number": 24963,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:38:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 24963,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-14T02:49:43Z",
         "review_author": "lunyue-ms"
     },
@@ -20962,6 +21326,13 @@
     {
         "number": 24934,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:38:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 24934,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-01T02:52:42Z",
         "review_author": "ZhaohuiS"
     },
@@ -21134,6 +21505,13 @@
         "comment_at": "2026-07-21T09:49:15Z",
         "comment_author": "StormLiangMS",
         "comment_body": "hi @weiguo-nvidia for cherrypick ask, could you update the test result with 202605?"
+    },
+    {
+        "number": 24926,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:38:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 24926,
@@ -21876,6 +22254,13 @@
     {
         "number": 24902,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:38:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 24902,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-12T01:26:00Z",
         "review_author": "lolyu"
     },
@@ -22060,6 +22445,13 @@
     {
         "number": 24886,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:38:40Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511,202605,msft-202608, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 24886,
+        "repo": "sonic-mgmt",
         "review_at": "2026-05-27T03:34:11Z",
         "review_author": "github-advanced-security"
     },
@@ -22212,6 +22604,13 @@
     {
         "number": 24876,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:38:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605,msft-202608, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 24876,
+        "repo": "sonic-mgmt",
         "review_at": "2026-05-28T01:15:55Z",
         "review_author": "ZhaohuiS"
     },
@@ -22302,6 +22701,13 @@
         "comment_at": "2026-07-20T12:56:45Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/26342"
+    },
+    {
+        "number": 24871,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:38:44Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 24871,
@@ -23459,6 +23865,13 @@
     {
         "number": 24816,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:38:50Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 24816,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-10T12:34:15Z",
         "review_author": "StormLiangMS"
     },
@@ -24300,6 +24713,13 @@
         "comment_at": "2026-06-04T07:33:40Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 24784,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-23T00:20:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 24784,
@@ -25594,6 +26014,13 @@
     {
         "number": 24642,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:39:02Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 24642,
+        "repo": "sonic-mgmt",
         "review_at": "2026-05-19T06:23:55Z",
         "review_author": "ZhaohuiS"
     },
@@ -26101,6 +26528,13 @@
     {
         "number": 24610,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:39:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 24610,
+        "repo": "sonic-mgmt",
         "review_at": "2026-05-22T18:59:35Z",
         "review_author": "vmittal-msft"
     },
@@ -26334,6 +26768,13 @@
         "comment_at": "2026-07-20T13:08:11Z",
         "comment_author": "StormLiangMS",
         "comment_body": "hi @echuawu is this needed for 202605 ?"
+    },
+    {
+        "number": 24597,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:39:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 24597,
@@ -30635,6 +31076,13 @@
     {
         "number": 24342,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:39:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 24342,
+        "repo": "sonic-mgmt",
         "review_at": "2026-05-08T08:51:16Z",
         "review_author": "nhe-NV"
     },
@@ -32302,6 +32750,13 @@
         "comment_at": "2026-07-21T14:37:12Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/26418"
+    },
+    {
+        "number": 24179,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:39:16Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 24179,
@@ -36311,6 +36766,13 @@
     {
         "number": 23631,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:39:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 23631,
+        "repo": "sonic-mgmt",
         "review_at": "2026-05-19T22:09:47Z",
         "review_author": "davidm-arista"
     },
@@ -36605,6 +37067,13 @@
         "comment_at": "2026-07-21T11:10:24Z",
         "comment_author": "echuawu",
         "comment_body": "> @echuawu PR conflicts with 202605 branch\r\n\r\nThe same content had been merged in https://github.com/sonic-net/sonic-mgmt/pull/26248"
+    },
+    {
+        "number": 23612,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-22T08:39:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 23612,
