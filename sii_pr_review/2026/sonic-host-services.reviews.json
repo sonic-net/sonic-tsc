@@ -1,5 +1,160 @@
 [
     {
+        "number": 412,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-07-16T12:32:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 412,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-07-16T12:32:23Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 412,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-07-16T12:32:33Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 412,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-07-16T12:45:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 412,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-07-16T12:45:09Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 412,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-07-16T13:04:51Z",
+        "comment_author": "Xichen96",
+        "comment_body": "@StormLiangMS @yxieca @lguohan could you please review when you get a chance? This is step 2 of 3 (caclmgrd now owns the dhcp_server docker0 syslog INPUT exception; buildimage#28328 removed the old container-side add/del). Thanks!"
+    },
+    {
+        "number": 412,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-07-17T11:20:34Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request for branch(es): 202605.<br>Added label(s) for branch(es) 202605.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 412,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-07-21T12:19:14Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 412,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-07-22T04:45:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 412,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-07-22T04:45:45Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 412,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-07-22T09:01:42Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "hi @Xichen96 Do we have a SONiC-MGMT test that verifies this functionality? If no, pls open an issue to track it as a test gap, then we can merge this PR. "
+    },
+    {
+        "number": 412,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-07-22T15:39:49Z",
+        "comment_author": "Xichen96",
+        "comment_body": "Hi @StormLiangMS \u2014 thanks for the review.\n\nThere is existing sonic-mgmt coverage: `tests/cacl/test_cacl_application.py::test_cacl_application` asserts the full `caclmgrd` INPUT ruleset, including the `dhcp_server` `docker0` syslog exception (added in #24696). Because this change moves ownership of that rule into `caclmgrd` and corrects the transport to RELP **tcp/2514** (feature-gated on `FEATURE.dhcp_server`), that existing assertion needs a corresponding update.\n\nI've opened a tracking issue for it: sonic-net/sonic-mgmt#26470.\n\nThis has been hardware-validated by manual patch on an `mx` (720dt) DUT: the rule is programmed above the catch-all DROP when the feature is enabled, container syslog reaches host rsyslog over tcp/2514, it toggles correctly on feature enable/disable, and it survives a control-plane ACL re-walk (the root regression in sonic-buildimage#27584). Happy to merge once you're good.\n"
+    },
+    {
+        "number": 412,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-07-22T16:17:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The change is not in 202605 yet. @Xichen96, please manually create the cherry pick PR for branch 202605.<br>You can ping the release branch owner(github account: vaibhavhd) to approve your cherry pick PR.<br>If this change is already in 202605, please comment \"already in 202605\". Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 412,
+        "repo": "sonic-host-services",
+        "review_at": "2026-07-16T12:47:33Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 412,
+        "repo": "sonic-host-services",
+        "review_at": "2026-07-21T08:26:32Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 412,
+        "repo": "sonic-host-services",
+        "review_at": "2026-07-21T08:31:50Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 412,
+        "repo": "sonic-host-services",
+        "review_at": "2026-07-21T13:39:15Z",
+        "review_author": "shreyansh-nexthop"
+    },
+    {
+        "number": 412,
+        "repo": "sonic-host-services",
+        "review_at": "2026-07-22T03:56:55Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 412,
+        "repo": "sonic-host-services",
+        "review_at": "2026-07-22T06:44:07Z",
+        "review_author": "yyynini"
+    },
+    {
+        "number": 412,
+        "repo": "sonic-host-services",
+        "latestReview_at": "2026-07-16T12:47:33Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 412,
+        "repo": "sonic-host-services",
+        "latestReview_at": "2026-07-21T13:39:15Z",
+        "latestReview_author": "shreyansh-nexthop",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 412,
+        "repo": "sonic-host-services",
+        "latestReview_at": "2026-07-21T08:31:50Z",
+        "latestReview_author": "StormLiangMS",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 412,
+        "repo": "sonic-host-services",
+        "latestReview_at": "2026-07-22T06:44:07Z",
+        "latestReview_author": "yyynini",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 406,
         "repo": "sonic-host-services",
         "comment_at": "2026-07-08T20:46:50Z",
