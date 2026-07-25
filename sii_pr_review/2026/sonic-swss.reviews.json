@@ -689,6 +689,13 @@
     {
         "number": 4758,
         "repo": "sonic-swss",
+        "comment_at": "2026-07-24T07:15:14Z",
+        "comment_author": "rookie-who",
+        "comment_body": "Hi \u2014 this PR is flagged for cherry-pick to the **202605 branch** (`Request for 202605 Branch`). To move forward with the cherry-pick, could you please:\n\n1. **Test this change on the 202605 branch** and add the test results to the PR description\n2. **Add the label `Tested for 202605 branch`** once testing is complete\n\nThis helps us track readiness and ensures we don't cherry-pick untested changes. Thanks!\n\n*Comment by @vaibhavhd via automated tooling*"
+    },
+    {
+        "number": 4758,
+        "repo": "sonic-swss",
         "review_at": "2026-07-16T01:19:59Z",
         "review_author": "vivekrnv"
     },
@@ -1628,7 +1635,21 @@
         "repo": "sonic-swss",
         "comment_at": "2026-07-24T00:57:47Z",
         "comment_author": "inder-nexthop",
-        "comment_body": "Hey, sending over a patch with the test work backing the orchagent graceful shutdown fix (sonic-swss PR 4699). What it contains:\r\n\r\n1. Two tests in tests/mock_tests/mux_rollback_ut.cpp. Each forks a child that replays ~OrchDaemon's deletion order, where AclOrch is freed before MuxOrch:\r\n- OrchDaemonTeardownOrderHeapUseAfterFree (ASAN builds only): child runs delete gAclOrch; delete m_MuxOrch; and must die with a heap use after free. The frames match the 202605 nightly core exactly: ~MuxAclHandler -> getAclRule -> getTableById on the freed AclOrch.\r\n- GracefulShutdownExitsBeforeOrchDaemonTeardown (all builds): child requests shutdown, calls exit_if_graceful_shutdown_requested(), then falls through to the same deletes. It must exit\u00a00. On any tree without the 4699 fix this fails, so it doubles as a permanent regression guard.\r\n2. ASAN wiring for the mock test binary in tests/mock_tests/Makefile.am (--enable-asan now instruments it, same pattern as p4orch_tests).\r\n\r\n\r\n[orchagent_teardown_ut_asan_fixes.patch](https://github.com/user-attachments/files/30328436/orchagent_teardown_ut_asan_fixes.patch)\r\n\r\n\r\nCC @deepak-singhal0408 @venkit-nexthop"
+        "comment_body": "Hey, sending over a patch with the test work backing the orchagent graceful shutdown fix (sonic-swss PR 4699). What it contains:\r\n\r\n1. Two tests in tests/mock_tests/mux_rollback_ut.cpp. Each forks a child that replays ~OrchDaemon's deletion order, where AclOrch is freed before MuxOrch:\r\n- OrchDaemonTeardownOrderHeapUseAfterFree (ASAN builds only): child runs delete gAclOrch; delete m_MuxOrch; and must die with a heap use after free. The frames match the 202605 nightly core exactly: ~MuxAclHandler -> getAclRule -> getTableById on the freed AclOrch.\r\n- GracefulShutdownExitsBeforeOrchDaemonTeardown (all builds): child requests shutdown, calls exit_if_graceful_shutdown_requested(), then falls through to the same deletes. It must exit\u00a00. On any tree without the 4699 fix this fails, so it doubles as a permanent regression guard.\r\n2. ASAN wiring for the mock test binary in tests/mock_tests/Makefile.am (--enable-asan now instruments it, same pattern as p4orch_tests).\r\n\r\n\r\n[orchagent_teardown_ut_asan_fixes.patch](https://github.com/user-attachments/files/30328436/orchagent_teardown_ut_asan_fixes.patch)\r\n\r\n\r\nTest matrix:\r\n\r\n```\r\n  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\r\n  \u2502            Target            \u2502         Build         \u2502  Fix state  \u2502                           Test case                           \u2502                                                   Result                                                   \u2502\r\n  \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524\r\n  \u2502 master                       \u2502 ASAN                  \u2502 fix present \u2502 MuxRollbackTest.OrchDaemonTeardownOrderHeapUseAfterFree       \u2502 PASS \u2014 child dies of heap-use-after-free, as asserted                                                      \u2502\r\n  \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524\r\n  \u2502 master                       \u2502 ASAN                  \u2502 fix present \u2502 MuxRollbackTest.GracefulShutdownExitsBeforeOrchDaemonTeardown \u2502 PASS \u2014 child exits 0 before teardown                                                                       \u2502\r\n  \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524\r\n  \u2502 master                       \u2502 ASAN                  \u2502 fix removed \u2502 MuxRollbackTest.OrchDaemonTeardownOrderHeapUseAfterFree       \u2502 PASS \u2014 teardown order is lethal either way                                                                 \u2502\r\n  \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524\r\n  \u2502 master                       \u2502 ASAN                  \u2502 fix removed \u2502 MuxRollbackTest.GracefulShutdownExitsBeforeOrchDaemonTeardown \u2502 FAIL \u2014 heap-use-after-free in ~MuxAclHandler \u2192 getAclRule \u2192 getTableById, freed by ~AclOrch                \u2502\r\n  \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524\r\n  \u2502 master                       \u2502 ASAN                  \u2502 fix present \u2502 full mock suite                                               \u2502 913 tests / 91 suites pass, zero ASAN reports                                                              \u2502\r\n  \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524\r\n  \u2502 master                       \u2502 non-ASAN (CI default) \u2502 fix present \u2502 all touched suites                                            \u2502 140 tests pass; ASAN-only repro compiled out; guard test passes                                            \u2502\r\n  \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524\r\n  \u2502 202605 + #4699 cherry-picked \u2502 ASAN                  \u2502 fix present \u2502 MuxRollbackTest.OrchDaemonTeardownOrderHeapUseAfterFree       \u2502 PASS (772 ms)                                                                                              \u2502\r\n  \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524\r\n  \u2502 202605 + #4699 cherry-picked \u2502 ASAN                  \u2502 fix present \u2502 MuxRollbackTest.GracefulShutdownExitsBeforeOrchDaemonTeardown \u2502 PASS (413 ms)                                                                                              \u2502\r\n  \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524\r\n  \u2502 202605 as-is (no backport)   \u2502 ASAN                  \u2502 fix absent  \u2502 MuxRollbackTest.OrchDaemonTeardownOrderHeapUseAfterFree       \u2502 PASS (697 ms)                                                                                              \u2502\r\n  \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524\r\n  \u2502 202605 as-is (no backport)   \u2502 ASAN                  \u2502 fix absent  \u2502 MuxRollbackTest.GracefulShutdownExitsBeforeOrchDaemonTeardown \u2502 FAIL (649 ms) \u2014 heap-use-after-free at ~MuxAclHandler muxorch.cpp:1486, freed by ~AclOrch aclorch.cpp:4242 \u2502\r\n  \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\r\n```\r\n\r\n\r\nCC @deepak-singhal0408 @venkit-nexthop @vaibhavhd "
+    },
+    {
+        "number": 4699,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-24T06:31:05Z",
+        "comment_author": "prsunny",
+        "comment_body": "Approving for 202605"
+    },
+    {
+        "number": 4699,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-24T06:41:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-swss/pull/4788"
     },
     {
         "number": 4699,
@@ -4357,6 +4378,13 @@
     {
         "number": 4654,
         "repo": "sonic-swss",
+        "comment_at": "2026-07-24T07:15:14Z",
+        "comment_author": "rookie-who",
+        "comment_body": "Hi \u2014 this PR is flagged for cherry-pick to the **202605 branch** (`Request for 202605 Branch`). To move forward with the cherry-pick, could you please:\n\n1. **Test this change on the 202605 branch** and add the test results to the PR description\n2. **Add the label `Tested for 202605 branch`** once testing is complete\n\nThis helps us track readiness and ensures we don't cherry-pick untested changes. Thanks!\n\n*Comment by @vaibhavhd via automated tooling*"
+    },
+    {
+        "number": 4654,
+        "repo": "sonic-swss",
         "review_at": "2026-06-08T11:20:55Z",
         "review_author": "DavidZagury"
     },
@@ -4571,6 +4599,264 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-04T04:16:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-04T04:17:00Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-05T03:31:14Z",
+        "comment_author": "Bojun-Feng",
+        "comment_body": "/azpw retry"
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-05T03:31:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-05T03:31:19Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1130444:\n\n\n\u2705Stage **Build**:\n- Job amd64: retried.\n- Job amd64: retried.\n\n\n\u2705Stage **BuildAsan**:\n- Job amd64: retried."
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-05T16:00:59Z",
+        "comment_author": "Bojun-Feng",
+        "comment_body": "/azpw retry"
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-05T16:01:02Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-05T16:01:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1130444:\n\n\n\u2705Stage **Build**:\n- Job amd64: retried.\n- Job amd64: retried.\n\n\n\u2705Stage **BuildAsan**:\n- Job amd64: retried."
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-05T16:13:35Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-05T16:13:45Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-05T22:08:03Z",
+        "comment_author": "Bojun-Feng",
+        "comment_body": "Note: CI builds were failing at `Download sonic platform-vpp deb packages` due to `Artifact vpp was not found for build`. Resolved after rebased to newest master commit."
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-15T21:41:26Z",
+        "comment_author": "tirupatihemanth",
+        "comment_body": "@prsunny  can you please help review?"
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-23T03:19:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-23T03:19:43Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-23T11:18:40Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi, there are workflow run(s) waiting for approval, you may be first-time contributor. I will notify maintainers to help approve once PR is approved. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-26T01:48:34Z",
+        "comment_author": "Bojun-Feng",
+        "comment_body": "/azpw retry"
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-26T01:48:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-26T01:48:40Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1146270:\n\n\n\u2705Stage **Test**:\n- Job vstest: retried."
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-26T13:07:34Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-26T13:07:44Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-26T16:36:35Z",
+        "comment_author": "Bojun-Feng",
+        "comment_body": "/azpw retry"
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-26T16:36:38Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-26T16:36:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1149705:\n\n\n\u2705Stage **BuildAsan**:\n- Job amd64: retried."
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-15T12:28:02Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@eddieruan-alibaba could you please help to review the changes and if all good approve the PR? this fix is required for 202605"
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-21T12:18:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-24T00:45:06Z",
+        "comment_author": "deepak-singhal0408",
+        "comment_body": "tag @dgsudharsan for review as well. "
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "review_at": "2026-06-04T05:42:25Z",
+        "review_author": "tirupatihemanth"
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "review_at": "2026-06-04T07:18:57Z",
+        "review_author": "Bojun-Feng"
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "review_at": "2026-06-19T02:00:12Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "review_at": "2026-06-23T03:22:34Z",
+        "review_author": "Bojun-Feng"
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "review_at": "2026-06-30T19:25:59Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "review_at": "2026-07-15T17:06:58Z",
+        "review_author": "eddieruan-alibaba"
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "review_at": "2026-07-24T00:59:41Z",
+        "review_author": "dgsudharsan"
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "review_at": "2026-07-24T01:05:01Z",
+        "review_author": "tirupatihemanth"
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-06-30T19:25:59Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-07-24T01:05:01Z",
+        "latestReview_author": "tirupatihemanth",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-07-24T00:59:41Z",
+        "latestReview_author": "dgsudharsan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4645,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-07-15T17:06:58Z",
+        "latestReview_author": "eddieruan-alibaba",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 4644,
         "repo": "sonic-swss",
         "comment_at": "2026-06-04T00:56:35Z",
@@ -4709,6 +4995,20 @@
         "comment_at": "2026-07-09T22:12:38Z",
         "comment_author": "vaibhavhd",
         "comment_body": "@StormLiangMS  why is this a must-have on 202605? Seems like the concern that this is fixing is a logging issue, and not a functional issue? Do you still want to take it to 202605?"
+    },
+    {
+        "number": 4643,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-24T07:15:15Z",
+        "comment_author": "rookie-who",
+        "comment_body": "Hi \u2014 this PR is flagged for cherry-pick to the **202605 branch** (`Request for 202605 Branch`). To move forward with the cherry-pick, could you please:\n\n1. **Test this change on the 202605 branch** and add the test results to the PR description\n2. **Add the label `Tested for 202605 branch`** once testing is complete\n\nThis helps us track readiness and ensures we don't cherry-pick untested changes. Thanks!\n\n*Comment by @vaibhavhd via automated tooling*"
+    },
+    {
+        "number": 4643,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-24T12:22:34Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 4643,
@@ -20422,6 +20722,13 @@
         "comment_at": "2026-04-21T17:51:38Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4400,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-24T06:30:26Z",
+        "comment_author": "prsunny",
+        "comment_body": "Approving for 202605"
     },
     {
         "number": 4400,
