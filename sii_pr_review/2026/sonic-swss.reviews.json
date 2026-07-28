@@ -11386,6 +11386,361 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-11T17:17:26Z",
+        "comment_author": "linux-foundation-easycla",
+        "comment_body": "<a href=\"https://easycla.lfx.linuxfoundation.org/#/?version=2\"><img src=\"https://s3.amazonaws.com/cla-project-logo-prod/cla-signed.svg?v=2\" alt=\"CLA Signed\" align=\"left\" height=\"28\" width=\"328\" ></a><br >The committers listed above are authorized under a signed CLA.<ul><li>:white_check_mark: login: venkit-nexthop / name: Venkit Kasiviswanathan (304a67dd94e21fd4182311f40d79150d330a7fd4)</li></ul>"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-05-29T22:25:26Z",
+        "comment_author": "venkit-nexthop",
+        "comment_body": "@prsunny @prabhataravind @vivekrnv @deepak-singhal0408 \r\nCould you take a look and approve this PR if you think it is good.\r\nThis PR implements the backend required for the `show orchagent tasks` and `sonic-clear orchagent tasks`\r\n(described in HLD https://github.com/sonic-net/SONiC/pull/2328)"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-10T21:43:53Z",
+        "comment_author": "deepak-singhal0408",
+        "comment_body": "@venkit-nexthop could you resolve the merge conflicts? thanks,"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-10T22:32:00Z",
+        "comment_author": "deepak-singhal0408",
+        "comment_body": "**Question: what's the vision for how `show`/`clear orchagent tasks` gets used?**\n\nReally like this \u2014 cheap, well-scoped latency visibility into the orchagent loop, and the P\u00b2 estimators keep it near-free.\n\nBefore diving into specifics, I'm curious about the **intended usage**, since it drives the design:\n- Purely an **interactive, on-box debug aid** a developer runs by hand during an incident?\n- Or something **scriptable / monitor-driven** (possibly concurrent), and maybe streamed off-box down the line?\n\nI ask because the data-sourcing choice ties to that. Across `sonic-utilities/show/`, ~21 commands read a DB table directly and 2 shell to vtysh; none do a `NotificationProducer` request/reply to a live daemon. This PR introduces that pattern \u2014 perfectly fine for a one-shot interactive command, with one edge if it's ever concurrent/scripted:\n\n\u26a0\ufe0f the reply on `ORCH_TASK_STATS_REPLY` carries no id linking it to a request, so two invocations at once (a `show` + a `clear`), or a reply that lands after the 10 s timeout, can be popped by the wrong caller \u2192 silently wrong/stale output. The `len(parts) != 14` guard catches schema drift but not a well-formed reply from the *wrong* request.\n\nSo it really comes down to the vision:\n- **Interactive debug only** \u2192 the current channel is the right scope (maybe just note the single-instance assumption).\n- **Scriptable / telemetry** \u2192 having orchagent publish into a **STATE_DB** table with the CLI doing a direct read would match the usual `show` pattern, remove the race, and make it streamable off-box for free. Or keep the channel and add an opaque request id echoed back in the reply.\n"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-11T17:44:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-11T17:44:56Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-11T17:45:12Z",
+        "comment_author": "venkit-nexthop",
+        "comment_body": "> @venkit-nexthop could you resolve the merge conflicts? thanks,\r\n\r\nJust resolved the conflicts."
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-11T18:11:20Z",
+        "comment_author": "venkit-nexthop",
+        "comment_body": "> **Question: what's the vision for how `show`/`clear orchagent tasks` gets used?**\r\n> \r\n> Really like this \u2014 cheap, well-scoped latency visibility into the orchagent loop, and the P\u00b2 estimators keep it near-free.\r\n> \r\n> Before diving into specifics, I'm curious about the **intended usage**, since it drives the design:\r\n> \r\n> * Purely an **interactive, on-box debug aid** a developer runs by hand during an incident?\r\n\r\nThis is the current intended usage. i.e an on-box debug aid that a developer or operator runs by hand.\r\n\r\n> * Or something **scriptable / monitor-driven** (possibly concurrent), and maybe streamed off-box down the line?\r\n\r\nThis is not designed for this use-case currently. But it could be extended for that in the future.\r\n\r\n> \r\n> I ask because the data-sourcing choice ties to that. Across `sonic-utilities/show/`, ~21 commands read a DB table directly and 2 shell to vtysh; none do a `NotificationProducer` request/reply to a live daemon. This PR introduces that pattern \u2014 perfectly fine for a one-shot interactive command, with one edge if it's ever concurrent/scripted:\r\n\r\nYes, the challenge with logging stats into redis is that it will become another periodic write into the redis DB. I wanted to avoid this. This only needs to be fetched on-demand (one-shot and interactive).\r\n\r\n> \r\n> \u26a0\ufe0f the reply on `ORCH_TASK_STATS_REPLY` carries no id linking it to a request, so two invocations at once (a `show` + a `clear`), or a reply that lands after the 10 s timeout, can be popped by the wrong caller \u2192 silently wrong/stale output. The `len(parts) != 14` guard catches schema drift but not a well-formed reply from the _wrong_ request.\r\n\r\n  Assume both sessions A and B are subscribed before either reply is published (the case where \"the 2nd reads the 1st's reply\"). Orchagent is single-threaded, so it publishes in order: reply-A, then reply-B. Each is broadcast to\r\n  both connections. So both A's and B's buffers end up holding [reply-A, reply-B] in that order.\r\n\r\nBut each CLI does select() + pop() exactly once:\r\n\r\n  - A wakes on reply-A, pops it, prints it, exits.\r\n  - B also wakes on reply-A (first in its buffer), pops it, prints A's data, exits.\r\n\r\nSo in the fully-concurrent case, both sessions render session-A's snapshot, and reply-B is consumed by nobody. reply-B was generated by orchagent and delivered into both connections' buffers, but neither process ever pops a\r\n  second time. The reply-B sits unread in the per-connection buffers/m_queue of both CLI processes. The moment each sonic-cli process exits (right after its single pop()), it closes its redis connection. Redis drops that connection's subscription and its associated output buffer, and the client-side m_queue is freed with the process. reply-B is simply garbage-collected along with the connections \u2014 it never touches persistent storage and doesn't leak or grow memory on the redis server.\r\n\r\nThere is not memory leak in any or this. There is a possibility that with some timing case, one of the sessions may read garbled data. If the one sessions does a `clear`, it is possible that is handled first and the other session gets all 0 data as well (This is common for any regular feature with competing sessions as well).\r\n\r\n> \r\n> So it really comes down to the vision:\r\n> \r\n> * **Interactive debug only** \u2192 the current channel is the right scope (maybe just note the single-instance assumption).\r\n\r\nYES, this one.\r\n\r\n> * **Scriptable / telemetry** \u2192 having orchagent publish into a **STATE_DB** table with the CLI doing a direct read would match the usual `show` pattern, remove the race, and make it streamable off-box for free. Or keep the channel and add an opaque request id echoed back in the reply.\r\n\r\nNO, not designed for this yet.\r\n\r\n"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-11T20:33:53Z",
+        "comment_author": "venkit-nexthop",
+        "comment_body": "> **Question: what's the vision for how `show`/`clear orchagent tasks` gets used?**\r\n> \r\n> Really like this \u2014 cheap, well-scoped latency visibility into the orchagent loop, and the P\u00b2 estimators keep it near-free.\r\n> \r\n> Before diving into specifics, I'm curious about the **intended usage**, since it drives the design:\r\n> \r\n> * Purely an **interactive, on-box debug aid** a developer runs by hand during an incident?\r\n> * Or something **scriptable / monitor-driven** (possibly concurrent), and maybe streamed off-box down the line?\r\n> \r\n> I ask because the data-sourcing choice ties to that. Across `sonic-utilities/show/`, ~21 commands read a DB table directly and 2 shell to vtysh; none do a `NotificationProducer` request/reply to a live daemon. This PR introduces that pattern \u2014 perfectly fine for a one-shot interactive command, with one edge if it's ever concurrent/scripted:\r\n> \r\n> \u26a0\ufe0f the reply on `ORCH_TASK_STATS_REPLY` carries no id linking it to a request, so two invocations at once (a `show` + a `clear`), or a reply that lands after the 10 s timeout, can be popped by the wrong caller \u2192 silently wrong/stale output. The `len(parts) != 14` guard catches schema drift but not a well-formed reply from the _wrong_ request.\r\n> \r\n> So it really comes down to the vision:\r\n> \r\n> * **Interactive debug only** \u2192 the current channel is the right scope (maybe just note the single-instance assumption).\r\n> * **Scriptable / telemetry** \u2192 having orchagent publish into a **STATE_DB** table with the CLI doing a direct read would match the usual `show` pattern, remove the race, and make it streamable off-box for free. Or keep the channel and add an opaque request id echoed back in the reply.\r\n\r\nAlso the show/clear commands are implemented in this PR => https://github.com/sonic-net/sonic-utilities/pull/4536"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-11T23:28:09Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-11T23:28:28Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-11T23:30:52Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-11T23:31:03Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-12T15:53:55Z",
+        "comment_author": "venkit-nexthop",
+        "comment_body": "@deepak-singhal0408 @prsunny \r\nCI has passed. Can you take a look and approve the PR?"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-15T07:09:52Z",
+        "comment_author": "venkit-nexthop",
+        "comment_body": "@prsunny can you approve this?"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-15T13:56:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-15T13:57:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-15T14:02:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-15T14:03:03Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-15T17:40:22Z",
+        "comment_author": "deepak-singhal0408",
+        "comment_body": "@venkit-nexthop please fix DCO/EasyCLA and also update PR body as per the repo PR body template. "
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-15T20:47:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-15T20:47:14Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-17T20:46:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-17T20:46:59Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-17T23:51:23Z",
+        "comment_author": "venkit-nexthop",
+        "comment_body": "/azp run Azure.sonic-swss"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-17T23:51:30Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nCommenter does not have sufficient privileges for PR 4563 in repo sonic-net/sonic-swss<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-18T03:46:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-18T03:47:05Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-18T07:42:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-18T07:42:27Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-18T14:25:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-18T14:25:56Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-20T18:38:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-20T18:39:00Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-21T17:32:09Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-21T17:32:21Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-23T02:51:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-23T02:52:05Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-23T02:53:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-23T02:53:50Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "review_at": "2026-07-13T06:08:28Z",
+        "review_author": "deepak-singhal0408"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "review_at": "2026-07-13T06:34:05Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "review_at": "2026-07-15T14:01:11Z",
+        "review_author": "venkit-nexthop"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "review_at": "2026-07-21T18:21:41Z",
+        "review_author": "deepak-singhal0408"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "review_at": "2026-07-22T21:22:57Z",
+        "review_author": "prabhataravind"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "review_at": "2026-07-22T21:37:16Z",
+        "review_author": "venkit-nexthop"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "review_at": "2026-07-23T02:58:16Z",
+        "review_author": "venkit-nexthop"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "review_at": "2026-07-23T03:45:25Z",
+        "review_author": "deepak-singhal0408"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "review_at": "2026-07-24T13:31:49Z",
+        "review_author": "prabhataravind"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-07-13T06:34:05Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-07-24T13:31:49Z",
+        "latestReview_author": "prabhataravind",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4563,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-07-23T03:45:25Z",
+        "latestReview_author": "deepak-singhal0408",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 4561,
         "repo": "sonic-swss",
         "comment_at": "2026-05-11T02:42:54Z",
@@ -38856,6 +39211,13 @@
         "comment_at": "2026-07-22T06:19:24Z",
         "comment_author": "mssonicbld",
         "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 4170,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-27T12:29:53Z",
+        "comment_author": "YairRaviv",
+        "comment_body": "> This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: <test result>) in the **Test result** section as well in your PR description.\r\n> \r\n> ---Powered by SONiC BuildBot\r\n\r\nAdded"
     },
     {
         "number": 4170,
