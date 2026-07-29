@@ -1,5 +1,253 @@
 [
     {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "comment_at": "2026-07-21T16:30:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "comment_at": "2026-07-21T16:30:06Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "comment_at": "2026-07-21T16:30:16Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "comment_at": "2026-07-21T16:36:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "comment_at": "2026-07-21T16:36:35Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "comment_at": "2026-07-22T02:52:58Z",
+        "comment_author": "nhe-NV",
+        "comment_body": "@Xichen96 should 202605 label added for this PR?"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "comment_at": "2026-07-22T06:02:59Z",
+        "comment_author": "Xichen96",
+        "comment_body": "@nhe-NV Yes\u2014added `Request for 202605 Branch`. I am validating this fix on a tagged 202605 image now and will post the exact image, platform/HWSKU, and results here."
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "comment_at": "2026-07-22T06:20:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "comment_at": "2026-07-23T05:40:37Z",
+        "comment_author": "Xichen96",
+        "comment_body": "202605 hardware validation is complete.\n\n- Image: `SONiC.20260510.07` (`1df5b92630`)\n- Platform/HWSKU/topology: `x86_64-arista_720dt_48s` / `Arista-720DT-G48S4` / `m0`\n- Stock reproduction: with two IPv6 LLAs and no management IPv6 GUA, `dhcpmon-Vlan1000` entered `FATAL` with the exact multiple-LLA initialization error.\n- PR package: remained `RUNNING` under the identical address state.\n- Functional validation: five consecutive runs of the three affected tests passed, **15/15 test executions**.\n\nTracking:\n- PBI: https://msazure.visualstudio.com/One/_workitems/edit/38912123\n- Child Task: https://msazure.visualstudio.com/One/_workitems/edit/38912124\n"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "comment_at": "2026-07-23T09:42:49Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@Xichen96 Thanks for fixing the multiple-LLA startup failure and adding the 202605 hardware validation.\n\nOne concern: skipping `initialize_intf_mac_and_ip_addr()` for the management interface also removes the existing validation that the interface exists. Previously, `SIOCGIFHWADDR` failed initialization for an invalid or stale `-im` value. Now any interface name is accepted; because the sockets bind to all interfaces and packets without a matching device context are ignored, `dhcpmon` could remain healthy while traffic on the real management interface is not monitored.\n\nCould we retain a lightweight existence check, such as `if_nametoindex()`, while continuing to skip MAC/IP address discovery for management interfaces?"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "comment_at": "2026-07-23T09:52:50Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "comment_at": "2026-07-23T09:53:00Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "comment_at": "2026-07-23T10:03:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "comment_at": "2026-07-23T10:03:16Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "comment_at": "2026-07-23T12:22:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The **Tested branch** section has been ticked and **Test result** is provided for branch(es): 202605. Added label(s): Tested for 202605 Branch.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "comment_at": "2026-07-23T17:40:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "comment_at": "2026-07-23T17:41:04Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "comment_at": "2026-07-23T17:45:57Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "comment_at": "2026-07-23T17:46:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "comment_at": "2026-07-23T17:46:58Z",
+        "comment_author": "Xichen96",
+        "comment_body": "@StormLiangMS Implemented the lightweight management-interface existence check as suggested. Management contexts still skip MAC/IP address discovery, but now call `if_nametoindex(ifname)` and fail initialization when the original `-im` value does not identify an existing interface. Using the original argument also ensures overlong names cannot pass via truncation.\n\n202605 manual validation of the functional fix (`942ac44`, CI build `1172862`) confirmed:\n- valid `eth0` with two LLAs and no IPv6 GUA: `dhcpmon` remained `RUNNING`;\n- missing `-im does-not-exist`: rejected with `No such device`;\n- overlong `-im` name: rejected with `No such device`.\n\nThe current head only removes two redundant include additions from that implementation; its CI build is running now. Thanks for catching this."
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "comment_at": "2026-07-24T04:22:52Z",
+        "comment_author": "Xichen96",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "comment_at": "2026-07-24T04:23:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "comment_at": "2026-07-27T16:33:29Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "hi @ashutosh-agrawal could you help to take a look?"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "review_at": "2026-07-21T16:32:54Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "review_at": "2026-07-21T16:36:39Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "review_at": "2026-07-21T16:38:51Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "review_at": "2026-07-23T09:55:10Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "review_at": "2026-07-23T10:03:11Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "review_at": "2026-07-23T10:05:09Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "review_at": "2026-07-23T17:43:00Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "review_at": "2026-07-23T17:48:15Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "review_at": "2026-07-27T16:29:45Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "review_at": "2026-07-27T16:31:14Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "review_at": "2026-07-28T03:59:44Z",
+        "review_author": "ashutosh-agrawal"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "latestReview_at": "2026-07-23T17:48:15Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "latestReview_at": "2026-07-28T03:59:44Z",
+        "latestReview_author": "ashutosh-agrawal",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 87,
+        "repo": "sonic-dhcpmon",
+        "latestReview_at": "2026-07-27T16:31:14Z",
+        "latestReview_author": "StormLiangMS",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 86,
         "repo": "sonic-dhcpmon",
         "comment_at": "2026-07-09T14:27:08Z",
