@@ -545,6 +545,13 @@
     {
         "number": 25730,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-31T01:26:47Z",
+        "comment_author": "sakshamkhurana21",
+        "comment_body": "> hi @lizhijianrd @yejianquan could this be an issue for mgmt tor?\r\n\r\nHey @StormLiangMS, the change has been present on the internal\u00a0branch since June 30 and has been exercised by active nightly tests. It was also cherry-picked into 202511. This M0 management-ToR nightly ran successfully afterward:\r\n\r\nhttps://elastictest.org/scheduler/testplan/6a48e7b0d38c80f6ad94bccd\r\n\r\nWe also found successful M0 runs on July 2 and July 3 after the cherry-pick. This provides evidence that binding image downloads to\u00a0eth0\u00a0does not break the upgrade image step. If it all looks good, can you please help with approving the cherry pick request for 202605? Please let me know if you have any other questions. "
+    },
+    {
+        "number": 25730,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-29T04:33:43Z",
         "review_author": "lolyu"
     },
@@ -13744,6 +13751,13 @@
     {
         "number": 25161,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-30T18:46:14Z",
+        "comment_author": "prabhataravind",
+        "comment_body": "> hi @prabhataravind for 202605 cherrypick, could you help to update the test result?\r\n\r\n@StormLiangMS tested on 202605 with a private image having changes from https://github.com/sonic-net/sonic-buildimage/pull/27657. The test needs the image change above to pass.\r\n\r\n======================================================================================================================= warnings summary =======================================================================================================================\r\nptf_runner.py:3\r\n  /var/src/sonic-mgmt-int/tests/ptf_runner.py:3: DeprecationWarning: 'pipes' is deprecated and slated for removal in Python 3.13\r\n    import pipes\r\n\r\ndatabase/test_state_db_flush.py:19\r\n  /var/src/sonic-mgmt-int/tests/database/test_state_db_flush.py:19: PytestUnknownMarkWarning: Unknown pytest.mark.disable_loganalyzer - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html\r\n    pytest.mark.disable_loganalyzer\r\n\r\ntests/database/test_state_db_flush.py::test_state_db_cleanup_after_swss_restart[str-msn2700a1-03-None]\r\n  /opt/venv/lib/python3.12/site-packages/pytest_ansible/host_manager/v213.py:13: DeprecationWarning: Host management is deprecated and will be removed in a future release\r\n    class HostManagerV213(BaseHostManager):\r\n\r\ntests/database/test_state_db_flush.py::test_state_db_cleanup_after_swss_restart[str-msn2700a1-03-None]\r\ntests/database/test_state_db_flush.py::test_state_db_cleanup_after_swss_restart[str-msn2700a1-03-None]\r\ntests/database/test_state_db_flush.py::test_state_db_cleanup_after_swss_restart[str-msn2700a1-03-None]\r\ntests/database/test_state_db_flush.py::test_state_db_cleanup_after_swss_restart[str-msn2700a1-03-None]\r\n  /opt/venv/lib/python3.12/site-packages/ansible/plugins/loader.py:1670: UserWarning: AnsibleCollectionFinder has already been configured\r\n    warnings.warn('AnsibleCollectionFinder has already been configured')\r\n\r\ntests/database/test_state_db_flush.py: 132 warnings\r\n  /usr/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=692) is multi-threaded, use of fork() may lead to deadlocks in the child.\r\n    self.pid = os.fork()\r\n\r\ntests/database/test_state_db_flush.py::test_state_db_cleanup_after_swss_restart[str-msn2700a1-03-None]\r\n  /var/src/sonic-mgmt-int/tests/conftest.py:1608: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).\r\n    record_testsuite_property(\"timestamp\", datetime.utcnow())\r\n\r\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\r\n------------------------------------------------------------------------------------------------ generated xml file: /var/src/sonic-mgmt-int/tests/logs/tr.xml -------------------------------------------------------------------------------------------------\r\n-------------------------------------------------------------------------------------------------------------------- live log sessionfinish --------------------------------------------------------------------------------------------------------------------\r\nINFO     root:__init__.py:67 Can not get Allure report URL. Please check logs\r\n========================================================================================================= 1 passed, 140 warnings in 227.88s (0:03:47) ================================================================================================================================================================================================================================= warnings summary =======================================================================================================================\r\nptf_runner.py:3\r\n  /var/src/sonic-mgmt-int/tests/ptf_runner.py:3: DeprecationWarning: 'pipes' is deprecated and slated for removal in Python 3.13\r\n    import pipes\r\n\r\ndatabase/test_state_db_flush.py:19\r\n  /var/src/sonic-mgmt-int/tests/database/test_state_db_flush.py:19: PytestUnknownMarkWarning: Unknown pytest.mark.disable_loganalyzer - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html\r\n    pytest.mark.disable_loganalyzer\r\n\r\ntests/database/test_state_db_flush.py::test_state_db_cleanup_after_swss_restart[str-msn2700a1-03-None]\r\n  /opt/venv/lib/python3.12/site-packages/pytest_ansible/host_manager/v213.py:13: DeprecationWarning: Host management is deprecated and will be removed in a future release\r\n    class HostManagerV213(BaseHostManager):\r\n\r\ntests/database/test_state_db_flush.py::test_state_db_cleanup_after_swss_restart[str-msn2700a1-03-None]\r\ntests/database/test_state_db_flush.py::test_state_db_cleanup_after_swss_restart[str-msn2700a1-03-None]\r\ntests/database/test_state_db_flush.py::test_state_db_cleanup_after_swss_restart[str-msn2700a1-03-None]\r\ntests/database/test_state_db_flush.py::test_state_db_cleanup_after_swss_restart[str-msn2700a1-03-None]\r\n  /opt/venv/lib/python3.12/site-packages/ansible/plugins/loader.py:1670: UserWarning: AnsibleCollectionFinder has already been configured\r\n    warnings.warn('AnsibleCollectionFinder has already been configured')\r\n\r\ntests/database/test_state_db_flush.py: 132 warnings\r\n  /usr/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=692) is multi-threaded, use of fork() may lead to deadlocks in the child.\r\n    self.pid = os.fork()\r\n\r\ntests/database/test_state_db_flush.py::test_state_db_cleanup_after_swss_restart[str-msn2700a1-03-None]\r\n  /var/src/sonic-mgmt-int/tests/conftest.py:1608: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).\r\n    record_testsuite_property(\"timestamp\", datetime.utcnow())\r\n\r\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\r\n------------------------------------------------------------------------------------------------ generated xml file: /var/src/sonic-mgmt-int/tests/logs/tr.xml -------------------------------------------------------------------------------------------------\r\n-------------------------------------------------------------------------------------------------------------------- live log sessionfinish --------------------------------------------------------------------------------------------------------------------\r\nINFO     root:__init__.py:67 Can not get Allure report URL. Please check logs\r\n========================================================================================================= 1 passed, 140 warnings in 227.88s (0:03:47) =========================================================================================================="
+    },
+    {
+        "number": 25161,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-12T20:18:27Z",
         "review_author": "kperumalbfn"
     },
@@ -16560,6 +16574,13 @@
     {
         "number": 25063,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-31T00:19:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25063,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-06T02:45:12Z",
         "review_author": "wsycqyz"
     },
@@ -16859,6 +16880,13 @@
         "comment_at": "2026-07-28T14:20:52Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/26625"
+    },
+    {
+        "number": 25055,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-31T00:19:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 25055,
@@ -24094,6 +24122,27 @@
     {
         "number": 24813,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-07-30T08:17:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/26691"
+    },
+    {
+        "number": 24813,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-30T08:20:20Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "hi @augusdn Could we make the checker use a more generic condition instead of relying on a specific HWSKU? For example, we could check for CPU frequency below 1.5 GHz and memory less than or equal to 4 GB. This would make the logic more broadly applicable across different platforms."
+    },
+    {
+        "number": 24813,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-31T00:19:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 24813,
+        "repo": "sonic-mgmt",
         "review_at": "2026-05-25T03:58:06Z",
         "review_author": "ediwibowo-msft"
     },
@@ -26080,6 +26129,13 @@
         "comment_at": "2026-07-22T08:39:02Z",
         "comment_author": "mssonicbld",
         "comment_body": "This PR has backport request label(s) for branch(es): 202511, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 24642,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-31T00:38:52Z",
+        "comment_author": "anamehra",
+        "comment_body": "Hi @XuChen-MSFT , please add to 202605 as well. Thanks"
     },
     {
         "number": 24642,
@@ -29669,9 +29725,9 @@
     {
         "number": 24453,
         "repo": "sonic-mgmt",
-        "comment_at": "2026-07-29T15:31:42Z",
-        "comment_author": "AharonMalkin",
-        "comment_body": "Hey  @judyjoseph , @yxieca, this PR also needed for 202605 branch, please advise in creating cherry pick"
+        "comment_at": "2026-07-31T00:20:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): msft-202608, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202608: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 24453,
@@ -30054,7 +30110,13 @@
     {
         "number": 24453,
         "repo": "sonic-mgmt",
-        "latestReview_at": "2026-07-29T07:58:04Z",
+        "review_at": "2026-07-30T03:47:00Z",
+        "review_author": "JibinBao"
+    },
+    {
+        "number": 24453,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-07-30T03:47:00Z",
         "latestReview_author": "JibinBao",
         "latestReview_state": "COMMENTED"
     },
@@ -33709,6 +33771,13 @@
         "comment_at": "2026-07-05T15:12:41Z",
         "comment_author": "mssonicbld",
         "comment_body": "@justin-wong-ce cherry pick PR didn't pass PR checker after retry. Please help check! Thanks.<br>https://github.com/sonic-net/sonic-mgmt/pull/25847\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 23936,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-31T00:20:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 23936,
@@ -40900,6 +40969,20 @@
         "comment_at": "2026-06-04T05:12:42Z",
         "comment_author": "StormLiangMS",
         "comment_body": "hi @bingwang-ms could you help to review?"
+    },
+    {
+        "number": 22696,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-30T04:57:27Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "hi @kazinator-arista could you help to update the test result for the cherrypick branches?"
+    },
+    {
+        "number": 22696,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-31T00:20:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): msft-202503,202511,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202503: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 22696,
