@@ -1162,6 +1162,13 @@
     {
         "number": 28069,
         "repo": "sonic-buildimage",
+        "comment_at": "2026-07-30T06:16:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@yifei-micas cherry pick PR didn't pass PR checker after retry. Please help check! Thanks.<br>https://github.com/Azure/sonic-buildimage-msft/pull/2786\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 28069,
+        "repo": "sonic-buildimage",
         "review_at": "2026-06-25T00:07:36Z",
         "review_author": "sdszhang"
     },
@@ -5451,6 +5458,20 @@
     {
         "number": 27896,
         "repo": "sonic-buildimage",
+        "comment_at": "2026-07-30T15:42:11Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The label `Approved for 202605 Branch` can only be added by a member of the @sonic-net/release-manager-202605 team. Removing the label. Please contact one of the release managers: @yxieca @vaibhavhd to approve the cherry pick."
+    },
+    {
+        "number": 27896,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-07-30T18:14:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): msft-202512, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202512: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 27896,
+        "repo": "sonic-buildimage",
         "review_at": "2026-06-16T23:21:57Z",
         "review_author": "bingwang-ms"
     },
@@ -8687,6 +8708,13 @@
     {
         "number": 27808,
         "repo": "sonic-buildimage",
+        "comment_at": "2026-07-30T06:16:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@KroosMicas cherry pick PR didn't pass PR checker after retry. Please help check! Thanks.<br>https://github.com/Azure/sonic-buildimage-msft/pull/2787\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 27808,
+        "repo": "sonic-buildimage",
         "review_at": "2026-06-24T02:41:01Z",
         "review_author": "prgeor"
     },
@@ -11425,6 +11453,20 @@
         "comment_at": "2026-06-14T00:48:21Z",
         "comment_author": "fzhou-nokia",
         "comment_body": "Cherry-pick PR for 202511 #27882 "
+    },
+    {
+        "number": 27741,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-07-30T15:39:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Auto cherry pick doesn't support submodule update. Please manually cherry pick!"
+    },
+    {
+        "number": 27741,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-07-30T18:15:11Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511,msft-202512, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 27741,
@@ -15876,6 +15918,20 @@
     {
         "number": 27682,
         "repo": "sonic-buildimage",
+        "comment_at": "2026-07-30T18:51:14Z",
+        "comment_author": "frank-nexthop",
+        "comment_body": "> > > This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: ) in the **Test result** section as well in your PR description.\r\n> > > ---Powered by SONiC BuildBot\r\n> > \r\n> > \r\n> > @frank-nexthop could you please address this to complete the cherry-pick.\r\n> \r\n> Yes, will take a look and test it on 202605.\r\n\r\n@vvolam I have added the following section to the PR description with my testing, it is verified on 202605.\r\n\r\n#### Test result\r\n\r\n202605: `SONiC.202605.1179093-ee68f85f5` (upstream 202605 broadcom nightly, build 1179093)\r\n\r\nTested on a Broadcom-based switch running the upstream 202605 nightly, with this PR's `service_checker.py` installed over the in-image copy (`/usr/local/lib/python3.13/dist-packages/health_checker/service_checker.py`), followed by `rm -f /tmp/critical_process_cache && systemctl restart system-health`.\r\n\r\nTest config: `Vlan1000` with IPv4/IPv6 addresses, `dhcp_servers` set on `VLAN|Vlan1000`, and `dhcpv6_servers` set on `DHCP_RELAY|Vlan1000`, so the container renders `[group:dhcp-relay]` with members `dhcp6relay` and `dhcprelayd`. (`isc-dhcpv4-relay-<vlan>` renders outside the group on 202605 unless `has_sonic_dhcpv4_relay=True`, so the expected member list differs from the master example in the PR description.)\r\n\r\n1. Critical process list is populated from the `group:` entry:\r\n\r\n```\r\n$ python3 -c \"import pickle; print(pickle.load(open('/tmp/critical_process_cache','rb')).get('dhcp_relay'))\"\r\n['dhcp-relay:dhcp6relay', 'dhcp-relay:dhcprelayd']\r\n```\r\n2. Retry-instead-of-latch verified: before DHCP relay config was applied, the container had no dhcp-relay group, and healthd retried every cycle instead of caching an empty result \u2014 then succeeded on the first cycle after the group appeared:\r\n\r\n```\r\nJul 30 18:35:40 ... bmc_base[25453]: Group expansion produced no processes for container dhcp_relay; will retry on next check\r\nJul 30 18:36:40 ... bmc_base[25453]: Group expansion produced no processes for container dhcp_relay; will retry on next check\r\n(next cycle: cache populated, see above)\r\n```\r\n3. Alarm fires within one check cycle after stopping a group member:\r\n\r\n```\r\n$ docker exec dhcp_relay supervisorctl stop dhcp-relay:dhcp6relay\r\ndhcp-relay:dhcp6relay: stopped\r\n$ redis-cli -n 6 HGETALL SYSTEM_HEALTH_INFO | grep -A1 dhcp\r\ndhcp_relay:dhcp-relay:dhcp6relay\r\nProcess 'dhcp-relay:dhcp6relay' in container 'dhcp_relay' is not running\r\n```\r\n4. Alarm clears on the next cycle after restarting the process:\r\n\r\n```\r\n$ docker exec dhcp_relay supervisorctl start dhcp-relay:dhcp6relay\r\ndhcp-relay:dhcp6relay: started\r\n$ redis-cli -n 6 HGETALL SYSTEM_HEALTH_INFO | grep dhcp\r\n(no output \u2014 alarm cleared)\r\n$ redis-cli -n 6 HGET SYSTEM_HEALTH_INFO summary\r\nOK\r\n```\r\nCaveat: this was verified by overlaying the patched service_checker.py onto an unmodified 202605 nightly image (the change is host-side Python only, shipped in the system_health wheel), not by building a full 202605 image from this branch."
+    },
+    {
+        "number": 27682,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-07-31T00:15:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The **Tested branch** section has been ticked and **Test result** is provided for branch(es): 202605. Added label(s): Tested for 202605 Branch.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 27682,
+        "repo": "sonic-buildimage",
         "review_at": "2026-06-15T23:09:51Z",
         "review_author": "geans-pin"
     },
@@ -17149,6 +17205,13 @@
     {
         "number": 27657,
         "repo": "sonic-buildimage",
+        "comment_at": "2026-07-30T21:17:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-buildimage/pull/28740"
+    },
+    {
+        "number": 27657,
+        "repo": "sonic-buildimage",
         "review_at": "2026-06-02T02:56:07Z",
         "review_author": "copilot-pull-request-reviewer"
     },
@@ -17210,6 +17273,12 @@
         "number": 27657,
         "repo": "sonic-buildimage",
         "review_at": "2026-07-09T20:10:26Z",
+        "review_author": "prabhataravind"
+    },
+    {
+        "number": 27657,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-07-30T18:48:07Z",
         "review_author": "prabhataravind"
     },
     {
@@ -19854,6 +19923,12 @@
     {
         "number": 27574,
         "repo": "sonic-buildimage",
+        "review_at": "2026-07-30T03:21:05Z",
+        "review_author": "yijingyan2"
+    },
+    {
+        "number": 27574,
+        "repo": "sonic-buildimage",
         "latestReview_at": "2026-07-03T06:10:25Z",
         "latestReview_author": "jusherma",
         "latestReview_state": "COMMENTED"
@@ -19875,9 +19950,9 @@
     {
         "number": 27574,
         "repo": "sonic-buildimage",
-        "latestReview_at": "2026-05-29T06:51:29Z",
+        "latestReview_at": "2026-07-30T03:21:05Z",
         "latestReview_author": "yijingyan2",
-        "latestReview_state": "APPROVED"
+        "latestReview_state": "COMMENTED"
     },
     {
         "number": 27561,
