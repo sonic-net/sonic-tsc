@@ -19145,14 +19145,14 @@
         "number": 24297,
         "repo": "sonic-mgmt",
         "comment_at": "2026-04-29T06:19:38Z",
-        "comment_author": "nsoma-cisco",
+        "comment_author": "nsoma26",
         "comment_body": "> Thorough follow-up to my review comment on #24218. All 10 test-side call sites now import from `constants.py`, and the 5 PTF-side scripts carry documented lock-step mirrors since they run outside the test tree's `sys.path`. The Ansible YAML literal with the sync comment is the right call \u2014 no Python import surface there. Verified the `%s` vs `.format()` switch in `advanced_reboot.py` produces identical output.\r\n\r\n@ZhaohuiS Thank you for the comment and approval."
     },
     {
         "number": 24297,
         "repo": "sonic-mgmt",
         "comment_at": "2026-04-29T15:03:47Z",
-        "comment_author": "nsoma-cisco",
+        "comment_author": "nsoma26",
         "comment_body": "@mssonicbld could you please re-run the pipeline on this PR? The `impacted-area-kvmtest-t1-lag by Elastictest` stage was killed by a module-level wall-clock timeout, not a test assertion:\n\n- Test summary: `passes: 1789`, `failures: 0`, `errors_ignore_retries: 1`\n- The single error was `Test Module Timeout: process_monitoring/test_critical_process_monitoring.py has been running for 193.98 minutes (configured timeout: 11638.677 seconds)`\n- Test plan: https://elastictest.org/scheduler/testplan/69f189ba1f6d9ccadfb46723\n\nThis module is unrelated to the changes in this PR (a pure rename of `/tmp/from_t1.json` to a named constant \u2014 it doesn't touch `process_monitoring/`, supervisor, or anything in the timed-out module's call graph). All other 22 jobs passed, including the previously-flaky `multi-asic-t1`. Looks like an oversubscribed-testbed flake. Could you please kick off another run when convenient?\n\nThank you very much for your help!\n\n/azp run"
     },
     {
@@ -19173,21 +19173,21 @@
         "number": 24297,
         "repo": "sonic-mgmt",
         "comment_at": "2026-04-30T04:06:03Z",
-        "comment_author": "nsoma-cisco",
+        "comment_author": "nsoma26",
         "comment_body": "@ZhaohuiS All checks have passed and you have already approved the changes. Could you please merge the PR?"
     },
     {
         "number": 24297,
         "repo": "sonic-mgmt",
         "comment_at": "2026-05-08T20:07:49Z",
-        "comment_author": "nsoma-cisco",
+        "comment_author": "nsoma26",
         "comment_body": "> @ZhaohuiS All checks have passed and you have already approved the changes. Could you please merge the PR?\r\n\r\n@ZhaohuiS Please let me know if there is anything else I need to do to wrap this up."
     },
     {
         "number": 24297,
         "repo": "sonic-mgmt",
         "comment_at": "2026-05-09T08:07:46Z",
-        "comment_author": "nsoma-cisco",
+        "comment_author": "nsoma26",
         "comment_body": "@ZhaohuiS Thank you for merging this PR."
     },
     {

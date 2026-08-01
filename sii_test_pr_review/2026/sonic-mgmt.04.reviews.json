@@ -824,7 +824,7 @@
         "number": 24272,
         "repo": "sonic-mgmt",
         "comment_at": "2026-05-09T08:10:57Z",
-        "comment_author": "nsoma-cisco",
+        "comment_author": "nsoma26",
         "comment_body": "@StormLiangMS Thank you for merging this PR."
     },
     {
@@ -1892,14 +1892,14 @@
         "number": 24218,
         "repo": "sonic-mgmt",
         "comment_at": "2026-04-27T09:43:35Z",
-        "comment_author": "nsoma-cisco",
+        "comment_author": "nsoma26",
         "comment_body": "@mssonicbld could you please re-run the pipeline on this PR? It looks like the `impacted-area-kvmtest-multi-asic-t1 by Elastictest` stage failed during testbed preparation rather than in the tests themselves:\r\n\r\n- `failures: 0`, `errors_ignore_retries: 0`, `failures_ignore_retries: 0` (593 tests actually passed)\r\n- The single \"error\" came from the scheduler with `Error type: CELERY_TASK_TIMEOUT`, `cmd is: Download image`\r\n- 3 of the 4 allocated testbeds (`vms-kvm-four-asic-t1-lag_westus3_400844/400848/400852`) were kicked out with `PrepareTestbedFailed`, and the remaining slot stayed at `progress: 0.00%` for the full 6891s\r\n\r\nThis looks like an environmental issue rather than something caused by the changes in this PR (which are teardown-only `/tmp/from_t1.json` and macvlan/netns cleanup). Could you please kick off another run when convenient?\r\n\r\nThank you very much for your help!\r\n\r\n/azp run"
     },
     {
         "number": 24218,
         "repo": "sonic-mgmt",
         "comment_at": "2026-04-27T16:47:25Z",
-        "comment_author": "nsoma-cisco",
+        "comment_author": "nsoma26",
         "comment_body": "@mssonicbld  could you please re-run the pipeline on this PR? It looks like the impacted-area-kvmtest-multi-asic-t1 by Elastictest stage failed during testbed preparation as before."
     },
     {
@@ -1920,14 +1920,14 @@
         "number": 24218,
         "repo": "sonic-mgmt",
         "comment_at": "2026-04-28T17:50:49Z",
-        "comment_author": "nsoma-cisco",
+        "comment_author": "nsoma26",
         "comment_body": "@ZhaohuiS All checks have passed and you have already approved. Could you please merge the PR? Thank you."
     },
     {
         "number": 24218,
         "repo": "sonic-mgmt",
         "comment_at": "2026-05-09T08:08:49Z",
-        "comment_author": "nsoma-cisco",
+        "comment_author": "nsoma26",
         "comment_body": "@ZhaohuiS Thank you for merging this PR."
     },
     {
@@ -1953,7 +1953,7 @@
         "number": 24218,
         "repo": "sonic-mgmt",
         "review_at": "2026-04-27T12:28:22Z",
-        "review_author": "nsoma-cisco"
+        "review_author": "nsoma26"
     },
     {
         "number": 24218,
@@ -1965,13 +1965,13 @@
         "number": 24218,
         "repo": "sonic-mgmt",
         "review_at": "2026-04-28T04:19:04Z",
-        "review_author": "nsoma-cisco"
+        "review_author": "nsoma26"
     },
     {
         "number": 24218,
         "repo": "sonic-mgmt",
         "review_at": "2026-04-28T17:53:17Z",
-        "review_author": "nsoma-cisco"
+        "review_author": "nsoma26"
     },
     {
         "number": 24214,
@@ -5983,7 +5983,7 @@
         "number": 24074,
         "repo": "sonic-mgmt",
         "comment_at": "2026-04-22T07:43:09Z",
-        "comment_author": "nsoma-cisco",
+        "comment_author": "nsoma26",
         "comment_body": "> Please resolve the merge conflicts and sign the CLA (EasyCLA bot flagged the commit as unauthorized) before this can proceed.\r\n\r\nThank you for the comment. I have signed the CLA and resolved the merge conflicts."
     },
     {
@@ -6004,14 +6004,14 @@
         "number": 24074,
         "repo": "sonic-mgmt",
         "comment_at": "2026-04-22T18:20:04Z",
-        "comment_author": "nsoma-cisco",
+        "comment_author": "nsoma26",
         "comment_body": "### CI status update\n\nI've reviewed the logs from three runs of the failing `impacted-area-kvmtest-t0` job. In all three runs:\n\n- The ported test case `tests/bgp/test_bgp_vnet.py::test_dynamic_peer_vnet` **passed** successfully, confirming the BGP convergence / `allowas-in` changes in this PR are working as intended.\n- The failure consistently occurs in the following test `test_bgp_vnet_route_forwarding` during the `ptfadapter` fixture setup, where `supervisorctl restart ptf_nn_agent` fails on the PTF container with:\n\n  ```\n  ptf_nn_agent: ERROR (spawn error)\n  ```\n  (rc=7)\n\nThis is a PTF container/testbed infrastructure flake and is unrelated to the code changes in this PR (no changes here touch the PTF setup or `ptf_nn_agent`).\n\nOther failing jobs (`kvmtest-t1-lag-vpp`, `impacted-area-kvmtest-t1-lag`) fail in unrelated test files (`srv6/test_srv6_dataplane.py`, `bgp/test_bgpmon.py`) which aren't modified by this PR, further supporting the environmental flake diagnosis.\n\nCould a maintainer please re-run `impacted-area-kvmtest-t0` (and the other unrelated failing jobs) when convenient? Happy to provide additional log excerpts on request."
     },
     {
         "number": 24074,
         "repo": "sonic-mgmt",
         "comment_at": "2026-04-23T06:25:35Z",
-        "comment_author": "nsoma-cisco",
+        "comment_author": "nsoma26",
         "comment_body": "> AI agent on behalf of Ying. Reviewed; no issues found.\r\n\r\nThank you for the approval. I don't see Merge button so please merge the PR for me."
     },
     {
@@ -6025,14 +6025,14 @@
         "number": 24074,
         "repo": "sonic-mgmt",
         "comment_at": "2026-04-24T05:36:07Z",
-        "comment_author": "nsoma-cisco",
+        "comment_author": "nsoma26",
         "comment_body": "@yyynini @wsycqyz @yxieca Thank you for the comments, approvals and merging the PR."
     },
     {
         "number": 24074,
         "repo": "sonic-mgmt",
         "comment_at": "2026-04-24T05:40:45Z",
-        "comment_author": "nsoma-cisco",
+        "comment_author": "nsoma26",
         "comment_body": "> @nsoma-cisco PR conflicts with 202511 branch\r\n\r\nI assumed we need this fix in 202511 since that's where I noticed this issue. If there is no need, please uncheck that in PR body.\r\nIf we want to port this fix to 202511, I am not sure about the process so please guide me on how I can resolve the conflicts with 202511 branch. Should I raise a new PR against 202511 branch?"
     },
     {
