@@ -1,5 +1,107 @@
 [
     {
+        "number": 119,
+        "repo": "sonic-wpa-supplicant",
+        "comment_at": "2026-07-02T22:40:19Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 119,
+        "repo": "sonic-wpa-supplicant",
+        "comment_at": "2026-07-02T22:40:29Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 119,
+        "repo": "sonic-wpa-supplicant",
+        "comment_at": "2026-07-03T15:58:12Z",
+        "comment_author": "xq9mend",
+        "comment_body": "cc @yijingyan2 @vijaya-ops \u2014 requesting your review on this OpenSSF compiler hardening change."
+    },
+    {
+        "number": 119,
+        "repo": "sonic-wpa-supplicant",
+        "comment_at": "2026-07-25T09:20:10Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 119,
+        "repo": "sonic-wpa-supplicant",
+        "comment_at": "2026-07-25T09:20:19Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 119,
+        "repo": "sonic-wpa-supplicant",
+        "comment_at": "2026-07-30T20:09:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 119,
+        "repo": "sonic-wpa-supplicant",
+        "comment_at": "2026-07-30T20:09:34Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 119,
+        "repo": "sonic-wpa-supplicant",
+        "comment_at": "2026-07-30T20:10:18Z",
+        "comment_author": "xq9mend",
+        "comment_body": "Thanks for the thorough review. Fixed in the latest commit (`50133ca`):\n\n1. **Flag propagation** \u2014 added `FORTIFY3_FLAGS := -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=3` and appended it explicitly to `DEB_CFLAGS_MAINT_APPEND`, `DEB_CXXFLAGS_MAINT_APPEND`, and `UCFLAGS`. All three build paths (main binaries, C++ code, udeb) now carry the flag directly rather than relying on CPPFLAGS indirection.\n\n2. **noopt guard** \u2014 wrapped the override in `ifeq (,$(filter noopt,$(DEB_BUILD_OPTIONS)))` so FORTIFY_SOURCE=3 is skipped when optimization is disabled, consistent with dpkg behavior.\n\n3. **Title/description** \u2014 narrowed to reflect only the actual change: FORTIFY_SOURCE level 2\u21923. Removed all claims about flags not present in the diff."
+    },
+    {
+        "number": 119,
+        "repo": "sonic-wpa-supplicant",
+        "comment_at": "2026-07-31T06:34:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 119,
+        "repo": "sonic-wpa-supplicant",
+        "comment_at": "2026-07-31T06:35:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 119,
+        "repo": "sonic-wpa-supplicant",
+        "comment_at": "2026-07-31T18:49:58Z",
+        "comment_author": "xq9mend",
+        "comment_body": "Fixed in `c7e5e66`.\n\nThe root cause: the previous change used `$(shell dpkg-buildflags --get CPPFLAGS)` inside `DEB_CFLAGS_MAINT_APPEND`. This shell call runs after `dpkg-buildpackage` has already pre-exported `CPPFLAGS=-Wdate-time -D_FORTIFY_SOURCE=2` into the environment, so it picked up the stale level-2 value regardless of `DEB_BUILD_MAINT_OPTIONS`.\n\nFix:\n- Changed `DEB_BUILD_MAINT_OPTIONS` to `hardening=+all,-fortify` \u2014 disables dpkg\u2019s built-in level-2 injection at the source.\n- Replaced all three `$(shell dpkg-buildflags --get CPPFLAGS/CFLAGS)` calls with `$(CPPFLAGS)`/`$(CFLAGS)` make variables, which go through `buildflags.mk`\u2019s lazy-eval path and correctly honour `DEB_BUILD_MAINT_OPTIONS` and `DEB_CPPFLAGS_MAINT_APPEND`.\n\nCI (amd64/arm64/armhf) all pass clean \u2014 no `_FORTIFY_SOURCE redefined` warnings in any job."
+    },
+    {
+        "number": 119,
+        "repo": "sonic-wpa-supplicant",
+        "review_at": "2026-07-30T10:47:44Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 119,
+        "repo": "sonic-wpa-supplicant",
+        "review_at": "2026-07-31T02:15:04Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 119,
+        "repo": "sonic-wpa-supplicant",
+        "review_at": "2026-08-01T05:49:31Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 119,
+        "repo": "sonic-wpa-supplicant",
+        "latestReview_at": "2026-08-01T05:49:31Z",
+        "latestReview_author": "Pterosaur",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 115,
         "repo": "sonic-wpa-supplicant",
         "comment_at": "2026-05-31T13:39:49Z",
