@@ -2461,6 +2461,20 @@
     {
         "number": 25587,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-08-02T02:52:27Z",
+        "comment_author": "sakshamkhurana21",
+        "comment_body": "> @sakshamkhurana21 i just found someone has this issue on 202605 also and try to commit the sol on master around same time as this PR. it will be better to backport to 202605.\r\n> \r\n> @wsycqyz #25032\r\n> \r\n> --> Fixes # (no GitHub issue filed; observed on internal nightly testplan t1.8102.202605.2_NightlyTest_20260601.2 for process_monitoring/test_critical_process_monitoring.py; root cause introduced by #21889)\r\n> \r\n> ---> also How did you verify/test it? Reproduced the original failure from testplan t1.8102.202605.2_NightlyTest_20260601.2 on testbed-bjw-can-8102-1 and testbed-bjw2-can-t1-8102-4.\r\n\r\nHey @yenlu-keith , I have raised a PR to 202605 which should address this error, please have a look here: https://github.com/sonic-net/sonic-mgmt/pull/26728 \r\n\r\nPlease let me know if there is any feedback that you might have"
+    },
+    {
+        "number": 25587,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-02T09:10:56Z",
+        "comment_author": "yenlu-keith",
+        "comment_body": "> > @sakshamkhurana21 i just found someone has this issue on 202605 also and try to commit the sol on master around same time as this PR. it will be better to backport to 202605.\r\n> > @wsycqyz #25032\r\n> > --> Fixes # (no GitHub issue filed; observed on internal nightly testplan t1.8102.202605.2_NightlyTest_20260601.2 for process_monitoring/test_critical_process_monitoring.py; root cause introduced by #21889)\r\n> > ---> also How did you verify/test it? Reproduced the original failure from testplan t1.8102.202605.2_NightlyTest_20260601.2 on testbed-bjw-can-8102-1 and testbed-bjw2-can-t1-8102-4.\r\n> \r\n> Hey @yenlu-keith , I have raised a PR to 202605 which should address this error, please have a look here: #26728\r\n> \r\n> Please let me know if there is any feedback that you might have\r\n\r\nLGTM. approved on the PR."
+    },
+    {
+        "number": 25587,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-24T00:22:04Z",
         "review_author": "sdszhang"
     },
@@ -24139,6 +24153,13 @@
         "comment_at": "2026-07-31T00:19:53Z",
         "comment_author": "mssonicbld",
         "comment_body": "This PR has backport request label(s) for branch(es): 202511,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 24813,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-02T12:59:40Z",
+        "comment_author": "augusdn",
+        "comment_body": "Hi @StormLiangMS, thanks - I agree with the direction, and I looked into whether we can build it.\r\n\r\nShort answer: the memory half works, the CPU frequency half doesn't on the platform this is meant to catch.\r\n\r\nI checked on a Nokia-M0-7215 (the SKU with the ~45% flake):\r\n\r\n```\r\n/proc/cpuinfo   ->  \"model name : ARMv7 Processor rev 1 (v7l)\"   # no MHz field at all\r\ncpufreq sysfs   ->  /sys/devices/system/cpu/cpu0/cpufreq/ does not exist\r\nlscpu           ->  no MHz line\r\nMemTotal        ->  3093248 kB (~2.95 GB)\r\nnproc           ->  2\r\n```\r\n\r\nSo `MemTotal <= 4GB` is readable and would select this platform correctly. CPU frequency isn't exposed on this hardware by any of the three usual sources, so a `< 1.5 GHz` condition would silently evaluate to unknown on exactly the SKU we need it to match.\r\n\r\nTwo other things worth weighing:\r\n\r\n- Swapping an exact-SKU list for `1.5 GHz` / `4 GB` doesn't really remove the magic numbers, it moves them. And a broader condition widens the 200s ceiling to platforms where the current 30s is working fine today.\r\n- The exact-SKU gating here was deliberate to match what `platform_tests/test_reboot.py` and `test_reload_config.py` already do for these same platforms, so the file stays consistent with its neighbours.\r\n\r\nThat said, I think there's a better generic answer than either, and it came out of a separate investigation into this same test. The real problem is that the 30s window starts before the memory has actually crossed the monit limit, so on a slow box we end up timing the allocation as well as monit's reaction to it. If we wait for the memory to genuinely cross the limit and *then* give monit its six cycles, no platform gating is needed at all - fast and slow boxes both get a fair window, and the assertion is unchanged.\r\n\r\nHappy to look at that as a follow-up if you think it's worth it. Since this PR is already merged and cherry-picked to 202605 (#26691), and the Nokia-7215 nightlies have been green since 28 July, I'd suggest doing it as a separate change rather than reopening this one.\r\n"
     },
     {
         "number": 24813,
