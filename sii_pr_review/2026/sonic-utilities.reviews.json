@@ -34,6 +34,154 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 4731,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-29T19:31:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4731,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-29T19:31:39Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4731,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-29T19:31:49Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4731,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-30T00:43:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4731,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-30T00:43:47Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4731,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-30T00:49:46Z",
+        "comment_author": "rimunagala",
+        "comment_body": "@vaibhavhd thanks for asking for the repro results, running them changed the fix.\r\n\r\nI brought up `docker-sonic-vs` built from master (`db028339e`) and ran the exact steps from sonic-net/sonic-buildimage#27818. The first version of this PR only guarded `BulkLeafListMoveGenerator`, and on a real switch that turned out **not** to fix the bug. It changed which operation the sorter emitted, but CONFIG_DB was still left with `prefixes_v4@ = ''` and `apply-patch` still failed. So I re-rooted the fix. Details below.\r\n\r\n### Root cause\r\n\r\nCONFIG_DB has no representation for an empty leaf-list. In `change_applier.set_config`, `config_db.set_entry()` serializes `[]` to an empty string, and `get_config_db_as_json()` reads it back as `['']`. So a target config that asks for `[]` can never be satisfied, and the final `verify_same_json(target_config, new_config)` in `PatchApplier.apply` compares `[]` against `['']` and always mismatches. That is the `after applying patch to config, there are still some parts not updated` error.\r\n\r\nThis is why a sorter-only guard cannot work: whichever operation the sorter picks, the resulting config dict still holds `prefixes_v4: []`.\r\n\r\nThe canonical way to say \"this leaf-list has no items\" is for the field to be absent. `PatchWrapper.simulate_patch` is the single place the target config is derived, and it is shared by `PatchApplier.apply` and all three `PatchSorter` call sites, so empty leaf-lists are now dropped there. The sorter then emits a field level `remove` and everything downstream lines up.\r\n\r\n### Repro results\r\n\r\nScope note first: this only reproduces on images whose `sonic_yang` uses the libyang3 bindings (`import libyang as ly`), which is master. On branches still on libyang 1.0.73 (`import yang as ly`) the empty list is rejected during validation before the sorter runs, so the bad value never reaches CONFIG_DB. I confirmed this against a `202511` image, which cannot reproduce.\r\n\r\n**Before, stock master:**\r\n\r\n```\r\n=== STEP 1: seed leaf-list with one item ===\r\nPatch applied successfully.\r\n{'prefixes_v4@': '10.20.0.0/16', 'prefixes_v6@': 'fc01:20::/64'}\r\n\r\n=== STEP 2: remove the LAST prefixes_v4 item (empties the leaf-list) ===\r\napply-patch failed for localhost: localhost: after applying patch to config, there are still some parts not updated\r\nError: Failed to apply patch on the following scopes:\r\nPatch Applier: localhost: Patch: [{\"op\": \"remove\", \"path\": \"/BGP_ALLOWED_PREFIXES/DEPLOYMENT_ID|0/prefixes_v4/0\"}]\r\nPatch Applier: The localhost patch was converted into 1 change:\r\nPatch Applier: localhost: applying 1 change in order:\r\nPatch Applier:   * [{\"op\": \"replace\", \"path\": \"/BGP_ALLOWED_PREFIXES/DEPLOYMENT_ID|0/prefixes_v4\", \"value\": []}]\r\n\r\n=== STEP 3: CONFIG_DB state ===\r\n{'prefixes_v4@': '', 'prefixes_v6@': 'fc01:20::/64'}\r\n```\r\n\r\n`prefixes_v4@` is the empty string, which matches the issue report.\r\n\r\n**After, with this PR:**\r\n\r\n```\r\n=== STEP 1: seed leaf-list with one item ===\r\nPatch applied successfully.\r\n{'prefixes_v4@': '10.20.0.0/16', 'prefixes_v6@': 'fc01:20::/64'}\r\n\r\n=== STEP 2: remove the LAST prefixes_v4 item (empties the leaf-list) ===\r\nPatch Applier: localhost: Patch: [{\"op\": \"remove\", \"path\": \"/BGP_ALLOWED_PREFIXES/DEPLOYMENT_ID|0/prefixes_v4/0\"}]\r\nPatch Applier: The localhost patch was converted into 1 change:\r\nPatch Applier: localhost: applying 1 change in order:\r\nPatch Applier:   * [{\"op\": \"remove\", \"path\": \"/BGP_ALLOWED_PREFIXES/DEPLOYMENT_ID|0/prefixes_v4\"}]\r\nPatch applied successfully.\r\n\r\n=== STEP 3: CONFIG_DB state ===\r\n{'prefixes_v6@': 'fc01:20::/64'}\r\n```\r\n\r\nThe field is removed instead of being set to an empty string, and the patch applies successfully.\r\n\r\n**Recovery, re-adding the leaf-list afterwards:**\r\n\r\n```\r\n=== re-add via add ===\r\nPatch applied successfully.\r\n{'prefixes_v6@': 'fc01:20::/64', 'prefixes_v4@': '10.40.0.0/16'}\r\n```\r\n\r\nOne thing worth calling out. After the fix the field is genuinely absent, so a follow up `{\"op\": \"replace\", \"path\": \".../prefixes_v4\", ...}` is correctly rejected with `can't replace a non-existent object 'prefixes_v4'`. That is RFC 6902 behaviour for `replace` on a missing path, not a regression, and `add` is the right operation there.\r\n\r\n**Edge case,** leaf-list is the only field in the entry. The patch applies and the entry is kept as `{'NULL': 'NULL'}`, which is the normal ConfigDB representation of an entry with no fields.\r\n\r\n### Unit tests\r\n\r\nRun in the same container against `tests/generic_config_updater/`:\r\n\r\n| | result |\r\n| --- | --- |\r\n| master baseline | 554 passed, 81 subtests passed |\r\n| this PR | 557 passed, 81 subtests passed |\r\n\r\nThe delta is exactly the three tests added here, no existing test changed behaviour.\r\n\r\nI have updated the PR title, description and commits to reflect the real fix. Happy to add anything else you would like to see.\r\n"
+    },
+    {
+        "number": 4731,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-30T00:56:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4731,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-30T00:56:31Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4731,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-30T16:21:08Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4731,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-30T16:21:20Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4731,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-30T16:28:40Z",
+        "comment_author": "rimunagala",
+        "comment_body": "Thanks for the review, the naming point was a good catch and chasing it turned up something a bit more than a docstring issue.\r\n\r\n`PatchWrapper.simulate_patch` is not only used for ConfigDB. `convert_sonic_yang_patch_to_config_db_patch` calls it with **SonicYang** shaped json:\r\n\r\n```python\r\ndef convert_sonic_yang_patch_to_config_db_patch(self, patch):\r\n    current_yang = self.config_wrapper.get_sonic_yang_as_json()\r\n    target_yang = self.simulate_patch(patch, current_yang)\r\n```\r\n\r\nThat is a live path, it is what `config apply-patch --format SONICYANG` goes through via `SonicYangDecorator`. The two shapes are different:\r\n\r\n```\r\nConfigDB    table -> key -> field           a list valued field here is a leaf-list\r\nSonicYang   module -> container -> LIST     a list here is a yang list of entries,\r\n                                            the real leaf-lists sit one level deeper\r\n```\r\n\r\nSo the previous revision would have dropped a `VLAN_LIST` that a patch had emptied, which is not a leaf-list, while missing the actual leaf-lists inside the list entries. Almost certainly harmless in practice, but it is an unvalidated behaviour change on a path unrelated to this bug.\r\n\r\nI have pushed a revision that scopes the normalization instead of renaming it:\r\n\r\n```python\r\ndef simulate_patch(self, patch, jsonconfig):\r\n    return patch.apply(jsonconfig)\r\n\r\ndef simulate_config_db_patch(self, patch, config_db):\r\n    return remove_empty_leaf_lists(self.simulate_patch(patch, config_db))\r\n```\r\n\r\n`simulate_config_db_patch` is now used at every site whose result is a ConfigDB target, `PatchApplier.apply`, `PatchSorter.sort`, `NonStrictPatchSorter.sort` and `convert_config_db_patch_to_sonic_yang_patch`. The SonicYang call site keeps plain `simulate_patch`.\r\n\r\nOn the naming, once the helper is only reachable with ConfigDB shaped json the name is accurate, because at `table -> key -> field` a list valued field **is** a leaf-list. So rather than renaming to something neutral I made the precondition explicit in the docstring:\r\n\r\n```\r\nExpects ConfigDB shaped json, i.e. table -> key -> field. At that shape a\r\nlist valued field is always a leaf-list, so every empty list found here is\r\nan empty leaf-list. Do not call this with SonicYang shaped json, where a\r\nlist is a yang list of entries rather than a leaf-list.\r\n```\r\n\r\nRenaming alone would have documented the ambiguity, scoping removes it.\r\n\r\nAdded a test that locks the boundary in, `simulate_patch` on SonicYang json leaves an emptied `VLAN_LIST` untouched, and moved the two normalization tests onto `simulate_config_db_patch`.\r\n\r\nRe-verified after the change: the end to end reproduction on `docker-sonic-vs` from master still ends with `prefixes_v4@` absent and `Patch applied successfully`, and `tests/generic_config_updater/` is at 558 passed against the 554 passed master baseline, the delta being exactly the four tests added here.\r\n\r\nOn the merge assessment, all CI checks were passing on the previous revision, including Azure Build Python3, diff coverage, static analysis, DCO and EasyCLA. I will confirm the same once this revision finishes.\r\n\r\nOne more data point on the \"already corrupted switch\" question, which is worth recording: in the before run, step 4 patched successfully over `prefixes_v4@ = ''`, so a switch that already hit this bug recovers with a normal patch, no manual CONFIG_DB surgery needed.\r\n"
+    },
+    {
+        "number": 4731,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-30T18:37:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4731,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-30T18:38:10Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4731,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-30T18:50:20Z",
+        "comment_author": "rimunagala",
+        "comment_body": "Housekeeping update, no functional change to the fix.\r\n\r\nThe branch was squashed into a single commit on top of current master (`666f192d`). The tree is byte identical to the previously reviewed `8baf7ba3`, the two earlier commits were intermediate steps of an approach this PR no longer takes and were only noise for the log.\r\n\r\nTwo review-facing things I want to call out rather than leave buried in the diff:\r\n\r\n@rookie-who this PR reverses one assertion from #4478. `test_generate__leaf_list_all_items_removed__single_replace_move` expected `BulkLeafListMoveGenerator` to emit a single bulk `replace` with an empty list when a leaf-list is emptied, and that empty list is precisely the value CONFIG_DB cannot store, so the expectation had to flip. It is renamed to `test_generate__leaf_list_all_items_removed__no_bulk_replace_move` and now expects no bulk move, leaving that transition to the granular removal generators. The batching optimisation itself is untouched for every non-empty leaf-list and is still covered by `test_generate__leaf_list_items_removed__single_replace_move` and `test_generate__leaf_list_items_added__single_replace_move`. Would appreciate your eyes on that specifically.\r\n\r\nThe open Copilot thread about `UpperLevelMoveExtender` synthesizing a parent level `REPLACE ... []` is answered inline and resolved. Short version: the fix now normalizes the ConfigDB target before sorting, so `diff.target_config` never contains an empty list for an extender to lift, and `_get_upper_operation` returns `REMOVE` for a token absent from the target anyway.\r\n\r\nRe-verified at the squashed commit: `generic_config_updater` suite 558 passed against a 554 passed baseline, flake8 clean on the diff, and the issue reproduction re-run end to end on `docker-sonic-vs` from master with the container code md5 checked against the commit.\r\n"
+    },
+    {
+        "number": 4731,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-29T19:40:45Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4731,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-30T00:48:52Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4731,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-30T01:01:25Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4731,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-30T16:24:08Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4731,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-30T18:47:00Z",
+        "review_author": "rimunagala"
+    },
+    {
+        "number": 4731,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-31T07:09:55Z",
+        "review_author": "vaibhavhd"
+    },
+    {
+        "number": 4731,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2026-07-30T16:24:08Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 4731,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2026-07-31T07:09:55Z",
+        "latestReview_author": "vaibhavhd",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 4729,
         "repo": "sonic-utilities",
         "comment_at": "2026-07-29T05:46:04Z",
@@ -116,6 +264,68 @@
         "comment_at": "2026-07-29T05:44:53Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4722,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-29T01:16:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4722,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-29T01:16:18Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4722,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-29T01:16:29Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4722,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-29T01:20:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4722,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-29T01:20:42Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4722,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-29T15:37:11Z",
+        "comment_author": "xq9mend",
+        "comment_body": "@isabelmsft @anders-nexthop \u2014 would appreciate your review on this PR. It adds interactive hidden prompt options to TACACS+ and RADIUS passkey/add commands so secrets are never visible on the command line or in shell history."
+    },
+    {
+        "number": 4722,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-29T20:55:38Z",
+        "comment_author": "xq9mend",
+        "comment_body": "Requesting review from @deepak-singhal0408 and @vmittal-msft. CI is fully green (8/8 checks pass). Thank you!"
+    },
+    {
+        "number": 4722,
+        "repo": "sonic-utilities",
+        "review_at": "2026-08-03T16:23:48Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 4722,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2026-08-03T16:23:48Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
     },
     {
         "number": 4721,
@@ -2526,6 +2736,61 @@
         "comment_at": "2026-06-18T17:00:40Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4627,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-06-18T16:15:57Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4627,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-06-18T16:16:11Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4627,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-06-18T16:20:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4627,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-06-18T16:20:16Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4627,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-11T01:20:58Z",
+        "comment_author": "yxieca",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4627,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-11T01:21:09Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4627,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-11T01:20:11Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 4627,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2026-07-11T01:20:11Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
     },
     {
         "number": 4625,
