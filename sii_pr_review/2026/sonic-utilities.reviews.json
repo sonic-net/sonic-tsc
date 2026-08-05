@@ -552,6 +552,144 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 4710,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-21T18:00:08Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4710,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-21T18:00:18Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4710,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-21T18:00:25Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4710,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-21T18:02:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4710,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-21T18:02:50Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4710,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-21T18:21:11Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi, there are workflow run(s) waiting for approval, you may be first-time contributor. I will notify maintainers to help approve once PR is approved. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 4710,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-23T03:05:33Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "/azpw retry"
+    },
+    {
+        "number": 4710,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-23T03:05:35Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 4710,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-23T03:05:38Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "No failed(or canceled) stages or jobs found in the most recent build 1171106."
+    },
+    {
+        "number": 4710,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-30T12:24:00Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "Review update from 202605 failure triage:\n\nThis PR is needed as part of the fix chain for the active 7260 T1 `test_pfcwd_show_stat` failures tracked by sonic-mgmt#26428 / ADO 38614044, together with sonic-buildimage#28546. The latest 20260510.08 Kusto data still shows final failures caused by `memory_checker` syslog during teardown/config reload, so the fix still needs to land and be available on 202605.\n\nBlocking items I see before merge/backport:\n1. `coverage.Azure.sonic-utilities.Python3` is failing. Please add unit coverage for `_get_monit_services_by_prefix()` and the `_stop_services()` / `_restart_services()` paths, including a sample `monit summary` containing `container_memory_*` services and the no-monit/command-failure case.\n2. If this PR is required for 202605, please add the 202605 backport request details here as well: tracking issue/work item (sonic-mgmt#26428 or ADO 38614044), failure type, tested 202605 image/version, and target-branch test evidence. The paired buildimage PR already requests 202605, but both sides are needed for the full fix."
+    },
+    {
+        "number": 4710,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-31T06:15:08Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4710,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-31T06:15:19Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4710,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-04T12:30:52Z",
+        "comment_author": "rajkumar1-arista",
+        "comment_body": "> Could you please help with the test coverage?\r\n\r\n@lolyu this has been resolved, I've added the required UTs"
+    },
+    {
+        "number": 4710,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-04T12:32:18Z",
+        "comment_author": "rajkumar1-arista",
+        "comment_body": "> Review update from 202605 failure triage:\r\n> \r\n> This PR is needed as part of the fix chain for the active 7260 T1 `test_pfcwd_show_stat` failures tracked by sonic-mgmt#26428 / ADO 38614044, together with sonic-buildimage#28546. The latest 20260510.08 Kusto data still shows final failures caused by `memory_checker` syslog during teardown/config reload, so the fix still needs to land and be available on 202605.\r\n> \r\n> Blocking items I see before merge/backport:\r\n> \r\n> 1. `coverage.Azure.sonic-utilities.Python3` is failing. Please add unit coverage for `_get_monit_services_by_prefix()` and the `_stop_services()` / `_restart_services()` paths, including a sample `monit summary` containing `container_memory_*` services and the no-monit/command-failure case.\r\n> 2. If this PR is required for 202605, please add the 202605 backport request details here as well: tracking issue/work item (sonic-mgmt#26428 or ADO 38614044), failure type, tested 202605 image/version, and target-branch test evidence. The paired buildimage PR already requests 202605, but both sides are needed for the full fix.\r\n\r\n@StormLiangMS, I've added the required UTs and also updated the review with the additional information required. Code coverage is passing now."
+    },
+    {
+        "number": 4710,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-04T14:16:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The change is not in 202605 yet. @rajkumar1-arista, please manually create the cherry pick PR for branch 202605.<br>You can ping the release branch owner(github account: vaibhavhd) to approve your cherry pick PR.<br>If this change is already in 202605, please comment \"already in 202605\". Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 4710,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-04T18:17:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The **Tested branch** section has been ticked and **Test result** is provided for branch(es): 202605. Added label(s): Tested for 202605 Branch.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 4710,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-27T07:43:14Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 4710,
+        "repo": "sonic-utilities",
+        "review_at": "2026-08-04T13:19:49Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 4710,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2026-07-27T07:43:14Z",
+        "latestReview_author": "lolyu",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 4710,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2026-08-04T13:19:49Z",
+        "latestReview_author": "StormLiangMS",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 4706,
         "repo": "sonic-utilities",
         "comment_at": "2026-07-17T21:40:12Z",
@@ -8256,6 +8394,13 @@
     {
         "number": 4510,
         "repo": "sonic-utilities",
+        "comment_at": "2026-08-05T00:17:01Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 4510,
+        "repo": "sonic-utilities",
         "review_at": "2026-04-30T20:38:34Z",
         "review_author": "copilot-pull-request-reviewer"
     },
@@ -13737,6 +13882,13 @@
         "comment_at": "2026-06-25T17:15:11Z",
         "comment_author": "mssonicbld",
         "comment_body": "The cherry pick conflict has been handled manually. Removing cherry pick conflict label...\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 4423,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-05T00:17:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511,msft-202601, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 4423,

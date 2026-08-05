@@ -2886,6 +2886,13 @@
     {
         "number": 28609,
         "repo": "sonic-buildimage",
+        "comment_at": "2026-08-05T00:15:16Z",
+        "comment_author": "peterbailey-arista",
+        "comment_body": "Have we had a 202411 ptf docker build and publish since this revert made it in? @yijingyan2 are you able to tell me how I could confirm whether `docker-ptf:202411` on the public sonicdev-microsoft.azurecr.io registry has been refreshed?\r\n\r\nmsft-202503 is currently pointing at docker-ptf:202411 which has the following:\r\n```\r\nroot@85d02c3bdeba:~# cat /root/env-python3/pyvenv.cfg\r\n...\r\ninclude-system-site-packages = false\r\n...\r\n```\r\nhttps://github.com/Azure/sonic-mgmt.msft/blob/ab1f85a8e41be85bbed3f42cc6053f4449c2c24a/ansible/roles/vm_set/tasks/add_topo.yml#L10\r\n\r\nwhich I believe to be causing saithrift import issues in qos due to the venv not including the system dist-packages, your change should result in include-system-site-packages = true, is that right? If so, does that mean the `docker-ptf:202411` tag I'm using predates this revert?\r\n\r\n"
+    },
+    {
+        "number": 28609,
+        "repo": "sonic-buildimage",
         "review_at": "2026-07-27T13:11:54Z",
         "review_author": "yijingyan2"
     },
