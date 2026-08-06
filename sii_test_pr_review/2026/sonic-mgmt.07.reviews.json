@@ -27057,6 +27057,13 @@
     {
         "number": 25741,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-08-05T07:20:46Z",
+        "comment_author": "wenjwang-nv",
+        "comment_body": "Hi @rbpittman  On some of our devices, when there are multiple active interfaces, the test will inject PFC pause to each one of them and to each priority sequentially, which lead to ~30min test time. During this window, the RX_OK keeps increasing and exceeds the margin 2000. Here is the error msg\r\n\r\nAssertionError: PFC frames were counted as RX_OK or RX_DRP beyond the allowed margin of 2000 on the following interfaces [(intf, rx_ok_delta, rx_drp_delta)]: [('Ethernet40', 3233, 0), ('Ethernet56', 3231, 0), ('Ethernet64', 3166, 0), ('Ethernet68', 3158, 0), ('Ethernet72', 3159, 0), ('Ethernet76', 3162, 0), ('Ethernet80', 3157, 0), ('Ethernet84', 3156, 0), ('Ethernet88', 3159, 0), ('Ethernet92', 3169, 0), ('Ethernet96', 3164, 0), ('Ethernet100', 3169, 0), ('Ethernet104', 3168, 0), ('Ethernet108', 3157, 0), ('Ethernet112', 3164, 0), ('Ethernet116', 3166, 0), ('Ethernet120', 3159, 0), ('Ethernet124', 3169, 0)]\r\n\r\nMy question is, how is the margin determined? It looks like these 3000+ RX_OK are not from PFC injection. Shall we modify the test to choose the margin wisely?  Or we need to optimize the assertion logic so that it can identify that the RX_OK delta and RX_DRP delta really come from PFC injection?\r\n\r\nAnd @wsycqyz I think your concern 1 and 5 is correct, do you have any recommendation to fix this?"
+    },
+    {
+        "number": 25741,
+        "repo": "sonic-mgmt",
         "review_at": "2026-07-06T05:39:54Z",
         "review_author": "yxieca"
     },
@@ -30004,6 +30011,13 @@
     {
         "number": 25577,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-08-06T00:18:24Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25577,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-30T07:50:59Z",
         "review_author": "bpar9"
     },
@@ -30863,6 +30877,34 @@
         "comment_at": "2026-07-09T15:43:22Z",
         "comment_author": "yxieca",
         "comment_body": "Thanks for the detailed walkthrough \u2014 I dug back into the code and you're right; withdrawing the blocking call.\n\n- **On the teardown ordering (my blocker 1):** my premise was wrong. I assumed `backup_and_restore_config_db_on_duts` re-applies the IPv4 mgmt address on teardown, but it only restores `config_db.json` on disk without a `config_reload` \u2014 so the DUT stays reachable on IPv6 until your fixture's `config_reload` runs over that still-valid IPv6 address, and `ansible_host` is only flipped back to IPv4 afterward. No race, and I now see that reordering the other way would recreate exactly the #16442 dirty-config problem. My mistake.\n- **On the IPv6 probe strictness (my blocker 2):** fair \u2014 given the failure mode (mis-flagging an unusable IPv6 as reachable would lose DUT access for the rest of the session), requiring the definitive `AuthenticationException` signal is the safe choice. I'll defer to that. Only optional suggestion: a one-line comment stating *why* only `AuthenticationException` counts (vs. treating timeouts/negotiation as reachable) would save the next reader from re-deriving the tradeoff.\n\nNo blockers from me. Minor non-blocking polish if you're touching it again: in `reload_config_and_addr`, `logger.exception(...)` on the `AnsibleConnectionFailure` path would capture the traceback during teardown, and the `backup_and_restore_ansible_hosts` docstring could drop the \"reloads config_db\" phrasing since the config-DB restore is owned by the other fixture.\n\nAI-assisted review, reviewed by Ying Xie (@yxieca).\n"
+    },
+    {
+        "number": 25501,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-05T03:58:52Z",
+        "comment_author": "Xichen96",
+        "comment_body": "Tested for 202605 branch (physical)\n\n- Testbed: `testbed-bjw2-can-t0-7260-1` (physical), topology `t0-116`, DUT `bjw2-can-7260-1`\n- Image: `SONiC.20260510.09` (commit `ed7a797580`)\n- IPv6 management address confirmed: `2404:f801:10:2200::a96:161f/52`; the test did not capability-skip\n- Command: `./run_tests.sh -n testbed-bjw2-can-t0-7260-1 -c ip/test_mgmt_ipv6_only.py -i ../ansible/veos,../ansible/bjw2 -t any -u -x -a False -p /home/xichenlin/logs/mgmt-ipv6-only-t0-20260804T1918Z`\n- Result: **10 passed, 0 failed, 0 skipped** in **1569.22s (0:26:09)**\n\nArtifacts: `xichenlin@10.150.22.225:~/copilot-artifacts/pr25501-202605-physical/` (`test.log`, `tr.xml`, console log, diff evidence). Testbed released and validation container/clone removed."
+    },
+    {
+        "number": 25501,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-05T06:16:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25501,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-05T14:30:03Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/26806"
+    },
+    {
+        "number": 25501,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-05T14:30:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@peterbailey-arista PR conflicts with 202511 branch"
     },
     {
         "number": 25501,
@@ -41266,6 +41308,13 @@
         "comment_at": "2026-08-03T00:24:42Z",
         "comment_author": "yyynini",
         "comment_body": "@sonumm please help attach the test result"
+    },
+    {
+        "number": 24563,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-05T23:32:47Z",
+        "comment_author": "sonumm",
+        "comment_body": "> @sonumm please help attach the test result\r\n\r\nHere are the test results on 202605 branch, with and without the changes\r\n\r\n\r\n**RUN1 (old code) \u2014 only 2 ports ever storm (single shared neighbor IP):****\r\nsonic@sonic-ucs-m6-37:/data/tests$ ./run_tests.sh -n trndo-t0 -l debug -e -s -m individual -u -e --skip_sanity -t t0,any -p /run_logs/sonmathu_pfc_0804 -c pfcwd/test_pfcwd_all_port_storm.py\r\n\r\nFAILED test_all_port_storm_restore[IPv4-tornado-t1-dut]\r\n- Failed: Not enough ports reached storm state (threshold: 75%)\r\nXFAIL ...[IPv6-tornado-t1-dut] - Xfail due to sonic-net/sonic-mgmt#21082\r\n======== 1 failed, 1 xfailed, 691 warnings in 811.90s (0:13:31) ========\r\n\r\nUnique stormed ports = 2 (Ethernet8, Ethernet232).\r\nE Failed: Not enough ports reached storm state (threshold: 75%)\r\n\r\n**RUN2 (with fix) \u2014 storm spreads across all server ports:**\r\nsonic@sonic-ucs-m6-37:/data/tests$ ./run_tests.sh -n trndo-t0 -l debug -e -s -m individual -u -e --skip_sanity -t t0,any -p /run_logs/sonmathu_pfc_0804_run2 -c pfcwd/test_pfcwd_all_port_storm.py\r\n\r\nUnique stormed ports = 16: Ethernet8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 232 \u2014 all 15 selected server ports + the uplink.\r\n\r\nXPASS ...[IPv6-tornado-t1-dut] - Xfail due to sonic-net/sonic-mgmt#21082\r\n======== 1 passed, 1 xpassed, 856 warnings in 923.23s (0:15:23) ========\r\n\r\nThe failure\u2192pass transition is directly caused by PR #24563: unique per-port neighbor IPs spread background-traffic egress across every server port, so PFC storm is detected on enough ports to clear the 75% threshold \u2014 the multi-port traffic evidence that was previously missing, now demonstrated end-to-end on the T1 testbed."
     },
     {
         "number": 24563,
