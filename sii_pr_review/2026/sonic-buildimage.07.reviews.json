@@ -2893,6 +2893,20 @@
     {
         "number": 28609,
         "repo": "sonic-buildimage",
+        "comment_at": "2026-08-05T01:44:42Z",
+        "comment_author": "yijingyan2",
+        "comment_body": "> Have we had a 202411 ptf docker build and publish since this revert made it in? @yijingyan2 are you able to tell me how I could confirm whether `docker-ptf:202411` on the public sonicdev-microsoft.azurecr.io registry has been refreshed?\r\n> \r\n> msft-202503 is currently pointing at docker-ptf:202411 which has the following:\r\n> \r\n> ```\r\n> root@85d02c3bdeba:~# cat /root/env-python3/pyvenv.cfg\r\n> ...\r\n> include-system-site-packages = false\r\n> ...\r\n> ```\r\n> \r\n> https://github.com/Azure/sonic-mgmt.msft/blob/ab1f85a8e41be85bbed3f42cc6053f4449c2c24a/ansible/roles/vm_set/tasks/add_topo.yml#L10\r\n> \r\n> which I believe to be causing saithrift import issues in qos due to the venv not including the system dist-packages, your change should result in include-system-site-packages = true, is that right? If so, does that mean the `docker-ptf:202411` tag I'm using predates this revert?\r\n\r\nHi @peterbailey-arista, `include-system-site-packages` is true only when `PTF_ENV_PY_VER == mixed`. For 202411 branch, the default is `PTF_ENV_PY_VER == py3`. Thanks"
+    },
+    {
+        "number": 28609,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-08-05T16:24:07Z",
+        "comment_author": "peterbailey-arista",
+        "comment_body": "Thanks @yijingyan2 that was changed from mixed to py3 in the same PR you partially reverted. So I guess even with your revert we would still have this same issue.\r\nCan you tell me about the builds? are 202411 ptf docker builds still being made?"
+    },
+    {
+        "number": 28609,
+        "repo": "sonic-buildimage",
         "review_at": "2026-07-27T13:11:54Z",
         "review_author": "yijingyan2"
     },
@@ -5377,6 +5391,20 @@
         "comment_at": "2026-07-28T16:37:07Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202511: https://github.com/sonic-net/sonic-buildimage/pull/28654"
+    },
+    {
+        "number": 28500,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-08-05T00:35:06Z",
+        "comment_author": "yijingyan2",
+        "comment_body": "Hi @vaibhavhd, @yxieca, can we have this change in 202605? It's needed to address S360 security alters. Thanks!"
+    },
+    {
+        "number": 28500,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-08-05T05:32:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-buildimage/pull/28851"
     },
     {
         "number": 28500,
