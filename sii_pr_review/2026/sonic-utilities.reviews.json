@@ -1,5 +1,33 @@
 [
     {
+        "number": 4752,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-06T23:57:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-utilities/pull/4584"
+    },
+    {
+        "number": 4752,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-06T23:57:54Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4752,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-06T23:58:02Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4752,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-06T23:58:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
         "number": 4734,
         "repo": "sonic-utilities",
         "comment_at": "2026-07-30T21:07:37Z",
@@ -130,6 +158,20 @@
         "comment_at": "2026-07-30T18:50:20Z",
         "comment_author": "rimunagala",
         "comment_body": "Housekeeping update, no functional change to the fix.\r\n\r\nThe branch was squashed into a single commit on top of current master (`666f192d`). The tree is byte identical to the previously reviewed `8baf7ba3`, the two earlier commits were intermediate steps of an approach this PR no longer takes and were only noise for the log.\r\n\r\nTwo review-facing things I want to call out rather than leave buried in the diff:\r\n\r\n@rookie-who this PR reverses one assertion from #4478. `test_generate__leaf_list_all_items_removed__single_replace_move` expected `BulkLeafListMoveGenerator` to emit a single bulk `replace` with an empty list when a leaf-list is emptied, and that empty list is precisely the value CONFIG_DB cannot store, so the expectation had to flip. It is renamed to `test_generate__leaf_list_all_items_removed__no_bulk_replace_move` and now expects no bulk move, leaving that transition to the granular removal generators. The batching optimisation itself is untouched for every non-empty leaf-list and is still covered by `test_generate__leaf_list_items_removed__single_replace_move` and `test_generate__leaf_list_items_added__single_replace_move`. Would appreciate your eyes on that specifically.\r\n\r\nThe open Copilot thread about `UpperLevelMoveExtender` synthesizing a parent level `REPLACE ... []` is answered inline and resolved. Short version: the fix now normalizes the ConfigDB target before sorting, so `diff.target_config` never contains an empty list for an extender to lift, and `_get_upper_operation` returns `REMOVE` for a token absent from the target anyway.\r\n\r\nRe-verified at the squashed commit: `generic_config_updater` suite 558 passed against a 554 passed baseline, flake8 clean on the diff, and the issue reproduction re-run end to end on `docker-sonic-vs` from master with the container code md5 checked against the commit.\r\n"
+    },
+    {
+        "number": 4731,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-06T18:03:02Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "@rimunagala Please test it on 202605 as this fix is needed for there as well. I added cherry-pick tag"
+    },
+    {
+        "number": 4731,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-06T18:21:11Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 4731,
@@ -366,6 +408,295 @@
         "repo": "sonic-utilities",
         "latestReview_at": "2026-07-31T22:52:40Z",
         "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-27T21:31:47Z",
+        "comment_author": "linux-foundation-easycla",
+        "comment_body": "<a href=\"https://easycla.lfx.linuxfoundation.org/#/?version=2\"><img src=\"https://s3.amazonaws.com/cla-project-logo-prod/cla-signed.svg?v=2\" alt=\"CLA Signed\" align=\"left\" height=\"28\" width=\"328\" ></a><br >The committers listed above are authorized under a signed CLA.<ul><li>:white_check_mark: login: ryanzhu706 / name: Ryan Zhu (1c722c3962a490ee84795df6a1c16b13041dc180, 98ab5a34c8eb9fa5c417f3a3812349ce82637e10, c37c1a42e23e3951f62a7390b6b0e43fe0b7a1fb, c76d30a28a82724a52e050173abc976a354a825d, faaac1d56407b4696f10c45929b099b7cd755c44)</li><li>:white_check_mark: login: ryanzhu706 / name: ryanzhu (2517b21bbd0f90179b5b4361e8d4b6bad0ca06a8)</li><li>:white_check_mark: login: ryanzhu706 / name: ryanzhu706 (bb003843d52c96ab0181cae4adc240b71c88f3b0, e850532131d5832cc7c626a345aadafaa6039fa5)</li></ul>"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-27T21:31:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-27T21:31:49Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-27T21:31:59Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-27T21:40:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-27T21:40:41Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-27T22:03:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-27T22:03:33Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-28T16:54:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-28T16:55:06Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-28T18:00:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-28T18:00:49Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-28T21:00:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-28T21:00:42Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-28T21:03:01Z",
+        "comment_author": "ryanzhu706",
+        "comment_body": "> Can you take a look at my comment at copilot review thread? Suggest also changing the name of the function. What do you think of record_reboot_marker?\r\n\r\nDone."
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-28T22:28:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-28T22:29:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-29T18:37:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-29T18:37:39Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-29T19:21:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-29T19:22:05Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-30T00:22:01Z",
+        "comment_author": "Ryangwaite",
+        "comment_body": "The PR does not explain why we cannot use `show reboot-cause history` for this task."
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-30T21:45:20Z",
+        "comment_author": "ryanzhu706",
+        "comment_body": "> The PR does not explain why we cannot use `show reboot-cause history` for this task.\r\n\r\nAdded in description, thanks!"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-27T21:35:24Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-27T21:44:03Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-27T21:51:06Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-27T21:57:22Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-27T21:58:08Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-27T22:35:18Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-27T22:39:11Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-27T22:39:38Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-27T23:27:48Z",
+        "review_author": "ryanzhu706"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-28T16:58:45Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-28T18:08:27Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-28T21:02:38Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-28T21:07:19Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-28T21:07:56Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-28T21:49:25Z",
+        "review_author": "ryanzhu706"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-28T22:31:57Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-29T18:40:11Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-29T19:23:39Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "review_at": "2026-08-06T21:56:58Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2026-07-29T19:23:39Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 4718,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2026-08-06T21:56:58Z",
+        "latestReview_author": "hdwhdw",
         "latestReview_state": "APPROVED"
     },
     {
@@ -662,6 +993,13 @@
         "comment_at": "2026-08-04T18:17:32Z",
         "comment_author": "mssonicbld",
         "comment_body": "The **Tested branch** section has been ticked and **Test result** is provided for branch(es): 202605. Added label(s): Tested for 202605 Branch.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 4710,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-06T11:08:03Z",
+        "comment_author": "rajkumar1-arista",
+        "comment_body": "@StormLiangMS @lolyu I've created the cherry-pick PR for 202605: https://github.com/sonic-net/sonic-utilities/pull/4751. Please take a look"
     },
     {
         "number": 4710,
@@ -4231,6 +4569,13 @@
         "comment_at": "2026-07-30T12:21:02Z",
         "comment_author": "mssonicbld",
         "comment_body": "This PR has backport request label(s) for branch(es): msft-202608, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202608: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 4584,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-06T23:57:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-utilities/pull/4752"
     },
     {
         "number": 4584,
