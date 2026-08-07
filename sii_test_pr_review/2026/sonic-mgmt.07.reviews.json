@@ -12867,6 +12867,13 @@
     {
         "number": 26176,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-08-06T06:17:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202505,202511,202605,msft-202606,msft-202607,msft-202608, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202505: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 26176,
+        "repo": "sonic-mgmt",
         "review_at": "2026-07-16T11:27:43Z",
         "review_author": "StormLiangMS"
     },
@@ -14399,6 +14406,13 @@
         "comment_at": "2026-07-23T02:49:11Z",
         "comment_author": "weiguo-nvidia",
         "comment_body": "LGTM"
+    },
+    {
+        "number": 26086,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-07T01:46:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202608: https://github.com/Azure/sonic-mgmt.msft/pull/1351"
     },
     {
         "number": 26086,
@@ -27060,6 +27074,27 @@
         "comment_at": "2026-08-05T07:20:46Z",
         "comment_author": "wenjwang-nv",
         "comment_body": "Hi @rbpittman  On some of our devices, when there are multiple active interfaces, the test will inject PFC pause to each one of them and to each priority sequentially, which lead to ~30min test time. During this window, the RX_OK keeps increasing and exceeds the margin 2000. Here is the error msg\r\n\r\nAssertionError: PFC frames were counted as RX_OK or RX_DRP beyond the allowed margin of 2000 on the following interfaces [(intf, rx_ok_delta, rx_drp_delta)]: [('Ethernet40', 3233, 0), ('Ethernet56', 3231, 0), ('Ethernet64', 3166, 0), ('Ethernet68', 3158, 0), ('Ethernet72', 3159, 0), ('Ethernet76', 3162, 0), ('Ethernet80', 3157, 0), ('Ethernet84', 3156, 0), ('Ethernet88', 3159, 0), ('Ethernet92', 3169, 0), ('Ethernet96', 3164, 0), ('Ethernet100', 3169, 0), ('Ethernet104', 3168, 0), ('Ethernet108', 3157, 0), ('Ethernet112', 3164, 0), ('Ethernet116', 3166, 0), ('Ethernet120', 3159, 0), ('Ethernet124', 3169, 0)]\r\n\r\nMy question is, how is the margin determined? It looks like these 3000+ RX_OK are not from PFC injection. Shall we modify the test to choose the margin wisely?  Or we need to optimize the assertion logic so that it can identify that the RX_OK delta and RX_DRP delta really come from PFC injection?\r\n\r\nAnd @wsycqyz I think your concern 1 and 5 is correct, do you have any recommendation to fix this?"
+    },
+    {
+        "number": 25741,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-06T13:52:12Z",
+        "comment_author": "rbpittman",
+        "comment_body": "Thanks for the details @wenjwang-nv \r\nThat's good to know, in this case the possible background traffic is much larger than I anticipated, and the test should be adapted appropriately. \r\n\r\nConcern 1 from @wsycqyz (AI-gen most likely) is mis-worded in this context: The point of the test is to establish that RX_OK and RX_DROP do not increment across all vendors, serving 2 possible purposes: Either identify and fix up any misbehaving implementations to follow this guideline (possibly declaring a list of vendors that do not adhere to this), or change the requirement in some manner with an official record of the change and new expectation in this test. \r\n\r\nI'd wonder what your port scale is here, but regardless the simplest solution is probably in line with \"Concern 5\": Reread port counters every time for each port. This has the innefficiency of needing to increase the total reads from 1 to n-ports, but appears required here. \r\n\r\nI'll start a revision. "
+    },
+    {
+        "number": 25741,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-06T15:07:26Z",
+        "comment_author": "wenjwang-nv",
+        "comment_body": "> Thanks for the details @wenjwang-nv That's good to know, in this case the possible background traffic is much larger than I anticipated, and the test should be adapted appropriately.\r\n> \r\n> Concern 1 from @wsycqyz (AI-gen most likely) is mis-worded in this context: The point of the test is to establish that RX_OK and RX_DROP do not increment across all vendors, serving 2 possible purposes: Either identify and fix up any misbehaving implementations to follow this guideline (possibly declaring a list of vendors that do not adhere to this), or change the requirement in some manner with an official record of the change and new expectation in this test.\r\n> \r\n> I'd wonder what your port scale is here, but regardless the simplest solution is probably in line with \"Concern 5\": Reread port counters every time for each port. This has the innefficiency of needing to increase the total reads from 1 to n-ports, but appears required here.\r\n> \r\n> I'll start a revision.\r\n\r\nHi @rbpittman , as you can see, on this failure we have 15 port, 8 PG, and doing the pfc injection in sequential made it run quite long time. And i agree, maybe we don't need to test on each one of them, sampling may help."
+    },
+    {
+        "number": 25741,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-06T16:14:46Z",
+        "comment_author": "rbpittman",
+        "comment_body": "See followup PR filed here:\r\n#26851\r\nLet me know if you have suggested revisions to this pattern. "
     },
     {
         "number": 25741,
