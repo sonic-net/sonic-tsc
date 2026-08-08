@@ -239,6 +239,13 @@
     {
         "number": 727,
         "repo": "sonic-gnmi",
+        "comment_at": "2026-08-07T02:31:46Z",
+        "comment_author": "donghaolicd",
+        "comment_body": "Post-merge physical-DUT validation of `da8b8b8` on Debian 13 (`str-msn4700-01`) completed on 2026-08-07.\n\nAfter provisioning a sonic-mgmt-compatible test PKI and completing mTLS through an SSH tunnel, the Get reached the interceptor and emitted:\n\n```text\nRPC_COMPLETION {\"v\":2,\"type\":\"unary\",\"method\":\"/gnmi.gNMI/Get\",\"peer_type\":\"tcp\",\"peer\":\"127.0.0.1:40012\",\"principal\":\"test.client.gnmi.sonic\",\"auth_type\":\"tls\",\"path\":[\"/sonic-db:CONFIG_DB/DEVICE_METADATA/localhost\"],\"code\":\"NotFound\",\"duration_ms\":0,\"suppressed\":0}\n```\n\nThe `NotFound` result is expected for this malformed native DB path on this image (`Node sonic-db:CONFIG_DB not found`); importantly, the completion record preserved the canonical requested path, TLS principal, transport type, status code, duration, and suppression count.\n\nAn earlier attempt with a mismatched client certificate failed during `ServerHandshake` with `tls: bad certificate` and correctly emitted no `RPC_COMPLETION`, because the RPC interceptor is entered only after TLS transport establishment."
+    },
+    {
+        "number": 727,
+        "repo": "sonic-gnmi",
         "review_at": "2026-08-03T22:23:35Z",
         "review_author": "copilot-pull-request-reviewer"
     },
