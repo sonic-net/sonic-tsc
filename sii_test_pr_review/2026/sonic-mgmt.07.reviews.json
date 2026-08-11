@@ -4837,7 +4837,7 @@
         "repo": "sonic-mgmt",
         "comment_at": "2026-08-08T07:23:24Z",
         "comment_author": "fzjalfred",
-        "comment_body": "Hi @StormLiangMS \r\nFor this change,\r\n`read_timeout=300\uff08second\uff09\u2192 max_loops=300\uff08loop count\uff09`\r\nBut since read_timeout is removed. A default timeout is active as 10s. Regardless how many loops, the cmd still exit within default timeout.\r\n\r\nAffected Testcase:\r\ntests/dut_console/test_console_stress.py::test_console_stress_output\r\n(t1-d96u4, Hwsku Mellanox-SN4280-O4X96)"
+        "comment_body": "Hi @StormLiangMS  @pdam-arista \r\nFor this change,\r\n`read_timeout=300\uff08second\uff09\u2192 max_loops=300\uff08loop count\uff09`\r\nBut since read_timeout is removed. A default timeout is active as 10s. Regardless how many loops, the cmd still exit within default timeout.\r\n\r\nAffected Testcase:\r\ntests/dut_console/test_console_stress.py::test_console_stress_output\r\n(t1-d96u4, Hwsku Mellanox-SN4280-O4X96)"
     },
     {
         "number": 26490,
@@ -9612,6 +9612,13 @@
         "comment_at": "2026-07-24T04:14:42Z",
         "comment_author": "mssonicbld",
         "comment_body": "The change is not in msft-202512 yet. @Sourabh-Kumar7, please manually create the cherry pick PR for branch msft-202512.<br>You can ping the release branch owner(github account: bingwang-ms) to approve your cherry pick PR.<br>If this change is already in msft-202512, please comment \"already in msft-202512\". Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 26304,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-11T00:15:19Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request for branch(es): 202512,202605.<br><br>Request label(s) for branch(es) 202605 already exists.<br>Added label(s) for branch(es) msft-202512.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 26304,
@@ -36802,7 +36809,7 @@
         "number": 25094,
         "repo": "sonic-mgmt",
         "comment_at": "2026-06-16T02:09:59Z",
-        "comment_author": "yaopingz",
+        "comment_author": "yaopingzhu-arista",
         "comment_body": "@zypgithub The change will skip memory check for the whole test. But it looks like not all cases require DUT reboot, i.e.,\r\n- test_fwutil_show\r\n- test_fwutil_install_bad_name\r\n- test_fwutil_install_bad_path\r\n- test_fwutil_update_bad_config\r\n- test_fwutil_auto (when reboot_type=\"none\")\r\n"
     },
     {
@@ -36849,7 +36856,7 @@
         "number": 25094,
         "repo": "sonic-mgmt",
         "review_at": "2026-06-23T23:02:52Z",
-        "review_author": "yaopingz"
+        "review_author": "yaopingzhu-arista"
     },
     {
         "number": 25094,
@@ -36868,7 +36875,7 @@
         "number": 25094,
         "repo": "sonic-mgmt",
         "latestReview_at": "2026-06-23T23:02:52Z",
-        "latestReview_author": "yaopingz",
+        "latestReview_author": "yaopingzhu-arista",
         "latestReview_state": "APPROVED"
     },
     {
@@ -41871,7 +41878,7 @@
         "number": 24423,
         "repo": "sonic-mgmt",
         "comment_at": "2026-07-07T00:24:49Z",
-        "comment_author": "yaopingz",
+        "comment_author": "yaopingzhu-arista",
         "comment_body": "> Hi @congh-nvidia I update the PR to fix comment of @anders-nexthop, please help review. I think most of the comment are reasonable. While for the IndexError might be triggered by parse_result[0], do you think we should skip it? Is it normal when a dut got no bgp neighbor?\r\n\r\nIMO, the test case is running in t0, m0 and mx topos, and the DUT has BGP neighbors in all of them. If no neighbors are found, there must be something wrong, e.g., either session not established or testbed misconfigured. The case should fail rather than being skipped."
     },
     {
@@ -44375,6 +44382,27 @@
         "comment_at": "2026-06-27T01:53:24Z",
         "comment_author": "maunnikr-cisco",
         "comment_body": "@theasianpianist could you review this?"
+    },
+    {
+        "number": 23834,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-10T23:16:35Z",
+        "comment_author": "maunnikr-cisco",
+        "comment_body": "@lolyu @theasianpianist this change needs to be cherry picked to 202605 as well. Can you help with this? "
+    },
+    {
+        "number": 23834,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-11T00:16:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request for branch(es): 202505,202511,202605.<br><br>Request label(s) for branch(es) 202505,202511 already exists.<br>Added label(s) for branch(es) 202605.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 23834,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-11T00:16:19Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202505,202511,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202505: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 23834,
