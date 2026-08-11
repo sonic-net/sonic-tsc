@@ -1147,6 +1147,20 @@
     {
         "number": 700,
         "repo": "sonic-platform-common",
+        "comment_at": "2026-08-10T08:13:59Z",
+        "comment_author": "yijingyan2",
+        "comment_body": "Hi @bgallagher-nexthop, this change seems to cause the build failure in https://github.com/sonic-net/sonic-buildimage/pull/28794\r\n`ChassisBase.__init__()`\u00a0now eagerly calls\u00a0`device_info.get_cpo_data()`. This breaks:\r\n\u2022 `sensormond` tests because platform files are unavailable.\r\n\u2022 \u00a0`bmcctld`\u00a0tests because its mocked `sonic_py_common` lacks `device_info`.\r\nCould you please help investigate? here is the build log: https://dev.azure.com/mssonic/build/_build/results?buildId=1188779&view=logs&jobId=618cdd86-3a55-5536-cbf2-915e654a5cd8&j=618cdd86-3a55-5536-cbf2-915e654a5cd8&t=21f5e61c-7c7c-5fa7-6b79-94888d7a2c64. Thanks!"
+    },
+    {
+        "number": 700,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-08-10T18:17:38Z",
+        "comment_author": "bgallagher-nexthop",
+        "comment_body": "> Hi @bgallagher-nexthop, this change seems to cause the build failure in https://github.com/sonic-net/sonic-buildimage/pull/28794\r\n\r\nThank you for the heads up. I am working on a fix for this in https://github.com/sonic-net/sonic-platform-daemons/pull/871 and I am currently validating the fix addresses the build failures."
+    },
+    {
+        "number": 700,
+        "repo": "sonic-platform-common",
         "review_at": "2026-07-06T02:47:00Z",
         "review_author": "micas-net"
     },
