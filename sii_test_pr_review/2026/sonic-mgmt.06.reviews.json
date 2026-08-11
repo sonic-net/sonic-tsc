@@ -6475,6 +6475,20 @@
     {
         "number": 25421,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-08-10T17:58:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202512: https://github.com/Azure/sonic-mgmt.msft/pull/1359"
+    },
+    {
+        "number": 25421,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-10T18:16:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511,msft-202512,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25421,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-18T05:50:44Z",
         "review_author": "StormLiangMS"
     },
@@ -13901,6 +13915,13 @@
     {
         "number": 25160,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-08-10T04:13:11Z",
+        "comment_author": "lipxu",
+        "comment_body": "**Backport validation \u2014 internal-202605**\n\nThis commit was cherry-picked together with the mmu-probing pr18\u201324 series to `internal-202605` and validated in a combined nightly QoS run.\n\n**Back port request:** \u2611 202605\n**Failure type:** regression (nightly `qos/test_qos_probe.py` on Mellanox SN4600C \u2014 `TypeError: list // int` + exponential-search hang/timeout)\n**Tested branch:** \u2611 master \u2611 202605 (internal-202605)\n\n**Test result \u2014 202605 (internal-202605):**\n- Image: internal-202605 official **tagged** build (broadcom `sonic-aboot-broadcom.swi`, mellanox `sonic-mellanox.bin`)\n- Elastictest run `20110c`, 2026-08-05 \u2014 pass=1289 / fail=26 across 17 testbeds\n- Baseline (internal-202605 without these commits): Mellanox 4600c hang \u2192 plan **CANCELLED 0/0/0**; SN2700-3/4 `testQosEgressDropProbe` FAILED\n- With backport: Mellanox 4600c-5 **FINISHED 77/2 (no hang)**; SN2700-3 ([6a72928a\u2026](https://elastictest.org/scheduler/testplan/6a72928ab103fcbd8adfc635)) **SUCCESS**, SN2700-4 ([6a72928e\u2026](https://elastictest.org/scheduler/testplan/6a72928eb103fcbd8adfc637)) **SUCCESS**\n- **This PR (pr24):** the `testQosPfcXonProbe` executor runs on 202605 (passes on Mellanox 4600c / SN2700). The remaining Cisco 8102-2 failure is pre-existing DWRR noise, present in the baseline run as well.\n\n**Known remaining failure (under investigation):** `testQosHeadroomPoolProbe` still assertion-fails on Mellanox 4600c-5/-6/-3 (the hang is fixed, but the probe assertion has not yet passed). Being investigated separately; not a regression introduced by these commits.\n\nBaseline run (before): `20260804_135517` \u00b7 Backport run (after): `20260805_013114`."
+    },
+    {
+        "number": 25160,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-06T08:35:01Z",
         "review_author": "github-advanced-security"
     },
@@ -14373,6 +14394,13 @@
     {
         "number": 25143,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-08-10T04:13:10Z",
+        "comment_author": "lipxu",
+        "comment_body": "**Backport validation \u2014 internal-202605**\n\nThis commit was cherry-picked together with the mmu-probing pr18\u201324 series to `internal-202605` and validated in a combined nightly QoS run.\n\n**Back port request:** \u2611 202605\n**Failure type:** regression (nightly `qos/test_qos_probe.py` on Mellanox SN4600C \u2014 `TypeError: list // int` + exponential-search hang/timeout)\n**Tested branch:** \u2611 master \u2611 202605 (internal-202605)\n\n**Test result \u2014 202605 (internal-202605):**\n- Image: internal-202605 official **tagged** build (broadcom `sonic-aboot-broadcom.swi`, mellanox `sonic-mellanox.bin`)\n- Elastictest run `20110c`, 2026-08-05 \u2014 pass=1289 / fail=26 across 17 testbeds\n- Baseline (internal-202605 without these commits): Mellanox 4600c hang \u2192 plan **CANCELLED 0/0/0**; SN2700-3/4 `testQosEgressDropProbe` FAILED\n- With backport: Mellanox 4600c-5 **FINISHED 77/2 (no hang)**; SN2700-3 ([6a72928a\u2026](https://elastictest.org/scheduler/testplan/6a72928ab103fcbd8adfc635)) **SUCCESS**, SN2700-4 ([6a72928e\u2026](https://elastictest.org/scheduler/testplan/6a72928eb103fcbd8adfc637)) **SUCCESS**\n- **This PR (pr23):** the 'PG #' \u2192 'Iter #' relabel is verified in the HeadroomPool observer output; no functional regression in the 202605 run.\n\n**Known remaining failure (under investigation):** `testQosHeadroomPoolProbe` still assertion-fails on Mellanox 4600c-5/-6/-3 (the hang is fixed, but the probe assertion has not yet passed). Being investigated separately; not a regression introduced by these commits.\n\nBaseline run (before): `20260804_135517` \u00b7 Backport run (after): `20260805_013114`."
+    },
+    {
+        "number": 25143,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-05T04:58:07Z",
         "review_author": "yxieca"
     },
@@ -14429,6 +14457,13 @@
         "comment_at": "2026-06-05T05:52:24Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25142,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-10T04:13:09Z",
+        "comment_author": "lipxu",
+        "comment_body": "**Backport validation \u2014 internal-202605**\n\nThis commit was cherry-picked together with the mmu-probing pr18\u201324 series to `internal-202605` and validated in a combined nightly QoS run.\n\n**Back port request:** \u2611 202605\n**Failure type:** regression (nightly `qos/test_qos_probe.py` on Mellanox SN4600C \u2014 `TypeError: list // int` + exponential-search hang/timeout)\n**Tested branch:** \u2611 master \u2611 202605 (internal-202605)\n\n**Test result \u2014 202605 (internal-202605):**\n- Image: internal-202605 official **tagged** build (broadcom `sonic-aboot-broadcom.swi`, mellanox `sonic-mellanox.bin`)\n- Elastictest run `20110c`, 2026-08-05 \u2014 pass=1289 / fail=26 across 17 testbeds\n- Baseline (internal-202605 without these commits): Mellanox 4600c hang \u2192 plan **CANCELLED 0/0/0**; SN2700-3/4 `testQosEgressDropProbe` FAILED\n- With backport: Mellanox 4600c-5 **FINISHED 77/2 (no hang)**; SN2700-3 ([6a72928a\u2026](https://elastictest.org/scheduler/testplan/6a72928ab103fcbd8adfc635)) **SUCCESS**, SN2700-4 ([6a72928e\u2026](https://elastictest.org/scheduler/testplan/6a72928eb103fcbd8adfc637)) **SUCCESS**\n- **This PR (pr22):** the `pool_size` safety cap eliminates the exponential-search hang \u2014 the 4600c plan now **FINISHED** vs. the baseline **CANCELLED** (600-min timeout).\n\n**Known remaining failure (under investigation):** `testQosHeadroomPoolProbe` still assertion-fails on Mellanox 4600c-5/-6/-3 (the hang is fixed, but the probe assertion has not yet passed). Being investigated separately; not a regression introduced by these commits.\n\nBaseline run (before): `20260804_135517` \u00b7 Backport run (after): `20260805_013114`."
     },
     {
         "number": 25142,
@@ -14496,6 +14531,13 @@
         "comment_at": "2026-06-05T02:52:58Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25139,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-10T04:13:08Z",
+        "comment_author": "lipxu",
+        "comment_body": "**Backport validation \u2014 internal-202605**\n\nThis commit was cherry-picked together with the mmu-probing pr18\u201324 series to `internal-202605` and validated in a combined nightly QoS run.\n\n**Back port request:** \u2611 202605\n**Failure type:** regression (nightly `qos/test_qos_probe.py` on Mellanox SN4600C \u2014 `TypeError: list // int` + exponential-search hang/timeout)\n**Tested branch:** \u2611 master \u2611 202605 (internal-202605)\n\n**Test result \u2014 202605 (internal-202605):**\n- Image: internal-202605 official **tagged** build (broadcom `sonic-aboot-broadcom.swi`, mellanox `sonic-mellanox.bin`)\n- Elastictest run `20110c`, 2026-08-05 \u2014 pass=1289 / fail=26 across 17 testbeds\n- Baseline (internal-202605 without these commits): Mellanox 4600c hang \u2192 plan **CANCELLED 0/0/0**; SN2700-3/4 `testQosEgressDropProbe` FAILED\n- With backport: Mellanox 4600c-5 **FINISHED 77/2 (no hang)**; SN2700-3 ([6a72928a\u2026](https://elastictest.org/scheduler/testplan/6a72928ab103fcbd8adfc635)) **SUCCESS**, SN2700-4 ([6a72928e\u2026](https://elastictest.org/scheduler/testplan/6a72928eb103fcbd8adfc637)) **SUCCESS**\n- **This PR (pr21):** `MellanoxProbeParamsResolver` resolves the `TypeError: list // int`; the 4600c-5 probe suite now runs to completion (77/2) vs. the baseline crash.\n\n**Known remaining failure (under investigation):** `testQosHeadroomPoolProbe` still assertion-fails on Mellanox 4600c-5/-6/-3 (the hang is fixed, but the probe assertion has not yet passed). Being investigated separately; not a regression introduced by these commits.\n\nBaseline run (before): `20260804_135517` \u00b7 Backport run (after): `20260805_013114`."
     },
     {
         "number": 25139,
@@ -14859,7 +14901,7 @@
         "number": 25121,
         "repo": "sonic-mgmt",
         "review_at": "2026-06-10T20:34:31Z",
-        "review_author": "yaopingz"
+        "review_author": "yaopingzhu-arista"
     },
     {
         "number": 25121,
@@ -14879,7 +14921,7 @@
         "number": 25121,
         "repo": "sonic-mgmt",
         "latestReview_at": "2026-06-10T20:34:31Z",
-        "latestReview_author": "yaopingz",
+        "latestReview_author": "yaopingzhu-arista",
         "latestReview_state": "APPROVED"
     },
     {
@@ -18450,6 +18492,13 @@
     {
         "number": 25006,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-08-11T00:15:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25006,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-01T12:30:53Z",
         "review_author": "Pterosaur"
     },
@@ -18579,7 +18628,7 @@
         "number": 25000,
         "repo": "sonic-mgmt",
         "comment_at": "2026-06-15T18:07:59Z",
-        "comment_author": "yaopingz",
+        "comment_author": "yaopingzhu-arista",
         "comment_body": "The ptfhost.mgmt_ipv6 is not None on Arista testbed. By forcing 1000::1 as the packet ipv6_src, both test cases can pass since ipv6_src is not in the expected packet filter.\r\nI would approve since I saw the similar patch in dataplane test in [PR#18609](https://github.com/sonic-net/sonic-mgmt/pull/18609). But the question remains, should the fix be to correct the testbed configuration for SRv6 traffic instead of patching test code everywhere?"
     },
     {
@@ -18612,7 +18661,7 @@
         "number": 25000,
         "repo": "sonic-mgmt",
         "review_at": "2026-06-15T18:11:34Z",
-        "review_author": "yaopingz"
+        "review_author": "yaopingzhu-arista"
     },
     {
         "number": 25000,
@@ -18631,7 +18680,7 @@
         "number": 25000,
         "repo": "sonic-mgmt",
         "latestReview_at": "2026-06-15T18:11:34Z",
-        "latestReview_author": "yaopingz",
+        "latestReview_author": "yaopingzhu-arista",
         "latestReview_state": "APPROVED"
     },
     {
@@ -23024,6 +23073,13 @@
     {
         "number": 24865,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-08-10T04:13:08Z",
+        "comment_author": "lipxu",
+        "comment_body": "**Backport validation \u2014 internal-202605**\n\nThis commit was cherry-picked together with the mmu-probing pr18\u201324 series to `internal-202605` and validated in a combined nightly QoS run.\n\n**Back port request:** \u2611 202605\n**Failure type:** regression (nightly `qos/test_qos_probe.py` on Mellanox SN4600C \u2014 `TypeError: list // int` + exponential-search hang/timeout)\n**Tested branch:** \u2611 master \u2611 202605 (internal-202605)\n\n**Test result \u2014 202605 (internal-202605):**\n- Image: internal-202605 official **tagged** build (broadcom `sonic-aboot-broadcom.swi`, mellanox `sonic-mellanox.bin`)\n- Elastictest run `20110c`, 2026-08-05 \u2014 pass=1289 / fail=26 across 17 testbeds\n- Baseline (internal-202605 without these commits): Mellanox 4600c hang \u2192 plan **CANCELLED 0/0/0**; SN2700-3/4 `testQosEgressDropProbe` FAILED\n- With backport: Mellanox 4600c-5 **FINISHED 77/2 (no hang)**; SN2700-3 ([6a72928a\u2026](https://elastictest.org/scheduler/testplan/6a72928ab103fcbd8adfc635)) **SUCCESS**, SN2700-4 ([6a72928e\u2026](https://elastictest.org/scheduler/testplan/6a72928eb103fcbd8adfc637)) **SUCCESS**\n- **This PR (pr18):** nightly collection no longer picks up mock UT/IT \u2014 the QoS probe suite collects and runs cleanly on all 202605 testbeds.\n\n**Known remaining failure (under investigation):** `testQosHeadroomPoolProbe` still assertion-fails on Mellanox 4600c-5/-6/-3 (the hang is fixed, but the probe assertion has not yet passed). Being investigated separately; not a regression introduced by these commits.\n\nBaseline run (before): `20260804_135517` \u00b7 Backport run (after): `20260805_013114`."
+    },
+    {
+        "number": 24865,
+        "repo": "sonic-mgmt",
         "review_at": "2026-05-26T08:29:11Z",
         "review_author": "ZhaohuiS"
     },
@@ -23075,6 +23131,20 @@
         "comment_at": "2026-08-07T00:20:02Z",
         "comment_author": "mssonicbld",
         "comment_body": "This PR has backport request label(s) for branch(es): 202511, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 24861,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-10T06:45:01Z",
+        "comment_author": "Javier-Tan",
+        "comment_body": "@vmittal-msft can we merge this to 202511? CC @yatishkoul, @wenyiz2021 "
+    },
+    {
+        "number": 24861,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-10T16:16:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202511: https://github.com/sonic-net/sonic-mgmt/pull/26919"
     },
     {
         "number": 24861,
