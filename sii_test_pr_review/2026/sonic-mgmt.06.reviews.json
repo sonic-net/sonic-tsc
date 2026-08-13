@@ -18107,6 +18107,13 @@
     {
         "number": 25028,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-08-12T07:56:05Z",
+        "comment_author": "augusdn",
+        "comment_body": "Cherry-pick test results for both requested release branches, recorded here on the original PR so they are findable alongside the change itself.\n\nXin has left the group, so I picked these up.\n\n**Tested branch**\n- [x] 202511\n- [x] 202605\n\n**Test result**\n\n- **202605** \u2014 `bgp/test_bgp_fact.py` on Nokia-7215, `mx` topology, physical, image `SONiC.20260510.10`: **1 passed** (full plan 17 passed / 20 / 0 failures / 0 errors).\n  Cherry-pick PR #26973 \u00b7 https://elastictest.org/scheduler/testplan/6a7bfdfe749c94fa50d6a913\n- **202511** \u2014 `bgp/test_bgp_fact.py` on Nokia-M0-7215, `m0` topology, physical, image `SONiC.20251110.43`: **1 passed** (full plan 18 passed / 21 / 0 failures / 0 errors).\n  Cherry-pick PR #26974 \u00b7 https://elastictest.org/scheduler/testplan/6a7bfdeb19239aa976852bef\n\n`PREPARE_TESTBED SUCCEEDED` on the first attempt in both runs, which is the part that matters here: that step runs `add-topo` / `deploy-mg`, and that is what drives the `multi_passwd_ssh` connection plugin this PR changes. So the plugin change is exercised by each run rather than merely present in the checkout.\n\nBoth branches were verified byte-identical to their cherry-pick PR heads for `ansible/plugins/connection/multi_passwd_ssh.py` before running \u2014 `6f3e194ce6a60bf7cb9d021830b1339b9e29dbb6` for 202605 and `64317afd6b4ed4e83f6ff328b68fb883b20b452c` for 202511 \u2014 so what was tested is exactly what merges.\n\n**What this evidence is, plainly.** It is no-regression evidence on each branch, not a reproduction of the `no_log` censorship bug. Reproducing that requires a DUT whose current password is not the first entry in `ansible_altpasswords` while a `no_log: true` task runs, and I did not want to arrange that on a shared lab device. If a reviewer wants the positive reproduction as well, it is doable on a dedicated DUT \u2014 say the word."
+    },
+    {
+        "number": 25028,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-05T07:14:46Z",
         "review_author": "lolyu"
     },
@@ -18554,6 +18561,13 @@
         "comment_at": "2026-08-11T06:19:52Z",
         "comment_author": "mssonicbld",
         "comment_body": "This PR has backport request label(s) for branch(es): 202511,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25016,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-12T12:01:10Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/27000"
     },
     {
         "number": 25016,
@@ -22482,6 +22496,20 @@
     {
         "number": 24917,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-08-12T01:57:50Z",
+        "comment_author": "echuawu",
+        "comment_body": "> On June 10 the AI bot as an incorrect change, and yet this was still merged. The code was also broken before this change. Presumably not tested at all.\r\n> \r\n> Can we stop the merge requests to release branches, and fix this properly in master.\r\n\r\nhello @davidm-arista , not quite understand why the skip could break what test, could you please explain?"
+    },
+    {
+        "number": 24917,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-12T06:20:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request for branch(es): 202511,202605.<br>Added label(s) for branch(es) 202511,202605.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 24917,
+        "repo": "sonic-mgmt",
         "review_at": "2026-05-30T13:15:03Z",
         "review_author": "nhe-NV"
     },
@@ -22500,6 +22528,38 @@
     {
         "number": 24917,
         "repo": "sonic-mgmt",
+        "review_at": "2026-08-12T14:21:53Z",
+        "review_author": "wrideout-arista"
+    },
+    {
+        "number": 24917,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-08-12T15:44:47Z",
+        "review_author": "wrideout-arista"
+    },
+    {
+        "number": 24917,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-08-12T15:46:08Z",
+        "review_author": "davidm-arista"
+    },
+    {
+        "number": 24917,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-08-12T15:46:08Z",
+        "latestReview_author": "davidm-arista",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 24917,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-08-12T15:44:47Z",
+        "latestReview_author": "wrideout-arista",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 24917,
+        "repo": "sonic-mgmt",
         "latestReview_at": "2026-06-24T23:25:39Z",
         "latestReview_author": "liat-grozovik",
         "latestReview_state": "APPROVED"
@@ -22509,13 +22569,6 @@
         "repo": "sonic-mgmt",
         "latestReview_at": "2026-05-30T13:15:03Z",
         "latestReview_author": "nhe-NV",
-        "latestReview_state": "APPROVED"
-    },
-    {
-        "number": 24917,
-        "repo": "sonic-mgmt",
-        "latestReview_at": "2026-06-10T19:22:56Z",
-        "latestReview_author": "wrideout-arista",
         "latestReview_state": "APPROVED"
     },
     {
@@ -24927,6 +24980,13 @@
     {
         "number": 24813,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-08-12T12:11:40Z",
+        "comment_author": "augusdn",
+        "comment_body": "@StormLiangMS I've updated the PR description with everything you asked for on 11 Aug, since a description edit on its own won't notify you.\n\nTracker: Microsoft ADO **38927874** \u2014 `[SONiC_Nightly][Failed_Case][memory_checker.test_memory_checker][test_memory_checker_recover][20260510][M0_MX][marvell-prestera]`. Sibling item on the same module and platform is ADO 38927892.\n\nFailure type: day-one, not a regression. The 30s recover budget has always been too tight on this 4GB Marvell-Prestera hardware. Nothing on 202511 introduced it \u2014 the branch simply runs under enough memory and CPU pressure that monit can't hold its 5s cadence during the memory-stress window, which makes the existing gap visible.\n\nBranch-specific validation for 202511 is now in the **Test result** section. I ran the patched 202511 code on the worst-affected SKU with `repeat_times=10` and `retry_times=0`, so nothing is masked by retries:\n\n- Nokia-M0-7215 (marvell-prestera, 4GB), m0 topology, physical testbed `testbed-bjw2-can-7215-7`\n- Image `SONiC.20251110.43`\n- `memory_checker/test_memory_checker.py::test_memory_checker_recover`\n- **10 passed / 10 run, 0 failures, 0 errors**, durations 457-951s\n- https://elastictest.org/scheduler/testplan/6a7bfdd819239aa976852bed\n\nAgainst the ~45% historical failure rate on this SKU, ten consecutive passes by chance is roughly 0.25%.\n\nOn your earlier question about avoiding a hardware-specific condition \u2014 I did look into a generic `CPU < 1.5GHz and RAM <= 4GB` rule and couldn't make it work. The Nokia-M0-7215 exposes no CPU frequency at all: no MHz field in `/proc/cpuinfo`, no `/sys/devices/system/cpu/cpu0/cpufreq/`, and no MHz line from `lscpu`. So a frequency condition would evaluate to unknown on precisely the SKU it needs to match. The merged code therefore matches the two affected SKUs exactly and deliberately excludes the 8GB Nokia-7215-A1 variants, which are 0% flaky across 168 runs. That also keeps it consistent with the exact-SKU gating already used for these platforms in `platform_tests/test_reboot.py` and `test_reload_config.py`.\n\nThe `Reject for 202511 branch` label is still applied. Happy to answer anything else if that's blocking it."
+    },
+    {
+        "number": 24813,
+        "repo": "sonic-mgmt",
         "review_at": "2026-05-25T03:58:06Z",
         "review_author": "ediwibowo-msft"
     },
@@ -26941,6 +27001,13 @@
         "comment_at": "2026-08-11T02:13:37Z",
         "comment_author": "anamehra",
         "comment_body": "> @XuChen-MSFT \u2014 this PR is labeled Request for 202605 branch, but the following required information is still missing:\r\n> \r\n> * linked GitHub issue or ADO work item\r\n> \r\n> Please add the missing tracker details (day-one/regression status, affected branch/image/platform/test, and why $branch needs the fix) and branch-specific validation evidence.\r\n\r\nrequired for https://github.com/sonic-net/sonic-mgmt/issues/26607"
+    },
+    {
+        "number": 24642,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-12T11:51:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/26997"
     },
     {
         "number": 24642,
@@ -29109,6 +29176,13 @@
         "comment_at": "2026-08-11T02:11:10Z",
         "comment_author": "StormLiangMS",
         "comment_body": "@xwjiang-ms \u2014 this PR is labeled Request for 202605 branch, but the following required information is still missing:\n\n- linked GitHub issue or ADO work item\n\nPlease add the missing information to the PR description. Tracker details should cover day-one/regression status, affected branch/image/platform/test, and why 202605 needs the fix; validation should identify the tested 202605 image and include the result or result link.\n\n<!-- copilot-202605-backport-reminder -->"
+    },
+    {
+        "number": 24545,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-12T11:48:29Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/26996"
     },
     {
         "number": 24545,
