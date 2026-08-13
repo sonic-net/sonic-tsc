@@ -1,5 +1,60 @@
 [
     {
+        "number": 750,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-08-11T22:40:24Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 750,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-08-11T22:40:27Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 750,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-08-11T22:40:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 750,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-08-12T00:21:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request for branch(es): 202605.<br>Added label(s) for branch(es) 202605.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 750,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-08-12T00:22:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The **Tested branch** section has been ticked and **Test result** is provided for branch(es): 202605. Added label(s): Tested for 202605 Branch.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 750,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-08-12T21:26:36Z",
+        "comment_author": "rookie-who",
+        "comment_body": "Backport review note: the concerns below apply to the parent PR (#727) and carry over to this cherry-pick.\n\n**1. Unbounded path serialization**\n\n`requestPaths()` serializes every path in the request with no cap. A Get or Set with thousands of paths (e.g. bulk interface counters or a large config patch) produces a single massive log line. The earlier `GNMI_AUDIT` iteration had an `auditPathLimit` \u2014 this was dropped in the rewrite.\n\nPotential impact:\n- rsyslog's default `$MaxMessageSize` is often 8KB; oversized lines may be silently truncated or dropped by the remote collector\n- Large JSON log lines can slow glog writes and log rotation under load\n\nSuggested validation: fire a gNMI Get with 1k\u201310k paths on a device and check whether the resulting log line is truncated by rsyslog, and measure write latency. A Set with thousands of delete+update+replace paths is also worth testing since Set is unlimited (every completion is logged).\n\n**2. Synchronous sink in the RPC completion path**\n\n`log()` runs `deriveRequestFields` (path extraction, TLS cert inspection) and `json.Marshal` synchronously in the RPC's deferred completion handler. If glog blocks (disk pressure, log rotation), every completing RPC stalls until the write finishes. The `l.mu` lock in `allow()` also serializes all concurrent rate-limit checks.\n\nSuggested validation: simulate slow log writes (e.g. fill disk or throttle I/O on the gnmi container's log volume) while running concurrent Gets/Sets and measure RPC latency impact. A concurrent throughput test (100+ simultaneous RPCs) with and without the interceptor would also show whether the mutex in `allow()` becomes a bottleneck.\n\nNeither of these is likely to bite under normal workloads, but both could surface under scale or degraded-disk conditions.\n\n*Review by @vaibhavhd via automated tooling*"
+    },
+    {
+        "number": 750,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-08-12T21:26:40Z",
+        "review_author": "vaibhavhd"
+    },
+    {
+        "number": 750,
+        "repo": "sonic-gnmi",
+        "latestReview_at": "2026-08-12T21:26:40Z",
+        "latestReview_author": "vaibhavhd",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 731,
         "repo": "sonic-gnmi",
         "comment_at": "2026-08-04T07:05:47Z",
@@ -249,6 +304,13 @@
         "comment_at": "2026-08-11T18:21:41Z",
         "comment_author": "mssonicbld",
         "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 727,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-08-12T21:26:36Z",
+        "comment_author": "rookie-who",
+        "comment_body": "Two observations on the non-test code that may be worth addressing as follow-up:\n\n**1. Unbounded path serialization**\n\n`requestPaths()` serializes every path in the request with no cap. A Get or Set with thousands of paths (e.g. bulk interface counters or a large config patch) produces a single massive log line. The earlier `GNMI_AUDIT` iteration had an `auditPathLimit` \u2014 this was dropped in the rewrite.\n\nPotential impact:\n- rsyslog's default `$MaxMessageSize` is often 8KB; oversized lines may be silently truncated or dropped by the remote collector\n- Large JSON log lines can slow glog writes and log rotation under load\n\nSuggested validation: fire a gNMI Get with 1k\u201310k paths on a device and check whether the resulting log line is truncated by rsyslog, and measure write latency. A Set with thousands of delete+update+replace paths is also worth testing since Set is unlimited (every completion is logged).\n\n**2. Synchronous sink in the RPC completion path**\n\n`log()` runs `deriveRequestFields` (path extraction, TLS cert inspection) and `json.Marshal` synchronously in the RPC's deferred completion handler. If glog blocks (disk pressure, log rotation), every completing RPC stalls until the write finishes. The `l.mu` lock in `allow()` also serializes all concurrent rate-limit checks.\n\nSuggested validation: simulate slow log writes (e.g. fill disk or throttle I/O on the gnmi container's log volume) while running concurrent Gets/Sets and measure RPC latency impact. A concurrent throughput test (100+ simultaneous RPCs) with and without the interceptor would also show whether the mutex in `allow()` becomes a bottleneck.\n\nNeither of these is likely to bite under normal workloads, but both could surface under scale or degraded-disk conditions.\n\n*Review by @vaibhavhd via automated tooling*"
     },
     {
         "number": 727,
