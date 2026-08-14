@@ -989,6 +989,271 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-29T13:14:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-29T13:14:40Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-29T13:14:51Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-02T06:50:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-02T06:50:39Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-02T06:51:39Z",
+        "comment_author": "augusdn",
+        "comment_body": "Thanks \u2014 both review comments were valid, and I've pushed fixes in 6c02b43.\r\n\r\n### 1. `SAI_STATUS_BUFFER_OVERFLOW` on the label stack\r\n\r\nConfirmed by tracing the propagation path rather than assuming:\r\n\r\n* `meta/SaiSerialize.cpp:151` \u2014 `transfer_list` returns `SAI_STATUS_BUFFER_OVERFLOW` when the caller's buffer is too small, overwrites `count` with the **required** size, and copies **nothing**.\r\n* `vslib/SwitchStateBase.cpp:768` \u2014 propagates it as `final_status`.\r\n* `vslib/vpp/SaiObjectDB.cpp:386` / `:398` / `:420` \u2014 all three `get_attr` implementations pass it through.\r\n\r\nSo with `VPP_MPLS_MAX_LABELS = 16`, a deeper stack failed the `== SAI_STATUS_SUCCESS` test, left `n_labels` at 0, and programmed a bare pop instead of swap/push \u2014 silent misforwarding, exactly as described. Both sites now detect `BUFFER_OVERFLOW` explicitly, log the required depth, and return `SAI_STATUS_NOT_SUPPORTED`. Any other failure still falls through to \"no label stack\", which is the legitimate pop/disposition path for a `SAI_NEXT_HOP_TYPE_IP` next hop.\r\n\r\nOne thing the review didn't mention: the `cnt > VPP_MPLS_MAX_LABELS` clamps in both functions were **dead code**. On `SAI_STATUS_SUCCESS` the returned count can never exceed the supplied 16-entry buffer, so those branches were unreachable and implied a bound check that never actually ran. Removed them rather than leave a misleading safety net.\r\n\r\n### 2. Partial two-EOS rollback (found in a separate review pass)\r\n\r\n`MplsRouteAddRemove` programs two VPP FIB entries for a swap/push \u2014 `eos=0` then `eos=1`. If `eos=0` succeeded and `eos=1` failed, the orphaned `eos=0` entry stayed in the MPLS FIB with no SAI object referring to it, because `addMplsRoute` returns through `CHECK_STATUS(...)` *before* setting `route_programmed = true`, so the existing create-time rollback never ran.\r\n\r\nThe loop now unwinds whatever it managed to program. Removing an entry that was never added is safe \u2014 `vpp_normalize_ret` (`vslib/vpp/vppxlate/SaiVppXlate.c:454`) maps `NO_SUCH_ENTRY` to success on delete.\r\n\r\n### Verification\r\n\r\nRebuilt against VPP 2606 to match the sonic-vpp image (the tree's older helper linked 2510, which the DUT can't load) \u2014 clean compile, zero warnings under `-Werror -Wall -Wextra -Wconversion -Wshadow -Wcast-align=strict -Wformat=2`. The repo's own gates also pass locally: `aspellcheck.pl`, `checkwhitespace.sh`, `swsslogentercheck.sh`.\r\n\r\nFunctionally re-verified on a `vms-kvm-vpp-t1-lag` KVM testbed with this exact binary installed in `syncd`:\r\n\r\n```\r\nmpls/test_mpls.py::TestBasicMpls::test_pop_label        PASSED\r\nmpls/test_mpls.py::TestBasicMpls::test_swap_label       PASSED\r\nmpls/test_mpls.py::TestBasicMpls::test_push_label       SKIPPED\r\nmpls/test_mpls.py::TestBasicMpls::test_swap_labelstack  PASSED\r\n```\r\n"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-03T08:28:34Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-03T08:28:46Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-04T13:24:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-04T13:24:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-04T13:25:53Z",
+        "comment_author": "augusdn",
+        "comment_body": "Pushed `14401c7`, which addresses the remaining automated-review feedback. Going through all five suppressed comments from the last two review passes explicitly, since two of them were worth acting on and three I think should be declined.\r\n\r\n## Fixed\r\n\r\n**1. `ip_route_add_del_get_stats` did not clamp `n_labels` (`SaiVppXlate.c`)**\r\n\r\nValid, and the more important of the two. The code assigned `nexthop->n_labels` straight into `fib_path->n_labels` while the loop only ever populated up to `VPP_MPLS_MAX_LABELS` entries, so a deeper stack would have told VPP the message carried more labels than it actually did.\r\n\r\nIt is currently unreachable \u2014 `fillNHGrpMember` now fails on `BUFFER_OVERFLOW`, so `n_labels` can never exceed 16 \u2014 but the asymmetry was real: `mpls_route_add_del` validates this and returns `-EINVAL`, and the IP path had no equivalent. Now clamped before the assignment, so the count and the populated entries always agree.\r\n\r\n**2. Misleading `out_labels` in the `MplsRouteAddRemove` log (`SwitchVppMpls.cpp`)**\r\n\r\nAlso valid. The pop case injects an implicit-null label and sets `n_labels` to 1, so a pop was logged as having one out-label. Now reports the SAI-visible count, which is what a reader of that log is actually after.\r\n\r\n## Declined, with reasoning\r\n\r\n**3. Roll back partial *deletes* the way partial adds are rolled back**\r\n\r\nI do not think this one should be actioned. Rolling back a failed delete means re-installing MPLS FIB entries during a teardown that is already failing \u2014 re-adding forwarding state for a next hop that is on its way out is worse than the transient inconsistency it would fix.\r\n\r\nIt is also self-healing: `vpp_normalize_ret` maps `NO_SUCH_ENTRY` to success on delete, so when orchagent retries the remove, the already-deleted EOS entry is a no-op and the remaining one is retried. The add case is genuinely different \u2014 there the caller aborts before recording the route, so nothing in SAI refers to the orphaned entry, which is why that one was worth unwinding.\r\n\r\n**4. `mr_n_paths` could truncate if `nexthop_cnt > 255`**\r\n\r\nTrue in the abstract, but this matches the existing convention exactly: the neighbouring `ip_route_add_del_get_stats` does the identical unvalidated `ip_route->n_paths = (u8)path_count`. Adding a check to only the MPLS path would make the two inconsistent without fixing the general case. In practice INSEG always passes `nexthop_cnt = 1` (hardcoded in `MplsRouteAddRemove`). If this is worth tightening it should be done for both paths, which is beyond the scope of this PR.\r\n\r\n**5. Treat an unresolvable `hwif_name` as an error rather than falling back to `~0`**\r\n\r\nThe fallback is deliberate and documented in `MplsRouteAddRemove`. It is also effectively unreachable: `hwif_name` is only set after `vpp_get_hwif_name()` has already succeeded for that port, so `get_swif_idx` failing afterwards would mean the interface disappeared mid-call. Turning that into a hard failure trades a rare degraded-forwarding case for a hard error on a path that today works, which I do not think is a good trade without evidence it happens.\r\n\r\nHappy to revisit any of these three if a reviewer disagrees.\r\n\r\n## Verification\r\n\r\nRebuilt against VPP 2606 to match the sonic-vpp image \u2014 clean, zero warnings under `-Werror -Wall -Wextra -Wconversion -Wshadow -Wcast-align=strict -Wformat=2`. The repo's own gates pass locally (`aspellcheck.pl`, `checkwhitespace.sh`, `swsslogentercheck.sh`), as does `make check` for `meta`, `lib`, `vslib` and `unittest/vslib`, and the full `tests` suite (all 11).\r\n\r\nBoth changes here are on paths the functional tests already cover: the label-count clamp sits in the IP-route imposition path exercised by `test_swap_labelstack`, and the log change is observational only.\r\n"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-05T05:23:15Z",
+        "comment_author": "augusdn",
+        "comment_body": "/azp run Azure.sonic-sairedis"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-05T05:23:29Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-05T07:07:19Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-05T07:07:31Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-05T07:08:10Z",
+        "comment_author": "augusdn",
+        "comment_body": "Rebased onto current master (`11984240`) and pushed `de99c7a`. Flagging why, since the CI failure that prompted it was **not** a flake and the cause is worth knowing for anyone with an older VPP branch in flight.\r\n\r\n## What broke\r\n\r\nTwo consecutive builds failed at *Compile sonic sairedis with coverage enabled*:\r\n\r\n```\r\nvpp/vppxlate/SaiVppXlate.c:5494:5: error: redefinition of 'get_sw_if_idx'\r\nvpp/vppxlate/SaiVppXlate.c:2673:5: note: previous definition of 'get_sw_if_idx' with type 'int(const char *)'\r\nmake[4]: *** [Makefile:1029: vpp/vppxlate/libSaiVS_a-SaiVppXlate.o] Error 1\r\n```\r\n\r\nThis is a **semantic merge conflict**, which is why it wasn't visible earlier:\r\n\r\n- The merge base (`24c799da`) has **zero** definitions of `get_sw_if_idx`.\r\n- This PR adds one.\r\n- 51fe70f *\"[vslib] Add support for SPAN mirror sessions\"* (#1920) landed after this branch was cut and adds another.\r\n\r\nGit merges both cleanly \u2014 the PR reported `MERGEABLE` throughout \u2014 but the merged result doesn't compile. Local builds passed because the branch base predated #1920.\r\n\r\n## Fix\r\n\r\nDropped ours and kept the upstream definition, which is **strictly better**: it takes `VPP_LOCK()` around `get_swif_idx()`, which ours did not. Behaviour is otherwise identical \u2014 ours mapped `(u32)-1` to `-1` explicitly, and upstream's `return (int)idx;` yields the same value for that input.\r\n\r\nNo header change was needed: the `extern` declaration is identical on both sides, so this PR no longer touches `SaiVppXlate.h` for that symbol. Net effect of the new commit is `-11` lines.\r\n\r\n## Verification\r\n\r\nFull CI replication in `sonic-slave-trixie` against the rebased tree:\r\n\r\n```\r\ndpkg_buildpackage_rc=0        <- the step that was failing\r\n9 debs produced\r\nvslib/vpp/vppxlate/libSaiVS_a-SaiVppXlate.o   built clean\r\n0 compile errors, 0 redefinition errors\r\n```\r\n\r\n`make check` reports one failure, `unittest/lib` \u2192 `ServerSai.stats_st_capability_query`, aborting on `Select::add_fd:epoll_ctl: error=(1):Operation not permitted`. That one is environmental and not related to this change:\r\n\r\n- `ServerSai` mocks `getFd()` to return `0` (stdin), and `epoll_ctl` returns `EPERM` for a stdin that isn't pollable \u2014 which is what you get running the suite under `docker run` with stdin redirected.\r\n- This PR touches **zero** files under `lib/` or `unittest/`.\r\n- `unittest/lib/tests` doesn't even link `vslib`: `tests_LDADD = ... lib/libSaiRedis.a -lhiredis -lswsscommon -lpthread -L meta/.libs -lsaimetadata -lsaimeta -lzmq`. Nothing from this PR is in that binary.\r\n\r\nThe four functional commits are unchanged by the rebase; only the new fifth commit differs.\r\n"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-05T10:24:17Z",
+        "comment_author": "augusdn",
+        "comment_body": "CI is green on the rebased head `de99c7a`: **19 checks pass, 0 fail** (ADO build 1184588).\n\nThat includes the two jobs that were failing before the rebase - `Build amd64` and `BuildAsan amd64` - plus `Test vstest` (1h26m) and `TestAsan vstest` (1h38m), and the ARM/Trixie/Docker/Swss builds.\n\nFor anyone reviewing the timeline: the earlier red builds were the `get_sw_if_idx` redefinition described in the previous comment, caused by #1920 landing after this branch was cut. That is fixed; no functional commit changed."
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-11T08:25:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-11T08:26:11Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-11T08:27:44Z",
+        "comment_author": "augusdn",
+        "comment_body": "Thanks for the review @yue-fred-gao - all six comments are addressed in `3b2a738`. No push-backs; each one was valid, and two of them turned out to be more than cosmetic.\r\n\r\n## Changes\r\n\r\n| Commit | Comment |\r\n|---|---|\r\n| 9cf787d | `get_linked_object()` to resolve the nexthop RIF |\r\n| 41595f9 | Honour `SAI_NEXT_HOP_ATTR_OUTSEG_{TTL,EXP}_{MODE,VALUE}` |\r\n| b26362e | Derive `eos_proto_af` from the nexthop family |\r\n| 72bf00d | Honour `SAI_INSEG_ENTRY_ATTR_POP_TTL_MODE` |\r\n| 3b2a738 | `MplsRouteAddRemove` -> `mplsRouteAddRemove` |\r\n\r\nYour two TTL comments (`SwitchVppNexthop.cpp` and `SaiVppXlate.c`) are fixed in one commit - they were the two ends of the same pipe, so they could not sensibly be done separately.\r\n\r\n**`eos_proto_af` was a real bug, not just a hardcode.** `mpls_route_add_del()` already accepts an `AF_INET6` nexthop and `mr_eos_proto` already maps it to `FIB_API_PATH_NH_PROTO_IP6`, so an IPv6 nexthop was being accepted end to end and then programmed with an IPv4 end-of-stack protocol. Thanks for spotting it.\r\n\r\n## Validation\r\n\r\nEvery one of these is behaviour-preserving on the tested path - the SAI defaults (`UNIFORM`, and `AF_INET` for an IPv4 nexthop) are exactly the values that were hardcoded. So I used \"identical result\" as the pass criterion rather than just \"tests pass\":\r\n\r\n```\r\nbefore (golden baseline):  3 passed, 1 skipped, 151 warnings, PYTEST_RC=0\r\nafter  (this push):        3 passed, 1 skipped, 151 warnings, PYTEST_RC=0\r\n```\r\n\r\n`mpls/test_mpls.py` on `vms-kvm-vpp-t1-lag`, freshly rebuilt `libsaivs.so` deployed to the DUT with a full config reload. The suite asserts exact TTL arithmetic (`MPLS.ttl -= 1`, `MPLS.ttl = IP.ttl - 1`, inner `IP.ttl` 64 -> 62 on pop), so an identical result is meaningful evidence that the TTL handling did not shift.\r\n\r\nAlso: clean `dpkg-buildpackage` (rc=0, 9 debs) and a clean `vslib` build with zero warnings under `-Werror -Wconversion -Wshadow`.\r\n\r\n## Two things I want to be upfront about\r\n\r\n1. **IPv6 is corrected, not claimed.** `eos_proto_af` now carries the right value, but I have not validated an IPv6 MPLS data path, so IPv6 stays in the known-limitations list.\r\n2. **The non-default attribute paths are unexercised.** Nothing in sonic-swss sets `OUTSEG_TTL_MODE`, `OUTSEG_TTL_VALUE`, `POP_TTL_MODE`, `OUTSEG_EXP_MODE` or `POP_QOS_MODE` today, so they sit at their defaults and the PIPE branches never execute in the current suite. The IP-to-MPLS imposition path is additionally untested because `test_push_label` is skipped - orchagent does not install `ROUTE_TABLE`-injected push routes into ASIC_DB. The code is reasoned and compiles clean, but I would rather say plainly that it is not covered than imply it is.\r\n\r\nI noticed #1950 landed a saithrift harness that drives saivpp directly - that looks like it could exercise these attribute paths properly. Happy to follow up there if you think it is worth it.\r\n"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-11T14:01:41Z",
+        "comment_author": "yue-fred-gao",
+        "comment_body": "> I noticed #1950 landed a saithrift harness that drives saivpp directly - that looks like it could exercise these attribute paths properly. Happy to follow up there if you think it is worth it.\r\nYes, we are enabling saitest as UT for saivpp. #1950 brings in the UT infra. We will turn it on in azure-pipelines as PR checker. I am not sure about the coverage on mpls in saitest. Please follow up on that to enable mpls UT for saivpp. Thanks!\r\n"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-13T00:27:29Z",
+        "comment_author": "augusdn",
+        "comment_body": "Thanks @yue-fred-gao. Ran the t1-lag-vpp sanity as requested, using the same mechanism as your example: sonic-net/sonic-buildimage#28806 pins `src/sonic-sairedis` at this PR's approved head `3b2a738`.\r\n\r\n**`BuildVS vpp` succeeded** and the t1-lag-vpp Elastictest plan came back green:\r\n\r\n```\r\nTest plan 6a7c81c21c6297f01e854596   status FINISHED   result SUCCESS\r\ntests 1838 | passes 1298 | failures 1 | errors 1 | skipped 538 | xfails 13\r\nerrors_ignore_retries = 0\r\n```\r\n\r\nTwo modules were not clean, neither related to MPLS:\r\n\r\n| Module | |\r\n|---|---|\r\n| `arp/test_arpall.py` | 1 failure |\r\n| `vxlan/test_vxlan_multi_tunnel.py` | 1 error (passed on retry) |\r\n\r\n`arp/test_arpall.py` also failed on the previous run of this same throwaway PR back on Aug 3 (plan `6a70bef6f481df03c4e5a5f3`, on an older sairedis commit), so it looks pre-existing on this topology rather than anything this change introduced.\r\n\r\n**One caveat I want to state rather than let the green check imply too much:** this plan does not include the `mpls` module. It runs stock sonic-mgmt, which still carries the blanket `mpls` skip \u2014 lifting that is the companion PR sonic-net/sonic-mgmt#26619. So this run demonstrates *no breakage* from the saivpp change, but it is not MPLS coverage.\r\n\r\nThe MPLS evidence is the earlier combined run with both PRs in place \u2014 plan `6a69da68f481df03c4e59c5e` on `vms-kvm-vpp-t1-lag`, **17 passed / 5 skipped / 0 failed / 0 errors**, covering `test_pretest.py` + `mpls/test_mpls.py` + `test_posttest.py`.\r\n\r\nOn saitest: agreed, and thanks for the pointer. I'll follow up on MPLS coverage there once #1950's infra is switched on as a PR checker \u2014 that is the right place to exercise the attribute paths that cannot be reached today (`OUTSEG_TTL_MODE`/`POP_TTL_MODE` PIPE, and IPv6 end-of-stack), since nothing in sonic-swss sets them.\r\n"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-13T13:11:16Z",
+        "comment_author": "yue-fred-gao",
+        "comment_body": "> Thanks @yue-fred-gao. Ran the t1-lag-vpp sanity as requested, using the same mechanism as your example: [sonic-net/sonic-buildimage#28806](https://github.com/sonic-net/sonic-buildimage/pull/28806) pins `src/sonic-sairedis` at this PR's approved head `3b2a738`.\r\n> \r\n> **`BuildVS vpp` succeeded** and the t1-lag-vpp Elastictest plan came back green:\r\n> \r\n> ```\r\n> Test plan 6a7c81c21c6297f01e854596   status FINISHED   result SUCCESS\r\n> tests 1838 | passes 1298 | failures 1 | errors 1 | skipped 538 | xfails 13\r\n> errors_ignore_retries = 0\r\n> ```\r\n> \r\n> Two modules were not clean, neither related to MPLS:\r\n> \r\n> Module\t\r\n> `arp/test_arpall.py`\t1 failure\r\n> `vxlan/test_vxlan_multi_tunnel.py`\t1 error (passed on retry)\r\n> `arp/test_arpall.py` also failed on the previous run of this same throwaway PR back on Aug 3 (plan `6a70bef6f481df03c4e5a5f3`, on an older sairedis commit), so it looks pre-existing on this topology rather than anything this change introduced.\r\n> \r\n> **One caveat I want to state rather than let the green check imply too much:** this plan does not include the `mpls` module. It runs stock sonic-mgmt, which still carries the blanket `mpls` skip \u2014 lifting that is the companion PR [sonic-net/sonic-mgmt#26619](https://github.com/sonic-net/sonic-mgmt/pull/26619). So this run demonstrates _no breakage_ from the saivpp change, but it is not MPLS coverage.\r\n> \r\n> The MPLS evidence is the earlier combined run with both PRs in place \u2014 plan `6a69da68f481df03c4e59c5e` on `vms-kvm-vpp-t1-lag`, **17 passed / 5 skipped / 0 failed / 0 errors**, covering `test_pretest.py` + `mpls/test_mpls.py` + `test_posttest.py`.\r\n> \r\n> On saitest: agreed, and thanks for the pointer. I'll follow up on MPLS coverage there once #1950's infra is switched on as a PR checker \u2014 that is the right place to exercise the attribute paths that cannot be reached today (`OUTSEG_TTL_MODE`/`POP_TTL_MODE` PIPE, and IPv6 end-of-stack), since nothing in sonic-swss sets them.\r\n\r\ntest_arpall also passed on retry. It is probably not very stable."
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-07-29T13:18:03Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-08-02T06:54:42Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-08-03T08:33:45Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-08-04T13:24:36Z",
+        "review_author": "augusdn"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-08-04T13:24:54Z",
+        "review_author": "augusdn"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-08-04T13:30:44Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-08-05T07:11:25Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-08-07T21:03:06Z",
+        "review_author": "yue-fred-gao"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-08-11T08:27:00Z",
+        "review_author": "augusdn"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-08-11T08:27:02Z",
+        "review_author": "augusdn"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-08-11T08:27:04Z",
+        "review_author": "augusdn"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-08-11T08:27:06Z",
+        "review_author": "augusdn"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-08-11T08:27:07Z",
+        "review_author": "augusdn"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-08-11T08:27:09Z",
+        "review_author": "augusdn"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-08-11T13:54:38Z",
+        "review_author": "yue-fred-gao"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-08-05T07:11:25Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 2008,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-08-11T13:54:38Z",
+        "latestReview_author": "yue-fred-gao",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 2002,
         "repo": "sonic-sairedis",
         "comment_at": "2026-07-20T19:27:20Z",
@@ -1050,6 +1315,13 @@
         "comment_at": "2026-08-05T20:16:10Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2002,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-13T06:21:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 2002,

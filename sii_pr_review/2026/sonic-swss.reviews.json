@@ -5814,6 +5814,13 @@
     {
         "number": 4662,
         "repo": "sonic-swss",
+        "comment_at": "2026-08-13T23:55:42Z",
+        "comment_author": "rookie-who",
+        "comment_body": "**Cherry-pick review \u2014 requesting justification**\n\nThis PR removes a Mellanox-specific ECMP group count divisor workaround in common routeorch code. While the description suggests the old workaround now produces incorrect values (131 instead of 4200) due to SDK changes, this touches common orchagent code and changes ECMP group capacity behavior.\n\nCould you clarify:\n1. Is this strictly needed for 202605, or can it wait for 202611?\n2. Does the 202605 branch ship with the updated SDK that returns 4200 directly? If not, removing the divisor on 202605 could break things in the other direction.\n3. What is the blast radius \u2014 does this affect non-Mellanox platforms?\n\n*Review by @vaibhavhd via automated tooling*"
+    },
+    {
+        "number": 4662,
+        "repo": "sonic-swss",
         "review_at": "2026-06-12T00:34:14Z",
         "review_author": "dgsudharsan"
     },
@@ -10426,6 +10433,13 @@
         "comment_at": "2026-07-07T16:11:24Z",
         "comment_author": "prsunny",
         "comment_body": "@prgeor fyi"
+    },
+    {
+        "number": 4609,
+        "repo": "sonic-swss",
+        "comment_at": "2026-08-13T23:55:33Z",
+        "comment_author": "rookie-who",
+        "comment_body": "**Cherry-pick review \u2014 requesting justification**\n\nThis PR adds new tx_precoding/rx_precoding SAI port attributes, which appears to be a new feature rather than a bug fix or enhancement of existing code. New feature additions to a release branch carry risk and should generally wait for the next release cycle.\n\nCould you provide justification for why this can't wait until 202611? Specifically:\n1. Is there a production issue that this unblocks?\n2. Are there devices that are non-functional without this support?\n\nIf this is purely additive functionality with no urgency, we'd prefer to target 202611.\n\n*Review by @vaibhavhd via automated tooling*"
     },
     {
         "number": 4609,
@@ -32623,6 +32637,450 @@
         "latestReview_at": "2026-03-10T03:14:54Z",
         "latestReview_author": "banidoru",
         "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-06T08:59:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-06T08:59:41Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines will not run the associated pipelines, because the pull request was updated after the run command was issued. Review the pull request again and issue a new run command.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-31T05:23:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-31T05:23:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-31T11:32:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-03-31T11:32:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-04-07T07:40:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-04-07T07:41:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-04-07T16:34:52Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-04-07T16:35:03Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-04-13T15:45:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-04-13T15:45:25Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-04-14T05:43:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-04-14T05:43:59Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-04-21T04:55:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-04-21T04:55:56Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-04-23T09:35:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-04-23T09:36:10Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-04-23T20:31:38Z",
+        "comment_author": "divyagayathri-hcl",
+        "comment_body": "@prsunny can you take a look at this PR to see how this can impact upstream SONiC?"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-04-28T04:27:46Z",
+        "comment_author": "kishanps",
+        "comment_body": "@prsunny Can you please review this PR?\r\ncc: @mint570 "
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-09T07:51:02Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-09T07:51:14Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-10T06:05:11Z",
+        "comment_author": "ksravani-hcl",
+        "comment_body": "@qiluo-msft, Addressed all your review comments, Please review and approve the PR.\r\nThank you!"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-11T18:52:44Z",
+        "comment_author": "kishanps",
+        "comment_body": "> @qiluo-msft, Addressed all your review comments, Please review and approve the PR. Thank you!\r\n\r\n@qiluo-msft Can you please take a look at the addressed changes?"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-16T06:07:35Z",
+        "comment_author": "ksravani-hcl",
+        "comment_body": "@qiluo-msft, Can you please review the changes and approve the PR.\r\nThank you!"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-24T04:12:16Z",
+        "comment_author": "ksravani-hcl",
+        "comment_body": "@qiluo-msft, Can you please review the changes and approve the PR.\r\nThank you!"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-01T04:10:58Z",
+        "comment_author": "ksravani-hcl",
+        "comment_body": "@qiluo-msft , Could you please review the changes to merge this PR.\r\nThank you!"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-03T07:14:28Z",
+        "comment_author": "ksravani-hcl",
+        "comment_body": "@qiluo-msft , Could you please review the changes to merge this PR.\r\nThank you!"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-09T06:38:35Z",
+        "comment_author": "ksravani-hcl",
+        "comment_body": "@qiluo-msft, Could you please review the changes,and help to merge the PR.\r\n@prsunny, Could you please help to merge the PR.\r\nThank you!\r\n"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-13T13:09:53Z",
+        "comment_author": "ksravani-hcl",
+        "comment_body": "@qiluo-msft, Could you please review the changes,and help to merge the PR.\r\n@prsunny, Could you please help to merge the PR.\r\nThank you!"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-21T11:32:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-21T11:32:15Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-22T04:24:22Z",
+        "comment_author": "ksravani-hcl",
+        "comment_body": "@qiluo-msft, Could you please review the changes,and help to merge the PR.\r\n@prsunny, Could you please help to merge the PR.\r\nThank you!"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-27T11:28:34Z",
+        "comment_author": "ksravani-hcl",
+        "comment_body": "@qiluo-msft, Could you please review the changes,and help to merge the PR.\r\n@prsunny, Could you please help to merge the PR.\r\nThank you!"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-08-03T16:58:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-08-03T16:58:40Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-08-03T17:00:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-08-03T17:00:53Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-08-03T17:02:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-08-03T17:03:03Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-08-04T01:42:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-08-04T01:42:42Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-08-11T09:04:14Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "comment_at": "2026-08-11T09:04:46Z",
+        "comment_author": "ksravani-hcl",
+        "comment_body": "@qiluo-msft, Could you please review the changes,and help to merge the PR."
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "review_at": "2026-03-12T21:58:47Z",
+        "review_author": "mint570"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "review_at": "2026-03-21T09:51:31Z",
+        "review_author": "ksravani-hcl"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "review_at": "2026-03-24T00:45:31Z",
+        "review_author": "mint570"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "review_at": "2026-03-31T05:24:55Z",
+        "review_author": "github-advanced-security"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "review_at": "2026-04-14T21:11:35Z",
+        "review_author": "mint570"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "review_at": "2026-04-28T02:16:10Z",
+        "review_author": "mint570"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "review_at": "2026-05-13T17:52:29Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "review_at": "2026-05-13T20:05:53Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "review_at": "2026-05-18T15:35:23Z",
+        "review_author": "kishanps"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "review_at": "2026-05-27T18:23:23Z",
+        "review_author": "kishanps"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "review_at": "2026-06-02T05:10:14Z",
+        "review_author": "ksravani-hcl"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "review_at": "2026-06-02T19:08:30Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "review_at": "2026-06-02T19:09:31Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "review_at": "2026-06-09T21:55:16Z",
+        "review_author": "mint570"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "review_at": "2026-07-23T15:01:54Z",
+        "review_author": "mint570"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "review_at": "2026-07-27T21:03:37Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "review_at": "2026-08-06T08:22:22Z",
+        "review_author": "mint570"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "review_at": "2026-08-12T18:48:05Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-05-27T18:23:23Z",
+        "latestReview_author": "kishanps",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-08-12T18:48:05Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-08-06T08:22:22Z",
+        "latestReview_author": "mint570",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4301,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-05-13T20:05:53Z",
+        "latestReview_author": "prsunny",
+        "latestReview_state": "DISMISSED"
     },
     {
         "number": 4295,
