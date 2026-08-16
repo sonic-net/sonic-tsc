@@ -1200,6 +1200,41 @@
         "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
     },
     {
+        "number": 26977,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-12T01:38:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-mgmt/pull/26953"
+    },
+    {
+        "number": 26977,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-12T01:38:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 26977,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-12T01:39:00Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 26977,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-12T01:39:15Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 26977,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-12T01:39:16Z",
+        "comment_author": "github-actions",
+        "comment_body": "<!-- skip-expiry-conditional-mark-review-note -->\n@StormLiangMS @wangxin @yxieca A user wants to merge changes to the conditional mark files into `202511`. Please review."
+    },
+    {
         "number": 26976,
         "repo": "sonic-mgmt",
         "comment_at": "2026-08-12T01:38:04Z",
@@ -9834,6 +9869,13 @@
         "comment_at": "2026-08-11T23:50:40Z",
         "comment_author": "DavidHuang666",
         "comment_body": "> @DavidHuang666 , you can ask @yxieca (Ying Xie) to merge this PR now.\r\n\r\n@yxieca  Hello Ying, the verification for PR #26406  has been completed. Could you please help merge it when you have a chance? Thanks!"
+    },
+    {
+        "number": 26406,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-15T08:12:09Z",
+        "comment_author": "DavidHuang666",
+        "comment_body": "> Reviewed and approving. The refactor of DOM per-port validation into a shared driver (validate_dom_plan_fields in dom_helpers.py) is clean: existing TC1 availability behavior is preserved via the field-check callback (include_freshness_only=True), and the new TC2 operational-range test adds {min,max} range validation and skips cleanly when no *_operational_range attributes are configured. All cross-file symbols resolve against head \u2014 no undefined/unused issues.\r\n> \r\n> Confirmed the two repo-convention items:\r\n> \r\n> * Topology marker: TC2 has no in-file pytestmark, but tests/transceiver/conftest.py:pytest_collection_modifyitems auto-applies topology(\"ptp\") to every item and parent Module under tests/transceiver/, so it runs on the right testbed. The offline markers_check.py static grep also passes because \"transceiver\" is in EXCLUDED_SUBFOLDERS (markers_check.py:12, _is_excluded), so the missing in-file marker is exempt by design.\r\n> * Enumeration: the transceiver suite is PTP-topology / real-transceiver-hardware and is not part of the KVM PR pipeline; TC2 follows the same selection path as the existing TC1 in this dir.\r\n> \r\n> Non-blocking nits:\r\n> \r\n> * format_dom_port_failure: availability failure text changed from \"media lanes {}\" to \"lanes {}\" while the debug log still prints media_lanes=%s \u2014 keep terminology consistent and confirm no downstream parser depends on the old text.\r\n> * validate_dom_plan_fields: the freshness guard `if max_age_min is not None and (has_field_checks or include_freshness_only)` is redundant (the inner condition is always True here) \u2014 simplify to `if max_age_min is not None`.\r\n> * test_dom_operational_range.py docstring says \"fresh and within operational ranges\", but TC2 doesn't pass include_freshness_only=True (TC1 owns freshness) \u2014 a one-line docstring/comment tweak would clarify.\r\n> * Optional: move the _has_operational_range_attributes skip above the availability_plan build to avoid work on the common no-config path; consider renaming availability_plan_by_port / build_dom_availability_plan to neutral names now that the plan feeds both tests; add small unit coverage for parse_min_max_range invalid cases (non-dict, missing min/max, non-finite, min > max).\r\n\r\n  Thanks for the review. I addressed the non-blocking nits in the TC3 branch:\r\n\r\n  - Updated the failure text to use \"media lanes\" consistently with the debug log.\r\n  - Simplified the freshness guard in validate_dom_plan_fields to `if max_age_min is not None:`.\r\n  - Clarified the TC2 operational-range test docstring so freshness is described as being checked only when range fields are validated.\r\n  - Moved the no-config skip before building the DOM sensor plan.\r\n  - Renamed the shared plan builder from `build_dom_availability_plan` to `build_dom_sensor_plan` and updated all DOM test call sites"
     },
     {
         "number": 26406,
@@ -19654,5 +19696,124 @@
         "latestReview_at": "2026-07-31T17:41:30Z",
         "latestReview_author": "davidm-arista",
         "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 21422,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-11-25T06:20:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-mgmt/pull/19263"
+    },
+    {
+        "number": 21422,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-11-25T06:21:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 21422,
+        "repo": "sonic-mgmt",
+        "comment_at": "2025-11-25T06:21:18Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 21422,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-03T00:13:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-mgmt"
+    },
+    {
+        "number": 21422,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-03T00:13:32Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 21422,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-04T00:14:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-mgmt"
+    },
+    {
+        "number": 21422,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-04T00:15:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines will not run the associated pipelines, because the pull request was updated after the run command was issued. Review the pull request again and issue a new run command.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 21422,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-12T00:06:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-mgmt"
+    },
+    {
+        "number": 21422,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-12T00:06:36Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 21422,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-13T00:02:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-mgmt"
+    },
+    {
+        "number": 21422,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-13T00:02:49Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 21422,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-19T00:12:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-mgmt"
+    },
+    {
+        "number": 21422,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-19T00:13:01Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 21422,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-07T00:25:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-mgmt"
+    },
+    {
+        "number": 21422,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-07T00:25:36Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 21422,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-15T01:58:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-mgmt"
+    },
+    {
+        "number": 21422,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-15T01:59:00Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
     }
 ]
