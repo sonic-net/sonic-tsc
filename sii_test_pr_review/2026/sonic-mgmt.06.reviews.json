@@ -14421,6 +14421,13 @@
     {
         "number": 25147,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-08-18T00:16:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25147,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-10T15:50:42Z",
         "review_author": "Sourabh-Kumar7"
     },
@@ -22202,6 +22209,20 @@
     {
         "number": 24926,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-08-17T19:03:35Z",
+        "comment_author": "Sourabh-Kumar7",
+        "comment_body": "Tested for 202511: \r\n<img width=\"1039\" height=\"604\" alt=\"image\" src=\"https://github.com/user-attachments/assets/f4b93c1d-8a74-43ae-80d4-148c262bd2e2\" />\r\n\r\ncc: @vmittal-msft , @StormLiangMS "
+    },
+    {
+        "number": 24926,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-17T21:48:18Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202511: https://github.com/sonic-net/sonic-mgmt/pull/27122"
+    },
+    {
+        "number": 24926,
+        "repo": "sonic-mgmt",
         "review_at": "2026-05-28T23:51:39Z",
         "review_author": "Janetxxx"
     },
@@ -28659,6 +28680,20 @@
         "comment_at": "2026-06-03T02:21:41Z",
         "comment_author": "kperumalbfn",
         "comment_body": "@bingwang-ms could you please merge"
+    },
+    {
+        "number": 24568,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-17T04:11:18Z",
+        "comment_author": "rimunagala",
+        "comment_body": "@mramezani95 - requesting a backport of this PR to **202605** (and completing the **202511** request that is already labelled here but never landed).\r\n\r\nThis PR is merged to `master`, but no backport exists in any state, searching the repo for `24568` returns only this PR itself. The `Request for 202511 branch` label was applied and never progressed to `Approved for 202511 branch` or `Created PR to 202511 branch`, so 202511 was never cherry-picked and 202605 was never requested at all.\r\n\r\n**Why it matters on 202605.** Both config tests are still at `tests/generic_config_updater/`, where their only conditional mark is `release in ['202505']` \u2014 there is no hwsku condition. They are therefore scheduled on every t0/t1 testbed and have to decide whether to skip by asking the DUT at runtime:\r\n\r\n```python\r\n# 202605  tests/generic_config_updater/conftest.py:130\r\n@pytest.fixture(scope=\"session\")\r\ndef skip_if_packet_trimming_not_supported(duthost):\r\n    trimming_capable = duthost.command(\r\n        'redis-cli -n 6 HGET \"SWITCH_CAPABILITY|switch\" \"SWITCH_TRIMMING_CAPABLE\"')['stdout'].strip()\r\n    if trimming_capable.lower() != 'true':\r\n        pytest.skip(\"Packet trimming is not supported\")\r\n```\r\n\r\n`duthost.command()` raises on a non-zero return code and only `['stdout']` is consumed, so there are three outcomes rather than two: supported \u2192 run, unsupported \u2192 skip, **DUT unreachable \u2192 ERROR**. Because the fixture is session-scoped, one raise takes down the module.\r\n\r\nOn image branch 20260510 the module ran on **25 distinct hwskus and not one of them is in the four-SKU allow-list** this PR gates on (`Arista-7060X6-64PE-B-C448O16`, `Arista-7060X6-64PE-B-C512S2`, `Mellanox-SN5640-C448O16`, `Mellanox-SN5640-C512S2`). Every run's only correct outcome was *skip*, but each still had to reach the DUT to find that out. Of 568 runs, 564 skipped and **4 errored \u2014 all 4 on non-allow-listed hardware**, purely because the DUT was unreachable at probe time (3 \u00d7 `Could not connect to Redis at 127.0.0.1:6379: Connection refused`, 1 \u00d7 `Timeout (62s) waiting for privilege escalation`). Over 180 days there are **zero** probe failures on allow-listed hardware, so the failures track SKU exposure, not the probe itself.\r\n\r\nAfter this PR the tests inherit the static hwsku allow-list and all of those become inventory-time skips. On 20260510 that costs **zero coverage** \u2014 the branch has no allow-listed hardware at all.\r\n\r\n**Cherry-pick note.** Hunks 1\u20133 apply cleanly to 202605. Hunk 4 (the `request`-based guards on `setup_trimming` / `clear_counters`) is **mandatory, not cosmetic**: on 202605 `setup_trimming` is `scope=\"module\", autouse=True`, so moving the config tests into `tests/packet_trimming/` without the guards would subject them to the full dataplane trimming setup they were never meant to run. The function signatures match but sit ~15/31 lines earlier (155 vs 170, 323 vs 354), so expect fuzz or a trivial manual rebase.\r\n\r\nTracked internally as ADO 38739636. Same failure family as ADO 37430984, which this PR was written for.\r\n"
+    },
+    {
+        "number": 24568,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-17T06:16:07Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 24568,
