@@ -114,6 +114,13 @@
     {
         "number": 121,
         "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-17T14:54:42Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@vaibhavhd, could you please approve the requested 202605 backport?\n\nAdditional exact validation of sonic-mgmt `test_dhcp_relay_with_source_port_ip_in_relay_enabled` covered all four affected dual-ToR hardware families: Arista-7260CX3-D108C8, Arista-7260CX3-C64, Arista-7050CX3-32C-C32, and Cisco-8101C01-C32. With the corresponding sonic-mgmt fixes, ISC passes end-to-end on every family, while SONiC alone still fails at relayed Discover with `0 != 48`.\n\nPacket capture confirms the current 202605 relay emits Link Selection `192.168.0.0`; the corrected expectation and this PR use the receiving VLAN address `192.168.0.1`. The 202605 buildimage pin is still `dae12809`, before this fix. This backport is required for sonic-mgmt #26108 and the exact source-port-IP testcase to pass on 202605; an xfail would hide the product defect."
+    },
+    {
+        "number": 121,
+        "repo": "sonic-dhcp-relay",
         "review_at": "2026-07-18T08:28:51Z",
         "review_author": "copilot-pull-request-reviewer"
     },
