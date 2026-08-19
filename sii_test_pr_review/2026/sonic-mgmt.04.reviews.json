@@ -175,7 +175,7 @@
         "number": 24322,
         "repo": "sonic-mgmt",
         "review_at": "2026-04-29T18:48:20Z",
-        "review_author": "vivekrnv"
+        "review_author": "vivekkarri"
     },
     {
         "number": 24322,
@@ -187,7 +187,7 @@
         "number": 24322,
         "repo": "sonic-mgmt",
         "latestReview_at": "2026-04-29T18:48:20Z",
-        "latestReview_author": "vivekrnv",
+        "latestReview_author": "vivekkarri",
         "latestReview_state": "APPROVED"
     },
     {
@@ -5045,7 +5045,7 @@
         "number": 24110,
         "repo": "sonic-mgmt",
         "review_at": "2026-04-22T02:39:18Z",
-        "review_author": "vivekrnv"
+        "review_author": "vivekkarri"
     },
     {
         "number": 24110,
@@ -5057,7 +5057,7 @@
         "number": 24110,
         "repo": "sonic-mgmt",
         "latestReview_at": "2026-04-22T02:39:18Z",
-        "latestReview_author": "vivekrnv",
+        "latestReview_author": "vivekkarri",
         "latestReview_state": "APPROVED"
     },
     {
@@ -10253,13 +10253,13 @@
         "number": 23965,
         "repo": "sonic-mgmt",
         "review_at": "2026-04-15T23:35:15Z",
-        "review_author": "vivekrnv"
+        "review_author": "vivekkarri"
     },
     {
         "number": 23965,
         "repo": "sonic-mgmt",
         "review_at": "2026-04-15T23:56:58Z",
-        "review_author": "vivekrnv"
+        "review_author": "vivekkarri"
     },
     {
         "number": 23965,
@@ -10284,7 +10284,7 @@
         "number": 23965,
         "repo": "sonic-mgmt",
         "latestReview_at": "2026-04-15T23:56:58Z",
-        "latestReview_author": "vivekrnv",
+        "latestReview_author": "vivekkarri",
         "latestReview_state": "DISMISSED"
     },
     {
@@ -10312,13 +10312,13 @@
         "number": 23964,
         "repo": "sonic-mgmt",
         "review_at": "2026-04-15T23:54:24Z",
-        "review_author": "vivekrnv"
+        "review_author": "vivekkarri"
     },
     {
         "number": 23964,
         "repo": "sonic-mgmt",
         "latestReview_at": "2026-04-15T23:54:24Z",
-        "latestReview_author": "vivekrnv",
+        "latestReview_author": "vivekkarri",
         "latestReview_state": "APPROVED"
     },
     {
@@ -24394,7 +24394,7 @@
         "number": 23605,
         "repo": "sonic-mgmt",
         "comment_at": "2026-04-04T00:06:48Z",
-        "comment_author": "vivekrnv",
+        "comment_author": "vivekkarri",
         "comment_body": "@zjswhhh, @prsunny  Please fix yang validation before making this change. \r\n\r\nAll the other SmartSwitch tests use this method. Config reload will be broken on all of those. "
     },
     {
@@ -24436,7 +24436,7 @@
         "number": 23605,
         "repo": "sonic-mgmt",
         "comment_at": "2026-04-06T18:23:15Z",
-        "comment_author": "vivekrnv",
+        "comment_author": "vivekkarri",
         "comment_body": "> @vivekrnv @nikamirrr - configuration generated with this PR will pass Yang, but it's not what we want.\r\n> \r\n> **Today hamgrd takes `main_dpu_ids` as a single string, so does our production configuring. We need to merge the YANG change into sonic-buildimage first, then update this PR to adapt.**\r\n\r\nIt would pass yang for the first boot, but will there be any yang validation issues in further config reload's?"
     },
     {
@@ -24560,7 +24560,7 @@
         "number": 23605,
         "repo": "sonic-mgmt",
         "review_at": "2026-04-06T18:42:44Z",
-        "review_author": "vivekrnv"
+        "review_author": "vivekkarri"
     },
     {
         "number": 23605,
@@ -35898,7 +35898,7 @@
         "number": 23276,
         "repo": "sonic-mgmt",
         "comment_at": "2026-03-26T03:52:22Z",
-        "comment_author": "vivekrnv",
+        "comment_author": "vivekkarri",
         "comment_body": "Need these changes for test_fnic.py to work. \r\n\r\nWe only add INBOUND Rule for `{ENCAP__VNI}:{PE_PA}`. This is for packet coming from PE, packet going out of VM can't have ENCAP__VNI. \r\n\r\n```\r\ndiff --git a/tests/dash/packets.py b/tests/dash/packets.py\r\nindex 86ec8acbb..fbb2c9a5f 100644\r\n--- a/tests/dash/packets.py\r\n+++ b/tests/dash/packets.py\r\n@@ -82,7 +82,7 @@ def rand_udp_port_packets(config, floating_nic=True, outbound_vni=None, outbound\r\n         config, outbound_encap, floating_nic, inner_sport=sport, inner_dport=dport, vni=outbound_vni\r\n     )\r\n     pe_to_dpu_pkt, exp_dpu_to_vm_pkt = inbound_pl_packets(\r\n-        config, floating_nic, inner_sport=dport, inner_dport=sport, exp_vni=outbound_vni\r\n+        config, floating_nic, inner_sport=dport, inner_dport=sport\r\n     )\r\n     return vm_to_dpu_pkt, exp_dpu_to_pe_pkt, pe_to_dpu_pkt, exp_dpu_to_vm_pkt\r\n \r\ndiff --git a/tests/dash/test_fnic.py b/tests/dash/test_fnic.py\r\nindex 6f6d9babb..5929eb795 100644\r\n--- a/tests/dash/test_fnic.py\r\n+++ b/tests/dash/test_fnic.py\r\n@@ -129,7 +129,7 @@ def test_fnic(ptfadapter, dash_pl_config, single_endpoint):\r\n \r\n     for _ in range(num_packets):\r\n         vm_to_dpu_pkt, exp_dpu_to_pe_pkt, pe_to_dpu_pkt, exp_dpu_to_vm_pkt = rand_udp_port_packets(\r\n-            dash_pl_config, floating_nic=True, outbound_vni=pl.ENCAP_VNI\r\n+            dash_pl_config, floating_nic=True, outbound_vni=pl.ENI_TRUSTED_VNI\r\n         )\r\n         exp_dpu_to_vm_pkt.set_do_not_care_packet(scapy.IP, \"dst\")\r\n         # Usually `testutils.send` automatically updates the packet payload to include the test name\r\n```"
     },
     {
@@ -35940,7 +35940,7 @@
         "number": 23276,
         "repo": "sonic-mgmt",
         "comment_at": "2026-04-03T23:37:43Z",
-        "comment_author": "vivekrnv",
+        "comment_author": "vivekkarri",
         "comment_body": "@theasianpianist, Direct cherry-pick would not work. There will be conflicts. Worth creating a manual PR"
     },
     {
@@ -35954,13 +35954,13 @@
         "number": 23276,
         "repo": "sonic-mgmt",
         "review_at": "2026-03-25T23:32:30Z",
-        "review_author": "vivekrnv"
+        "review_author": "vivekkarri"
     },
     {
         "number": 23276,
         "repo": "sonic-mgmt",
         "review_at": "2026-03-26T00:18:31Z",
-        "review_author": "vivekrnv"
+        "review_author": "vivekkarri"
     },
     {
         "number": 23276,
@@ -35972,7 +35972,7 @@
         "number": 23276,
         "repo": "sonic-mgmt",
         "review_at": "2026-03-26T00:22:04Z",
-        "review_author": "vivekrnv"
+        "review_author": "vivekkarri"
     },
     {
         "number": 23276,
@@ -35990,7 +35990,7 @@
         "number": 23276,
         "repo": "sonic-mgmt",
         "latestReview_at": "2026-03-26T00:22:04Z",
-        "latestReview_author": "vivekrnv",
+        "latestReview_author": "vivekkarri",
         "latestReview_state": "COMMENTED"
     },
     {
