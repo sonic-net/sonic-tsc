@@ -605,6 +605,13 @@
     {
         "number": 722,
         "repo": "sonic-platform-common",
+        "comment_at": "2026-08-19T18:36:31Z",
+        "comment_author": "pnakka28",
+        "comment_body": "> @pnakka28 \u2014 This PR is requested for the **202605 branch** but is missing test evidence. To move forward with cherry-pick approval, please:\r\n> \r\n> 1. **Test on the 202605 branch** and add results (image version + test output) to the PR description\r\n> 2. **Check the `202605` box** in the \"Tested Branches\" section of the PR description\r\n> 3. **Add the \"Tested for 202605 branch\" label** once testing is complete\r\n> \r\n> Also, to help us prioritize correctly, could you clarify: **Is this PR a bug fix / regression fix, a new feature, a platform config change, or a dependency/infra update?** Understanding the nature of the change helps us triage the cherry-pick queue.\r\n> \r\n> Thank you!\r\n> \r\n> _Review by @vaibhavhd via automated tooling_\r\n\r\nThis is a regression fix. A previous refactor dropped the existing \"Abort CMD102h supported\" advertisement from the returned info text. This PR restores that behavior.\r\n\r\nI tested the change against the 202605 branch and updated the PR description with the image version and test results. \r\n\r\nNote: This PR needs to be cherry picked after #681 is merged into 202605. The conflict label is due to this."
+    },
+    {
+        "number": 722,
+        "repo": "sonic-platform-common",
         "review_at": "2026-07-17T21:17:11Z",
         "review_author": "copilot-pull-request-reviewer"
     },
@@ -4030,6 +4037,13 @@
         "comment_at": "2026-08-18T07:41:37Z",
         "comment_author": "rookie-who",
         "comment_body": "@pnakka28 \u2014 This PR is requested for the **202605 branch** but is missing test evidence. To move forward with cherry-pick approval, please:\n\n1. **Test on the 202605 branch** and add results (image version + test output) to the PR description\n2. **Check the `202605` box** in the \"Tested Branches\" section of the PR description\n3. **Add the \"Tested for 202605 branch\" label** once testing is complete\n\nAlso, to help us prioritize correctly, could you clarify: **Is this PR a bug fix / regression fix, a new feature, a platform config change, or a dependency/infra update?** Understanding the nature of the change helps us triage the cherry-pick queue.\n\nThank you!\n\n*Review by @vaibhavhd via automated tooling*"
+    },
+    {
+        "number": 681,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-08-19T19:06:50Z",
+        "comment_author": "pnakka28",
+        "comment_body": "> @pnakka28 \u2014 This PR is requested for the **202605 branch** but is missing test evidence. To move forward with cherry-pick approval, please:\r\n> \r\n> 1. **Test on the 202605 branch** and add results (image version + test output) to the PR description\r\n> 2. **Check the `202605` box** in the \"Tested Branches\" section of the PR description\r\n> 3. **Add the \"Tested for 202605 branch\" label** once testing is complete\r\n> \r\n> Also, to help us prioritize correctly, could you clarify: **Is this PR a bug fix / regression fix, a new feature, a platform config change, or a dependency/infra update?** Understanding the nature of the change helps us triage the cherry-pick queue.\r\n> \r\n> Thank you!\r\n> \r\n> _Review by @vaibhavhd via automated tooling_\r\n\r\nThis is a spec-compliance fix, not a new feature. No new user-facing feature, platform config change, or dependency update.\r\n\r\nTested against 202605 and updated the PR description with the image version and test results.\r\n\r\nNote on ordering: this PR should be cherry-picked to 202605 before #722, which builds on it. I verified that #681 cherry-picks cleanly onto the current 202605 branch, and #722 then applies cleanly on top with no conflict."
     },
     {
         "number": 681,
