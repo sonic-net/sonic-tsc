@@ -1186,6 +1186,20 @@
     {
         "number": 25676,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-08-19T18:20:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25676,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-20T01:10:42Z",
+        "comment_author": "prabhataravind",
+        "comment_body": "@nnelluri-cisco could you add test information for 202605 as well?\r\n"
+    },
+    {
+        "number": 25676,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-25T19:56:42Z",
         "review_author": "copilot-pull-request-reviewer"
     },
@@ -21376,6 +21390,13 @@
         "comment_at": "2026-08-11T02:11:51Z",
         "comment_author": "StormLiangMS",
         "comment_body": "@auspham \u2014 this PR is labeled Request for 202605 branch, but the following required information is still missing:\n\n- linked GitHub issue or ADO work item\n- 202605-specific image/test result evidence\n\nPlease add the missing information to the PR description. Tracker details should cover day-one/regression status, affected branch/image/platform/test, and why 202605 needs the fix; validation should identify the tested 202605 image and include the result or result link.\n\n<!-- copilot-202605-backport-reminder -->"
+    },
+    {
+        "number": 24963,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-19T02:35:32Z",
+        "comment_author": "auspham",
+        "comment_body": "Hi @StormLiangMS, I have tested on physical testbed Nokia TH6, the PR is working however we also need complement PR for 202605 to work. Please find the below:\r\n\r\n\r\n\r\n| Order | PR | Commit | Purpose and dependency |\r\n| --- | --- | --- | --- |\r\n| 1 | [(https://github.com/sonic-net/sonic-mgmt/pull/24963)](https://github.com/sonic-net/sonic-mgmt/pull/24963) | `538a579000` | Base converged multi-VRF cEOS framework. Apply first. |\r\n| 2 | [(https://github.com/sonic-net/sonic-mgmt/pull/24527)](https://github.com/sonic-net/sonic-mgmt/pull/24527) | `c8eb40aea8` | Adds converged LT2 templates and route announcement support, plus safe absent-backplane-VLAN cleanup. Depends on #24963. |\r\n| 3 | [(https://github.com/sonic-net/sonic-mgmt/pull/24665)](https://github.com/sonic-net/sonic-mgmt/pull/24665) | `d209d439d3` | Expands the LT2 route pool for the 224 T1 peers in `lt2-o256-u32d224`. Must accompany #24527 on Nokia TH6. |\r\n| 4 | [(https://github.com/sonic-net/sonic-mgmt/pull/26080)](https://github.com/sonic-net/sonic-mgmt/pull/26080) | `98c30671f3` only for Nokia TH6 | Passes `multi_vrf` and `multi_vrf_data` through `restart-ptf`. Without it, renumbering deletes the PTF `backplane.<VLAN>` interfaces, ExaBGP loses its cEOS sessions, default routes disappear, and pretest fails. |"
     },
     {
         "number": 24963,
