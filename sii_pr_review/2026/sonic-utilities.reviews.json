@@ -1,5 +1,107 @@
 [
     {
+        "number": 4797,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-24T06:22:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-utilities/pull/4783"
+    },
+    {
+        "number": 4797,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-24T06:22:37Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4797,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-24T06:22:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4797,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-24T06:22:57Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4791,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-18T07:28:33Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4791,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-18T07:28:40Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4791,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-18T07:28:53Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4791,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-18T07:41:10Z",
+        "comment_author": "rookie-who",
+        "comment_body": "@mdhoff-ms \u2014 This PR is requested for the **202605 branch** but is missing test evidence. To move forward with cherry-pick approval, please:\n\n1. **Test on the 202605 branch** and add results (image version + test output) to the PR description\n2. **Check the `202605` box** in the \"Tested Branches\" section of the PR description\n3. **Add the \"Tested for 202605 branch\" label** once testing is complete\n\nAlso, to help us prioritize correctly, could you clarify: **Is this PR a bug fix / regression fix, a new feature, a platform config change, or a dependency/infra update?** Understanding the nature of the change helps us triage the cherry-pick queue.\n\nThank you!\n\n*Review by @vaibhavhd via automated tooling*"
+    },
+    {
+        "number": 4791,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-18T12:18:52Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 4791,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-24T04:12:42Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4791,
+        "repo": "sonic-utilities",
+        "review_at": "2026-08-24T04:10:45Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4791,
+        "repo": "sonic-utilities",
+        "review_at": "2026-08-24T04:12:22Z",
+        "review_author": "mdhoff-ms"
+    },
+    {
+        "number": 4791,
+        "repo": "sonic-utilities",
+        "review_at": "2026-08-24T05:25:42Z",
+        "review_author": "lizhijianrd"
+    },
+    {
+        "number": 4791,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2026-08-24T04:10:45Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 4791,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2026-08-24T05:25:42Z",
+        "latestReview_author": "lizhijianrd",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 4787,
         "repo": "sonic-utilities",
         "comment_at": "2026-08-17T22:47:19Z",
@@ -323,6 +425,20 @@
         "comment_at": "2026-08-21T00:28:27Z",
         "comment_author": "ganglyu",
         "comment_body": "@saiarcot895 You were right \u2014 closing the read end is enough.\n\nRan all three variants on a switch (40.9MB `show ip route json`, 64KB pipe), parse aborted mid-stream, as root:\n\n| cleanup on parse failure | returns? | child rc | left behind |\n|---|---|---|---|\n| old code (`wait()` inside the `with`) | **no, deadlock** | \u2014 | **4** |\n| (1) drop the explicit `wait()`, let `__exit__` close | 0.21s | 141 (SIGPIPE) | 0 |\n| (2) `proc.stdout.close()` then `wait()` | 0.18s | 141 (SIGPIPE) | 0 |\n\n(3) isn't needed \u2014 a read after `close()` just raises `ValueError: I/O operation on closed file`.\n\nRoot cause is exactly what you pointed at: `Popen.__exit__` *does* close `proc.stdout`, but the explicit `proc.wait()` sat **inside** the `with` block and blocked before `__exit__` could run. An ordering bug.\n\nThe PR now closes the read end in a `finally` before any `wait()`, and the remaining `wait()` is bounded. The `SIGPIPE` exit (141 through `sudo`) is no longer reported as a `vtysh` failure, since it is the expected outcome of closing rather than a real failure. Two guards added, both of which fail against the previous revision.\n"
+    },
+    {
+        "number": 4783,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-24T06:13:29Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-utilities/pull/4796"
+    },
+    {
+        "number": 4783,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-24T06:22:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-utilities/pull/4797"
     },
     {
         "number": 4783,
@@ -2191,6 +2307,237 @@
         "repo": "sonic-utilities",
         "latestReview_at": "2026-07-17T21:25:55Z",
         "latestReview_author": "zjswhhh",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-16T07:39:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-16T07:39:44Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-16T07:39:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-16T08:42:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-16T08:43:05Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-16T11:22:09Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi, there are workflow run(s) waiting for approval, you may be first-time contributor. I will notify maintainers to help approve once PR is approved. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-23T14:00:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-23T14:00:49Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-26T14:23:19Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-26T14:23:29Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-26T15:27:11Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-26T15:27:22Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-26T15:28:12Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-12T13:14:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-12T13:14:17Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-17T03:25:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-17T03:25:34Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-17T03:29:57Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-17T03:30:05Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines will not run the associated pipelines, because the pull request was updated after the run command was issued. Review the pull request again and issue a new run command.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-17T03:31:02Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-17T03:31:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-17T03:34:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-17T03:34:51Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-17T03:48:21Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-17T03:48:32Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-23T14:04:44Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-26T14:23:49Z",
+        "review_author": "V2lsbGlhbVpoYW5n"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-26T14:25:01Z",
+        "review_author": "V2lsbGlhbVpoYW5n"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-26T14:25:51Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-26T15:30:31Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "review_at": "2026-08-10T02:55:12Z",
+        "review_author": "lizhijianrd"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "review_at": "2026-08-24T02:42:38Z",
+        "review_author": "lizhijianrd"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2026-07-26T15:30:31Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 4697,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2026-08-24T02:42:38Z",
+        "latestReview_author": "lizhijianrd",
         "latestReview_state": "APPROVED"
     },
     {
@@ -14437,6 +14784,253 @@
         "repo": "sonic-utilities",
         "latestReview_at": "2026-04-17T23:51:23Z",
         "latestReview_author": "tirupatihemanth",
+        "latestReview_state": "DISMISSED"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-04-10T18:50:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-04-10T18:50:24Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-04-10T19:50:11Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-04-10T19:50:22Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-05-14T02:04:42Z",
+        "comment_author": "Sourabh-Kumar7",
+        "comment_body": "@lguohan @abdosi can you pls help review this?"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-05-27T18:25:07Z",
+        "comment_author": "william8545",
+        "comment_body": "> Review on behalf of @lguohan:\r\n> \r\n> The fix for multi-ASIC package feature management \u2014 please provide:\r\n> \r\n> 1. What specific failure does this address? (The PR description is truncated)\r\n> 2. How does this interact with `config feature` commands on multi-ASIC platforms?\r\n> 3. Are there sonic-mgmt tests that validate multi-ASIC feature enable/disable?\r\n\r\n1.  Two CLI- and package-manager-side failures after installing a new package \r\n\r\n- `config feature state <pkg> enabled` crashes / no-ops. The command prints `status` and the feature is not enabled. \r\n- Host vs ASIC CONFIG_DB divergence after install / uninstall. `sonic-package-manager install` only populated the host's `FEATURE` table, so ASIC namespaces never received the row (autorestart and state included). `sonic-package-manager uninstall` likewise only removed the host row, leaving stale entries in the ASIC namespaces.\r\n\r\n2. `config feature state` / `config feature autorestart` iterate `db.cfgdb_clients`, which `utilities_common/db.py::Db` builds as `{'': host_cfgdb, 'asic0': ..., 'asic1': ..., ...}` whenever `multi_asic.is_multi_asic()` is true. The command (a) validates the entry exists, (b) checks the value is consistent across all namespaces, and (c) writes the new value to every namespace.\r\n\r\n3. No tests in sonic-mgmt that test sonic-package-manager install/uninstall"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-06-09T19:50:25Z",
+        "comment_author": "Sourabh-Kumar7",
+        "comment_body": "@lguohan @securely1g could you please re-review and approve the changes? Thanks"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-06-11T19:48:10Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-06-11T19:54:20Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-06-12T00:02:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-06-12T00:02:28Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-06-18T17:50:37Z",
+        "comment_author": "Sourabh-Kumar7",
+        "comment_body": "@lguohan @abdosi can you pls help review this?"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-06-18T17:50:59Z",
+        "comment_author": "Sourabh-Kumar7",
+        "comment_body": "@william8545 can you please check the copilot's comment?"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-06-22T20:47:34Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-06-22T20:47:46Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-06-22T21:09:50Z",
+        "comment_author": "william8545",
+        "comment_body": "Fix"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-06T16:28:19Z",
+        "comment_author": "william8545",
+        "comment_body": "resolve reviews"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-07T11:38:35Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@lguohan kindly reminder to approve or provide more feedback"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-30T22:06:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-07-30T22:06:41Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-08-10T05:42:05Z",
+        "comment_author": "liat-grozovik",
+        "comment_body": "@qiluo-msft can you confirm feedback is handled and you can approve to merge?"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "review_at": "2026-04-24T23:59:18Z",
+        "review_author": "oleksandrivantsiv"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "review_at": "2026-05-24T04:55:42Z",
+        "review_author": "securely1g"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "review_at": "2026-06-09T19:51:57Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "review_at": "2026-06-18T17:49:16Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-06T16:27:41Z",
+        "review_author": "william8545"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-06T16:27:53Z",
+        "review_author": "william8545"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-06T16:28:12Z",
+        "review_author": "william8545"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-06T16:37:02Z",
+        "review_author": "william8545"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-11T02:19:30Z",
+        "review_author": "oleksandrivantsiv"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-29T22:14:16Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "review_at": "2026-07-30T22:06:36Z",
+        "review_author": "william8545"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "review_at": "2026-08-24T21:58:47Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2026-06-18T17:49:16Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2026-05-24T04:55:42Z",
+        "latestReview_author": "securely1g",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2026-08-24T21:58:47Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4445,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2026-07-11T02:19:30Z",
+        "latestReview_author": "oleksandrivantsiv",
         "latestReview_state": "DISMISSED"
     },
     {
