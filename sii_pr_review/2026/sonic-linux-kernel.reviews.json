@@ -162,6 +162,20 @@
     {
         "number": 612,
         "repo": "sonic-linux-kernel",
+        "comment_at": "2026-08-27T18:00:38Z",
+        "comment_author": "bingwang-ms",
+        "comment_body": "@nats-nokia Do we need to backport the change to any release branch?"
+    },
+    {
+        "number": 612,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-08-27T18:16:29Z",
+        "comment_author": "nats-nokia",
+        "comment_body": "> @nats-nokia Do we need to backport the change to any release branch?\r\n\r\nYes, we need to backport this into 202608.\r\nPR: https://github.com/Azure/sonic-linux-kernel.msft/pull/73 is created for the same."
+    },
+    {
+        "number": 612,
+        "repo": "sonic-linux-kernel",
         "review_at": "2026-08-22T06:52:29Z",
         "review_author": "paulmenzel"
     },
@@ -657,6 +671,134 @@
         "latestReview_at": "2026-07-08T16:19:27Z",
         "latestReview_author": "paulmenzel",
         "latestReview_state": "CHANGES_REQUESTED"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-06-22T07:06:14Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-06-22T07:06:24Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-06-22T09:35:02Z",
+        "comment_author": "chander-nexthop",
+        "comment_body": "> I am sorry, this is hard to review. Please make it smaller commits despite it being squashed in the end. (No idea, why the SONiC admins don\u2019t change that GitHub setting.)\r\n> \r\n> Anyway, SONiC has several boards, so please don\u2019t use generic summaries/title like _Update DTS file_.\r\n> \r\n> Please also amend the commit message to include a description (or should you split as asked above) several descriptions.\r\n\r\nThe DTS file doesn't represent a generic hardware. Its a patch file to add a DTS file to the kernel build that represents our card. Doesn't affect any other vendor. Having an incremental patch to update this single DTS file seem overkill as no other vendor is impacted by it."
+    },
+    {
+        "number": 591,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-06-22T09:42:15Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "> The DTS file doesn't represent a generic hardware. Its a patch file to add a DTS file to the kernel build that represents our card. Doesn't affect any other vendor. Having an incremental patch to update this single DTS file seem overkill as no other vendor is impacted by it.\r\n\r\nSorry, that is a misunderstanding. It\u2019s not about, if other devices are impacted, it\u2019s about being able to review stuff, and to understand changes in several years, once Nexthop moved on and stopped supporting code."
+    },
+    {
+        "number": 591,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-06-22T09:47:15Z",
+        "comment_author": "chander-nexthop",
+        "comment_body": "> > The DTS file doesn't represent a generic hardware. Its a patch file to add a DTS file to the kernel build that represents our card. Doesn't affect any other vendor. Having an incremental patch to update this single DTS file seem overkill as no other vendor is impacted by it.\r\n> \r\n> Sorry, that is a misunderstanding. It\u2019s not about, if other devices are impacted, it\u2019s about being able to review stuff, and to understand changes in several years, once Nexthop moved on and stopped supporting code.\r\n\r\nA far earlier way to review a DTS file which is submitted as patch, imho, is to apply the patch and look into the DTS file directly. If there is a better way to add the DTS file to the SONiC Kernel let me know. "
+    },
+    {
+        "number": 591,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-07-06T06:22:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-07-06T06:22:42Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-07-06T09:17:05Z",
+        "comment_author": "paulmenzel",
+        "comment_body": "> Anyway, SONiC has several boards, so please don\u2019t use generic summaries/title like Update DTS file.\r\n\r\nThis is still not addressed. Please add the device name (NextHop B27 R0?) to the commit message summary/title, and the merge/pull request summary/title."
+    },
+    {
+        "number": 591,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-07-06T09:40:44Z",
+        "comment_author": "chander-nexthop",
+        "comment_body": "> > Anyway, SONiC has several boards, so please don\u2019t use generic summaries/title like Update DTS file.\r\n> \r\n> This is still not addressed. Please add the device name (NextHop B27 R0?) to the commit message summary/title, and the merge/pull request summary/title.\r\n\r\nSorry about missing this. Done."
+    },
+    {
+        "number": 591,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-08-05T06:19:15Z",
+        "comment_author": "yxieca",
+        "comment_body": "@paulmenzel  with the author/SoB/commit-summary addressed and the PR title updated, are you good to approve, or are there remaining issues you'd like resolved (e.g. the smaller-commits/reviewability point)?"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-08-26T16:40:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-08-26T16:40:54Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2026-06-22T09:29:11Z",
+        "review_author": "paulmenzel"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2026-06-22T09:29:29Z",
+        "review_author": "paulmenzel"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2026-06-22T09:32:19Z",
+        "review_author": "chander-nexthop"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2026-07-06T06:23:15Z",
+        "review_author": "chander-nexthop"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2026-08-27T18:42:20Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2026-06-22T09:29:29Z",
+        "latestReview_author": "paulmenzel",
+        "latestReview_state": "CHANGES_REQUESTED"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2026-08-27T18:42:20Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
     },
     {
         "number": 589,

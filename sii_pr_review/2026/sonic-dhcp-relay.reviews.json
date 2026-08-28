@@ -184,6 +184,186 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T18:57:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T18:57:28Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T18:57:37Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T20:36:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T20:36:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T20:47:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T20:48:05Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-11T00:18:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request for branch(es): 202605.<br>Added label(s) for branch(es) 202605.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-11T00:18:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-11T17:18:32Z",
+        "comment_author": "ashutosh-agrawal",
+        "comment_body": "@Xichen96 @yxieca Please help review this PR. More than half of the unit tests are getting skipped without this fix."
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T16:18:03Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T16:18:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T14:11:39Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@ashutosh-agrawal Thanks for fixing the deterministic sync-barrier abort. I found one blocking lifecycle issue in the current approach.\n\n`DHCPMgr` remains stack-local in these tests, while `initialize_config_listener()` detaches a thread and `stop_db_updates()` only flips the stop flag. The listener can remain blocked in the 1000 ms `select()` timeout, but the tests wait only 100 ms before the `DHCPMgr` object and test-local global `write()` expectation are destroyed. The next test then calls `InitConfigPipeForTest()`, closing and reusing the global pipe descriptors while the previous listener may still be alive.\n\nThat leaves concrete race paths where the old listener accesses the destroyed `DHCPMgr`, invokes the global mock after teardown, or writes to a recycled descriptor\u2014potentially producing another mid-suite abort/terminate or cross-test corruption.\n\nCould you make `DHCPMgr` own the listener thread and join it before destruction and before resetting `config_pipe`? A deterministic completion handshake would also work; another fixed sleep would remain fragile.\n\nNon-blocking cleanup: the helper's `ASSERT_EQ(pipe(...), 0)` only returns from the helper, allowing the test body to continue, and the `fcntl()` result is unchecked. Once #135/#138 are stable, the Makefile's `|| true` should also be removed so CI protects against future aborted or failing test runs."
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T17:29:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T17:29:43Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T18:11:50Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T18:12:00Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T18:16:21Z",
+        "comment_author": "ashutosh-agrawal",
+        "comment_body": "@StormLiangMS Thanks for the review \u2014 addressed the blocking lifecycle issue and the non-blocking InitConfigPipeForTest cleanup.\r\n\r\n**Blocking**: listener thread lifecycle \r\n\r\nDHCPMgr now owns a joinable config_listener_thread_ instead of detaching.\r\nstop_db_updates() sets stop_thread and joins the listener if joinable.\r\ninitialize_config_listener() calls stop_db_updates() first before starting a new thread.\r\n~DHCPMgr() calls stop_db_updates(), so the listener is joined before the object is destroyed and before the next test's InitConfigPipeForTest() recycles config_pipe.\r\n\r\n**Non-blocking**: InitConfigPipeForTest() hardening\r\n\r\nReturns bool; checks close/pipe/fcntl with strerror(errno) diagnostics.\r\nCall sites use ASSERT_TRUE(InitConfigPipeForTest()) so setup failure stops the test at the call site.\r\n\r\n**Deferred**: Makefile || true\r\n\r\nAgreed \u2014 will remove once #138 lands and the UT suite is 46/46 passing locally. Without #138, 44/46 tests are passing with this PR."
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-24T11:01:16Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-24T11:01:26Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-26T05:28:57Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-26T05:29:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-27T00:25:53Z",
+        "comment_author": "ashutosh-agrawal",
+        "comment_body": "@yxieca @StormLiangMS @Xichen96 Please help in merging this PR."
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-20T13:09:56Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-20T13:12:00Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-08-20T13:12:00Z",
+        "latestReview_author": "Xichen96",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 130,
         "repo": "sonic-dhcp-relay",
         "comment_at": "2026-08-10T16:38:48Z",
