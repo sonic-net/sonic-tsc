@@ -13864,6 +13864,13 @@
     {
         "number": 26138,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-08-27T13:36:12Z",
+        "comment_author": "rbpittman",
+        "comment_body": "removed 202605 request"
+    },
+    {
+        "number": 26138,
+        "repo": "sonic-mgmt",
         "review_at": "2026-07-15T06:08:41Z",
         "review_author": "wsycqyz"
     },
@@ -20141,6 +20148,13 @@
         "comment_at": "2026-08-25T04:36:02Z",
         "comment_author": "mssonicbld",
         "comment_body": "The change is not in msft-202512 yet. @atul-nexthop, please manually create the cherry pick PR for branch msft-202512.<br>You can ping the release branch owner(github account: bingwang-ms) to approve your cherry pick PR.<br>If this change is already in msft-202512, please comment \"already in msft-202512\". Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25950,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-27T16:59:11Z",
+        "comment_author": "atul-nexthop",
+        "comment_body": "already in 202511"
     },
     {
         "number": 25950,
@@ -27799,6 +27813,13 @@
     {
         "number": 25741,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-08-27T13:34:27Z",
+        "comment_author": "rbpittman",
+        "comment_body": "Removing 202605 request. "
+    },
+    {
+        "number": 25741,
+        "repo": "sonic-mgmt",
         "review_at": "2026-07-06T05:39:54Z",
         "review_author": "yxieca"
     },
@@ -30123,6 +30144,20 @@
         "comment_at": "2026-08-26T04:17:29Z",
         "comment_author": "mssonicbld",
         "comment_body": "This PR is approved for branch 202511. No cherry pick PR has been created because of code conflict. @dcaugher, please manually create the cherry pick PR.<br>If this change is already in 202511, please comment \"already in 202511\". Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-27T20:17:20Z",
+        "comment_author": "dcaugher",
+        "comment_body": "> Hi @dcaugher,\r\n> \r\n> Could you please clarify whether this PR is a **must-have cherry-pick for the 202605 branch**?\r\n> \r\n> **Current evaluation**\r\n> \r\n> * Classification: Platform/HWSKU enablement or config\r\n> * Bug fix: No\r\n> * Recommendation: **NO**\r\n> * Rationale: This is new G200X QoS enablement/coverage, not an existing-behavior repair; seven-file calibration changes and a recorded 202511 conflict increase porting risk.\r\n> \r\n> If this is required for 202605, please reply with the branch-specific failure or impact, required dependencies, and 202605 validation results.\r\n> \r\n> If there is no response by **September 2, 2026**, the Request for 202605 branch will be rejected based on the evaluation above.\r\n\r\nBranch-specific failure: G200X fail to run or are skipped. \r\nRequired dependencies: None known\r\nValidation results:\r\n\r\n\r\nThe key points of this PR are:\r\n\r\nCan we verify that VOQ tests are properly skipped on the G200X?\r\nCan we verify that the PG headroom watermark test runs on the G200X?\r\nThe resulting log file (all 25MB of it) shows that both points have been satisfied:\r\n\r\ntestQosSaiLossyQueueVoq \u2192 10 skipped with reason Unsupported testbed type. This is the intended GR2X skip, driven by the branch's own conditional_mark rule in tests_mark_conditions.yaml. With CISCO_8122_PREFIX = \"x86_64-8122\" (cisco_data.py, matches GR2/GR2X), the platform.startswith(...) condition fires on our G200X DUT. We can pin the skip to that condition specifically: since testQosSaiPgHeadroomWatermark ran, t0 is in QOS_SAI_TOPO, so the topo conditions were false and asic_type is cisco-8000 \u2014 leaving the 8122-prefix match as the trigger. There's also an in-test backstop at test_qos_sai.py (\"not applicable on Output-Queued (non-VOQ) ASICs\"); conditional_mark just fires first. Net: the VOQ test is skipped on GR2X for the right reason.\r\n\r\ntestQosSaiPgHeadroomWatermark \u2192 1 passed, 4 skipped, 1 error. It was not skipped (its skip rule only targets cisco-8000 that is not 8122; G200X is 8122), it executed the PTF PGHeadroomWatermarkTest, and the call phase passed (1 passed). The 4 skips are the inapplicable multi-asic/multi-dut enum variants on t0.\r\n\r\nThe lone error is a teardown-phase LogAnalyzer match on an environmental syslog \"swss#orchagent: waitForGetResponse: logic error, get response returned 0 values\", raised during post-test teardown after YANG validation passed (post-test). It does not touch the watermark assertions \u2014 the test ran and passed."
+    },
+    {
+        "number": 25648,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-27T20:28:16Z",
+        "comment_author": "dcaugher",
+        "comment_body": "Note: We're avoiding 202511 now for this change. 202605 is the primary target.\r\n"
     },
     {
         "number": 25648,
