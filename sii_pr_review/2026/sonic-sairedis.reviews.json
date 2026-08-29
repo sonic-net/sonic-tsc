@@ -1,5 +1,71 @@
 [
     {
+        "number": 2062,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-26T21:31:44Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2062,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-26T21:31:45Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2062,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-26T21:31:56Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2062,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-28T15:36:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2062,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-28T15:36:28Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2062,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-08-28T17:16:55Z",
+        "review_author": "dypet"
+    },
+    {
+        "number": 2062,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-08-28T18:59:07Z",
+        "review_author": "yue-fred-gao"
+    },
+    {
+        "number": 2062,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-08-28T19:00:22Z",
+        "review_author": "yue-fred-gao"
+    },
+    {
+        "number": 2062,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-08-28T19:09:42Z",
+        "review_author": "dypet"
+    },
+    {
+        "number": 2062,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-08-28T19:09:42Z",
+        "latestReview_author": "dypet",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 2061,
         "repo": "sonic-sairedis",
         "comment_at": "2026-08-26T07:24:20Z",
@@ -278,6 +344,100 @@
         "repo": "sonic-sairedis",
         "latestReview_at": "2026-08-26T15:57:11Z",
         "latestReview_author": "dypet",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2047,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-20T10:07:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2047,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-20T10:07:46Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2047,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-20T10:07:57Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2047,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-25T13:46:57Z",
+        "comment_author": "yue-fred-gao",
+        "comment_body": "\"PR https://github.com/sonic-net/sonic-sairedis/pull/2020 repairs the tap during LAG-member removal, but a later teamd update can overwrite that one-time repair\". Does teamd set the member interface removed from LAG back to the switch Mac? What is the sequence of events?"
+    },
+    {
+        "number": 2047,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-26T01:33:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2047,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-26T01:33:41Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2047,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-26T01:34:28Z",
+        "comment_author": "auspham",
+        "comment_body": "@yue-fred-gao Correction to my earlier reply: the important ordering is inside the Linux team driver. It publishes the port-removed event first, then calls `team_port_set_orig_dev_addr()` to restore the saved member MAC. `teamsyncd` can process that event and trigger the #2020 repair before the kernel performs the final MAC restore, so the kernel write can overwrite #2020. teamd starts the removal, but the later writer is the kernel team driver. I updated the PR description with this sequence."
+    },
+    {
+        "number": 2047,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-27T20:24:15Z",
+        "comment_author": "yue-fred-gao",
+        "comment_body": "as always, please trigger vpp sanity through sonic-buildimage PR"
+    },
+    {
+        "number": 2047,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-08-25T15:08:43Z",
+        "review_author": "aaronber0614"
+    },
+    {
+        "number": 2047,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-08-26T01:34:28Z",
+        "review_author": "auspham"
+    },
+    {
+        "number": 2047,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-08-26T16:12:20Z",
+        "review_author": "aaronber0614"
+    },
+    {
+        "number": 2047,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-08-27T21:06:19Z",
+        "review_author": "yue-fred-gao"
+    },
+    {
+        "number": 2047,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-08-26T16:12:20Z",
+        "latestReview_author": "aaronber0614",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2047,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-08-27T21:06:19Z",
+        "latestReview_author": "yue-fred-gao",
         "latestReview_state": "APPROVED"
     },
     {
