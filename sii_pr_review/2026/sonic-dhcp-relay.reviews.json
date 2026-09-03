@@ -184,6 +184,137 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T20:48:07Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T20:48:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T20:48:17Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-11T00:18:11Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request for branch(es): 202605.<br>Added label(s) for branch(es) 202605.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-11T00:18:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T16:17:47Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T16:17:58Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T14:11:39Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@ashutosh-agrawal The fixture changes here look correct; I did not find a blocking issue in #138.\n\n- `giaddr = 0` selects the intended new-client path, allowing production to assign the VLAN address and encode Option 82.\n- `client_sock = 1` correctly passes the `to_client()` readiness guard, and it is safe here because `send_udp()` is mocked.\n- Removing the manual `encode_relay_option()` call from `from_client` avoids double-encoding once production owns that behavior.\n\nOne non-blocking improvement: please consider asserting that `from_client()` actually adds Option 82, and that `to_client()` removes it and calls `send_udp()` with `pad = true`. The current callbacks mostly verify unchanged header fields rather than those key relay behaviors.\n\nThis should merge only after #135 is fixed and landed, because #138's tests are not meaningfully executed on its standalone branch while the earlier `DHCPMgrTest` abort remains masked by the Makefile's `|| true`."
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T18:48:37Z",
+        "comment_author": "ashutosh-agrawal",
+        "comment_body": "Addressed the non-blocking suggestions in `959fdf561`:\n\n- **`from_client`**: fixture now sets the DHCP magic cookie so Option 82 encoding runs; `send_udp` callback asserts Option 82 is present on the wire with circuit ID `cisco:eth12:Vlan10` and `pad=true`.\n- **`to_client`**: `send_udp` callback asserts Option 82 is stripped and `pad=true`.\n\nLocal deb build (stacked on #135): **46/46 gtests pass**."
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T18:48:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T18:48:53Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-27T04:00:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-27T04:00:42Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-28T21:02:16Z",
+        "comment_author": "ashutosh-agrawal",
+        "comment_body": "@Xichen96 Please help with approval and merge of this PR."
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-01T04:56:19Z",
+        "comment_author": "Xichen96",
+        "comment_body": "Master-side preparation is complete at `7ffbd8a`, and exact-head CI is green. Xichen review is now in progress. The remaining strict release gate is the requested 202605 delivery: please add concrete 202605 validation and mark the tested branch, or remove the request if it is no longer intended."
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-01T06:17:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The change is not in 202605 yet. @ashutosh-agrawal, please manually create the cherry pick PR for branch 202605.<br>You can ping the release branch owner(github account: vaibhavhd) to approve your cherry pick PR.<br>If this change is already in 202605, please comment \"already in 202605\". Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-01T04:56:18Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-01T05:00:06Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-09-01T05:00:06Z",
+        "latestReview_author": "Xichen96",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 135,
         "repo": "sonic-dhcp-relay",
         "comment_at": "2026-08-10T18:57:27Z",
