@@ -19002,6 +19002,20 @@
     {
         "number": 25012,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-09-02T22:39:41Z",
+        "comment_author": "caleb-nexthop",
+        "comment_body": "> @caleb-nexthop \u2014 this PR is labeled Request for 202605 branch, but the following required information is still missing:\r\n> \r\n> * 202605-specific image/test result evidence\r\n> \r\n> Please add the missing information to the PR description. Tracker details should cover day-one/regression status, affected branch/image/platform/test, and why 202605 needs the fix; validation should identify the tested 202605 image and include the result or result link.\r\n\r\n@StormLiangMS \r\nI've updated the description to capture testing run on each of the branches and logs detailing the successful test runs."
+    },
+    {
+        "number": 25012,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-03T01:48:29Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The **Tested branch** section has been ticked and **Test result** is provided for branch(es): 202505,202511,202605. Added label(s): Tested for 202505 Branch,Tested for 202511 Branch,Tested for 202605 Branch.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25012,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-01T17:25:52Z",
         "review_author": "github-advanced-security"
     },
@@ -19494,6 +19508,13 @@
         "comment_at": "2026-08-30T04:17:13Z",
         "comment_author": "mssonicbld",
         "comment_body": "This PR is approved for branch 202511. No cherry pick PR has been created because of code conflict. @atul-nexthop, please manually create the cherry pick PR.<br>If this change is already in 202511, please comment \"already in 202511\". Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 24994,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-01T20:53:06Z",
+        "comment_author": "atul-nexthop",
+        "comment_body": "@mssonicbld https://github.com/sonic-net/sonic-mgmt/pull/27394 backported this to 202511"
     },
     {
         "number": 24994,
@@ -39896,6 +39917,20 @@
         "comment_at": "2026-06-24T17:55:46Z",
         "comment_author": "YatishSVC",
         "comment_body": "@conradf-arista , Could you please help create a manual pr for 202511 branch?\r\ncc: @vmittal-msft "
+    },
+    {
+        "number": 23353,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-01T13:30:47Z",
+        "comment_author": "Xichen96",
+        "comment_body": "## 202605 backport rationale\n\n#23353 remains a required prerequisite for the 202605 gNMI COUNTERS_DB fix.\n\nThe #26013 manual 202605 backport #27343 merged at 2026-09-01 05:44:52 UTC / 15:44:52 Sydney, so the managed `PygnmiClient` and fixtures are already delivered to 202605.\n\nCurrent 202605 still does not contain `get_namespace()`. #27348 imports that helper to build the correct COUNTERS_DB namespace path, so #23353 must be backported separately rather than expanding #27348's conflict resolution.\n\nRemaining delivery order:\n\n1. #23353 \u2014 validate, approve and backport namespace-aware COUNTERS_DB support\n2. #27348 \u2014 merge the root fix, then approve and create its 202605 backport\n\nThe #23353 202605 multi-ASIC validation is still pending. `Tested for 202605 branch` will be added only after that evidence passes.\n\nTracking: https://msazure.visualstudio.com/One/_workitems/edit/39480482 and https://msazure.visualstudio.com/One/_workitems/edit/39480484\n"
+    },
+    {
+        "number": 23353,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-01T18:18:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511,202605,msft-202601, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 23353,
