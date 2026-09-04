@@ -495,6 +495,276 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T16:39:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T16:39:01Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T16:39:10Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T18:19:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request for branch(es): 202605.<br>Added label(s) for branch(es) 202605.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T18:19:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T20:54:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T20:54:33Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-28T20:21:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-28T20:21:51Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-28T20:26:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-28T20:26:14Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T07:55:21Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T07:55:32Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T08:14:43Z",
+        "comment_author": "Xichen96",
+        "comment_body": "@ashutosh-agrawal Why duplicate the short-header check in `from_client()` and `to_client()` when `pkt_in_callback()` is their only production caller and already rejects truncated DHCP layers?"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T09:15:45Z",
+        "comment_author": "Xichen96",
+        "comment_body": "@ashutosh-agrawal The production receive buffer is 9,200 bytes. What current path passes `send_udp()` a writable buffer smaller than 300 bytes? Is the padding overflow reachable today, or is this defensive API hardening?\n"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T09:30:45Z",
+        "comment_author": "Xichen96",
+        "comment_body": "This implementation is mechanically safe, but unnecessary if every current caller has at least 300 writable bytes. Please identify a reachable smaller-buffer path or drop the extra copy/helper.\n"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T09:31:50Z",
+        "comment_author": "Xichen96",
+        "comment_body": "Same concern for `to_client()`: its only production caller already validates the DHCP header length. Please remove this duplicate guard unless another production call path requires it."
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T09:44:08Z",
+        "comment_author": "Xichen96",
+        "comment_body": "Since this PR already edits the adjacent Doxygen, please also update the `send_udp()` signature to use `in_addr src_ip` and include the `pad` argument."
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T16:45:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T16:46:06Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T16:53:14Z",
+        "comment_author": "ashutosh-agrawal",
+        "comment_body": "Re [the duplicate `from_client()` guard](https://github.com/sonic-net/sonic-dhcp-relay/pull/133#issuecomment-5506580759): addressed in a665d46c4. I removed the inner guard and kept the single validation in `pkt_in_callback()` before any DHCP header access."
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T16:53:56Z",
+        "comment_author": "ashutosh-agrawal",
+        "comment_body": "Re [the 9,200-byte receive-buffer question](https://github.com/sonic-net/sonic-dhcp-relay/pull/133#issuecomment-5507280728): Good question. The 9,200-byte array is only the buffer used by `recvmsg()`; it is not necessarily the storage that reaches `send_udp()`. When relay options are added, PcapPlusPlus may grow the packet through `Packet::extendLayer()`, which can reallocate the `RawPacket` storage and update the DHCP-layer pointer. That allocation is sized from the captured packet, so it can have less than 300 writable bytes from the DHCP header even though the original receive array was 9,200 bytes. That is the path the local padding buffer protects. The callback check also rejects a truncated DHCP layer before any header access."
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T16:54:00Z",
+        "comment_author": "ashutosh-agrawal",
+        "comment_body": "Re [the extra copy/helper question](https://github.com/sonic-net/sonic-dhcp-relay/pull/133#issuecomment-5507460930): You are right that the copy would be unnecessary if `send_udp()` always received a pointer into the 9,200-byte array. The detail is that PcapPlusPlus can replace that storage while extending the parsed packet, so the DHCP pointer can refer to a smaller reallocated buffer. Since `send_udp()` receives the payload length but not the allocation capacity, it cannot safely pad that buffer in place. I kept the helper for direct unit coverage, but a665d46c4 leaves the local array uninitialized and only copies plus zero-fills when padding is actually needed, so the common path does no extra clearing."
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T16:54:06Z",
+        "comment_author": "ashutosh-agrawal",
+        "comment_body": "Re [the duplicate `to_client()` guard](https://github.com/sonic-net/sonic-dhcp-relay/pull/133#issuecomment-5507473966): addressed in a665d46c4. I removed this guard; the production callback performs the length validation before dispatch."
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T16:54:15Z",
+        "comment_author": "ashutosh-agrawal",
+        "comment_body": "Re [the `send_udp()` Doxygen signature](https://github.com/sonic-net/sonic-dhcp-relay/pull/133#issuecomment-5507619796): addressed in a665d46c4. The header documentation now uses `in_addr src_ip`, includes `pad`, and documents all parameters consistently. I also removed the stale duplicate block from the implementation."
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-03T03:48:18Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The change is not in 202605 yet. @ashutosh-agrawal, please manually create the cherry pick PR for branch 202605.<br>You can ping the release branch owner(github account: vaibhavhd) to approve your cherry pick PR.<br>If this change is already in 202605, please comment \"already in 202605\". Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-21T21:01:25Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-24T04:18:48Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T08:03:29Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T16:51:22Z",
+        "review_author": "ashutosh-agrawal"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T16:52:09Z",
+        "review_author": "ashutosh-agrawal"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T19:44:07Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T19:58:40Z",
+        "review_author": "ashutosh-agrawal"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T19:58:45Z",
+        "review_author": "ashutosh-agrawal"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-03T02:07:30Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-03T02:18:57Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-09-02T19:44:07Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-09-03T02:18:57Z",
+        "latestReview_author": "Xichen96",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-08-21T21:01:25Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "DISMISSED"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-08-24T04:18:48Z",
+        "latestReview_author": "StormLiangMS",
+        "latestReview_state": "DISMISSED"
+    },
+    {
         "number": 130,
         "repo": "sonic-dhcp-relay",
         "comment_at": "2026-08-10T16:38:48Z",
