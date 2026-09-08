@@ -36458,6 +36458,20 @@
     {
         "number": 23894,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-09-07T22:16:33Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@liamkearney-msft\n\nThanks for preparing this cherry-pick. One release concern still looks worth confirming before taking it into `202605`: in source PR #23894, an unresolved review thread calls out that `--per_interface_macsec` could fail fixture setup with `KeyError: 'default_priority'` instead of using `macsec_profile[\"priority\"]`. Since this change adds the new per-interface mode across `tests/common/macsec/__init__.py`, `tests/macsec/conftest.py`, and the new `tests/macsec/test_per_interface_profile.py`, carrying that issue into the release branch would make the new MACsec path unusable.\n\nCan you verify that the `202605` cherry-pick includes the fix for that specific priority-key issue, and that the branch version does not still reference `default_priority` in the per-interface profile flow?\n\n<!-- cherrypick-desk:c908fd10-ba7a-460f-9af2-cbe62d07c257:23894 -->"
+    },
+    {
+        "number": 23894,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-07T23:16:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR is approved for branch 202605. No cherry pick PR has been created because of code conflict. @liamkearney-msft, please manually create the cherry pick PR.<br>If this change is already in 202605, please comment \"already in 202605\". Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 23894,
+        "repo": "sonic-mgmt",
         "review_at": "2026-04-14T06:40:13Z",
         "review_author": "github-advanced-security"
     },
