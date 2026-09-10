@@ -1658,6 +1658,20 @@
     {
         "number": 26603,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-09-09T06:29:48Z",
+        "comment_author": "vrajeshe",
+        "comment_body": "Hi @yejianquan \r\nthis is needed on 202605 branch too "
+    },
+    {
+        "number": 26603,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-09T07:20:06Z",
+        "comment_author": "sakshamkhurana21",
+        "comment_body": "Hi @vrajeshe are you seeing the 30-second ping-readiness timeout on 202605\u00a0? Could you share a failing test or logs? I checked the last 60 days and found no matching timeouts on 202605.  "
+    },
+    {
+        "number": 26603,
+        "repo": "sonic-mgmt",
         "review_at": "2026-07-28T02:50:51Z",
         "review_author": "copilot-pull-request-reviewer"
     },
@@ -23639,6 +23653,13 @@
     {
         "number": 25874,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-09-09T10:43:10Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@lizhijianrd\n\nThis looks like a **low-risk, release-appropriate test-only cherry-pick** from PR #25874: the change is isolated to `tests/platform_tests/api/test_sfp.py` and narrows `is_xcvr_optical()` so `test_tx_disable_channel` skips copper `BASE-T` SFP modules that have no laser and return `\"N/A\"` from the optics APIs. That matches the stated release impact of avoiding spurious platform test failures on RJ45 SFPs.\n\nOne thing to verify before landing the backport: the cached 202605 backport PR #27525 is shown as **open with failed CI**. Is that failure unrelated to this change, or does the release branch need any branch-specific adjustment in `tests/platform_tests/api/test_sfp.py` for the cherry-pick to pass cleanly?\n\n<!-- cherrypick-desk:f3e02eda-e52e-4822-ac53-8fd7e611e5d9:25874 -->"
+    },
+    {
+        "number": 25874,
+        "repo": "sonic-mgmt",
         "review_at": "2026-07-03T03:36:46Z",
         "review_author": "lizhijianrd"
     },
@@ -37624,6 +37645,13 @@
         "comment_at": "2026-09-03T16:14:27Z",
         "comment_author": "mssonicbld",
         "comment_body": "@wenjwang-nv cherry pick PR didn't pass PR checker after retry. Please help check! Thanks.<br>https://github.com/sonic-net/sonic-mgmt/pull/27528\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25220,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-09T10:43:15Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@wenjwang-nv\n\nLooks reasonable for the 202605 cherry-pick: PR #25220 is narrowly scoped to `tests/common/devices/multi_asic.py` and updates `modify_syslog_rate_limit()` to match the newer `rsyslog.conf` `SysSock.RateLimit.Interval` format described in the PR body, which is the release-relevant failure mode.\n\nOne thing I\u2019d like confirmed before taking this into release: in the same file, the re-enable path now hard-codes `SysSock.RateLimit.Interval=\"300\"` and only toggles the interval field. If 202605 images can carry a different default burst/interval in `/etc/rsyslog.conf`, this could restore a non-native config after pretest. If the branch default is indeed the `300` interval described in PR #25220, then I don\u2019t see a blocker from the supplied diff.\n\n<!-- cherrypick-desk:f3e02eda-e52e-4822-ac53-8fd7e611e5d9:25220 -->"
     },
     {
         "number": 25220,

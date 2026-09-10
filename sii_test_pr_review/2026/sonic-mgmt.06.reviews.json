@@ -1242,6 +1242,20 @@
     {
         "number": 25676,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-09-09T04:17:58Z",
+        "comment_author": "nnelluri-cisco",
+        "comment_body": "@prabhataravind \r\nTests passed with 202606 Branch , please find below XML file logs.\r\n\r\ncat tr_2026-09-09-02-25-34.xml\r\n<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"2\" time=\"380.734\" timestamp=\"2026-09-09T02:25:42.615390+00:00\" hostname=\"sonic-ucs-m6-18\"><properties><property name=\"topology\" value=\"t1-28-lag\" /><property name=\"testbed\" value=\"cmono_t1\" /><property name=\"timestamp\" value=\"2026-09-09 02:25:59.373788\" /><property name=\"host\" value=\"MtFuji-dut\" /><property name=\"asic\" value=\"cisco-8000\" /><property name=\"platform\" value=\"x86_64-8102_28fh_dpu_o-r0\" /><property name=\"hwsku\" value=\"Cisco-8102-28FH-DPU-O\" /><property name=\"os_version\" value=\"HEAD.48101-dirty-20260827.222703\" /></properties><testcase classname=\"arp.test_neighbor_mac_noptf.TestNeighborMacNoPtf\" name=\"testNeighborMacNoPtf[4-MtFuji-dut-None]\" file=\"arp/test_neighbor_mac_noptf.py\" line=\"379\" time=\"67.477\"><properties><property name=\"start\" value=\"2026-09-09 02:25:56.374808\" /><property name=\"end\" value=\"2026-09-09 02:27:03.852818\" /></properties></testcase><testcase classname=\"arp.test_neighbor_mac_noptf.TestNeighborMacNoPtf\" name=\"testNeighborMacNoPtf[6-MtFuji-dut-None]\" file=\"arp/test_neighbor_mac_noptf.py\" line=\"379\" time=\"299.371\"><properties><property name=\"start\" value=\"2026-09-09 02:27:03.906665\" /><property name=\"end\" value=\"2026-09-09 02:32:03.277876\" /></properties></testcase></testsuite></testsuites>"
+    },
+    {
+        "number": 25676,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-09T17:04:53Z",
+        "comment_author": "nnelluri-cisco",
+        "comment_body": "@prabhataravind \r\nAttached test logs , please check ,\r\n\r\n\r\n[test_2026-09-09-02-25-34.log](https://github.com/user-attachments/files/32018887/test_2026-09-09-02-25-34.log)\r\n[tr_2026-09-09-02-25-34.xml](https://github.com/user-attachments/files/32018888/tr_2026-09-09-02-25-34.xml)\r\n"
+    },
+    {
+        "number": 25676,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-25T19:56:42Z",
         "review_author": "copilot-pull-request-reviewer"
     },
@@ -8278,6 +8292,13 @@
         "comment_at": "2026-07-18T21:12:45Z",
         "comment_author": "mssonicbld",
         "comment_body": "@Pterosaur cherry pick PR didn't pass PR checker after retry. Please help check! Thanks.<br>https://github.com/sonic-net/sonic-mgmt/pull/26231\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25355,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-09T06:16:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 25355,
@@ -22069,6 +22090,13 @@
     {
         "number": 24948,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-09-09T06:16:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 24948,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-04T10:58:44Z",
         "review_author": "StormLiangMS"
     },
@@ -23547,6 +23575,13 @@
         "comment_at": "2026-07-23T16:13:13Z",
         "comment_author": "mssonicbld",
         "comment_body": "@wrideout-arista cherry pick PR didn't pass PR checker after retry. Please help check! Thanks.<br>https://github.com/sonic-net/sonic-mgmt/pull/26363\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 24902,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-09T10:43:21Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@wrideout-arista\n\nThis looks **reasonable for 202605** from the supplied source evidence in PR #24902: the core fix in `tests/common/utilities.py` teaches `wait_until` to retry on `pytest.fail.Exception`, and the companion changes in `tests/common/helpers/monit.py`, `tests/bmp/test_frr_bmp_sanity.py`, `tests/monit/test_monit_status.py`, and `tests/show_techsupport/test_techsupport.py` make the affected waits fail explicitly instead of passing silently.\n\nThe only release-specific point I\u2019d want confirmed is the status of cached backport PR **#26363**, which is shown as open with failed CI. If that failure is tied to these same test-path changes, please make sure the cherry-pick includes the full set together; taking only the `wait_until` change without the updated assertions/`return True` follow-ups could leave 202605 with different test behavior than `master`.\n\n<!-- cherrypick-desk:f3e02eda-e52e-4822-ac53-8fd7e611e5d9:24902 -->"
     },
     {
         "number": 24902,
@@ -29184,6 +29219,13 @@
         "comment_at": "2026-08-28T13:13:59Z",
         "comment_author": "mssonicbld",
         "comment_body": "@mramezani95 cherry pick PR didn't pass PR checker after retry. Please help check! Thanks.<br>https://github.com/sonic-net/sonic-mgmt/pull/27322\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 24568,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-09T10:43:26Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@mramezani95\n\nOne narrow release check on this cherry-pick: PR #24568 renames `tests/generic_config_updater/test_packet_trimming_config_{symmetric,asymmetric}.py` into `tests/packet_trimming/` and removes the old per-file skip entries from `tests/common/plugins/conditional_mark/tests_mark_conditions.yaml`. Can you confirm any 202605 job selectors or scripts that still reference the old `generic_config_updater` paths were updated too?\n\nThe release risk is specific to the file move: if branch automation still targets the old filenames, 202605 could lose the intended packet-trimming config coverage or keep stale skip behavior even though the tests themselves were relocated. The supplied source-PR checks are green, but the cached 202605 backport entry shows failed CI, so this path/reference point seems worth double-checking.\n\n<!-- cherrypick-desk:f3e02eda-e52e-4822-ac53-8fd7e611e5d9:24568 -->"
     },
     {
         "number": 24568,
