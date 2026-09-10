@@ -1,5 +1,307 @@
 [
     {
+        "number": 2072,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-09T04:41:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-sairedis/pull/2001"
+    },
+    {
+        "number": 2072,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-09T04:42:05Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2072,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-09T04:42:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2072,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-09T04:42:27Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-29T08:15:58Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-29T08:16:08Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-29T08:16:20Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-29T08:32:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-29T08:33:01Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-29T08:40:44Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-29T08:40:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-29T09:34:57Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-01T22:24:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-01T22:24:17Z",
+        "comment_author": "lolyu",
+        "comment_body": "Pushed `6864c79`, which came out of review on the HLD ([SONiC#2506](https://github.com/sonic-net/SONiC/pull/2506)).\n\n@yue-fred-gao asked what happens if `IN_PORTS` is used in an **egress** ACL. It turned out to be a real gap rather than an unsupported-but-harmless one. The ACL plugin fills the 5-tuple slot this scope matches on by direction:\n\n```c\nif (is_input)\n  out_sw_if_index[ii] = vnet_buffer (b[ii])->sw_if_index[VLIB_RX];\nelse\n  out_sw_if_index[ii] = vnet_buffer (b[ii])->sw_if_index[VLIB_TX];\n```\n\nSAI puts no stage constraint on `SAI_ACL_TABLE_ATTR_FIELD_IN_PORTS`, and `aclBindUnbindPort()` binds egress groups for real, so an egress table's entry would have been fanned out and programmed normally \u2014 then matched against the **egress** interface. \"Drop what arrives on EthernetX\" would have quietly become \"drop what leaves on EthernetX\", with the dump still printing the interface the operator named.\n\n`fill_acl_rules()` now resolves the table's stage and fails such an entry with `SAI_STATUS_NOT_SUPPORTED`, matching the existing treatment of an interface index that does not fit in 16 bits. I considered silently dropping the scope instead and rejected it: that reproduces the exact bug this PR exists to fix \u2014 an over-broad rule applying to every bound port.\n\nNo in-tree consumer creates this configuration (every SONiC user of `IN_PORTS` is ingress), so this is a guard rather than a path expected to be taken.\n\nVerified with a full `-fsyntax-only` type-check of the translation unit against the SAI revision this branch pins and real swss-common headers, including a negative control to confirm the check was actually exercising the new code."
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-01T22:24:28Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-01T22:31:03Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-01T22:31:16Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-02T05:06:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-02T05:06:54Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-02T05:07:46Z",
+        "comment_author": "lolyu",
+        "comment_body": "Correcting course on the egress guard I described above \u2014 pushed `e0de9e71`, which **skips** the entry instead of failing it.\n\nTracing what a failure actually does in this file, rejecting turned out to be unsafe:\n\n1. `createAclEntry()` registers the entry in `m_objectHash` and `m_acl_tbl_rules_map` **before** `AclAddRemoveCheck()` runs, and never rolls back.\n2. orchagent does not remove a rule whose `create()` failed \u2014 it logs and leaves the task queued for retry (`aclorch.cpp:6136`).\n3. On the retry, `create_internal()` returns `SAI_STATUS_ITEM_ALREADY_EXISTS`, and `AclRule::create()` treats that as success (`aclorch.cpp:1498`).\n\nNet effect: the rule is reported **ACTIVE** while the table is left permanently unprogrammable, because every later `AclTblConfig()` re-walks the poisoned entry and bails. That is the same class of silent failure the guard exists to prevent, just moved up a level \u2014 and since `IN_PORTS` was previously ignored outright, it would also be a **regression for a config that programs today**.\n\nSo the entry now emits no rule and logs an error, and the rest of the table programs. This matches how an enabled-but-empty `IN_PORTS` list is already handled. The stage is still resolved lazily, and an unreadable stage is treated as ingress, so the guard cannot itself take a table down.\n\nOn reachability \u2014 I checked how real this is rather than assuming. Nothing in tree creates it today (MuxOrch, PFC watchdog and the GCU table are all ingress), but it is one config change away, not one code change: `TABLE_TYPE_MIRROR` and `TABLE_TYPE_L3V4V6` both declare `IN_PORTS` as a match, `aclorch.cpp:3765` enables both stages for `VPP_PLATFORM_SUBSTRING`, and `EVERFLOW_EGRESS` is a standard minigraph-generated egress MIRROR table.\n\nSeparately, the poisoning pattern above is **pre-existing** \u2014 five other `return SAI_STATUS_FAILURE` paths in `fill_acl_rules()` behave the same way. This PR adds one more that is plausibly reachable: `acl_entry_in_ports_get()` fails the table if none of the named ports resolve to a VPP interface, which could fire on a startup/warm-reboot ordering race. Worth fixing with a rollback in `createAclEntry()`, but that touches existing paths so I have left it out of this PR rather than folding it in silently. Happy to do it as a follow-up if you agree."
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-02T22:03:29Z",
+        "comment_author": "aaronber0614",
+        "comment_body": "Review notes from a multi model consensus review (Opus, GPT, Grok, high reasoning), verified against source at head e0de9e71. Four items, ranked. The red build here is the cross repo ordering with sonic-platform-vpp #278 (the in_sw_if_index api field lands there first), not a defect in this PR.\n\n- Major: unresolved IN_PORTS fails the whole shared table and leaves stale SAI state. createAclEntry (vslib/vpp/SwitchVppAcl.cpp:1744) commits the entry with create_internal before AclAddRemoveCheck runs AclTblConfig and fill_acl_rules. When IN_PORTS resolves to zero ports, acl_entry_in_ports_get returns FAILURE (SwitchVppAcl.cpp:1151) and CHECK_STATUS_ACLTBLCONFIG (:1372) fails the entire table with no rollback, so unrelated entries in a shared table (for example PfcWd rules in IngressTableDrop) go down too, and the entry stays registered in the SAI DB and m_acl_tbl_rules_map. The egress path already avoids this by emitting zero rules for the entry (:1001-1014). Suggest the unresolved IN_PORTS path do the same skip-entry instead of failing the table.\n\n- Non blocking: partial IN_PORTS resolution silently narrows scope. In acl_entry_in_ports_get an unresolved port hits continue with a warning (SwitchVppAcl.cpp:1137-1148) and only an all unresolved set fails (:1151), so a multi port entry with one unresolved port is still programmed on the rest, with the missing port silently unscoped (a fail open on that port). Recommend one consistent policy: if any named port does not resolve, emit zero rules for that ACE.\n\n- Non blocking (latent): MAX_ACL_ATTRS=12 dump truncation can drop IN_PORTS for rich entries. acl_entry_in_ports_get scans only the cached ace->attrs (SwitchVppAcl.cpp:1090), which is filled from a get_max dump capped at MAX_ACL_ATTRS=12 (SwitchVppAcl.h:7, break at vslib/vpp/SwitchVpp.cpp:2727), and the attr store is keyed by attribute name so the surviving 12 are an alphabetical cut. Reachable mux and dynamic drop entries are safe because IN_PORTS sorts within the first 12, but a rich L3 or DATAACL entry with many match fields plus actions plus counter can exceed 12 and drop IN_PORTS, at which point it is treated as unscoped and programmed on all bound ports. Cheap hardening: fetch IN_PORTS by id via get(SAI_OBJECT_TYPE_ACL_ENTRY, ace_oid, 1, &attr) instead of the truncated dump, or raise the cap and assert attrs_count is below MAX_ACL_ATTRS.\n\n- Non blocking: egress guard fails toward ingress on a STAGE read failure. table_is_egress falls back to STAGE_NOT_EGRESS when the SAI_ACL_TABLE_ATTR_ACL_STAGE get fails (SwitchVppAcl.cpp:854-857) and still programs the scoped rule at the ingress index. STAGE is MANDATORY_ON_CREATE and read from the local store so this branch is near unreachable, but the safe fallback is the opposite: treat an unreadable stage as egress (emit no scoped rule, keep programming the rest of the table). One line flip at :857.\n\nReviewed by AI agent on behalf of aaronber0614.\n"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-03T07:44:34Z",
+        "comment_author": "lolyu",
+        "comment_body": "For anyone looking at the red X: the two Azure failures are expected at this point, and they are the matched-pair dependency this PR describes, showing up as a compile error rather than a runtime one.\n\nBoth failing jobs (`Build amd64` and `BuildAsan amd64`) die in the same step, `Compile sonic sairedis with coverage enabled`:\n\n```\nvpp/vppxlate/SaiVppXlate.c: In function 'vpp_acl_add_replace':\nvpp/vppxlate/SaiVppXlate.c:3421:21: error: 'vl_api_acl_rule_t' {aka 'struct _vl_api_acl_rule'}\n    has no member named 'in_sw_if_index'\n 3421 |             vpp_rule->in_sw_if_index = htonl(in_idx);\n```\n\n`vslib` builds with `-Werror`, so this is fatal.\n\nThe header comes from the VPP artifact the build environment installs for us:\n\n```\nINFO buildenv_setup.cascade: upstream 'vpp': downloading artifact vpp-bookworm\nINFO buildenv_setup.azp_client: resolved sonic-net.sonic-platform-vpp -> build 1208678 (branch master)\n...\nUnpacking vpp-dev (26.10-rc0~31-g3f9e978d7)\n```\n\nThat `vpp-dev` is built from `sonic-platform-vpp` **master**, which does not yet carry `0018-acl-match-on-ingress-interface.patch` \u2014 that patch is #278, still open. So `/usr/include/vpp_plugins/acl/acl.api.h` is generated from an `acl_rule` with six fields and no `in_sw_if_index`:\n\n```\nvl_api_acl_action_t is_permit;\nvl_api_prefix_t     src_prefix;\nvl_api_prefix_t     dst_prefix;\nvl_api_ip_proto_t   proto;\nu8                  tcp_flags_mask;\nu8                  tcp_flags_value;\n```\n\nThis is the same CRC coupling called out in the PR description and in the HLD: the field has to exist in the `.api` definition before the SAI layer can assign it.\n\n**What unblocks it:** merge [sonic-platform-vpp#278](https://github.com/sonic-net/sonic-platform-vpp/pull/278) first. Once its master build publishes a new `vpp-bookworm` artifact, this pipeline picks it up automatically \u2014 the download uses `runVersion: latestFromBranch` on `refs/heads/master` \u2014 and a re-run goes green with no change here.\n\nThere is no way to make this PR green beforehand. `staged_upstreams` in `build-template.yml` only covers artifacts produced earlier in the *same* pipeline run, so it cannot be pointed at the #278 branch. The alternative \u2014 guarding the assignment behind an autoconf member check so it compiles against either header \u2014 would be worse: it would silently compile the feature out and produce a syncd that accepts `IN_PORTS` and ignores it, which is precisely the failure mode this PR exists to remove.\n\nFunctionally the pair has been validated together: the combined patch series builds, and the resulting image was exercised on a dual-ToR VPP testbed."
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-03T07:57:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-03T07:57:19Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-03T08:00:09Z",
+        "comment_author": "lolyu",
+        "comment_body": "Thanks \u2014 this is a genuinely useful review. All four line references check out against `e0de9e71`. I've taken item 1, pushed back on the remedies for 2 and 3 (while accepting both findings), and kept 4 as-is for now. Detail below, plus one thing the review led me to that I think matters more than any of the four.\n\nPushed as `a6f0a407`.\n\n---\n\n### 1. Unresolved `IN_PORTS` fails the whole shared table \u2014 **fixed**\n\nConfirmed end to end, including the shared-table claim: `muxorch.cpp:49` sets `MUX_ACL_TABLE_NAME = INGRESS_TABLE_DROP` and `pfcactionhandler.cpp:322` sets `m_strIngressTable = INGRESS_TABLE_DROP`, so those really are the same table.\n\nOne precision correction to the write-up: `cleanup_acl_tbl_config()` only frees heap and never removes the VPP ACL, so the table doesn't go *down* \u2014 it **freezes** at its last-good rule set. Arguably worse, because every later add or remove re-walks the bad entry and fails again, and with orchagent treating the retry's `ITEM_ALREADY_EXISTS` as success the rule is marked `ACTIVE` throughout. Permanent and silent rather than visible.\n\nFixed as suggested: `hwifs` is left empty and the caller emits no rule, reusing the egress path. I extended it to the `get()` failure at `:1136` as well, since the scope is equally unknown there and the alternatives are identical.\n\n### 2. Partial resolution \u2014 **finding accepted, remedy declined**\n\nEmitting zero rules when any port fails to resolve makes a DENY entry strictly more fail-open:\n\n| ports {A, B}, B unresolved | A | B |\n|---|---|---|\n| today | denied | not denied |\n| proposed | **not denied** | not denied |\n\nSame direction for permit-in-default-deny. Partial resolution is closer to intent, and a port absent from VPP can't carry traffic anyway.\n\nThat said, the inconsistency you identified was real \u2014 and fixing item 1 dissolves it without a separate change. Both paths now follow one rule: *emit rules for the ports that resolved*, with all-unresolved as the degenerate zero case. That's the consistent policy you asked for, arrived at from the other end.\n\n### 3. `MAX_ACL_ATTRS` truncation \u2014 **finding accepted, remedy declined, and it's bigger than `IN_PORTS`**\n\nConfirmed the mechanism: `AttrHash` is `std::map<std::string, ...>` (`SwitchState.h:29`) keyed by `attridname` (`SwitchStateBase.cpp:639`), so the cut is alphabetical as you said. `IN_PORTS` ranks 107/170 in the full namespace \u2014 62 `ACTION_*`, 43 `FIELD_*` and `ADMIN_STATE` sort ahead of it. (Also worth noting every `FIELD_INNER_*` sorts before `FIELD_IN_PORTS`, since `'N'` `0x4e` < `'_'` `0x5f`.)\n\nModeling real rule shapes:\n\n| shape | IN_PORTS position |\n|---|---|\n| mux standby drop | 4/12 |\n| L3 5-tuple | 5/12 |\n| L3V4V6 v4+v6 + icmp + range | 11/12 |\n| + `ACL_IP_TYPE` | 12/12 |\n| + `ACL_USER_META` | **13/12 \u2014 truncated** |\n\nSo your \"reachable entries are safe\" holds, but by two attributes.\n\n**Here's why I don't want the targeted `get()`:** at 21 attributes the same cut also drops `PRIORITY`, `TABLE_ID`, `SRC_IP`, `IP_PROTOCOL`, `L4_*` and `TCP_FLAGS`. And `acl_priority_attr_get()` returns FAILURE when `PRIORITY` is missing with its return value **ignored** at `:768`, leaving priority `0` and silently misordering the rule.\n\nThat's a pre-existing systemic bug, considerably worse than the `IN_PORTS` symptom. Fixing only `IN_PORTS` would make it *harder* to find, since scoping would start working while match fields kept vanishing. I'd rather raise the cap and warn when `attrs_count` hits it \u2014 fixing all of it \u2014 in a **separate PR**, since none of it is caused by this change. Happy to open that; say the word.\n\n### 4. Egress guard fallback direction \u2014 **kept, but I'd flip it if you feel strongly**\n\nReasoning: the branch is near-unreachable, so the tiebreaker is which error costs more. On VPP `mux_tunnel_egress_acl` defaults to disabled (below), so an ingress table is overwhelmingly the likely case, and flipping means an unreadable stage silently stops emitting rules on ordinary ingress tables \u2014 making the guard's failure mode worse than not having the guard. My rule of thumb is that a guard which can't make its determination shouldn't change behaviour. Low stakes either way; genuinely happy to flip on your call.\n\n---\n\n### The thing your review led me to\n\nChasing item 4's reachability turned up something that **corrects a claim in my own HLD**. I had written that no in-tree consumer creates an egress table carrying `IN_PORTS`. That's wrong \u2014 `muxorch.cpp`:\n\n```cpp\n1485:  string table_name = is_ingress_acl_ ? MUX_ACL_TABLE_NAME : EGRESS_TABLE_DROP;\n1551:  acl_table.stage = is_ingress_acl_ ? ACL_STAGE_INGRESS : ACL_STAGE_EGRESS;\n...\n1566:  // Add MATCH_IN_PORTS as match criteria for ingress table\n1567:  attr_name = MATCH_IN_PORTS;          // NOT conditioned on is_ingress_acl_\n```\n\nWith `SYSTEM_DEFAULTS|mux_tunnel_egress_acl` enabled, `MuxAclHandler` creates an **egress** DROP table and adds `MATCH_IN_PORTS` unconditionally \u2014 the comment says \"for ingress table\" but the code doesn't branch. `init_cfg.json.j2:211` defaults that key to enabled on `mellanox` and disabled elsewhere, so VPP is unaffected as shipped, but it's one CONFIG_DB key away, not a hypothetical.\n\nSo the egress guard is protecting a real in-tree path. HLD updated (`84073d13`) with this, the corrected failure-handling semantics, and a new restriction that `mux_tunnel_egress_acl` must stay disabled on VPP.\n\nThe red build is unrelated \u2014 cross-repo ordering with sonic-platform-vpp#278, as you noted and as detailed in the comment above."
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-03T12:10:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-03T12:10:41Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-03T12:43:18Z",
+        "comment_author": "lolyu",
+        "comment_body": "### CI update \u2014 the `in_sw_if_index` blocker is cleared\n\nsonic-platform-vpp#278 merged at 07:39Z, so the compile failure this PR was blocked on is gone.\n\nWorth recording why the first post-merge run (build `1210614`, 09:34Z) still failed with the same error: it was **artifact timing, not a second defect**. The platform-vpp master build for merge commit `7fb27b0` did not finish until **11:18:30Z**, so that run resolved `sonic-net.sonic-platform-vpp -> build 1209689`, a *pre-merge* master build, and installed a `vpp-dev` without patch 0018.\n\nThe current run (`1210796`) resolves build `1210723` and:\n\n| step | before | now |\n|---|---|---|\n| `Compile sonic sairedis with coverage enabled` (Build amd64) | fail | **pass** |\n| `Compile sonic sairedis with coverage enabled` (BuildAsan amd64) | fail | **pass** |\n| `BuildAsan amd64` overall | fail | **pass** |\n\nThe one remaining red is `FlexCounter.bulkChunksize` in `unittest/syncd/`, which is a known-flaky test tracked by #1978, #1888, #1986 and #1818. It's unrelated to this PR \u2014 the change here is confined to `vslib/vpp/` \u2014 and it passed in the ASan job of this same run.\n\nAlso rebased onto master (`1205916d`, the l2-vlan-filter FDB change) so the branch is current. `SwitchVppAcl.cpp` is byte-identical across that rebase, so the review threads above are unaffected."
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-03T13:06:31Z",
+        "comment_author": "lolyu",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-03T13:06:42Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-03T13:10:06Z",
+        "comment_author": "aaronber0614",
+        "comment_body": "Thanks, this is a thorough pass and the egress + IN_PORTS catch in MuxOrch is a good one. The item 1 fix looks right: both the read failure and the all unresolved case now cost the entry its rules instead of the table, and partial and total collapse into one policy. Agreed on keeping item 4 as ingress too; that branch is a single attr get of a mandatory on create stage so it is effectively unreachable, and I would rather not silence rules on ordinary ingress tables to harden a path that cannot really be hit.\n\nThe one thing I want to land, and I think it is the same follow up you already offered: nothing reprograms an entry once a port it named becomes resolvable. The only caller of AclTblConfig is an ACL add or remove on that table, so an entry that resolves to zero ports or a subset is created and reported done, and the missing scope stays missing until some later unrelated add or remove on the same table happens to rewalk it. That is strictly better than the old freeze, so I am not blocking on it, but it turns a transient resolution miss into a durable one.\n\nThat is also why I would not lean on \"a port absent from VPP cannot carry traffic\" to justify the partial case. Unresolved here is a name to hwif resolution miss, not proof the interface is down. Warm boot restores the object hash but does not repopulate m_hostif_info_map, so a live forwarding port can miss resolution during bring up and, with no reprogram on resolve, stay unscoped afterward. For a standby DROP that is a real fail open window on exactly the port that matters.\n\nSo my one ask: fold a reprogram on resolve (or the createAclEntry rollback you mentioned) into the follow up, so a port that appears after the entry gets the scope applied rather than waiting on an unrelated table mutation.\n\nTwo smaller notes, neither blocking:\n\n- On the sticky failure write up: I traced the retry and it does not reach ITEM_ALREADY_EXISTS. Orchagent allocates a fresh OID on each retry, leaking the previous RID, so create_internal never hits its same id check and the task stays in PENDING_CREATION rather than being marked ACTIVE. The freeze and the no rollback points still hold, just via a leaked object rather than an active rule.\n- Item 3: agree it is bigger than IN_PORTS and belongs in its own PR. The piece I care most about is acl_priority_attr_get returning FAILURE on a truncated PRIORITY with its return ignored at :768, which silently leaves priority 0 and misorders the rule. Please fold that into the same cap raise and warn change. A one line warn when attrs_count hits MAX_ACL_ATTRS in this PR would also be welcome, since the IN_PORTS lookup now depends on the qualifier surviving the dump, but I am fine taking the full fix separately.\n\nReviewed by AI agent on behalf of aaronber0614.\n"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-05T07:22:01Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-05T07:22:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-05T07:23:48Z",
+        "comment_author": "lolyu",
+        "comment_body": "All three land. Two of them correct things I had written, so thank you \u2014 I've fixed the artifacts rather than just the conversation.\n\nPushed `b51bb24f`.\n\n### The retry mechanism \u2014 you're right, my write-up was wrong\n\nI traced it and confirmed your version. `RedisRemoteSaiInterface::create()` allocates unconditionally:\n\n```cpp\n// lib/RedisRemoteSaiInterface.cpp:219\n*objectId = m_virtualObjectIdManager->allocateNewObjectId(objectType, switchId);\n```\n\nSo every retry arrives at `create_internal()` with a **new** serialized id, the `objectHash.find()` duplicate check never fires, and `SAI_STATUS_ITEM_ALREADY_EXISTS` is unreachable on this path. On the orchagent side the generic failure branch is `setAclRuleStatus(..., PENDING_CREATION); it++;` \u2014 the task stays in `m_toSync` and is never marked `ACTIVE`.\n\nSo it's a leak per retry, not a rule falsely reported healthy. The freeze and no-rollback conclusions are unchanged, but the mechanism was wrong and it was wrong in the commit message and the HLD, not just in a comment. Both corrected: commit message amended in place (message-only \u2014 verified the tree hash is byte-identical), HLD updated in `cb6e6267`.\n\n### The partial-resolution justification \u2014 also right to reject it\n\nI had written \"a port genuinely absent from VPP cannot carry traffic\". That's not what an unresolved port means. `vpp_get_hwif_name()` resolves via `m_port_id_to_tapname`, which is populated only in `vs_create_hostif_tap_interface()`, so resolution tracks *hostif creation order*, not link state. A forwarding port misses if the ACL entry is programmed first.\n\nOne refinement on the warm-boot specifics: `SAI_VS_HOSTIF_USE_TAP_DEVICE=true` for this platform, so `VirtualSwitchSaiInterface` does call `vs_recreate_hostif_tap_interfaces()` on the warm path, which re-runs `setPortIdToTapName()` for each hostif. `m_hostif_info_map` does carry the in-tree TODO you're thinking of:\n\n```cpp\n// vslib/SwitchStateBase.cpp:57\n// TODO populate m_hostif_info_map - need to be able to remove port after warm boot\n// should be auto populated vs_recreate_hostif_tap_interfaces on create_switch\n```\n\nbut the map the `IN_PORTS` lookup actually depends on is repopulated by that path. So warm boot specifically is narrower than stated \u2014 **the ordering window during bring-up is the real exposure**, and your conclusion holds on that alone. I've replaced the bad justification with the ordering argument rather than keeping a claim that only survives on one path.\n\n### Reprogram on resolve \u2014 agreed, and confirmed\n\nVerified: `AclTblConfig()` is reached only from `createAclEntry()`, `removeAclEntry()` and `setAclEntry()`. All three are ACL mutations on that table; no port or hostif event re-drives it. So a partial or empty resolution is durable until an unrelated add or remove happens to re-walk the entry.\n\nTaking it as follow-up, and I've recorded it in the HLD as a limitation with both candidate fixes (reprogram on resolve, or roll back in `createAclEntry()` so the retry re-drives it) rather than leaving it as an undocumented gap. Worth noting the rollback option is now more attractive than when I first raised it, since the retry leaks an object each time.\n\n### `MAX_ACL_ATTRS` warn \u2014 done in this PR\n\nAdded, since as you say the `IN_PORTS` lookup now depends on the qualifier surviving the dump:\n\n```cpp\nif (p_ace->attrs_count >= MAX_ACL_ATTRS) {\n    SWSS_LOG_WARN(\"ACL entry %s has at least %u attributes, the most this code reads; \"\n                  \"any beyond that were dropped by name order and are invisible to it\",\n                  sid.c_str(), MAX_ACL_ATTRS);\n}\n```\n\nModelling the cut over the real SAI attribute names shows the margin is thinner than I'd assumed \u2014 the guard fires exactly when something is lost:\n\n| entry shape | `attrs_count` | warns | `IN_PORTS` lost | `PRIORITY` lost |\n|---|---|---|---|---|\n| mux standby drop | 6 | no | no | no |\n| L3 five-tuple | 11 | no | no | no |\n| L3V4V6 + ICMP + range + `ACL_IP_TYPE` + `ACL_USER_META` | 12 (capped from 21) | **yes** | **yes** | **yes** |\n\nAnd agreed on `acl_priority_attr_get` \u2014 its `SAI_STATUS_FAILURE` return is discarded at `:768`, so a truncated `PRIORITY` silently leaves the rule at 0 and misorders it. That's the worse half of the bug and I'll fold it into the cap-raise PR alongside the `assert`/warn, not leave it to a follow-up of a follow-up. Also recorded as a limitation in the HLD in the meantime."
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-09T07:08:50Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-09T07:09:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-08-29T08:19:12Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-08-29T08:32:41Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-08-29T09:00:59Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-09-02T05:39:18Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-09-03T12:06:38Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-09-10T00:09:34Z",
+        "review_author": "yue-fred-gao"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-09-03T12:06:38Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 2064,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-09-10T00:09:34Z",
+        "latestReview_author": "yue-fred-gao",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 2062,
         "repo": "sonic-sairedis",
         "comment_at": "2026-08-26T21:31:44Z",
@@ -1736,6 +2038,179 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 2021,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-04T21:55:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2021,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-04T21:55:24Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2021,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-04T21:55:35Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2021,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-04T21:55:53Z",
+        "comment_author": "justin-wong-ce",
+        "comment_body": "Will makr PR as active when CI passes."
+    },
+    {
+        "number": 2021,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-05T20:09:25Z",
+        "comment_author": "justin-wong-ce",
+        "comment_body": "/azpw retry"
+    },
+    {
+        "number": 2021,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-05T20:09:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 2021,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-05T20:09:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1184108:\n\n\n\u2705Stage **Build**:\n- Job amd64: retried.\n- Job amd64: retried.\n\n\n\u2705Stage **BuildAsan**:\n- Job amd64: retried."
+    },
+    {
+        "number": 2021,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-06T22:57:02Z",
+        "comment_author": "justin-wong-ce",
+        "comment_body": "Weird, I can't reproduce the unit test failure locally. Need to take a further look."
+    },
+    {
+        "number": 2021,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-06T22:57:06Z",
+        "comment_author": "justin-wong-ce",
+        "comment_body": "/azpw retry"
+    },
+    {
+        "number": 2021,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-06T22:57:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 2021,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-06T22:57:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1184108:\n\n\n\u2705Stage **Build**:\n- Job amd64: retried.\n- Job amd64: retried.\n\n\n\u2705Stage **BuildAsan**:\n- Job amd64: retried."
+    },
+    {
+        "number": 2021,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-10T05:14:51Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "@justin-wong-ce  Can you please fix the pipeline failures?"
+    },
+    {
+        "number": 2021,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-10T16:02:31Z",
+        "comment_author": "gpunathilell",
+        "comment_body": "The pipeline failure is caused by incomplete `getopt_long()` state reset between unit tests.\n\nIn `syncd/CommandLineOptionsParser.cpp`, inside `CommandLineOptionsParser::parseCommandLine()`, please change:\n\n```cpp\noptind = 1;\n```\n\nto:\n\n```cpp\noptind = 0;\n```\n\nSetting `optind` to `0` forces glibc to fully reinitialize its internal `getopt` state. The unit tests call `parseCommandLine()` multiple times in the same process, and after parsing the new `-G` option, `optind = 1` leaves state from the previous call. This causes the following `parseCommandLineInitTimeout` test to fail.\n\nMaster already contains this reset behavior, but it is missing from the `202605` branch. This one-line change should fix both the regular and ASAN pipeline failures."
+    },
+    {
+        "number": 2021,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-10T18:07:15Z",
+        "comment_author": "justin-wong-ce",
+        "comment_body": "> The pipeline failure is caused by incomplete `getopt_long()` state reset between unit tests.\r\n> \r\n> In `syncd/CommandLineOptionsParser.cpp`, inside `CommandLineOptionsParser::parseCommandLine()`, please change:\r\n> \r\n> ```c++\r\n> optind = 1;\r\n> ```\r\n> \r\n> to:\r\n> \r\n> ```c++\r\n> optind = 0;\r\n> ```\r\n> \r\n> Setting `optind` to `0` forces glibc to fully reinitialize its internal `getopt` state. The unit tests call `parseCommandLine()` multiple times in the same process, and after parsing the new `-G` option, `optind = 1` leaves state from the previous call. This causes the following `parseCommandLineInitTimeout` test to fail.\r\n> \r\n> Master already contains this reset behavior, but it is missing from the `202605` branch. This one-line change should fix both the regular and ASAN pipeline failures.\r\n\r\nThanks for the suggestions, was going to look today. Will try it out."
+    },
+    {
+        "number": 2021,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-10T18:10:19Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2021,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-10T18:10:32Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2021,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-11T16:03:37Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2021,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-08-19T23:40:27Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@justin-wong-ce \u2014 reviewed. This is a correct branch-aware 202605 backport of sairedis #2000, including the `-G/--enablePerPortCounterDiscovery` plumbing and `getopt_long()` reset; all checks are green and I found no code blocker. This PR only supplies #2000. The 202605 chain still needs the #2001 backport before #2002/config-driven enablement and the buildimage submodule update."
+    },
+    {
+        "number": 2021,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-03T04:58:48Z",
+        "comment_author": "lolyu",
+        "comment_body": "Hi @vaibhavhd, could you please help approve this to 202605?"
+    },
+    {
+        "number": 2021,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-09T23:16:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR is approved for branch 202605, but no cherry pick PR has been created. Removing approved label and adding it again to trigger cherry pick workflow.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2021,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-10T00:16:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry pick PR is not created after readding the approved label. @yijingyan2, please help check if the cherry pick workflow is working. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2021,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-08-20T00:23:50Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 2021,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-09-02T20:06:11Z",
+        "review_author": "davidm-arista"
+    },
+    {
+        "number": 2021,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-08-20T00:23:50Z",
+        "latestReview_author": "lolyu",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2021,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-09-02T20:06:11Z",
+        "latestReview_author": "davidm-arista",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 2020,
         "repo": "sonic-sairedis",
         "comment_at": "2026-08-04T08:33:27Z",
@@ -3438,6 +3913,13 @@
     {
         "number": 2001,
         "repo": "sonic-sairedis",
+        "comment_at": "2026-09-09T04:42:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-sairedis/pull/2072"
+    },
+    {
+        "number": 2001,
+        "repo": "sonic-sairedis",
         "review_at": "2026-08-03T10:13:07Z",
         "review_author": "lolyu"
     },
@@ -4098,16 +4580,28 @@
     {
         "number": 1996,
         "repo": "sonic-sairedis",
-        "latestReview_at": "2026-08-04T13:17:41Z",
-        "latestReview_author": "copilot-pull-request-reviewer",
+        "review_at": "2026-09-09T18:57:54Z",
+        "review_author": "aaronber0614"
+    },
+    {
+        "number": 1996,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-09-09T21:32:14Z",
+        "review_author": "yue-fred-gao"
+    },
+    {
+        "number": 1996,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-09-09T21:32:14Z",
+        "latestReview_author": "yue-fred-gao",
         "latestReview_state": "COMMENTED"
     },
     {
         "number": 1996,
         "repo": "sonic-sairedis",
-        "latestReview_at": "2026-09-08T21:33:12Z",
-        "latestReview_author": "yue-fred-gao",
-        "latestReview_state": "APPROVED"
+        "latestReview_at": "2026-08-04T13:17:41Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
     },
     {
         "number": 1995,
