@@ -30,6 +30,20 @@
     {
         "number": 2346,
         "repo": "sai",
+        "comment_at": "2026-09-10T07:31:17Z",
+        "comment_author": "bandaru-viswanath",
+        "comment_body": "Please understand that this breaks backward compatibility. Why were the placements of OBJ-TYPE and STA_ID awapped ? \r\n@Pterosaur @tjchadaga @JaiOCP "
+    },
+    {
+        "number": 2346,
+        "repo": "sai",
+        "comment_at": "2026-09-10T14:49:46Z",
+        "comment_author": "Pterosaur",
+        "comment_body": "> Please understand that this breaks backward compatibility. Why were the placements of OBJ-TYPE and STA_ID awapped ? @Pterosaur @tjchadaga @JaiOCP\r\n\r\nHi @bandaru-viswanath \r\n\r\nSorry for the confusion.\r\n\r\nThis PR does not introduce a new wire layout. It corrects an inconsistency in the original documentation.\r\n\r\nThe existing bit diagram places the object type first on the wire (the upper 16 bits of the enterprise-number value), followed by the stat ID (the lower 16 bits), with an EF bit in each half. The subsequent port example already follows that layout: type 0x0001 and stat ID 0x0004 produce 0x00010004. Only the formula in this paragraph had the two fields reversed.\r\n\r\nThe existing SONiC decoder also follows the diagram and the port example. The purpose of this PR is to make the text consistent with them and prevent future SAI implementations from being misled by the contradictory formula. Neither the diagrams nor any implementation code were changed by this PR."
+    },
+    {
+        "number": 2346,
+        "repo": "sai",
         "review_at": "2026-09-02T22:01:36Z",
         "review_author": "copilot-pull-request-reviewer"
     },
@@ -1628,6 +1642,169 @@
         "repo": "sai",
         "latestReview_at": "2026-06-02T19:21:15Z",
         "latestReview_author": "tjchadaga",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2286,
+        "repo": "sai",
+        "comment_at": "2026-06-09T08:36:05Z",
+        "comment_author": "james-jra",
+        "comment_body": "@tjchadaga can you please prompt someone to review this change?"
+    },
+    {
+        "number": 2286,
+        "repo": "sai",
+        "comment_at": "2026-07-07T08:23:16Z",
+        "comment_author": "eddyk-nvidia",
+        "comment_body": "@tjchadaga - what should we do to progress with this HLD ? It was reviewed by the SAI community and approved by Cisco. Is something else required to have this HLD merged ?\r\n\r\n@itaibaz "
+    },
+    {
+        "number": 2286,
+        "repo": "sai",
+        "comment_at": "2026-07-16T15:48:32Z",
+        "comment_author": "tjchadaga",
+        "comment_body": "@r12f , @JaiOCP, @rck-innovium - please help review this PR"
+    },
+    {
+        "number": 2286,
+        "repo": "sai",
+        "comment_at": "2026-07-23T15:03:08Z",
+        "comment_author": "james-jra",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2286,
+        "repo": "sai",
+        "comment_at": "2026-07-23T15:03:14Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nCommenter does not have sufficient privileges for PR 2286 in repo opencomputeproject/SAI<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2286,
+        "repo": "sai",
+        "comment_at": "2026-07-23T17:53:11Z",
+        "comment_author": "james-jra",
+        "comment_body": "@tjchadaga / @kcudnik this now has 2 separate approvals, you ok to run the pipeline and merge?"
+    },
+    {
+        "number": 2286,
+        "repo": "sai",
+        "comment_at": "2026-07-23T18:52:54Z",
+        "comment_author": "kcudnik",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2286,
+        "repo": "sai",
+        "comment_at": "2026-07-23T18:53:04Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2286,
+        "repo": "sai",
+        "comment_at": "2026-07-23T20:37:02Z",
+        "comment_author": "james-jra",
+        "comment_body": "@kcudnik I fixed the metadata error, can you please rerun?"
+    },
+    {
+        "number": 2286,
+        "repo": "sai",
+        "comment_at": "2026-08-06T14:02:56Z",
+        "comment_author": "james-jra",
+        "comment_body": "@kcudnik can I please get a CI re-run?"
+    },
+    {
+        "number": 2286,
+        "repo": "sai",
+        "comment_at": "2026-08-06T16:18:56Z",
+        "comment_author": "kcudnik",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2286,
+        "repo": "sai",
+        "comment_at": "2026-08-06T16:19:06Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2286,
+        "repo": "sai",
+        "comment_at": "2026-08-07T08:53:53Z",
+        "comment_author": "james-jra",
+        "comment_body": "@tjchadaga this is all green, can you merge?"
+    },
+    {
+        "number": 2286,
+        "repo": "sai",
+        "comment_at": "2026-08-13T08:44:27Z",
+        "comment_author": "james-jra",
+        "comment_body": "@kcudnik @tjchadaga all green and approved, ok to merge?"
+    },
+    {
+        "number": 2286,
+        "repo": "sai",
+        "review_at": "2026-06-09T17:32:25Z",
+        "review_author": "yanjundeng"
+    },
+    {
+        "number": 2286,
+        "repo": "sai",
+        "review_at": "2026-07-08T23:49:36Z",
+        "review_author": "jeflo"
+    },
+    {
+        "number": 2286,
+        "repo": "sai",
+        "review_at": "2026-07-23T09:10:37Z",
+        "review_author": "rck-innovium"
+    },
+    {
+        "number": 2286,
+        "repo": "sai",
+        "review_at": "2026-07-24T18:16:32Z",
+        "review_author": "JaiOCP"
+    },
+    {
+        "number": 2286,
+        "repo": "sai",
+        "review_at": "2026-09-10T23:46:20Z",
+        "review_author": "tjchadaga"
+    },
+    {
+        "number": 2286,
+        "repo": "sai",
+        "latestReview_at": "2026-07-08T23:49:36Z",
+        "latestReview_author": "jeflo",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2286,
+        "repo": "sai",
+        "latestReview_at": "2026-07-24T18:16:32Z",
+        "latestReview_author": "JaiOCP",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2286,
+        "repo": "sai",
+        "latestReview_at": "2026-07-23T09:10:37Z",
+        "latestReview_author": "rck-innovium",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2286,
+        "repo": "sai",
+        "latestReview_at": "2026-09-10T23:46:20Z",
+        "latestReview_author": "tjchadaga",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2286,
+        "repo": "sai",
+        "latestReview_at": "2026-06-09T17:32:25Z",
+        "latestReview_author": "yanjundeng",
         "latestReview_state": "APPROVED"
     },
     {
