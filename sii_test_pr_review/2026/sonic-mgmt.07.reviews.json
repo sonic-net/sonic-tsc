@@ -39288,6 +39288,13 @@
     {
         "number": 24923,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-09-10T05:05:34Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@developfast\n\nThis looks **low risk from the supplied evidence**: PR #24923 adds new test coverage in `tests/snappi_tests/dataplane/files/thp_pinning_helper.py` and `tests/snappi_tests/dataplane/test_thp_pinning_fdb_storm.py`, and the source PR checks shown are green.\n\nThe only release-specific gap I can ground here is **test evidence for the 202605 cherry-pick**: `target_test_evidence.satisfied` is `false`, and the source PR evidence does not show a matching `Tested` label that would satisfy the release requirement. Please attach the required 202605 validation for this backport.\n\n<!-- cherrypick-desk:340fda86-0355-400a-8cf9-a65083023a24:24923 -->"
+    },
+    {
+        "number": 24923,
+        "repo": "sonic-mgmt",
         "review_at": "2026-05-28T06:01:02Z",
         "review_author": "github-advanced-security"
     },
@@ -40832,6 +40839,13 @@
         "comment_at": "2026-08-25T22:08:42Z",
         "comment_author": "StormLiangMS",
         "comment_body": "<!-- 202605-cherrypick-triage -->\nHi @Janetxxx,\n\nCould you please clarify whether this PR is a **must-have cherry-pick for the 202605 branch**?\n\n**Current evaluation**\n- Classification: New test coverage/feature\n- Bug fix: No\n- Recommendation: **NO**\n- Rationale: Adds 1,547 lines of SN5640/capability-gated coverage, not a behavior fix. PTF, Scapy, nnpy and statistical timing increase backport risk, with no 202605-specific evidence.\n\nIf this is required for 202605, please reply with the branch-specific failure or impact, required dependencies, and 202605 validation results.\n\nIf there is no response by **September 2, 2026**, the Request for 202605 branch will be rejected based on the evaluation above."
+    },
+    {
+        "number": 24776,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-10T04:32:33Z",
+        "comment_author": "Janetxxx",
+        "comment_body": "Hi @StormLiangMS , this change should be included in 202607 rather than 202605. "
     },
     {
         "number": 24776,
