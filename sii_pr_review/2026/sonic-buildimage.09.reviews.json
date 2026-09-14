@@ -1,5 +1,52 @@
 [
     {
+        "number": 29507,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-09-13T01:49:30Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29507,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-09-13T01:49:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 29507,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-09-13T01:49:54Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29507,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-09-13T01:54:03Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 29507,
+        "repo": "sonic-buildimage",
+        "review_at": "2026-09-13T03:29:45Z",
+        "review_author": "yejianquan"
+    },
+    {
+        "number": 29507,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2026-09-13T01:54:03Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 29507,
+        "repo": "sonic-buildimage",
+        "latestReview_at": "2026-09-13T03:29:45Z",
+        "latestReview_author": "yejianquan",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 29502,
         "repo": "sonic-buildimage",
         "comment_at": "2026-09-12T03:03:51Z",
@@ -131,6 +178,55 @@
         "comment_at": "2026-09-10T23:56:08Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29460,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-09-10T08:14:06Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29460,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-09-10T08:14:16Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run Azure.sonic-buildimage"
+    },
+    {
+        "number": 29460,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-09-10T08:14:30Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29460,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-09-13T09:12:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This cherry pick PR has been opened for more than 3 days. The mssonicbld will attempt to retry.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 29460,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-09-13T09:12:57Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azpw retry"
+    },
+    {
+        "number": 29460,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-09-13T09:13:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 29460,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-09-13T09:13:03Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1216715:\n\n\n\u2705Stage **Test**:\n- Job impacted-area-kvmtest-t0 by Elastictest: retried."
     },
     {
         "number": 29459,
@@ -2419,6 +2515,20 @@
         "comment_at": "2026-09-11T03:07:25Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29334,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-09-13T03:03:18Z",
+        "comment_author": "aaronber0614",
+        "comment_body": "Final post-merge hardware qualification: **PASS with a documented harness waiver**. This supersedes the earlier HOLD assessment.\n\nDirect console evidence proved the TH2 management outage occurred before SAI initialization: preserved 202605 configuration contained `DEVICE_METADATA.orch_northbond_route_zmq_enabled`, which master YANG no longer accepts. That caused `config-setup` to fail before `interfaces-config` and before `syncd` started. Removing only the obsolete field recovered both TH2 systems while retaining the exact candidate `SONiC.master-29334.1217160-6630c1146` with SAI `15.2.1.0.0.0.17.3`.\n\nSame-bed A/B smoke was baseline-equivalent: baseline `6aa326ea0ba481e905c19917` and candidate `6aa6a0dececbc372f5d566f3` each produced 26 passed, 126 skipped, and zero failures/errors.\n\nFull TH2 t1 plan `6aa6ba970ba481e905c19efe` completed with 430 passed and 765 topology/conditional skips in the unique run, with zero test failures. ACL dataplane completed 384 passed/616 skipped in both base and retry; each had one teardown error when the harness loaded the same stale `/etc/sonic/golden_config_db.json`. VLAN, VXLAN decap, and FDB were skipped because these scripts require t0/m0/mx topology. Final health returned code 0/READY with `syncd` and `swss` running, all 48 discovered BGP neighbors established, and no required interface link-down ports.\n\nNo rollback is indicated. The evidence supports retaining the merged master change and proceeding with the requested 202605 backport."
+    },
+    {
+        "number": 29334,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-09-13T03:08:19Z",
+        "comment_author": "aaronber0614",
+        "comment_body": "Superseded: rollback PR #29508 was closed without merge at operator direction. Subsequent console RCA and completed A/B/full qualification exonerated SAI `.17.3`; no rollback is indicated."
     },
     {
         "number": 29334,
@@ -9618,6 +9728,13 @@
         "comment_at": "2026-09-09T23:58:51Z",
         "comment_author": "thisptr-sh",
         "comment_body": "@vaibhavhd, this change is needed to enable the testing infrastructure for this platform. The target image is the 202605 image, so we need to upstream all the HWSKUs that have been maintained in the private repository so far into the corresponding target branch."
+    },
+    {
+        "number": 28741,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-09-13T18:56:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-buildimage/pull/29510"
     },
     {
         "number": 28741,
