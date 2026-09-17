@@ -14381,6 +14381,13 @@
     {
         "number": 25161,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-09-16T09:48:07Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/27965"
+    },
+    {
+        "number": 25161,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-12T20:18:27Z",
         "review_author": "kperumalbfn"
     },
@@ -21814,6 +21821,13 @@
     {
         "number": 24963,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-09-16T09:46:05Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@auspham The cherry-pick request for the 202605 branch is rejected.\n\nRejected for 202605 cherrypick. Pls provide clarification and follow up the cherrypick template.\n\n<!-- cherrypick-desk:3c887d30-38be-471e-b97c-0ded96371c36:24963 -->"
+    },
+    {
+        "number": 24963,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-14T02:49:43Z",
         "review_author": "lunyue-ms"
     },
@@ -23000,6 +23014,13 @@
     {
         "number": 24917,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-09-16T18:54:04Z",
+        "comment_author": "davidm-arista",
+        "comment_body": "Sorry for the delay, I didn't get a notification on your response.  This was explained in detail above on June 10.\r\n\r\nExplaining it differently.  Under what conditions will the test skip?  Looking at the code\r\n\r\n       - \"topo_name in ['t1-isolated-d128', 't1-isolated-d32', 't1-isolated-d32u1s2']\"\r\n      - \"https://github.com/sonic-net/sonic-mgmt/issues/17930 and topo_name in ['t1-isolated-d28u1']\"\r\n\r\nThis is can written in 1 line as:\r\n \"topo_name in ['t1-isolated-d128', 't1-isolated-d32', 't1-isolated-d32u1s2'] and https://github.com/sonic-net/sonic-mgmt/issues/17930 and topo_name in ['t1-isolated-d28u1']\"\r\n\r\nre-order and just picking out the buggy part\r\ntopo_name in ['t1-isolated-d128', 't1-isolated-d32', 't1-isolated-d32u1s2'] and  topo_name in ['t1-isolated-d28u1']\r\n\r\nThis statement can never be true.  If topo_name is one of the first three, then it can't be 't1-isolated-d28u1', so the statement is false, and if the topo_name is 't1-isolated-d28u1' then the first part is false, so the statement is false, and if the topo_name is anything else, then the statement is false.\r\n\r\nHow did you test this?"
+    },
+    {
+        "number": 24917,
+        "repo": "sonic-mgmt",
         "review_at": "2026-05-30T13:15:03Z",
         "review_author": "nhe-NV"
     },
@@ -23664,6 +23685,20 @@
         "comment_at": "2026-08-11T06:20:29Z",
         "comment_author": "mssonicbld",
         "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 24891,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-16T09:42:21Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@weiguo-nvidia The cherry-pick request for the 202605 branch is rejected.\n\nRejected for 202605 cherrypick. Pls provide clarification and follow up the cherrypick template.\n\n<!-- cherrypick-desk:eed2cff2-3af7-4aff-8278-718699021a68:24891 -->"
+    },
+    {
+        "number": 24891,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-16T10:42:49Z",
+        "comment_author": "nhe-NV",
+        "comment_body": "@StormLiangMS  the templete updated, I remove the reject label "
     },
     {
         "number": 24891,
@@ -28342,6 +28377,20 @@
     {
         "number": 24597,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-09-16T09:36:11Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@echuawu The cherry-pick request for the 202605 branch is rejected.\n\nRejected for 202605 cherrypick. Pls provide clarification and follow up the cherrypick template.\n\n<!-- cherrypick-desk:efddd464-caa5-49fd-87da-4b40125913df:24597 -->"
+    },
+    {
+        "number": 24597,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-16T10:56:48Z",
+        "comment_author": "nhe-NV",
+        "comment_body": "Template updated, I removed the reject for 202605 branch"
+    },
+    {
+        "number": 24597,
+        "repo": "sonic-mgmt",
         "review_at": "2026-05-15T09:18:07Z",
         "review_author": "nhe-NV"
     },
@@ -28919,6 +28968,20 @@
         "comment_at": "2026-08-25T22:08:32Z",
         "comment_author": "StormLiangMS",
         "comment_body": "<!-- 202605-cherrypick-triage -->\nHi @weiguo-nvidia,\n\nCould you please clarify whether this PR is a **must-have cherry-pick for the 202605 branch**?\n\n**Current evaluation**\n- Classification: New test coverage/feature\n- Bug fix: No\n- Recommendation: **NO**\n- Rationale: Adds Nvidia SPC6+ counter coverage rather than repairing existing behavior. Its synthetic buffer profile and autouse setup affect the full packet-trimming suite, with only master-side validation.\n\nIf this is required for 202605, please reply with the branch-specific failure or impact, required dependencies, and 202605 validation results.\n\nIf there is no response by **September 2, 2026**, the Request for 202605 branch will be rejected based on the evaluation above."
+    },
+    {
+        "number": 24578,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-16T09:35:57Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@weiguo-nvidia The cherry-pick request for the 202605 branch is rejected.\n\nRejected for 202605 cherrypick. Pls provide clarification and follow up the cherrypick template.\n\n<!-- cherrypick-desk:efddd464-caa5-49fd-87da-4b40125913df:24578 -->"
+    },
+    {
+        "number": 24578,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-16T10:54:43Z",
+        "comment_author": "nhe-NV",
+        "comment_body": "Template updated, I removed the reject for 202605 branch"
     },
     {
         "number": 24578,
@@ -30450,6 +30513,20 @@
         "comment_at": "2026-08-11T06:21:05Z",
         "comment_author": "mssonicbld",
         "comment_body": "This PR has backport request label(s) for branch(es): 202511,msft-202512,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 24527,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-16T09:35:50Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@bingwang-ms The cherry-pick request for the 202605 branch is rejected.\n\nRejected for 202605 cherrypick. Pls provide clarification and follow up the cherrypick template.\n\n<!-- cherrypick-desk:efddd464-caa5-49fd-87da-4b40125913df:24527 -->"
+    },
+    {
+        "number": 24527,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-16T10:18:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR is approved for branch msft-202512. No cherry pick PR has been created because of code conflict. @bingwang-ms, please manually create the cherry pick PR.<br>If this change is already in msft-202512, please comment \"already in msft-202512\". Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 24527,
@@ -32629,6 +32706,20 @@
         "comment_at": "2026-08-16T23:59:02Z",
         "comment_author": "StormLiangMS",
         "comment_body": "@arlakshm \u2014 this 202605 backport request is not approval-ready yet. Please update the PR description with:\n\n- a linked GitHub issue or ADO work item explaining why this is needed on 202605\n- the tested 202605 image/commit and test result or log link\n\nThis information needs to be in the backport/test sections so the request is traceable and BuildBot can validate it.\n\n<!-- copilot-202605-backport-reminder -->"
+    },
+    {
+        "number": 24416,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-16T09:05:01Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@arlakshm The cherry-pick request for the 202605 branch is rejected.\n\nReject for 202605 cherrypick, pls add further clarification for the 202605 cherrypick and follow the rules of cherrypick.\n\n<!-- cherrypick-desk:3b3070e2-77aa-4000-a1b4-5c07ebe3f3a3:24416 -->"
+    },
+    {
+        "number": 24416,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-16T09:17:57Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR is approved for branch 202511. No cherry pick PR has been created because of code conflict. @arlakshm, please manually create the cherry pick PR.<br>If this change is already in 202511, please comment \"already in 202511\". Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 24416,
@@ -35078,6 +35169,13 @@
     {
         "number": 24075,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-09-16T06:18:47Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 24075,
+        "repo": "sonic-mgmt",
         "review_at": "2026-06-08T21:19:50Z",
         "review_author": "thisptr-sh"
     },
@@ -35370,6 +35468,13 @@
         "comment_at": "2026-08-11T06:21:26Z",
         "comment_author": "mssonicbld",
         "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 23986,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-16T09:04:54Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@ytzur1 The cherry-pick request for the 202605 branch is rejected.\n\nReject for 202605 cherrypick, pls add further clarification for the 202605 cherrypick and follow the rules of cherrypick.\n\n<!-- cherrypick-desk:3b3070e2-77aa-4000-a1b4-5c07ebe3f3a3:23986 -->"
     },
     {
         "number": 23986,
@@ -37841,6 +37946,13 @@
     {
         "number": 23725,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-09-16T09:04:46Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@YatishSVC The cherry-pick request for the 202605 branch is rejected.\n\nReject for 202605 cherrypick, pls add further clarification for the 202605 cherrypick and follow the rules of cherrypick.\n\n<!-- cherrypick-desk:3b3070e2-77aa-4000-a1b4-5c07ebe3f3a3:23725 -->"
+    },
+    {
+        "number": 23725,
+        "repo": "sonic-mgmt",
         "review_at": "2026-04-13T21:47:12Z",
         "review_author": "wenyiz2021"
     },
@@ -39079,6 +39191,13 @@
     {
         "number": 23612,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-09-16T09:39:44Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@echuawu Reconciled the 202605 cherry-pick request: https://github.com/sonic-net/sonic-mgmt/pull/26248 merged into `202605` at 2026-07-17T01:25:55Z. A reviewer verified that the complete original fix is present and not reverted. Marking this request Included and clearing its branch conflict label.\n\n<!-- cherrypick-desk:d16f9bb9-7a19-4f80-9f03-0276a1e1a310:23612 -->"
+    },
+    {
+        "number": 23612,
+        "repo": "sonic-mgmt",
         "review_at": "2026-04-04T12:59:32Z",
         "review_author": "nhe-NV"
     },
@@ -40130,6 +40249,13 @@
     {
         "number": 23353,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-09-16T09:04:39Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@conradf-arista The cherry-pick request for the 202605 branch is rejected.\n\nReject for 202605 cherrypick, pls add further clarification for the 202605 cherrypick and follow the rules of cherrypick.\n\n<!-- cherrypick-desk:3b3070e2-77aa-4000-a1b4-5c07ebe3f3a3:23353 -->"
+    },
+    {
+        "number": 23353,
+        "repo": "sonic-mgmt",
         "review_at": "2026-03-30T05:58:56Z",
         "review_author": "StormLiangMS"
     },
@@ -40794,6 +40920,13 @@
         "comment_at": "2026-08-25T22:08:16Z",
         "comment_author": "StormLiangMS",
         "comment_body": "<!-- 202605-cherrypick-triage -->\nHi @vikumarks,\n\nCould you please clarify whether this PR is a **must-have cherry-pick for the 202605 branch**?\n\n**Current evaluation**\n- Classification: New test coverage/feature\n- Bug fix: No\n- Recommendation: **NO**\n- Rationale: Adds 1,256 lines of new RoCEv2 Snappi coverage for T0/T1/T2 traffic-generator environments. Evidence is master/IxNetwork-based, with no 202605 defect or image result; traffic-generator dependencies and `.flake8` exceptions make this high risk.\n\nIf this is required for 202605, please reply with the branch-specific failure or impact, required dependencies, and 202605 validation results.\n\nIf there is no response by **September 2, 2026**, the Request for 202605 branch will be rejected based on the evaluation above."
+    },
+    {
+        "number": 23240,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-16T09:04:31Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@vikumarks The cherry-pick request for the 202605 branch is rejected.\n\nReject for 202605 cherrypick, pls add further clarification for the 202605 cherrypick and follow the rules of cherrypick.\n\n<!-- cherrypick-desk:3b3070e2-77aa-4000-a1b4-5c07ebe3f3a3:23240 -->"
     },
     {
         "number": 23240,
