@@ -9507,6 +9507,20 @@
     {
         "number": 28318,
         "repo": "sonic-buildimage",
+        "comment_at": "2026-09-17T15:26:51Z",
+        "comment_author": "yenlu-keith",
+        "comment_body": "Tested branch (Please provide the tested image version)\r\ntest evidence (e.g., 202605:\r\nTrace from dut\r\n0. What CONFIG_DB asked for\r\n\r\nMGMT_INTERFACE|eth0|192.168.122.115/24\r\nMGMT_INTERFACE|eth0|fc00:2::32/64\r\n1. Template (source of the fix)\r\n\r\n{% if prefix | ipv6 %}\r\n    # IPv6 may be disabled on the mgmt port (inherited default); re-enable it so the address can be assigned\r\n    pre-up sysctl -w net.ipv6.conf.{{ name }}.disable_ipv6=0\r\n{% endif %}\r\n2. Rendered file after reload\r\n\r\niface eth0 inet6 static\r\n    address fc00:2::32\r\n    netmask 64\r\n    network fc00:2::\r\n    broadcast fc00:2::ffff:ffff:ffff:ffff\r\n    # IPv6 may be disabled on the mgmt port (inherited default); re-enable it so the address can be assigned\r\n    pre-up sysctl -w net.ipv6.conf.eth0.disable_ipv6=0\r\n3. Healthy baseline\r\n\r\nnet.ipv6.conf.all.disable_ipv6 = 0\r\nnet.ipv6.conf.default.disable_ipv6 = 0\r\nnet.ipv6.conf.eth0.disable_ipv6 = 0\r\ninet6 fc00:2::32/64 scope global\r\ninet6 fe80::9a:a8ff:feab:d5b2/64 scope link\r\n4. Bug baseline \u2014 IPv6 disabled on the port\r\n\r\nsudo sysctl -w net.ipv6.conf.eth0.disable_ipv6=1\r\nnet.ipv6.conf.eth0.disable_ipv6 = 1\r\nip -6 addr show eth0\r\nWithout the pre-up, ifup would stop here with IPv6 is disabled on this device.\r\n\r\n5. PR path \u2014 sudo ifup -v --force eth0\r\n\r\ninfo: executing sysctl -w net.ipv6.conf.eth0.disable_ipv6=0\r\ninfo: eth0: netlink: ip addr add fc00:2::32/64 dev eth0 broadcast fc00:2::ffff:ffff:ffff:ffff/128\r\ninfo: executing ip -6 route add fc00:2::/64 dev eth0 table default\r\ninfo: executing ip -6 route add default via fc00:2::1 dev eth0 table default metric 201\r\ninfo: executing ip -6 rule add pref 32765 from fc00:2::32/128 table default\r\n6. After ifup\r\n\r\nnet.ipv6.conf.eth0.disable_ipv6 = 0\r\ninet6 fc00:2::32/64 scope global\r\ninet6 fe80::9a:a8ff:feab:d5b2/64 scope link\r\ninet 192.168.122.115/24    # IPv4 unchanged\r\nsnmp Up 5 minutes\r\nifup_rc=0\r\nThe line that is the PR is executing sysctl -w net.ipv6.conf.eth0.disable_ipv6=0. The next line, ip addr add fc00:2::32/64, is what was impossible before that sysctl.\r\n)"
+    },
+    {
+        "number": 28318,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-09-17T15:27:48Z",
+        "comment_author": "yenlu-keith",
+        "comment_body": "@wsycqyz attached all test logs. could u help to follow up.?"
+    },
+    {
+        "number": 28318,
+        "repo": "sonic-buildimage",
         "review_at": "2026-07-09T18:22:52Z",
         "review_author": "copilot-pull-request-reviewer"
     },

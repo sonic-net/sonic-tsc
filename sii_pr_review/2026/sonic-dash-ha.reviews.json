@@ -1,5 +1,98 @@
 [
     {
+        "number": 216,
+        "repo": "sonic-dash-ha",
+        "comment_at": "2026-09-14T18:38:05Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 216,
+        "repo": "sonic-dash-ha",
+        "comment_at": "2026-09-14T18:38:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 216,
+        "repo": "sonic-dash-ha",
+        "comment_at": "2026-09-14T18:38:25Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 216,
+        "repo": "sonic-dash-ha",
+        "comment_at": "2026-09-14T21:31:17Z",
+        "comment_author": "dypet",
+        "comment_body": "> Here is the log when the issue happened. 2026 Sep 8 23:23:16.063405 MtFuji-dut01 INFO dash-hadpu0#supervisord: hamgrd thread 'tokio-runtime-worker' panicked at /var/azureuser/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/file-rotate-0.7.6/src/lib.rs:564:9: 2026 Sep 8 23:23:16.063413 MtFuji-dut01 INFO dash-hadpu0#supervisord: hamgrd assertion failed: old_path.exists() 2026 Sep 8 23:23:16.063419 MtFuji-dut01 INFO dash-hadpu0#supervisord: hamgrd stack backtrace: 2026 Sep 8 23:23:16.069310 MtFuji-dut01 NOTICE dash-hadpu0#hamgrd: :- ~RedisPipeline: RedisPipeline dtor is called from another thread, possibly due to exit(), Database: STATE_DB 2026 Sep 8 23:23:16.069360 MtFuji-dut01 INFO dash-hadpu0#supervisord: hamgrd thread 'tokio-runtime-worker' panicked at /var/azureuser/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tracing-subscriber-0.3.18/src/fmt/writer.rs:796:38: 2026 Sep 8 23:23:16.069367 MtFuji-dut01 INFO dash-hadpu0#supervisord: hamgrd lock poisoned: PoisonError { .. } This change is a reactive solution, which is fine. But did you find the root cause of \"old_path.exists\" assertion failure?\r\n\r\n@yue-fred-gao  Seems to be a known open issue in the `file-rotate` crate; it caches rotated files and can panic if another process deletes or moves one:\r\nhttps://github.com/kstrafe/file-rotate/issues/17\r\n\r\nSONiC\u2019s low-space cleanup searches all of `/var/log` and deletes the oldest logs, including `hamgrd-dpu*.rec.N.gz` files:\r\nhttps://github.com/sonic-net/sonic-buildimage/blob/6826e1c2b7bbef13d3e4be98ae54b1676f62d338/files/image_config/logrotate/on_demand_archived_log_clean_up.j2#L29-L45\r\n```\r\n2026 Sep  8 23:05:26.955249 MtFuji-dut01 INFO logrotate: Deleting archive file /var/log/dash-ha/hamgrd-dpu0.rec.55.gz to free up space\r\n2026 Sep  8 23:05:27.387921 MtFuji-dut01 INFO logrotate: Deleting archive file /var/log/dash-ha/hamgrd-dpu0.rec.54.gz to free up space\r\n```\r\n\r\nHamgrd currently uses 64 MiB files with `max_file_count: usize::MAX`. Should we set a finite `max_file_count` to bound disk usage and reduce the likelihood that SONiC\u2019s cleanup deletes these files? The current fix should still be kept to avoid the panic loop if/when the low-space cleanup runs.\r\n\r\n"
+    },
+    {
+        "number": 216,
+        "repo": "sonic-dash-ha",
+        "comment_at": "2026-09-15T00:16:50Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 216,
+        "repo": "sonic-dash-ha",
+        "comment_at": "2026-09-15T13:29:00Z",
+        "comment_author": "yue-fred-gao",
+        "comment_body": "> @yue-fred-gao Seems to be a known open issue in the `file-rotate` crate; it caches rotated files and can panic if another process deletes or moves one: [kstrafe/file-rotate#17](https://github.com/kstrafe/file-rotate/issues/17)\r\n> \r\n> SONiC\u2019s low-space cleanup searches all of `/var/log` and deletes the oldest logs, including `hamgrd-dpu*.rec.N.gz` files: https://github.com/sonic-net/sonic-buildimage/blob/6826e1c2b7bbef13d3e4be98ae54b1676f62d338/files/image_config/logrotate/on_demand_archived_log_clean_up.j2#L29-L45\r\n> \r\n> ```\r\n> 2026 Sep  8 23:05:26.955249 MtFuji-dut01 INFO logrotate: Deleting archive file /var/log/dash-ha/hamgrd-dpu0.rec.55.gz to free up space\r\n> 2026 Sep  8 23:05:27.387921 MtFuji-dut01 INFO logrotate: Deleting archive file /var/log/dash-ha/hamgrd-dpu0.rec.54.gz to free up space\r\n> ```\r\n> \r\n> Hamgrd currently uses 64 MiB files with `max_file_count: usize::MAX`. Should we set a finite `max_file_count` to bound disk usage and reduce the likelihood that SONiC\u2019s cleanup deletes these files? The current fix should still be kept to avoid the panic loop if/when the low-space cleanup runs.\r\n\r\nThanks for the explanation. Yes, we should keep the existing defensive solution. If we set max_file_count, it can lower but can't completely stop sonic low-space cleanup to remove logs. You mentioned there is effort to reduce the verbosity of logs. We can set the max_file_count after that so we know roughly how long of history it correlates to."
+    },
+    {
+        "number": 216,
+        "repo": "sonic-dash-ha",
+        "comment_at": "2026-09-16T15:29:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 216,
+        "repo": "sonic-dash-ha",
+        "comment_at": "2026-09-16T15:29:39Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 216,
+        "repo": "sonic-dash-ha",
+        "review_at": "2026-09-14T19:47:06Z",
+        "review_author": "yue-fred-gao"
+    },
+    {
+        "number": 216,
+        "repo": "sonic-dash-ha",
+        "review_at": "2026-09-15T13:34:57Z",
+        "review_author": "yue-fred-gao"
+    },
+    {
+        "number": 216,
+        "repo": "sonic-dash-ha",
+        "review_at": "2026-09-16T15:29:27Z",
+        "review_author": "dypet"
+    },
+    {
+        "number": 216,
+        "repo": "sonic-dash-ha",
+        "review_at": "2026-09-16T15:29:34Z",
+        "review_author": "dypet"
+    },
+    {
+        "number": 216,
+        "repo": "sonic-dash-ha",
+        "review_at": "2026-09-16T18:37:54Z",
+        "review_author": "yue-fred-gao"
+    },
+    {
+        "number": 216,
+        "repo": "sonic-dash-ha",
+        "latestReview_at": "2026-09-16T18:37:54Z",
+        "latestReview_author": "yue-fred-gao",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 214,
         "repo": "sonic-dash-ha",
         "comment_at": "2026-08-07T18:16:55Z",
