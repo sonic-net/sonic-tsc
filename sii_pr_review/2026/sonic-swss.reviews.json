@@ -222,6 +222,138 @@
         "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
     },
     {
+        "number": 4886,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-14T07:46:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4886,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-14T07:46:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4886,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-14T07:46:23Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4886,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-14T12:16:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request for branch(es): 202605.<br>Added label(s) for branch(es) 202605.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 4886,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-14T12:16:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The **Tested branch** section has been ticked and **Test result** is provided for branch(es): 202605. Added label(s): Tested for 202605 Branch.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 4886,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-15T06:04:43Z",
+        "comment_author": "zjswhhh",
+        "comment_body": "Hi @Ndancejic - can you help review?"
+    },
+    {
+        "number": 4886,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-15T18:19:33Z",
+        "comment_author": "Ndancejic",
+        "comment_body": "Looks good to me! @rajkumar1-arista have you tested with both prefix and host route mode to confirm the behavior for host route mode hasn't changed?"
+    },
+    {
+        "number": 4886,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-15T22:30:49Z",
+        "comment_author": "Ndancejic",
+        "comment_body": "@manamand2020 for review as well"
+    },
+    {
+        "number": 4886,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-16T00:34:34Z",
+        "comment_author": "manamand2020",
+        "comment_body": "LGTM. @rajkumar1-arista do you want to verify the nexthop ref count as well in the tests since **invalidnexthopinNextHopGroup()** only removes SAI members; NeighOrch refcount is unchanged until the NHG itself is destroyed. "
+    },
+    {
+        "number": 4886,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-17T06:02:10Z",
+        "comment_author": "rajkumar1-arista",
+        "comment_body": "> Looks good to me! @rajkumar1-arista have you tested with both prefix and host route mode to confirm the behavior for host route mode hasn't changed?\r\n\r\nYes, this was verified for host-route mode.\r\n\r\n<details>\r\n<summary>Click to expand</summary>\r\n\r\n```shell\r\nadmin@gd274:~$ show version --brief\r\n\r\nSONiC Software Version: SONiC.branch.202605-ars.34c55f68-buildimage.94f39efbfba9878881126e45c3b926decb74dd48-review.801796.6-2026.09.15.21.27\r\nSONiC OS Version: 13\r\nDistribution: Debian 13.7\r\nKernel: 6.12.41+deb13-sonic-amd64\r\nBuild commit: 2c28d7a75\r\nBuild date: Tue Sep 15 22:15:20 UTC 2026\r\nBuilt by: jenkins@jenkins-arsonic-k8s-arsonic-backend-k8s-117770-cqt2r-g680m\r\n\r\nPlatform: x86_64-arista_7260cx3_64\r\nHwSKU: Arista-7260CX3-D108C8\r\nASIC: broadcom\r\nASIC Count: 1\r\nSerial Number: SSJ18010321\r\nModel Number: DCS-7260CX3-64\r\nHardware Revision: 03.00\r\nUptime: 05:40:51 up 22:45,  1 user,  load average: 1.50, 1.54, 1.36\r\nDate: Thu 17 Sep 2026 05:40:51\r\nadmin@gd274:~$ sudo grep \"SAI_STATUS_NOT_EXECUTED\" /var/log/syslog | tail -5\r\nadmin@gd274:~$\r\nadmin@gd274:~$\r\nadmin@gd274:~$ show mux config | head -8\r\nSWITCH_NAME    PEER_TOR\r\n-------------  ----------\r\ngd333          10.1.0.33\r\nport         state    ipv4             ipv6               cable_type    soc_ipv4    soc_ipv6    prober_type    neighbor_mode\r\n-----------  -------  ---------------  -----------------  ------------  ----------  ----------  -------------  ---------------\r\nEthernet0    auto     192.168.0.2/32   fc02:1000::2/128                                         software       host-route\r\nEthernet4    auto     192.168.0.3/32   fc02:1000::3/128                                         software       host-route\r\nEthernet8    auto     192.168.0.4/32   fc02:1000::4/128                                         software       host-route\r\nadmin@gd274:~$\r\nadmin@gd274:~$\r\nadmin@gd274:~$ show mux status | head -5\r\nPORT         STATUS    SERVER_STATUS    HEALTH     HWSTATUS    LAST_SWITCHOVER_TIME\r\n-----------  --------  ---------------  ---------  ----------  ---------------------------\r\nEthernet0    standby   standby          unhealthy  consistent  2026-Sep-16 13:06:18.366025\r\nEthernet4    standby   standby          unhealthy  consistent  2026-Sep-16 13:06:17.726109\r\nEthernet8    standby   standby          unhealthy  consistent  2026-Sep-17 04:49:28.457891\r\nadmin@gd274:~$\r\nadmin@gd274:~$ sudo config mux mode active Ethernet4\r\nport       state\r\n---------  ----------\r\nEthernet4  INPROGRESS\r\nadmin@gd274:~$ sudo config mux mode active Ethernet8\r\nport       state\r\n---------  ----------\r\nEthernet8  INPROGRESS\r\nadmin@gd274:~$ show mux status | head -5\r\nPORT         STATUS    SERVER_STATUS    HEALTH     HWSTATUS    LAST_SWITCHOVER_TIME\r\n-----------  --------  ---------------  ---------  ----------  ---------------------------\r\nEthernet0    standby   standby          unhealthy  consistent  2026-Sep-16 13:06:18.366025\r\nEthernet4    active    active           unhealthy  consistent  2026-Sep-17 05:41:34.602152\r\nEthernet8    active    active           unhealthy  consistent  2026-Sep-17 05:41:39.322464\r\nadmin@gd274:~$ sudo ip neigh replace 192.168.0.3 lladdr aa:bb:cc:dd:ee:01 dev Vlan1000\r\nadmin@gd274:~$ sudo ip neigh replace 192.168.0.4 lladdr aa:bb:cc:dd:ee:02 dev Vlan1000\r\nadmin@gd274:~$ sudo config route add prefix 9.9.9.0/24 nexthop 192.168.0.3,192.168.0.4\r\nadmin@gd274:~$ show ip route 9.9.9.0/24\r\nRouting entry for 9.9.9.0/24\r\n  Known via \"static\", distance 1, metric 0, best\r\n  Last update 00:00:09 ago\r\n  * 192.168.0.3, via Vlan1000\r\n  * 192.168.0.4, via Vlan1000\r\n\r\nadmin@gd274:~$ sudo config mux mode standby Ethernet4\r\nport       state\r\n---------  ----------\r\nEthernet4  INPROGRESS\r\nadmin@gd274:~$ sudo config mux mode standby Ethernet8\r\nport       state\r\n---------  ----------\r\nEthernet8  INPROGRESS\r\nadmin@gd274:~$ show mux status | head -5\r\nPORT         STATUS    SERVER_STATUS    HEALTH     HWSTATUS      LAST_SWITCHOVER_TIME\r\n-----------  --------  ---------------  ---------  ------------  ---------------------------\r\nEthernet0    standby   standby          unhealthy  consistent    2026-Sep-16 13:06:18.366025\r\nEthernet4    standby   standby          unhealthy  consistent    2026-Sep-17 05:42:43.686706\r\nEthernet8    standby   standby          unhealthy  consistent    2026-Sep-17 05:42:47.686158\r\nadmin@gd274:~$ sudo config route del prefix 9.9.9.0/24\r\nadmin@gd274:~$ sudo grep \"SAI_STATUS_NOT_EXECUTED\" /var/log/syslog | tail -5\r\nadmin@gd274:~$ sudo grep \"SAI_STATUS_NOT_EXECUTED\" /var/log/syslog | wc -l\r\n0\r\nadmin@gd274:~$\r\n```\r\n</details>\r\n\r\n[(host_route)test_static_route.tar.gz](https://github.com/user-attachments/files/32321461/host_route.test_static_route.tar.gz)\r\n"
+    },
+    {
+        "number": 4886,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-17T06:10:01Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4886,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-17T06:10:07Z",
+        "comment_author": "rajkumar1-arista",
+        "comment_body": "> do you want to verify the nexthop ref count as well in the tests since **invalidnexthopinNextHopGroup()** only removes SAI members; NeighOrch refcount is unchanged until the NHG itself is destroyed.\r\n\r\nThanks, added in the UT"
+    },
+    {
+        "number": 4886,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-17T06:10:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4886,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-18T05:15:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4886,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-18T05:15:59Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4886,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-22T15:48:52Z",
+        "comment_author": "prsunny",
+        "comment_body": "@rajkumar1-arista , there is a cherry-pick conflict for 202605. Would you raise a separate PR for 202605? "
+    },
+    {
+        "number": 4886,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-22T16:18:29Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The change is not in 202605 yet. @rajkumar1-arista, please manually create the cherry pick PR for branch 202605.<br>You can ping the release branch owner(github account: vaibhavhd) to approve your cherry pick PR.<br>If this change is already in 202605, please comment \"already in 202605\". Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 4886,
+        "repo": "sonic-swss",
+        "review_at": "2026-09-17T17:54:24Z",
+        "review_author": "Ndancejic"
+    },
+    {
+        "number": 4886,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-09-17T17:54:24Z",
+        "latestReview_author": "Ndancejic",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 4884,
         "repo": "sonic-swss",
         "comment_at": "2026-09-14T00:45:47Z",
@@ -3524,6 +3656,165 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 4828,
+        "repo": "sonic-swss",
+        "comment_at": "2026-08-19T18:45:44Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4828,
+        "repo": "sonic-swss",
+        "comment_at": "2026-08-19T18:45:45Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4828,
+        "repo": "sonic-swss",
+        "comment_at": "2026-08-19T18:45:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4828,
+        "repo": "sonic-swss",
+        "comment_at": "2026-08-20T00:20:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request for branch(es): 202605.<br>Added label(s) for branch(es) 202605.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 4828,
+        "repo": "sonic-swss",
+        "comment_at": "2026-08-20T00:20:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The **Tested branch** section has been ticked and **Test result** is provided for branch(es): 202605. Added label(s): Tested for 202605 Branch.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 4828,
+        "repo": "sonic-swss",
+        "comment_at": "2026-08-21T06:22:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4828,
+        "repo": "sonic-swss",
+        "comment_at": "2026-08-21T06:22:27Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4828,
+        "repo": "sonic-swss",
+        "comment_at": "2026-08-26T08:03:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4828,
+        "repo": "sonic-swss",
+        "comment_at": "2026-08-26T08:03:16Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4828,
+        "repo": "sonic-swss",
+        "comment_at": "2026-08-27T03:50:49Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "hi @prsunny  could you help to review?"
+    },
+    {
+        "number": 4828,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-18T23:36:06Z",
+        "comment_author": "prsunny",
+        "comment_body": "@rajkumar1-arista , would you resolve conflict? "
+    },
+    {
+        "number": 4828,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-20T18:32:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4828,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-20T18:32:52Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4828,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-20T18:33:15Z",
+        "comment_author": "rajkumar1-arista",
+        "comment_body": "> @rajkumar1-arista , would you resolve conflict?\r\n\r\nIts resolved now, PTAL"
+    },
+    {
+        "number": 4828,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-21T09:59:54Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4828,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-21T10:00:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4828,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-21T10:00:22Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4828,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-21T18:35:23Z",
+        "comment_author": "prsunny",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4828,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-21T18:35:35Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4828,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-22T16:18:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR is approved for branch 202605. No cherry pick PR has been created because of code conflict. @rajkumar1-arista, please manually create the cherry pick PR.<br>If this change is already in 202605, please comment \"already in 202605\". Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 4828,
+        "repo": "sonic-swss",
+        "review_at": "2026-08-27T18:37:13Z",
+        "review_author": "Ndancejic"
+    },
+    {
+        "number": 4828,
+        "repo": "sonic-swss",
+        "review_at": "2026-09-21T17:53:20Z",
+        "review_author": "Ndancejic"
+    },
+    {
+        "number": 4828,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-09-21T17:53:20Z",
+        "latestReview_author": "Ndancejic",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 4820,
         "repo": "sonic-swss",
         "comment_at": "2026-08-06T17:57:04Z",
@@ -4437,6 +4728,245 @@
         "comment_at": "2026-07-31T22:38:38Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-31T18:18:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-31T18:18:40Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-31T18:18:51Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "comment_at": "2026-08-03T17:13:56Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "comment_at": "2026-08-06T17:30:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "comment_at": "2026-08-06T17:30:24Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "comment_at": "2026-08-11T21:21:01Z",
+        "comment_author": "zjswhhh",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "comment_at": "2026-08-11T21:21:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "comment_at": "2026-08-24T19:11:31Z",
+        "comment_author": "zjswhhh",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "comment_at": "2026-08-24T19:11:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "comment_at": "2026-08-24T19:11:35Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Build not found. Please close and reopen the PR or rebase your branch to trigger a new build."
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-01T16:00:18Z",
+        "comment_author": "prabhataravind",
+        "comment_body": "@zjswhhh there are some conflicts. vnet tests have been converted to mock tests recently."
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-02T20:14:34Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-02T20:14:47Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-02T20:17:32Z",
+        "comment_author": "zjswhhh",
+        "comment_body": "> @zjswhhh there are some conflicts. vnet tests have been converted to mock tests recently.\r\n\r\nThanks @prabhataravind - updated accordingly. "
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-11T20:38:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-11T20:39:03Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-14T22:09:01Z",
+        "comment_author": "zjswhhh",
+        "comment_body": "/azpw retry\r\n"
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-14T22:09:03Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-14T22:09:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1218123:\n\n\n\u2705Stage **Test**:\n- Job vstest: retried."
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-15T06:20:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-15T06:20:27Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-15T19:19:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-15T19:20:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-17T22:09:49Z",
+        "comment_author": "zjswhhh",
+        "comment_body": "Hi @prabhataravind - please help approve again"
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-22T20:24:49Z",
+        "comment_author": "zjswhhh",
+        "comment_body": "Hi @prsunny - please help merge"
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-22T20:30:19Z",
+        "comment_author": "prsunny",
+        "comment_body": "@zjswhhh , is this a fix that needs to be backported? "
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "review_at": "2026-07-31T18:22:30Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "review_at": "2026-09-11T18:51:56Z",
+        "review_author": "prabhataravind"
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "review_at": "2026-09-11T19:55:56Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "review_at": "2026-09-11T20:45:08Z",
+        "review_author": "zjswhhh"
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "review_at": "2026-09-11T22:21:27Z",
+        "review_author": "prabhataravind"
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "review_at": "2026-09-18T00:47:25Z",
+        "review_author": "prabhataravind"
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-07-31T18:22:30Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 4808,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-09-18T00:47:25Z",
+        "latestReview_author": "prabhataravind",
+        "latestReview_state": "APPROVED"
     },
     {
         "number": 4805,
