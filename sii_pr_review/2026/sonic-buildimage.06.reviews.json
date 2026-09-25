@@ -1624,6 +1624,34 @@
     {
         "number": 28050,
         "repo": "sonic-buildimage",
+        "comment_at": "2026-09-24T14:50:24Z",
+        "comment_author": "norimeher-arista",
+        "comment_body": "Hi @saiarcot895 , this fix only partially addresses the issue. It really depends on how long the device remains powered off, after a significant gap, chrony may take a long time to correct the clock by slewing.\r\n\r\nI\u2019m working on an HLD that would allow chrony to step the clock at most once during startup, then return to slew-only mode. I\u2019d appreciate your thoughts on this approach. Thanks!\r\n\r\ncc @vivekverma-arista @judyjoseph "
+    },
+    {
+        "number": 28050,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-09-24T15:03:57Z",
+        "comment_author": "norimeher-arista",
+        "comment_body": "Correction: The offset also depends on the interval since the last daily epoch update, not just the powered-off duration."
+    },
+    {
+        "number": 28050,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-09-24T16:32:08Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "Hi @norimeher-arista, this change was never meant to completely fix the issue. It's meant to have it start from a slightly more correct time and thus take less time for it to get fully corrected/synchronized without (ideally) needing to resort to time jumps. This means instead of having it start from May 3, 2026 (the build time for systemd), it'll start from whenever the system was last powered off.\r\n\r\nAutomatic/uncontrolled time jumps (specifically the `makestep` command in the config) have been intentionally disabled due to issues seen in the past resulting in dataplane impact.\r\n\r\nTwo improvements I can see to reduce the diff:\r\n\r\n1. Change the timer to be hourly instead of daily. I think in terms of disk writes, this should still be fine, as this would be an inode update.\r\n2. Modify the sonic-mgmt add-topo step to do a makestep on the BMC. I know it's being done for DUT, but I'm not sure if that is being done for BMC as well."
+    },
+    {
+        "number": 28050,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-09-24T17:26:45Z",
+        "comment_author": "norimeher-arista",
+        "comment_body": "Ack that @saiarcot895. Thanks for a prompt reply back!\r\n\r\n1.  Writing it hourly would certainly reduce the initial skew. However it doesn't fully mitigate the problem, does it?\r\n\r\n2.  Performing makestep from the sonic-mgmt add-topo flow would help the test environment, but it would not address issues with deployed systems right.\r\n\r\n \r\n I agree that we should not restore a general persistent `makestep 1 3` directive in chrony.conf. As BMC doesn't work in the dataplane, stepping it would not directly alter the DUT clock or dataplane forwarding (Not completely sure, want to know your comments)\r\n\r\nThe proposed design is narrower:\r\n- Enabled only on explicitly configured NetworkBmc platforms.\r\n- Disabled on switch platforms.\r\n- At most one explicit bootstrap-step attempt per BMC boot.\r\n- Chrony restarts do not reopen the opportunity.\r\n- No persistent makestep directive.\r\n\r\n\r\nAs a reference point, upstream OpenBMC enables systemd-timesyncd by default, and it immediately steps an accepted offset of 0.4 seconds or greater using ADJ_SETOFFSET: [configuration](https://github.com/openbmc/openbmc/blob/master/meta-phosphor/recipes-core/systemd/systemd_%25.bbappend#L2-L16) [timesyncd implementation](https://github.com/systemd/systemd/blob/v259.5/src/timesync/timesyncd-manager.c#L240-L293)\r\n"
+    },
+    {
+        "number": 28050,
+        "repo": "sonic-buildimage",
         "review_at": "2026-06-23T21:57:50Z",
         "review_author": "copilot-pull-request-reviewer"
     },
