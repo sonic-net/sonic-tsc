@@ -20410,6 +20410,13 @@
     {
         "number": 25950,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-09-24T18:54:33Z",
+        "comment_author": "atul-nexthop",
+        "comment_body": "@StormLiangMS @vmittal-msft @yatishkoul requesting 202605 backport approval for this PR, together with its dependency (see the **Backport dependency** note in the description):\r\n\r\n1. **sonic-net/sonic-swss#4658** (`switchorch: add credit_watchdog SWITCH_TABLE knob`, master `cab95ecb`) \u2014 carries the `Request for 202605 Branch` label but is still pending approval. This PR's DNX/VOQ packet-aging path writes the APPL_DB `SWITCH_TABLE:switch credit_watchdog` knob, which SwitchOrch only honors with that change, so it must be on 202605 first.\r\n2. **This PR** \u2014 approve after (or together with) the above, to land in that order.\r\n\r\nReason for the request: the approved 202605 cherry-pick of #27455 (bot PR #28199) is failing the `Pre_test Validate Test Cases` check with:\r\n\r\n```\r\nImportError: cannot import name 'get_pfcwd_timers' from 'tests.common.snappi_tests.common_helpers'\r\n```\r\n\r\n`get_pfcwd_timers` was introduced by this PR (master commit 9f00195bd), which was backported to 202511 but not to 202605, so the #27455 helpers have no import target there. #28199 should not merge before this lands on 202605, otherwise test collection breaks branch-wide for the snappi pfcwd modules.\r\n\r\nSo the full 202605 ordering is: swss#4658 \u2192 this PR \u2192 #28199.\r\n\r\nNote for the cherry-pick desk: the automated cherry-pick of this PR to 202605 will conflict in one file (`tests/snappi_tests/pfcwd/files/pfcwd_basic_helper.py` region); I'll create the manual cherry-pick PR once the label is approved.\r\n"
+    },
+    {
+        "number": 25950,
+        "repo": "sonic-mgmt",
         "review_at": "2026-07-07T14:35:21Z",
         "review_author": "github-advanced-security"
     },
@@ -26142,6 +26149,20 @@
         "comment_at": "2026-07-16T11:31:55Z",
         "comment_author": "mssonicbld",
         "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-mgmt/pull/26255"
+    },
+    {
+        "number": 25818,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-24T19:15:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202512: https://github.com/Azure/sonic-mgmt.msft/pull/1443"
+    },
+    {
+        "number": 25818,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-25T00:18:52Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202511,msft-202512,202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202511: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 25818,
