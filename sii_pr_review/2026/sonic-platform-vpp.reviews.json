@@ -48,6 +48,227 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-09-17T19:58:18Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-09-17T19:58:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-09-17T19:58:37Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-09-17T20:11:03Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-09-17T20:11:12Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-09-17T21:23:09Z",
+        "comment_author": "yue-fred-gao",
+        "comment_body": "> Review note (blocking):\r\n> \r\n> The VPP test-suite integration and VXLAN multicast fix look sound, but I found two blocking issues.\r\n> \r\n> 1. vppbld/patches/series no longer has a trailing newline. The repo_clone loop in vppbld/Makefile uses plain while read, so it silently stops at patch 0017 and never applies 0018-acl-match-on-ingress-interface.patch. Current sonic-sairedis writes vl_api_acl_rule_t.in_sw_if_index, which is introduced by 0018, so the resulting VPP headers break the downstream libsaivpp build. Please restore the newline; making the loop EOF-safe would also prevent this class of failure.\r\n> 2. The new VPP pin includes upstream's IPIP module-to-plugin migration, but the required integration is incomplete. Current sonic-sairedis still includes <vnet/ipip/ipip.api*.h>, while those headers are now installed under <vpp_plugins/ipip/...>. In addition, the SONiC VPP startup profiles disable unlisted plugins and currently omit ipip_plugin.so; sonic-sairedis unconditionally resolves the IPIP API and asserts that it exists during initialization. Please land the companion sonic-sairedis include update and enable ipip_plugin.so in both startup templates and both generated-config defaults before consuming this pin.\r\n> \r\n> Reviewed by AI agent on behalf of @aaronber0614.\r\n\r\nGood points. Will fix those. Thanks!"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-09-18T00:35:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-09-18T00:35:24Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-09-18T00:46:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-09-18T00:46:22Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-09-18T00:57:20Z",
+        "comment_author": "yue-fred-gao",
+        "comment_body": "created PR https://github.com/sonic-net/sonic-sairedis/pull/2082\r\n"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-09-18T21:44:48Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-09-18T21:44:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-09-18T21:45:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-09-18T21:45:15Z",
+        "comment_author": "yue-fred-gao",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-09-18T21:45:24Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-09-18T21:46:57Z",
+        "comment_author": "yue-fred-gao",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-09-18T21:47:06Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-09-21T13:16:18Z",
+        "comment_author": "yue-fred-gao",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-09-21T13:16:30Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-09-21T18:33:40Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-09-21T18:33:51Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-09-22T20:44:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-09-22T20:45:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-09-23T13:56:04Z",
+        "comment_author": "yue-fred-gao",
+        "comment_body": "Created PR https://github.com/sonic-net/sonic-sairedis/pull/2082 to adapt to the ipip moving to plugin. sonic-buildimage PR https://github.com/sonic-net/sonic-buildimage/pull/27039 runs build with both PRs and it passes all the tests."
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-09-24T13:36:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-09-24T13:36:57Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "review_at": "2026-09-17T21:19:44Z",
+        "review_author": "aaronber0614"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "review_at": "2026-09-23T16:15:36Z",
+        "review_author": "dypet"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "review_at": "2026-09-24T13:48:20Z",
+        "review_author": "aaronber0614"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "latestReview_at": "2026-09-24T13:48:20Z",
+        "latestReview_author": "aaronber0614",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 287,
+        "repo": "sonic-platform-vpp",
+        "latestReview_at": "2026-09-23T16:15:36Z",
+        "latestReview_author": "dypet",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 283,
         "repo": "sonic-platform-vpp",
         "comment_at": "2026-09-14T18:26:30Z",
