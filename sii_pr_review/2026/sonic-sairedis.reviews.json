@@ -169,6 +169,459 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 2079,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-15T08:18:16Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2079,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-15T08:18:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2079,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-15T08:18:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2079,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-15T12:18:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi, there are workflow run(s) waiting for approval, you may be first-time contributor. I will notify maintainers to help approve once PR is approved. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2079,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-22T03:29:11Z",
+        "comment_author": "Griffin-micas",
+        "comment_body": "> Correct, minimal, well-diagnosed fix \u2014 verified against the full `processFlexCounterEvent`. The root-cause analysis holds: the DEL path calls `m_manager->removeCounter(vid, groupName)`, which takes **only the VID**, so translating VID\u2192RID on removal was doing work whose result is never consumed \u2014 and its miss produced the misleading \"port VID \u2026 was not found\" error for a removal that actually succeeds. For dynamically recreated objects (CPO `PORT_SERDES`) the old mapping can legitimately be gone before the `stop_poll`/DEL arrives, so gating the translation on `SET_COMMAND` is the right fix.\r\n> \r\n> Details check out:\r\n> \r\n> * Initializing `rid = SAI_NULL_OBJECT_ID` is necessary and also closes a latent uninitialized-read (previously `rid` was only written by `tryTranslateVidToRid`).\r\n> * The SET-failure\u2192DEL fallback is preserved: a native DEL now skips translation via short-circuit, while a SET that can't translate still logs and demotes to DEL exactly as before.\r\n> * Null rid on the DEL path is never forwarded (`removeCounter` is VID-only), so it's harmless.\r\n> * The regression test pins the right contract \u2014 `getRidForVid` called `Times(0)` on DEL \u2014 not just an incidental output.\r\n> \r\n> **One request before merge: close the test-coverage gap.** The new test only exercises `fromAsicChannel = false`. The `fromAsicChannel = true` DEL branch takes an additional path (`m_flexCounterTable->del(singleKey)` + `sendApiResponse(...)`), and since the ASIC channel is exactly where the misleading ERROR was being logged (the `SWSS_LOG_ERROR` vs `SWSS_LOG_WARN` split is on `fromAsicChannel`), it's the more representative reproduction of the reported bug. Please add a second variant with `fromAsicChannel = true` asserting the same `getRidForVid` `Times(0)` + `SAI_STATUS_SUCCESS`, so both DEL branches are guarded against a future re-introduction of the translation. Everything else is approve-quality; this is the one thing I'd like tightened.\r\n> \r\n> (Context: this is the third fix in this syncd FlexCounter/translator area recently \u2014 #2057 poll-guard, #2068 notification `tryTranslateRidToVid` \u2014 all sharing the same lesson: use the translator's read-only/try variants where a miss is legitimate, and don't translate where the result is unused. This is the cleanest instance.)\r\n\r\nThank you for the thorough review! @lolyu \r\nYou're right \u2014 although the VID-to-RID translation gate is shared, the existing test only covers the non-ASIC-channel path. The fromAsicChannel=true variant is a more faithful reproduction of the reported issue and should also verify the FLEX_COUNTER_TABLE deletion and API response path.\r\nI\u2019ll add coverage for fromAsicChannel=true with the same getRidForVid Times(0) and SAI_STATUS_SUCCESS assertions, then rerun the unit tests."
+    },
+    {
+        "number": 2079,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-22T03:51:34Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2079,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-22T03:51:47Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2079,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-22T03:53:24Z",
+        "comment_author": "Griffin-micas",
+        "comment_body": "@lolyu Thanks again for the careful review. I\u2019ve added a fromAsicChannel=true regression test. It verifies that DEL does not call getRidForVid(), removes the FLEX_COUNTER_TABLE entry, sends a successful API response, and returns SAI_STATUS_SUCCESS."
+    },
+    {
+        "number": 2079,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-09-21T05:20:59Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 2079,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-09-21T05:24:05Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 2079,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-09-27T04:18:55Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 2079,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-09-21T05:20:59Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 2079,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-09-27T04:18:55Z",
+        "latestReview_author": "lolyu",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-14T21:48:24Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-14T21:48:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-14T21:48:45Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-14T22:05:40Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-14T22:05:52Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-14T23:06:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-14T23:06:54Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-15T00:17:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi, there are workflow run(s) waiting for approval, you may be first-time contributor. I will notify maintainers to help approve once PR is approved. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-15T02:39:43Z",
+        "comment_author": "linux-foundation-easycla",
+        "comment_body": "<a href=\"https://easycla.lfx.linuxfoundation.org/#/?version=2\"><img src=\"https://s3.amazonaws.com/cla-project-logo-prod/cla-signed.svg?v=2\" alt=\"CLA Signed\" align=\"left\" height=\"28\" width=\"328\" ></a><br >The committers listed above are authorized under a signed CLA.<ul><li>:white_check_mark: login: jjin62 / name: Jimmy Jin (af3d031d7f23a9192fa5d76f0af149d1be556af1)</li></ul>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-15T02:39:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-15T02:40:06Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-15T02:41:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-15T02:41:54Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-16T00:27:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-16T00:28:06Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-16T18:22:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi @sonic-net/sonic-sairedis-maintainer, this approved PR has workflow run(s) waiting for approval. Please help review. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-17T00:24:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi @sonic-net/sonic-sairedis-maintainer, this approved PR has workflow run(s) waiting for approval. Please help review. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-17T06:22:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi @sonic-net/sonic-sairedis-maintainer, this approved PR has workflow run(s) waiting for approval. Please help review. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-17T18:22:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi @sonic-net/sonic-sairedis-maintainer, this approved PR has workflow run(s) waiting for approval. Please help review. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-18T00:21:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi @sonic-net/sonic-sairedis-maintainer, this approved PR has workflow run(s) waiting for approval. Please help review. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-18T06:22:09Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi @sonic-net/sonic-sairedis-maintainer, this approved PR has workflow run(s) waiting for approval. Please help review. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-18T12:22:29Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi @sonic-net/sonic-sairedis-maintainer, this approved PR has workflow run(s) waiting for approval. Please help review. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-18T18:22:44Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi @sonic-net/sonic-sairedis-maintainer, this approved PR has workflow run(s) waiting for approval. Please help review. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-19T00:21:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi @sonic-net/sonic-sairedis-maintainer, this approved PR has workflow run(s) waiting for approval. Please help review. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-19T06:21:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi @sonic-net/sonic-sairedis-maintainer, this approved PR has workflow run(s) waiting for approval. Please help review. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-19T12:21:29Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi @sonic-net/sonic-sairedis-maintainer, this approved PR has workflow run(s) waiting for approval. Please help review. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-19T18:22:03Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi @sonic-net/sonic-sairedis-maintainer, this approved PR has workflow run(s) waiting for approval. Please help review. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-20T00:19:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi @sonic-net/sonic-sairedis-maintainer, this approved PR has workflow run(s) waiting for approval. Please help review. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-20T06:18:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi @sonic-net/sonic-sairedis-maintainer, this approved PR has workflow run(s) waiting for approval. Please help review. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-20T12:20:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi @sonic-net/sonic-sairedis-maintainer, this approved PR has workflow run(s) waiting for approval. Please help review. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-20T18:19:21Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi @sonic-net/sonic-sairedis-maintainer, this approved PR has workflow run(s) waiting for approval. Please help review. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-21T00:17:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi @sonic-net/sonic-sairedis-maintainer, this approved PR has workflow run(s) waiting for approval. Please help review. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-21T06:18:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi @sonic-net/sonic-sairedis-maintainer, this approved PR has workflow run(s) waiting for approval. Please help review. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-21T12:19:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi @sonic-net/sonic-sairedis-maintainer, this approved PR has workflow run(s) waiting for approval. Please help review. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-21T18:19:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi @sonic-net/sonic-sairedis-maintainer, this approved PR has workflow run(s) waiting for approval. Please help review. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-22T00:17:57Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi @sonic-net/sonic-sairedis-maintainer, this approved PR has workflow run(s) waiting for approval. Please help review. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-22T06:19:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi @sonic-net/sonic-sairedis-maintainer, this approved PR has workflow run(s) waiting for approval. Please help review. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-22T12:19:29Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi @sonic-net/sonic-sairedis-maintainer, this approved PR has workflow run(s) waiting for approval. Please help review. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-22T18:21:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi @sonic-net/sonic-sairedis-maintainer, this approved PR has workflow run(s) waiting for approval. Please help review. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-23T00:20:24Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi @sonic-net/sonic-sairedis-maintainer, this approved PR has workflow run(s) waiting for approval. Please help review. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-23T06:22:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi @sonic-net/sonic-sairedis-maintainer, this approved PR has workflow run(s) waiting for approval. Please help review. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-23T18:22:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi @sonic-net/sonic-sairedis-maintainer, this approved PR has workflow run(s) waiting for approval. Please help review. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-24T00:22:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi @sonic-net/sonic-sairedis-maintainer, this approved PR has workflow run(s) waiting for approval. Please help review. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-24T06:22:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi @sonic-net/sonic-sairedis-maintainer, this approved PR has workflow run(s) waiting for approval. Please help review. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-09-15T06:13:31Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-09-16T00:29:14Z",
+        "review_author": "jjin62"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-09-16T00:29:29Z",
+        "review_author": "jjin62"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-09-16T06:38:25Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-09-24T08:56:05Z",
+        "review_author": "github-advanced-security"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-09-27T04:20:11Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-09-24T08:56:05Z",
+        "latestReview_author": "github-advanced-security",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-09-16T06:38:25Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2077,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-09-27T04:20:11Z",
+        "latestReview_author": "lolyu",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 2073,
         "repo": "sonic-sairedis",
         "comment_at": "2026-09-10T00:42:33Z",
@@ -1099,6 +1552,20 @@
         "comment_at": "2026-09-03T12:20:40Z",
         "comment_author": "mssonicbld",
         "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2059,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-27T20:26:30Z",
+        "comment_author": "mrinal-arista",
+        "comment_body": "I've updated the PR description with the requested tested-branch information and test results for both master and 202605.\r\nThe regression test is submitted separately in follow-up PR #2095."
+    },
+    {
+        "number": 2059,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-28T00:15:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The **Tested branch** section has been ticked and **Test result** is provided for branch(es): 202605. Added label(s): Tested for 202605 Branch.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 2059,
