@@ -624,6 +624,331 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-08-06T00:04:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-08-06T00:04:23Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-08-06T00:04:36Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-08-06T00:15:51Z",
+        "comment_author": "venkit-nexthop",
+        "comment_body": "@qiluo-msft I have fixed your comment from https://github.com/sonic-net/sonic-swss-common/pull/1187 in this PR\r\n@deepak-singhal0408 I have fixed your comment from https://github.com/sonic-net/sonic-swss/pull/4564 in this PR"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-08-07T04:18:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-08-07T04:18:54Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-08-15T01:23:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-08-15T01:23:35Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-08-20T14:59:02Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-08-20T14:59:17Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-08-24T21:36:34Z",
+        "comment_author": "deepak-singhal0408",
+        "comment_body": "Hi @qiluo-msft, could you help review/merge this PR? thanks,"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-08-27T03:35:34Z",
+        "comment_author": "venkit-nexthop",
+        "comment_body": "@qiluo-msft could you help merge this?"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-09-02T21:11:11Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "> One thing the registry fix doesn't reach, on a file outside this diff:\r\n> \r\n> [`ZmqConsumerStateTable::~ZmqConsumerStateTable()`](https://github.com/sonic-net/sonic-swss-common/blob/master/common/zmqconsumerstatetable.cpp#L53) calls `removeHandler()`, which is correct for its own members \u2014 but `ZmqRouteConsumerStateTable` declares no destructor, so its `m_ingressCallback` is destroyed before that base body runs, while the object still has the derived vptr and is still registered. An in-flight `dispatch()` in that window calls the overridden `handleReceivedData()` and reads a destroyed `std::function`. The dtor comment states the invariant (\"detach from the registry before any of our members are destroyed\") that the subclass then breaks.\r\n> \r\n> Not reachable in orchagent, which exits via `_exit(0)`, but reachable from tests that destroy a consumer while the poll thread runs. Detaching in the most-derived destructor \u2014 or a `detach()` helper each most-derived class calls \u2014 would close it and make the requirement explicit for future subclasses.\r\n\r\nAgree with @deepak-singhal0408 . This is a valid bug."
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-09-04T02:59:35Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-09-04T02:59:48Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-09-04T14:13:58Z",
+        "comment_author": "venkit-nexthop",
+        "comment_body": "Pushed 05bb48c to address the destructor use-after-free follow-up that @deepak-singhal0408 raised and @qiluo-msft confirmed:\n\n- `~ZmqRouteConsumerStateTable()` now detaches from the registry (via a new idempotent `ZmqConsumerStateTable::detachFromRegistry()`) **before** its members are destroyed, so `removeHandler()` blocks any in-flight dispatch and bars new ones while `m_ingressCallback` is still alive. The base destructor routes through the same helper and stays self-protecting for plain (non-route) consumers, so the \"detach before members are destroyed\" invariant now holds for subclasses too.\n- Added `DestroyDuringStreamIsSafe`: an AddressSanitizer stress reproducer that destroys a consumer mid-stream with a heap-owning ingress callback, so a missing derived detach is flagged.\n- Also refreshed the PR body's \"How to verify it\" to match the current 300us / [40,150]ms holdoff test.\n\nCI is green on this head (buildId 1211381) \u2014 all builds, `BuildenvSetupUnitTests`, `coverage`, and `Test vstest` pass. Could you re-approve when you get a chance? Thanks!\n"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-09-10T16:54:45Z",
+        "comment_author": "venkit-nexthop",
+        "comment_body": "@qiluo-msft @deepak-singhal0408 could you take a look at this PR. I have fixed your review comments."
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-09-20T22:08:09Z",
+        "comment_author": "venkit-nexthop",
+        "comment_body": "@qiluo-msft @deepak-singhal0408 could you take a look and approve this?"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-09-23T00:46:02Z",
+        "comment_author": "venkit-nexthop",
+        "comment_body": "Thanks for approving @deepak-singhal0408 \r\n@qiluo-msft can you help merge this ?"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-09-23T05:39:59Z",
+        "comment_author": "venkit-nexthop",
+        "comment_body": "@deepak-singhal0408 gentle nudge \u2014 this is approved (thanks!) and mergeable/clean with all Azure + Analyze checks green. Could you help land it? It's the last upstream swss-common piece of the orchagent route-redesign burst-coalescing work (follow-up to #1187): the deferred-notify UAF fix plus the bounded notification-deferral (drain-to-empty flush). Appreciate it!\n"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-09-26T05:58:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-09-26T05:58:18Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-09-26T05:59:00Z",
+        "comment_author": "venkit-nexthop",
+        "comment_body": "@qiluo-msft addressed both your comments in 9fee0ea:\n\n1. **Identity-aware removal** \u2014 `removeHandler(db, table, handler)` now erases the slot only if it still holds the caller's handler, so the base destructor's second detach is a true no-op and can't evict a replacement registered under the same key. Threaded the handler through `detachFromRegistry()` and `ZmqServer::removeMessageHandler()`.\n2. **Persistence coverage** \u2014 added `DestroyDuringStreamIsSafeWithPersistence`, which reruns the destroy-mid-stream stress with `dbPersistence=true` so the `AsyncDBUpdater` is built and torn down every cycle (the #1187 teardown path).\n\nBoth threads resolved. PTAL \u2014 should be ready to merge once CI is green."
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-09-26T21:30:49Z",
+        "comment_author": "venkit-nexthop",
+        "comment_body": "/azp run Azure.sonic-swss-common"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-09-26T21:30:56Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nCommenter does not have sufficient privileges for PR 1234 in repo sonic-net/sonic-swss-common<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-09-26T21:31:33Z",
+        "comment_author": "venkit-nexthop",
+        "comment_body": "CI failure here is an **unrelated flake**, not from this change:\n\n- The only failing test is `Notifications.AllowListFilter` (`ntf_ut.cpp:283-284`) \u2014 a redis pub/sub notification test with no code-path overlap with this PR (which only touches `zmqserver` / `zmqconsumerstatetable` / `zmq_route_ut`).\n- It failed on an off-by-one timing race: expected `received=6 / dropped=3`, got `5 / 2` \u2014 one pub/sub message arrived late, throwing both counts off by one. Classic notification-test flake under load.\n- Timeline confirms non-causality: `AllowListFilter` ran/failed at 06:14:56, while this PR's tests ran later (06:17\u201306:18) and both passed (`DestroyDuringStreamIsSafe`, `DestroyDuringStreamIsSafeWithPersistence`). Build succeeded; 283/284 passed.\n\nI tried `/azp run` but don't have pipeline privileges. @qiluo-msft @deepak-singhal0408 could one of you re-run `Azure.sonic-swss-common`? It should go green. Thanks!"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-09-27T00:48:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-09-27T00:48:24Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "comment_at": "2026-09-27T14:34:21Z",
+        "comment_author": "venkit-nexthop",
+        "comment_body": "@deepak-singhal0408 @qiluo-msft \nThe CI is green now. Please take a look. All the comments are fixed."
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "review_at": "2026-08-06T07:35:56Z",
+        "review_author": "deepak-singhal0408"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "review_at": "2026-08-06T07:51:04Z",
+        "review_author": "deepak-singhal0408"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "review_at": "2026-08-06T20:44:27Z",
+        "review_author": "venkit-nexthop"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "review_at": "2026-08-06T20:45:57Z",
+        "review_author": "venkit-nexthop"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "review_at": "2026-08-07T04:18:49Z",
+        "review_author": "venkit-nexthop"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "review_at": "2026-08-07T04:18:51Z",
+        "review_author": "venkit-nexthop"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "review_at": "2026-08-07T04:18:52Z",
+        "review_author": "venkit-nexthop"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "review_at": "2026-08-07T04:18:53Z",
+        "review_author": "venkit-nexthop"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "review_at": "2026-08-07T04:18:54Z",
+        "review_author": "venkit-nexthop"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "review_at": "2026-08-17T20:24:08Z",
+        "review_author": "deepak-singhal0408"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "review_at": "2026-08-20T14:59:14Z",
+        "review_author": "venkit-nexthop"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "review_at": "2026-08-24T18:59:50Z",
+        "review_author": "deepak-singhal0408"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "review_at": "2026-09-22T22:20:53Z",
+        "review_author": "deepak-singhal0408"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "review_at": "2026-09-26T01:38:44Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "review_at": "2026-09-26T01:38:50Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "review_at": "2026-09-26T05:58:29Z",
+        "review_author": "venkit-nexthop"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "review_at": "2026-09-26T05:58:31Z",
+        "review_author": "venkit-nexthop"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "review_at": "2026-09-28T21:16:30Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "latestReview_at": "2026-09-28T21:16:30Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 1234,
+        "repo": "sonic-swss-common",
+        "latestReview_at": "2026-09-22T22:20:53Z",
+        "latestReview_author": "deepak-singhal0408",
+        "latestReview_state": "DISMISSED"
+    },
+    {
         "number": 1233,
         "repo": "sonic-swss-common",
         "comment_at": "2026-07-23T23:01:51Z",
