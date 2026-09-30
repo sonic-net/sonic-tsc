@@ -1652,6 +1652,20 @@
     {
         "number": 28050,
         "repo": "sonic-buildimage",
+        "comment_at": "2026-09-29T01:41:56Z",
+        "comment_author": "saiarcot895",
+        "comment_body": "@norimeher-arista After discussing with Judy a bit more, I think the following should be sufficient:\r\n\r\n1. Change the timer to be hourly instead of daily.\r\n2. Add `makestep 15 3` to `chrony.conf` only for BMCs. Because BMCs don't have a RTC, outside of manual time manipulation, the time on the BMC will only ever step forward, and never step backwards. Given that a BMC is not in dataplane, the risk of a time jump is lower on this hardware. I don't think we need separate logic restricting it to just one time jump, since very likely, only one time jump will happen once the time is synchronized the first time (via a time jump) until it reboots, and restarting Chrony won't trigger a time jump unless it somehow becomes more than 15 seconds off.\r\n\r\nThoughts?"
+    },
+    {
+        "number": 28050,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-09-29T05:55:10Z",
+        "comment_author": "norimeher-arista",
+        "comment_body": "Yup, I think this should work!  \r\n\r\nThe one thing I would suggest is, update the epoch immediately after when we do a step. Just for scenarios where unexpected power loss before the next hourly update causing the BMC to boot again using the old timestamp. (Not a blocker, since Chrony would step the clock again after reboot)\r\n\r\nThe one time jump was mainly a safety policy, I\u2019m okay omitting it if there are no concerns about Chrony restarts reopening the step window.\r\n\r\n@saiarcot895 \r\n\r\n"
+    },
+    {
+        "number": 28050,
+        "repo": "sonic-buildimage",
         "review_at": "2026-06-23T21:57:50Z",
         "review_author": "copilot-pull-request-reviewer"
     },
