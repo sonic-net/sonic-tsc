@@ -1,5 +1,193 @@
 [
     {
+        "number": 4949,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-28T19:51:58Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4949,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-28T19:52:07Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4949,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-28T19:52:19Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4949,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-29T00:16:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4949,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-29T00:16:27Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4949,
+        "repo": "sonic-swss",
+        "comment_at": "2026-10-01T01:14:36Z",
+        "comment_author": "prsunny",
+        "comment_body": "@vaibhavhd fyi. This is a critical bug fix"
+    },
+    {
+        "number": 4949,
+        "repo": "sonic-swss",
+        "review_at": "2026-10-01T01:14:05Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 4949,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-10-01T01:14:05Z",
+        "latestReview_author": "prsunny",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4948,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-28T19:51:47Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4948,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-28T19:51:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4948,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-28T19:52:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4948,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-29T00:16:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4948,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-29T00:16:27Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4948,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-29T17:10:38Z",
+        "comment_author": "prabhataravind",
+        "comment_body": "> what if downlink flaps?\r\n\r\n@theasianpianist I think this is still an open question. This PR narrows blast radius to VLAN, but doesn't change the fire-and-forget, no-retry probe from #4849. For an already-provisioned host hitting a genuine link/cable flap on a VLAN port, recovery depends entirely on nbrmgrd's single ndisc6 probe landing before the link is fully back up. If that probe is lost, the entry gets stuck in INCOMPLETE with no timer, and arp_update won't touch it since it's no longer FAILED - turning a normally-transient flap into a permanent black hole."
+    },
+    {
+        "number": 4948,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-29T17:16:42Z",
+        "comment_author": "prsunny",
+        "comment_body": "> > what if downlink flaps?\r\n> \r\n> @theasianpianist I think this is still an open question. This PR narrows blast radius to VLAN, but doesn't change the fire-and-forget, no-retry probe from #4849. For an already-provisioned host hitting a genuine link/cable flap on a VLAN port, recovery depends entirely on nbrmgrd's single ndisc6 probe landing before the link is fully back up. If that probe is lost, the entry gets stuck in INCOMPLETE with no timer, and arp_update won't touch it since it's no longer FAILED - turning a normally-transient flap into a permanent black hole.\r\n\r\nAt the same time, another concern is if the link is down and never recovered, we might be unnecessarily sending probe continuously. Also, i thought arp update shall retrigger the ping to Vlan interfaces. "
+    },
+    {
+        "number": 4948,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-29T21:19:13Z",
+        "comment_author": "theasianpianist",
+        "comment_body": "> > > what if downlink flaps?\r\n> > \r\n> > \r\n> > @theasianpianist I think this is still an open question. This PR narrows blast radius to VLAN, but doesn't change the fire-and-forget, no-retry probe from #4849. For an already-provisioned host hitting a genuine link/cable flap on a VLAN port, recovery depends entirely on nbrmgrd's single ndisc6 probe landing before the link is fully back up. If that probe is lost, the entry gets stuck in INCOMPLETE with no timer, and arp_update won't touch it since it's no longer FAILED - turning a normally-transient flap into a permanent black hole.\r\n> \r\n> At the same time, another concern is if the link is down and never recovered, we might be unnecessarily sending probe continuously. Also, i thought arp update shall retrigger the ping to Vlan interfaces.\r\n\r\nYes, arp_update will retry probing VLAN member interfaces for FAILED and INCOMPLETE."
+    },
+    {
+        "number": 4948,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-30T15:00:20Z",
+        "comment_author": "prabhataravind",
+        "comment_body": "> > > > what if downlink flaps?\r\n> > > \r\n> > > \r\n> > > @theasianpianist I think this is still an open question. This PR narrows blast radius to VLAN, but doesn't change the fire-and-forget, no-retry probe from #4849. For an already-provisioned host hitting a genuine link/cable flap on a VLAN port, recovery depends entirely on nbrmgrd's single ndisc6 probe landing before the link is fully back up. If that probe is lost, the entry gets stuck in INCOMPLETE with no timer, and arp_update won't touch it since it's no longer FAILED - turning a normally-transient flap into a permanent black hole.\r\n> > \r\n> > \r\n> > At the same time, another concern is if the link is down and never recovered, we might be unnecessarily sending probe continuously. Also, i thought arp update shall retrigger the ping to Vlan interfaces.\r\n> \r\n> Yes, arp_update will retry probing VLAN member interfaces for FAILED and INCOMPLETE.\r\n\r\n@theasianpianist While arp_update will retry for INCOMPLETE entries as well, the kernel function __neigh_event_send() only arms a new timer/probe inside if (!(nud_state & (NUD_STALE | NUD_INCOMPLETE))) \u2014 i.e. on the transition into INCOMPLETE. If the neighbor is already INCOMPLETE, that's skipped and the packet just gets queued into arp_queue, no new NS sent. So the ping in [arp_update](https://github.com/sonic-net/sonic-buildimage/blob/master/files/scripts/arp_update)'s unresolved_kernel_neighbors loop (which does include INCOMPLETE) is a no-op for an entry already stuck there.\r\n\r\nOn a link-down/flap, the one-shot probe can be sent before the link fully recovers and gets lost, leaving the entry permanently stuck in INCOMPLETE with nothing left to resolve it. I think the risk still remains. Could you double check?"
+    },
+    {
+        "number": 4948,
+        "repo": "sonic-swss",
+        "review_at": "2026-09-28T20:55:40Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4948,
+        "repo": "sonic-swss",
+        "review_at": "2026-09-28T22:38:27Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 4948,
+        "repo": "sonic-swss",
+        "review_at": "2026-09-29T00:11:15Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4948,
+        "repo": "sonic-swss",
+        "review_at": "2026-09-29T01:42:13Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 4948,
+        "repo": "sonic-swss",
+        "review_at": "2026-09-29T05:36:58Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 4948,
+        "repo": "sonic-swss",
+        "review_at": "2026-09-29T21:15:09Z",
+        "review_author": "theasianpianist"
+    },
+    {
+        "number": 4948,
+        "repo": "sonic-swss",
+        "review_at": "2026-09-30T23:17:51Z",
+        "review_author": "prabhataravind"
+    },
+    {
+        "number": 4948,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-09-28T22:38:27Z",
+        "latestReview_author": "prsunny",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 4948,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-09-29T00:11:15Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 4948,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-09-29T05:36:58Z",
+        "latestReview_author": "lolyu",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4948,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-09-30T23:17:51Z",
+        "latestReview_author": "prabhataravind",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 4947,
         "repo": "sonic-swss",
         "comment_at": "2026-09-28T17:32:23Z",
@@ -13406,6 +13594,521 @@
         "repo": "sonic-swss",
         "latestReview_at": "2026-06-12T00:34:14Z",
         "latestReview_author": "dgsudharsan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-11T06:51:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-11T06:51:10Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-13T13:55:36Z",
+        "comment_author": "linux-foundation-easycla",
+        "comment_body": "<a href=\"https://easycla.lfx.linuxfoundation.org/#/?version=2\"><img src=\"https://s3.amazonaws.com/cla-project-logo-prod/cla-signed.svg?v=2\" alt=\"CLA Signed\" align=\"left\" height=\"28\" width=\"328\" ></a><br >The committers listed above are authorized under a signed CLA.<ul><li>:white_check_mark: login: AnantKishorSharma / name: AnantKishorSharma (b799e908dd3df8f0938e80a951a1a1420932e9b6, f04cf553f6460186b500b2761ad099da4b1b5daf)</li></ul>"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-13T13:55:38Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-13T13:55:48Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-13T17:16:50Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-13T17:16:59Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-14T06:30:51Z",
+        "comment_author": "AnantKishorSharma",
+        "comment_body": "/azpw retry"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-14T06:30:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-14T06:30:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1137957:\n\n\n\u2705Stage **Build**:\n- Job amd64: retried.\n- Job amd64: retried.\n\n\n\u2705Stage **BuildAsan**:\n- Job amd64: retried."
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-14T11:02:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-14T11:03:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-14T12:20:40Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-14T12:20:49Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-15T15:53:29Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-15T15:53:40Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-15T15:54:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-15T15:55:06Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-15T18:38:12Z",
+        "comment_author": "AnantKishorSharma",
+        "comment_body": "/azpw retry"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-15T18:38:16Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-16T01:17:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi, there are workflow run(s) waiting for approval, you may be first-time contributor. I will notify maintainers to help approve once PR is approved. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-20T05:30:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-20T05:30:35Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-20T16:26:11Z",
+        "comment_author": "AnantKishorSharma",
+        "comment_body": "/azpw retry"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-20T16:26:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-20T16:26:16Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1143961:\n\n\n\u2705Stage **BuildArm**:\n- Job armhf: retried.\n\n\n\u2705Stage **Test**:\n- Job vstest: retried."
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-20T22:27:49Z",
+        "comment_author": "AnantKishorSharma",
+        "comment_body": "/azpw retry"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-20T22:27:52Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-20T22:27:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1143961:\n\n\n\u2705Stage **Test**:\n- Job vstest: retried."
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-21T04:30:45Z",
+        "comment_author": "AnantKishorSharma",
+        "comment_body": "/azpw retry"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-21T04:30:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-21T04:30:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1143961:\n\n\n\u2705Stage **Test**:\n- Job vstest: retried."
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-21T09:25:02Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-21T09:25:12Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-21T11:11:34Z",
+        "comment_author": "AnantKishorSharma",
+        "comment_body": "/azpw retry"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-21T11:11:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-21T11:11:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1144858:\n\n\n\u2705Stage **BuildAsan**:\n- Job amd64: retried."
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-21T16:26:41Z",
+        "comment_author": "AnantKishorSharma",
+        "comment_body": "/azpw retry"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-21T16:26:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-21T16:26:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1144858:\n\n\n\u2705Stage **Test**:\n- Job vstest: retried."
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-22T01:57:18Z",
+        "comment_author": "AnantKishorSharma",
+        "comment_body": "/azpw retry"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-22T01:57:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-22T01:57:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1144858:\n\n\n\u2705Stage **Test**:\n- Job vstest: retried."
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-22T08:03:27Z",
+        "comment_author": "AnantKishorSharma",
+        "comment_body": "/azpw retry"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-22T08:03:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-22T08:03:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1144858:\n\n\n\u2705Stage **Test**:\n- Job vstest: retried."
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-22T14:09:50Z",
+        "comment_author": "AnantKishorSharma",
+        "comment_body": "/azpw retry"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-22T14:49:19Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-22T14:49:31Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-23T01:01:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-23T01:01:31Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-24T11:11:43Z",
+        "comment_author": "AnantKishorSharma",
+        "comment_body": "The `Test vstest` failure here is the known DVS readiness-check issue, not a problem with this PR. The `docker-sonic-vs` supervisor program was renamed `start.sh` \u2192 `start` in sonic-buildimage, but `tests/conftest.py::check_services_ready()` still polled for `start.sh`, so the readiness check times out and every test errors at setup. This is being fixed by #4696. Will re-run CI here once #4696 or temp WA **#4703** merges.\n"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-25T18:04:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-25T18:04:44Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-06-30T18:26:40Z",
+        "comment_author": "prsunny",
+        "comment_body": "@AnantKishorSharma , please don't close and re-open PRs. If you want to retrigger PR tests, use \"/azpw run\" "
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-01T05:55:36Z",
+        "comment_author": "AnantKishorSharma",
+        "comment_body": "> @AnantKishorSharma , please don't close and re-open PRs. If you want to retrigger PR tests, use \"/azpw run\"\r\n\r\nThanks @prsunny \u2014 understood."
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-08T10:22:57Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-08T10:23:09Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-08T10:23:19Z",
+        "comment_author": "AnantKishorSharma",
+        "comment_body": "Rebased onto the latest `master` and force-pushed to resolve the merge conflict introduced by #4613.\r\n\r\n#4613 removed the per-orch `tests/mock_tests/hftelorch_is_supported_sai_wrap.{cpp,h}` (which this PR's ACL match-field UT relied on) and replaced them with the unified `tests/mock_tests/mock_sai_capability_wrap.{cpp,h}`. \r\n\r\nThere is no functional change to the ACL match-field gating in `aclorch.cpp`; only the test scaffolding was migrated to the unified wrapper. "
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-08T15:19:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-08T15:19:28Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-13T18:49:54Z",
+        "comment_author": "AnantKishorSharma",
+        "comment_body": "/azpw retry"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-13T18:49:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-07-13T18:50:01Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1159788:\n\n\n\u2705Stage **Build**:\n- Job amd64: retried."
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-08-14T04:16:37Z",
+        "comment_author": "AnantKishorSharma",
+        "comment_body": "Hi @bingwang-ms @prsunny - could you please help review this?"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-19T06:24:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-19T06:24:43Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "comment_at": "2026-10-01T04:19:56Z",
+        "comment_author": "AnantKishorSharma",
+        "comment_body": "Hi @prsunny - could you please help merge this? Thanks!"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "review_at": "2026-06-12T17:47:04Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "review_at": "2026-09-18T23:49:14Z",
+        "review_author": "prsunny"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "review_at": "2026-09-30T22:39:45Z",
+        "review_author": "bingwang-ms"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-09-18T23:49:14Z",
+        "latestReview_author": "prsunny",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-06-12T17:47:04Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 4661,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-09-30T22:39:45Z",
+        "latestReview_author": "bingwang-ms",
         "latestReview_state": "APPROVED"
     },
     {
@@ -30036,6 +30739,13 @@
         "comment_at": "2026-04-14T16:51:40Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4469,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-30T05:43:26Z",
+        "comment_author": "AnantKishorSharma",
+        "comment_body": "Hi @prabhataravind @prsunny - is there any plan to back port it to 202611? Thanks!"
     },
     {
         "number": 4469,
