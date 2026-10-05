@@ -993,6 +993,13 @@
     {
         "number": 28262,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-10-04T18:05:56Z",
+        "comment_author": "Xichen96",
+        "comment_body": "202605 hardware validation is complete for the exact merged fix.\n\n**Provenance**\n\n- PR source head: `6363bade474fe057d040866170e534ad8d3dd031`\n- `internal-202605` base: `94c776e43b2602ba9ccd0d2395a523f8c6ef2993`\n- Image: `SONiC.20260510.19`, build `fb70ba3611`\n- Testbed: `vms68-dual-t0-8101c1-04`\n- Platform: Cisco-8101C01-C32, dual-ToR active-active\n- DUTs: `str3-8101c1-07`, `str3-8101c1-08`\n\n**Results**\n\n- Pretest: **12 passed / 5 expected skips / 0 failures / 0 errors**\n- Five consecutive focused iterations completed with exit code 0.\n- Each iteration passed all three affected cases:\n  - `test_dhcp_relay_agent_mode[replace-sonic-relay-agent]`\n  - `test_dhcp_relay_agent_mode[append-sonic-relay-agent]`\n  - `test_dhcp_max_hop_count[2-sonic-relay-agent]`\n- Focused total: **15 passed / 0 failures / 0 errors / 0 skips**\n\nJUnit evidence independently confirms 3 tests, 0 failures, and 0 errors in each of the five iterations. Standard module health/YANG/config checks remained enabled, and every focused command exited 0.\n\nThe original Cisco dual-ToR failure was also reproduced before the fix on the same bed family: the three cases reported zero relayed DISCOVER packets. Changing only the destination-MAC selection to the exact PR behavior made the cases pass, and this final campaign confirms the exact merged change repeatedly on the fixed 202605 image.\n\n@StormLiangMS, the requested 202605 evidence is now complete. Please proceed with the 202605 backport review/follow-through.\n"
+    },
+    {
+        "number": 28262,
+        "repo": "sonic-mgmt",
         "review_at": "2026-09-29T04:04:05Z",
         "review_author": "prhoskot"
     },
