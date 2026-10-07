@@ -1,5 +1,277 @@
 [
     {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-05T23:41:01Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-05T23:41:10Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-05T23:41:24Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-05T23:50:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-05T23:50:36Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T00:22:27Z",
+        "comment_author": "hdwhdw",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T00:22:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T01:02:14Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T01:02:26Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T02:17:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T02:17:56Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T02:17:59Z",
+        "comment_author": "hdwhdw",
+        "comment_body": "> Cancellation and the downloader's 15-minute deadline are converted to `Internal` here.\n\nFixed in `379aa5c`: Containerz now preserves meaningful gRPC status codes. Client cancellation returns `Canceled`, the downloader timeout returns `DeadlineExceeded`, and other transfer failures remain `Internal`. Temporary-file cleanup runs in every case.\n\nValidated with focused Containerz tests and `go vet`.\n"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T02:30:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T02:30:50Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T02:48:42Z",
+        "comment_author": "hdwhdw",
+        "comment_body": "Both findings are fixed in `4fba38a`: Containerz now requires exact byte-count matches for nonzero declared image sizes and rejects HTTP(S) URLs with ports outside 1-65535 before creating a temporary file or starting a download.\n\n> `image_size` is enforced only as an upper bound here. If a client declares 1 GiB but the server returns a valid 10-byte archive, the download succeeds and that smaller payload is passed to `LoadDockerImage`.\n\nFor every nonzero client-declared `image_size`, the downloaded byte count must now match exactly before `LoadDockerImage` is called. A mismatch returns gRPC `DataLoss`, removes the temporary file, and does not start image loading. The existing upper-bound check still stops oversized streams.\n\n> HTTP URLs with an out-of-range numeric port (for example, `https://example.com:65536/image`) pass this validation.\n\nHTTP and HTTPS validation now rejects explicit ports outside 1-65535. Invalid URLs return gRPC `InvalidArgument` before temporary-file creation or download begins.\n\nValidation passed: downloader tests, race tests, and vet; focused Containerz tests (98.4% statement coverage) and vet.\n"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T02:48:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T02:49:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T03:04:38Z",
+        "comment_author": "hdwhdw",
+        "comment_body": "Fixed in `c46a0bd`. Containerz now preserves request cancellation and deadline status during SSH transfer setup and control operations, returning gRPC `Canceled` or `DeadlineExceeded` instead of `Internal`.\n\n> If the request is canceled or its deadline expires while `Stat` is in flight, closing/deadlining the SSH connection makes `Stat` fail here, but this branch converts that failure to a generic transfer error. `Deploy` then reports `Internal` instead of `Canceled`/`DeadlineExceeded`. Check `ctx.Err()` before returning the sanitized SFTP error, as the surrounding SFTP operations already do. This issue also appears on line 536 of the same file.\n\nThe fix checks `ctx.Err()` before returning sanitized SFTP or SCP errors. It covers the in-flight SFTP `Stat` path, the initial SCP acknowledgment, and later SCP control operations with the same cancellation race.\n\nValidation: a focused integration test blocks SFTP `Stat`, cancels the request, and verifies `context.Canceled`. Downloader tests, race tests, vet, and `git diff --check` pass.\n"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T03:04:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T03:04:56Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T03:13:29Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T03:13:42Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T03:23:08Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T03:23:21Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-05T23:44:44Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-05T23:50:24Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-05T23:50:43Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-06T02:13:57Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-06T02:17:58Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-06T02:25:04Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-06T02:30:28Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-06T02:36:14Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-06T02:53:50Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-06T03:08:54Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-06T03:17:47Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-06T03:23:16Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-06T03:28:07Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-06T17:19:56Z",
+        "review_author": "donghaolicd"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-06T17:25:22Z",
+        "review_author": "donghaolicd"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "latestReview_at": "2026-10-06T03:28:07Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 811,
+        "repo": "sonic-gnmi",
+        "latestReview_at": "2026-10-06T17:25:22Z",
+        "latestReview_author": "donghaolicd",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 800,
         "repo": "sonic-gnmi",
         "comment_at": "2026-09-30T22:50:14Z",
