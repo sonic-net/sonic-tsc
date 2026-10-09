@@ -25992,6 +25992,13 @@
     {
         "number": 26467,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-10-08T05:26:37Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@ronan-nexthop Reconciled the 202605 cherry-pick request: https://github.com/sonic-net/sonic-mgmt/pull/28066 merged into `202605` at 2026-09-24T02:59:55Z. Using this recorded linked candidate and its verified current target-branch commit containment, with no revert signals detected in the inspected backport metadata. This does not claim a fresh code review, passing CI, patch equivalence, verified original-to-backport mapping, complete original-fix coverage, or a full historical revert search. Marking this request Included and clearing its branch conflict label.\n\n<!-- cherrypick-desk:75b9a119-9064-4774-858a-9c84e2824e91:26467 -->"
+    },
+    {
+        "number": 26467,
+        "repo": "sonic-mgmt",
         "review_at": "2026-08-19T07:14:24Z",
         "review_author": "anders-nexthop"
     },
@@ -27139,6 +27146,13 @@
         "comment_at": "2026-08-25T04:35:44Z",
         "comment_author": "mssonicbld",
         "comment_body": "This PR is approved for branch 202605. No cherry pick PR has been created because of code conflict. @gopi-arista, please manually create the cherry pick PR.<br>If this change is already in 202605, please comment \"already in 202605\". Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 26460,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-08T02:40:40Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@gopi-arista Reconciled the 202605 cherry-pick request: https://github.com/sonic-net/sonic-mgmt/pull/27673 merged into `202605` at 2026-09-04T03:13:29Z. Using this recorded linked candidate and its verified current target-branch commit containment, with no revert signals detected in the inspected backport metadata. This does not claim a fresh code review, passing CI, patch equivalence, verified original-to-backport mapping, complete original-fix coverage, or a full historical revert search. Marking this request Included and clearing its branch conflict label.\n\n<!-- cherrypick-desk:a3aa23bf-2de5-40a5-9e1e-ba599299b9a8:26460 -->"
     },
     {
         "number": 26460,
@@ -31745,6 +31759,13 @@
     {
         "number": 26302,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-10-08T14:14:52Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@r12f cherry pick PR didn't pass PR checker after retry. Please help check! Thanks.<br>https://github.com/sonic-net/sonic-mgmt/pull/28389\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 26302,
+        "repo": "sonic-mgmt",
         "review_at": "2026-07-19T10:08:01Z",
         "review_author": "Pterosaur"
     },
@@ -32196,6 +32217,27 @@
         "comment_at": "2026-08-16T23:59:07Z",
         "comment_author": "StormLiangMS",
         "comment_body": "@sakshamkhurana21 \u2014 this 202605 backport request is not approval-ready yet. Please update the PR description with:\n\n- replace the tracker TODO with a linked GitHub issue or ADO work item\n- check 202605 under **Tested branch** and add the tested image/commit plus result or log link\n\nThis information needs to be in the backport/test sections so the request is traceable and BuildBot can validate it.\n\n<!-- copilot-202605-backport-reminder -->"
+    },
+    {
+        "number": 26288,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-08T22:59:06Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@sakshamkhurana21 Please provide test results for your 202605 branch cherry-pick request.\n\nPlease run the relevant tests on the `202605` target branch with this change applied, and link the test report in this original PR. Include the tested branch and image/build, the test cases run, and pass/fail counts; explain any failures or skipped tests.\n\nIf you already provided a report, please point us to it and confirm it covers this change on `202605`. Passing source-PR CI alone does not establish target-branch testing.\n\n<!-- cherrypick-desk:c7cfb909-2e29-46e7-b1d3-23d4965407f2:26288 -->"
+    },
+    {
+        "number": 26288,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-08T23:41:17Z",
+        "comment_author": "sakshamkhurana21",
+        "comment_body": "### 202605 target-branch test results\r\n\r\nRan the relevant pytest on the **202605 target branch with this PR's patch applied**, \r\n| Item | Verified value |\r\n| --- | --- |\r\n| sonic-mgmt branch/base | `202605` at `17029807431bfbdcaae128705de634afaaca27c9` |\r\n| Applied change | Exact #26288 diff, PR head `b07ef1fb2977381517ceb53b0352d008a0a1c1da`; only `tests/syslog/test_syslog_rate_limit.py` changed, 19 additions / 4 deletions |\r\n| DUT image | `SONiC.202605.1240155-3091f3792`, build commit `3091f3792` |\r\n| Platform | Single-ASIC SONiC VS/KVM, `x86_64-kvm_x86_64-r0`, `Force10-S6000` |\r\n| Test case | `syslog/test_syslog_rate_limit.py::test_syslog_rate_limit` |\r\n| Run started | 2026-10-08 23:28:00 UTC |\r\n| Result | **1 passed, 0 failed, 0 errors, 0 skipped**, exit code **0** |\r\n| Suite duration | **318.202 seconds** (5 minutes 18 seconds) |\r\n\r\n**Coverage:** Container rate limiting enabled/disabled, host rate limiting enabled/disabled, configuration save/reload, and checks after reload. The existing test randomly selects one supported container per phase: this run exercised **lldp before reload** and **bgp after reload**. Pre-test and post-test YANG validation, configuration checks, and core-dump checks passed.\r\n\r\n**Scope and exclusions:** This was one isolated VS control-plane run, without a PTF/BGP-peer topology, using `--skip_sanity` for topology-wide sanity checks. Syslog assertions, the test's internal LogAnalyzer, config reload, and YANG validation were not bypassed. The test's existing feature filtering bypassed disabled `mux`, `otel`, `macsec`, and `sflow` candidates; there were no pytest-level skips. This run does not claim physical-DUT coverage, database-container coverage, repeated flake testing, a throttled before/after reproduction on 202605, or testing on 202511.\r\n\r\n**Warnings/setup:** The passing run reported 294 dependency/plugin warnings, predominantly Python multiprocessing/fork deprecation warnings. Collection also reported unavailable minigraph facts in this isolated setup, and no Allure URL was generated. Earlier attempts failed during runner/inventory setup; those are preserved separately and are not counted as passing runs.\r\n\r\n<details>\r\n<summary>Invocation and recorded result</summary>\r\n\r\nExecuted in the isolated sonic-mgmt runner from the checkout's `tests/` directory, using the repository's standard Ansible configuration and plugin-path exports:\r\n\r\n```bash\r\nexport ANSIBLE_CONFIG=/var/src/sonic-mgmt/ansible/ansible.cfg\r\nexport ANSIBLE_LIBRARY=/var/src/sonic-mgmt/ansible/library\r\nexport ANSIBLE_CONNECTION_PLUGINS=/var/src/sonic-mgmt/ansible/plugins/connection\r\nexport ANSIBLE_CLICONF_PLUGINS=/var/src/sonic-mgmt/ansible/cliconf_plugins\r\nexport ANSIBLE_TERMINAL_PLUGINS=/var/src/sonic-mgmt/ansible/terminal_plugins\r\npython3 -m pytest --cache-clear -c pytest.ini \\\r\n  syslog/test_syslog_rate_limit.py::test_syslog_rate_limit \\\r\n  --host-pattern vlab-01 \\\r\n  --inventory ../ansible/syslog26288_inventory.yml \\\r\n  --testbed syslog-26288-202605 \\\r\n  --testbed_file ../ansible/syslog26288_testbed.yaml \\\r\n  --skip_sanity -vv --log-cli-level=INFO \\\r\n  --log-file=/var/src/results/patched-pytest.log \\\r\n  --junitxml=/var/src/results/patched-junit.xml\r\n```\r\n\r\nRecorded console summary:\r\n```text\r\n1 passed, 294 warnings in 318.20s (0:05:18)\r\n```\r\n\r\nVerified JUnit suite attributes:\r\n```text\r\ntests=\"1\" failures=\"0\" errors=\"0\" skipped=\"0\" time=\"318.202\"\r\n```\r\n"
+    },
+    {
+        "number": 26288,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-08T23:45:11Z",
+        "comment_author": "sakshamkhurana21",
+        "comment_body": "> @sakshamkhurana21 Please provide test results for your 202605 branch cherry-pick request.\r\n> \r\n> Please run the relevant tests on the `202605` target branch with this change applied, and link the test report in this original PR. Include the tested branch and image/build, the test cases run, and pass/fail counts; explain any failures or skipped tests.\r\n> \r\n> If you already provided a report, please point us to it and confirm it covers this change on `202605`. Passing source-PR CI alone does not establish target-branch testing.\r\n\r\nHi @StormLiangMS the results for 202605 have been added. Please let me know if there is anything else you need"
     },
     {
         "number": 26288,
@@ -35791,6 +35833,13 @@
     {
         "number": 25924,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-10-08T22:59:37Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@yenlu-keith Please provide test results for your 202605 branch cherry-pick request.\n\nPlease run the relevant tests on the `202605` target branch with this change applied, and link the test report in this original PR. Include the tested branch and image/build, the test cases run, and pass/fail counts; explain any failures or skipped tests.\n\nIf you already provided a report, please point us to it and confirm it covers this change on `202605`. Passing source-PR CI alone does not establish target-branch testing.\n\n<!-- cherrypick-desk:c7cfb909-2e29-46e7-b1d3-23d4965407f2:25924 -->"
+    },
+    {
+        "number": 25924,
+        "repo": "sonic-mgmt",
         "review_at": "2026-07-09T05:54:18Z",
         "review_author": "anamehra"
     },
@@ -39136,6 +39185,13 @@
         "comment_at": "2026-10-05T10:49:51Z",
         "comment_author": "StormLiangMS",
         "comment_body": "@lakshmi-nexthop Please provide test results for your 202605 branch cherry-pick request.\n\nPlease run the relevant tests on the `202605` target branch with this change applied, and link the test report in this original PR. Include the tested branch and image/build, the test cases run, and pass/fail counts; explain any failures or skipped tests.\n\nIf you already provided a report, please point us to it and confirm it covers this change on `202605`. Passing source-PR CI alone does not establish target-branch testing.\n\ncould you follow the PR template ask to provide test result for cherrypick ask?\n\n<!-- cherrypick-desk:fa06bf9c-554a-46f4-8ab5-316540a3577d:25277 -->"
+    },
+    {
+        "number": 25277,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-09T00:24:33Z",
+        "comment_author": "saravanan-nexthop",
+        "comment_body": "> @lakshmi-nexthop Please provide test results for your 202605 branch cherry-pick request.\r\n> \r\n> Please run the relevant tests on the `202605` target branch with this change applied, and link the test report in this original PR. Include the tested branch and image/build, the test cases run, and pass/fail counts; explain any failures or skipped tests.\r\n> \r\n> If you already provided a report, please point us to it and confirm it covers this change on `202605`. Passing source-PR CI alone does not establish target-branch testing.\r\n> \r\n> could you follow the PR template ask to provide test result for cherrypick ask?\r\n\r\nThese tests were run with a Nexthop branch's KVM t2 image for UT2 topology \r\n\r\ngeneric_config_updater/test_ecn_config_update.py : Failure: 0 Error: 0  \r\npassw_hardening/test_passw_hardening.py : Failure: 0 Error: 0  \r\narp/test_neighbor_mac_noptf.py : Failure: 0 Error: 0  \r\nbmp/test_bmp_statedb.py : Failure: 0 Error: 0  \r\nbmp/test_frr_bmp_sanity.py : Failure: 0 Error: 0  \r\ntelemetry/test_telemetry_cert_rotation.py : Failure: 0 Error: 0  \r\narp/test_neighbor_mac_aging.py : Failure: 0 Error: 0  \r\nsystem_health/test_system_status.py : Failure: 0 Error: 0  \r\ntacacs/test_ro_user.py : Failure: 0 Error: 0  \r\nradv/test_radv_restart.py : Failure: 0 Error: 0  \r\ntacacs/test_jit_user.py : Failure: 0 Error: 0  \r\ncontainer_hardening/test_container_hardening.py : Failure: 0 Error: 0  \r\nqos/test_pfc_counters.py : Failure: 0 Error: 0  \r\nipfwd/test_mtu.py : Failure: 0 Error: 0  \r\nsnmp/test_snmp_default_route.py : Failure: 1 Error: 0  \r\ngeneric_config_updater/test_aaa.py : Failure: 0 Error: 0  \r\ntest_nbr_health.py : Failure: 0 Error: 0  \r\ndatabase/test_db_scripts.py : Failure: 0 Error: 0  \r\nplatform_tests/test_sequential_restart.py : Failure: 0 Error: 0  \r\ngeneric_config_updater/test_ntp.py : Failure: 0 Error: 0  \r\ngeneric_config_updater/test_syslog.py : Failure: 0 Error: 0  \r\nplatform_tests/test_memory_exhaustion.py : Failure: 0 Error: 0  \r\nbmp/test_bmp_redis_instance.py : Failure: 0 Error: 0  \r\nqos/test_pfc_pause.py : Failure: 0 Error: 0  \r\nbmp/test_bmp_configdb.py : Failure: 0 Error: 0  \r\ntacacs/test_accounting.py : Failure: 0 Error: 0  \r\nssh/test_ssh_limit.py : Failure: 0 Error: 0  \r\ntacacs/test_rw_user.py : Failure: 0 Error: 0  \r\nscp/test_scp_copy.py : Failure: 0 Error: 0  \r\nsnmp/test_snmp_memory.py : Failure: 0 Error: 0  \r\nminigraph/test_masked_services.py : Failure: 0 Error: 0  \r\nmonit/test_monit_status.py : Failure: 0 Error: 0  \r\nhash/test_generic_hash.py : Failure: 0 Error: 0  \r\ntest_features.py : Failure: 0 Error: 0  \r\npfcwd/test_pfc_config.py : Failure: 0 Error: 0  \r\ntest_procdockerstatsd.py : Failure: 0 Error: 0  \r\ncacl/test_cacl_application.py : Failure: 0 Error: 0  \r\nclock/test_clock.py : Failure: 0 Error: 0  \r\ngnmi/test_gnmi_2038.py : Failure: 0 Error: 0  \r\nfips/test_fips.py : Failure: 0 Error: 0  \r\nbgp/test_bgp_fact.py : Failure: 0 Error: 0  \r\ngnmi_e2e/test_gnmi_auth.py : Failure: 0 Error: 0  \r\ntest_interfaces.py : Failure: 0 Error: 0  \r\nntp/test_ntp.py : Failure: 0 Error: 0  \r\ndatabase/test_db_config.py : Failure: 0 Error: 0  \r\nhttp/test_http_copy.py : Failure: 0 Error: 0  \r\nfdb/test_fdb_mac_move.py : Failure: 0 Error: 0  \r\nbgp/test_prefix_list_suppress.py : Failure: 0 Error: 0  \r\nplatform_tests/test_pmon_grep_safe.py : Failure: 0 Error: 0  \r\nsnmp/test_snmp_lldp.py : Failure: 1 Error: 0  \r\ngnmi/test_gnmi_stress.py : Failure: 0 Error: 0  \r\nsyslog/test_cron_health.py : Failure: 0 Error: 0  \r\nsyslog/test_logrotate.py : Failure: 0 Error: 0  \r\nconfig_setup/test_config_setup_boot.py : Failure: 0 Error: 0  \r\npassed 154 failed 2 errors 0 tests 156 passRate 98.71794871794873 files 54"
     },
     {
         "number": 25277,
