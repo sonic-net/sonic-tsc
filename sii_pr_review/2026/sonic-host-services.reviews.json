@@ -1,5 +1,181 @@
 [
     {
+        "number": 457,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-10-08T15:13:48Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 457,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-10-08T15:13:57Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 457,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-10-08T15:14:10Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 457,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-10-08T15:24:44Z",
+        "comment_author": "pkawatkar14",
+        "comment_body": "When you have the chance please review this PR, thank you!\r\n@qiluo-msft @saiarcot895 "
+    },
+    {
+        "number": 457,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-10-08T22:07:15Z",
+        "comment_author": "hdwhdw",
+        "comment_body": "the idea is we want gnmi to be self contained for image independent container delivery anyway. If we can move the feature into gnmi we should do it"
+    },
+    {
+        "number": 457,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-10-09T00:09:17Z",
+        "comment_author": "hdwhdw",
+        "comment_body": "https://github.com/sonic-net/sonic-gnmi/pull/811"
+    },
+    {
+        "number": 457,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-10-09T14:12:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 457,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-10-09T14:13:06Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 457,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-10-09T14:14:41Z",
+        "comment_author": "pkawatkar14",
+        "comment_body": "> the idea is we want gnmi to be self contained for image independent container delivery anyway. If we can move the feature into gnmi we should do it\r\n\r\n@hdwhdw thanks, confirmed and done. I checked across the org: after sonic-gnmi#811 merged, there are no remaining D-Bus callers of \u00a0FileService.download()\u00a0/\u00a0get_file_stat()\u00a0/\u00a0remove()\u00a0 anywhere (sonic-buildimage, sonic-utilities, sonic-gnmi, etc.) \u2014 PR #811 removed the \u00a0GetFileStat\u00a0/\u00a0DownloadFile\u00a0/\u00a0RemoveFile\u00a0 client methods on the gnmi side entirely.\r\n\r\nI also checked that gnmi's native replacement (\u00a0internal/download/remote.go\u00a0) already returns sanitized, stable error messages for every SFTP/SCP/HTTP failure path, so it doesn't reintroduce F086's raw-exception-disclosure issue \u2014 no changes needed there.\r\n\r\nGiven that, I've updated this PR to remove \u00a0host_modules/file_service.py\u00a0 entirely (plus its D-Bus registration and tests) instead of patching it. That fully resolves F086 by eliminating the vulnerable code path. Description updated above with details \u2014 let me know if this looks right to you."
+    },
+    {
+        "number": 457,
+        "repo": "sonic-host-services",
+        "review_at": "2026-10-08T21:50:09Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 457,
+        "repo": "sonic-host-services",
+        "review_at": "2026-10-08T22:03:33Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 457,
+        "repo": "sonic-host-services",
+        "review_at": "2026-10-08T22:35:07Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 457,
+        "repo": "sonic-host-services",
+        "review_at": "2026-10-09T15:50:18Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 457,
+        "repo": "sonic-host-services",
+        "latestReview_at": "2026-10-08T21:50:09Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 457,
+        "repo": "sonic-host-services",
+        "latestReview_at": "2026-10-09T15:50:18Z",
+        "latestReview_author": "hdwhdw",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 453,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-10-06T22:47:43Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 453,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-10-06T22:47:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 453,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-10-06T22:48:03Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 453,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-10-07T00:04:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 453,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-10-07T00:04:41Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 453,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-10-08T13:02:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 453,
+        "repo": "sonic-host-services",
+        "comment_at": "2026-10-08T13:02:43Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 453,
+        "repo": "sonic-host-services",
+        "review_at": "2026-10-09T01:40:18Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 453,
+        "repo": "sonic-host-services",
+        "review_at": "2026-10-09T01:42:17Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 453,
+        "repo": "sonic-host-services",
+        "latestReview_at": "2026-10-09T01:40:18Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 453,
+        "repo": "sonic-host-services",
+        "latestReview_at": "2026-10-09T01:42:17Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 452,
         "repo": "sonic-host-services",
         "comment_at": "2026-10-05T17:43:48Z",
