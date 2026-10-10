@@ -13629,6 +13629,20 @@
     {
         "number": 26154,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-10-09T02:46:16Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202608: https://github.com/Azure/sonic-mgmt.msft/pull/1477"
+    },
+    {
+        "number": 26154,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-09T06:17:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): msft-202608, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202608: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 26154,
+        "repo": "sonic-mgmt",
         "review_at": "2026-07-14T04:54:54Z",
         "review_author": "lizhijianrd"
     },
@@ -16027,6 +16041,13 @@
         "comment_at": "2026-10-08T22:57:00Z",
         "comment_author": "mssonicbld",
         "comment_body": "@v-cshekar PR conflicts with 202605 branch"
+    },
+    {
+        "number": 26064,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-09T06:18:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR is approved for branch 202605. No cherry pick PR has been created because of code conflict. @v-cshekar, please manually create the cherry pick PR.<br>If this change is already in 202605, please comment \"already in 202605\". Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 26064,
@@ -19235,6 +19256,13 @@
         "comment_at": "2026-09-18T06:18:38Z",
         "comment_author": "mssonicbld",
         "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25978,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-09T07:42:15Z",
+        "comment_author": "wsycqyz",
+        "comment_body": "## Technical memo: `vxlan/test_vxlan_multiple_tunnels.py` on Cisco 8102-64H (`x86_64-8102_64h_o-r0`): root cause of the failure\r\n\r\n### TL;DR\r\n- The 8102-64H failure is **not a test issue** and **not caused by the Cisco 3-tunnel limit**: the 3 VxLAN P2MP tunnels the test creates on cisco-8000 are within that limit.\r\n- On 8102-64H, **VxLAN decapsulation is silently dropped in the ASIC**. The trigger is the Silicon One NPU device property **`mcast_tunnel_enabled: true`**, which only the 8102-64H platform config sets. 8101-32FH and 8102-28FH-DPU use the same Silicon One (Gibraltar) ASIC without it, and the test passes on both.\r\n- With **`mcast_tunnel_enabled: false`** the full test scenario works on 8102-64H. Setting it back to `true` brings the drop back (A/B/A verified).\r\n- Recommendation: keep 8102-64H excluded for now, but as a **known platform issue with a tracking item**, not as \"not supported\". Revert this PR once the platform fix lands. On the revert question: not yet.\r\n\r\n### Context\r\n- This PR removed `x86_64-8102_64h_o-r0` from the allow-list of `vxlan/test_vxlan_multiple_tunnels.py` as \"not supported\".\r\n- #21400 added the test for feature validation, with 8102-64H in scope.\r\n- #25799 skips only the 4th tunnel (`special_v6`) on cisco-8000, because SAI supports at most 3 VxLAN P2MP tunnels. On cisco-8000 the test creates 3 tunnels and skips the 4 `outer_special_v6` cases.\r\n\r\n### Observations (202605, SONiC.20260510.19, 8102-64H on t1-64-lag)\r\n1. Running the test with 8102-64H re-enabled: **12/12 executed cases fail** with `Did not receive expected packet`, including on retry. The 4 `outer_special_v6` cases are skipped as designed. The PTF captures **no VxLAN packet at all** from the DUT.\r\n2. Since it was added, the test has never passed on 8102-64H in our nightly runs, on 202511 or 202605 images. It passes on 8101-32FH and 8102-28FH-DPU with the same image.\r\n3. The SONiC side is programmed correctly:\r\n   - ASIC_DB has `SAI_SWITCH_ATTR_VXLAN_DEFAULT_PORT`, `SAI_SWITCH_ATTR_VXLAN_DEFAULT_ROUTER_MAC`, a P2MP VxLAN tunnel-term entry for the loopback in the default VR, active VNET routes, and tunnel-encap next hops.\r\n   - No SAI error is specific to the failure.\r\n   - The VxLAN packets are **not trapped to the CPU**, so they are dropped inside the SDK/ASIC.\r\n4. Other VNET / overlay-ECMP tests pass on 8102-64H because they **do not exercise VxLAN decap**. For example, `test_vnet_decap.py` sends IP-in-IP packets in, and `test_vxlan_ecmp*.py` are encap-only. `test_vxlan_multiple_tunnels.py` exercises VxLAN decap \u2192 VNET route \u2192 VxLAN encap.\r\n\r\n### Platform configuration difference: `mcast_tunnel_enabled`\r\nThe Gibraltar `npu_cfg.device_property` blocks are almost identical across these SKUs. The only tunnel-related difference is `mcast_tunnel_enabled`:\r\n\r\n| Platform / HwSKU | `mcast_tunnel_enabled` | test result |\r\n|---|---|---|\r\n| `x86_64-8102_64h_o-r0` (Cisco-8102-C64, Cisco-8102-64H-O) | **`true`** | fails |\r\n| `x86_64-8101_32fh_o-r0` (O8C48 / O8V48 / O32 / \u2026) | not set | passes |\r\n| `x86_64-8102_28fh_dpu_o-r0` | not set | passes |\r\n\r\nOn 8102-64H the property is set in:\r\n- `device/cisco/x86_64-8102_64h_o-r0/platform_npu_cfg.yaml`\r\n- `device/cisco/x86_64-8102_64h_o-r0/<hwsku>/platform_npu_cfg.yaml`\r\n- `device/cisco/x86_64-8102_64h_o-r0/<hwsku>/asic_cfg.json` (`device_property`, used as `SAI_INIT_CONFIG_FILE`)\r\n\r\nIt is also set on other Cisco platforms such as 8111 and 8122, which are not in this test's allow-list.\r\n\r\n### Isolation (PTF-driven, same config as the test)\r\nConfig: `VXLAN_TUNNEL` (ttl_mode pipe), `VNET` (scope default, VNI 8000), `VNET_ROUTE_TUNNEL` routes.\r\n\r\nTo toggle the property, I set `mcast_tunnel_enabled` in the three files above and ran `config reload`, which re-initializes syncd and the SDK. I confirmed syncd loaded the new value, then restored the original config the same way.\r\n\r\n| Probe | `mcast_tunnel_enabled: true` (shipped) | `false` | `true` again |\r\n|---|---|---|---|\r\n| VxLAN \u2192 VNET route \u2192 VxLAN re-encap (1 tunnel) | 0/5 | **5/5** | 0/5 |\r\n| VxLAN decap \u2192 native route | 0/5 | **5/5** | 0/5 |\r\n| IP-in-IP \u2192 VxLAN encap (control) | 5/5 | 5/5 | 5/5 |\r\n| 3 tunnels (loopback_v4 / special_v4 / loopback_v6) \u00d7 v4/v6 VNET route \u00d7 v4/v6 inner (10 combos) | test: 12/12 fail | **10/10 pass** | \u2013 |\r\n\r\n- It fails with a **single** tunnel, so the tunnel count is not a factor.\r\n- The result does not change with the VxLAN UDP port (4789 / 65330) or the inner DMAC (router MAC vs. arbitrary).\r\n\r\n### Conclusion\r\n- The failure is real and specific to the 8102-64H platform configuration: VxLAN decap does not work while **`mcast_tunnel_enabled: true`**, and works with **`mcast_tunnel_enabled: false`**.\r\n- It is not expected by the test design, and we found no documentation that 8102-64H does not support this flow.\r\n- Any 8102-64H T1 that needs **VxLAN decap (VNET ingress)** is affected, so this is not a test-only problem.\r\n\r\n### Next steps\r\n1. Cisco to confirm why 8102-64H enables `mcast_tunnel_enabled`, and either:\r\n   - fix the SDK so that VxLAN decap works with `mcast_tunnel_enabled: true`, or\r\n   - set `mcast_tunnel_enabled: false` on 8102-64H if the multicast-tunnel feature is not needed there.\r\n2. Keep 8102-64H excluded until the fix lands, but change the skip reason to reference the tracking item instead of \"not supported\". Revert this PR after the fix is validated.\r\n3. The 4th-tunnel skip on cisco-8000 (#25799) is unrelated and stays as is.\r\n"
     },
     {
         "number": 25978,
