@@ -46040,6 +46040,13 @@
     {
         "number": 21638,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-10-10T19:34:17Z",
+        "comment_author": "augusdn",
+        "comment_body": "202603 hardware evidence is now available for the backport request.\n\nADO: 40096530\n\nThe release validation composed this sequence fix with the delay correction in #28371 and ran the existing power-off module on both DMA topologies using SONiC.20260310.24:\n\n- Testplan ID: `6aca659753edc28c6b57daf1` \u2014 LMA, 2 passed / 0 failed / 0 errors.\n- Testplan ID: `6aca7d222e0f2fa39edf1d3e` \u2014 UMA, 2 passed / 0 failed / 0 errors.\n\nEach run used zero retries and exercised PSU1-only, PSU2-only, and all-feed restoration at both 5- and 15-second delays. All 12 cycles reported `Power Loss`; pretest and posttest were clean.\n\n`Request for msft-202603 branch` and `Tested for msft-202603 Branch` are now applied. The 202603 composition also requires #28371 so the configured delay is actually honored."
+    },
+    {
+        "number": 21638,
+        "repo": "sonic-mgmt",
         "review_at": "2026-07-03T22:36:57Z",
         "review_author": "davidm-arista"
     },
