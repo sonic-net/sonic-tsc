@@ -2817,6 +2817,13 @@
     {
         "number": 408,
         "repo": "sonic-host-services",
+        "comment_at": "2026-10-13T02:15:19Z",
+        "comment_author": "chartsai-nvidia",
+        "comment_body": "Hello @vaibhavhd,\r\n\r\nI validated this fix on 202605 and all three test rounds passed after applying the PR. \r\n\r\n**Before applying the fix:** Parallel shutdown of DPU0 and DPU1 reproduced the issue in the first round:\r\n```text\r\nReboot command failed (rc=2, target=169.254.200.1:169.254.200.2)\r\nlookup tcp/169.254.200.2: unknown port\r\n```\r\n\r\n**After applying the fix:** I applied this PR\u2019s changes to `gnoi_shutdown_daemon.py` on the same image and restarted `gnoi-shutdown.service`. All **3 shutdown/startup rounds passed**:\r\n\r\n- Both DPUs successfully completed gNOI HALT in every round.\r\n- Both returned to Online/Ready and passed ping and gNOI RebootStatus checks.\r\n- No malformed-target, `unknown port`, or gNOI daemon errors were observed.\r\n\r\nSuccessful HALT messages were captured in each round:\r\n```text\r\nDPU0: Halting the services on DPU is successful for DPU0\r\nDPU1: Halting the services on DPU is successful for DPU1\r\n```\r\n\r\nThanks"
+    },
+    {
+        "number": 408,
+        "repo": "sonic-host-services",
         "review_at": "2026-07-13T16:35:50Z",
         "review_author": "dgsudharsan"
     },

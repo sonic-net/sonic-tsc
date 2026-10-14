@@ -1,5 +1,77 @@
 [
     {
+        "number": 824,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-12T17:19:40Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 824,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-12T17:19:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 824,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-12T17:20:04Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 824,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-13T18:39:22Z",
+        "comment_author": "donghaolicd",
+        "comment_body": "Independent review of **`0f94819f679b0c16b31696d4367cff36c94ea4ac`**: **no new actionable findings in this PR's declared scope**.\n\nReviewed the diff, authentication implementations, request-context ownership, gNMI/gNOI callers, tests, and existing discussion. The [per-attempt reset and unconditional role check](https://github.com/sonic-net/sonic-gnmi/blob/0f94819f679b0c16b31696d4367cff36c94ea4ac/gnmi_server/server.go#L847-L908) correctly separate failed-method identity from subsequent fallback and enforce roles with an empty `ConfigTableName`. I accounted for the already-merged #780/#782/#790 changes and the documented **#807-before-#824** dependency; the existing role-ordering/status-code discussions are not new findings here.\n\n**Evidence and limits:**\n- Local `git diff --check` and formatting checks passed.\n- A separate harness using verbatim authentication/context/role function bodies passed the PR's regression tests plus independent signed-JWT, successful/rejected fallback, target-role matrix, sequential context reuse, 64 concurrent independent requests, and UDS/auth-disabled compatibility checks. Both normal and `-race` runs passed; harness `go vet` passed. The PR regression tests failed against the pre-change implementation as expected. SSH, CONFIG_DB storage, CRL outcomes, and shared-memory counters were stubbed; certificate contexts were synthetic. This is isolated logic evidence, not transport/native integration evidence or proof that sharing one mutable request context concurrently is safe.\n- All 13 GitHub checks/statuses are green. Separately inspected the existing [integration execution](https://github.com/sonic-net/sonic-gnmi/runs/114937427246): checkout was merge `b0b6da9151eebedaaffc5c00d532598d6a0fd9f5`, whose tree matches the reviewed SHA. Logs and test results confirm all four `TestAuthenticateRoleAccess*` groups, all six certificate-matrix subtests, `TestAuthenticate`, and `TestAuthenticateUDS` passed without skips. The overall pipeline succeeded; other suite tests have skips.\n- Local full-package execution was blocked at compilation by missing PAM/libyang headers and generated SWSS bindings. No live SSH/TLS/CRL or device validation was performed in this review.\n"
+    },
+    {
+        "number": 824,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-12T17:23:16Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 824,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-12T17:26:50Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 824,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-12T17:27:15Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 824,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-13T18:52:09Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 824,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-13T19:02:47Z",
+        "review_author": "donghaolicd"
+    },
+    {
+        "number": 824,
+        "repo": "sonic-gnmi",
+        "latestReview_at": "2026-10-13T18:52:09Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 824,
+        "repo": "sonic-gnmi",
+        "latestReview_at": "2026-10-13T19:02:47Z",
+        "latestReview_author": "donghaolicd",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 821,
         "repo": "sonic-gnmi",
         "comment_at": "2026-10-08T22:48:51Z",
@@ -271,6 +343,225 @@
         "repo": "sonic-gnmi",
         "latestReview_at": "2026-10-10T22:45:18Z",
         "latestReview_author": "hdwhdw",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 818,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-07T06:51:39Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 818,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-07T06:51:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 818,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-07T06:52:01Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 818,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-08T00:22:19Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Hi, there are workflow run(s) waiting for approval, you may be first-time contributor. I will notify maintainers to help approve once PR is approved. Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 818,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-13T19:05:35Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 818,
+        "repo": "sonic-gnmi",
+        "latestReview_at": "2026-10-13T19:05:35Z",
+        "latestReview_author": "hdwhdw",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 814,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T18:17:54Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 814,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T18:18:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 814,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T18:18:18Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 814,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-13T19:18:25Z",
+        "comment_author": "donghaolicd",
+        "comment_body": "Independent review of **`93493e2fd876388e418f26738e44519d0056001c`** against base `3cf83f3d17c4855d5d5eeeebf0e50bc82bc62605`: **no new actionable findings in this diff; suitable to merge as the scoped handler fix**.\n\nThe [authorization call](https://github.com/sonic-net/sonic-gnmi/blob/93493e2fd876388e418f26738e44519d0056001c/gnmi_server/gnoi_healthz.go#L218-L240) precedes request/path processing, file access, hashing and streaming, requests gNOI **read** access, and returns the original error. Authorized streaming is unchanged. Reviewed the exact diff, shared authentication/context/role behavior, callers, tests and existing discussion. #782 is already in this base; the separate #807/#824 hardening is not part of this patch or evidence of complete authorization-policy remediation.\n\n**Verification:** formatting and diff checks passed. A source-exact isolated harness passed the PR's denial-order test, a 72-case role matrix, nine Artifact authorization-boundary cases, and file/header/hash/content/trailer assertions. The denial-order test fails against the exact base as expected. Credential mechanisms and file lookup were stubbed; this is logic evidence, not live credential or transport validation.\n\nSeparately verified the [existing integration execution](https://github.com/sonic-net/sonic-gnmi/runs/112510566236): checkout `9bb8c3c` has the reviewed HEAD's tree; the denial-order test and all eight Artifact cases passed without skips. Latest checks are green. The build retains two earlier failed wildcard-subscription results, while the later integration attempt passed (1,019 passed, 17 skipped in the environment suite). CI uses mocked dependencies/direct handler calls for these cases; no device evidence is claimed.\n"
+    },
+    {
+        "number": 814,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-06T18:19:21Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 814,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-13T19:22:57Z",
+        "review_author": "donghaolicd"
+    },
+    {
+        "number": 814,
+        "repo": "sonic-gnmi",
+        "latestReview_at": "2026-10-06T18:19:21Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 814,
+        "repo": "sonic-gnmi",
+        "latestReview_at": "2026-10-13T19:22:57Z",
+        "latestReview_author": "donghaolicd",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 813,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T16:05:40Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 813,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T16:05:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 813,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T16:06:05Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 813,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T16:15:44Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 813,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T16:15:58Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 813,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T16:48:37Z",
+        "comment_author": "hdwhdw",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 813,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T16:48:50Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 813,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T17:01:14Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 813,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T17:01:29Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 813,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T17:51:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 813,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T17:51:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 813,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T18:27:51Z",
+        "comment_author": "hdwhdw",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 813,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-06T18:28:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 813,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-13T19:17:58Z",
+        "comment_author": "donghaolicd",
+        "comment_body": "Independent review of **7412fe72b81cc44afd9b3a55be2ae8c5e1bb3800** against **3cf83f3d17c4855d5d5eeeebf0e50bc82bc62605**: **no new actionable defects found** in the reviewed transport restriction, local-access boundary, action policy, executor, or protocol migration.\n\nOpenConfig Debug is absent from TCP registration, write-gated on UDS, and rejects non-Unix peers before dispatch. Local authorization intentionally trusts filesystem access rather than identifying the calling UID. Policy resolution fixes executable/argv/identity and fails closed; stdout/stderr share a response budget. The shared role-resolution change also affects other authenticated RPCs, with explicit `noaccess` taking precedence.\n\nValidation performed:\n- Passed focused `go test` and `go test -race` for `./internal/exec ./pkg/gnoi/debug`, `go vet` for both, and the DPU proxy tests with `-gcflags='all=-N -l'`.\n- Passed a 10-second policy fuzz run and `git diff --check`. Additional isolated tests used real unprivileged helper processes to verify combined-output truncation, exit-status propagation, and timeout termination; these replaced the namespace/systemd launcher.\n- Read the existing successful CI checkout and execution logs: the merge includes this exact head/base, and the Debug peer-denial, write-enabled/disabled listener-registration, and deny-precedence tests actually passed without skips. This goes beyond the aggregate green [checks](https://github.com/sonic-net/sonic-gnmi/pull/813/checks).\n\nLimits / non-blocking follow-up: local `gnmi_server` tests could not compile without SONiC/PAM/libyang dependencies. Existing executor tests mock process launch; neither those nor my helper tests validate the real `nsenter` \u2192 systemd sandbox/cgroup path. Before deployment, smoke-test both actions, cancellation/timeout cleanup, and socket ownership/permissions in the target image. Coordinate the documented v1 policy migration and service restart. Also refresh the PR's validation paragraph: the server tests now have successful CI execution evidence.\n"
+    },
+    {
+        "number": 813,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-06T16:09:47Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 813,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-13T19:27:02Z",
+        "review_author": "donghaolicd"
+    },
+    {
+        "number": 813,
+        "repo": "sonic-gnmi",
+        "latestReview_at": "2026-10-06T16:09:47Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 813,
+        "repo": "sonic-gnmi",
+        "latestReview_at": "2026-10-13T19:27:02Z",
+        "latestReview_author": "donghaolicd",
         "latestReview_state": "APPROVED"
     },
     {
@@ -746,6 +1037,13 @@
     {
         "number": 791,
         "repo": "sonic-gnmi",
+        "comment_at": "2026-10-13T19:14:07Z",
+        "comment_author": "donghaolicd",
+        "comment_body": "Retrospective independent review of final head `b7d7f9e342beaba2db1a474d723ef6b8572825de` against its own base; also checked the corresponding squash-merge changes.\n\nNo new actionable defect found in the pre-bypass authorization change. The final code uses the CONFIG_DB-specific target, addressing the earlier review thread, and reaches `bypass.TrySet` only after configured authentication/authorization succeeds.\n\nVerification: source-exact isolated handler tests passed for both target wire forms across update/replace/delete and write/read-only/unrelated roles (18 cases), plus no-header, other-database and bypass-ineligible routing (3 cases). The PR's target/authentication tests and the bypass package tests also passed. The pre-change Set handler failed the read-only and unmapped-identity denial controls. Identity mapping/native clients were substituted; bypass package tests use an in-memory Redis server, not a device. GitHub reports successful checks; historical build logs were unavailable for independent testcase readback.\n\nNo corrective change to this PR identified. Non-blocking: upstream the full-handler second-wire-form and fallback coverage; the existing second-wire-form case exercises only target resolution. Keep #807/#824 shared-auth hardening separate. The reviewed 202511 base has no native Set bypass, so #817 does not need a mechanical backport of this fast-path change.\n"
+    },
+    {
+        "number": 791,
+        "repo": "sonic-gnmi",
         "review_at": "2026-09-27T15:21:02Z",
         "review_author": "copilot-pull-request-reviewer"
     },
@@ -829,6 +1127,13 @@
         "comment_at": "2026-10-02T23:14:41Z",
         "comment_author": "mssonicbld",
         "comment_body": "@hdwhdw cherry pick PR didn't pass PR checker after retry. Please help check! Thanks.<br>https://github.com/sonic-net/sonic-gnmi/pull/795\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 790,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-13T19:14:03Z",
+        "comment_author": "donghaolicd",
+        "comment_body": "Retrospective independent review of final head `d8436e101f6b752bb76153e45948b99e255038d2` against its own base; also checked the corresponding squash-merge changes.\n\nNo new actionable defect found in this PR's five write-classification changes. Authorization precedes File handler dispatch, FactoryReset backend construction, and OS.Install's lock, stream reads and filesystem work.\n\nVerification: the original 15-case authorization matrix passed in a source-exact isolated harness, plus an independent OS.Install denial check covering stream I/O, lock availability and unchanged temporary files. Restoring the pre-change handlers made all five read-only denial cases fail as expected. Native CONFIG_DB storage and service backends were substituted; this is not device execution. GitHub reports successful checks, but the historical build logs were unavailable during this review, so I did not independently reconfirm their individual test results.\n\nFollow-up: retain the separate shared-authentication hardening in #807/#824; this narrow classification fix does not replace those changes. For 202511, #817 includes the five checks with release-specific shared authorization. No corrective change to this PR identified. A non-blocking improvement is to retain the extra pre-stream/pre-filesystem denial assertions in the repository tests.\n"
     },
     {
         "number": 790,
