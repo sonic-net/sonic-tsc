@@ -1,5 +1,108 @@
 [
     {
+        "number": 170,
+        "repo": "sonic-mgmt-framework",
+        "comment_at": "2026-09-25T00:38:17Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 170,
+        "repo": "sonic-mgmt-framework",
+        "comment_at": "2026-09-25T00:38:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 170,
+        "repo": "sonic-mgmt-framework",
+        "comment_at": "2026-09-25T00:38:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 170,
+        "repo": "sonic-mgmt-framework",
+        "comment_at": "2026-09-30T06:00:01Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 170,
+        "repo": "sonic-mgmt-framework",
+        "comment_at": "2026-09-30T06:00:59Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 170,
+        "repo": "sonic-mgmt-framework",
+        "comment_at": "2026-10-01T05:07:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 170,
+        "repo": "sonic-mgmt-framework",
+        "comment_at": "2026-10-01T05:07:17Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 170,
+        "repo": "sonic-mgmt-framework",
+        "comment_at": "2026-10-02T04:58:15Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@nishant111 - reviewed `12b124b89b91f2efe6ac073eba4e73cd0b3f7642`. No high-confidence exploitable blocker found in the dependency changes, but the remediation evidence needs clarification.\r\n\r\nThe `go.mod` / `go.sum` changes are consistent: `x/crypto` moves to v0.52.0 with the required companion versions, and all eight changed module / go.mod hashes match the Go checksum database. Current CI, DCO and CLA checks are green.\r\n\r\n1. **Please provide an authoritative reference for CVE-2026-46596, or correct the identifier.** The other six listed CVEs have upstream fixed-version evidence at v0.52.0: [GO-2026-5017](https://vuln.go.dev/ID/GO-2026-5017.json), [GO-2026-5019](https://vuln.go.dev/ID/GO-2026-5019.json), [GO-2026-5006](https://vuln.go.dev/ID/GO-2026-5006.json), [GO-2026-5005](https://vuln.go.dev/ID/GO-2026-5005.json), [GO-2026-5020](https://vuln.go.dev/ID/GO-2026-5020.json), and [GO-2026-5021](https://vuln.go.dev/ID/GO-2026-5021.json). I could not corroborate CVE-2026-46596 in the public advisory sources checked; that is an evidence gap, not proof the identifier is invalid.\r\n2. **Please include authentication regression evidence with auth tests enabled.** The existing Azure run reports success, but all seven `TestAuth_*` cases were skipped. The REST authentication path uses `x/crypto/ssh` for password authentication against fixed `127.0.0.1:22`, so the green result does not demonstrate that this runtime path was exercised.\r\n3. **Minimum-Go compatibility remains unverified.** CI used Go 1.26.5 while `go.mod` declares 1.25.9. If that minimum is part of the supported contract, please cover it or document the intended build-toolchain requirement.\r\n\r\nThe review supports the dependency update, not a claim that every listed CVE and deployment path has been independently validated. No local Go build, `govulncheck`, live authentication exchange or DUT test was run for this review.\r\n"
+    },
+    {
+        "number": 170,
+        "repo": "sonic-mgmt-framework",
+        "comment_at": "2026-10-08T04:05:50Z",
+        "comment_author": "nishant111",
+        "comment_body": "@StormLiangMS Thank you for the review . \r\n I have addressed the validation requests and updated the CVE in the description ( apologies for the Typo in the CVE Identifier )\r\n \r\nfor point 2, Authentication regression validation\r\n \r\n I rebuilt commit \u00a012b124b89b91f2efe6ac073eba4e73cd0b3f7642\u00a0 and explicitly enabled the authentication tests:\r\n \r\n  TOPDIR=$PWD tools/test/rest-gotest.sh \\\r\n      -bin -run Auth -authtest local,tacacs\r\n \r\n All seven top-level \u00a0TestAuth_*\u00a0 cases ran and passed; none were skipped. Every GET, HEAD, OPTIONS, PUT, POST, PATCH, and DELETE subtest also passed. Valid credentials completed the actual \u00a0golang.org/x/crypto/ssh\u00a0 password handshake used by \u00a0PAMAuthenAndAuthor()\u00a0, while invalid users and passwords produced the expected SSH authentication failures.\r\n \r\n for point 3, Minimum-Go compatibility\r\n \r\n I repeated dependency verification and compilation with the exact minimum toolchain declared by \u00a0go.mod\u00a0:\r\n \r\n  go version go1.25.9 linux/amd64\r\n \r\n Using Go 1.25.9:\r\n \r\n  - \u00a0go mod verify\u00a0 passed.\r\n  - The matching clean \u00a0sonic-mgmt-common\u00a0 build passed.\r\n  - Framework \u00a0make -j8 rest\u00a0 passed.\r\n  - The generated REST test binary passed the enabled authentication suite above.\r\n "
+    },
+    {
+        "number": 170,
+        "repo": "sonic-mgmt-framework",
+        "comment_at": "2026-10-12T00:37:43Z",
+        "comment_author": "nishant111",
+        "comment_body": " Additional validation artifacts are attached as \u00a0pr170-validation-artifacts.zip\u00a0.\r\n \r\n Validated commit: \u00a012b124b89b91f2efe6ac073eba4e73cd0b3f7642\u00a0\r\n Toolchain: \u00a0go version go1.25.9 linux/amd64\u00a0\r\n Artifact SHA-256: \u00a0cb973fdc537a2f0eabe9a15556c06b9d41a73b7a977068714a7d4c4cdd61e771\u00a0\r\n \r\n Minimum-Go results:\r\n \r\n  go version go1.25.9 linux/amd64\r\n  all modules verified\r\n  sonic-mgmt-common build: PASS (exit code 0)\r\n  sonic-mgmt-framework make -j8 rest: PASS (exit code 0)\r\n  REST test binary generated: build/tests/rest/server.test\r\n \r\n Authentication command:\r\n \r\n  TOPDIR=$PWD tools/test/rest-gotest.sh \\\r\n      -bin -run Auth -authtest local,tacacs\r\n \r\n Authentication result excerpt:\r\n \r\n  +++++ Enabled auth test types [local tacacs]\r\n  --- PASS: TestAuth_LocalUser (0.02s)\r\n  --- PASS: TestAuth_LocalAdmin (0.02s)\r\n  --- PASS: TestAuth_TacacsUser (0.02s)\r\n  --- PASS: TestAuth_TacacsAdmin (0.02s)\r\n  --- PASS: TestAuth_NoUser (0.00s)\r\n  --- PASS: TestAuth_BadUser (0.02s)\r\n  --- PASS: TestAuth_BadPass (0.02s)\r\n  PASS\r\n  coverage: 24.0% of statements\r\n \r\n No \u00a0TestAuth_*\u00a0 test was skipped. Every test ran its GET, HEAD, OPTIONS, PUT, POST, PATCH, and DELETE subtests. The raw log records successful \u00a0golang.org/x/crypto/ssh\u00a0 password handshakes for valid credentials and the expected SSH handshake authentication failures for invalid credentials.\r\n \r\n The SSH endpoint was an isolated loopback test fixture bound to \u00a0127.0.0.1:22\u00a0. This evidence validates the framework SSH client authentication and authorization path after the dependency update; it does not claim independent validation of production PAM or TACACS infrastructure.\r\n \r\n The ZIP includes:\r\n \r\n  - \u00a0pr170-auth-tests-go1.25.9.txt\u00a0 \u2014 complete authentication output\r\n  - \u00a0pr170-framework-rest-build-go1.25.9.txt\u00a0 \u2014 complete framework REST build output\r\n  - \u00a0pr170-common-build-go1.25.9.txt\u00a0 \u2014 complete paired common build output\r\n  - \u00a0pr170-validation-evidence.txt\u00a0 \u2014 commands, commits, results, and scope\r\n  - \u00a0SHA256SUMS.txt\u00a0 \u2014 per-file integrity hashes"
+    },
+    {
+        "number": 170,
+        "repo": "sonic-mgmt-framework",
+        "comment_at": "2026-10-12T00:42:35Z",
+        "comment_author": "nishant111",
+        "comment_body": "[pr170-validation-artifacts.zip](https://github.com/user-attachments/files/33316429/pr170-validation-artifacts.zip)\r\n"
+    },
+    {
+        "number": 170,
+        "repo": "sonic-mgmt-framework",
+        "review_at": "2026-09-25T00:40:23Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 170,
+        "repo": "sonic-mgmt-framework",
+        "review_at": "2026-10-13T03:22:52Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 170,
+        "repo": "sonic-mgmt-framework",
+        "latestReview_at": "2026-09-25T00:40:23Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 170,
+        "repo": "sonic-mgmt-framework",
+        "latestReview_at": "2026-10-13T03:22:52Z",
+        "latestReview_author": "StormLiangMS",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 169,
         "repo": "sonic-mgmt-framework",
         "comment_at": "2026-09-21T20:28:40Z",
