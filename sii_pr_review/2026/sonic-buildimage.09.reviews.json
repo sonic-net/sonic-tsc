@@ -5990,6 +5990,27 @@
     {
         "number": 29614,
         "repo": "sonic-buildimage",
+        "comment_at": "2026-10-14T05:22:59Z",
+        "comment_author": "augusdn",
+        "comment_body": "### Hardware evidence for the msft-202603 backport request\n\nThe final PR-head patch was qualified in two installable image compositions on physical hardware:\n\n| Source base | Testplan ID | Focused result | Plan result |\n|---|---|---:|---|\n| `master` | `6aaf7a7acf9385883455d3b4` | R02 1/1 passed | 17 passed / 4 skipped, clean pre/post, zero retries |\n| `202605` | `6aae9ef580f8f7db7163b8b8` | R02 1/1 passed | 18 passed / 3 skipped, clean pre/post, zero retries |\n\nEach image contained the exact final PR-head patch; the `202605` application required no adaptation. The patch applies cleanly to the msft-202603 source and its focused aggregate suite passed 292 tests.\n\nAn exact msft-202603 image containing this final patch has not yet completed hardware qualification. I added the `Request for msft-202603 Branch` label. This repository currently has no `Tested for msft-202603 Branch` label to apply; exact backport-image evidence should be added after that artifact is available."
+    },
+    {
+        "number": 29614,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-10-14T05:32:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202603: https://github.com/Azure/sonic-buildimage-msft/pull/3364"
+    },
+    {
+        "number": 29614,
+        "repo": "sonic-buildimage",
+        "comment_at": "2026-10-14T06:13:01Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): msft-202603, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202603: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 29614,
+        "repo": "sonic-buildimage",
         "review_at": "2026-09-18T01:32:26Z",
         "review_author": "copilot-pull-request-reviewer"
     },
