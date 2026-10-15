@@ -35,7 +35,7 @@ work=$(mktemp -d)
 trap 'rm -rf $work' EXIT
 
 if [ -z "$tool_dir" ]; then
-    git clone --depth 1 https://github.com/sonic-net/sonic-pipelines $work/sonic-pipelines
+    git clone --depth 1 https://github.com/yijingyan2/sonic-pipelines $work/sonic-pipelines
     tool_dir=$work/sonic-pipelines/scripts/code-owners
 fi
 
