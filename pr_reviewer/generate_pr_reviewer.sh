@@ -5,7 +5,7 @@ repos=$(grep -v "^\s*#" "$(dirname "$0")/repos" | grep -v "^\s*$")
 tool_dir=""
 max_owners=1000
 half_life_days=180
-min_score=0.5
+min_score=0.4
 min_raw=50
 use_reviews=1
 
