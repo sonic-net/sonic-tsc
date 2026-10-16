@@ -5,6 +5,8 @@ repos=$(grep -v "^\s*#" "$(dirname "$0")/repos" | grep -v "^\s*$")
 tool_dir=""
 max_owners=1000
 half_life_days=180
+min_score=0.5
+min_raw=50
 use_reviews=1
 
 help(){
@@ -13,6 +15,8 @@ help(){
     echo "    -t    # path to sonic-pipelines/scripts/code-owners, default: clone it"
     echo "    -m    # max owners per folder, default $max_owners (keep all contributors for approver qualification)"
     echo "    -l    # recency half-life in days, default $half_life_days (0 disables)"
+    echo "    -s    # drop owners with final score below this, default $min_score (0 keeps all)"
+    echo "    -w    # drop owners with raw decayed change weight below this, default $min_raw (0 ignores)"
     echo "    -R    # skip approval history (change score only)"
     echo "Set GITHUB_API_TOKENS (comma separated) to avoid API rate limits."
 }
@@ -24,6 +28,8 @@ do
         -t) tool_dir=$2; shift ;;
         -m) max_owners=$2; shift ;;
         -l) half_life_days=$2; shift ;;
+        -s) min_score=$2; shift ;;
+        -w) min_raw=$2; shift ;;
         -R) use_reviews=0 ;;
         *) help; exit 1 ;;
     esac
@@ -90,8 +96,9 @@ PY
     fi
 
     # raw_change_weights.yml: decayed changed lines; raw_review_weights.yml: decayed approval counts;
-    # pr_reviewer-by-files.yml: 0.6 * change score + 0.4 * approval score, each weight / top weight in the folder (0-1)
-    norm_args=(--normalize max)
+    # pr_reviewer-by-files.yml: 0.6 * change score + 0.4 * approval score, each weight / top weight in the folder (0-1);
+    # owners below min_score or min_raw are dropped from pr_reviewer-by-files.yml only (raw files keep everyone)
+    norm_args=(--normalize max --min_score $min_score --min_raw_change_weight $min_raw)
     if [ "$use_reviews" = 1 ]; then
         "$(dirname "$0")/dump_reviews.sh" -r $repo -o $work/$name.reviews || echo "review dump failed for $repo"
         [ -d $work/$name.reviews ] && norm_args+=(--reviews_file $work/$name.reviews --reviews_out $work/$name.rv.yaml)
