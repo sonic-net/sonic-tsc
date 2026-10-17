@@ -29023,6 +29023,20 @@
     {
         "number": 26931,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-10-16T19:50:36Z",
+        "comment_author": "frank-nexthop",
+        "comment_body": "@StormLiangMS test results on the `202605` target branch for the cherry-pick request. The PR description's **Tested branch** / **Test result** sections are updated with the same evidence.\n\n**Code under test:** `sonic-net/sonic-mgmt` branch `202605` at a754f582a with only this PR's master commit (5ab9811bae) cherry-picked on top. Three context conflicts, all from neighbouring lines that are not on 202605 (`lacp_fast_rate`, the BMC switch-host block, the `is_pfcwd_hw_recovery_enabled` import in `tests/conftest.py`); the resulting diff is otherwise identical to the master commit.\n\n**Image:** community 202605 nightly `SONiC.202605.1248505-2baf02b39` (sonic-buildimage 202605 @ 2baf02b39, Azure build 1248505).\n\n**Testbed:** physical testbed, Broadcom-based DUT, topology `t1-8`, 8 x 800G DAC links to a SONiC fanout, `LinkTraining=on` for those links in `sonic_lab_links.csv`.\n\n**Run:** deploy-mg from the branch above, then an ad-hoc pytest (not part of this PR) that drives `tests/common/config_reload.py` from the same branch through the three reload flows below. Result: 4 passed, 0 failed, 0 skipped (12m10s).\n\n| Flow | Command issued on the DUT | Observed |\n|---|---|---|\n| 1. Baseline after deploy-mg | `config load_minigraph -y -o -p golden_config_db.json` (by deploy-mg) | golden config == `golden_config_db.json.origin.backup`; `link_training on` on 8/8 ports in CONFIG_DB and in the saved `config_db.json`; 8/8 links up and `trained` on DUT and fanout |\n| 2. Plain minigraph revert (the premise) | `sudo config load_minigraph -y` | `link_training` 8 \u2192 0 ports, `trained` 8 \u2192 0, links down |\n| 3. `config_reload(config_source='minigraph')`, no override | `config load_minigraph -y -p /etc/sonic/golden_config_db.json`, then log `Re-applying link_training from golden config on 8 ports after minigraph reload` | 8/8 `link_training on`, 8/8 up and `trained`, persisted by `config save -y` |\n| 4. `config_reload(config_source='minigraph', override_config=True)` | `config load_minigraph -y -o -p /etc/sonic/golden_config_db.json`; no reapply log line (override path unchanged) | 8/8 `link_training on`, 8/8 up and `trained`, golden config still == `.origin.backup` |\n"
+    },
+    {
+        "number": 26931,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-17T00:15:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The **Tested branch** section has been ticked and **Test result** is provided for branch(es): 202605. Added label(s): Tested for 202605 Branch.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 26931,
+        "repo": "sonic-mgmt",
         "review_at": "2026-08-14T20:58:19Z",
         "review_author": "bingwang-ms"
     },
