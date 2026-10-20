@@ -712,6 +712,168 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 879,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-08-21T21:06:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 879,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-08-21T21:06:24Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 879,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-08-21T21:06:32Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 879,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-08-22T00:21:01Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): msft-202608, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202608: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 879,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-08-28T19:23:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 879,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-08-28T19:23:41Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 879,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-08-28T20:14:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 879,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-08-28T20:15:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 879,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-08-28T20:18:29Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 879,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-10-01T04:04:11Z",
+        "comment_author": "judyjoseph",
+        "comment_body": "@chinmoy-nexthop  @fraserg-arista please review \r\n"
+    },
+    {
+        "number": 879,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-10-10T02:14:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 879,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-10-10T02:14:34Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 879,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-10-16T04:10:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 879,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-10-16T04:10:53Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 879,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-10-16T04:10:58Z",
+        "comment_author": "judyjoseph",
+        "comment_body": "> Reviewed at `cc530cf6`. One blocking item, which I think is an accident rather than intent; the rest are non-blocking.\r\n> \r\n> **Blocking \u2014 the `TestThermalMonitor` class header was deleted, orphaning its body.**\r\n> \r\n> In the last hunk of `sonic-thermalctld/tests/test_thermalctld.py`:\r\n> \r\n> ```\r\n> +        liquid_cooling_updater.event_logger.log_notice.assert_any_call(\r\n> +            'Liquid cooling leaking sensor leakage1 recovered from fault')\r\n> \r\n> -class TestThermalMonitor(object):\r\n>      \"\"\"\r\n>      Test cases to cover functionality in ThermalMonitor class\r\n>      \"\"\"\r\n> ```\r\n> \r\n> The `class` line is removed while its docstring and every one of its methods survive as context at 4-space indent \u2014 the same level as the newly added tests above them. So `TestThermalMonitor` no longer exists, and all of its test methods are silently re-parented into the preceding LiquidCooling test class. Nothing fails loudly: the methods still run, but under a class whose fixtures and setup were never written for them, and any method name that collides with one already in that class is shadowed outright.\r\n> \r\n> Nothing in the PR description mentions removing ThermalMonitor coverage, so this reads like a rebase or hunk-edit slip. Restoring the one line fixes it.\r\n> \r\n> Non-blocking, but the first one is worth checking before merge because it could make the headline feature a no-op:\r\n> \r\n> 1. **Does `_restore_state_from_db()` run before or after `__init__` writes the sensor rows?** The restore depends on reading _persisted_ state:\r\n>    ```python\r\n>    fields = self._row_to_dict(self.sensor_table.get(sensor_name))\r\n>    if not fields or fields.get('leaking') != 'Yes':\r\n>        continue\r\n>    ```\r\n>    \r\n>    \r\n>        \r\n>          \r\n>        \r\n>    \r\n>          \r\n>        \r\n>    \r\n>        \r\n>      \r\n>    but the call is placed after the `__init__` loop that writes each sensor row (including a freshly stamped `timestamp`). If that loop seeds or overwrites `leaking`/`leak_severity`, the restore reads back what `__init__` just wrote rather than the pre-restart state, and an ongoing leak silently fails to survive a restart \u2014 exactly what this change is meant to prevent.\r\n>    What makes this hard to rule out from the tests: all four new tests construct the updater first, then write the DB rows, then call `updater._restore_state_from_db()` directly, so none of them exercise the constructor path that production uses. A test that pre-populates the mock tables and _then_ constructs `LiquidCoolingUpdater`, asserting the state came back, would both settle this and lock it in.\r\n> 2. **The new catch-all in `task_worker` can flood syslog and leaves a stale row looking current.**\r\n>    ```python\r\n>    try:\r\n>        self.update()\r\n>    except Exception as e:\r\n>        self.log_error('Error during liquid cooling update cycle: {}'.format(repr(e)))\r\n>    ```\r\n>    \r\n>    \r\n>        \r\n>          \r\n>        \r\n>    \r\n>          \r\n>        \r\n>    \r\n>        \r\n>      \r\n>    Keeping the thread alive is right. But a persistently failing platform plugin now logs once per `liquid_cooling_update_interval` forever, which is a departure from the log-once idiom this same class already uses for faulty sensors (`if sensor_name not in self.faulty_sensors:`). More importantly, the failure is fully swallowed \u2014 `assert liquid_cooling_updater.exc is None` in the test confirms it \u2014 so STATE_DB keeps serving the last-known row, and a sensor that cannot be read at all is indistinguishable from one reporting \"no leak\". Latching the error (log once, log recovery once) and marking the affected rows stale would keep the hardening benefit without that ambiguity.\r\n> 3. **`timestamp` quietly changed meaning.** `ts = self.leaking_sensors.get(sensor_name, now)` turns it from \"time of last row write\" into \"leak-start time\", which is what the restart requirement needs \u2014 but it also removes the only record of _when_ a sensor escalated MINOR\u2192CRITICAL. The change is visible only as an inverted assertion:\r\n>    ```python\r\n>    -        assert fvp.fv_dict['timestamp'] != ts1_leak1, \"escalation must record a fresh timestamp\"\r\n>    +        assert fvp.fv_dict['timestamp'] == ts1_leak1, \"escalation must preserve the original leak-start timestamp\"\r\n>    ```\r\n>    \r\n>    \r\n>        \r\n>          \r\n>        \r\n>    \r\n>          \r\n>        \r\n>    \r\n>        \r\n>      \r\n>    A separate `leak_start` field, leaving `timestamp` as last-update, would satisfy the restart case without changing the meaning of a field any existing CLI or telemetry consumer may already read.\r\n> 4. **Two new tests may be asserting vacuously.** `test_restart_latches_critical_even_if_platform_reads_minor` and `test_restart_resumes_minor_timer_and_escalates` set the attribute directly:\r\n>    ```python\r\n>    lc.leakage_sensors[0].leak_severity = LeakSeverity.MINOR\r\n>    ```\r\n>    \r\n>    \r\n>        \r\n>          \r\n>        \r\n>    \r\n>          \r\n>        \r\n>    \r\n>        \r\n>      \r\n>    while every sibling test in this file stubs the accessor instead (`sensor.get_leak_severity = mock.MagicMock(return_value=...)`). If `MockLeakSensor.get_leak_severity()` doesn't read that attribute, the assignment is a no-op and the latch never actually faces a live MINOR \u2014 the assertions pass for free. Worth confirming, or switching to the mock form used elsewhere.\r\n> 5. **Moving the faulty/recovered messages to `event_logger` may drop them from syslog.** The stated goal is to add durable `/host/event.log` output, not to remove syslog coverage \u2014 so if `event_logger` doesn't tee, please emit to both and keep parity with how the rest of thermalctld reports faults.\r\n> 6. **`_row_to_dict` is shaped by the test double.** Its own comment says it: _\"Real swsscommon returns (found, fvs); the unit-test mock returns a plain dict.\"_ Fixing `mock_swsscommon.Table.get()` to return `(found, fvs)` would let the `isinstance(row, dict)` branch go away, so production code isn't carrying a shape that only exists in tests.\r\n> 7. Minor: the PR description lists item 4 (\"Error log case when a leak sensor tell it is leaking but Severity is None\") and `test_leaking_without_severity_logs_event_error`, neither of which appears in this diff. Dropped from the branch, or already upstream?\r\n> \r\n> The restart-survival work is the right thing to be doing here, and the event-log durability goal makes sense \u2014 it's really just the deleted class line that needs fixing before this can land.\r\n> \r\n> AI-assisted review, reviewed by Ying Xie (@yxieca).\r\n\r\nthanks @yxieca addressed the comments "
+    },
+    {
+        "number": 879,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-10-19T18:20:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Removed label(s):\n- `Request for msft-202608 Branch`: The matching `Tested for msft-202608 Branch` label is missing. This requirement also applies to manually added request labels.\n\nThis PR requests backports for branch(es): 202608, but is missing required test information.\n\n**Update the PR description, not a PR comment:**\n1. List each requested branch under **Backport**.\n2. After testing on each branch, tick its checkbox (`- [x]`) under **Tested branch**. An unchecked box (`- [ ]`) does not count.\n3. Under **Test result**, start a separate entry with each branch number, followed by its test evidence on the same line or the following lines, such as a test-run link or a summary with logs. A branch number alone, placeholders, and results for another branch do not count.\n\nExample format for the branches above (replace every placeholder with your actual test evidence; only check branches you have tested):\n```markdown\n### Backport\n202608\n\n### Tested branch\n- [x] 202608\n\n### Test result\n202608: <link to test results or summary with logs>\n```\n\nKeep this information outside HTML comments (`<!-- ... -->`) so the app can read it.\nAfter you save the PR description, the app checks it again and adds the matching `Tested for <branch> Branch` labels first, then the `Request for <branch> Branch` labels. Request labels remain blocked until their matching tested labels are present.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 879,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-10-19T19:16:35Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The change is not in msft-202608 yet. @judyjoseph, please manually create the cherry pick PR for branch msft-202608.<br>You can ping the release branch owner(github account: yxieca) to approve your cherry pick PR.<br>If this change is already in msft-202608, please comment \"already in msft-202608\". Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 879,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2026-10-01T17:04:15Z",
+        "review_author": "fraserg-arista"
+    },
+    {
+        "number": 879,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2026-10-01T17:30:26Z",
+        "review_author": "chinmoy-nexthop"
+    },
+    {
+        "number": 879,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2026-10-10T02:05:03Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 879,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2026-10-10T02:12:32Z",
+        "review_author": "judyjoseph"
+    },
+    {
+        "number": 879,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2026-10-11T00:30:41Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 879,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2026-10-19T18:16:53Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 879,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2026-10-19T18:16:53Z",
+        "latestReview_author": "yxieca",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 876,
         "repo": "sonic-platform-daemons",
         "comment_at": "2026-08-14T17:31:41Z",
@@ -3304,6 +3466,102 @@
         "comment_at": "2026-06-16T16:15:04Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 836,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-06-15T19:39:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 836,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-06-15T19:39:57Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 836,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-09-08T18:17:29Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 836,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-09-08T19:07:14Z",
+        "comment_author": "zjswhhh",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 836,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-09-08T19:07:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 836,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-09-08T19:07:52Z",
+        "comment_author": "zjswhhh",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 836,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-09-08T19:08:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 836,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-09-08T19:12:05Z",
+        "comment_author": "zjswhhh",
+        "comment_body": "Hi @Ndancejic @lolyu - please help review"
+    },
+    {
+        "number": 836,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-09-08T20:58:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 836,
+        "repo": "sonic-platform-daemons",
+        "comment_at": "2026-09-08T20:58:22Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 836,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2026-10-19T05:54:52Z",
+        "review_author": "harjotsinghpawra"
+    },
+    {
+        "number": 836,
+        "repo": "sonic-platform-daemons",
+        "review_at": "2026-10-19T19:12:49Z",
+        "review_author": "mihirpat1"
+    },
+    {
+        "number": 836,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2026-10-19T19:12:49Z",
+        "latestReview_author": "mihirpat1",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 836,
+        "repo": "sonic-platform-daemons",
+        "latestReview_at": "2026-10-19T05:54:52Z",
+        "latestReview_author": "harjotsinghpawra",
+        "latestReview_state": "APPROVED"
     },
     {
         "number": 831,

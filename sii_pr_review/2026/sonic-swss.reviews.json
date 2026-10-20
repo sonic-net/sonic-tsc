@@ -1621,6 +1621,183 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 4894,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-16T06:08:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4894,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-16T06:08:18Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4894,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-16T06:08:29Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4894,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-18T00:01:46Z",
+        "comment_author": "yizhenzha",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4894,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-18T00:01:54Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nCommenter does not have sufficient privileges for PR 4894 in repo sonic-net/sonic-swss<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4894,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-21T15:38:50Z",
+        "comment_author": "Sourabh-Kumar7",
+        "comment_body": "@prsunny could you please help review this PR? thanks"
+    },
+    {
+        "number": 4894,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-28T23:53:28Z",
+        "comment_author": "prsunny",
+        "comment_body": "@kperumalbfn , would you review?"
+    },
+    {
+        "number": 4894,
+        "repo": "sonic-swss",
+        "comment_at": "2026-09-29T00:00:36Z",
+        "comment_author": "kperumalbfn",
+        "comment_body": "**Abort the SHP disable if any profile refresh fails** \u2014 [`buffermgrdyn.cpp:L1675-L1688`](https://github.com/sonic-net/sonic-swss/blob/fc3d08494667ef82dee1e76c046215f152dcbebd/cfgmgr/buffermgrdyn.cpp#L1675-L1688)\n\n`doUpdateBufferProfileForSize()` can return `task_failed` when the expanded non-SHP profile violates port headroom limits. The code only logs this failure; because `m_bufferProfileApplDbWritten` remains false, that profile is omitted from `m_shpProfilesToCheck`. Once the successfully written profiles synchronize, the new barrier publishes pool `xoff=0` while the failed profile remains in SHP form in SAI\u2014the same condition that causes `SAI_STATUS_FAILURE`. The in-memory profile has also already been recalculated, leaving it inconsistent with APPL_DB.\n\nReturn the profile update failure from `refreshSharedHeadroomPool()` and do not publish `xoff=0`. Add a test with two profiles where one fails `isHeadroomResourceValid()`, verifying the pool retains its nonzero xoff and the handler does not report success."
+    },
+    {
+        "number": 4894,
+        "repo": "sonic-swss",
+        "comment_at": "2026-10-08T16:46:41Z",
+        "comment_author": "yizhenzha",
+        "comment_body": "@kperumalbfn can you review the commit? I addressed your comment in the latest commit https://github.com/sonic-net/sonic-swss/pull/4894/changes/3598b6ad88fad1091abee016854b8cc6f9292295"
+    },
+    {
+        "number": 4894,
+        "repo": "sonic-swss",
+        "comment_at": "2026-10-09T20:55:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4894,
+        "repo": "sonic-swss",
+        "comment_at": "2026-10-09T20:55:54Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4894,
+        "repo": "sonic-swss",
+        "comment_at": "2026-10-09T22:11:13Z",
+        "comment_author": "kperumalbfn",
+        "comment_body": "**Failed SHP disable is dropped in a permanently inconsistent state** \u2014 `cfgmgr/buffermgrdyn.cpp:1713-1716`, `2072-2088`\n\n`handleDefaultLossLessBufferParam()` commits `m_overSubscribeRatio = newRatio` before refreshing the profiles. If any profile refresh fails, `refreshSharedHeadroomPool()` returns `task_failed`, while `m_shpDisablePendingByRatio` is set only for `task_need_retry`. The consumer then removes `task_failed` events from `m_toSync` at lines `3688-3690`.\n\nConsequently, the configured ratio is considered disabled internally, pool `xoff` remains nonzero, and profiles updated before the failure remain partially converted. Replaying the same configuration will not repair it because `ratioUpdated == false` and no pending flag remains. The new unit test currently codifies this terminal state by expecting an empty ratio and `m_shpDisablePendingByRatio == false`.\n\n**Recommended fix:** make the transition transactional. On profile-refresh failure, restore the previous `m_overSubscribeRatio` and roll back or recalculate any profiles already published, or retain an explicit failed/pending transition that a later configuration event can complete. Do not consume the ratio-delete event while leaving runtime state partially enabled.\n"
+    },
+    {
+        "number": 4894,
+        "repo": "sonic-swss",
+        "comment_at": "2026-10-12T18:21:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4894,
+        "repo": "sonic-swss",
+        "comment_at": "2026-10-12T18:21:30Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4894,
+        "repo": "sonic-swss",
+        "comment_at": "2026-10-15T17:39:19Z",
+        "comment_author": "yizhenzha",
+        "comment_body": "The pipeline fails in test_fpmsyncd_static_mysid_timer_replay because the expected SRV6_MY_SID_TABLE entry is missing.\r\n\r\nI checked the logs and found the identical failure on [master](https://dev.azure.com/mssonic/build/_build/results?buildId=1245916) and unrelated PRs [#5011](https://dev.azure.com/mssonic/build/_build/results?buildId=1246171), [#5004](https://dev.azure.com/mssonic/build/_build/results?buildId=1246152), and [#4946](https://dev.azure.com/mssonic/build/_build/results?buildId=1246251). It is a general sonic-swss pipeline failure. \r\n\r\nThe cause is an earlier test leaving fpmsyncd in a pending warm restart. Its default 120-second timer delays database updates beyond the MySID test\u2019s 20-second timeout. It looks like [PR #5008](https://github.com/sonic-net/sonic-swss/pull/5008) includes the cleanup fix, and the affected test passes in its pipeline. "
+    },
+    {
+        "number": 4894,
+        "repo": "sonic-swss",
+        "comment_at": "2026-10-16T18:24:57Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 4894,
+        "repo": "sonic-swss",
+        "comment_at": "2026-10-16T18:25:10Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4894,
+        "repo": "sonic-swss",
+        "comment_at": "2026-10-16T18:25:48Z",
+        "comment_author": "yizhenzha",
+        "comment_body": "force push to rebase, for the purpose of including the pipeline fix PR which just got merged `https://github.com/sonic-net/sonic-swss/pull/5008`"
+    },
+    {
+        "number": 4894,
+        "repo": "sonic-swss",
+        "review_at": "2026-09-16T06:15:22Z",
+        "review_author": "stephenxs"
+    },
+    {
+        "number": 4894,
+        "repo": "sonic-swss",
+        "review_at": "2026-09-24T00:15:50Z",
+        "review_author": "dgsudharsan"
+    },
+    {
+        "number": 4894,
+        "repo": "sonic-swss",
+        "review_at": "2026-10-02T22:48:44Z",
+        "review_author": "stephenxs"
+    },
+    {
+        "number": 4894,
+        "repo": "sonic-swss",
+        "review_at": "2026-10-09T20:56:14Z",
+        "review_author": "dgsudharsan"
+    },
+    {
+        "number": 4894,
+        "repo": "sonic-swss",
+        "review_at": "2026-10-12T16:41:26Z",
+        "review_author": "kperumalbfn"
+    },
+    {
+        "number": 4894,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-10-09T20:56:14Z",
+        "latestReview_author": "dgsudharsan",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4894,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-10-12T16:41:26Z",
+        "latestReview_author": "kperumalbfn",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 4894,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-10-02T22:48:44Z",
+        "latestReview_author": "stephenxs",
+        "latestReview_state": "DISMISSED"
+    },
+    {
         "number": 4892,
         "repo": "sonic-swss",
         "comment_at": "2026-09-16T02:37:39Z",
