@@ -1,5 +1,114 @@
 [
     {
+        "number": 828,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-19T03:15:33Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 828,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-19T03:15:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 828,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-19T03:15:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 828,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-19T05:00:09Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 828,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-19T05:00:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 828,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-19T10:20:28Z",
+        "review_author": "sakshamkhurana21"
+    },
+    {
+        "number": 828,
+        "repo": "sonic-gnmi",
+        "latestReview_at": "2026-10-19T10:20:28Z",
+        "latestReview_author": "sakshamkhurana21",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 825,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-12T22:17:49Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 825,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-12T22:17:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 825,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-12T22:18:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 825,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-13T18:27:26Z",
+        "comment_author": "donghaolicd",
+        "comment_body": "Independent review of `b80447188cc9c88251d9003a5e85917bb57cd33e`:\n\n**P2 \u2014 Make the native Verify timeout bound the actual child process and output wait.** The new [60-second invocation](https://github.com/sonic-net/sonic-gnmi/blob/b80447188cc9c88251d9003a5e85917bb57cd33e/pkg/gnoi/os/os.go#L34-L39) uses an executor whose [default arguments include `--pid`](https://github.com/sonic-net/sonic-gnmi/blob/b80447188cc9c88251d9003a5e85917bb57cd33e/pkg/exec/command.go#L136-L160). `nsenter` consequently forks before executing the installer. On timeout, `exec.CommandContext` kills the `nsenter` parent, but the installer child can survive with stdout/stderr open; [the synchronous `cmd.Run()`](https://github.com/sonic-net/sonic-gnmi/blob/b80447188cc9c88251d9003a5e85917bb57cd33e/pkg/exec/command.go#L82-L101) still waits for those pipes. If `sonic-installer list` stalls, Verify's server handler can therefore remain blocked beyond 60 seconds rather than returning the intended `DeadlineExceeded`. The former D-Bus caller had a separate bounded wait.\n\nConfirmed with the unchanged executor and real `nsenter` in disposable Linux user/PID/mount namespaces: `/bin/sleep 0.6` with a 20 ms timeout returned after **602 ms**; the control omitting the PID namespace returned after **21 ms**. Please ensure cancellation terminates the command/descendants and bounds pipe draining, and add a real fork/pipe regression test; the injected-runner timeout test misses this behavior.\n\nVerification: focused OS/exec unit tests, race tests, and vet passed locally (module metadata normalization was needed; production Go sources were unchanged). Read authorization, normal installer output parsing, and counter ordinals were also inspected. GitHub reports all 13 checks successful; I did not independently verify their individual test results. Broader local packages were blocked by missing SONiC bindings/PAM/libyang prerequisites. No SONiC container or DUT execution was performed.\n"
+    },
+    {
+        "number": 825,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-19T18:37:12Z",
+        "comment_author": "donghaolicd",
+        "comment_body": "Re-review of unchanged HEAD `b80447188cc9c88251d9003a5e85917bb57cd33e`:\n\n**Recommendation: fix before merge. The existing [P2 timeout finding](https://github.com/sonic-net/sonic-gnmi/pull/825#issuecomment-6152369136) still applies; no additional actionable bugs were identified.**\n\nRechecked the complete three-dot PR diff, production Verify delegation, parsing behavior, remaining service-client callers, and counter ordinals. Missing/empty `Current:` output yielding an empty version is consistent with the former HostService production parser.\n\n**Reproduction reconfirmed:** reused the previous isolated test binary with real util-linux 2.37.2 `nsenter` in disposable namespaces. With `/bin/sleep 0.6` and a 20 ms timeout, production-default namespace arguments returned after **605.33 ms (FAIL)**; the no-PID-fork control returned after **20.59 ms (PASS)**. This reconfirms the defect, not a passing fix. The impact is that the server handler and child can outlive the operation deadline; a client with its own deadline can still stop waiting independently.\n\n**Additional CI evidence:** [build 1246289](https://dev.azure.com/mssonic/build/_build/results?buildId=1246289) completed successfully. Checkout logs confirm merge commit `3280d7df69f2c16a4db0051049d17dfb76fad40f`, containing the reviewed HEAD. [Pure-package log 27](https://dev.azure.com/mssonic/build/_apis/build/builds/1246289/logs/27?api-version=7.1) and [integration log 117](https://dev.azure.com/mssonic/build/_apis/build/builds/1246289/logs/117?api-version=7.1), corroborated by published test results, show the Verify parsing/error/context tests, server authorization/delegation/status tests, and RPC success/failure tests actually passed. Those paths use an injected runner, a single-process helper, or a substituted native handler, so they do not cover the real nsenter fork/pipe behavior. The complete build reports 2,426 passed and 18 other tests not executed; the relevant Verify tests were not skipped. This is CI-container test evidence, not deployed SONiC/DUT execution.\n\n**Required before merge:** bound both child-process lifetime and output-pipe waiting on cancellation/timeout in the existing execution path. Add a real fork/retained-pipe regression covering bounded return, child cleanup, and Verify DeadlineExceeded/Canceled mapping. Merely returning from another goroutine leaves the child behind; limiting pipe waiting alone does not establish child cleanup. No broad executor or CI-framework rewrite is requested.\n\n**Non-blocking follow-up:** a normal Verify smoke test against the host current image in an authorized deployment environment, and execution evidence for the counter-ABI test. Counter ordinals were statically checked; I did not find that specific test in the inspected CI results. Historical focused unit/race/vet results were reused rather than rerunning the unchanged full suite. No production source changes or DUT operations were performed.\n"
+    },
+    {
+        "number": 825,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-12T22:19:32Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 825,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-19T21:47:47Z",
+        "review_author": "sakshamkhurana21"
+    },
+    {
+        "number": 825,
+        "repo": "sonic-gnmi",
+        "latestReview_at": "2026-10-12T22:19:32Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 825,
+        "repo": "sonic-gnmi",
+        "latestReview_at": "2026-10-19T21:47:47Z",
+        "latestReview_author": "sakshamkhurana21",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 824,
         "repo": "sonic-gnmi",
         "comment_at": "2026-10-12T17:19:40Z",
