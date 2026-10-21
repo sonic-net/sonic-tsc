@@ -1,0 +1,57 @@
+trigger: none
+pr: none
+
+schedules:
+- cron: '0 0 * * 0'
+  always: true
+  branches:
+    include:
+    - master
+
+pool: sonic-ubuntu-1c
+
+jobs:
+- job: update
+  timeoutInMinutes: 600
+  variables:
+  - group: SONICBLD
+  steps:
+  - checkout: self
+    clean: true
+    path: s
+  - bash: |
+      set -x
+
+      curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+      sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
+      echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+      sudo apt update
+      sudo apt install gh jq python3-venv -y
+
+      echo $TOKEN | gh auth login --with-token
+      git remote remove sonicbld || true
+      git remote add sonicbld https://mssonicbld:$TOKEN@github.com/mssonicbld/sonic-tsc/
+      git fetch sonicbld
+      git config user.email 'sonicbld@microsoft.com'
+      git config user.name 'Sonic Automation'
+    env:
+      TOKEN: $(GITHUB-TOKEN)
+    displayName: setup env
+
+  - bash: |
+      set -ex
+
+      # git reset origin/master --hard
+      cd pr_reviewer
+      ./generate_pr_reviewer.sh
+      git add .
+      git commit -m "[data] Update PR reviewer score data." || exit 0
+      git push sonicbld HEAD:refs/heads/data/pr-reviewer -f
+      re=$(gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/pr-reviewer -B master -b '' -t "[data] Update PR reviewer score data." 2>&1 || true)
+      sleep 60
+      # gh pr edit $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') --add-label automerge
+      git reset origin/master --hard
+      cd ..
+    displayName: update PR reviewer scores
+    env:
+      GITHUB_API_TOKENS: $(GITHUB-TOKEN)
