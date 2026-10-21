@@ -1,5 +1,137 @@
 [
     {
+        "number": 641,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-10-14T23:59:36Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 641,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-10-14T23:59:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 641,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-10-14T23:59:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 641,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-10-17T02:28:13Z",
+        "comment_author": "wsycqyz",
+        "comment_body": "## Test report: 202605 branch (cisco-8000, amd64)\n\nI tested this PR on **202605**: sonic-linux-kernel `202605` (`288cc3645d5d`) plus this commit, which applies cleanly (hunk offset -1). I built it in a Microsoft internal sonic-buildimage 202605 tree for **cisco-8000**. All three images come from the same sonic-buildimage commit:\n\n| Build | sonic-buildimage change | Image version |\n|---|---|---|\n| Baseline | none | `internal-202605.186089081-1d8266d407` |\n| A | this PR + the `rules/linux-kernel.mk` change from sonic-net/sonic-buildimage#30172 | `kernel-dbg-pr641.186113249-19b9381ce1` |\n| B | A + the `build_debian.sh` fix shown below | `kernel-dbg-pr641-fix.186113257-b54257957a` |\n\n### Test steps\n1. Apply this PR on sonic-linux-kernel 202605. Declare `LINUX_KERNEL_DBG` as a derived package of `LINUX_HEADERS_COMMON` in `rules/linux-kernel.mk`, as #30172 does.\n2. B only: in `build_debian.sh`, install the `linux-image-${LINUX_KERNEL_VERSION}-*_${CONFIGURED_ARCH}.deb` glob without `-dbg_` (diff below).\n3. Build `target/sonic-cisco-8000.bin` and `target/docker-syncd-cisco-rpc.gz`, then compare `target/` with the baseline file by file.\n4. Extract the `-dbg` deb and check:\n   - the GNU build-id of `/usr/lib/debug/boot/vmlinux-*` against the vmlinux embedded in `/boot/vmlinuz-*`, from both the `linux-image-*-unsigned` deb and the installer (`fs.zip`);\n   - the build-ids of all modules in `linux-image-*-unsigned` against `/usr/lib/debug/lib/modules/*/kernel/**/*.ko`;\n   - `gdb -batch -ex 'info line *(panic+0x60)' vmlinux`, `ptype struct net_device`, and `info line *(igb_xmit_frame+0x10)` on `igb.ko`.\n5. Check the image with `unsquashfs -lls fs.squashfs usr/lib/debug`, and check the rootfs build log for `apt -y install ... -dbg`.\n\n### Results\n- **`target/`**: the only new package compared with the baseline is `debs/trixie/linux-image-6.12.41+deb13-sonic-amd64-dbg_6.12.41-1_amd64.deb` (817 MB). No other package changed.\n- **`-dbg` content (A and B)**:\n  - `vmlinux` is 336.6 MiB with full DWARF (`CONFIG_DEBUG_INFO_REDUCED` is not set).\n  - `System.map` is real (168,335 symbols); the unsigned deb carries only Debian's placeholder.\n  - There are 3,840 module debug files.\n  - The `vmlinux` build-id matches the kernel in the image: A `93fe5ca2\u2026`, B `aab614a5\u2026`. Each build has its own build-id.\n  - All 3,840 module build-ids match the shipped modules.\n  - gdb resolves `panic+0x60` to `kernel/panic.c:303` and `igb_xmit_frame+0x10` to `include/linux/skbuff.h:3772`, and it prints struct layouts.\n- **Image A, without the `build_debian.sh` fix**: the glob also matches the `-dbg` deb, so apt installs it into the rootfs.\n  - `sonic-cisco-8000.bin` grows from 2,440,071,151 to **3,748,845,551** bytes.\n  - The rootfs grows from 758 MB to **2,501 MB**, with **3,848 files (5,038 MiB)** under `/usr/lib/debug`.\n  - Public build [1248403](https://dev.azure.com/mssonic/build/_build/results?buildId=1248403) shows the same effect: the broadcom rootfs grows from 616 MB to 2,359 MB.\n- **Image B, with the fix**: `sonic-cisco-8000.bin` is 2,439,835,631 bytes and the rootfs is 758 MB, both the same as the baseline. There is no `/usr/lib/debug`.\n\n### Conclusion\nThis PR works on 202605. **sonic-buildimage must exclude the `-dbg` package before the submodule update that brings this PR in.** Otherwise every image grows by about 1.3 GB. The fix:\n\n```diff\n-sudo cp $debs_path/initramfs-tools-core_*.deb $debs_path/initramfs-tools_*.deb $debs_path/linux-image-${LINUX_KERNEL_VERSION}-*_${CONFIGURED_ARCH}.deb $FILESYSTEM_ROOT\n-basename_deb_packages=$(basename -a $debs_path/initramfs-tools-core_*.deb $debs_path/initramfs-tools_*.deb $debs_path/linux-image-${LINUX_KERNEL_VERSION}-*_${CONFIGURED_ARCH}.deb | sed 's,^,./,')\n+kernel_debs=$(ls $debs_path/linux-image-${LINUX_KERNEL_VERSION}-*_${CONFIGURED_ARCH}.deb | grep -v -- '-dbg_')\n+sudo cp $debs_path/initramfs-tools-core_*.deb $debs_path/initramfs-tools_*.deb $kernel_debs $FILESYSTEM_ROOT\n+basename_deb_packages=$(basename -a $debs_path/initramfs-tools-core_*.deb $debs_path/initramfs-tools_*.deb $kernel_debs | sed 's,^,./,')\n```\n\nNote: `vmlinux` must be matched to a crash dump by build-id (VMCOREINFO `BUILD-ID`). Builds A and B have the same version banner (`Debian 6.12.41-1 (2026-10-16)`) but different kernels.\n"
+    },
+    {
+        "number": 641,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-10-17T02:45:57Z",
+        "comment_author": "wsycqyz",
+        "comment_body": "@yijingyan2 FYI, the sonic-buildimage side of this change:\n- sonic-net/sonic-buildimage#30197 (tracked by sonic-net/sonic-buildimage#30196) stops `build_debian.sh` from installing this `-dbg` package into the image. Please merge it on master and 202605 **before** the sonic-linux-kernel submodule update that brings in this PR. Otherwise every image grows by about 1.3 GB.\n- The `rules/linux-kernel.mk` declaration from sonic-net/sonic-buildimage#30172 should be merged together with that submodule update. With the DPKG write cache enabled, declaring the package before the submodule builds it would make the kernel target fail.\n\nI also updated this PR's description with `Fixes #646`, a \"How to verify it\" section, the 202605 backport request (tracking issue #646), the tested branches (master and 202605), and the test results.\n"
+    },
+    {
+        "number": 641,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-10-17T06:18:02Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request for branch(es): 202605.<br>Added label(s) for branch(es) 202605.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 641,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-10-17T06:18:07Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The **Tested branch** section has been ticked and **Test result** is provided for branch(es): 202605. Added label(s): Tested for 202605 Branch.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 641,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-10-19T22:44:47Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 641,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-10-19T22:44:58Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 641,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2026-10-15T00:02:02Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 641,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2026-10-16T09:36:09Z",
+        "review_author": "wsycqyz"
+    },
+    {
+        "number": 641,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2026-10-19T08:15:32Z",
+        "review_author": "wsycqyz"
+    },
+    {
+        "number": 641,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2026-10-19T15:34:18Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 641,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2026-10-19T22:44:49Z",
+        "review_author": "yijingyan2"
+    },
+    {
+        "number": 641,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2026-10-19T22:50:08Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 641,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2026-10-19T23:29:18Z",
+        "review_author": "wsycqyz"
+    },
+    {
+        "number": 641,
+        "repo": "sonic-linux-kernel",
+        "review_at": "2026-10-20T01:28:44Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 641,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2026-10-19T22:50:08Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 641,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2026-10-19T23:29:18Z",
+        "latestReview_author": "wsycqyz",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 641,
+        "repo": "sonic-linux-kernel",
+        "latestReview_at": "2026-10-20T01:28:44Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 638,
         "repo": "sonic-linux-kernel",
         "comment_at": "2026-10-06T20:12:10Z",
@@ -1806,6 +1938,13 @@
         "comment_at": "2026-08-26T16:40:54Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 591,
+        "repo": "sonic-linux-kernel",
+        "comment_at": "2026-10-21T00:36:40Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Removed label(s):\n- `Request for msft-202608 Branch`: The matching `Tested for msft-202608 Branch` label is missing. This requirement also applies to manually added request labels.\n\nThis PR requests backports for branch(es): 202608, but is missing required test information.\n\n**Update the PR description, not a PR comment:**\n1. List each requested branch under **Backport**.\n2. After testing on each branch, tick its checkbox (`- [x]`) under **Tested branch**. An unchecked box (`- [ ]`) does not count.\n3. Under **Test result**, start a separate entry with each branch number, followed by its test evidence on the same line or the following lines, such as a test-run link or a summary with logs. A branch number alone, placeholders, and results for another branch do not count.\n\nExample format for the branches above (replace every placeholder with your actual test evidence; only check branches you have tested):\n```markdown\n### Backport\n202608\n\n### Tested branch\n- [x] 202608\n\n### Test result\n202608: <link to test results or summary with logs>\n```\n\nKeep this information outside HTML comments (`<!-- ... -->`) so the app can read it.\nAfter you save the PR description, the app checks it again and adds the matching `Tested for <branch> Branch` labels first, then the `Request for <branch> Branch` labels. Request labels remain blocked until their matching tested labels are present.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 591,
