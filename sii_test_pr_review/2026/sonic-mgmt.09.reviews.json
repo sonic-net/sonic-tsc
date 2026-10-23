@@ -23521,6 +23521,13 @@
     {
         "number": 27222,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-10-22T18:43:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR requests backports for branch(es): 202511, but is missing required test information.\n\n**Update the PR description, not a PR comment:**\n1. List each requested branch under **Backport**.\n2. After testing on each branch, tick its checkbox (`- [x]`) under **Tested branch**. An unchecked box (`- [ ]`) does not count.\n3. Under **Test result**, start a separate entry with each branch number, followed by its test evidence on the same line or the following lines, such as a test-run link or a summary with logs. A branch number alone, placeholders, and results for another branch do not count.\n\nExample format for the branches above (replace every placeholder with your actual test evidence; only check branches you have tested):\n```markdown\n### Backport\n202511\n\n### Tested branch\n- [x] 202511\n\n### Test result\n202511: <link to test results or summary with logs>\n```\n\nKeep this information outside HTML comments (`<!-- ... -->`) so the app can read it.\nAfter you save the PR description, the app checks it again and adds the matching `Tested for <branch> Branch` labels first, then the `Request for <branch> Branch` labels. Request labels remain blocked until their matching tested labels are present.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 27222,
+        "repo": "sonic-mgmt",
         "review_at": "2026-09-22T19:24:27Z",
         "review_author": "kamalsahu0001"
     },
@@ -37632,6 +37639,20 @@
         "comment_at": "2026-10-15T01:14:57Z",
         "comment_author": "yaopingzhu-arista",
         "comment_body": "> @yaopingzhu-arista Please provide test results for your 202605 branch cherry-pick request.\r\n> \r\n> Please run the relevant tests on the `202605` target branch with this change applied, and link the test report in this original PR. Include the tested branch and image/build, the test cases run, and pass/fail counts; explain any failures or skipped tests.\r\n> \r\n> If you already provided a report, please point us to it and confirm it covers this change on `202605`. Passing source-PR CI alone does not establish target-branch testing.\r\n\r\nYou can refer the Kusto results by the above report GUID, e.g., in fib/fib/test_fib.log, search\r\n'lldp_rem_sys_desc': 'Arista Networks EOS version 4.35.2F-46221466.4352F (engineering build) running on an Arista cEOSLab'\r\n"
+    },
+    {
+        "number": 26026,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-22T12:23:33Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "hi @yaopingzhu-arista are these command back compatible? If the neighbor using an older cEOS version?"
+    },
+    {
+        "number": 26026,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-22T14:08:43Z",
+        "comment_author": "yaopingzhu-arista",
+        "comment_body": "> hi @yaopingzhu-arista are these command back compatible? If the neighbor using an older cEOS version?\r\n\r\nIt takes care of backward compatibility. To be more specific, the neighbor VMs in the testbed are initialized according to the sonic-mgmt build, i.e., controlled by sonic-mgmt/ansible/group_vars/vm_host/ceos.yml. The older version of sonic-mgmt has corresponding cEOS version."
     },
     {
         "number": 26026,
