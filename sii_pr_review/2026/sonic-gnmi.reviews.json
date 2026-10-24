@@ -1,5 +1,168 @@
 [
     {
+        "number": 832,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-22T01:13:27Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 832,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-22T01:13:35Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 832,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-22T01:13:49Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 832,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-22T02:24:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 832,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-22T02:24:44Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 832,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-23T00:31:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 832,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-23T00:31:29Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 832,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-23T01:24:01Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 832,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-23T01:24:15Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 832,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-23T19:04:53Z",
+        "comment_author": "bhouse-nexthop",
+        "comment_body": "@qiluo-msft one more setup step, found on the first Renovate PRs. It needs a repository admin.\n\nsonic-gnmi has a classic branch protection rule that matches every branch, not only `master` and the release branches. It requires a pull request, plus `EasyCLA` and `sonic-net.sonic-gnmi`, for everyone except admins. Because of it, the `Renovate go.sum` workflow can't commit the tidied `go.sum` to a Renovate branch. #833 and #835 both fail with:\n\n```\nBRANCH_PROTECTION_RULE_VIOLATION: protected branch 'renovate/master-patch-go-security-updates' check failed:\nChanges must be made through a pull request. 2 of 2 required status checks are expected.\n```\n\nRenovate can create its branches, since the rule doesn't block branch creation, but no commit can be added to one afterwards. Exempting a bot from the pull request requirement isn't enough, because a new commit can't have passed the two required checks yet.\n\n**Requested change:** keep the rule's protection on every branch except `renovate/**`. A classic rule can't exclude a pattern, so:\n1. Settings \u2192 Rules \u2192 Rulesets \u2192 **New branch ruleset**, enforcement **Active**.\n2. Targets: **Include all branches**, then **Exclude by pattern** `renovate/**`.\n3. Turn on the protections the wildcard rule has today: require a pull request, and require the `EasyCLA` and `sonic-net.sonic-gnmi` status checks. Add the **Repository admin** role to the bypass list, matching today's \"non-admins\" enforcement.\n4. Delete the old wildcard rule under Settings \u2192 Branches. The `master` rule is separate; leave it as it is.\n\n**What changes:** anyone with write access could push to a `renovate/**` branch. That doesn't open a merge path: the merge robot only merges a Renovate PR when every commit on it is signed and authored by `renovate[bot]` or `github-actions[bot]`, and `master`'s own protection is unchanged.\n\nTo check it, rerun the `tidy` job on #833. It should commit `Update go.sum` and dispatch CodeQL and Semgrep.\n"
+    },
+    {
+        "number": 832,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-22T01:29:43Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 832,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-22T23:38:18Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 832,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-22T23:40:05Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 832,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-23T00:03:06Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 832,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-23T00:03:36Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 832,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-23T00:31:42Z",
+        "review_author": "bhouse-nexthop"
+    },
+    {
+        "number": 832,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-23T00:31:46Z",
+        "review_author": "bhouse-nexthop"
+    },
+    {
+        "number": 832,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-23T01:24:26Z",
+        "review_author": "bhouse-nexthop"
+    },
+    {
+        "number": 832,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-23T14:12:06Z",
+        "review_author": "hdwhdw"
+    },
+    {
+        "number": 832,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-23T18:54:05Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 832,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-23T18:55:26Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 832,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-23T19:13:12Z",
+        "review_author": "bhouse-nexthop"
+    },
+    {
+        "number": 832,
+        "repo": "sonic-gnmi",
+        "latestReview_at": "2026-10-23T18:55:26Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 832,
+        "repo": "sonic-gnmi",
+        "latestReview_at": "2026-10-22T23:40:05Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 832,
+        "repo": "sonic-gnmi",
+        "latestReview_at": "2026-10-23T14:12:06Z",
+        "latestReview_author": "hdwhdw",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 828,
         "repo": "sonic-gnmi",
         "comment_at": "2026-10-19T03:15:33Z",
@@ -1255,6 +1418,88 @@
         "number": 800,
         "repo": "sonic-gnmi",
         "latestReview_at": "2026-10-01T00:53:45Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 799,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-09-30T22:37:19Z",
+        "comment_author": "linux-foundation-easycla",
+        "comment_body": "<a href=\"https://api.easycla.lfx.linuxfoundation.org/v2/repository-provider/github/sign/39820104/498141963/799/#/?version=2\"><img src=\"https://s3.amazonaws.com/cla-project-logo-prod/cla-not-signed.svg?v=2\" alt=\"CLA Not Signed\" align=\"left\" height=\"28\" width=\"328\" ></a><br/><br ><ul><li>:white_check_mark: login: qiluo-msft / name: Qi Luo (1cdbcda1445d011666967f952594ad63f6983aaa)</li><li><a href='https://api.easycla.lfx.linuxfoundation.org/v2/repository-provider/github/sign/39820104/498141963/799/#/?version=2' target='_blank'>:x:</a> - login: @dependabot[bot] / name: dependabot[bot]. The commit (1c6884d1005cab01060523e6a93bd8ab107016f2) is not authorized under a signed CLA. <a href='https://api.easycla.lfx.linuxfoundation.org/v2/repository-provider/github/sign/39820104/498141963/799/#/?version=2' target='_blank'>Please click here to be authorized</a>. For further assistance with EasyCLA, <a href='https://easycla.lfx.linuxfoundation.org/' target='_blank'>please visit our EasyCLA portal</a> and chat with our support bot.</li></ul>"
+    },
+    {
+        "number": 799,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-09-30T22:37:22Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 799,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-09-30T22:37:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 799,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-09-30T22:37:45Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 799,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-23T21:35:35Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "/azp run [sonic-net.sonic-gnmi](https://github.com/sonic-net/sonic-gnmi/pull/799/checks?check_run_id=110132406637)"
+    },
+    {
+        "number": 799,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-23T21:35:42Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nNo pipelines are associated with this pull request.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 799,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-23T21:36:14Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 799,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-23T21:36:32Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 799,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-23T22:50:05Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 799,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-23T22:52:13Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 799,
+        "repo": "sonic-gnmi",
+        "latestReview_at": "2026-10-23T22:52:13Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 799,
+        "repo": "sonic-gnmi",
+        "latestReview_at": "2026-10-23T22:50:05Z",
         "latestReview_author": "qiluo-msft",
         "latestReview_state": "APPROVED"
     },
