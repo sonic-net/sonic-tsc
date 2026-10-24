@@ -1,5 +1,147 @@
 [
     {
+        "number": 240,
+        "repo": "sonic-pipelines",
+        "comment_at": "2026-10-23T01:54:00Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 240,
+        "repo": "sonic-pipelines",
+        "comment_at": "2026-10-23T01:54:09Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 240,
+        "repo": "sonic-pipelines",
+        "comment_at": "2026-10-23T01:54:17Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nNo pipelines were found matching this branch/path.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 240,
+        "repo": "sonic-pipelines",
+        "review_at": "2026-10-23T02:04:01Z",
+        "review_author": "yijingyan2"
+    },
+    {
+        "number": 240,
+        "repo": "sonic-pipelines",
+        "latestReview_at": "2026-10-23T02:04:01Z",
+        "latestReview_author": "yijingyan2",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 239,
+        "repo": "sonic-pipelines",
+        "comment_at": "2026-10-22T01:13:21Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 239,
+        "repo": "sonic-pipelines",
+        "comment_at": "2026-10-22T01:13:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 239,
+        "repo": "sonic-pipelines",
+        "comment_at": "2026-10-22T01:13:39Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nNo pipelines were found matching this branch/path.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 239,
+        "repo": "sonic-pipelines",
+        "comment_at": "2026-10-22T01:37:02Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "The robot's trust anchor for Renovate PRs is the PR author plus the `automerge` and `security` labels. Someone with write access can push a commit onto an open Renovate security PR (or have someone with triage add the labels to a major one), and the robot will merge it with `--admin` and no reviewer once checks pass. Consider also requiring every commit on the PR to be authored by `renovate[bot]` (or `github-actions[bot]` for the go.sum commit in sonic-gnmi); `gh pr list --json commits` already has what is needed.\n\nAlso, the shared preset sets no `minimumReleaseAge`, so repositories that don't set it themselves get no cooldown on non-security updates (sonic-gnmi#832 currently fails the required Semgrep rule `renovate-missing-minimum-release-age` for the same reason). Adding it to a `packageRules` entry in the preset would cover every repository; vulnerability alerts override it by default, so security updates are not delayed.\n"
+    },
+    {
+        "number": 239,
+        "repo": "sonic-pipelines",
+        "comment_at": "2026-10-22T02:24:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 239,
+        "repo": "sonic-pipelines",
+        "comment_at": "2026-10-22T02:24:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nNo pipelines were found matching this branch/path.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 239,
+        "repo": "sonic-pipelines",
+        "comment_at": "2026-10-22T02:25:02Z",
+        "comment_author": "bhouse-nexthop",
+        "comment_body": "Thanks, both done.\n\n**Commit authors.** Fixed in 9e38f3e, and it checks a bit more than the author. A pushed commit can name any author, `renovate[bot]` included, so the robot now merges a Renovate PR only when every commit on it is:\n- signed by GitHub (`wasSignedByGitHub`), and\n- authored by `renovate[bot]` or `github-actions[bot]`,\n\nand the last commit is the head it evaluated. GitHub signs the commits Renovate makes through its API. It doesn't sign a pushed commit, and a REST API commit naming `renovate[bot]` as its author also comes back unsigned. To make the sonic-gnmi `go.sum` fixup pass, it now commits through `createCommitOnBranch` instead of `git push` (sonic-net/sonic-gnmi#832, 714c4d0). That commit comes back GitHub-verified, and it fails if Renovate moved the branch in the meantime. The check passes against the live onboarding PRs sonic-net/sonic-mgmt-common#261 and sonic-net/sonic-gnmi#831. It fails a human PR, a Dependabot PR, a wrong head commit, and an unsigned commit that names `renovate[bot]`. `gh pr list --json commits` doesn't carry signatures, so this is one GraphQL call per Renovate PR. The HLD (7.6) and 13.1 cover it.\n\nOne gap is left. Someone with write access could push a workflow to another branch that makes a `github-actions[bot]` commit with `GITHUB_TOKEN`. Closing that needs a limit on who can run workflows, which is beyond what the robot can see.\n\n**Release age.** Added to the preset as a `matchPackageNames: [\"*\"]` rule, `minimumReleaseAge: 7 days`. `vulnerabilityAlerts` resets `minimumReleaseAge` to `null`, so security updates are not delayed. On sonic-gnmi#832 the Semgrep rule matches every `packageRules` entry that names packages, not the config as a whole. What fired there was the patched-module rule, even though the repository set `minimumReleaseAge` at the top level. Both patched-module rules now repeat the 7 days, and the top-level setting in sonic-gnmi is gone. Locally, the rule fails the old `renovate.json` and passes the new one, and `p/default` reports nothing.\n"
+    },
+    {
+        "number": 239,
+        "repo": "sonic-pipelines",
+        "comment_at": "2026-10-23T00:31:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 239,
+        "repo": "sonic-pipelines",
+        "comment_at": "2026-10-23T00:31:23Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nNo pipelines were found matching this branch/path.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 239,
+        "repo": "sonic-pipelines",
+        "comment_at": "2026-10-23T01:24:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 239,
+        "repo": "sonic-pipelines",
+        "comment_at": "2026-10-23T01:24:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nNo pipelines were found matching this branch/path.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 239,
+        "repo": "sonic-pipelines",
+        "review_at": "2026-10-22T01:29:10Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 239,
+        "repo": "sonic-pipelines",
+        "review_at": "2026-10-22T01:32:06Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 239,
+        "repo": "sonic-pipelines",
+        "review_at": "2026-10-22T02:24:58Z",
+        "review_author": "bhouse-nexthop"
+    },
+    {
+        "number": 239,
+        "repo": "sonic-pipelines",
+        "review_at": "2026-10-23T18:30:02Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 239,
+        "repo": "sonic-pipelines",
+        "latestReview_at": "2026-10-23T18:30:02Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 237,
         "repo": "sonic-pipelines",
         "comment_at": "2026-10-14T23:04:11Z",
