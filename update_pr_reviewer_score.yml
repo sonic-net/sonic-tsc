@@ -49,7 +49,7 @@ jobs:
       git push sonicbld HEAD:refs/heads/data/pr-reviewer -f
       re=$(gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/pr-reviewer -B master -b '' -t "[data] Update PR reviewer score data." 2>&1 || true)
       sleep 60
-      # gh pr edit $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') --add-label automerge
+      gh pr edit $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') --add-label automerge
       git reset origin/master --hard
       cd ..
     displayName: update PR reviewer scores
