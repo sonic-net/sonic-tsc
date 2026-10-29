@@ -1689,6 +1689,20 @@
     {
         "number": 28222,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-10-28T17:48:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Removed label(s):\n- `Request for msft-202512 Branch`: The matching `Tested for msft-202512 Branch` label is missing. This requirement also applies to manually added request labels.\n\nThis PR requests backports for branch(es): 202512, but is missing required test information.\n\n**Update the PR description, not a PR comment:**\n1. List each requested branch under **Backport**.\n2. After testing on each branch, tick its checkbox (`- [x]`) under **Tested branch**. An unchecked box (`- [ ]`) does not count.\n3. Under **Test result**, start a separate entry with each branch number, followed by its test evidence on the same line or the following lines, such as a test-run link or a summary with logs. A branch number alone, placeholders, and results for another branch do not count.\n\nPlease make sure you have done all three steps above.\nExample format for the branches above (replace every placeholder with your actual test evidence; only check branches you have tested):\n```markdown\n### Backport\n202512\n\n### Tested branch\n- [x] 202512\n\n### Test result\n202512: <link to test results or summary with logs>\n```\n\nKeep this information outside HTML comments (`<!-- ... -->`) so it can be read.\nAfter you save the PR description, I will check it again and add the matching `Tested for <branch> Branch` labels first, then the `Request for <branch> Branch` labels. Request labels remain blocked until their matching tested labels are present.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 28222,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-28T17:50:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202512: https://github.com/Azure/sonic-mgmt.msft/pull/1503"
+    },
+    {
+        "number": 28222,
+        "repo": "sonic-mgmt",
         "review_at": "2026-09-25T15:45:15Z",
         "review_author": "bingwang-ms"
     },
@@ -29068,6 +29082,27 @@
         "comment_at": "2026-10-19T11:12:54Z",
         "comment_author": "mssonicbld",
         "comment_body": "@frank-nexthop PR conflicts with 202605 branch"
+    },
+    {
+        "number": 26931,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-28T22:35:02Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Removed label(s):\n- `Request for 202511 branch`: The matching `Tested for 202511 Branch` label is missing. This requirement also applies to manually added request labels.\n- `Request for msft-202512 Branch`: The matching `Tested for msft-202512 Branch` label is missing. This requirement also applies to manually added request labels.\n\nThis PR requests backports for branch(es): 202511, 202512, but is missing required test information.\n\n**Update the PR description, not a PR comment:**\n1. List each requested branch under **Backport**.\n2. After testing on each branch, tick its checkbox (`- [x]`) under **Tested branch**. An unchecked box (`- [ ]`) does not count.\n3. Under **Test result**, start a separate entry with each branch number, followed by its test evidence on the same line or the following lines, such as a test-run link or a summary with logs. A branch number alone, placeholders, and results for another branch do not count.\n\nPlease make sure you have done all three steps above.\nExample format for the branches above (replace every placeholder with your actual test evidence; only check branches you have tested):\n```markdown\n### Backport\n202511\n202512\n\n### Tested branch\n- [x] 202511\n- [x] 202512\n\n### Test result\n202511: <link to test results or summary with logs>\n202512: <link to test results or summary with logs>\n```\n\nKeep this information outside HTML comments (`<!-- ... -->`) so it can be read.\nAfter you save the PR description, I will check it again and add the matching `Tested for <branch> Branch` labels first, then the `Request for <branch> Branch` labels. Request labels remain blocked until their matching tested labels are present.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 26931,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-29T00:01:31Z",
+        "comment_author": "frank-nexthop",
+        "comment_body": "Test results on the `202511` target branch for the 202511 backport request. The PR description's **Tested branch** / **Test result** sections are updated with the same evidence.\n\n**Code under test:** `sonic-net/sonic-mgmt` branch `202511` at 278658c41 with only this PR's master commit (5ab9811bae) cherry-picked on top. Three files conflict, all from neighbouring lines that are not on 202511 (`lacp_fast_rate` / `enabled_dpu_indices` / `bgp_confd_*` parameters, the C0 golden-config generator, the `is_pfcwd_hw_recovery_enabled` import in `tests/conftest.py`); only this PR's lines were taken and the resulting diff is otherwise identical to the master commit. On 202511 the default topology path in `generate_golden_config_db.py` still emits `{}`, so the link-training pass builds `PORT` from the minigraph render, which is the path this PR already handles.\n\n**Image:** community 202511 nightly `SONiC.202511.1258182-1a80eb6ef` (sonic-buildimage 202511 @ 1a80eb6ef, Azure build 1258182).\n\n**Testbed:** physical testbed, Broadcom-based DUT, topology `t1-8`, 8 x 800G DAC links to a SONiC fanout, `LinkTraining=on` for those links in `sonic_lab_links.csv`; cEOS neighbours, 8/8 BGP sessions established after deploy-mg and again after the run.\n\n**Run:** deploy-mg from the branch above, then an ad-hoc pytest (not part of this PR) that drives `tests/common/config_reload.py` from the same branch through the three reload flows below. Result: 4 passed, 0 failed, 0 skipped (11m10s).\n\n| Flow | Command issued on the DUT | Observed |\n|---|---|---|\n| 1. Baseline after deploy-mg | `config load_minigraph -y -o -p golden_config_db.json` (by deploy-mg) | golden config == `golden_config_db.json.origin.backup`; `link_training on` on 8/8 ports in CONFIG_DB and in the saved `config_db.json`; 8/8 links up and `trained` |\n| 2. Plain minigraph revert (the premise) | `sudo config load_minigraph -y` | `link_training` 8 \u2192 0 ports, `trained` 8 \u2192 0, links down |\n| 3. `config_reload(config_source='minigraph')`, no override | `config load_minigraph -y -p /etc/sonic/golden_config_db.json`, then log `Re-applying link_training from golden config on 8 ports after minigraph reload` | 8/8 `link_training on`, 8/8 up and `trained`, persisted by `config save -y` |\n| 4. `config_reload(config_source='minigraph', override_config=True)` | `config load_minigraph -y -o -p /etc/sonic/golden_config_db.json`; no reapply log line (override path unchanged) | 8/8 `link_training on`, 8/8 up and `trained`, golden config still == `.origin.backup` |\n"
+    },
+    {
+        "number": 26931,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-29T00:01:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Added tested label(s): Tested for 202511 Branch. The corresponding branches are checked in the **Tested branch** section and have branch-specific test information in the **Test result** section of the PR description.\n\nAdded request label(s): Request for 202511 Branch. These branches are requested in the **Backport** section of the PR description, and their matching **Tested for** labels are now present.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 26931,
