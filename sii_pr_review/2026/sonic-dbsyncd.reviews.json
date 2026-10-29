@@ -1,5 +1,106 @@
 [
     {
+        "number": 88,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2026-10-21T07:55:41Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2026-10-21T07:55:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2026-10-21T07:56:01Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2026-10-27T12:51:24Z",
+        "comment_author": "Xichen96",
+        "comment_body": "Independent validation completed for exact head `a661f87f96627ae8332d58e3358e5fbd1024f9df`.\n\n### Focused checks\n- Unit suite: **16/16 passed**.\n- Python wheel build, compile, and `git diff --check`: passed.\n- Flake8: **0 violations on PR-added lines**.\n\n### Same-DUT physical A/B\nThe actual cold SWSS restart path was used, with systemd failure counters reset before each attempt to match the test setup.\n\n- **Stock control: 16/16 reproduced** (`p = 1.0`, `N95 = 1`; final proof target `N = 10`). `LLDP_LOC_CHASSIS` dropped from 7 fields to absent and remained absent for **82-115 seconds**. `lldp-syncd` kept the same PID, live `lldpcli` chassis data remained present, and SNMP returned `No Such Instance`.\n- **Exact candidate: 16/16 passed**, including **10/10 final-N passes**. The table repopulated automatically without restarting `lldp-syncd` in **1.48-9.13 seconds** (median **5.89 seconds**), and SNMP recovered.\n- Healthy-path Redis monitoring across four sync intervals showed only `EXISTS LLDP_LOC_CHASSIS`; there were no unnecessary delete or field-write operations.\n\n### Functional and health checks\n- `snmp/test_snmp_lldp.py`: **1/1 passed**.\n- Pretest: **11/11 applicable checks passed** (3 expected skips).\n- Posttest: **5/5 passed**.\n- BGP: **6/6 established**; LLDP neighbours: **7**.\n- No unexpected core files or service-health regressions.\n\nPhysical A/B validation ran on `SONiC.20260510.22`. The original `SONiC.20241110.22` image and exact original configuration were restored afterward and full health was reverified.\n\nTracking:\n- PBI: https://msazure.visualstudio.com/One/_workitems/edit/40347878\n- Task: https://msazure.visualstudio.com/One/_workitems/edit/40347879\n\nSanitized evidence archive SHA-256: `584674c7b44f20836524cf293a3f8523e6402eaf097c380fa9b0363725b97061`.\n"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2026-10-27T12:54:15Z",
+        "comment_author": "Xichen96",
+        "comment_body": "@storm-liang Please review this fix. Independent validation on the exact PR head is recorded here: https://github.com/sonic-net/sonic-dbsyncd/pull/88#issuecomment-6442328636."
+    },
+    {
+        "number": 88,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2026-10-29T00:41:52Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Removed label(s):\n- `Request for msft-202603 branch`: The matching `Tested for msft-202603 Branch` label is missing. This requirement also applies to manually added request labels.\n\nThis PR requests backports for branch(es): 202603, but is missing required test information.\n\n**Update the PR description, not a PR comment:**\n1. List each requested branch under **Backport**.\n2. After testing on each branch, tick its checkbox (`- [x]`) under **Tested branch**. An unchecked box (`- [ ]`) does not count.\n3. Under **Test result**, start a separate entry with each branch number, followed by its test evidence on the same line or the following lines, such as a test-run link or a summary with logs. A branch number alone, placeholders, and results for another branch do not count.\n\nPlease make sure you have done all three steps above.\nExample format for the branches above (replace every placeholder with your actual test evidence; only check branches you have tested):\n```markdown\n### Backport\n202603\n\n### Tested branch\n- [x] 202603\n\n### Test result\n202603: <link to test results or summary with logs>\n```\n\nKeep this information outside HTML comments (`<!-- ... -->`) so it can be read.\nAfter you save the PR description, I will check it again and add the matching `Tested for <branch> Branch` labels first, then the `Request for <branch> Branch` labels. Request labels remain blocked until their matching tested labels are present.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2026-10-29T00:42:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Removed label(s):\n- `Request for msft-202603 branch`: The matching `Tested for msft-202603 Branch` label is missing. This requirement also applies to manually added request labels.\n\nThis PR requests backports for branch(es): 202603, but is missing required test information.\n\n**Update the PR description, not a PR comment:**\n1. List each requested branch under **Backport**.\n2. After testing on each branch, tick its checkbox (`- [x]`) under **Tested branch**. An unchecked box (`- [ ]`) does not count.\n3. Under **Test result**, start a separate entry with each branch number, followed by its test evidence on the same line or the following lines, such as a test-run link or a summary with logs. A branch number alone, placeholders, and results for another branch do not count.\n\nPlease make sure you have done all three steps above.\nExample format for the branches above (replace every placeholder with your actual test evidence; only check branches you have tested):\n```markdown\n### Backport\n202603\n\n### Tested branch\n- [x] 202603\n\n### Test result\n202603: <link to test results or summary with logs>\n```\n\nKeep this information outside HTML comments (`<!-- ... -->`) so it can be read.\nAfter you save the PR description, I will check it again and add the matching `Tested for <branch> Branch` labels first, then the `Request for <branch> Branch` labels. Request labels remain blocked until their matching tested labels are present.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-dbsyncd",
+        "comment_at": "2026-10-29T00:43:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Added tested label(s): Tested for msft-202603 Branch. The corresponding branches are checked in the **Tested branch** section and have branch-specific test information in the **Test result** section of the PR description.\n\nAdded request label(s): Request for msft-202603 Branch. These branches are requested in the **Backport** section of the PR description, and their matching **Tested for** labels are now present.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2026-10-21T07:57:22Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2026-10-21T23:18:47Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2026-10-27T12:47:39Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-dbsyncd",
+        "review_at": "2026-10-28T11:22:33Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-dbsyncd",
+        "latestReview_at": "2026-10-28T11:22:33Z",
+        "latestReview_author": "StormLiangMS",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-dbsyncd",
+        "latestReview_at": "2026-10-21T23:18:47Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-dbsyncd",
+        "latestReview_at": "2026-10-27T12:47:39Z",
+        "latestReview_author": "Xichen96",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 87,
         "repo": "sonic-dbsyncd",
         "comment_at": "2026-10-06T21:35:37Z",
