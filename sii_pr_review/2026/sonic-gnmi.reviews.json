@@ -343,6 +343,161 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 852,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-26T19:45:11Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 852,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-26T19:45:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 852,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-26T19:45:35Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 852,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-26T20:37:40Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 852,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-26T20:37:54Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 852,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-26T20:49:03Z",
+        "comment_author": "hdwhdw",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 852,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-26T20:49:15Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 852,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-28T18:12:29Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 852,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-28T18:13:18Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 852,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-29T19:08:13Z",
+        "comment_author": "donghaolicd",
+        "comment_body": "Reviewed `f62780e76fc5ff5ad1813eede61659ac4c5c36ec`.\n\n**[P2] Reject missing required configuration fields in the pure provider.**\n\nThe [typed fields and JSON decoding](https://github.com/sonic-net/sonic-gnmi/blob/f62780e76fc5ff5ad1813eede61659ac4c5c36ec/internal/adaptors/dbconfig/provider_pure.go#L26-L55) silently substitute Go zero values for omitted `id`, `separator`, `hostname`, and `port`. For example:\n\n```json\n{\"INSTANCES\":{\"redis\":{}},\"DATABASES\":{\"CONFIG_DB\":{\"instance\":\"redis\"}}}\n```\n\nWith this fixture, the current pure provider returns `GetDbId(\"CONFIG_DB\", \"\") = 0`, `GetDbSeparator(...) = \"\"`, and `GetDbTcpAddr(...) = \":0\"`, all with nil errors. I reproduced this against the reviewed revision. In contrast, the [SWSS parser](https://github.com/sonic-net/sonic-swss-common/blob/19fecd2920b82d1316015ff719b892c639807a3c/common/dbconnector.cpp#L209-L229) reads these fields with `.at()` and rejects missing fields. This allows invalid fixtures to pass standalone tests while failing with the native provider.\n\nPlease validate required-field presence and types during initialization, and add negative cases to the shared provider tests. Distinguish an omitted ID from valid `id: 0`; keep the optional `unix_socket_path` optional. This can be addressed locally without expanding the provider abstraction.\n\n**Verification:** existing pure tests passed with CGO disabled; focused race tests and vet passed. An independent local reproduction confirmed the missing-field acceptance. Latest CI checkout includes the reviewed SHA; execution logs show the three normal-provider tests and legacy multi-namespace/multi-instance tests passing. The native malformed-input behavior above was checked in SWSS source, not executed locally. No device validation was performed.\n\n**Description cleanup:** please refresh the older revision/test evidence and replace the removed `junit-xml` command with `ci-report` following #854. Also remove the internal tracking reference from the public description without copying it into another public comment.\n\nRecommendation: address the provider-validation mismatch before merge.\n"
+    },
+    {
+        "number": 852,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-29T19:24:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 852,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-29T19:24:53Z",
+        "comment_author": "hdwhdw",
+        "comment_body": "> Please validate required-field presence and types during initialization, and add negative cases to the shared provider tests.\n\nFixed in f973aa5. The pure provider now rejects missing or null `hostname`,\n`port`, `instance`, `id` and `separator` before publishing configuration.\nTyped decoding continues to reject invalid scalar types. An explicit `id: 0`\nand an omitted `unix_socket_path` remain valid. The native provider is unchanged.\n\nAdded 15 shared negative cases and a zero-ID/optional-socket compatibility\ncase. Ten missing/null cases failed before the fix and now pass. The existing\nmissing-instance test still checks its original error.\n\nThe documented CGO-disabled command, focused formatting/build/race/vet\nchecks, and full `make -f pure.mk fmt-check ci-report` pass (984 tests).\nLocal normal-provider and legacy tests cannot compile without generated\nSWSS bindings; native CI for the correction head is not yet verified.\n\nThe description now uses `ci-report` and current source and validation\nevidence. This addresses [the review comment](https://github.com/sonic-net/sonic-gnmi/pull/852#issuecomment-6505917010).\n"
+    },
+    {
+        "number": 852,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-29T19:25:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 852,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-29T19:50:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 852,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-29T19:51:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 852,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-26T20:51:11Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 852,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-26T21:46:45Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 852,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-28T18:14:42Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 852,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-29T19:29:01Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 852,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-29T19:53:45Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 852,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-29T22:41:04Z",
+        "review_author": "donghaolicd"
+    },
+    {
+        "number": 852,
+        "repo": "sonic-gnmi",
+        "latestReview_at": "2026-10-29T19:53:45Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 852,
+        "repo": "sonic-gnmi",
+        "latestReview_at": "2026-10-29T22:41:04Z",
+        "latestReview_author": "donghaolicd",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 851,
         "repo": "sonic-gnmi",
         "comment_at": "2026-10-26T15:00:47Z",
@@ -876,6 +1031,47 @@
         "number": 851,
         "repo": "sonic-gnmi",
         "latestReview_at": "2026-10-28T01:44:23Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 850,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-25T08:23:00Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 850,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-25T08:23:09Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 850,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-25T08:23:22Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 850,
+        "repo": "sonic-gnmi",
+        "comment_at": "2026-10-25T09:13:31Z",
+        "comment_author": "marvellgit",
+        "comment_body": "@qiluo-msft This replaces #810 and addresses both points from your review there:\n\n1. **Merged the latest master.** It picks up `golang.org/x/time`, and CodeQL Analyze (go) now passes.\n2. **Added coverage.** New tests call `UserPwAuth` and `sshdHostKeyCallback` against in-process SSH servers: valid login, wrong password, host key mismatch, no usable host keys, connection refused, and a stalled handshake cut off by the deadline. `sshAuthAddr` is now a var, like `sshHostKeyPaths`. `coverage.sonic-net.sonic-gnmi.build` passes.\n\n#810 was closed because the branch ruleset blocks pushes to existing branches. All checks are green. Could you take a look?"
+    },
+    {
+        "number": 850,
+        "repo": "sonic-gnmi",
+        "review_at": "2026-10-29T21:16:13Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 850,
+        "repo": "sonic-gnmi",
+        "latestReview_at": "2026-10-29T21:16:13Z",
         "latestReview_author": "qiluo-msft",
         "latestReview_state": "APPROVED"
     },
