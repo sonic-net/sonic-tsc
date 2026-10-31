@@ -100,6 +100,557 @@
         "latestReview_state": "DISMISSED"
     },
     {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-09-29T08:40:24Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-09-29T08:40:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-09-29T08:40:44Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-09-29T09:16:08Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-09-29T09:16:18Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-09-29T09:30:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-09-29T09:31:05Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-09-29T10:25:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-09-29T10:26:05Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-09-30T02:17:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-09-30T02:17:36Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-09T02:20:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-09T02:20:14Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-09T02:37:58Z",
+        "comment_author": "ganglyu",
+        "comment_body": "Thanks @yxieca. Addressed in 754214d, except 4 and 11:\n\n1, 2. `threshold()` returns `None` for `None`, `\"N/A\"` and `bool`.\n3. Docstring fixed; `continue` is correct for a keyword-only arg without a default. The comma split is safe: the input comes from `scope_scan._signature()`, which writes names and `=...` only, never annotations.\n4. Intentional: rows are mutable and some carry lists, so like `@dataclass(eq=True)` they compare by value but are not hashable.\n5. A declined template default is now formatted like the taken branch.\n6. Integer reads go through `int_cast()`, which returns `None` for NaN/inf/out-of-range/negative-to-unsigned instead of saturating.\n7. A non-`Optional` `Threshold` is rejected with a `ParseError`.\n8. Fixed: it is a `ParseError` naming the source.\n9. `bridge_test.rs` is rustfmt-clean.\n10. `--locked` added for pyo3 and provider. platform-api has no dependencies and no tracked `Cargo.lock`.\n11. The target dir is under `Agent.TempDirectory`, which the agent cleans after each job.\n12. The empty feature is removed; the cfg stays known via `[lints.rust] check-cfg`.\n\nQ1: not reachable today, but the shared call is now unconditional when a member has no column bit.\nQ2: `finalize` runs `atexit._run_exitfuncs()`, not `Py_FinalizeEx`, so the interpreter stays alive. The finalize tests are in separate test binaries, and each is the only atexit registrant in its binary.\n"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-09T03:02:03Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-09T03:02:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-09T07:02:14Z",
+        "comment_author": "ganglyu",
+        "comment_body": "Thanks @bobby-nexthop. There is no functional change here: the six daemons are ported from Python to Rust and do the same work. They write the same STATE_DB tables and fields, and they still reach the hardware through each vendor's existing Python platform API, so vendors change nothing. There is no new CLI, config or DB schema. A platform opts in with `use_rust_<daemon>` in `pmon_daemon_control.json`, and every other platform keeps the Python daemons. So we don't think this needs an HLD.\n"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-13T01:16:19Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-13T01:16:28Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-13T06:35:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-13T06:35:51Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-13T06:56:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-13T06:56:46Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-13T15:12:13Z",
+        "comment_author": "az-pz",
+        "comment_body": "@ganglyu , Have you checked the memory utilization with this change? How does it compare against the master the branch? The main purpose of the rust port is memory reduction. We should measure that change. "
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-13T23:22:50Z",
+        "comment_author": "bobby-nexthop",
+        "comment_body": "> Thanks @bobby-nexthop. There is no functional change here: the six daemons are ported from Python to Rust and do the same work. They write the same STATE_DB tables and fields, and they still reach the hardware through each vendor's existing Python platform API, so vendors change nothing. There is no new CLI, config or DB schema. A platform opts in with `use_rust_<daemon>` in `pmon_daemon_control.json`, and every other platform keeps the Python daemons. So we don't think this needs an HLD.\r\n\r\nMakes sense, I understand the daemons are opt-in and the STATE_DB surface is unchanged, but my concern isn't the daemons, it's the contract. This PR makes facade.pyi + inventory.json the declared source of truth for the platform API surface, codifies traversal/sentinel/fallback semantics that were previously implicit, and gates all future platform_base changes behind the generator and three Rust crates. That's community-wide infrastructure, not just an internal refactor, and it spans 8 PRs across 3 repos!\r\n\r\nThere's a lot that the community needs to know (an HLD is the way to do it), the generator workflow for future API changes, how do vendors onboard themselves ? what is the rollout/deprecation plan for the Python daemons ? Do we have to maintain daemons in multiple languages now? What is the memory/perf data, and that's really just what I can think of on the top of my head, I'm sure other folks have more."
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-14T01:11:59Z",
+        "comment_author": "ganglyu",
+        "comment_body": "@az-pz Yes. Over the PyO3 bridge, which this change uses, memory is about the same as the Python daemons. Each Rust daemon still embeds a Python interpreter to load the vendor's `sonic_platform`, and that is where most of the memory goes.\n\nThe reduction comes when a platform has a native Rust implementation. On an NVIDIA DUT, we ran these daemons together in pmon three ways: the Python daemons, the Rust daemons over the PyO3 bridge, and the Rust daemons over a native Rust implementation of the NVIDIA platform API. PSS per daemon from `/proc/<pid>/smaps_rollup`, and the pmon container's `memory.current` (what `docker stats` shows), in MiB:\n\n| | Python | Rust, PyO3 | Rust, native |\n|---|---|---|---|\n| thermalctld | 21.8 | 21.9 | 6.6 |\n| psud | 19.8 | 20.6 | 5.2 |\n| syseepromd | 18.2 | 20.2 | 4.9 |\n| pcied | 17.7 | 20.7 | 5.6 |\n| stormond | 17.3 | 21.1 | 5.8 |\n| chassisd | 21.9 | 21.3 | 6.9 |\n| **pmon container** | **209.6** | **205.2** | **111.5** |\n\nOver PyO3, the extra PSS per daemon is the Rust binary's code pages, and the container as a whole uses about the same. With the native API, each daemon takes 5\u20137 MiB, and the pmon container drops from 210 to 112 MiB.\n"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-19T01:23:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-19T01:23:35Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-19T01:38:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-19T01:38:32Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-19T02:50:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-19T02:50:27Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-19T05:12:16Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-19T05:12:26Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-19T06:33:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-19T06:33:32Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-20T02:11:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-20T02:11:49Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-22T10:12:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-22T10:12:52Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-22T10:36:13Z",
+        "comment_author": "ganglyu",
+        "comment_body": "@az-pz Thanks for the careful review. Everything inline is addressed in 85c05c8, with a reply in each thread.\n\nThe differential testing is now in-tree: `crates/platform-base/tests/differential.rs` (#780) builds random chassis and requires the Python facade + bridge and the native facade to give the same answers and make the same platform calls, and each daemon PR (sonic-net/sonic-platform-daemons#915-#920) has `parity` tests that run the Python daemon and the Rust port over the Python daemon's own test mocks and compare the tables and logs. The docs now describe only the checks that exist.\n\nOn the three questions:\n- Stub changes: `facade.pyi` is the single source, and CI here fails unless the generated Python, trait and bridge are regenerated. The daemons pin these crates in `Cargo.lock` and re-pin when the stub changes; sonic-buildimage builds them against its own submodules (a `[patch]` in `rules/sonic-pmon-daemons-rs.cargo.toml`), so an image never mixes versions.\n- Vendors: running the Rust daemons over a vendor's Python `sonic_platform` needs no vendor code (`use_rust_<daemon>` in `pmon_daemon_control.json`). Going native means implementing platform-base's traits, where every base-class method already has Python's default answer, and selecting it per daemon with `platform_api_<daemon>`. sonic-net/sonic-buildimage#30232 does that for NVIDIA, and that is where the memory goes down (about 27 MB to 5-9 MB PSS per daemon).\n- Python daemons: unchanged and still the default; a platform opts in per daemon and can switch back. The parity tests keep the two in step while both exist.\n\nNits: the package is now `sonic_platform_api`; I'll give the folded commit a proper subject line.\n"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-22T10:38:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-22T10:38:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-23T10:15:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-23T10:15:16Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-26T04:55:29Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-26T04:55:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-27T02:41:47Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-27T02:41:57Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-10-29T05:38:26Z",
+        "comment_author": "keboliu",
+        "comment_body": "Hi @az-pz do you have further comments? if no, I plan to merge it to unblock other PRs."
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-10-05T22:43:12Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-10-05T23:26:54Z",
+        "review_author": "bobby-nexthop"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-10-21T15:51:46Z",
+        "review_author": "az-pz"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-10-22T10:22:40Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-10-22T10:24:00Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-10-22T10:25:03Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-10-22T10:26:02Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-10-22T10:26:55Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-10-22T10:27:53Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-10-22T10:28:39Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-10-22T10:30:54Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-10-22T10:30:56Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-10-22T10:30:59Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-10-22T10:31:01Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-10-22T10:31:03Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-10-22T10:31:05Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-10-22T10:31:07Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-10-22T10:31:10Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-10-22T10:31:12Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-10-22T10:31:14Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-10-22T10:31:16Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-10-22T10:31:18Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-10-22T10:31:21Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-10-22T10:31:23Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-10-22T10:31:25Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-10-26T22:57:05Z",
+        "review_author": "BYGX-wcr"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-10-27T02:46:10Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-10-27T02:46:12Z",
+        "review_author": "ganglyu"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-10-27T18:08:03Z",
+        "review_author": "BYGX-wcr"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-10-29T16:13:43Z",
+        "review_author": "az-pz"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "latestReview_at": "2026-10-05T23:26:54Z",
+        "latestReview_author": "bobby-nexthop",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "latestReview_at": "2026-10-29T16:13:43Z",
+        "latestReview_author": "az-pz",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 768,
+        "repo": "sonic-platform-common",
+        "latestReview_at": "2026-10-27T18:08:03Z",
+        "latestReview_author": "BYGX-wcr",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 767,
         "repo": "sonic-platform-common",
         "comment_at": "2026-09-28T18:18:19Z",
