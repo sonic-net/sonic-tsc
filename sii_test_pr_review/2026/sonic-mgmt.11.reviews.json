@@ -1,0 +1,210 @@
+[
+    {
+        "number": 28851,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-28T02:53:01Z",
+        "comment_author": "yxieca",
+        "comment_body": "This PR was created by an AI agent on behalf of @yxieca. The production candidate is 245f021b4ebc985339f5f01fd2acc2fbb44f5347; the PR description contains independently verified, sanitized six-run A/B evidence and explicitly documents the same-arm stock LogAnalyzer limitation. Measurement-only plugin/quota changes are not part of this PR."
+    },
+    {
+        "number": 28851,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-28T02:53:04Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 28851,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-28T02:53:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 28851,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-28T02:53:31Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 28851,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-28T02:57:46Z",
+        "comment_author": "yxieca",
+        "comment_body": "Addressed the Azure Markers Check failure in signed-off incremental commit 6f670242dba0726301535edfcf3af4d11734584b: add the topology(any) module marker to the offline regression file, matching existing unit-test patterns. Validation on this head: 40 offline regressions passed; full-file configured pre-commit passed; the actual repository marker checker passed (733 checked, zero missing). Both production runtime files are byte-for-byte identical to measured candidate 245f021b4ebc985339f5f01fd2acc2fbb44f5347, so the published six-run A/B evidence still applies to the runtime implementation; no DUT/testbed rerun was needed or performed. The PR description now distinguishes the measured candidate from the metadata-only follow-up. Exact-head DCO/Azure checks are being verified; this is not an all-CI-green claim."
+    },
+    {
+        "number": 28851,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-28T02:57:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 28851,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-28T02:58:11Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 28851,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-28T03:02:31Z",
+        "comment_author": "yxieca",
+        "comment_body": "Verified at 2026-10-28 03:02 UTC on head 6f670242dba0726301535edfcf3af4d11734584b: DCO and EasyCLA pass; all seven Azure Pre_test jobs pass, including Markers Check, and the complete Pre_test stage succeeded. Azure build 1259924 explicitly identifies this source SHA (the build sourceVersion is the PR merge commit). Build: https://dev.azure.com/mssonic/_build/results?buildId=1259924 . This completes verification of the marker-only correction; Azure downstream tests/rollup and CodeQL were still pending, so this is not an all-CI-green or merge-readiness claim."
+    },
+    {
+        "number": 28851,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-28T04:06:42Z",
+        "comment_author": "yxieca",
+        "comment_body": "Review notes:\n- Confirming the existing sudo sed filter finding: the original positive helper excluded these lines, but the original no-other-user checker did not. LogCursor.counts() now applies that exclusion before username validation, weakening the negative check. An executable base/head comparison rejects a genuine other-user record containing command: /usr/bin/echo sudo sed in the original checker but ignores it in the new parser; the complete new verifier also passes when this record accompanies the expected grep record. Please remove the obsolete exemption or narrowly identify reader noise, and add a forbidden-user regression.\n- The seven scenarios and their core intent are preserved, but this is not strictly behavior-equivalent: matching is now exact rather than substring-based, pre-boundary records are excluded, deadlines count elapsed remote-call time, combined checks share observation budgets, and missing remote positives can now trigger scenario retries. These changes can be intentional improvements; please document them as changed observation/retry semantics rather than a performance-only refactor.\n\nValidation: 40 offline tests passed, plus targeted original/new parser comparisons and a full-verifier counterexample. No live DUT/TACACS testing or performance rerun was performed for this review.\n\nAI-assisted review, reviewed by Ying Xie (@yxieca)."
+    },
+    {
+        "number": 28851,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-28T04:44:13Z",
+        "comment_author": "yxieca",
+        "comment_body": "## Batched review response \u2014 shipped in 19db289 and 031087689\n\n- **Parser finding ([inline](https://github.com/sonic-net/sonic-mgmt/pull/28851#discussion_r4396448472)):** Removed both `sudo sed` and `ansible.legacy.command Invoked` payload exemptions. Genuine accounting records cannot bypass username checks through command arguments. Both prefixes \u00d7 both strings are covered through the full verifier with expected plus forbidden records, expected-user records, and real non-accounting noise. Eight new payload cases failed before correction; all **51 offline cases now pass**.\n- **Observation/retry semantics ([review](https://github.com/sonic-net/sonic-mgmt/pull/28851#issuecomment-6460393192)):** PR description explicitly documents exact matching, stale boundaries, elapsed deadlines, shared budgets and missing-remote-positive retries, rather than claiming a performance-only behavior-equivalent refactor.\n- **CI packaging failure:** Old build 1259924's 12 offline attempts passed the affected fake-host test body but failed inherited DUT LogAnalyzer teardown: backslash-bearing parameter IDs lost backslashes in unquoted marker command parsing. Renamed the offline suite to `unit_test_accounting.py` and gave rotation/truncation/regrowth safe IDs. Actual selector CLI plus pipeline mappings exclude it on all four CI jobs while retaining live accounting (four-ASIC T1 uses `t1_checker`). No shared LogAnalyzer changes or disabled checks. Broad pytest still matches `unit_test_*.py`; explicit `--noconftest` isolation remains required.\n\n**Verification:** 51 offline cases pass; full-file configured pre-commit, actual marker checker (732 checked, zero missing), scoped static/diff checks pass. Testbed service ran exact `19db289f9127d993f45c3530be4aae6d4a966bbb`: **7 accounting passed, 0 failures/errors/skips**, all setup/call/teardown phases completed; stock utilities completed and cleanup/lock release independently verified. Whole run 942.156s; module 656.140s\u2014durations, not a new speedup comparison. Pushed head **0310876893586eec41e8acbc89097076c3222574** changes only offline packaging relative to the service revision; both runtime file hashes match the frozen service hashes listed in the PR description.\n\nThe service retained the explicitly approved stock accounting LogAnalyzer-disable marker and documented accounting-only quota/utility harness allowances. It does not validate accounting LogAnalyzer checking or broad CI. Historical six-run A/B evidence remains scoped to older runtime `245f021`. Exact-head DCO has passed; new Azure prechecks/downstream jobs are being verified separately. No all-CI-green claim.\n\n**Exact-head CI verification (2026-10-28 05:14 UTC):** [Azure build 1260198](https://dev.azure.com/mssonic/build/_build/results?buildId=1260198) identifies source SHA `0310876893586eec41e8acbc89097076c3222574` (merge checkout `a11ece1064966395fbf3acda6b079facb3e9de00`). DCO/EasyCLA and all seven Azure Pre_test checks pass; the full Pre_test stage succeeded. Actual Azure trigger logs\u2014not only local selector simulation\u2014confirm all four newly created test plans contain the seven live TACACS modules, retain `tacacs/test_accounting.py`, and contain neither offline filename. Thus the unintended offline DUT scheduling is corrected in this build. The four downstream Elastictest jobs and CodeQL were still running at this observation; full CI completion remains pending.\n\n**Bounded follow-up (2026-10-28 05:38:48 UTC):** After 29m24s of observation at 95-second intervals, exact-head DCO/EasyCLA, CodeQL/Analyze, Semgrep, and all seven Azure Pre_test checks pass. Azure 1260198 remains in progress: all four Elastictest jobs remain unfinished; three now show `Run test` and one shows `Prepare Testbed`; no downstream pass/fail result is available yet. No blind rerun or additional code change was made. The corrected actual scheduling is verified, but complete CI validation remains pending.\n"
+    },
+    {
+        "number": 28851,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-28T05:08:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 28851,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-28T05:08:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 28851,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-28T07:18:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 28851,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-28T07:18:56Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 28851,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-28T07:19:01Z",
+        "comment_author": "yxieca",
+        "comment_body": "Addressed the incomplete-record retry finding from [review5678055449](https://github.com/sonic-net/sonic-mgmt/pull/28851#pullrequestreview-5678055449) in signed-off commit **73e37dc2c634b3841c03807295156ef1dd193544**, now pushed normally.\n\nThe `MissingAccounting` handler rejects retry when ANY local/remote cursor has pending data, before cleanup or re-execution can erase it. Clean missing-positive retry behavior remains. Four regressions run the actual helper/verifier and fake-host snapshots for expected/forbidden users on either source, including the formerly false-pass second attempt; each asserts one cleanup/command and preserved incomplete evidence. All four failed before the fix; all **55 offline tests pass** now. Full-file pre-commit, marker732/zero missing, four-job actual selector and diff checks pass.\n\nFresh service validation on **exact source/runtime73e37dc**: **7 accounting passed, 0 failures/errors/skips**, all setup/call/teardown completed; stock utilities completed and restoration/lock release independently verified. Whole934.153s/module650.931s are durations, not a new performance comparison. Runtime file hashes and authorized harness limits are in the updated PR description. This does not claim the incomplete-record fault naturally occurred in the DUT run; synthetic regressions exercise that path. Stock accounting LogAnalyzer-disable limitation remains, no global checks weakened.\n\nHistorical A/B remains245f021; prior green CI1260198 does not validate this changed runtime. Exact-head DCO/EasyCLA pass; new Azure prechecks/downstream completion are being verified separately. No new-head CI-green or merge-readiness claim.\n"
+    },
+    {
+        "number": 28851,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-28T20:15:19Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 28851,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-28T20:15:39Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 28851,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-01T01:43:39Z",
+        "comment_author": "yxieca",
+        "comment_body": "### Chipmunk exploratory hardware validation \u2014 2026-10-31\n\nExecuted at Ying's explicit request on physical Chipmunk BMC `SONiC-OS-20260810.19`.\n\n**Revision:** upstream `3b902892919ae14e4cff39714c020ae003affd73`, applied locally through its six-commit series (test-branch HEAD `76da6f386b5918eb4affc59ea53ff680af834dd0`). Both production-file hashes match those reported in this PR:\n- `tests/tacacs/accounting.py`: `f7c83d65ef772505348b0dd73c14c918266430abc04b6c976c0fca034c68c9d9`\n- `tests/tacacs/test_accounting.py`: `a485d200fb4faaecd06aeb55b9fe03d00b1d8766c09953060007580ee98a8c39`\n\n**Observed result:** all seven accounting cases executed and passed, with **0 failures, 0 errors, 0 skips**. Detailed logs contain setup/call/teardown markers for each case; the final JUnit has no teardown errors. Cases: TACACS-only, all-server-down, some-server-down, local-only, TACACS+local, combined accounting with all servers down, and remote-address verification.\n- Main pytest session: **964.13 seconds (16m04s)**.\n- Entire wrapper, including utilities: **28m23s**, 18:12:49\u201318:41:12 Pacific; exit 0.\n- Pretest: **11 passed, 4 skipped** (stock applicability).\n- Posttest: **5 passed**, no failures/errors/skips.\n- Offline suite on the applied checkout: **85 passed** (pytest 9.1.1, isolated config/conftest/plugin loading); `git diff --check` passed.\n\n**Protocol:** standard `run_tests.sh`, grouped accounting module, normal pre/posttest and sanity/config checks. No forced VS device type or VS quota exception was added. The existing `device_type('vs')` marker was retained; in this checkout that marker is enforced only when `--device_type` is explicitly supplied, which the standard BMC invocation does not do. This is exploratory Chipmunk evidence, not proof the marker broadly certifies BMC applicability. The stock accounting-module `disable_loganalyzer` marker was retained: **no accounting LogAnalyzer/syslog-error validation claim**.\n\n**Restoration checks:** after completion, authenticated admin access and noninteractive sudo succeeded. Protected pre-main/preflight versus post-run CONFIG_DB comparison found `AAA`, `TACPLUS`, and `TACPLUS_SERVER` unchanged. The PTF test TACACS service was stopped, consistent with the stock `cleanup_tacacs()` fixture and its logged successful stop. Its pre-run running/stopped state was not independently recorded, so this is not a claim of exact PTF initial-state restoration. No raw configs or credential-bearing logs are published. An independent serial capture was available, but local-password recovery during an outage was not exercised.\n\n**Limits:** this was one candidate correctness run, **not a matched baseline/candidate performance experiment**; its elapsed time does not establish a hardware speedup. It does not cover the full TACACS suite, all platforms, or injected failure cases. The designated full-panel clearance for this exact revision or a proven runtime-equivalent revision remains unverified per coordination review; this result does **not** substitute for that gate, and direct authorization to run this experiment is not represented as a waiver of it.\n\nRun identifier: `tacacs28851_20261031_181249`. Console, detailed logs and utility/main JUnit reports retained privately.\n"
+    },
+    {
+        "number": 28851,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-01T02:18:16Z",
+        "comment_author": "yxieca",
+        "comment_body": "### Chipmunk accounting runtime comparison\n\nAdding the observed historical timing difference requested by Ying:\n\n- **Before:** completed full-run baseline `tr_retest_20261028_184818.xml` on `.18`: **2745.159 seconds (45m45s)** summed JUnit testcase duration for the seven accounting cases.\n- **With PR #28851:** targeted run `tacacs28851_20261031_181249` on `.19`, exact candidate `3b902892919ae14e4cff39714c020ae003affd73`: **918.994 seconds (15m19s)** using the same summed-testcase metric; **7 passed, 0 failures/errors/skips**.\n- **Observed reduction: 1826.165 seconds \u2014 30m26s, or 66.5% less recorded accounting testcase time.**\n\nBoth totals cover the same seven accounting test identities and include their attributed setup/teardown time. They exclude pretest/posttest and are not whole-run elapsed times. The candidate's main pytest session elapsed time was 964.13 seconds; its full wrapper including utilities took 28m23s, as reported in the earlier validation comment.\n\n**This is an observed historical comparison, not a controlled Chipmunk A/B measurement or causal speedup guarantee.** The baseline was part of a full suite on `.18`; the candidate was a focused run on `.19`, with different overall checkout/state context. We therefore cannot attribute the entire 66.5% difference exclusively to this PR. It is nevertheless the measured runtime difference on this testbed. The separate matched VS/KVM measurements in the PR remain the controlled performance evidence.\n"
+    },
+    {
+        "number": 28851,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-01T02:25:38Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202608: https://github.com/Azure/sonic-mgmt.msft/pull/1508"
+    },
+    {
+        "number": 28851,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-10-28T02:57:04Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 28851,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-10-28T03:01:11Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 28851,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-10-28T05:09:11Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 28851,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-10-28T05:12:13Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 28851,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-10-28T07:22:52Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 28851,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-10-28T17:55:05Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 28851,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-10-28T20:16:46Z",
+        "review_author": "yxieca"
+    },
+    {
+        "number": 28851,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-10-28T20:18:13Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 28851,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-10-28T21:27:20Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 28851,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-10-28T20:18:13Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 28851,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-10-28T21:27:20Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    }
+]
