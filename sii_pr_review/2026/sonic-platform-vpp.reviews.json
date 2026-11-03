@@ -1,5 +1,218 @@
 [
     {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-10-28T21:46:09Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-10-28T21:46:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-10-28T21:46:27Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-10-29T20:08:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-10-29T20:09:04Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-10-29T21:40:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-10-29T21:40:31Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-10-30T12:12:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-10-30T12:13:09Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-10-30T13:52:59Z",
+        "comment_author": "yue-fred-gao",
+        "comment_body": "I think about it more. What's the value to have separate nodes for admission and trim, where trim has to send the packet back to admission? If we combine them to one, you don't need to use the sideband. I asked the question to AI and here is the answer.\r\n```\r\nShould they be combined?\r\nI think yes, and the PR's own objective is the argument. Every difficulty #329 introduces \u2014 the TRIMMED marker, a valid bit spent on it, the re-entry, the loop risk if the marker is lost, the cursor-advance subtlety above \u2014 exists only because the work happens in a node that isn't on the arc and has to climb back on. Do the trimming in the node that already holds the arc position and the entire class of problem disappears: vnet_feature_next is called once, next0 is already correct, the packet continues to the next feature with no marker and no second dispatch.\r\n\r\nWhat you'd give up is modest. The I-cache argument is the real one, but it's answerable without splitting the graph:\r\n\r\nA noinline cold helper behind the existing PREDICT_FALSE gives you the code separation without the graph separation \u2014 the hot loop stays small, the trim body sits in a cold text region. Counters can stay separate (vlib_node_increment_counter doesn't care), and the trace record can carry both the admission verdict and the trim outcome in one entry, which is arguably better than today's two records that duplicate the queue number.\r\n\r\nThe genuine loss is the separate show runtime line for trim's vector rate and clocks/packet. That's worth something operationally, but not worth a marker field, a re-entry path, and a potential infinite loop.\r\n```\r\nDo you see other values to separate them that I missed? "
+    },
+    {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-10-30T19:44:04Z",
+        "comment_author": "aaronber0614",
+        "comment_body": "> I think about it more. What's the value to have separate nodes for admission and trim, where trim has to send the packet back to admission? If we combine them to one, you don't need to use the sideband. I asked the question to AI and here is the answer.\r\n> \r\n> ```\r\n> Should they be combined?\r\n> I think yes, and the PR's own objective is the argument. Every difficulty #329 introduces \u2014 the TRIMMED marker, a valid bit spent on it, the re-entry, the loop risk if the marker is lost, the cursor-advance subtlety above \u2014 exists only because the work happens in a node that isn't on the arc and has to climb back on. Do the trimming in the node that already holds the arc position and the entire class of problem disappears: vnet_feature_next is called once, next0 is already correct, the packet continues to the next feature with no marker and no second dispatch.\r\n> \r\n> What you'd give up is modest. The I-cache argument is the real one, but it's answerable without splitting the graph:\r\n> \r\n> A noinline cold helper behind the existing PREDICT_FALSE gives you the code separation without the graph separation \u2014 the hot loop stays small, the trim body sits in a cold text region. Counters can stay separate (vlib_node_increment_counter doesn't care), and the trace record can carry both the admission verdict and the trim outcome in one entry, which is arguably better than today's two records that duplicate the queue number.\r\n> \r\n> The genuine loss is the separate show runtime line for trim's vector rate and clocks/packet. That's worth something operationally, but not worth a marker field, a re-entry path, and a potential infinite loop.\r\n> ```\r\n> \r\n> Do you see other values to separate them that I missed?\r\n\r\nHmmm.. yeah I would agree that having separate nodes isn't worth the complexity. Let me re-work and test"
+    },
+    {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-10-30T20:04:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-10-30T20:04:46Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-10-30T20:34:42Z",
+        "comment_author": "aaronber0614",
+        "comment_body": "> > I think about it more. What's the value to have separate nodes for admission and trim, where trim has to send the packet back to admission? If we combine them to one, you don't need to use the sideband. I asked the question to AI and here is the answer.\r\n> > ```\r\n> > Should they be combined?\r\n> > I think yes, and the PR's own objective is the argument. Every difficulty #329 introduces \u2014 the TRIMMED marker, a valid bit spent on it, the re-entry, the loop risk if the marker is lost, the cursor-advance subtlety above \u2014 exists only because the work happens in a node that isn't on the arc and has to climb back on. Do the trimming in the node that already holds the arc position and the entire class of problem disappears: vnet_feature_next is called once, next0 is already correct, the packet continues to the next feature with no marker and no second dispatch.\r\n> > \r\n> > What you'd give up is modest. The I-cache argument is the real one, but it's answerable without splitting the graph:\r\n> > \r\n> > A noinline cold helper behind the existing PREDICT_FALSE gives you the code separation without the graph separation \u2014 the hot loop stays small, the trim body sits in a cold text region. Counters can stay separate (vlib_node_increment_counter doesn't care), and the trace record can carry both the admission verdict and the trim outcome in one entry, which is arguably better than today's two records that duplicate the queue number.\r\n> > \r\n> > The genuine loss is the separate show runtime line for trim's vector rate and clocks/packet. That's worth something operationally, but not worth a marker field, a re-entry path, and a potential infinite loop.\r\n> > ```\r\n> > \r\n> > \r\n> >     \r\n> >       \r\n> >     \r\n> > \r\n> >       \r\n> >     \r\n> > \r\n> >     \r\n> >   \r\n> > Do you see other values to separate them that I missed?\r\n> \r\n> Hmmm.. yeah I would agree that having separate nodes isn't worth the complexity. Let me re-work and test\r\n\r\n@yue-fred-gao  . I re-worked as suggested. HLD follow-up :  https://github.com/sonic-net/SONiC/pull/2620"
+    },
+    {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-10-30T20:39:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-10-30T20:39:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-10-30T21:30:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-10-30T21:30:57Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "review_at": "2026-10-28T22:39:08Z",
+        "review_author": "nhegde-microsoft"
+    },
+    {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "review_at": "2026-10-29T14:54:39Z",
+        "review_author": "yue-fred-gao"
+    },
+    {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "review_at": "2026-10-29T18:22:10Z",
+        "review_author": "yue-fred-gao"
+    },
+    {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "review_at": "2026-10-29T21:48:39Z",
+        "review_author": "aaronber0614"
+    },
+    {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "review_at": "2026-10-29T21:53:39Z",
+        "review_author": "aaronber0614"
+    },
+    {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "review_at": "2026-10-29T21:58:34Z",
+        "review_author": "aaronber0614"
+    },
+    {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "review_at": "2026-10-29T22:02:16Z",
+        "review_author": "aaronber0614"
+    },
+    {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "review_at": "2026-10-30T00:59:33Z",
+        "review_author": "yue-fred-gao"
+    },
+    {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "review_at": "2026-10-30T05:00:26Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "review_at": "2026-10-30T21:19:50Z",
+        "review_author": "yue-fred-gao"
+    },
+    {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "review_at": "2026-10-30T21:35:08Z",
+        "review_author": "aaronber0614"
+    },
+    {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "latestReview_at": "2026-10-30T21:19:50Z",
+        "latestReview_author": "yue-fred-gao",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "latestReview_at": "2026-10-30T05:00:26Z",
+        "latestReview_author": "lolyu",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 329,
+        "repo": "sonic-platform-vpp",
+        "latestReview_at": "2026-10-28T22:39:08Z",
+        "latestReview_author": "nhegde-microsoft",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 327,
         "repo": "sonic-platform-vpp",
         "comment_at": "2026-10-28T10:58:54Z",
