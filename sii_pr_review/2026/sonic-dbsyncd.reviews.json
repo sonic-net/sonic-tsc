@@ -156,6 +156,13 @@
     {
         "number": 88,
         "repo": "sonic-dbsyncd",
+        "comment_at": "2026-11-03T10:19:56Z",
+        "comment_author": "wsycqyz",
+        "comment_body": "This also affects 202605: dbsyncd's `202605` branch has the chassis cache from #75 but not this fix.\n\nAfter a cold `systemctl restart swss`, APPL_DB is flushed and `LLDP_LOC_CHASSIS` stays empty until lldp restarts, so the LLDP-MIB local system data disappears from SNMP. In 202605 nightly runs, `snmp/test_snmp_lldp.py` fails whenever `database/test_state_db_flush.py` ran earlier on the same DUT (Cisco 8101, Mellanox SN4600C, Arista 7060CX/7260CX3, Nokia 7215).\n\nCould this be backported to 202605?"
+    },
+    {
+        "number": 88,
+        "repo": "sonic-dbsyncd",
         "review_at": "2026-10-21T07:57:22Z",
         "review_author": "copilot-pull-request-reviewer"
     },
