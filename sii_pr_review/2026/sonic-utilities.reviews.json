@@ -67,6 +67,94 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 5017,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-11-03T15:49:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 5017,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-11-03T15:50:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 5017,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-11-03T15:50:19Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 5017,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-11-04T02:45:01Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 5017,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-11-04T02:45:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 5017,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-11-04T02:47:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@wsycqyz Addressed both blocking points in [the follow-up commit](https://github.com/sonic-net/sonic-utilities/commit/0afbd198da01bd8710f67e1ba49986431d5b628f):\n\n- **Inactive `hostcfgd`:** retained the synchronous chrony restart for default-mode add/delete when `systemctl is-active --quiet hostcfgd` fails, including the existing restart-error reporting. Active `hostcfgd` still owns the asynchronous update.\n- **YANG scope:** corrected the code comment, command reference, and PR description. GCU's `ntp_validator` remains unchanged; the fallback is skipped when YANG validation already applies the update, so it does not introduce another restart there.\n\nThe expanded existing tests cover IPv4/IPv6, active/inactive `hostcfgd`, invalid/no-op requests, restart failures, and the YANG path: **25 focused checks pass** (24 NTP cases plus the existing GCU check), versus 10 failures and 15 passes on the previous PR head. On a fresh same-image t2 supervisor, the previous head left chrony's rendered server list stale after both add and delete with `hostcfgd` stopped; the correction applies both changes before returning. The original NTP configuration and service/timer states were restored, with the systemd start limits unchanged. The repository's Flake8 diff check also passes.\n\nAgreed on the non-blocking note: [the broader restart issue](https://github.com/sonic-net/sonic-buildimage/issues/23904) remains open. This does not coalesce `hostcfgd` restarts, fix GCU/hostcfgd overlap, or make daemon startup/shutdown an atomic subscription-readiness handoff. The full NTP module results in the description are explicitly marked as prior-revision evidence, not a new rerun. New-revision CI is underway; the static-analysis, Semgrep, and DCO checks have passed."
+    },
+    {
+        "number": 5017,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-11-04T04:11:11Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 5017,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-11-04T04:11:23Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 5017,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-11-04T04:13:52Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@wsycqyz Agreed: the warm/fast-boot wait makes `is-active` insufficient, not just a short startup race. Addressed [your follow-up](https://github.com/sonic-net/sonic-utilities/pull/5017#discussion_r4463129551) in [the boot-wait correction](https://github.com/sonic-net/sonic-utilities/commit/2ce94011e0076da736edd238a5f9394b08169946).\n\n- The existing fallback now checks `RestartWaiter.isAdvancedBootInProgress()` before delegating to an active `hostcfgd`. It restarts chrony synchronously during the shared warm/fast-boot flag window, while preserving the inactive-daemon fallback and the normal post-boot/YANG behavior.\n- A `RuntimeError` from the STATE_DB check is logged and printed before falling back; there is no broad silent exception handler. Restart failures still fail the command.\n- Updated the command reference and PR description, including the timeout-overlap trade-off and the fact that these checks are not an atomic subscription-readiness handshake.\n\nThe expanded existing NTP/GCU coverage passes **43 checks**; the same tests with the previous production code give 14 failures and 29 passes. On a freshly deployed same-image t2 supervisor, I also exercised the real daemon's boot wait with warm and fast flag states, for both IPv4 and IPv6: eight before/after scenarios and sixteen add/delete operations. Previous code returned success with stale chrony configuration, which remained stale after the daemon subscribed; corrected code applied both changes before returning. Pretest and the two posttest restoration checks passed. Original NTP configuration, boot flags, service/timer states, limits, and installed-source hashes were restored, and temporary sources/dependencies were removed.\n\nThis was a controlled boot-wait experiment, not a full warm/fast reboot run; the full NTP module was not rerun for this revision. Cold-start/flag-clear handoff races and overlap after the 180-second wait expires remain outside this correction, as do GCU overlap and burst coalescing. [Latest-revision CI](https://dev.azure.com/mssonic/be1b070f-be15-4154-aade-b1d3bfb17054/_build/results?buildId=1266814) is running; static analysis, Semgrep, and DCO have passed."
+    },
+    {
+        "number": 5017,
+        "repo": "sonic-utilities",
+        "review_at": "2026-11-04T01:35:55Z",
+        "review_author": "wsycqyz"
+    },
+    {
+        "number": 5017,
+        "repo": "sonic-utilities",
+        "review_at": "2026-11-04T03:11:18Z",
+        "review_author": "wsycqyz"
+    },
+    {
+        "number": 5017,
+        "repo": "sonic-utilities",
+        "review_at": "2026-11-04T04:19:55Z",
+        "review_author": "wsycqyz"
+    },
+    {
+        "number": 5017,
+        "repo": "sonic-utilities",
+        "latestReview_at": "2026-11-04T04:19:55Z",
+        "latestReview_author": "wsycqyz",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 4996,
         "repo": "sonic-utilities",
         "comment_at": "2026-10-28T02:52:24Z",
@@ -4698,6 +4786,27 @@
         "comment_at": "2026-10-06T00:00:02Z",
         "comment_author": "azure-pipelines",
         "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 4841,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-11-04T22:33:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to msft-202608: https://github.com/Azure/sonic-utilities.msft/pull/504"
+    },
+    {
+        "number": 4841,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-11-04T22:33:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Removed label(s):\n- `Request for msft-202608 Branch`: The matching `Tested for msft-202608 Branch` label is missing. This requirement also applies to manually added request labels.\n\nThis PR requests backports for branch(es): 202608, but is missing required test information.\n\n**Update the PR description, not a PR comment:**\n1. List each requested branch under **Backport**.\n2. After testing on each branch, tick its checkbox (`- [x]`) under **Tested branch**. An unchecked box (`- [ ]`) does not count.\n3. Under **Test result**, start a separate entry with each branch number, followed by its test evidence on the same line or the following lines, such as a test-run link or a summary with logs. A branch number alone, placeholders, and results for another branch do not count.\n\nPlease make sure you have done all three steps above.\nExample format for the branches above (replace every placeholder with your actual test evidence; only check branches you have tested):\n```markdown\n### Backport\n202608\n\n### Tested branch\n- [x] 202608\n\n### Test result\n202608: <link to test results or summary with logs>\n```\n\nKeep this information outside HTML comments (`<!-- ... -->`) so it can be read.\nAfter you save the PR description, I will check it again and add the matching `Tested for <branch> Branch` labels first, then the `Request for <branch> Branch` labels. Request labels remain blocked until their matching tested labels are present.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 4841,
+        "repo": "sonic-utilities",
+        "comment_at": "2026-11-04T22:34:01Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Removed `Approved for msft-202608 Branch` because the matching `Request for msft-202608 Branch` label and `Tested for msft-202608 Branch` label are missing. Please ensure the matching request label is present before adding the approval again.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 4841,
