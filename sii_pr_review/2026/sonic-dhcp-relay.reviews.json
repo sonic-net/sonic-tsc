@@ -1,5 +1,4694 @@
 [
     {
+        "number": 156,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-28T23:56:59Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 156,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-28T23:57:10Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 156,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-28T23:57:19Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 156,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-10-09T18:48:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 156,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-10-09T18:48:47Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 156,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-10-09T18:48:38Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 156,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-10-09T18:48:38Z",
+        "latestReview_author": "Xichen96",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 154,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-23T22:20:42Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 154,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-23T22:20:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 154,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-23T22:21:01Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 154,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-24T21:34:50Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 154,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-24T21:35:01Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 154,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-10-10T07:58:21Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 154,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-10-10T07:58:30Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 154,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-10-10T08:43:19Z",
+        "comment_author": "Xichen96",
+        "comment_body": "The Interface-ID presence and length validation looks good. SONiC generates a 16-byte identifier, and the server must echo it unchanged, so checking its size before decoding is appropriate.\n\nHowever, **I do not agree with making the configured-server source-address checks mandatory for DHCPv4 and DHCPv6.** Configured forwarding destinations are not necessarily the addresses from which legitimate replies arrive. For example:\n\n1. **Multihomed DHCPv4 server**\n\n   ```text\n   Client \u2192 relay \u2192 server address A (192.0.2.10)\n            relay \u2190 server address B (198.51.100.10)\n   ```\n\n   A and B belong to the same server, but the relay lists only A as its forwarding destination. [RFC 2131 \u00a74.1](https://www.rfc-editor.org/rfc/rfc2131.html#section-4.1) permits the server to use any of its network addresses in outgoing messages. The new filter would reject its reply from B.\n\n2. **Chained DHCPv4 relays**\n\n   ```text\n   Request: client \u2192 R1 \u2192 R2 \u2192 server\n   Reply:           R1 \u2190\u2500\u2500\u2500\u2500\u2500 server\n   ```\n\n   R1\u2019s `giaddr` is `192.0.2.1`, and its configured forwarding destination is R2 at `198.51.100.2`. R2 preserves that nonzero `giaddr`, so the server at `203.0.113.10` replies directly to R1. The new filter would reject that reply because its source is the server, not R2.\n\n3. **DHCPv6 multicast forwarding and source-address assumptions**\n\n   ```text\n   Configured destination: ff05::1:3\n   Request: client \u2192 relay \u2192 multicast group\n   Reply:           relay \u2190 server (2001:db8::10)\n   ```\n\n   The responding server\u2019s unicast source cannot match the configured multicast destination. SONiC currently accepts such destinations, and [RFC 8415 \u00a719](https://www.rfc-editor.org/rfc/rfc8415.html#section-19) permits them.\n\n   The added restriction would still not necessarily be a hard functional blocker, especially if we choose not to use multicast addresses as DHCPv6 server destinations. However, the standard does not require the reply\u2019s source address to match the configured forwarding destination. My understanding is that the protocol allows those addresses to differ, so I do not agree with making equality an unconditional requirement.\n\nThese checks introduce an always-on restriction without an opt-out, rather than simply rejecting malformed input. I\u2019m comfortable with the Interface-ID validation, but not with the unconditional source filtering as currently proposed."
+    },
+    {
+        "number": 154,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-10-10T21:15:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 154,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-10-10T21:15:41Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 154,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-10-10T21:19:05Z",
+        "comment_author": "ashutosh-agrawal",
+        "comment_body": "@Xichen96 Thanks for the detailed protocol examples. I removed the unconditional configured-server source-address checks for DHCPv4 and DHCPv6, along with their associated tests. Replies are no longer rejected solely because their source address differs from the configured forwarding destination, covering the multihomed-server, chained-relay, and DHCPv6 multicast cases you described. The Interface-ID presence and length validation remains. The update is in 7f115618. Tests have not been rerun on this revision; CI is still running."
+    },
+    {
+        "number": 154,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-10-10T08:46:21Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 154,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-10-14T14:08:12Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 154,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-10-14T14:08:12Z",
+        "latestReview_author": "Xichen96",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 149,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-09T00:21:47Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 149,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-09T00:21:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 149,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-09T00:22:06Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 149,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-09T00:25:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 149,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-09T00:25:22Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 149,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-09T00:25:49Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 149,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-09T02:26:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 149,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-09T02:26:10Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 149,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-09T03:33:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 149,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-09T03:33:49Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 149,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-09T05:48:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 149,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-09T05:48:42Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 149,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-10T00:19:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request for branch(es): 202605.<br>Added label(s) for branch(es) 202605.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 149,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-10T00:19:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 149,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-10T13:36:38Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 149,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-10T13:36:48Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 149,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-29T12:50:39Z",
+        "comment_author": "Xichen96",
+        "comment_body": "@ashutosh-agrawal please create the manual cherry-pick PR for the `202605` branch."
+    },
+    {
+        "number": 149,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-29T13:17:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The change is not in 202605 yet. @ashutosh-agrawal, please manually create the cherry pick PR for branch 202605.<br>You can ping the release branch owner(github account: vaibhavhd) to approve your cherry pick PR.<br>If this change is already in 202605, please comment \"already in 202605\". Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 149,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-10-05T06:02:00Z",
+        "comment_author": "rajkumar1-arista",
+        "comment_body": "@ashutosh-agrawal can you please create a manual cherry-pick PR for 202605"
+    },
+    {
+        "number": 149,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-10-05T17:08:05Z",
+        "comment_author": "ashutosh-agrawal",
+        "comment_body": "@rajkumar1-arista I had opened manual cherry-pick for PR last week - https://github.com/sonic-net/sonic-dhcp-relay/pull/161\r\nIt's waiting for approval from @vaibhavhd."
+    },
+    {
+        "number": 149,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-29T12:45:16Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 149,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-09-29T12:45:16Z",
+        "latestReview_author": "Xichen96",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 148,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-06T11:54:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 148,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-06T11:54:18Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 148,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-06T11:54:27Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 148,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-06T12:01:53Z",
+        "comment_author": "Xichen96",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 148,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-06T12:01:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 148,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-06T12:01:57Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1213292:\n\n\n\u2705Stage **__default**:"
+    },
+    {
+        "number": 148,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-06T13:29:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 148,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-06T13:29:21Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 148,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-06T13:45:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 148,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-06T13:45:14Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 148,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-06T14:44:37Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 148,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-06T14:44:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 148,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-06T14:44:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 148,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-08T00:42:23Z",
+        "comment_author": "Xichen96",
+        "comment_body": "@StormLiangMS @sdszhang, could you please help review this when you have a chance? It's a high-priority, targeted fix for the older release. Given the narrow release scope, would it be possible to focus this review on the new changes, with any pre-existing behavior concerns tracked separately? Thank you for your help.\n\nShawn, could you also please confirm whether this repository and its `202411` branch are the right place to land this fix for Microsoft SONiC `202503`?\n\nUpdated hardware results are in the Testing section: build 1214622 passed all 9 targeted corrected-stack checks, with no failures, errors or skips. Both previously failing PortChannel RX-counter cases now pass; the earlier duplicate-counter blocker is resolved at the listed exact heads. Reused evidence and infrastructure limitations are identified separately."
+    },
+    {
+        "number": 148,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-09T05:35:49Z",
+        "comment_author": "Xichen96",
+        "comment_body": "Supplemental CI passed for unchanged source `839f83d83722149ac0800f8797bde21af668c071`: https://github.com/Xichen96/sonic-dhcp-relay/actions/runs/34309066786.\n\nAll 48 existing tests passed on native amd64/arm64 and QEMU armhf, including direct reruns with unmasked exit status. CodeQL completed with the existing query configuration: nine pre-existing note-level quality findings, no security findings.\n\nThe [CI-only diff](https://github.com/Xichen96/sonic-dhcp-relay/compare/839f83d83722149ac0800f8797bde21af668c071...132205f0515138298adaab5479834d2fbcaec3aa) uses Bookworm and matching 202503 dependencies; production, tests, Makefiles and packaging are unchanged. Native Azure/CodeQL failures remain unchanged; this is supplemental evidence requiring maintainer acceptance."
+    },
+    {
+        "number": 148,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-06T11:56:56Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 148,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-06T12:01:49Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 148,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-09T02:36:27Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 148,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-09-06T11:56:56Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 148,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-09-09T02:36:27Z",
+        "latestReview_author": "StormLiangMS",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T20:17:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T20:17:22Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T20:17:29Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T20:17:56Z",
+        "comment_author": "Xichen96",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T20:18:06Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T20:27:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T20:28:03Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T20:30:21Z",
+        "comment_author": "Xichen96",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T20:30:32Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T04:58:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T04:58:23Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T04:59:26Z",
+        "comment_author": "Xichen96",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T04:59:34Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T06:00:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T06:00:58Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T06:02:58Z",
+        "comment_author": "Xichen96",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T06:03:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T07:23:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T07:23:16Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T07:24:12Z",
+        "comment_author": "Xichen96",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T07:24:20Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T08:18:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T08:19:05Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T08:20:05Z",
+        "comment_author": "Xichen96",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T08:20:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T08:30:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T08:31:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T08:31:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-24T07:33:47Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-24T07:33:58Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-27T17:54:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-27T17:54:42Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-27T17:56:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-27T17:56:42Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-01T06:04:03Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-01T06:04:12Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-01T06:29:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-01T06:29:33Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-01T08:12:15Z",
+        "comment_author": "Xichen96",
+        "comment_body": "@StormLiangMS @ashutosh-agrawal This PR is ready for review on the current head. Xichen review, exact-head CI, and required validation are complete; please review when available.\n\n<!-- collector-review-request-20260901-sonic-dhcp-relay-146 -->"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-01T12:31:46Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@Xichen96 - reviewed exact head `1a266d83e680f684d30a13abc872318305975f70`. The previously noted oversized-required-VRF path is now fixed: it returns failure and `from_client()` drops the request instead of forwarding without VSS.\n\nThe current implementation looks ready from a code-review perspective. The VSS-required fail-closed policy is narrowly applied, ordinary non-VSS RFC 3046 fallback is preserved, the projected size includes the two-byte Option 82 header, and DCO/CLA/security plus amd64, arm64, and armhf CI are all green.\n\nNon-blocking follow-ups: add overflow-policy coverage for `append`/`replace` relay modes and assert the TX drop-counter increments. The PR description also references an older published head/build and could be refreshed to the current exact head."
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-01T16:51:49Z",
+        "comment_author": "ashutosh-agrawal",
+        "comment_body": "@Xichen96 Could you please consider merging #133 first? It adds the short-header validation that must run before from_client() accesses DHCP header fields and also fixes BOOTP padding bounds. This PR adds VSS/Option 82 sizing logic at the same location and renames the encoding helper across the shared tests. Merging #133 first would let this  PR #146 rebase cleanly while preserving both safety checks and test suites. Thanks!"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-03T04:17:10Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-03T04:17:20Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-03T04:26:49Z",
+        "comment_author": "Xichen96",
+        "comment_body": "@StormLiangMS Thanks. The oversized-required-VRF path now returns failure and has focused drop coverage in `e4e694f`.\r\n\r\nOn forward mode, I initially made the same assumption and opened sonic-buildimage#29111. @ashutosh-agrawal explained that the request class must be identified first: `giaddr == 0` is a first-hop request owned by this relay and receives local VSS, while `giaddr != 0` is already relayed and forward mode preserves the client-facing relay's `giaddr` and Option 82. I agreed, so #29111 is closed.\r\n\r\nThat correction required a substantial new revision of #122: it now establishes reply ownership before VSS handling and preserves already-relayed forward-mode traffic. The generic ownership portion has been split into #147.\r\n"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-03T04:31:54Z",
+        "comment_author": "Xichen96",
+        "comment_body": "@ashutosh-agrawal Done. #133 merged as `1648ad3f`; #147 was rebased onto that master and is now `85b80fb`; #146 is rebased on #147 at `e4e694f`, preserving the short-header/BOOTP-padding changes and both test suites."
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-03T06:28:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-03T06:28:46Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-19T20:21:39Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-19T20:28:49Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-19T20:28:51Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-19T20:33:08Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-20T05:03:13Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-20T06:07:31Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-20T07:28:45Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-20T08:24:21Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-20T08:36:05Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-20T09:12:29Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-24T07:41:04Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-24T08:20:01Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-24T08:22:36Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-27T17:58:39Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-28T03:57:52Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-28T04:01:50Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-01T06:11:05Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-01T06:30:35Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-01T06:30:41Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-01T06:33:43Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-03T16:28:04Z",
+        "review_author": "ashutosh-agrawal"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-09-01T06:33:43Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 146,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-09-03T16:28:04Z",
+        "latestReview_author": "ashutosh-agrawal",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 145,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T15:27:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-dhcp-relay/pull/121"
+    },
+    {
+        "number": 145,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T15:27:18Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 145,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T15:27:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 145,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T15:27:36Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 144,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T06:03:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-dhcp-relay/pull/120"
+    },
+    {
+        "number": 144,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T06:03:32Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 144,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T06:03:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 144,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T06:03:49Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 142,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-12T14:19:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 142,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-12T14:19:37Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 142,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-12T14:19:47Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 142,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-12T14:25:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 142,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-12T14:25:41Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 142,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-16T10:23:43Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 142,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-16T10:24:46Z",
+        "comment_author": "Xichen96",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 142,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-16T10:24:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 142,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-16T10:24:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "No failed(or canceled) stages or jobs found in the most recent build 1190972."
+    },
+    {
+        "number": 142,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-16T10:25:11Z",
+        "comment_author": "Xichen96",
+        "comment_body": "@ashutosh-agrawal @yxieca @StormLiangMS My review is complete. This PR makes repeated DHCPv4 counter initialization idempotent so VLAN membership SET events cannot discard unsynchronized VLAN counter deltas; explicit removal and recreation still starts from zero. Final CI has been retriggered after activation. Review requested."
+    },
+    {
+        "number": 142,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-17T13:38:51Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@Xichen96 \u2014 Follow-up reviewed. The updated description now clearly limits this PR to repeated membership SET initialization and identifies #141 as the owner of the DEL/delete-recreate lifecycle handling. The implementation at `95d2cfe` is correct, the focused regression coverage is sufficient, and all required checks pass. No remaining concerns from my review; ready to merge."
+    },
+    {
+        "number": 142,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T03:38:55Z",
+        "comment_author": "Xichen96",
+        "comment_body": "@StormLiangMS Agreed. This PR is limited to repeated SET initialization. `VLAN_MEMBER` DEL and delete/recreate ordering are unchanged and handled by https://github.com/sonic-net/sonic-dhcp-relay/pull/141. The description now makes that scope explicit."
+    },
+    {
+        "number": 142,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-12T14:22:27Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 142,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-12T14:25:45Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 142,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-12T14:27:44Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 142,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-16T10:27:38Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 142,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-18T03:53:32Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 142,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-08-16T10:27:38Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 142,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-08-18T03:53:32Z",
+        "latestReview_author": "StormLiangMS",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-12T14:07:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-12T14:07:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-12T14:07:17Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-12T14:17:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-12T14:17:11Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-12T14:36:03Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-12T14:36:17Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-16T09:53:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-16T09:53:58Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-16T12:09:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-16T12:09:25Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T04:01:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T04:02:03Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-01T05:38:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-01T05:38:56Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-03T07:13:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-03T07:13:17Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-07T12:18:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-07T12:18:22Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-07T12:46:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-07T12:46:32Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-07T12:50:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-07T12:50:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-07T14:04:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-07T14:05:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-07T14:05:21Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-07T14:12:22Z",
+        "comment_author": "Xichen96",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-07T14:12:32Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-07T14:32:10Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-07T14:32:20Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-07T14:32:28Z",
+        "comment_author": "Xichen96",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-07T14:32:37Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-07T15:42:19Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-07T15:42:29Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-07T16:01:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-07T16:01:43Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-07T16:15:10Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-07T16:15:20Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-07T16:31:44Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-07T16:31:53Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-07T17:09:49Z",
+        "comment_author": "Xichen96",
+        "comment_body": "@StormLiangMS @ashutosh-agrawal @yxieca\r\n\r\nThe final dependency stack is ready for coordinated review:\r\n\r\n- #134 `e4e3bdd` \u2014 startup physical-member resolution, including the\r\n  shared-prefix optimization.\r\n- #140 `9a4ec67` \u2014 live PortChannel membership reconciliation and malformed\r\n  member-key handling.\r\n- #141 `5a0378c` \u2014 stale-delete ownership protection.\r\n\r\nExact-head Azure builds 1214279, 1214280, and 1214291 passed on amd64, arm64,\r\nand armhf; CodeQL, Semgrep, DCO, and EasyCLA are green. Complete amd64 output\r\nreports 59/59 tests for #134, 61/61 for #140, and 62/62 for #141, so the prior\r\nstdout-closing fixture no longer conceals the suite result.\r\n\r\nThe final executable SHA-256\r\n`eb9a49dfffa8488cc9e3c308c21d5bcdd0046c1658f5877df6d5a5276feb2d69`\r\npassed an exact-binary 20/20 physical-member smoke. The same production logic\r\nbefore the final `compare/strlen` to `rfind` cleanup was validated extensively\r\non a locked 720DT m0 bed with a\r\ntemporary valid `Ethernet44/45 -> PortChannel1005 -> Vlan1000` fallback\r\ntopology:\r\n\r\n- 400 DHCPDISCOVER packets during eight member remove/add cycles:\r\n  RX +400, TX +400, drops +0, invalid-interface warnings +0.\r\n- Live member present/removed/restored: +20/+20, +0/+0, +20/+20.\r\n- SET-new/DEL-old moves to PortChannel1006 and back: +20/+20 in each\r\n  direction, zero warnings.\r\n- Native relay PID remained stable.\r\n\r\nAll temporary objects and counters were removed. Direct VLAN members, ACL\r\nbindings, ISC relay, dhcpmon, and six established BGP sessions were verified\r\nafter restoration. All review threads across the three PRs are resolved.\r"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-09T20:11:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-09T20:11:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-12T14:13:04Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-12T14:19:53Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-12T14:24:08Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-12T14:41:51Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-16T10:01:39Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-16T12:15:40Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-18T04:07:10Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-01T05:42:23Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-03T07:17:45Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-07T12:51:07Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-07T13:02:55Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-07T13:09:10Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-07T14:05:06Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-07T14:05:09Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-07T14:05:12Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-07T15:37:00Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-07T15:51:36Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-07T16:02:00Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-07T16:07:32Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-07T16:15:40Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-07T16:24:17Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-07T16:32:06Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-07T16:32:09Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-07T16:38:24Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-09T20:11:49Z",
+        "review_author": "ashutosh-agrawal"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-09-07T16:38:24Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 141,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-09-09T20:11:49Z",
+        "latestReview_author": "ashutosh-agrawal",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T20:48:07Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T20:48:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T20:48:17Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-11T00:18:11Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request for branch(es): 202605.<br>Added label(s) for branch(es) 202605.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-11T00:18:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T16:17:47Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T16:17:58Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T14:11:39Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@ashutosh-agrawal The fixture changes here look correct; I did not find a blocking issue in #138.\n\n- `giaddr = 0` selects the intended new-client path, allowing production to assign the VLAN address and encode Option 82.\n- `client_sock = 1` correctly passes the `to_client()` readiness guard, and it is safe here because `send_udp()` is mocked.\n- Removing the manual `encode_relay_option()` call from `from_client` avoids double-encoding once production owns that behavior.\n\nOne non-blocking improvement: please consider asserting that `from_client()` actually adds Option 82, and that `to_client()` removes it and calls `send_udp()` with `pad = true`. The current callbacks mostly verify unchanged header fields rather than those key relay behaviors.\n\nThis should merge only after #135 is fixed and landed, because #138's tests are not meaningfully executed on its standalone branch while the earlier `DHCPMgrTest` abort remains masked by the Makefile's `|| true`."
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T18:48:37Z",
+        "comment_author": "ashutosh-agrawal",
+        "comment_body": "Addressed the non-blocking suggestions in `959fdf561`:\n\n- **`from_client`**: fixture now sets the DHCP magic cookie so Option 82 encoding runs; `send_udp` callback asserts Option 82 is present on the wire with circuit ID `cisco:eth12:Vlan10` and `pad=true`.\n- **`to_client`**: `send_udp` callback asserts Option 82 is stripped and `pad=true`.\n\nLocal deb build (stacked on #135): **46/46 gtests pass**."
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T18:48:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T18:48:53Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-27T04:00:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-27T04:00:42Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-28T21:02:16Z",
+        "comment_author": "ashutosh-agrawal",
+        "comment_body": "@Xichen96 Please help with approval and merge of this PR."
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-01T04:56:19Z",
+        "comment_author": "Xichen96",
+        "comment_body": "Master-side preparation is complete at `7ffbd8a`, and exact-head CI is green. Xichen review is now in progress. The remaining strict release gate is the requested 202605 delivery: please add concrete 202605 validation and mark the tested branch, or remove the request if it is no longer intended."
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-01T06:17:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The change is not in 202605 yet. @ashutosh-agrawal, please manually create the cherry pick PR for branch 202605.<br>You can ping the release branch owner(github account: vaibhavhd) to approve your cherry pick PR.<br>If this change is already in 202605, please comment \"already in 202605\". Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-01T04:56:18Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-01T05:00:06Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 138,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-09-01T05:00:06Z",
+        "latestReview_author": "Xichen96",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T18:57:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T18:57:28Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T18:57:37Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T20:36:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T20:36:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T20:47:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T20:48:05Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-11T00:18:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request for branch(es): 202605.<br>Added label(s) for branch(es) 202605.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-11T00:18:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-11T17:18:32Z",
+        "comment_author": "ashutosh-agrawal",
+        "comment_body": "@Xichen96 @yxieca Please help review this PR. More than half of the unit tests are getting skipped without this fix."
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T16:18:03Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T16:18:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T14:11:39Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@ashutosh-agrawal Thanks for fixing the deterministic sync-barrier abort. I found one blocking lifecycle issue in the current approach.\n\n`DHCPMgr` remains stack-local in these tests, while `initialize_config_listener()` detaches a thread and `stop_db_updates()` only flips the stop flag. The listener can remain blocked in the 1000 ms `select()` timeout, but the tests wait only 100 ms before the `DHCPMgr` object and test-local global `write()` expectation are destroyed. The next test then calls `InitConfigPipeForTest()`, closing and reusing the global pipe descriptors while the previous listener may still be alive.\n\nThat leaves concrete race paths where the old listener accesses the destroyed `DHCPMgr`, invokes the global mock after teardown, or writes to a recycled descriptor\u2014potentially producing another mid-suite abort/terminate or cross-test corruption.\n\nCould you make `DHCPMgr` own the listener thread and join it before destruction and before resetting `config_pipe`? A deterministic completion handshake would also work; another fixed sleep would remain fragile.\n\nNon-blocking cleanup: the helper's `ASSERT_EQ(pipe(...), 0)` only returns from the helper, allowing the test body to continue, and the `fcntl()` result is unchecked. Once #135/#138 are stable, the Makefile's `|| true` should also be removed so CI protects against future aborted or failing test runs."
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T17:29:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T17:29:43Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T18:11:50Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T18:12:00Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T18:16:21Z",
+        "comment_author": "ashutosh-agrawal",
+        "comment_body": "@StormLiangMS Thanks for the review \u2014 addressed the blocking lifecycle issue and the non-blocking InitConfigPipeForTest cleanup.\r\n\r\n**Blocking**: listener thread lifecycle \r\n\r\nDHCPMgr now owns a joinable config_listener_thread_ instead of detaching.\r\nstop_db_updates() sets stop_thread and joins the listener if joinable.\r\ninitialize_config_listener() calls stop_db_updates() first before starting a new thread.\r\n~DHCPMgr() calls stop_db_updates(), so the listener is joined before the object is destroyed and before the next test's InitConfigPipeForTest() recycles config_pipe.\r\n\r\n**Non-blocking**: InitConfigPipeForTest() hardening\r\n\r\nReturns bool; checks close/pipe/fcntl with strerror(errno) diagnostics.\r\nCall sites use ASSERT_TRUE(InitConfigPipeForTest()) so setup failure stops the test at the call site.\r\n\r\n**Deferred**: Makefile || true\r\n\r\nAgreed \u2014 will remove once #138 lands and the UT suite is 46/46 passing locally. Without #138, 44/46 tests are passing with this PR."
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-24T11:01:16Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-24T11:01:26Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-26T05:28:57Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-26T05:29:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-27T00:25:53Z",
+        "comment_author": "ashutosh-agrawal",
+        "comment_body": "@yxieca @StormLiangMS @Xichen96 Please help in merging this PR."
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-20T13:09:56Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-20T13:12:00Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 135,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-08-20T13:12:00Z",
+        "latestReview_author": "Xichen96",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T16:39:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T16:39:01Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T16:39:10Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T18:19:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request for branch(es): 202605.<br>Added label(s) for branch(es) 202605.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T18:19:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T20:54:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T20:54:33Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-28T20:21:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-28T20:21:51Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-28T20:26:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-28T20:26:14Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T07:55:21Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T07:55:32Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T08:14:43Z",
+        "comment_author": "Xichen96",
+        "comment_body": "@ashutosh-agrawal Why duplicate the short-header check in `from_client()` and `to_client()` when `pkt_in_callback()` is their only production caller and already rejects truncated DHCP layers?"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T09:15:45Z",
+        "comment_author": "Xichen96",
+        "comment_body": "@ashutosh-agrawal The production receive buffer is 9,200 bytes. What current path passes `send_udp()` a writable buffer smaller than 300 bytes? Is the padding overflow reachable today, or is this defensive API hardening?\n"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T09:30:45Z",
+        "comment_author": "Xichen96",
+        "comment_body": "This implementation is mechanically safe, but unnecessary if every current caller has at least 300 writable bytes. Please identify a reachable smaller-buffer path or drop the extra copy/helper.\n"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T09:31:50Z",
+        "comment_author": "Xichen96",
+        "comment_body": "Same concern for `to_client()`: its only production caller already validates the DHCP header length. Please remove this duplicate guard unless another production call path requires it."
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T09:44:08Z",
+        "comment_author": "Xichen96",
+        "comment_body": "Since this PR already edits the adjacent Doxygen, please also update the `send_udp()` signature to use `in_addr src_ip` and include the `pad` argument."
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T16:45:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T16:46:06Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T16:53:14Z",
+        "comment_author": "ashutosh-agrawal",
+        "comment_body": "Re [the duplicate `from_client()` guard](https://github.com/sonic-net/sonic-dhcp-relay/pull/133#issuecomment-5506580759): addressed in a665d46c4. I removed the inner guard and kept the single validation in `pkt_in_callback()` before any DHCP header access."
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T16:53:56Z",
+        "comment_author": "ashutosh-agrawal",
+        "comment_body": "Re [the 9,200-byte receive-buffer question](https://github.com/sonic-net/sonic-dhcp-relay/pull/133#issuecomment-5507280728): Good question. The 9,200-byte array is only the buffer used by `recvmsg()`; it is not necessarily the storage that reaches `send_udp()`. When relay options are added, PcapPlusPlus may grow the packet through `Packet::extendLayer()`, which can reallocate the `RawPacket` storage and update the DHCP-layer pointer. That allocation is sized from the captured packet, so it can have less than 300 writable bytes from the DHCP header even though the original receive array was 9,200 bytes. That is the path the local padding buffer protects. The callback check also rejects a truncated DHCP layer before any header access."
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T16:54:00Z",
+        "comment_author": "ashutosh-agrawal",
+        "comment_body": "Re [the extra copy/helper question](https://github.com/sonic-net/sonic-dhcp-relay/pull/133#issuecomment-5507460930): You are right that the copy would be unnecessary if `send_udp()` always received a pointer into the 9,200-byte array. The detail is that PcapPlusPlus can replace that storage while extending the parsed packet, so the DHCP pointer can refer to a smaller reallocated buffer. Since `send_udp()` receives the payload length but not the allocation capacity, it cannot safely pad that buffer in place. I kept the helper for direct unit coverage, but a665d46c4 leaves the local array uninitialized and only copies plus zero-fills when padding is actually needed, so the common path does no extra clearing."
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T16:54:06Z",
+        "comment_author": "ashutosh-agrawal",
+        "comment_body": "Re [the duplicate `to_client()` guard](https://github.com/sonic-net/sonic-dhcp-relay/pull/133#issuecomment-5507473966): addressed in a665d46c4. I removed this guard; the production callback performs the length validation before dispatch."
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T16:54:15Z",
+        "comment_author": "ashutosh-agrawal",
+        "comment_body": "Re [the `send_udp()` Doxygen signature](https://github.com/sonic-net/sonic-dhcp-relay/pull/133#issuecomment-5507619796): addressed in a665d46c4. The header documentation now uses `in_addr src_ip`, includes `pad`, and documents all parameters consistently. I also removed the stale duplicate block from the implementation."
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-03T03:48:18Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The change is not in 202605 yet. @ashutosh-agrawal, please manually create the cherry pick PR for branch 202605.<br>You can ping the release branch owner(github account: vaibhavhd) to approve your cherry pick PR.<br>If this change is already in 202605, please comment \"already in 202605\". Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-09T03:09:51Z",
+        "comment_author": "ashutosh-agrawal",
+        "comment_body": "Cherry-pick PR for 202605: #151"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-21T21:01:25Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-24T04:18:48Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T08:03:29Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T16:51:22Z",
+        "review_author": "ashutosh-agrawal"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T16:52:09Z",
+        "review_author": "ashutosh-agrawal"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T19:44:07Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T19:58:40Z",
+        "review_author": "ashutosh-agrawal"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T19:58:45Z",
+        "review_author": "ashutosh-agrawal"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-03T02:07:30Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-03T02:18:57Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-09-02T19:44:07Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-09-03T02:18:57Z",
+        "latestReview_author": "Xichen96",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-08-21T21:01:25Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "DISMISSED"
+    },
+    {
+        "number": 133,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-08-24T04:18:48Z",
+        "latestReview_author": "StormLiangMS",
+        "latestReview_state": "DISMISSED"
+    },
+    {
+        "number": 132,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T16:38:57Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 132,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T16:38:58Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 132,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T16:39:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 132,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T18:19:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request for branch(es): 202605.<br>Added label(s) for branch(es) 202605.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 132,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T18:19:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 132,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T20:53:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 132,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T20:53:35Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 132,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-28T19:27:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 132,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-28T19:27:23Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 132,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-28T20:16:48Z",
+        "comment_author": "ashutosh-agrawal",
+        "comment_body": "@StormLiangMS @qiluo-msft I had to resolve a merge conflict that cleared your approval. Please help with re-approval and merge."
+    },
+    {
+        "number": 132,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-03T16:32:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 132,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-03T16:32:30Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 132,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-07T20:16:47Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 132,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-07T20:16:57Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 132,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-07T20:17:39Z",
+        "comment_author": "ashutosh-agrawal",
+        "comment_body": "@StormLiangMS @Xichen96 This PR was earlier approved but a rebase to master cleared the review. Appreciate your help with approval and merge."
+    },
+    {
+        "number": 132,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-08T21:17:10Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The change is not in 202605 yet. @ashutosh-agrawal, please manually create the cherry pick PR for branch 202605.<br>You can ping the release branch owner(github account: vaibhavhd) to approve your cherry pick PR.<br>If this change is already in 202605, please comment \"already in 202605\". Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 132,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-09T02:40:36Z",
+        "comment_author": "ashutosh-agrawal",
+        "comment_body": "Cherry-pick PR for 202605: #150"
+    },
+    {
+        "number": 132,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-21T20:41:43Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 132,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-24T04:18:46Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 132,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-08T21:04:08Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 132,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-09-08T21:04:08Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 132,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-08-24T04:18:46Z",
+        "latestReview_author": "StormLiangMS",
+        "latestReview_state": "DISMISSED"
+    },
+    {
+        "number": 130,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T16:38:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 130,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T16:38:49Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 130,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T16:38:57Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 130,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T18:19:38Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request for branch(es): 202605.<br>Added label(s) for branch(es) 202605.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 130,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T18:19:40Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 130,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T20:55:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 130,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T20:55:42Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 130,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-24T18:46:34Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 130,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-24T18:46:43Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 130,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-21T21:15:29Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 130,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-24T04:18:44Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 130,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-08-21T21:15:29Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 130,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-08-24T04:18:44Z",
+        "latestReview_author": "StormLiangMS",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 129,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T16:38:40Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 129,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T16:38:40Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 129,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T16:38:50Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 129,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T18:19:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request for branch(es): 202605.<br>Added label(s) for branch(es) 202605.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 129,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T18:19:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 129,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T20:55:14Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 129,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T20:55:25Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 129,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-24T18:19:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 129,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-24T18:19:43Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 129,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-21T21:18:31Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 129,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-24T04:18:42Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 129,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-08-21T21:18:31Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 129,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-08-24T04:18:42Z",
+        "latestReview_author": "StormLiangMS",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-25T15:15:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-25T15:15:05Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-25T15:15:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-25T23:02:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-25T23:02:46Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-26T00:59:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-26T00:59:51Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-27T01:21:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-27T01:22:03Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-27T01:33:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-27T01:33:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-31T17:58:02Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-31T17:58:11Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-31T17:58:22Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-03T17:08:49Z",
+        "comment_author": "Xichen96",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-03T17:08:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-03T17:15:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-03T17:15:08Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-03T17:15:19Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-03T18:22:57Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-03T18:23:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-04T16:40:17Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T06:25:59Z",
+        "comment_author": "Xichen96",
+        "comment_body": "@ashutosh-agrawal @yxieca \u2014 could you please help review this DHCP-related PR? It is non-draft, CI is green, and it adds F2 physical-member DHCPv6 relay support."
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-10T18:06:19Z",
+        "comment_author": "ashutosh-agrawal",
+        "comment_body": "@Xichen96 Quick note on naming \u2014 \"interface\" means different things in dhcp6relay, and it's easy to mix them up.\r\n\r\nIn update_vlan_mapping(), interface is the VLAN member port from VLAN_MEMBER|Vlan1000|<member> (e.g. Ethernet19, PortChannel1001). That's not VLAN_INTERFACE \u2014 that table is only used earlier to check the VLAN has an IPv6 address.\r\n\r\nFor reference:\r\n\r\n- relay_config.interface = the VLAN (Vlan1000)\r\n- interface here = member port from VLAN_MEMBER\r\n- intf in client_callback() = kernel ifname on the packet (often a physical Ethernet* even when the VLAN member is a PortChannel)\r\n\r\nThe PR makes sense \u2014 packets hit physical LAG members but vlan_map only has the PortChannel, so portchannel_map bridges the gap. Minor nit: renaming interface to member_port or vlan_member would help."
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-11T21:02:04Z",
+        "comment_author": "Xichen96",
+        "comment_body": "@ashutosh-agrawal Renamed the local variable to `vlan_member` to distinguish the `VLAN_MEMBER` entry from the relay VLAN interface."
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-11T21:10:30Z",
+        "comment_author": "Xichen96",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-11T21:20:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-11T21:21:14Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-11T21:21:24Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-12T04:21:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-12T04:21:27Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-12T04:21:32Z",
+        "comment_author": "Xichen96",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-12T04:21:35Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-12T04:21:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "No failed(or canceled) stages or jobs found in the most recent build 1190595."
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-12T14:10:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-12T14:10:43Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-14T02:17:10Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-14T02:17:20Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T04:01:52Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T04:02:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T10:23:06Z",
+        "comment_author": "Xichen96",
+        "comment_body": "@ashutosh-agrawal Hi Ashutosh, comment resolved, pls help review again"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-07-25T15:17:39Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-07-25T23:00:01Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-07-25T23:05:45Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-07-25T23:46:35Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-07-26T00:59:52Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-07-26T00:59:53Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-07-26T01:02:04Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-07-27T01:26:05Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-07-27T01:33:03Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-07-27T01:35:45Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-07-31T18:03:28Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-03T18:25:41Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-11T21:05:23Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-11T21:08:23Z",
+        "review_author": "github-advanced-security"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-12T04:21:28Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-12T04:25:47Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-12T14:15:31Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-14T02:21:38Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-14T02:22:51Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-17T18:00:53Z",
+        "review_author": "ashutosh-agrawal"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-18T03:14:14Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-18T04:07:03Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-18T16:16:53Z",
+        "review_author": "ashutosh-agrawal"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-08-11T21:08:23Z",
+        "latestReview_author": "github-advanced-security",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-08-18T04:07:03Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 128,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-08-18T16:16:53Z",
+        "latestReview_author": "ashutosh-agrawal",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-18T14:48:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-18T14:48:49Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-18T14:48:57Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-18T15:16:52Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-18T15:17:01Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-18T15:41:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-18T15:41:25Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-02T13:55:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-02T13:55:36Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-02T14:29:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-02T14:29:35Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-02T14:31:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-02T14:31:23Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-02T14:42:50Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-02T14:42:59Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-02T16:11:48Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-16T16:44:09Z",
+        "comment_author": "Xichen96",
+        "comment_body": "@StormLiangMS @ashutosh-agrawal This PR is ready for review. It adds RFC 6607 VSS-Control Suboption 152 alongside VSS Suboption 151, accepts only matching VSS acknowledgements that remove 152, and drops retained-152 or missing/mismatched-151 replies. Current CI is green, and the remaining Copilot buffer concern has been addressed using SONiC's schema-enforced 15-character VRF-name limit. The dependent behavior test is https://github.com/sonic-net/sonic-mgmt/pull/26315."
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-17T13:38:47Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@Xichen96, `validate_vss_reply()` currently decides that VSS must be present from the current interface/server configuration, rather than from whether this request actually inserted the local VSS suboptions.\n\nThis can drop valid replies in at least two paths:\n1. `agent_relay_mode=forward`, where the upstream relay's Option 82 is intentionally preserved and may not match the local VSS.\n2. The packet-size bailout in `encode_relay_option()`, where the request is forwarded without the new Option 82 but the reply is still required to contain the local VSS.\n\nCould you correlate reply validation with what was inserted for the request, or explicitly reject/disable these paths, and add regression tests combining VSS with forward mode and the size bailout? I think this should be addressed before merge."
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T17:55:52Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T17:56:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T18:49:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T18:49:15Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T19:37:35Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T19:37:45Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T20:21:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T20:21:48Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T20:22:19Z",
+        "comment_author": "Xichen96",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T20:22:28Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T20:26:14Z",
+        "comment_author": "ashutosh-agrawal",
+        "comment_body": "@Xichen96 @StormLiangMS The original dhcp4relay design intentionally inserted VSS suboption 151 only and omitted 152, because RFC 6607 VSS-Control was not widely deployed in the field (notably Cisco and other legacy relays send 151 without zero-length 152, and Cisco historically reused 152 for other Option 82 semantics). RFC 6607 \u00a710 also acknowledges that 151 predates 152 for this reason.\r\n\r\nIf the server does not fully implement RFC 6607 server behavior, strict reply validation\u2014especially dropping replies that retain 152\u2014can turn partial interop into complete DHCP failure. Should we soften this: log retained or ambiguous 152 handling and still require matching 151, rather than fail-closed on 152 alone?\r\n"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T20:28:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T20:28:49Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T20:30:33Z",
+        "comment_author": "Xichen96",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T20:30:42Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-19T20:49:47Z",
+        "comment_author": "Xichen96",
+        "comment_body": "@StormLiangMS @ashutosh-agrawal Addressed with the explicit Option A split:\n\n1. [sonic-dhcp-relay #146](https://github.com/sonic-net/sonic-dhcp-relay/pull/146)\n   makes `encode_relay_option()` return an explicit outcome. If local VSS is\n   required and 151/152 cannot fit, the request is dropped and counted.\n   Ordinary non-VSS no-space forwarding remains unchanged.\n2. [sonic-buildimage #29111](https://github.com/sonic-net/sonic-buildimage/pull/29111)\n   rejects `vrf_selection=enable` with `agent_relay_mode=forward` in both YANG\n   and CLI validation.\n3. This PR is restacked on #146 and keeps strict processed-reply validation.\n   The current exact head is\n   `0d8cf0f6d437a07be2c3b7b7beca7cc71e058c85`.\n\nThe retained-152 case is intentionally fail-closed. RFC 6607 preserves\ncompatibility with historical 151-only relays on the **server** side:\n[Section 7](https://datatracker.ietf.org/doc/html/rfc6607#section-7) says a\nserver receiving 151 without 152 must process it as if both were present.\nThat is separate from a request originated by this relay. For the latter,\n[Sections 4.1 and 5](https://datatracker.ietf.org/doc/html/rfc6607#section-4.1)\nrequire 151+152, and\n[Section 7.2](https://datatracker.ietf.org/doc/html/rfc6607#section-7.2)\ndefines retained 152 as the signal that the server copied the relay option but\ndid not process VSS. A matching echoed 151 alone is not proof of processing,\nbecause RFC 3046 copy behavior produces exactly that echo from an unaware\nserver.\n\nForwarding that reply would be unsafe here: VSS selects the VPN address space,\nwhile `giaddr` carries no VRF identity and may overlap across VRFs. The relay\ncannot prove that the returned lease came from the configured VPN. RFC 6607\nalso says a VSS relay/server pair that does not interoperate should not be\ndeployed and that this misconfiguration should prevent address acquisition,\nrather than silently fall back to a potentially wrong VPN.\n\nDependent validation is refreshed in\n[sonic-mgmt #26315](https://github.com/sonic-net/sonic-mgmt/pull/26315):\nthe simulated unaware server retains 152 and must not reach the client; the\naware-server path returns matching 151 without 152. Its late-packet isolation\nreview finding is fixed and resolved.\n"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T04:58:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T04:58:52Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T04:59:25Z",
+        "comment_author": "Xichen96",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T04:59:34Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T06:02:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T06:02:34Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T06:02:58Z",
+        "comment_author": "Xichen96",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T06:03:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T07:23:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T07:23:46Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T07:24:12Z",
+        "comment_author": "Xichen96",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T07:24:21Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T08:19:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T08:19:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T08:20:06Z",
+        "comment_author": "Xichen96",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T08:20:15Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T08:31:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T08:32:00Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T08:32:44Z",
+        "comment_author": "Xichen96",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T08:32:53Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T08:54:10Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T08:54:20Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T08:55:31Z",
+        "comment_author": "Xichen96",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-20T08:55:40Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T10:26:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T10:26:11Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines will not run the associated pipelines, because the pull request was updated after the run command was issued. Review the pull request again and issue a new run command.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T10:28:29Z",
+        "comment_author": "Xichen96",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T10:28:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T10:28:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "No Azure DevOps builds found for sonic-net/sonic-dhcp-relay#122."
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T10:35:14Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T10:35:20Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines will not run the associated pipelines, because the pull request was updated after the run command was issued. Review the pull request again and issue a new run command.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T10:36:00Z",
+        "comment_author": "Xichen96",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T10:36:03Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T10:36:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "No Azure DevOps builds found for sonic-net/sonic-dhcp-relay#122."
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T11:09:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T11:10:01Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines will not run the associated pipelines, because the pull request was updated after the run command was issued. Review the pull request again and issue a new run command.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T11:11:59Z",
+        "comment_author": "Xichen96",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T11:12:02Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T11:12:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "No Azure DevOps builds found for sonic-net/sonic-dhcp-relay#122."
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T11:37:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T11:37:31Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines will not run the associated pipelines, because the pull request was updated after the run command was issued. Review the pull request again and issue a new run command.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T11:39:40Z",
+        "comment_author": "Xichen96",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T11:39:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T11:39:44Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "No Azure DevOps builds found for sonic-net/sonic-dhcp-relay#122."
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T13:40:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T13:40:19Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines will not run the associated pipelines, because the pull request was updated after the run command was issued. Review the pull request again and issue a new run command.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T13:41:10Z",
+        "comment_author": "Xichen96",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T13:41:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T13:41:14Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "No Azure DevOps builds found for sonic-net/sonic-dhcp-relay#122."
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T13:44:40Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T13:44:47Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines will not run the associated pipelines, because the pull request was updated after the run command was issued. Review the pull request again and issue a new run command.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T13:45:29Z",
+        "comment_author": "Xichen96",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T13:45:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T13:45:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "No Azure DevOps builds found for sonic-net/sonic-dhcp-relay#122."
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T13:47:24Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T13:47:31Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines will not run the associated pipelines, because the pull request was updated after the run command was issued. Review the pull request again and issue a new run command.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T13:48:32Z",
+        "comment_author": "Xichen96",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T13:48:35Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T13:48:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "No Azure DevOps builds found for sonic-net/sonic-dhcp-relay#122."
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T15:20:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T15:20:59Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines will not run the associated pipelines, because the pull request was updated after the run command was issued. Review the pull request again and issue a new run command.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T15:22:18Z",
+        "comment_author": "Xichen96",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T15:22:21Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T15:22:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "No Azure DevOps builds found for sonic-net/sonic-dhcp-relay#122."
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T16:08:14Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-09-02T16:08:21Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines will not run the associated pipelines, because the pull request was updated after the run command was issued. Review the pull request again and issue a new run command.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-07-18T14:55:47Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-07-18T15:17:12Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-07-18T15:17:12Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-07-18T15:17:12Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-07-18T15:24:59Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-02T13:57:51Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-02T14:31:37Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-02T14:35:42Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-02T14:46:08Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-16T16:44:04Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-19T18:02:51Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-19T20:26:45Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-19T20:33:55Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-20T05:03:42Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-20T06:08:12Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-20T07:28:23Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-20T08:30:12Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-20T08:37:28Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-20T09:01:58Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-08-20T09:12:28Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T10:33:05Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T10:41:05Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T11:17:02Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T11:43:11Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T13:46:29Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T13:52:12Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T15:26:52Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T16:13:23Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T17:03:26Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T17:08:11Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T17:17:31Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T17:25:46Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T17:53:46Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T18:04:00Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T18:49:27Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T19:10:02Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T19:38:02Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T19:38:04Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T19:38:07Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T19:38:10Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T19:43:43Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T19:56:34Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-02T20:11:52Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-03T02:10:10Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-03T03:58:51Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-03T04:03:04Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-03T09:28:32Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-07T05:38:39Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-07T05:43:29Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-07T05:55:10Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-07T06:05:43Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-21T01:21:22Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-21T03:31:19Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-21T03:37:36Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-21T03:48:20Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-21T03:57:43Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-09-21T04:03:21Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-10-12T17:11:58Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-10-13T08:09:29Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-10-13T12:53:22Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-10-14T21:10:27Z",
+        "review_author": "ashutosh-agrawal"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-10-12T17:11:58Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 122,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-10-14T21:10:27Z",
+        "latestReview_author": "ashutosh-agrawal",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-18T08:09:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-18T08:09:58Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-18T08:10:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-18T08:26:34Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-18T08:26:44Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-18T08:34:02Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-18T08:34:12Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-18T09:22:06Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-20T12:48:53Z",
+        "comment_author": "Xichen96",
+        "comment_body": "Phase 1 hardware validation is complete.\n\n- Validated the combined #121 + #120 CI-built relay artifact on physical dual-ToR and single-ToR/m0 testbeds.\n- `test_dhcp_relay_default` and `test_dhcp_relay_unicast_mac` passed for both ISC and SONiC relay agents.\n- `test_dhcp_relay_default[sonic-relay-agent]` passed 5 consecutive runs on each testbed.\n- The original DUT binaries were restored after validation.\n\nNote: dual-ToR validation exposed a pre-existing sonic-mgmt cleanup issue from #24403: cleanup expected the SONiC relay on the standby ToR even though only the selected ToR is switched. The packet tests passed; a validation-only cleanup correction was used for the consecutive runs. This issue is outside this PR."
+    },
+    {
+        "number": 121,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-20T15:50:47Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-20T15:50:57Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-21T08:39:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-21T08:39:52Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-21T08:45:33Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "hi @ashutosh-agrawal could you help to take a look?"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-21T15:25:27Z",
+        "comment_author": "ashutosh-agrawal",
+        "comment_body": "LGTM"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-22T05:25:19Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The label `Approved for 202605 Branch` can only be added by a member of the @sonic-net/release-manager-202605 team. Removing the label. Please contact one of the release managers: @vaibhavhd to approve the cherry pick."
+    },
+    {
+        "number": 121,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-17T14:54:42Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@vaibhavhd, could you please approve the requested 202605 backport?\n\nAdditional exact validation of sonic-mgmt `test_dhcp_relay_with_source_port_ip_in_relay_enabled` covered all four affected dual-ToR hardware families: Arista-7260CX3-D108C8, Arista-7260CX3-C64, Arista-7050CX3-32C-C32, and Cisco-8101C01-C32. With the corresponding sonic-mgmt fixes, ISC passes end-to-end on every family, while SONiC alone still fails at relayed Discover with `0 != 48`.\n\nPacket capture confirms the current 202605 relay emits Link Selection `192.168.0.0`; the corrected expectation and this PR use the receiving VLAN address `192.168.0.1`. The 202605 buildimage pin is still `dae12809`, before this fix. This backport is required for sonic-mgmt #26108 and the exact source-port-IP testcase to pass on 202605; an xfail would hide the product defect."
+    },
+    {
+        "number": 121,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T15:27:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-dhcp-relay/pull/145"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-07-18T08:28:51Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-07-18T08:36:56Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-07-20T15:51:03Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-07-20T15:51:06Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-07-21T08:26:32Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-07-21T08:41:22Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-07-21T15:25:42Z",
+        "review_author": "ashutosh-agrawal"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-07-21T08:26:32Z",
+        "latestReview_author": "StormLiangMS",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-07-21T08:41:22Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 121,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-07-21T15:25:42Z",
+        "latestReview_author": "ashutosh-agrawal",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 120,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-18T07:28:16Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 120,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-18T07:28:16Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 120,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-18T07:28:25Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 120,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-20T12:48:51Z",
+        "comment_author": "Xichen96",
+        "comment_body": "Phase 1 hardware validation is complete.\n\n- Validated the combined #121 + #120 CI-built relay artifact on physical dual-ToR and single-ToR/m0 testbeds.\n- `test_dhcp_relay_default` and `test_dhcp_relay_unicast_mac` passed for both ISC and SONiC relay agents.\n- `test_dhcp_relay_default[sonic-relay-agent]` passed 5 consecutive runs on each testbed.\n- The original DUT binaries were restored after validation.\n\nNote: dual-ToR validation exposed a pre-existing sonic-mgmt cleanup issue from #24403: cleanup expected the SONiC relay on the standby ToR even though only the selected ToR is switched. The packet tests passed; a validation-only cleanup correction was used for the consecutive runs. This issue is outside this PR."
+    },
+    {
+        "number": 120,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-20T12:48:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 120,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-07-21T12:19:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 120,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T03:58:57Z",
+        "comment_author": "prhoskot",
+        "comment_body": "Hi @StormLiangMS Can you please backport fixes to 202605. Thanks!"
+    },
+    {
+        "number": 120,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T04:58:43Z",
+        "comment_author": "mdhoff-ms",
+        "comment_body": "> Hi @StormLiangMS Can you please backport fixes to 202605. Thanks!\r\n\r\n+1, sonic-mgmt is out of sync (https://github.com/sonic-net/sonic-mgmt/commit/35b20fc29a expects this change) and it is causing test failures."
+    },
+    {
+        "number": 120,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T06:03:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-dhcp-relay/pull/144"
+    },
+    {
+        "number": 120,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T06:05:29Z",
+        "comment_author": "vaibhavhd",
+        "comment_body": "Approved. What is missing - which PR caused the regression? Why did the PR test not catch it? Regressions present a good opportunity to address any potential gaps in shift-left."
+    },
+    {
+        "number": 120,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-08-18T06:09:27Z",
+        "comment_author": "mdhoff-ms",
+        "comment_body": "> Approved. What is missing - which PR caused the regression? Why did the PR test not catch it? Regressions present a good opportunity to address any potential gaps in shift-left.\r\n\r\nFrom my understanding, mgmt PR https://github.com/sonic-net/sonic-mgmt/pull/26753 also needed this (#120 ) to be merged as a pair, but there was a delay in the 202605 cherry pick for this dhcp-relay PR. My testbed (mellanox 4600C) had failures on test_dhcpv4_relay.\r\n\r\nIs there a formal process for getting multi-repo changes cherry-picked as a group? Perhaps we need one if not"
+    },
+    {
+        "number": 120,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-07-18T07:31:55Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 120,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-07-21T08:26:32Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 120,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-07-21T08:33:51Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 120,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-07-18T07:31:55Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 120,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-07-21T08:33:51Z",
+        "latestReview_author": "StormLiangMS",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 115,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-06-16T16:05:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Original PR: https://github.com/sonic-net/sonic-dhcp-relay/pull/113"
+    },
+    {
+        "number": 115,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-06-16T16:06:11Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 115,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-06-16T16:06:21Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 113,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-05-31T13:33:35Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 113,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-05-31T13:33:44Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 113,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-05-31T14:25:10Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 113,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-05-31T14:25:18Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 113,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-05-31T14:38:12Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 113,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-05-31T14:38:21Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 113,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-06-03T02:55:03Z",
+        "comment_author": "rookie-who",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 113,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-06-03T02:55:10Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nCommenter does not have sufficient privileges for PR 113 in repo sonic-net/sonic-dhcp-relay<br>\r\n\n</samp>"
+    },
+    {
+        "number": 113,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-06-03T03:19:46Z",
+        "comment_author": "vaibhavhd",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 113,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-06-03T03:19:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 113,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-06-10T22:24:37Z",
+        "comment_author": "bhouse-nexthop",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 113,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-06-10T22:24:40Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 113,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-06-10T22:24:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "No failed(or canceled) stages or jobs found in the most recent build 1129422."
+    },
+    {
+        "number": 113,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-06-12T14:44:23Z",
+        "comment_author": "bhouse-nexthop",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 113,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-06-12T14:44:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 113,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-06-12T14:44:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "No failed(or canceled) stages or jobs found in the most recent build 1129422."
+    },
+    {
+        "number": 113,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-06-15T13:06:33Z",
+        "comment_author": "bhouse-nexthop",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 113,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-06-15T13:06:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 113,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-06-15T13:06:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "No failed(or canceled) stages or jobs found in the most recent build 1129422."
+    },
+    {
+        "number": 113,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-06-15T13:22:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 113,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-06-15T13:22:06Z",
+        "comment_author": "linux-foundation-easycla",
+        "comment_body": "<a href=\"https://easycla.lfx.linuxfoundation.org/#/?version=2\"><img src=\"https://s3.amazonaws.com/cla-project-logo-prod/cla-signed.svg?v=2\" alt=\"CLA Signed\" align=\"left\" height=\"28\" width=\"328\" ></a><br >The committers listed above are authorized under a signed CLA.<ul><li>:white_check_mark: login: bhouse-nexthop / name: Brad House (14a7ff18b951e90e37476131df5cf7a328fbb298, 20a7f681426a0e787772a4f9ccf01699865dfac4)</li></ul>"
+    },
+    {
+        "number": 113,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-06-15T13:22:14Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 113,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-06-15T13:28:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 113,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-06-15T13:28:39Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 113,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-06-15T13:33:10Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 113,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-06-15T13:33:20Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 113,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-06-16T16:06:02Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Cherry-pick PR to 202605: https://github.com/sonic-net/sonic-dhcp-relay/pull/115"
+    },
+    {
+        "number": 113,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-06-03T02:58:47Z",
+        "review_author": "rookie-who"
+    },
+    {
+        "number": 113,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-06-15T19:52:21Z",
+        "review_author": "vaibhavhd"
+    },
+    {
+        "number": 113,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-06-03T02:58:47Z",
+        "latestReview_author": "rookie-who",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 113,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-06-15T19:52:21Z",
+        "latestReview_author": "vaibhavhd",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 110,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-05-07T04:55:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 110,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-05-07T06:14:05Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 110,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-05-10T17:16:11Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 110,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-05-10T17:16:11Z",
+        "latestReview_author": "Xichen96",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 108,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-04-29T14:06:37Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 108,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-04-29T14:06:47Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 108,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-04-29T17:27:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 108,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-04-29T17:28:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 108,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-04-29T17:52:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 108,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-04-29T17:52:25Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 108,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-04-29T18:11:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 108,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-04-29T18:12:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 108,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-04-30T03:07:44Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 108,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-04-30T03:07:53Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 108,
+        "repo": "sonic-dhcp-relay",
+        "comment_at": "2026-05-07T06:38:41Z",
+        "comment_author": "cshivashgit",
+        "comment_body": "@ashutosh-agrawal @Xichen96  \"Request for 202511 Branch\" Label is needed for these changes"
+    },
+    {
+        "number": 108,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-04-29T16:01:58Z",
+        "review_author": "ashutosh-agrawal"
+    },
+    {
+        "number": 108,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-04-29T16:17:56Z",
+        "review_author": "ashutosh-agrawal"
+    },
+    {
+        "number": 108,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-04-29T16:19:44Z",
+        "review_author": "ashutosh-agrawal"
+    },
+    {
+        "number": 108,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-04-29T16:30:55Z",
+        "review_author": "cshivashgit"
+    },
+    {
+        "number": 108,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-04-29T17:31:57Z",
+        "review_author": "cshivashgit"
+    },
+    {
+        "number": 108,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-04-29T17:32:17Z",
+        "review_author": "cshivashgit"
+    },
+    {
+        "number": 108,
+        "repo": "sonic-dhcp-relay",
+        "review_at": "2026-05-06T14:11:06Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 108,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-04-29T16:19:44Z",
+        "latestReview_author": "ashutosh-agrawal",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 108,
+        "repo": "sonic-dhcp-relay",
+        "latestReview_at": "2026-05-06T14:11:06Z",
+        "latestReview_author": "Xichen96",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 107,
         "repo": "sonic-dhcp-relay",
         "comment_at": "2026-04-28T21:47:50Z",

@@ -80,29 +80,55 @@ dump_by_year(){
     return 0
 }
 
-dump_by_10day(){
-    a=$year/$repo.$month.a.$dump_type.json
-    b=$year/$repo.$month.b.$dump_type.json
-    c=$year/$repo.$month.c.$dump_type.json
+dump_adaptive_by_month(){
+    local month_last_day=${end:8:2}
+    local start_day=1
+    local end_day
+    local range_start
+    local range_end
+    local step
+    local idx=0
+    local tmp_file
+    local result
+    local ok
+    local -a tmp_files=()
 
-    echo "            dump by 10 days"
-    result=$(gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-01..$year-$month-10")
-    [[ "$result" == "" ]] && return 1
-    echo $result | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}]" > $a
-    echo "            $year-$month-01..$year-$month-10,$(cat $a | jq length)"
-    sleep $interval
-    result=$(gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-11..$year-$month-20")
-    [[ "$result" == "" ]] && return 1
-    echo $result | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}]" > $b
-    echo "            $year-$month-11..$year-$month-20,$(cat $b | jq length)"
-    sleep $interval
-    result=$(gh pr list -R $org_repo -L 10000 -s merged --json $keys -S "merged:$year-$month-21..$end")
-    [[ "$result" == "" ]] && return 1
-    echo $result | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}]" > $c
-    echo "            $year-$month-21..$end,$(cat $c | jq length)"
-    sleep $interval
-    jq -s 'add | sort_by(-.number)' --indent 4 $a $b $c > $file_by_month
-    rm -rf $a $b $c
+    echo "            dump by adaptive chunk: 10 -> 5 -> 3 -> 1 day(s)"
+
+    while (( start_day <= month_last_day ))
+    do
+        ok="n"
+        for step in 10 5 3 1
+        do
+            end_day=$(( start_day + step - 1 ))
+            (( end_day > month_last_day )) && end_day=$month_last_day
+            range_start=$(printf "%s-%s-%02d" "$year" "$month" "$start_day")
+            range_end=$(printf "%s-%s-%02d" "$year" "$month" "$end_day")
+            tmp_file="$year/$repo.$month.$idx.$dump_type.json"
+
+            result=$(gh pr list -R "$org_repo" -L 10000 -s merged --json "$keys" -S "merged:$range_start..$range_end")
+            if [[ -n "$result" ]]; then
+                printf '%s\n' "$result" | jq --indent 4 "[.[] | . += {repo: \"$repo\", author: .author.login}]" > "$tmp_file" || return $?
+                echo "            $range_start..$range_end,$(jq length "$tmp_file")"
+                sleep "$interval"
+                tmp_files+=("$tmp_file")
+                idx=$(( idx + 1 ))
+                start_day=$(( end_day + 1 ))
+                ok="y"
+                break
+            fi
+
+            echo "            range failed with ${step}-day window, narrowing down..."
+        done
+
+        if [[ "$ok" != "y" ]]; then
+            echo "FATAL: All chunk sizes failed for $range_start..$range_end in $year-$month. Exiting to prevent data loss." >&2
+            exit 1
+        fi
+    done
+
+    jq -s 'add | sort_by(-.number)' --indent 4 "${tmp_files[@]}" > "$file_by_month" || return $?
+    rm -rf "${tmp_files[@]}"
 }
 
 for year in $years
@@ -133,13 +159,11 @@ do
                 [[ "$(cat $file_by_month | jq length)" != "$pr_count" ]] && echo "        pr count not match! $(cat $file_by_month | jq length) $pr_count" || continue
             fi
 
-            # try dump by 10 days, when dump by month failed
-            while true; do
-                dump_by_10day && break
-                sleep 60
-            done
+            # for each remaining range: try 10 days, fallback to 5 days, then 3 days, then 1 day
+            dump_adaptive_by_month || return $?
+            continue
         done    
-        if [[ "$repo" != "sonic-mgmt" ]]; then
+        if [[ "$repo" != "sonic-buildimage" && "$repo" != "sonic-mgmt" ]]; then
             jq -s 'add | sort_by(-.number)' --indent 4 $year/$repo.*.$dump_type.json > $file_by_year
             rm $year/$repo.*.$dump_type.json -rf
         else

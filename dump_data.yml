@@ -48,7 +48,7 @@ jobs:
       git push sonicbld HEAD:refs/heads/data/hld -f
       re=$(gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/hld -B master -b '' -t "[data] Update HLD related data." 2>&1 || true)
       sleep 60
-      gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
+      gh pr edit $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') --add-label automerge
       git reset origin/master --hard
       cd ..
     displayName: dump hld
@@ -65,7 +65,7 @@ jobs:
       git push sonicbld HEAD:refs/heads/data/issue -f
       re=$(gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/issue -B master -b '' -t "[data] Update issue related data." 2>&1 || true)
       sleep 60
-      gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
+      gh pr edit $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') --add-label automerge
       git reset origin/master --hard
       cd ..
     displayName: dump issue
@@ -82,7 +82,7 @@ jobs:
       git push sonicbld HEAD:refs/heads/data/testplan-hld -f
       re=$(gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/testplan-hld -B master -b '' -t "[data] Update testplan HLD related data." 2>&1 || true)
       sleep 60
-      gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
+      gh pr edit $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') --add-label automerge
       git reset origin/master --hard
       cd ..
     displayName: dump test hld
@@ -111,7 +111,7 @@ jobs:
       git push sonicbld HEAD:refs/heads/data/pr -f
       re=$(gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/pr -B master -b '' -t "[data] Update pr&review related data." 2>&1 || true)
       sleep 60
-      gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
+      gh pr edit $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') --add-label automerge
       git reset origin/master --hard
       cd ..
     displayName: dump pr
@@ -141,7 +141,7 @@ jobs:
       git push sonicbld HEAD:refs/heads/data/testpr -f
       re=$(gh pr create -R sonic-net/sonic-tsc -H mssonicbld:data/testpr -B master -b '' -t "[data] Update test pr&review related data." 2>&1 || true)
       sleep 60
-      gh pr merge --auto $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') -s
+      gh pr edit $(echo $re | grep -Eo 'https://github.com/sonic-net/sonic-tsc/pull/[0-9]*') --add-label automerge
       git reset origin/master --hard
       cd ..
     displayName: dump test pr
