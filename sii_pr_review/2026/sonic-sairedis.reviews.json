@@ -47,6 +47,166 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 2177,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-11T04:28:35Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2177,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-11T04:28:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2177,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-11T04:28:58Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2177,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-11T04:35:45Z",
+        "comment_author": "lolyu",
+        "comment_body": "Self-review notes at `775c253`. I'll address them in follow-up commits.\n\n**The design holds.** orchagent sets DROP on the encap-only mux tunnel, which has no decap term, so DROP can only mean \"drop a packet from the peer that's routed back to the peer\". VPP matches the exact P2P tunnel before the MP2P one, so the P2P `ipip` interface is both the ingress and the egress for that bounce, which is what `sonic-ext-ip{4,6}-loopback` drops. The `ipip16`/`ipip4` counters confirm this.\n\n### To do before asking for review\n1. **Copilot's two threads.**\n   - `SwitchVpp.cpp:2861`: the result of the undo in `setTunnelLoopbackAction` is discarded. If the undo also fails partway, the attribute reads FORWARD while some VPP interface stays at DROP, and nothing retries. If the undo fails, log the interfaces at ERR and return `SAI_STATUS_FAILURE`.\n   - `TunnelManager.cpp:2833`: if the FORWARD sync fails after the last DROP next hop is removed, the interface keeps dropping. `m_ipip_loopback_drop` still lists it, so the next next-hop event on that interface retries. That's acceptable, but reply on the thread saying so, and consider raising the log from WARN to ERR.\n2. **Test with a real build.** The end-to-end check so far was the action set by hand with `vat2`. Run `dualtor/test_ipinip.py::test_decap_standby_tor` on dualtor-vpp with an image built from this PR (a sonic-buildimage DONT-MERGE PR, as for #2133 and #2145), and link the run here. That also covers orchagent's real order: the tunnel is created with DROP, then the next hop.\n3. **Inner IPv6.** The outer header is IPv4, but the bounced inner packet can be IPv6. The hand test and the gtests cover only IPv4. Confirm that an inner IPv6 packet bounced to the peer is dropped, for example by sending one IPv6-in-IPv4 packet and checking the `sonic-ext-ip6-loopback` counter.\n4. **ADO number:** the work-item field in the description is empty.\n\n### Smaller points\n- Without `iface-loopback`, creating a tunnel with DROP succeeds and a GET returns DROP, but nothing drops; SET of DROP is rejected. That's deliberate, because orchagent always creates the tunnel with DROP, and it matches the RIF behaviour. Add a comment in `create()` so nobody \"fixes\" it later.\n- On a standby ToR, every mux toggle creates or removes the P2P tunnel, which means one more `vat2` call and one NOTICE log line per toggle. Mention that it's expected.\n- CI is still running. Wait for vstest and the VPP stages to pass.\n"
+    },
+    {
+        "number": 2177,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-11T04:53:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2177,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-11T04:53:19Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2177,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-11T05:07:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2177,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-11T05:07:40Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2177,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-12T00:41:24Z",
+        "comment_author": "lolyu",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2177,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-12T00:41:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2177,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-13T03:17:44Z",
+        "comment_author": "lolyu",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2177,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-13T03:17:57Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2177,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-13T04:51:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2177,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-13T04:51:27Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2177,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-11-11T04:33:36Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 2177,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-11-11T04:53:10Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 2177,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-11-11T04:53:11Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 2177,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-11-11T04:57:33Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 2177,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-11-11T05:07:52Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 2177,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-11-11T05:10:32Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 2177,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-11-11T20:05:15Z",
+        "review_author": "yue-fred-gao"
+    },
+    {
+        "number": 2177,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-11-13T04:54:03Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 2177,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-11-13T04:54:03Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 2177,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-11-11T20:05:15Z",
+        "latestReview_author": "yue-fred-gao",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 2162,
         "repo": "sonic-sairedis",
         "comment_at": "2026-11-02T03:59:07Z",
@@ -124,6 +284,134 @@
         "number": 2161,
         "repo": "sonic-sairedis",
         "latestReview_at": "2026-11-04T05:02:38Z",
+        "latestReview_author": "lolyu",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2159,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-10-30T12:41:05Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2159,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-10-30T12:41:14Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2159,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-10-30T12:41:29Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2159,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-12T05:28:51Z",
+        "comment_author": "Janetxxx",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2159,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-12T05:29:04Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2159,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-12T11:16:04Z",
+        "comment_author": "Janetxxx",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 2159,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-12T11:16:08Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 2159,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-12T11:16:10Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1274425:\n\n\n\u2705Stage **BuildSaiTestVpp**:\n- Job Build docker-sai-test-vpp: retried."
+    },
+    {
+        "number": 2159,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-12T11:34:57Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2159,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-13T00:36:19Z",
+        "comment_author": "Janetxxx",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2159,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-13T00:36:33Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2159,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-10-30T12:43:53Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 2159,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-11-12T05:30:05Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 2159,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-11-12T11:37:10Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 2159,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-11-12T11:51:35Z",
+        "review_author": "Pterosaur"
+    },
+    {
+        "number": 2159,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-11-13T03:57:39Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 2159,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-11-12T11:37:10Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 2159,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-11-12T11:51:35Z",
+        "latestReview_author": "Pterosaur",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2159,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-11-13T03:57:39Z",
         "latestReview_author": "lolyu",
         "latestReview_state": "APPROVED"
     },
@@ -3747,6 +4035,68 @@
         "repo": "sonic-sairedis",
         "latestReview_at": "2026-11-04T14:33:15Z",
         "latestReview_author": "dypet",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2116,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-10-09T11:31:39Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2116,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-10-09T11:31:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2116,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-10-09T11:32:01Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2116,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-10-19T22:20:38Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2116,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-10-19T22:20:51Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2116,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-10T19:14:36Z",
+        "comment_author": "bhouse-nexthop",
+        "comment_body": "@kcudnik @prsunny could you review this when you have a chance? syncd removes the flex counters of VIDs that apply view drops, so no stale counters stay polled. CI is green."
+    },
+    {
+        "number": 2116,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-14T01:17:39Z",
+        "comment_author": "bhouse-nexthop",
+        "comment_body": "@kcudnik thanks for the approval. CI is green; could you merge it when you get a chance?"
+    },
+    {
+        "number": 2116,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-11-10T22:13:35Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2116,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-11-10T22:13:35Z",
+        "latestReview_author": "kcudnik",
         "latestReview_state": "APPROVED"
     },
     {
@@ -13451,6 +13801,114 @@
         "repo": "sonic-sairedis",
         "latestReview_at": "2026-08-11T13:54:38Z",
         "latestReview_author": "yue-fred-gao",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2006,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-26T19:21:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2006,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-26T19:21:57Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2006,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-26T19:22:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2006,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-07-27T00:15:37Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2006,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-09-29T17:30:25Z",
+        "comment_author": "anamehra",
+        "comment_body": "Hi @kperumalbfn , please review this PR. Thanks"
+    },
+    {
+        "number": 2006,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-13T05:16:42Z",
+        "comment_author": "anamehra",
+        "comment_body": "Hi @saiarcot895 , could you please help with this PR review? We need this to be able to support PLATFORM=cisco in 202611 for Cisco platform build support in community. Thanks"
+    },
+    {
+        "number": 2006,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-14T00:19:12Z",
+        "comment_author": "abdosi",
+        "comment_body": "@rlhui can you merge this"
+    },
+    {
+        "number": 2006,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-14T00:27:32Z",
+        "comment_author": "anamehra",
+        "comment_body": "Thanks @abdosi and @saiarcot895 !"
+    },
+    {
+        "number": 2006,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-09-14T20:54:39Z",
+        "review_author": "bmridul"
+    },
+    {
+        "number": 2006,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-11-13T21:35:53Z",
+        "review_author": "madhava28"
+    },
+    {
+        "number": 2006,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-11-14T00:18:38Z",
+        "review_author": "abdosi"
+    },
+    {
+        "number": 2006,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-11-14T00:26:16Z",
+        "review_author": "saiarcot895"
+    },
+    {
+        "number": 2006,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-11-14T00:26:16Z",
+        "latestReview_author": "saiarcot895",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2006,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-09-14T20:54:39Z",
+        "latestReview_author": "bmridul",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2006,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-11-13T21:35:53Z",
+        "latestReview_author": "madhava28",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2006,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-11-14T00:18:38Z",
+        "latestReview_author": "abdosi",
         "latestReview_state": "APPROVED"
     },
     {
