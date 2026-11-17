@@ -1,5 +1,73 @@
 [
     {
+        "number": 810,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-16T02:30:39Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 810,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-16T02:30:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 810,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-16T02:30:58Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 810,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-11-16T02:45:59Z",
+        "review_author": "bhouse-nexthop"
+    },
+    {
+        "number": 810,
+        "repo": "sonic-platform-common",
+        "latestReview_at": "2026-11-16T02:45:59Z",
+        "latestReview_author": "bhouse-nexthop",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 806,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-14T02:01:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 806,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-14T02:01:16Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 806,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-14T02:01:26Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 806,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-11-16T02:43:40Z",
+        "review_author": "bhouse-nexthop"
+    },
+    {
+        "number": 806,
+        "repo": "sonic-platform-common",
+        "latestReview_at": "2026-11-16T02:43:40Z",
+        "latestReview_author": "bhouse-nexthop",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 805,
         "repo": "sonic-platform-common",
         "comment_at": "2026-11-13T22:54:38Z",
@@ -260,6 +328,126 @@
         "repo": "sonic-platform-common",
         "latestReview_at": "2026-11-11T01:53:40Z",
         "latestReview_author": "ganglyu",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 797,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-10T00:39:18Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 797,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-10T00:39:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 797,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-10T00:39:37Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 797,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-12T19:35:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 797,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-12T19:36:03Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 797,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-12T19:53:51Z",
+        "comment_author": "pnakka28",
+        "comment_body": "> I found no blocking defects. The inline comments give the details. Two design points are easier to settle before this PR and [sonic-net/sonic-platform-daemons#938](https://github.com/sonic-net/sonic-platform-daemons/pull/938) merge: the side effect in `stage_custom_si_settings()`, and the location of the JSON keys.\r\n> \r\n> Questions:\r\n> \r\n> 1. Does the module apply byte 29 at once, or at the next DataPathInit? Does the value reset when the module resets or goes to low power?\r\n> 2. Did you test a breakout port (for example 2x400G) where one subport stays active while the other one initializes again? The write is module-wide. If the subports get different `optics_si_settings.json` entries, the last writer wins.\r\n> \r\n> What I checked:\r\n> \r\n> * Byte 29 is in the CMIS \"Custom\" range (00h:29-30). 00h:28 is Reserved.\r\n> * I used an in-memory EEPROM with the real factory and the real base staging. The factory selects `PinewaveCmisApi` for `PINEWAVE` / `T-RH8ENH-NMT`. The write keeps the other bits of byte 29. The second breakout half does not write again. A PN that is not in the list ignores the key.\r\n> * `tests/sonic_xcvr`: 1855 passed on this branch and 1828 on the merge-base, so there are no regressions. A test merge onto current master is clean (1855 passed). The new modules have 100% line coverage.\r\n\r\n1. On the modules I tested, the value takes effect immediately: writing byte 29 with the link up brought it down right away, without a DataPathInit, and writing it back recovered it. A module reset restores the default, and xcvrd writes the configured value again at the next datapath init.\r\n\r\n2. Tested on port (two subports on one module): both subports admin down, module reset, first subport up \u2192 the value was written during its init. The second subport came up 60 s later while the first stayed active: it found the value already set, nothing was written again, and there was no re-init. \r\n\r\nMore details on the tests performed is in the ADO."
+    },
+    {
+        "number": 797,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-12T20:12:55Z",
+        "comment_author": "pnakka28",
+        "comment_body": "@az-pz Addressed the comments can you please review?"
+    },
+    {
+        "number": 797,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-16T18:21:57Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Removed label(s):\n- `Request for 202605 Branch`: The matching `Tested for 202605 Branch` label is missing. This requirement also applies to manually added request labels.\n\nThis PR requests backports for branch(es): 202605, but is missing required test information.\n\n**Update the PR description, not a PR comment:**\n1. List each requested branch under **Backport**.\n2. After testing on each branch, tick its checkbox (`- [x]`) under **Tested branch**. An unchecked box (`- [ ]`) does not count.\n3. Under **Test result**, start a separate entry with each branch number, followed by its test evidence on the same line or the following lines, such as a test-run link or a summary with logs. A branch number alone, placeholders, and results for another branch do not count.\n\nPlease make sure you have done all three steps above.\nExample format for the branches above (replace every placeholder with your actual test evidence; only check branches you have tested):\n```markdown\n### Backport\n202605\n\n### Tested branch\n- [x] 202605\n\n### Test result\n202605: <link to test results or summary with logs>\n```\n\nKeep this information outside HTML comments (`<!-- ... -->`) so it can be read.\nAfter you save the PR description, I will check it again and add the matching `Tested for <branch> Branch` labels first, then the `Request for <branch> Branch` labels. Request labels remain blocked until their matching tested labels are present.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 797,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-16T21:19:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Added request label(s): Request for 202605 Branch. These branches are requested in the **Backport** section of the PR description, and their matching **Tested for** labels are now present.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 797,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-16T22:57:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The change is not in 202605 yet. @pnakka28, please manually create the cherry pick PR for branch 202605.<br>You can ping the release branch owner(github account: vaibhavhd) to approve your cherry pick PR.<br>If this change is already in 202605, please comment \"already in 202605\". Thanks!\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 797,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-11-10T00:42:11Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 797,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-11-11T18:22:38Z",
+        "review_author": "az-pz"
+    },
+    {
+        "number": 797,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-11-12T19:38:20Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 797,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-11-12T19:41:07Z",
+        "review_author": "pnakka28"
+    },
+    {
+        "number": 797,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-11-12T19:42:12Z",
+        "review_author": "pnakka28"
+    },
+    {
+        "number": 797,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-11-12T23:27:37Z",
+        "review_author": "az-pz"
+    },
+    {
+        "number": 797,
+        "repo": "sonic-platform-common",
+        "latestReview_at": "2026-11-12T19:38:20Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 797,
+        "repo": "sonic-platform-common",
+        "latestReview_at": "2026-11-12T23:27:37Z",
+        "latestReview_author": "az-pz",
         "latestReview_state": "APPROVED"
     },
     {
@@ -2972,6 +3160,13 @@
         "comment_at": "2026-11-12T18:10:35Z",
         "comment_author": "mssonicbld",
         "comment_body": "Removed label(s):\n- `Request for 202605 Branch`: The matching `Tested for 202605 Branch` label is missing. This requirement also applies to manually added request labels.\n\nThis PR requests backports for branch(es): 202605, but is missing required test information.\n\n**Update the PR description, not a PR comment:**\n1. List each requested branch under **Backport**.\n2. After testing on each branch, tick its checkbox (`- [x]`) under **Tested branch**. An unchecked box (`- [ ]`) does not count.\n3. Under **Test result**, start a separate entry with each branch number, followed by its test evidence on the same line or the following lines, such as a test-run link or a summary with logs. A branch number alone, placeholders, and results for another branch do not count.\n\nPlease make sure you have done all three steps above.\nExample format for the branches above (replace every placeholder with your actual test evidence; only check branches you have tested):\n```markdown\n### Backport\n202605\n\n### Tested branch\n- [x] 202605\n\n### Test result\n202605: <link to test results or summary with logs>\n```\n\nKeep this information outside HTML comments (`<!-- ... -->`) so it can be read.\nAfter you save the PR description, I will check it again and add the matching `Tested for <branch> Branch` labels first, then the `Request for <branch> Branch` labels. Request labels remain blocked until their matching tested labels are present.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 747,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-16T16:30:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Removed label(s):\n- `Request for 202605 Branch`: The matching `Tested for 202605 Branch` label is missing. This requirement also applies to manually added request labels.\n- `Request for msft-202608 Branch`: The matching `Tested for msft-202608 Branch` label is missing. This requirement also applies to manually added request labels.\n\nThis PR requests backports for branch(es): 202605, 202608, but is missing required test information.\n\n**Update the PR description, not a PR comment:**\n1. List each requested branch under **Backport**.\n2. After testing on each branch, tick its checkbox (`- [x]`) under **Tested branch**. An unchecked box (`- [ ]`) does not count.\n3. Under **Test result**, start a separate entry with each branch number, followed by its test evidence on the same line or the following lines, such as a test-run link or a summary with logs. A branch number alone, placeholders, and results for another branch do not count.\n\nPlease make sure you have done all three steps above.\nExample format for the branches above (replace every placeholder with your actual test evidence; only check branches you have tested):\n```markdown\n### Backport\n202605\n202608\n\n### Tested branch\n- [x] 202605\n- [x] 202608\n\n### Test result\n202605: <link to test results or summary with logs>\n202608: <link to test results or summary with logs>\n```\n\nKeep this information outside HTML comments (`<!-- ... -->`) so it can be read.\nAfter you save the PR description, I will check it again and add the matching `Tested for <branch> Branch` labels first, then the `Request for <branch> Branch` labels. Request labels remain blocked until their matching tested labels are present.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
     },
     {
         "number": 747,
