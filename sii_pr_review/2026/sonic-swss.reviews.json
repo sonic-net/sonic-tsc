@@ -12555,6 +12555,34 @@
     {
         "number": 4801,
         "repo": "sonic-swss",
+        "comment_at": "2026-11-18T18:44:34Z",
+        "comment_author": "nhegde-microsoft",
+        "comment_body": "@dgsudharsan @haojun291 @prsunny\r\nThis PR appears to have broken VS CI.\r\nThe new `!m_isWarmRestoreStage` guard assumes `WarmStart::isWarmStart()` means the SAI state was actually preserved and already cleaned. That is not true when CI creates or force-recreates a DVS container.\r\nThe required default VLAN-member and bridge-port cleanup is skipped; the DVS container exits during initialization. Please consider reverting this change, then only skip the cleanup when the ASIC state was actually restored, not just because warm start is enabled."
+    },
+    {
+        "number": 4801,
+        "repo": "sonic-swss",
+        "comment_at": "2026-11-18T19:40:33Z",
+        "comment_author": "dgsudharsan",
+        "comment_body": "@nhegde-microsoft Why didn't the pipeline catch this issue? Do we do warm restart of DVS in CI? Can you please explain further?\r\n\r\n@haojun291 I am reverting this as this is blocking CI"
+    },
+    {
+        "number": 4801,
+        "repo": "sonic-swss",
+        "comment_at": "2026-11-18T21:21:57Z",
+        "comment_author": "nhegde-microsoft",
+        "comment_body": "> @nhegde-microsoft Why didn't the pipeline catch this issue? Do we do warm restart of DVS in CI? Can you please explain further?\r\n> \r\n> @haojun291 I am reverting this as this is blocking CI\r\n\r\n@dgsudharsan, I apologize, I might have hit the trigger too soon. Please cancel/pause your revert PR, since I don't think this PR was necessarily the cause of the failures. The exact docker-sonic-vs artifact exits during Supervisor parsing because BGPD_GRACEFUL_RESTART_ARG is undefined, before DVS test bodies run. That seems to have stemmed from a different PR (https://github.com/sonic-net/sonic-buildimage/pull/30443). My apologies.\r\n\r\nEDIT: I see your revert PR is already open. I suggest letting it run to see if it clears CI, in case I am wrong in thinking I was wrong. :-) "
+    },
+    {
+        "number": 4801,
+        "repo": "sonic-swss",
+        "comment_at": "2026-11-18T21:43:52Z",
+        "comment_author": "nhegde-microsoft",
+        "comment_body": "@dgsudharsan, the issue was caused by https://github.com/sonic-net/sonic-buildimage/pull/30443. Apologies for the incorrect attribution to this PR."
+    },
+    {
+        "number": 4801,
+        "repo": "sonic-swss",
         "review_at": "2026-10-26T20:50:06Z",
         "review_author": "copilot-pull-request-reviewer"
     },
