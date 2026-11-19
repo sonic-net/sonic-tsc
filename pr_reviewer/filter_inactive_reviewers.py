@@ -133,6 +133,10 @@ def save_cache(path, cache):
 
 
 def active_reviewers(logins, now, cache=None):
+    bots = {login for login in logins if login.casefold().endswith("[bot]")}
+    if bots:
+        print(f"Excluding bot reviewer accounts: {', '.join(sorted(bots))}", file=sys.stderr)
+        logins = logins - bots
     if not logins:
         return set()
     if cache is None:
@@ -260,7 +264,7 @@ def filter_files(paths, now, cache_path=None):
     removed = sorted(logins - active)
     print(
         f"90-day {ORGANIZATION} activity filter: kept {len(active)} reviewers; "
-        f"removed {len(removed)} inactive reviewers"
+        f"removed {len(removed)} inactive or ineligible reviewers"
         + (f": {', '.join(removed)}" if removed else ""),
         file=sys.stderr,
     )

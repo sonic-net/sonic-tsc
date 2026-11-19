@@ -107,6 +107,52 @@ class ActivityTests(unittest.TestCase):
             self.assertEqual(activity.active_reviewers(set(), NOW), set())
         api.assert_not_called()
 
+    def test_bot_only_candidates_need_no_api(self):
+        with patch.object(activity, "gh_api") as api, patch.object(activity, "pages") as pages:
+            self.assertEqual(activity.active_reviewers({"dependabot[bot]", "APP[BOT]"}, NOW), set())
+        api.assert_not_called()
+        pages.assert_not_called()
+
+    def test_cached_bots_are_excluded_before_batch_lookup_and_file_output(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "reviewers.yaml"
+            path.write_text("/: {Active: 0.6, 'dependabot[bot]': 0.9}\n/bot-only/: {'app[bot]': .inf}\n")
+            cache_path = Path(directory) / "cache.json"
+            cache = {
+                "version": 1, "organization": "sonic-net", "viewer": "automation",
+                "repos": {"sonic-net/example": {"issues": {
+                    "through": activity.isoformat(NOW),
+                    "latest": {"dependabot[bot]": activity.isoformat(NOW)},
+                }}},
+            }
+            activity.save_cache(cache_path, cache)
+            with patch.object(
+                activity, "gh_api",
+                side_effect=self.contribution_api({"active": {"totalCommitContributions": 1}}),
+            ) as api, patch.object(
+                activity, "pages", return_value=iter([{"full_name": "sonic-net/example"}]),
+            ):
+                activity.filter_files([path], NOW, cache_path)
+            self.assertEqual(yaml.safe_load(path.read_text()), {"/": {"Active": 0.6}})
+            self.assertEqual(api.call_count, 2)
+            query = api.call_args_list[1].kwargs["query"]
+            self.assertIn('user(login: "active")', query)
+            self.assertNotIn("[bot]", query)
+
+    def test_unresolved_human_user_still_fails(self):
+        api = self.contribution_api({})
+
+        def unresolved(endpoint, **fields):
+            data = api(endpoint, **fields)
+            if "organization" in fields:
+                data["data"]["u0"] = None
+            return data
+
+        with patch.object(activity, "gh_api", side_effect=unresolved), \
+                patch.object(activity, "pages", return_value=iter([])):
+            with self.assertRaisesRegex(ValueError, "GitHub user missing-user was not found"):
+                activity.active_reviewers({"missing-user"}, NOW)
+
     def test_filters_combined_candidates_without_changing_scores(self):
         with tempfile.TemporaryDirectory() as directory:
             paths = [Path(directory) / "one.yaml", Path(directory) / "two.yaml"]
