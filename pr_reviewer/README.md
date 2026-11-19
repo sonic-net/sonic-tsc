@@ -23,6 +23,10 @@ PR review, or an issue/PR comment (including inline review comments) created or
 edited during the window. Commit contributions follow GitHub's contribution
 attribution and branch rules. Reactions are not counted. Activity is limited to
 repositories and contributions visible to the authenticated `gh` account.
+Bot logins ending in `[bot]` are excluded from reviewer eligibility before any
+activity lookup, even if they have recent cached activity. GitHub's GraphQL
+`user(login:)` lookup cannot resolve these bot accounts. Other unresolved users
+and API errors still fail the run rather than being treated as inactivity.
 
 The filter uses GitHub's organization-scoped contributions API and paginated
 repository comment APIs, not the capped user events feed. `gh` must be
