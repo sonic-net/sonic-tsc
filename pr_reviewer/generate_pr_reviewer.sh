@@ -69,6 +69,8 @@ run_codeowners(){
     done
 }
 
+generated_repos=()
+reviewer_files=()
 for repo in $repos
 do
     name=$(echo $repo | awk -F/ '{print$2}')
@@ -105,11 +107,23 @@ PY
     fi
     if run_codeowners $work/$name.raw.yaml "${args[@]}" &&
        run_codeowners $work/$name.yaml "${args[@]}" "${norm_args[@]}"; then
-        mv $work/$name.raw.yaml $out/raw_change_weights.yml
-        mv $work/$name.yaml $out/pr_reviewer-by-files.yml
-        [ -f $work/$name.rv.yaml ] && mv $work/$name.rv.yaml $out/raw_review_weights.yml
+        generated_repos+=("$name")
+        reviewer_files+=("$work/$name.yaml")
     else
         echo "codeowners-cli failed for $repo"
     fi
     rm -rf $work/$name
 done
+
+if [ ${#reviewer_files[@]} -gt 0 ]; then
+    $work/venv/bin/python "$base/filter_inactive_reviewers.py" \
+        --cache "$base/activity_cache.json" "${reviewer_files[@]}" || exit 1
+    for name in "${generated_repos[@]}"; do
+        out=$base/$name
+        mv "$work/$name.raw.yaml" "$out/raw_change_weights.yml"
+        mv "$work/$name.yaml" "$out/pr_reviewer-by-files.yml"
+        if [ -f "$work/$name.rv.yaml" ]; then
+            mv "$work/$name.rv.yaml" "$out/raw_review_weights.yml"
+        fi
+    done
+fi
