@@ -958,6 +958,75 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 5044,
+        "repo": "sonic-swss",
+        "comment_at": "2026-10-22T00:25:28Z",
+        "comment_author": "linux-foundation-easycla",
+        "comment_body": "<a href=\"https://easycla.lfx.linuxfoundation.org/#/?version=2\"><img src=\"https://s3.amazonaws.com/cla-project-logo-prod/cla-signed.svg?v=2\" alt=\"CLA Signed\" align=\"left\" height=\"28\" width=\"328\" ></a><br >The committers listed above are authorized under a signed CLA.<ul><li>:white_check_mark: login: renovate[bot] / name: renovate[bot] (423b5c6a069312f67227fad177c782bc445c87f3)</li></ul>"
+    },
+    {
+        "number": 5044,
+        "repo": "sonic-swss",
+        "comment_at": "2026-10-22T00:25:33Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 5044,
+        "repo": "sonic-swss",
+        "comment_at": "2026-10-22T00:25:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 5044,
+        "repo": "sonic-swss",
+        "comment_at": "2026-10-22T00:25:54Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 5044,
+        "repo": "sonic-swss",
+        "comment_at": "2026-11-22T05:17:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**1 of 1 changed files have qualified approval** for head commit `423b5c6a069312f67227fad177c782bc445c87f3`.\n\n**All changed folders have qualified approval.** The `Qualified-approval` label indicates this PR meets the qualified-approval requirement for auto-merge.\n\nOther merge conditions, including required checks, branch protection, draft state, and mergeability, still apply. The bot does not enable auto-merge or merge the PR.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: @qiluo-msft.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/</code> | 1 | <code>/</code> | Approved | - | 0 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-swss/pr_reviewer-by-files.yml)\n[CODEOWNERS](https://github.com/sonic-net/sonic-swss/blob/7adef2f04c70384f5b4f2614fc80d0daca07e9d3/.github/CODEOWNERS)\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 5044,
+        "repo": "sonic-swss",
+        "comment_at": "2026-11-22T05:17:50Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-merge-risk-assessment:423b5c6a069312f67227fad177c782bc445c87f3 -->\nMerge risk assessment requested for head commit `423b5c6a069312f67227fad177c782bc445c87f3`. This confirms submission only, not completion or approval to merge."
+    },
+    {
+        "number": 5044,
+        "repo": "sonic-swss",
+        "comment_at": "2026-11-22T05:18:07Z",
+        "comment_author": "qiluo-msft",
+        "comment_body": "/easycla"
+    },
+    {
+        "number": 5044,
+        "repo": "sonic-swss",
+        "comment_at": "2026-11-22T05:26:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- elastictest-merge-risk:6b027afea664af5da815deff:423b5c6a069312f67227fad177c782bc445c87f3 -->\n**Medium merge risk \u2014 Changes required** for [head `423b5c6a`](https://github.com/sonic-net/sonic-swss/commit/423b5c6a069312f67227fad177c782bc445c87f3) against base `7adef2f04c70384f5b4f2614fc80d0daca07e9d3`, assessed at the fixed `2026-11-22T05:18:01.552Z` cutoff. **Confidence: High.** The exact diff and SONiC's approved Renovate rollout directly establish the policy mismatch; live repository-admin settings remain unverified.\n\n- The six-line `renovate.json` activates plain `config:recommended` across Cargo, Docker and GitHub Actions. The PR itself forecasts 10 immediate PRs, up to 45 over time, plus three security PRs.\n- SONiC's [shared-preset rollout](https://github.com/sonic-net/sonic-pipelines/commit/51efbb81d3064da648bb6bdfef0be180cf314bd6) explicitly says to close the 33 bot onboarding PRs without merging: plain onboarding lacks the SONiC security-WG reviewer, patched-module handling, release-branch policy and Dependabot coordination. The cutoff-current [shared preset](https://github.com/sonic-net/sonic-pipelines/blob/ad9f3346140f446f9ed0f856b53a5c4d53ccc695/renovate/default.json) also pins Actions digests, enables lock-file maintenance and defines the guarded security-update flow.\n- This change does not alter the built `swss` package or `orchagent` image, and the cutoff buildimage pin `13f57c250e85e70974c6fb3f0a5214299d7fe9ca` does not contain this head. Revision-matched [component CI](https://github.com/sonic-net/sonic-swss/runs/119633186182) built all nine architecture/container jobs successfully, but runtime validation was not clean: one normal VS shard recovered from 18 first-attempt failures to 37/37 after retry, while the ASAN VS task ended with 21 passed, 18 errors and was recorded as `succeededWithIssues`.\n- The PR merged at `2026-11-22T05:18:40Z`, after the cutoff. Replace the onboarding config with the reviewed shared preset, verify the documented repository-admin prerequisites, and reconcile any duplicate Renovate/Dependabot output before treating the rollout as complete.\n\nThe repository does not currently contain the required existing `medium merge risk` label, so that label could not be applied without creating a new label, which this workflow is not authorized to do.\n\nMERGE_RISK=medium"
+    },
+    {
+        "number": 5044,
+        "repo": "sonic-swss",
+        "review_at": "2026-11-22T05:17:44Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 5044,
+        "repo": "sonic-swss",
+        "latestReview_at": "2026-11-22T05:17:44Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 5037,
         "repo": "sonic-swss",
         "comment_at": "2026-10-20T14:29:41Z",
