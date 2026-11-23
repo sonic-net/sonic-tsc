@@ -1,5 +1,87 @@
 [
     {
+        "number": 29453,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-21T23:26:41Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29453,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-21T23:26:50Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 29453,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-21T23:26:54Z",
+        "comment_author": "github-actions",
+        "comment_body": "<!-- skip-expiry-conditional-mark-review-note -->\n@StormLiangMS @wangxin @yxieca A user wants to merge changes to the conditional mark files into `master`. Please review."
+    },
+    {
+        "number": 29453,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-21T23:27:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29453,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-22T00:05:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**1 of 1 changed files have qualified approval** for head commit `975020b37449c1f15fc044610f7b47b434ab2fe3`.\n\n**All changed folders have qualified approval.** The `Qualified-approval` label indicates this PR meets the qualified-approval requirement for auto-merge.\n\nOther merge conditions, including required checks, branch protection, draft state, and mergeability, still apply. The bot does not enable auto-merge or merge the PR.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: @yijingyan2.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/tests/common/plugins/conditional_mark/</code> | 1 | <code>/tests/common/plugins/conditional_mark/</code> | Approved | - | 0 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-mgmt/pr_reviewer-by-files.yml)\n[CODEOWNERS](https://github.com/sonic-net/sonic-mgmt/blob/088fcee916f8bd65dcc3870859d0040c860adf84/.github/CODEOWNERS)\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 29453,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-22T00:05:38Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-merge-risk-assessment:975020b37449c1f15fc044610f7b47b434ab2fe3 -->\nMerge risk assessment requested for head commit `975020b37449c1f15fc044610f7b47b434ab2fe3`. This confirms submission only, not completion or approval to merge."
+    },
+    {
+        "number": 29453,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-22T00:15:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- elastictest-merge-risk:6b0231d1023080bc2a397a9b:975020b37449c1f15fc044610f7b47b434ab2fe3 -->\n## Merge-risk assessment\n\n**Risk: medium. Recommendation: Validate before merge. \ud83d\udfe2 High confidence.** This assessment covers [sonic-mgmt PR #29453](https://github.com/sonic-net/sonic-mgmt/pull/29453) at [head `975020b37449c1f15fc044610f7b47b434ab2fe3`](https://github.com/sonic-net/sonic-mgmt/commit/975020b37449c1f15fc044610f7b47b434ab2fe3), against [base `master` `088fcee916f8bd65dcc3870859d0040c860adf84`](https://github.com/sonic-net/sonic-mgmt/commit/088fcee916f8bd65dcc3870859d0040c860adf84), at the `2026-11-22T00:05:49.060Z` cutoff.\n\n### Why this is medium risk\n\n- The 18-line selection change adds module-prefix skips for `crm/test_crm.py`, `ip/test_ip_packet.py`, and `ssh/test_ssh_stress.py` when [issue #29438](https://github.com/sonic-net/sonic-mgmt/issues/29438) is open and the lane is VPP `t0`. Prefix matching suppresses every parameterized case in each module; with [PR #29439](https://github.com/sonic-net/sonic-mgmt/pull/29439), the same issue now gates 12 modules on this lane.\n- A retained [exact-base `t0-vpp` plan](https://elastictest.org/scheduler/publictestplan/6b01c3871c0f51380a2e9908) recorded source `088fcee\u2026`: CRM failed the same nexthop-counter check on attempts 0/1/2; IP packet forwarding failed first and passed retry 1; SSH stress errored in teardown because route consistency did not recover, then passed retry 1.\n- In the fixed 14-day VPP `t0` KVM lane, outcomes worsened sharply after November 15: CRM first/final pass rates fell from 99.5%/99.8% to 58.6%/74.2%; IP from 99.8%/100% to 85.0%/90.5%; SSH from 99.3%/99.6% to 88.0%/95.0%. This corroborates instability, but does not independently prove host CPU oversubscription as the cause.\n- No product code, assertion, retry count, xfail, or new LogAnalyzer suppression changes. Retained VPP `t0` plans in the window were KVM-only, and other VPP topologies are outside the condition. Static and conditional-mark checks completed successfully.\n\n### Validation gap\n\nThe [exact-head `t0-vpp` check](https://github.com/sonic-net/sonic-mgmt/runs/137023195547) was still running at the cutoff, so there is no completed revision-matched runtime result. Before merge, verify all three modules are skipped only on `t0-vpp`, remain selected on `t1-lag-vpp`/dualtor VPP lanes, and retain non-blocking visibility until the root cause is fixed. Also note that issue-state lookup fails open: an API failure leaves these skips active even after the issue is closed.\n\nMERGE_RISK=medium"
+    },
+    {
+        "number": 29453,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-22T03:09:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**1 of 1 changed files have qualified approval** for head commit `975020b37449c1f15fc044610f7b47b434ab2fe3`.\n\n**All changed folders have qualified approval.** The `Qualified-approval` label indicates this PR meets the qualified-approval requirement for auto-merge.\n\nOther merge conditions, including required checks, branch protection, draft state, and mergeability, still apply. The bot does not enable auto-merge or merge the PR.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: @yijingyan2.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/tests/common/plugins/conditional_mark/</code> | 1 | <code>/tests/common/plugins/conditional_mark/</code> | Approved | - | 0 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-mgmt/pr_reviewer-by-files.yml)\n[CODEOWNERS](https://github.com/sonic-net/sonic-mgmt/blob/088fcee916f8bd65dcc3870859d0040c860adf84/.github/CODEOWNERS)\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 29453,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-22T00:05:30Z",
+        "review_author": "yijingyan2"
+    },
+    {
+        "number": 29453,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-22T03:09:09Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 29453,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-11-22T03:09:09Z",
+        "latestReview_author": "lolyu",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 29453,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-11-22T00:05:30Z",
+        "latestReview_author": "yijingyan2",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 29439,
         "repo": "sonic-mgmt",
         "comment_at": "2026-11-20T20:55:25Z",
@@ -128,6 +210,60 @@
         "repo": "sonic-mgmt",
         "latestReview_at": "2026-11-20T21:34:07Z",
         "latestReview_author": "yue-fred-gao",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 29417,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-20T04:49:44Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29417,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-20T04:49:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 29417,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-20T04:50:11Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29417,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-20T04:54:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**0 of 1 changed files have qualified approval** for head commit `fa7bf3bf884816353411f79ad3de253645545de0`.\n\nThis PR does not yet meet the qualified-approval requirement for auto-merge. The `Qualified-approval` label is applied only when all changed folders have qualified approval.\n\nOther merge conditions, including required checks, branch protection, draft state, and mergeability, still apply. The bot does not enable auto-merge or merge the PR.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: -.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/.azure-pipelines/baseline_test/</code> | 1 | <code>/.azure-pipelines/baseline_test/</code> | Awaiting qualified approval | - | 0 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-mgmt/pr_reviewer-by-files.yml)\n[CODEOWNERS](https://github.com/sonic-net/sonic-mgmt/blob/5c2197938a537a9b0236925a6f14598733cfa57b/.github/CODEOWNERS)\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 29417,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-20T04:51:34Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 29417,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-20T04:54:37Z",
+        "review_author": "sakshamkhurana21"
+    },
+    {
+        "number": 29417,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-11-20T04:51:34Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 29417,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-11-20T04:54:37Z",
+        "latestReview_author": "sakshamkhurana21",
         "latestReview_state": "APPROVED"
     },
     {
@@ -3843,6 +3979,178 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 29161,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-11T03:23:34Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29161,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-11T03:23:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 29161,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-11T03:24:01Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29161,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-11T06:25:08Z",
+        "comment_author": "xixuej",
+        "comment_body": "/azpw"
+    },
+    {
+        "number": 29161,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-11T06:28:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 29161,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-11T06:28:44Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29161,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-11T10:04:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 29161,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-11T10:05:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29161,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-11T15:10:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 29161,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-11T15:10:47Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29161,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-12T23:50:24Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**0 of 1 changed files have qualified approval** for head commit `d6223ceafda9e45b19c47b3e89eadd17cde7ccdc`.\n\nThis PR does not yet meet the qualified-approval requirement for auto-merge. The `Qualified-approval` label is applied only when all changed folders have qualified approval.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: -.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/tests/arp/</code> | 1 | <code>/tests/arp/</code> | Awaiting qualified approval | - | 0 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-mgmt/pr_reviewer-by-files.yml)\n[CODEOWNERS](https://github.com/sonic-net/sonic-mgmt/blob/8ac333a1089d9bbe01fa60d0103897fd8b00ae8c/.github/CODEOWNERS)\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 29161,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-12T23:50:30Z",
+        "comment_author": "wrideout-arista",
+        "comment_body": "/azpw retry"
+    },
+    {
+        "number": 29161,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-12T23:50:34Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 29161,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-12T23:50:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1273755:\n\n\n\u2705Stage **Test**:\n- Job Get impacted area: retried."
+    },
+    {
+        "number": 29161,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-13T04:08:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**0 of 1 changed files have qualified approval** for head commit `d6223ceafda9e45b19c47b3e89eadd17cde7ccdc`.\n\nThis PR does not yet meet the qualified-approval requirement for auto-merge. The `Qualified-approval` label is applied only when all changed folders have qualified approval.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: -.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/tests/arp/</code> | 1 | <code>/tests/arp/</code> | Awaiting qualified approval | - | 0 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-mgmt/pr_reviewer-by-files.yml)\n[CODEOWNERS](https://github.com/sonic-net/sonic-mgmt/blob/8ac333a1089d9bbe01fa60d0103897fd8b00ae8c/.github/CODEOWNERS)\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 29161,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-17T03:56:01Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR requests backports for branch(es): 202611, but is missing required test information.\n\n**Update the PR description, not a PR comment:**\n1. List each requested branch under **Backport**.\n2. After testing on each branch, tick its checkbox (`- [x]`) under **Tested branch**. An unchecked box (`- [ ]`) does not count.\n3. Under **Test result**, start a separate entry with each branch number, followed by its test evidence on the same line or the following lines, such as a test-run link or a summary with logs. A branch number alone, placeholders, and results for another branch do not count.\n\nPlease make sure you have done all three steps above.\nExample format for the branches above (replace every placeholder with your actual test evidence; only check branches you have tested):\n```markdown\n### Backport\n202611\n\n### Tested branch\n- [x] 202611\n\n### Test result\n202611: <link to test results or summary with logs>\n```\n\nKeep this information outside HTML comments (`<!-- ... -->`) so it can be read.\nAfter you save the PR description, I will check it again and add the matching `Tested for <branch> Branch` labels first, then the `Request for <branch> Branch` labels. Request labels remain blocked until their matching tested labels are present.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 29161,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-17T04:29:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Added tested label(s): Tested for 202611 Branch. The corresponding branches are checked in the **Tested branch** section and have branch-specific test information in the **Test result** section of the PR description.\n\nAdded request label(s): Request for 202611 Branch. These branches are requested in the **Backport** section of the PR description, and their matching **Tested for** labels are now present.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 29161,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-18T01:57:12Z",
+        "comment_author": "xixuej",
+        "comment_body": "Hi @lolyu , @yxieca , @liat-grozovik , can you please review and approve? Thanks"
+    },
+    {
+        "number": 29161,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-22T11:38:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**0 of 1 changed files have qualified approval** for head commit `d6223ceafda9e45b19c47b3e89eadd17cde7ccdc`.\n\nThis PR does not yet meet the qualified-approval requirement for auto-merge. The `Qualified-approval` label is applied only when all changed folders have qualified approval.\n\nOther merge conditions, including required checks, branch protection, draft state, and mergeability, still apply. The bot does not enable auto-merge or merge the PR.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: -.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/tests/arp/</code> | 1 | <code>/tests/arp/</code> | Awaiting qualified approval | - | 0 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-mgmt/pr_reviewer-by-files.yml)\n[CODEOWNERS](https://github.com/sonic-net/sonic-mgmt/blob/8ac333a1089d9bbe01fa60d0103897fd8b00ae8c/.github/CODEOWNERS)\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 29161,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-12T23:50:19Z",
+        "review_author": "wrideout-arista"
+    },
+    {
+        "number": 29161,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-13T04:08:51Z",
+        "review_author": "nhe-NV"
+    },
+    {
+        "number": 29161,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-22T11:38:01Z",
+        "review_author": "liat-grozovik"
+    },
+    {
+        "number": 29161,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-11-22T11:38:01Z",
+        "latestReview_author": "liat-grozovik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 29161,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-11-13T04:08:51Z",
+        "latestReview_author": "nhe-NV",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 29161,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-11-12T23:50:19Z",
+        "latestReview_author": "wrideout-arista",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 29158,
         "repo": "sonic-mgmt",
         "comment_at": "2026-11-11T02:46:16Z",
@@ -5125,6 +5433,136 @@
         "repo": "sonic-mgmt",
         "latestReview_at": "2026-11-09T19:20:46Z",
         "latestReview_author": "deepak-singhal0408",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 29110,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T03:58:42Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29110,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T03:58:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 29110,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T03:59:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29110,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T03:59:08Z",
+        "comment_author": "github-actions",
+        "comment_body": "<!-- skip-expiry-conditional-mark-review-note -->\n@StormLiangMS @wangxin @yxieca A user wants to merge changes to the conditional mark files into `master`. Please review."
+    },
+    {
+        "number": 29110,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T04:01:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Added tested label(s): Tested for 202611 Branch. The corresponding branches are checked in the **Tested branch** section and have branch-specific test information in the **Test result** section of the PR description.\n\nAdded request label(s): Request for 202611 Branch. These branches are requested in the **Backport** section of the PR description, and their matching **Tested for** labels are now present.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 29110,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T08:48:52Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 29110,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T08:49:10Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29110,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T14:45:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**0 of 2 changed files have qualified approval** for head commit `88f99357c55d2547e1b6746e7180fef355e3a1dc`.\n\nThis PR does not yet meet the qualified-approval requirement for auto-merge. The `Qualified-approval` label is applied only when all changed folders have qualified approval.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: -.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/ansible/roles/test/files/tools/loganalyzer/</code> | 1 | <code>/ansible/roles/test/files/</code> | Awaiting qualified approval | - | 0 | - |\n| <code>/tests/common/plugins/conditional_mark/</code> | 1 | <code>/tests/common/plugins/conditional_mark/</code> | Awaiting qualified approval | - | 0 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-mgmt/pr_reviewer-by-files.yml)\n[CODEOWNERS](https://github.com/sonic-net/sonic-mgmt/blob/cfe1e781c4322461f38a8adde97e0c048e7228be/.github/CODEOWNERS)\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 29110,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T14:45:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 29110,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T14:46:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29110,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T16:49:08Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**0 of 2 changed files have qualified approval** for head commit `88f99357c55d2547e1b6746e7180fef355e3a1dc`.\n\nThis PR does not yet meet the qualified-approval requirement for auto-merge. The `Qualified-approval` label is applied only when all changed folders have qualified approval.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: -.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/ansible/roles/test/files/tools/loganalyzer/</code> | 1 | <code>/ansible/roles/test/files/</code> | Awaiting qualified approval | - | 0 | - |\n| <code>/tests/common/plugins/conditional_mark/</code> | 1 | <code>/tests/common/plugins/conditional_mark/</code> | Awaiting qualified approval | - | 0 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-mgmt/pr_reviewer-by-files.yml)\n[CODEOWNERS](https://github.com/sonic-net/sonic-mgmt/blob/cfe1e781c4322461f38a8adde97e0c048e7228be/.github/CODEOWNERS)\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 29110,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-10T01:14:32Z",
+        "comment_author": "weiguo-nvidia",
+        "comment_body": "Hi @StormLiangMS ,\n\nCould you help review the PR? Thanks!"
+    },
+    {
+        "number": 29110,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-22T11:39:34Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**0 of 2 changed files have qualified approval** for head commit `88f99357c55d2547e1b6746e7180fef355e3a1dc`.\n\nThis PR does not yet meet the qualified-approval requirement for auto-merge. The `Qualified-approval` label is applied only when all changed folders have qualified approval.\n\nOther merge conditions, including required checks, branch protection, draft state, and mergeability, still apply. The bot does not enable auto-merge or merge the PR.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: -.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/ansible/roles/test/files/tools/loganalyzer/</code> | 1 | <code>/ansible/roles/test/files/</code> | Awaiting qualified approval | - | 0 | - |\n| <code>/tests/common/plugins/conditional_mark/</code> | 1 | <code>/tests/common/plugins/conditional_mark/</code> | Awaiting qualified approval | - | 0 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-mgmt/pr_reviewer-by-files.yml)\n[CODEOWNERS](https://github.com/sonic-net/sonic-mgmt/blob/cfe1e781c4322461f38a8adde97e0c048e7228be/.github/CODEOWNERS)\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 29110,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-09T14:45:45Z",
+        "review_author": "nhe-NV"
+    },
+    {
+        "number": 29110,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-09T16:49:03Z",
+        "review_author": "az-pz"
+    },
+    {
+        "number": 29110,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-22T11:39:30Z",
+        "review_author": "liat-grozovik"
+    },
+    {
+        "number": 29110,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-11-09T16:49:03Z",
+        "latestReview_author": "az-pz",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 29110,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-11-22T11:39:30Z",
+        "latestReview_author": "liat-grozovik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 29110,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-11-09T14:45:45Z",
+        "latestReview_author": "nhe-NV",
         "latestReview_state": "APPROVED"
     },
     {
@@ -7445,6 +7883,591 @@
         "repo": "sonic-mgmt",
         "latestReview_at": "2026-11-05T02:34:31Z",
         "latestReview_author": "lipxu",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-05T01:36:42Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-05T01:36:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-05T01:37:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-05T01:48:08Z",
+        "comment_author": "Xichen96",
+        "comment_body": "### Startup prerequisite reproduced; reset-only recovery\r\n\r\nThe failure is before server-down injection, not a failure of the injected server-outage scenario.\r\n\r\nThe original buildimage CI worker ran the faulty-Y-cable module, ARP extended, and then `test_server_down[active-standby]`. Upper PMON was recreated immediately before the ICMP responder stopped. The next responder fixture increased the heartbeat interval from 100ms to 3000ms but did not clear accumulated suspension. All 24 upper ports stayed active/unhealthy and all 24 lower ports standby/unhealthy through three attempts on that worker.\r\n\r\nA faithful predecessor replay captured the real exponential suspension path: 0.8, 1.6, 3.2, 6.4, 12.8, 25.6, and repeated 51.2-second windows. It narrowly passed when the old timer expired inside the health gate; that pass was not treated as a fix.\r\n\r\nThe phase-aligned warm-PMON [control](https://elastictest.org/scheduler/testplan/6aebce8a0a7ed00efb0152f0), pinned to diagnostic `f3df9e43647d08de4e38c460da0f7badacda84bd`, then reproduced the exact original assertion on the same `SONiC.master-30444.1266929-476cba3a4` image:\r\n\r\n> mux_cable status is unexpected. Should be (active, healthy). Test can't proceed.\r\n\r\nBoth ToRs retained the original all-24-port unhealthy signature after responder startup. Only `config muxcable reset-heartbeat-suspend all` was applied at the counterfactual boundary. All ports became healthy, with unchanged linkmgrd, TeamMgr, TeamSync and PMON PIDs, unchanged mux roles, and `interval_v4=3000` preserved. The selected-server PTF capture received no probes during the failed health window; request/reply traffic returned after the reset. Pretest, the diagnostic and posttest all passed.\r\n\r\nThe precise timer duration on the historical worker was not logged. The controlled run proves the reconstructed suspension mechanism and the narrow recovery; it does not retroactively measure that lost timer. The successful CI retry used a fresh worker and different predecessors, so it was not an unchanged stateful replay of this precursor.\r\n\r\n### Matched proof campaign in progress\r\n\r\n- [Unchanged control, 10 sequences](https://elastictest.org/scheduler/testplan/6aebdf53ca64c8bf4f3f7c59), source `462a36915e588581c1dfb053c905da3cb42949cb`.\r\n- [Fixed, 10 sequences](https://elastictest.org/scheduler/testplan/6aebdf643cf96a974c02baa0), source `5e6f23c80ef100fc568865492c1188736c418c87`.\r\n\r\nBoth plans use two KVMs, zero retries, the same original image and the same timing trigger. Their diagnostic code is byte-identical; the fixed head adds only the three-line production patch from `b11abd99fc549aa55142ff7ef2e28bf36602d2d0`. The entire changed fixture file matches this PR's head.\r\n\r\nThese sequences exercise the actual original healthy prerequisite and stop explicitly before server-down injection. This scope is startup recovery; the full server-failure assertions remain unchanged and are left to normal PR CI. Repeated fixed-head validation and exact-head CI are not yet complete.\r\n"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-05T03:06:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-05T03:07:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-05T03:18:34Z",
+        "comment_author": "Xichen96",
+        "comment_body": "### Repeated validation caught a remaining reset-delivery failure\n\nThe initial fixture-only candidate is **not validated**. Its first sequence passed on both KVMs, but `[fixed]|||2` failed at the unchanged original active/healthy prerequisite. All 24 upper ports were still active/unhealthy after the CLI returned success for all ports.\n\nThe successful run logged linkmgrd's `handleResetSuspendTimer` and resumed probes; the failed run did not log that consumption or resume and remained suspended. The exact image's `ConfigDBConnector::set_entry` removes the transient reset field during immediate restoration. Its `SubscriberStateTable::pops` reads field-values from the current Redis hash, not from the historical notification. Thus a successful one-shot write is not a consumption acknowledgement.\n\nCurrent head `7d61b9cdf89efed87413ce1bf3f18ef0c5c74f76` replaces the one-shot fixture change with four lines in the existing server-down startup health predicate. While the active-standby healthy prerequisite remains unhealthy, it requests heartbeat resumption again; only the observed active/healthy state permits progress. The 30-second deadline, actual health assertion, post-fault unhealthy checks and active-active behavior remain unchanged. No global fixture health requirement or daemon restart is added.\n\nThe original unchanged-code control remains applicable. Revised fixed-head repeated validation and CI will be linked here; the previous two passes are not claimed as a completed ten-run proof. Earlier reproduction evidence remains valid, but evidence for the superseded one-shot candidate does not validate this revised head.\n"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-05T03:41:10Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-05T03:41:28Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-05T13:13:17Z",
+        "comment_author": "Xichen96",
+        "comment_body": "The current revision moves the repair to the test that injected the fault.\n\nHead `6685ab27ee3b57bf01b86899e779e4935aadbacc` changes only `tests/dualtor/test_switchover_faulty_ycable.py` (+24/-5). The previous heartbeat-reset change in the later server-down testcase is removed.\n\nThe teardown now waits for restored Y-cable state before deciding PMON recreation is needed, verifies restoration after that fallback, and waits for healthy, hardware-consistent active-standby mux ports on both ToRs while the responder remains available. A timeout is reported by the faulty-Y-cable teardown. Existing helper/polling conventions are retained, without forcing a uniform mux role.\n\nRepository hooks and focused fixture control-flow checks pass. Functional validation of this exact teardown revision is pending. Build1267774 and the earlier repeated startup-reset campaigns exercised the superseded downstream workaround; they are not validation of this new head. The original worker's exact suspension timer was not retained, and no exact historical duration is claimed.\n"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-05T13:13:29Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-05T13:13:49Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-06T14:06:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-06T14:06:50Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T15:18:19Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T15:18:39Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T15:55:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T15:55:53Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-11T23:18:16Z",
+        "comment_author": "StormLiangMS",
+        "comment_body": "@Xichen96 Reviewed head `9d1b07eb1909f28628726ca09f062f003bc48e3c`. Two P2 correctness gaps remain before this establishes complete fault restoration:\n\n1. **Teardown can succeed while both ToRs remain unhealthy.** [Lines 150-159](https://github.com/sonic-net/sonic-mgmt/blob/9d1b07eb1909f28628726ca09f062f003bc48e3c/tests/dualtor/test_switchover_faulty_ycable.py#L150-L159) check only the selected port's probe response and peer-link state on the faulty ToR. Those values can recover while linkmgrd still reports unhealthy ports, leaving the reported downstream failure undetected. In an isolated reproduction, both cleanup paths completed while all 24 ports on each ToR remained unhealthy. Please add a bounded check, after either recovery path, that every active-standby port on both ToRs is healthy and hardware-consistent. Preserve mixed active/standby assignments rather than forcing a particular active side. The existing linkmgrd-restart test demonstrates the health/hwstatus checks and 120-second, 10-second-poll convention. The explicit responder dependency is correct, but keeping it available alone does not establish recovery.\n\n2. **Fixed waits can trigger unnecessary PMON recreation or premature teardown failure.** [Lines 142-159](https://github.com/sonic-net/sonic-mgmt/blob/9d1b07eb1909f28628726ca09f062f003bc48e3c/tests/dualtor/test_switchover_faulty_ycable.py#L142-L159) use a single fault-state sample after a 60-second sleep. A report arriving shortly afterward triggers recreation or fails the new assertion despite successful recovery. The source-level reproduction with the report becoming valid at 65 seconds fails teardown at 60 seconds. Please use bounded `wait_until` polling on the fault-clear predicate before and after the fallback, such as the 90-second window described in the PR. This also lets transiently incomplete state converge instead of immediately raising on a missing peer-state key.\n\nThese independently confirmed findings align with the existing unresolved review threads; they are still present in this head. Please also update the description: it names `6685ab27` and promises bounded polling/all-port checks that are absent from the current revision.\n\nValidation was isolated/source-level against the exact-head function bodies and the repository's `wait_until`; no DUT run was performed. All 23 reported PR checks were successful at review time, including DCO and EasyCLA, but the above restoration gaps remain."
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-12T07:05:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-12T07:06:12Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-16T16:29:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-16T16:29:27Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-16T17:00:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-16T17:00:57Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-16T17:32:38Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-16T17:32:57Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-17T02:34:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-17T02:34:33Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-17T02:49:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-17T02:49:19Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-17T03:22:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-17T03:23:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-17T04:15:50Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-17T04:16:08Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-17T05:14:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-17T05:14:34Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-17T08:21:43Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-17T08:22:01Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-17T08:36:38Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-17T08:36:56Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-17T10:57:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-17T10:57:33Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-17T14:55:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-17T14:56:12Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-20T03:15:19Z",
+        "comment_author": "Xichen96",
+        "comment_body": "### Repeated KVM validation\r\n\r\nTested `dualtor/test_switchover_faulty_ycable.py` on classic `dualtor`, `Force10-S6000`, image `SONiC.master.1276864-47fcc8d38`. Each arm ran 10 module repetitions (20 target cases) across five KVMs, with zero retries and identical source-independent settings.\r\n\r\n| Arm | Exact source | Test plan | Result |\r\n|---|---|---|---|\r\n| Unchanged control | `572ffc1f0bb0b57dc71d99e4bbebfef61b5826d0` | [Control run](https://elastictest.org/scheduler/testplan/6afcec1a312e6b703ed8dde9) | 20/20 cases passed; stale peer-down information triggered unnecessary PMON recreation in 10/10 peer-down cleanups |\r\n| Fixed | `60460bc52a6c68b7cdb867a5d08a2c05a7e056d5` | [Fixed run](https://elastictest.org/scheduler/testplan/6afcec280c87d768cbddc421) | 20/20 cases passed; zero PMON recreations across all 20 cleanups |\r\n\r\nBoth plans finished successfully, with no target skips, errors or failures. All five pretest and five posttest worker gates passed in each arm. Complete logs from all 20 module executions were checked: every fixed cleanup verified all 24 active-standby ports healthy and hardware-consistent on both ToRs, and every fixed module completed cleanup before stopping its ICMP responder.\r\n\r\nExact-head PR CI is green (24/24 checks), including [Azure build 1279377](https://dev.azure.com/mssonic/be1b070f-be15-4154-aade-b1d3bfb17054/_build/results?buildId=1279377). Separately, 30 focused control-flow checks, including restoration-command failures, and two stub-DUT fixture-wiring cases passed.\r\n\r\nScope: the original image 1266929 was unavailable; its download-failed attempts executed no tests and are excluded. This validates the cleanup change on image 1276864, not the original full-prefix incident's causation. These native repetitions did not force a cleanup-command failure; that path has isolated-test coverage only."
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-20T14:18:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-20T14:18:37Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-20T14:48:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-20T14:49:10Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-20T17:36:17Z",
+        "comment_author": "Xichen96",
+        "comment_body": "### Validation results for `f6232eb94c333cce54d11cc4997a6fce9239f378`\r\n\r\nCompleted matched KVM validation of `dualtor/test_switchover_faulty_ycable.py`: classic `dualtor`, `Force10-S6000` VS, image `SONiC.master.1279791-6bbb70630`. Each arm ran 10 module repetitions / 20 target cases across five KVMs, with zero retries and identical source-independent settings.\r\n\r\n| Arm | Exact source | Test plan | Result |\r\n|---|---|---|---|\r\n| Unchanged control | `572ffc1f0bb0b57dc71d99e4bbebfef61b5826d0` | [Control](https://elastictest.org/scheduler/testplan/6b0072efa664af5da815da83) | 20/20 target cases passed; stale peer-down information caused unnecessary PMON fallback in 9/10 peer-down cleanups |\r\n| Fixed | `f6232eb94c333cce54d11cc4997a6fce9239f378` | [Fixed](https://elastictest.org/scheduler/testplan/6b0072fb6708a5add452e95f) | 20/20 target cases passed; no PMON fallback in any of the 20 cleanups |\r\n\r\nBoth plans finished successfully, with no target skips, errors or failures. All five pretest and five posttest worker gates passed in each arm. Complete logs from all 20 module executions were checked. Every fixed cleanup verified all 24 active-standby ports healthy and hardware-consistent on each ToR, checked the good ToR last without rechecking the faulty side, and completed before the ICMP responder was stopped. The one control peer-down cleanup without fallback already had a fresh `up` report.\r\n\r\nExact-head CI is green: **26/26 checks**, including [Azure build 1282372](https://dev.azure.com/mssonic/be1b070f-be15-4154-aade-b1d3bfb17054/_build/results?buildId=1282372). The two target cases also passed on their first attempt in both the [classic CI lane](https://elastictest.org/scheduler/testplan/6b005f49f6f698c1f6c1fa6e) and [VPP CI lane](https://elastictest.org/scheduler/testplan/6b005f4d6708a5add452e91f).\r\n\r\n**Failure-path coverage:** 33 isolated exact-function checks and two stub-DUT fixture-wiring cases passed. These include good-ToR-only unhealthy, hardware-inconsistent and missing-port cases failing cleanup without recreating faulty-side PMON, including after a required faulty-side fallback. Primary faulty-side health failures still trigger one PMON fallback by design, as do reported restoration-command, daemon-startup and cable-recovery failures; failure after that fallback fails cleanup. The new peer-side regression checks fail against the previous combined-check implementation.\r\n\r\n**Limits:** the native repetitions did not force command-error or health-timeout failures; that failure-path evidence is isolated testing. This is validation on image 1279791, not reproduction of the original image 1266929/full-prefix incident or proof of its causation."
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-22T23:35:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**1 of 1 changed files have qualified approval** for head commit `f6232eb94c333cce54d11cc4997a6fce9239f378`.\n\n**All changed folders have qualified approval.** The `Qualified-approval` label indicates this PR meets the qualified-approval requirement for auto-merge.\n\nOther merge conditions, including required checks, branch protection, draft state, and mergeability, still apply. The bot does not enable auto-merge or merge the PR.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: @stormliangms.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/tests/dualtor/</code> | 1 | <code>/tests/dualtor/</code> | Approved | - | 0 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-mgmt/pr_reviewer-by-files.yml)\n[CODEOWNERS](https://github.com/sonic-net/sonic-mgmt/blob/cfe1e781c4322461f38a8adde97e0c048e7228be/.github/CODEOWNERS)\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-22T23:35:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-merge-risk-assessment:f6232eb94c333cce54d11cc4997a6fce9239f378 -->\nMerge risk assessment requested for head commit `f6232eb94c333cce54d11cc4997a6fce9239f378`. This confirms submission only, not completion or approval to merge."
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-22T23:39:18Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- elastictest-merge-risk:6b037c3e023080bc2a397c85:f6232eb94c333cce54d11cc4997a6fce9239f378 -->\n## Merge-risk assessment\n\n**Risk: medium. Confidence: High. Recommendation: Ready based on available evidence.**\n\nAssessed [PR #29048](https://github.com/sonic-net/sonic-mgmt/pull/29048) at [head `f6232eb94c333cce54d11cc4997a6fce9239f378`](https://github.com/sonic-net/sonic-mgmt/commit/f6232eb94c333cce54d11cc4997a6fce9239f378) against `master`.\n\n### Findings\n\n- The [one-file diff](https://github.com/sonic-net/sonic-mgmt/blob/f6232eb94c333cce54d11cc4997a6fce9239f378/tests/dualtor/test_switchover_faulty_ycable.py) is test-only and confined to the two faulty-Y-cable cases. It replaces fixed cleanup sleeps/single samples with bounded ycabled, fault-clear, and all-port health checks; it keeps the ICMP responder alive through teardown and retains one bounded PMON fallback for faulty-side recovery failures. No production code, test-selection change, assertion weakening, retry/xfail, or new log-analyzer suppression was found.\n- Revision-matched [fixed validation](https://elastictest.org/scheduler/testplan/6b0072fb6708a5add452e95f) and [unchanged control](https://elastictest.org/scheduler/testplan/6b0072efa664af5da815da83) used Force10-S6000 VS `dualtor` KVM, 10 repeats, and zero configured retries. The fixed head recorded 20/20 target cases passed with no skips, failures, or errors; the control also passed 20/20, while the retained campaign reports unnecessary PMON fallback in 9/10 control peer-down cleanups and none in the fixed arm.\n- The [CI merge commit](https://github.com/sonic-net/sonic-mgmt/commit/9187caaada677ecd7c11e89c749dbc26c80757f5) includes the assessed head. Current PR checks are green, including the [Azure.sonic-mgmt check](https://github.com/sonic-net/sonic-mgmt/runs/136424555581), CodeQL, Semgrep, DCO, and the impacted dualtor lanes.\n\n### Remaining validation\n\nNative evidence is KVM/VS-only and does not force every restoration-command-error or health-timeout branch; those paths have isolated exact-function/stub-DUT coverage. The original incident image was unavailable, so this validates the cleanup behavior rather than reproducing that image's full-prefix history. These are bounded validation gaps, not evidence of a current defect.\n\nMERGE_RISK=medium"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-05T01:38:20Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-05T03:09:51Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-05T03:20:20Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-05T03:42:49Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-05T03:45:01Z",
+        "review_author": "Xichen96"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-05T03:46:52Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-05T13:15:07Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-06T14:09:38Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-09T15:21:19Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-09T15:58:40Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-09T16:02:20Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-12T07:07:51Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-16T16:30:39Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-16T17:02:23Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-16T17:34:35Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-17T02:36:23Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-17T02:51:01Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-17T02:55:15Z",
+        "review_author": "github-advanced-security"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-17T03:24:53Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-17T04:17:41Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-17T05:19:18Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-17T08:23:41Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-17T08:39:44Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-17T09:14:12Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-17T11:02:12Z",
+        "review_author": "github-advanced-security"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-17T11:15:15Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-17T15:09:07Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-20T13:25:56Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-20T14:27:52Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-20T14:58:34Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-22T23:35:00Z",
+        "review_author": "StormLiangMS"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-11-17T11:02:12Z",
+        "latestReview_author": "github-advanced-security",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-11-20T14:58:34Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 29048,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-11-22T23:35:00Z",
+        "latestReview_author": "StormLiangMS",
         "latestReview_state": "APPROVED"
     },
     {
@@ -22211,6 +23234,219 @@
         "latestReview_state": "DISMISSED"
     },
     {
+        "number": 27875,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-11T09:25:37Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 27875,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-11T09:25:47Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 27875,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-11T09:26:05Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 27875,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-11T12:15:01Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request for branch(es): 202605.<br>Added label(s) for branch(es) 202605.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 27875,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-11T12:15:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "The **Tested branch** section has been ticked and **Test result** is provided for branch(es): 202605. Added label(s): Tested for 202605 Branch.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 27875,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-17T01:09:54Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 27875,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-17T01:10:04Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 27875,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-17T01:10:23Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 27875,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T02:22:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Removed label(s):\n- `Request for 202605 branch`: The matching `Tested for 202605 branch` label is also being removed for the reason listed below.\n- `Tested for 202605 branch`: Branch `202605` no longer has both a checked checkbox in **Tested branch** and branch-specific evidence in **Test result**.\n\nThis PR requests backports for branch(es): 202605, but is missing required test information.\n\n**Update the PR description, not a PR comment:**\n1. List each requested branch under **Backport**.\n2. After testing on each branch, tick its checkbox (`- [x]`) under **Tested branch**. An unchecked box (`- [ ]`) does not count.\n3. Under **Test result**, start a separate entry with each branch number, followed by its test evidence on the same line or the following lines, such as a test-run link or a summary with logs. A branch number alone, placeholders, and results for another branch do not count.\n\nPlease make sure you have done all three steps above.\nExample format for the branches above (replace every placeholder with your actual test evidence; only check branches you have tested):\n```markdown\n### Backport\n202605\n\n### Tested branch\n- [x] 202605\n\n### Test result\n202605: <link to test results or summary with logs>\n```\n\nKeep this information outside HTML comments (`<!-- ... -->`) so it can be read.\nAfter you save the PR description, I will check it again and add the matching `Tested for <branch> Branch` labels first, then the `Request for <branch> Branch` labels. Request labels remain blocked until their matching tested labels are present.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 27875,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T02:22:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 27875,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T02:22:50Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 27875,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T02:23:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Added tested label(s): Tested for 202611 Branch. The corresponding branches are checked in the **Tested branch** section and have branch-specific test information in the **Test result** section of the PR description.\n\nAdded request label(s): Request for 202611 Branch. These branches are requested in the **Backport** section of the PR description, and their matching **Tested for** labels are now present.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 27875,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T02:50:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 27875,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T02:51:16Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 27875,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T08:55:46Z",
+        "comment_author": "wenjwang-nv",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 27875,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T08:55:49Z",
+        "comment_author": "azure-pipelines-wrapper",
+        "comment_body": "You are not authorized to retry Azure Pipelines jobs for this repository."
+    },
+    {
+        "number": 27875,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T10:52:51Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 27875,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T10:53:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 27875,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T10:53:19Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 27875,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T15:20:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**0 of 1 changed files have qualified approval** for head commit `8b69f2fa4c14e589d6b502f05cfb31d9d03d2915`.\n\nThis PR does not yet meet the qualified-approval requirement for auto-merge. The `Qualified-approval` label is applied only when all changed folders have qualified approval.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: -.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/tests/platform_tests/</code> | 1 | <code>/tests/platform_tests/</code> | Awaiting qualified approval | - | 0 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-mgmt/pr_reviewer-by-files.yml)\n[CODEOWNERS](https://github.com/sonic-net/sonic-mgmt/blob/cfe1e781c4322461f38a8adde97e0c048e7228be/.github/CODEOWNERS)\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 27875,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T15:21:47Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Added tested label(s): Tested for 202605 Branch. The corresponding branches are checked in the **Tested branch** section and have branch-specific test information in the **Test result** section of the PR description.\n\nAdded request label(s): Request for 202605 Branch. These branches are requested in the **Backport** section of the PR description, and their matching **Tested for** labels are now present.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 27875,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-14T00:32:52Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**0 of 1 changed files have qualified approval** for head commit `8b69f2fa4c14e589d6b502f05cfb31d9d03d2915`.\n\nThis PR does not yet meet the qualified-approval requirement for auto-merge. The `Qualified-approval` label is applied only when all changed folders have qualified approval.\n\nOther merge conditions, including required checks, branch protection, draft state, and mergeability, still apply. The bot does not enable auto-merge or merge the PR.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: -.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/tests/platform_tests/</code> | 1 | <code>/tests/platform_tests/</code> | Awaiting qualified approval | @vvolam | 0.3833 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-mgmt/pr_reviewer-by-files.yml)\n[CODEOWNERS](https://github.com/sonic-net/sonic-mgmt/blob/cfe1e781c4322461f38a8adde97e0c048e7228be/.github/CODEOWNERS)\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 27875,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-20T09:43:48Z",
+        "comment_author": "wenjwang-nv",
+        "comment_body": "Hi @zypgithub please help review"
+    },
+    {
+        "number": 27875,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-22T11:40:18Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**0 of 1 changed files have qualified approval** for head commit `8b69f2fa4c14e589d6b502f05cfb31d9d03d2915`.\n\nThis PR does not yet meet the qualified-approval requirement for auto-merge. The `Qualified-approval` label is applied only when all changed folders have qualified approval.\n\nOther merge conditions, including required checks, branch protection, draft state, and mergeability, still apply. The bot does not enable auto-merge or merge the PR.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: -.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/tests/platform_tests/</code> | 1 | <code>/tests/platform_tests/</code> | Awaiting qualified approval | @vvolam | 0.3105 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-mgmt/pr_reviewer-by-files.yml)\n[CODEOWNERS](https://github.com/sonic-net/sonic-mgmt/blob/cfe1e781c4322461f38a8adde97e0c048e7228be/.github/CODEOWNERS)\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 27875,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-09-13T00:05:41Z",
+        "review_author": "nhe-NV"
+    },
+    {
+        "number": 27875,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-09T15:20:45Z",
+        "review_author": "nhe-NV"
+    },
+    {
+        "number": 27875,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-14T00:32:47Z",
+        "review_author": "vvolam"
+    },
+    {
+        "number": 27875,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-22T11:40:14Z",
+        "review_author": "liat-grozovik"
+    },
+    {
+        "number": 27875,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-11-22T11:40:14Z",
+        "latestReview_author": "liat-grozovik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 27875,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-11-09T15:20:45Z",
+        "latestReview_author": "nhe-NV",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 27875,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-11-14T00:32:47Z",
+        "latestReview_author": "vvolam",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 27841,
         "repo": "sonic-mgmt",
         "comment_at": "2026-09-10T02:40:36Z",
@@ -28951,6 +30187,209 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 25919,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-06T10:58:36Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 25919,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-06T10:58:49Z",
+        "comment_author": "github-actions",
+        "comment_body": "<!-- skip-expiry-conditional-mark-review-note -->\n@StormLiangMS @wangxin @yxieca A user wants to merge changes to the conditional mark files into `master`. Please review."
+    },
+    {
+        "number": 25919,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-06T10:58:52Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25919,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-06T11:12:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request for branch(es): 202605.<br>Added label(s) for branch(es) 202605.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25919,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-13T09:13:03Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 25919,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-13T09:13:37Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25919,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-17T08:41:59Z",
+        "comment_author": "nhe-NV",
+        "comment_body": "@echuawu  the PR title not match the change. , please update"
+    },
+    {
+        "number": 25919,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-17T10:12:48Z",
+        "comment_author": "echuawu",
+        "comment_body": "> @echuawu the PR title not match the change. , please update\r\n\r\nUpdated."
+    },
+    {
+        "number": 25919,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-27T12:19:14Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25919,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-16T02:04:11Z",
+        "comment_author": "nhe-NV",
+        "comment_body": "@r12f can you help to review?"
+    },
+    {
+        "number": 25919,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-09T04:03:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 25919,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-09T04:03:33Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25919,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-09T10:46:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 25919,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-09T10:46:57Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25919,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-03T19:10:16Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**0 of 1 changed files have qualified approval** for head commit `6ed61bd74d86da9b0e6d340c8d4da4e16b331a10`.\n\nThis PR does not yet meet the qualified-approval requirement for auto-merge. The `Qualified-approval` label is applied only when all changed folders have qualified approval.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: -.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/tests/common/plugins/conditional_mark/</code> | 1 | <code>/tests/common/plugins/conditional_mark/</code> | Awaiting qualified approval | - | 0 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-mgmt/pr_reviewer-by-files.yml)\nCODEOWNERS: not available.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25919,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T09:20:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR requests backports for branch(es): 202611, but is missing required test information.\n\n**Update the PR description, not a PR comment:**\n1. List each requested branch under **Backport**.\n2. After testing on each branch, tick its checkbox (`- [x]`) under **Tested branch**. An unchecked box (`- [ ]`) does not count.\n3. Under **Test result**, start a separate entry with each branch number, followed by its test evidence on the same line or the following lines, such as a test-run link or a summary with logs. A branch number alone, placeholders, and results for another branch do not count.\n\nPlease make sure you have done all three steps above.\nExample format for the branches above (replace every placeholder with your actual test evidence; only check branches you have tested):\n```markdown\n### Backport\n202611\n\n### Tested branch\n- [x] 202611\n\n### Test result\n202611: <link to test results or summary with logs>\n```\n\nKeep this information outside HTML comments (`<!-- ... -->`) so it can be read.\nAfter you save the PR description, I will check it again and add the matching `Tested for <branch> Branch` labels first, then the `Request for <branch> Branch` labels. Request labels remain blocked until their matching tested labels are present.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25919,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T09:25:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Added tested label(s): Tested for 202611 Branch. The corresponding branches are checked in the **Tested branch** section and have branch-specific test information in the **Test result** section of the PR description.\n\nAdded request label(s): Request for 202611 Branch. These branches are requested in the **Backport** section of the PR description, and their matching **Tested for** labels are now present.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25919,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-20T11:54:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**0 of 1 changed files have qualified approval** for head commit `6ed61bd74d86da9b0e6d340c8d4da4e16b331a10`.\n\nThis PR does not yet meet the qualified-approval requirement for auto-merge. The `Qualified-approval` label is applied only when all changed folders have qualified approval.\n\nOther merge conditions, including required checks, branch protection, draft state, and mergeability, still apply. The bot does not enable auto-merge or merge the PR.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: -.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/tests/common/plugins/conditional_mark/</code> | 1 | <code>/tests/common/plugins/conditional_mark/</code> | Awaiting qualified approval | - | 0 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-mgmt/pr_reviewer-by-files.yml)\nCODEOWNERS: not available.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25919,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-22T11:41:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**0 of 1 changed files have qualified approval** for head commit `6ed61bd74d86da9b0e6d340c8d4da4e16b331a10`.\n\nThis PR does not yet meet the qualified-approval requirement for auto-merge. The `Qualified-approval` label is applied only when all changed folders have qualified approval.\n\nOther merge conditions, including required checks, branch protection, draft state, and mergeability, still apply. The bot does not enable auto-merge or merge the PR.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: -.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/tests/common/plugins/conditional_mark/</code> | 1 | <code>/tests/common/plugins/conditional_mark/</code> | Awaiting qualified approval | - | 0 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-mgmt/pr_reviewer-by-files.yml)\nCODEOWNERS: not available.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25919,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-07-11T12:32:00Z",
+        "review_author": "nhe-NV"
+    },
+    {
+        "number": 25919,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-07-13T09:14:41Z",
+        "review_author": "echuawu"
+    },
+    {
+        "number": 25919,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-07-17T10:19:56Z",
+        "review_author": "nhe-NV"
+    },
+    {
+        "number": 25919,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-09-13T00:28:31Z",
+        "review_author": "nhe-NV"
+    },
+    {
+        "number": 25919,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-03T19:10:12Z",
+        "review_author": "YatishSVC"
+    },
+    {
+        "number": 25919,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-20T11:54:34Z",
+        "review_author": "zypgithub"
+    },
+    {
+        "number": 25919,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-22T11:41:13Z",
+        "review_author": "liat-grozovik"
+    },
+    {
+        "number": 25919,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-11-20T11:54:34Z",
+        "latestReview_author": "zypgithub",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 25919,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-11-22T11:41:13Z",
+        "latestReview_author": "liat-grozovik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 25919,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-09-13T00:28:31Z",
+        "latestReview_author": "nhe-NV",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 25919,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-11-03T19:10:12Z",
+        "latestReview_author": "YatishSVC",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 25916,
         "repo": "sonic-mgmt",
         "comment_at": "2026-07-06T10:52:40Z",
@@ -30006,6 +31445,296 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-30T08:29:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-06-30T08:29:58Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-01T06:31:38Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request for branch(es): 202605.<br>Added label(s) for branch(es) 202605.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-02T10:12:38Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-02T10:12:54Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-02T11:04:56Z",
+        "comment_author": "echuawu",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-02T11:04:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-02T11:05:01Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "No failed(or canceled) jobs found in completed stages. Only failed(or canceled) jobs in completed stages can be retried.\n\nStages in progress: Test. Please wait for the stages to complete and then retry again."
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-03T11:59:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-03T11:59:22Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-04T02:22:07Z",
+        "comment_author": "nhe-NV",
+        "comment_body": "@vaibhavhd @bingwang-ms @nazariig  can you please help to review?"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-05T23:36:04Z",
+        "comment_author": "yxieca",
+        "comment_body": "Thanks for adapting these tests to isolated (no-PortChannel) topologies \u2014 the `has_dut_portchannels` gating reads cleanly and most call sites are guarded correctly. One question on `ptftests/arista.py`.\n\n**`get_portchannel_changetime()` \u2014 does this now silently swallow real CLI/parse failures on PortChannel topologies?**\n\nBoth call sites are already guarded by `if self.has_dut_portchannels:` (lines ~172 and ~218), and `check_change_time` is only invoked in the `has_dut_portchannels` branch. So on an isolated topology the function is never called \u2014 the empty/no-PortChannel case is handled entirely by the caller-side gate.\n\nThat means every `return None` inside `get_portchannel_changetime()` only fires on a topology that *does* have PortChannels, where `show interfaces po1 | json` is expected to return real data:\n\n```python\ndef get_portchannel_changetime(self):\n    portchannel_output = self.do_cmd(\"show interfaces po1 | json\")\n    portchannel_output = \"\\n\".join(portchannel_output.split(\"\\r\\n\")[1:-1])\n    if not portchannel_output.strip():\n        return None                      # empty CLI output\n    try:\n        po_info = json.loads(portchannel_output, strict=False)\n        return po_info['interfaces']['Port-Channel1']['lastStatusChangeTimestamp']\n    except (json.JSONDecodeError, KeyError, TypeError) as err:\n        self.log('Failed to parse Port-Channel1 status: {}'.format(err))\n        return None                      # parse / lookup failure\n```\n\nPreviously (on master) a parse/lookup failure here would raise and fail the run loudly. Now it's caught and returns `None`, which flows into `sample[\"po_changetime\"]` and then `check_change_time`. `None != timestamp` compares without raising, so the run continues \u2014 but a genuine CLI or script failure on a PortChannel topology is now masked (only a log line, no test failure), and could contribute a spurious state-change count.\n\nCould you confirm the intent?\n- If the `None` path is meant purely to tolerate the isolated/no-PortChannel case: that case never reaches this function (the caller guard already handles it), so the fallback may be unnecessary there.\n- On a PortChannel topology, empty output or a parse error is a real failure \u2014 should it be surfaced (e.g. add to `self.fails` / skip inserting the sample) rather than logged-and-continued? A short note in the code or PR description on the chosen behavior would make this clear.\n\nMinor (same function): `json.JSONDecodeError` is a subclass of `ValueError`; if any non-`py3/` path ever runs this on an older interpreter, catching `ValueError` (in addition to / instead of `json.JSONDecodeError`) would be a touch more robust.\n\n*Reviewed by AI agent on behalf of Ying.*\n"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-05T23:37:22Z",
+        "comment_author": "yxieca",
+        "comment_body": "@vaibhavhd please review or assign someone from your team to review."
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-13T10:15:25Z",
+        "comment_author": "echuawu",
+        "comment_body": "> Thanks for adapting these tests to isolated (no-PortChannel) topologies \u2014 the `has_dut_portchannels` gating reads cleanly and most call sites are guarded correctly. One question on `ptftests/arista.py`.\r\n> \r\n> **`get_portchannel_changetime()` \u2014 does this now silently swallow real CLI/parse failures on PortChannel topologies?**\r\n> \r\n> Both call sites are already guarded by `if self.has_dut_portchannels:` (lines ~172 and ~218), and `check_change_time` is only invoked in the `has_dut_portchannels` branch. So on an isolated topology the function is never called \u2014 the empty/no-PortChannel case is handled entirely by the caller-side gate.\r\n> \r\n> That means every `return None` inside `get_portchannel_changetime()` only fires on a topology that _does_ have PortChannels, where `show interfaces po1 | json` is expected to return real data:\r\n> \r\n> ```python\r\n> def get_portchannel_changetime(self):\r\n>     portchannel_output = self.do_cmd(\"show interfaces po1 | json\")\r\n>     portchannel_output = \"\\n\".join(portchannel_output.split(\"\\r\\n\")[1:-1])\r\n>     if not portchannel_output.strip():\r\n>         return None                      # empty CLI output\r\n>     try:\r\n>         po_info = json.loads(portchannel_output, strict=False)\r\n>         return po_info['interfaces']['Port-Channel1']['lastStatusChangeTimestamp']\r\n>     except (json.JSONDecodeError, KeyError, TypeError) as err:\r\n>         self.log('Failed to parse Port-Channel1 status: {}'.format(err))\r\n>         return None                      # parse / lookup failure\r\n> ```\r\n> \r\n> Previously (on master) a parse/lookup failure here would raise and fail the run loudly. Now it's caught and returns `None`, which flows into `sample[\"po_changetime\"]` and then `check_change_time`. `None != timestamp` compares without raising, so the run continues \u2014 but a genuine CLI or script failure on a PortChannel topology is now masked (only a log line, no test failure), and could contribute a spurious state-change count.\r\n> \r\n> Could you confirm the intent?\r\n> \r\n> * If the `None` path is meant purely to tolerate the isolated/no-PortChannel case: that case never reaches this function (the caller guard already handles it), so the fallback may be unnecessary there.\r\n> * On a PortChannel topology, empty output or a parse error is a real failure \u2014 should it be surfaced (e.g. add to `self.fails` / skip inserting the sample) rather than logged-and-continued? A short note in the code or PR description on the chosen behavior would make this clear.\r\n> \r\n> Minor (same function): `json.JSONDecodeError` is a subclass of `ValueError`; if any non-`py3/` path ever runs this on an older interpreter, catching `ValueError` (in addition to / instead of `json.JSONDecodeError`) would be a touch more robust.\r\n> \r\n> _Reviewed by AI agent on behalf of Ying._\r\n\r\nUpdated according to the comments"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-13T10:15:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-13T10:16:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-07-27T12:20:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR has backport request label(s) for branch(es): 202605, but is missing required test information. Please make sure you tick the tested branch(es) in the **Tested branch** section and provide test evidence (e.g., 202605: &lt;test result&gt;) in the **Test result** section as well in your PR description.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-16T02:08:27Z",
+        "comment_author": "nhe-NV",
+        "comment_body": "@vaibhavhd  can you help to review?"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-09T11:07:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-09T11:07:45Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-10T01:43:29Z",
+        "comment_author": "echuawu",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-10T01:43:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-10-10T01:43:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1243426:\n\n\n\u2705Stage **Test**:\n- Job impacted-area-kvmtest-multi-asic-t1 by Elastictest: retried.\n- Job impacted-area-kvmtest-t2 by Elastictest: retried.\n- Job impacted-area-kvmtest-t1-lag-vpp by Elastictest: retried.\n- Job impacted-area-kvmtest-t0-sonic by Elastictest: retried.\n- Job impacted-area-kvmtest-dpu by Elastictest: retried.\n- Job impacted-area-kvmtest-dualtor by Elastictest: retried."
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T08:18:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T08:18:23Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T09:19:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR requests backports for branch(es): 202611, but is missing required test information.\n\n**Update the PR description, not a PR comment:**\n1. List each requested branch under **Backport**.\n2. After testing on each branch, tick its checkbox (`- [x]`) under **Tested branch**. An unchecked box (`- [ ]`) does not count.\n3. Under **Test result**, start a separate entry with each branch number, followed by its test evidence on the same line or the following lines, such as a test-run link or a summary with logs. A branch number alone, placeholders, and results for another branch do not count.\n\nPlease make sure you have done all three steps above.\nExample format for the branches above (replace every placeholder with your actual test evidence; only check branches you have tested):\n```markdown\n### Backport\n202611\n\n### Tested branch\n- [x] 202611\n\n### Test result\n202611: <link to test results or summary with logs>\n```\n\nKeep this information outside HTML comments (`<!-- ... -->`) so it can be read.\nAfter you save the PR description, I will check it again and add the matching `Tested for <branch> Branch` labels first, then the `Request for <branch> Branch` labels. Request labels remain blocked until their matching tested labels are present.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T09:26:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Added tested label(s): Tested for 202611 Branch. The corresponding branches are checked in the **Tested branch** section and have branch-specific test information in the **Test result** section of the PR description.\n\nAdded request label(s): Request for 202611 Branch. These branches are requested in the **Backport** section of the PR description, and their matching **Tested for** labels are now present.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T15:26:22Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T15:26:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-09T15:26:52Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-10T01:53:29Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-10T01:53:48Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-10T06:49:21Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-10T06:49:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-11T02:17:18Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**0 of 6 changed files have qualified approval** for head commit `a8cb7fa714634f972d7b46da7b3d736d082b767c`.\n\nThis PR does not yet meet the qualified-approval requirement for auto-merge. The `Qualified-approval` label is applied only when all changed folders have qualified approval.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: -.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/ansible/roles/test/files/ptftests/</code> | 2 | <code>/ansible/roles/test/files/ptftests/</code> | Awaiting qualified approval | - | 0 | - |\n| <code>/ansible/roles/test/files/ptftests/py3/</code> | 1 | <code>/ansible/roles/test/files/ptftests/py3/</code> | Awaiting qualified approval | - | 0 | - |\n| <code>/tests/common/fixtures/</code> | 1 | <code>/tests/common/fixtures/</code> | Awaiting qualified approval | - | 0 | - |\n| <code>/tests/common/platform/</code> | 1 | <code>/tests/common/platform/</code> | Awaiting qualified approval | - | 0 | - |\n| <code>/tests/platform_tests/</code> | 1 | <code>/tests/platform_tests/</code> | Awaiting qualified approval | - | 0 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-mgmt/pr_reviewer-by-files.yml)\n[CODEOWNERS](https://github.com/sonic-net/sonic-mgmt/blob/1177ba81855db8f7669bf3c0344263f6fc623d29/.github/CODEOWNERS)\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-13T04:59:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**1 of 6 changed files have qualified approval** for head commit `a8cb7fa714634f972d7b46da7b3d736d082b767c`.\n\nThis PR does not yet meet the qualified-approval requirement for auto-merge. The `Qualified-approval` label is applied only when all changed folders have qualified approval.\n\nOther merge conditions, including required checks, branch protection, draft state, and mergeability, still apply. The bot does not enable auto-merge or merge the PR.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: -.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/ansible/roles/test/files/ptftests/</code> | 2 | <code>/ansible/roles/test/files/ptftests/</code> | Awaiting qualified approval | - | 0 | - |\n| <code>/ansible/roles/test/files/ptftests/py3/</code> | 1 | <code>/ansible/roles/test/files/ptftests/py3/</code> | Awaiting qualified approval | - | 0 | - |\n| <code>/tests/common/fixtures/</code> | 1 | <code>/tests/common/fixtures/</code> | Awaiting qualified approval | @Ryangwaite | 0.1765 | - |\n| <code>/tests/common/platform/</code> | 1 | <code>/tests/common/platform/</code> | Awaiting qualified approval | - | 0 | - |\n| <code>/tests/platform_tests/</code> | 1 | <code>/tests/platform_tests/</code> | Approved | - | 0 | @Ryangwaite |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-mgmt/pr_reviewer-by-files.yml)\n[CODEOWNERS](https://github.com/sonic-net/sonic-mgmt/blob/1177ba81855db8f7669bf3c0344263f6fc623d29/.github/CODEOWNERS)\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-07-04T02:21:35Z",
+        "review_author": "nhe-NV"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-07-17T08:46:35Z",
+        "review_author": "nhe-NV"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-11T02:17:14Z",
+        "review_author": "nhe-NV"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-11-13T04:59:10Z",
+        "review_author": "Ryangwaite"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-11-13T04:59:10Z",
+        "latestReview_author": "Ryangwaite",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 25779,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-11-11T02:17:14Z",
+        "latestReview_author": "nhe-NV",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 25123,
         "repo": "sonic-mgmt",
         "comment_at": "2026-06-04T17:17:38Z",
@@ -30148,6 +31877,94 @@
         "latestReview_at": "2026-11-06T00:52:36Z",
         "latestReview_author": "bingwang-ms",
         "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 24830,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-05-24T12:34:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 24830,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-05-24T12:35:00Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines successfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 24830,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-05T23:55:42Z",
+        "comment_author": "dprital",
+        "comment_body": "@liat-grozovik , Can you please review ?"
+    },
+    {
+        "number": 24830,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-26T06:11:02Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 24830,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-26T06:11:20Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 24830,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-08-26T06:12:13Z",
+        "comment_author": "AntonHryshchuk",
+        "comment_body": "> couple of Non-Blocking issues, otherwise LGTM\r\n> \r\n> (1) [tests/acl/test_acl_outer_vlan.py:147-149] \u2014 Redundant/unreachable guard: pytest_require(len(remaining_ports) >= 2, ...) can never fail given the precondition len(minigraph_vlan['members']) >= 4 (line 133) and lag_pair always consuming exactly 2 members. remaining_ports is therefore always >= 2 by construction. Harmless as defensive code, but it's dead logic that adds a false sense of an additional guarantee \u2014 consider removing it or replacing the comment with a note that it's an invariant check, not a real runtime possibility.\r\n> \r\n> (2) [tests/acl/test_acl_outer_vlan.py:150] \u2014 Unnecessary list() call: lag_pair is already a list (produced by the ports[:2] slice in the generator expression on line 144), so list(lag_pair) is a no-op copy. Minor: ports_for_test = lag_pair + remaining_ports[:2] is equivalent and clearer.\r\n\r\nHi @bpar9 \r\nThe code has been updated according to your comments.\r\nPlease review again. Thanks"
+    },
+    {
+        "number": 24830,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-09-04T05:02:35Z",
+        "comment_author": "Sourabh-Kumar7",
+        "comment_body": "for viz"
+    },
+    {
+        "number": 24830,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-04T13:56:41Z",
+        "comment_author": "AntonHryshchuk",
+        "comment_body": "@bpar9 can you please review?"
+    },
+    {
+        "number": 24830,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-06-28T10:22:07Z",
+        "review_author": "AharonMalkin"
+    },
+    {
+        "number": 24830,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-08-06T05:25:17Z",
+        "review_author": "bpar9"
+    },
+    {
+        "number": 24830,
+        "repo": "sonic-mgmt",
+        "review_at": "2026-10-19T10:26:47Z",
+        "review_author": "AharonMalkin"
+    },
+    {
+        "number": 24830,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-10-19T10:26:47Z",
+        "latestReview_author": "AharonMalkin",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 24830,
+        "repo": "sonic-mgmt",
+        "latestReview_at": "2026-08-06T05:25:17Z",
+        "latestReview_author": "bpar9",
+        "latestReview_state": "DISMISSED"
     },
     {
         "number": 24823,
