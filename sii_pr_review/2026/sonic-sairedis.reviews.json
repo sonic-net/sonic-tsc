@@ -55,6 +55,416 @@
         "latestReview_state": "APPROVED"
     },
     {
+        "number": 2217,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-22T11:34:49Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2217,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-22T11:34:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2217,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-22T11:35:09Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2217,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-23T00:22:13Z",
+        "comment_author": "lolyu",
+        "comment_body": "Hi @justin-wong-ce, could you please help review this PR?"
+    },
+    {
+        "number": 2217,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-23T14:40:14Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**1 of 1 changed files have qualified approval** for head commit `1581c02cd10e16c6211704b5d50c76671630cbb8`.\n\n**All changed folders have qualified approval.** The `Qualified-approval` label indicates this PR meets the qualified-approval requirement for auto-merge.\n\nOther merge conditions, including required checks, branch protection, draft state, and mergeability, still apply. The bot does not enable auto-merge or merge the PR.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: @kcudnik.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/syncd/</code> | 1 | <code>/syncd/</code> | Approved | @kcudnik | 0.2331 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-sairedis/pr_reviewer-by-files.yml)\nCODEOWNERS: not available.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2217,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-23T14:40:16Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-merge-risk-assessment:1581c02cd10e16c6211704b5d50c76671630cbb8 -->\nMerge risk assessment requested for head commit `1581c02cd10e16c6211704b5d50c76671630cbb8`. This confirms submission only, not completion or approval to merge."
+    },
+    {
+        "number": 2217,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-23T14:58:24Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- elastictest-merge-risk:6b045050ab1cb479891a9fa7:1581c02cd10e16c6211704b5d50c76671630cbb8 -->\n\n**Low merge risk \u2014 Validate before merge. \ud83d\udfe2 Confidence: High.** Assessed [sonic-sairedis PR #2217](https://github.com/sonic-net/sonic-sairedis/pull/2217) at [head `1581c02cd10e16c6211704b5d50c76671630cbb8`](https://github.com/sonic-net/sonic-sairedis/commit/1581c02cd10e16c6211704b5d50c76671630cbb8) against [base `28dabe5819a579680ddec7ce6e991e83bef84edf`](https://github.com/sonic-net/sonic-sairedis/commit/28dabe5819a579680ddec7ce6e991e83bef84edf), as of 2026-11-23 14:40:28 UTC. The change caches the string returned by the existing `serializeStat` for each stat value and uses it in the per-object, bulk, and DASH-meter `COUNTERS_DB` write loops. It does not change SAI APIs, counter names, or ASIC programming; existing assertions remain intact.\n\n**Evidence:** The exact CI merge [commit `0674603378a43cb670a441403d21d3abb3c345a1`](https://github.com/sonic-net/sonic-sairedis/commit/0674603378a43cb670a441403d21d3abb3c345a1) contains the assessed head and base. The [component CI check](https://github.com/sonic-net/sonic-sairedis/runs/137246430905) passed; the existing `FlexCounter` suite passed 22/22 in each of three unit-test jobs, and both candidate virtual-switch test lanes passed using a newly built image containing the candidate package. The [sonic-buildimage master snapshot](https://github.com/sonic-net/sonic-buildimage/tree/8406df37c3be8e82a1e04e21460db842733f0be2) still pins [an earlier sonic-sairedis commit](https://github.com/sonic-net/sonic-sairedis/commit/9488623cddb23f3fb8e054bc0178f5ebca2fd817); no physical-ASIC validation with this head was present in the reviewed evidence. The PR description's performance results are mock-SAI measurements, not hardware results.\n\n**Recommendation:** Before merge, confirm unchanged counter names/values and measure poll CPU/latency on one representative physical ASIC with its vendor SAI. No actionable code defect was found; the remaining gap is hardware runtime and performance validation.\n\nMERGE_RISK=low"
+    },
+    {
+        "number": 2217,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-11-22T11:36:11Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 2217,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-11-23T14:40:07Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2217,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-11-23T21:44:04Z",
+        "review_author": "justin-wong-ce"
+    },
+    {
+        "number": 2217,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-11-22T11:36:11Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 2217,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-11-23T14:40:07Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2217,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-11-23T21:44:04Z",
+        "latestReview_author": "justin-wong-ce",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2216,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-22T11:34:46Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2216,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-22T11:34:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2216,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-22T11:35:09Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2216,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-23T14:40:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**2 of 2 changed files have qualified approval** for head commit `4b01413854c27de5db61a35a82ae50a2af8708b0`.\n\n**All changed folders have qualified approval.** The `Qualified-approval` label indicates this PR meets the qualified-approval requirement for auto-merge.\n\nOther merge conditions, including required checks, branch protection, draft state, and mergeability, still apply. The bot does not enable auto-merge or merge the PR.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: @kcudnik.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/syncd/</code> | 2 | <code>/syncd/</code> | Approved | @kcudnik | 0.2331 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-sairedis/pr_reviewer-by-files.yml)\nCODEOWNERS: not available.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2216,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-23T14:40:44Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-merge-risk-assessment:4b01413854c27de5db61a35a82ae50a2af8708b0 -->\nMerge risk assessment requested for head commit `4b01413854c27de5db61a35a82ae50a2af8708b0`. This confirms submission only, not completion or approval to merge."
+    },
+    {
+        "number": 2216,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-23T14:47:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- elastictest-merge-risk:6b04506ba664af5da815e273:4b01413854c27de5db61a35a82ae50a2af8708b0 -->\n**Low merge risk \u2014 Validate before merge** for [head `4b014138`](https://github.com/sonic-net/sonic-sairedis/commit/4b01413854c27de5db61a35a82ae50a2af8708b0) against [base `28dabe58`](https://github.com/sonic-net/sonic-sairedis/commit/28dabe5819a579680ddec7ce6e991e83bef84edf). \ud83d\udfe0 **Medium confidence:** the key flow is directly inspectable and the pinned CI ran, but an ASAN retry and missing hardware validation leave an alternative explanation open.\n\n- [Both synchronous ASIC_DB update call sites](https://github.com/sonic-net/sonic-sairedis/blob/4b01413854c27de5db61a35a82ae50a2af8708b0/syncd/Syncd.cpp#L4453-L4610) now pass their already-deserialized meta key; [SAI translation works on a copy](https://github.com/sonic-net/sonic-sairedis/blob/4b01413854c27de5db61a35a82ae50a2af8708b0/syncd/Syncd.cpp#L3317-L3334). No SAI interface, default, log suppression or intended ASIC_DB key change. A mistaken key would affect forwarding, but no such defect is apparent in the changed paths.\n- The [revision-matched CI checks](https://github.com/sonic-net/sonic-sairedis/pull/2216/checks) built the head/base merge and passed component builds, `make check` (including `SyncdBrcmTest.routeBulkCreate` in three build variants), VPP compatibility and regular/ASAN virtual jobs. **Not a clean first-attempt ASAN result:** the virtual route module first reported 9 passes, 5 skips and 4 setup/teardown errors after its VS/Redis container disappeared, then passed on its second run (11 passes, 5 skips). Two exact-base ASAN builds also had Redis-unavailable teardown failures in a different suite; this does not establish the candidate failure's cause.\n- The inspected [buildimage `master` pin](https://github.com/sonic-net/sonic-buildimage/tree/8406df37c3be8e82a1e04e21460db842733f0be2/src/sonic-sairedis) is older than this PR; virtual CI is not a verified production-image or physical-ASIC run. **Before merge:** explain or reproduce the first-run container loss without relying on retry, and validate exact-revision synchronous route create/set/remove (including init/apply view, IPv4/IPv6 ASIC_DB keys and traffic) on affected hardware. This is a validation request, not a claim that the code is defective.\n\nMERGE_RISK=low"
+    },
+    {
+        "number": 2216,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-11-22T11:36:07Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 2216,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-11-23T14:40:35Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2216,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-11-22T11:36:07Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 2216,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-11-23T14:40:35Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2215,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-22T11:34:45Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2215,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-22T11:34:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2215,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-22T11:35:07Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2215,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-23T14:41:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**2 of 2 changed files have qualified approval** for head commit `b689509870137d49a0ff98cf9e2467d1639a82e1`.\n\n**All changed folders have qualified approval.** The `Qualified-approval` label indicates this PR meets the qualified-approval requirement for auto-merge.\n\nOther merge conditions, including required checks, branch protection, draft state, and mergeability, still apply. The bot does not enable auto-merge or merge the PR.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: @kcudnik.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/syncd/</code> | 1 | <code>/syncd/</code> | Approved | @kcudnik | 0.2331 | - |\n| <code>/unittest/syncd/</code> | 1 | <code>/unittest/syncd/</code> | Approved | @kcudnik | 0.2122 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-sairedis/pr_reviewer-by-files.yml)\nCODEOWNERS: not available.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2215,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-23T14:41:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-merge-risk-assessment:b689509870137d49a0ff98cf9e2467d1639a82e1 -->\nMerge risk assessment requested for head commit `b689509870137d49a0ff98cf9e2467d1639a82e1`. This confirms submission only, not completion or approval to merge."
+    },
+    {
+        "number": 2215,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-23T15:06:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- elastictest-merge-risk:6b04508f023080bc2a397eae:b689509870137d49a0ff98cf9e2467d1639a82e1 -->\n**Low merge risk - Validate before merge. \ud83d\udfe0 Confidence: Medium.** The inspected parser is behavior-preserving and revision-matched unit tests pass, but retry-dependent integration results and unexplained ASAN startup failures limit runtime confidence.\n\nAssessed [head `b689509870137d49a0ff98cf9e2467d1639a82e1`](https://github.com/sonic-net/sonic-sairedis/commit/b689509870137d49a0ff98cf9e2467d1639a82e1) against [base `28dabe5819a579680ddec7ce6e991e83bef84edf`](https://github.com/sonic-net/sonic-sairedis/commit/28dabe5819a579680ddec7ce6e991e83bef84edf) on [`master`](https://github.com/sonic-net/sonic-sairedis/tree/master), as of `2026-11-23T14:41:29.491Z`.\n\n### Changed behavior and risk\n\n- [`processBulkQuadEvent`](https://github.com/sonic-net/sonic-sairedis/blob/b689509870137d49a0ff98cf9e2467d1639a82e1/syncd/Syncd.cpp#L2038-L2085) replaces stream tokenization with direct scanning, reserves vectors and moves decoded attributes. Inspection supports equivalent empty/trailing-delimiter, first-equals and missing-equals behavior; `SaiAttributeList` owns deserialized storage before the tuple vector is moved.\n- This helper feeds bulk create/set/remove/get, entry and object-ID operations, INIT_VIEW, and ASIC_DB updates. Those consumers make a discrepancy consequential, but no actionable introduced source defect, API/schema change, weakened assertion, or added log-analyzer suppression was found. The low category reflects equivalence, not merely diff size.\n\n### Independently inspected validation\n\n[Build 1284030](https://github.com/sonic-net/sonic-sairedis/runs/137245868279) tested [CI merge `83f07c565d0ed5f8a20041d856cf6d891b0bf5a2`](https://github.com/sonic-net/sonic-sairedis/commit/83f07c565d0ed5f8a20041d856cf6d891b0bf5a2), whose full parents exactly match the assessed base/head. Seven component compile configurations passed. The [new per-object attribute test](https://github.com/sonic-net/sonic-sairedis/blob/b689509870137d49a0ff98cf9e2467d1639a82e1/unittest/syncd/TestSyncd.cpp#L1384-L1447) ran once and passed once in each of three unit configurations; each syncd suite passed 239/239 cases. The locally reported metadata-version failure also passed in CI.\n\nCurrent-build component packages, including `syncd-vs`, were installed into rebuilt VS images and those same-build images were used for integration; these are not passes borrowed from an older buildimage component pin.\n\n| Candidate VS lane | First outer module run clean | Final clean modules | Extra outer attempts | Final testcase results |\n| --- | --- | --- | --- | --- |\n| Normal | 105/108 | 108/108 | 4 | 1,027 passed, 99 skipped, 2 xfailed |\n| ASAN | 95/108 | 108/108 | 14 | 1,027 passed, 99 skipped, 2 xfailed |\n\nThe same-harness exact-base controls had 106/108 and 105/108 clean first normal runs, and 101/108 and 103/108 first ASAN runs. `--force-flaky` retries inside pytest mean these are **not true first testcase-attempt pass rates**. One candidate build and two controls do not establish a flake rate; separately widening the 14-day history to 30 days added no exact-revision exposure. Initial ASAN setup timeouts included abnormal syncd startup states; some exited-state signatures also occur on the base, but the candidate's increased failures and fatal-startup episodes are not causally explained.\n\nThe VPP compatibility check is a stable-baseline gate: 38/38 required selectors passed, with five additional passes and 42 non-passes among 85 selectors, matching both base controls. Its green check is not an all-tests-pass result or direct proof of exercising this syncd parser.\n\n### Before merge\n\nInspect the retained per-container logs and compare base/head startup with identical dependencies to explain the ASAN episodes, preserving first attempts and teardown/recovery evidence. Retain focused delimiter-edge and list/object-ID/entry-type bulk coverage, including INIT_VIEW and vendor fallback. Physical ASIC, multi-ASIC/NPU/DPU, boot/recovery and hardware performance were not independently verified; the PR's benchmark remains author-reported.\n\nThis assessment does not approve a merge or bypass required checks. No tests were run or source changed by this worker.\n\nMERGE_RISK=low"
+    },
+    {
+        "number": 2215,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-11-22T11:36:30Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 2215,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-11-23T14:41:11Z",
+        "review_author": "kcudnik"
+    },
+    {
+        "number": 2215,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-11-22T11:36:30Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 2215,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-11-23T14:41:11Z",
+        "latestReview_author": "kcudnik",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2202,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-17T21:57:37Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2202,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-17T21:57:45Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2202,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-17T21:58:00Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2202,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-18T14:40:44Z",
+        "comment_author": "dypet",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 2202,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-18T14:40:48Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 2202,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-18T14:40:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1279621:\n\n\n\u2705Stage **Test**:\n- Job vstest: retried.\n\n\n\u2705Stage **BuildAsan**:\n- Job amd64: retried."
+    },
+    {
+        "number": 2202,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-18T16:00:09Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2202,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-18T16:00:40Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2202,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-19T18:59:49Z",
+        "comment_author": "dypet",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 2202,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-19T18:59:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 2202,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-19T18:59:56Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1280411:\n\n\n\u2705Stage **Test**:\n- Job vstest: retried."
+    },
+    {
+        "number": 2202,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-20T18:04:12Z",
+        "comment_author": "dypet",
+        "comment_body": "/azpw run"
+    },
+    {
+        "number": 2202,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-20T18:04:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "\u26a0\ufe0f **Notice**: `/azpw run` only runs failed jobs now. If you want to trigger a whole pipline run, please rebase your branch or close and reopen the PR.\n\ud83d\udca1 **Tip**: You can also use `/azpw retry` to retry failed jobs directly.\n\nRetrying failed(or canceled) jobs..."
+    },
+    {
+        "number": 2202,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-20T18:04:18Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "Retrying failed(or canceled) stages in build 1280411:\n\n\n\u2705Stage **Test**:\n- Job vstest: retried."
+    },
+    {
+        "number": 2202,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-20T19:10:55Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 2202,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-20T19:11:10Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 2202,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-23T16:06:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**0 of 2 changed files have qualified approval** for head commit `b688ccbe0a006b2ce9ed8786fafa4c50e95a166e`.\n\nThis PR does not yet meet the qualified-approval requirement for auto-merge. The `Qualified-approval` label is applied only when all changed folders have qualified approval.\n\nOther merge conditions, including required checks, branch protection, draft state, and mergeability, still apply. The bot does not enable auto-merge or merge the PR.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: -.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/unittest/vslib/</code> | 1 | <code>/unittest/vslib/</code> | Awaiting qualified approval | - | 0 | - |\n| <code>/vslib/vpp/</code> | 1 | <code>/vslib/vpp/</code> | Awaiting qualified approval | - | 0 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-sairedis/pr_reviewer-by-files.yml)\nCODEOWNERS: not available.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2202,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-23T19:19:18Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**2 of 2 changed files have qualified approval** for head commit `b688ccbe0a006b2ce9ed8786fafa4c50e95a166e`.\n\n**All changed folders have qualified approval.** The `Qualified-approval` label indicates this PR meets the qualified-approval requirement for auto-merge.\n\nOther merge conditions, including required checks, branch protection, draft state, and mergeability, still apply. The bot does not enable auto-merge or merge the PR.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: -.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/unittest/vslib/</code> | 1 | <code>/unittest/vslib/</code> | Approved | @yue-fred-gao | 0.5835 | - |\n| <code>/vslib/vpp/</code> | 1 | <code>/vslib/vpp/</code> | Approved | @yue-fred-gao | 1 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-sairedis/pr_reviewer-by-files.yml)\nCODEOWNERS: not available.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2202,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-23T19:19:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-merge-risk-assessment:b688ccbe0a006b2ce9ed8786fafa4c50e95a166e -->\nMerge risk assessment requested for head commit `b688ccbe0a006b2ce9ed8786fafa4c50e95a166e`. This confirms submission only, not completion or approval to merge."
+    },
+    {
+        "number": 2202,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-23T19:21:28Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**2 of 2 changed files have qualified approval** for head commit `b688ccbe0a006b2ce9ed8786fafa4c50e95a166e`.\n\n**All changed folders have qualified approval.** The `Qualified-approval` label indicates this PR meets the qualified-approval requirement for auto-merge.\n\nOther merge conditions, including required checks, branch protection, draft state, and mergeability, still apply. The bot does not enable auto-merge or merge the PR.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: -.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/unittest/vslib/</code> | 1 | <code>/unittest/vslib/</code> | Approved | @yue-fred-gao | 0.5835 | - |\n| <code>/vslib/vpp/</code> | 1 | <code>/vslib/vpp/</code> | Approved | @taran9999, @yue-fred-gao | 1.1247 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-sairedis/pr_reviewer-by-files.yml)\nCODEOWNERS: not available.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 2202,
+        "repo": "sonic-sairedis",
+        "comment_at": "2026-11-23T19:40:26Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- elastictest-merge-risk:6b0491b71c0f51380a2e9e2c:b688ccbe0a006b2ce9ed8786fafa4c50e95a166e -->\n## Merge risk assessment: medium\n\n**Assessed revision:** [`b688ccbe0a006b2ce9ed8786fafa4c50e95a166e`](https://github.com/sonic-net/sonic-sairedis/commit/b688ccbe0a006b2ce9ed8786fafa4c50e95a166e)  \n**Recommendation:** **Validate before merge**  \n**Confidence:** \ud83d\udfe2 High \u2014 the code path, rollback, revision-matched CI, package/image provenance, and an exact-base control were inspected; latest-base and direct LCP-tap MTU validation remain missing.\n\n### Why this is medium risk\n\n- The runtime change [sets the SAI MTU on a newly created VPP BVI before the LCP pair is created](https://github.com/sonic-net/sonic-sairedis/blob/b688ccbe0a006b2ce9ed8786fafa4c50e95a166e/vslib/vpp/SwitchVppFdb.cpp#L1902-L1915). Scope is bounded to SONiC-VPP VLAN router interfaces, but incorrect MTU/order can affect jumbo forwarding. MTU-programming failure returns an error and the existing RIF-create rollback deletes the owned BVI.\n- All 20 current checks passed on [pipeline build 1282538](https://github.com/sonic-net/sonic-sairedis/runs/136667103629), whose tested merge commit [`b4f07666`](https://github.com/sonic-net/sonic-sairedis/commit/b4f07666bef9cd761d18a0f623b6f14f01edb8dc) incorporates this head into `3e6c8a16`. The three added tests passed in normal, ASAN, and Trixie unit jobs: 9/9 test invocations.\n- The current-run `libsairedis`/`libsaivs` packages were built into the tested VPP SAI image. Its stable gate passed 38/38 selectors with zero regressions. The exact-base control build had the same 85-selector status set; the existing `IngressMtuTestV4/V6` errors occurred in both candidate and control, so they are not new regressions.\n\n### Validation gaps\n\n- The unit mocks check the final MTU but do not assert that MTU programming precedes LCP creation, as [review feedback](https://github.com/sonic-net/sonic-sairedis/pull/2202#pullrequestreview-6024968446) noted.\n- The directly relevant VPP SAI ingress-MTU cases still do not pass, so BVI-to-tap MTU inheritance and jumbo forwarding are not independently demonstrated by the current pipeline. The PR's reported 63/63 SONiC-VPP T0 result has no immutable run/provenance link.\n- Current CI merged against `3e6c8a16`; `master` advanced to [`bb1141cd`](https://github.com/sonic-net/sonic-sairedis/commit/bb1141cdeb8faad128f4118746ad7f3b3be49593). Those seven intervening commits do not overlap the changed VPP files, but no latest-base build was found.\n\nBefore merge, rebase/re-run against current `master` and validate a pinned-head SONiC-VPP T0 jumbo path (or add a call-order assertion and verify both BVI and LCP tap MTUs).\n\nMERGE_RISK=medium"
+    },
+    {
+        "number": 2202,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-11-23T16:06:16Z",
+        "review_author": "AkeelAli"
+    },
+    {
+        "number": 2202,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-11-23T19:19:12Z",
+        "review_author": "yue-fred-gao"
+    },
+    {
+        "number": 2202,
+        "repo": "sonic-sairedis",
+        "review_at": "2026-11-23T19:21:23Z",
+        "review_author": "taran9999"
+    },
+    {
+        "number": 2202,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-11-23T16:06:16Z",
+        "latestReview_author": "AkeelAli",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2202,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-11-23T19:21:23Z",
+        "latestReview_author": "taran9999",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 2202,
+        "repo": "sonic-sairedis",
+        "latestReview_at": "2026-11-23T19:19:12Z",
+        "latestReview_author": "yue-fred-gao",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 2196,
         "repo": "sonic-sairedis",
         "comment_at": "2026-11-16T06:17:02Z",
