@@ -3064,7 +3064,7 @@
         "number": 25578,
         "repo": "sonic-mgmt",
         "comment_at": "2026-06-27T02:12:55Z",
-        "comment_author": "eddieruan-alibaba",
+        "comment_author": "eddieruan-sonic",
         "comment_body": "Thanks @yxieca for reviewing it. We run this test case via\r\n\r\ncd /data/sonic-mgmt/tests; ./run_tests.sh -n vms-kvm-force10-7nodes -d vlab-c-02  -c \"srv6/test_srv6_basic_sanity.py\"  -f vtestbed.yaml -i ../ansible/veos_vtb  -u  -e --skip_sanity -e --skip_yang  -e --disable_loganalyzer -e --neighbor_type=sonic \r\n\r\nSo test_traffic_check_normal would be skipped. \r\n\r\nSKIPPED [1] srv6/test_srv6_basic_sanity.py:217: SRv6 data plane only available on ciscovs topologies\r\n\r\nI have aded your suggested changes via https://github.com/sonic-net/sonic-mgmt/pull/25578/changes/09efb94682a8e142ef422a9c1292084f1748590c\r\n\r\nYour suggestion actually brings in my next question. \r\n\r\nOnce this one is added, does it mean \"force10-7nodes\" topology test would be included in PR test ? \r\n"
     },
     {
@@ -3085,7 +3085,7 @@
         "number": 25578,
         "repo": "sonic-mgmt",
         "comment_at": "2026-06-29T04:59:20Z",
-        "comment_author": "eddieruan-alibaba",
+        "comment_author": "eddieruan-sonic",
         "comment_body": "Thanks @sakshamkhurana21  @yejianquan \r\n\r\ni saw \r\n\r\nPR_TOPOLOGY_TYPE = [\"t0_checker\", \"t0-2vlans_checker\", \"t0-sonic_checker\", \"t1_checker\",\r\n                    \"t1-multi-asic_checker\", \"t1-lag-vpp_checker\", \"dpu_checker\",\r\n                    \"dualtor_checker\", \"t2_checker\"]\r\n                    \r\n                  Does that mean I would need to add \"force10-7nodes\" to this list if I want to include this test topology in PR test ? I assume normal force10 vsonic image would be built. \r\n"
     },
     {
@@ -5813,7 +5813,7 @@
         "number": 25449,
         "repo": "sonic-mgmt",
         "comment_at": "2026-06-23T05:35:23Z",
-        "comment_author": "eddieruan-alibaba",
+        "comment_author": "eddieruan-sonic",
         "comment_body": "@ccroy-arista can you help to review it? This change follows your https://github.com/sonic-net/sonic-mgmt/commit/70b20715cc74513a1b168cadd2f332713ed613fb#diff-8c88431536769e12e12bb04cda929e3a58cd66cd1efb79d97871d35e5856b849 "
     },
     {
@@ -5827,7 +5827,7 @@
         "number": 25449,
         "repo": "sonic-mgmt",
         "comment_at": "2026-06-23T23:55:18Z",
-        "comment_author": "eddieruan-alibaba",
+        "comment_author": "eddieruan-sonic",
         "comment_body": "> @eddieruan-alibaba the PR title has a typo, could use some cleanup. Code changes look safe.\r\n\r\nUpdated.  Can you approve it if you are ok with the changes?"
     },
     {

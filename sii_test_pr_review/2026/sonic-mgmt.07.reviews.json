@@ -33765,7 +33765,7 @@
         "number": 25447,
         "repo": "sonic-mgmt",
         "comment_at": "2026-06-23T05:37:40Z",
-        "comment_author": "eddieruan-alibaba",
+        "comment_author": "eddieruan-sonic",
         "comment_body": "@bingwang-ms  can you help to review it? \r\n\r\nI would like skip those two block when init_cfg_profile  is defined, a.k.a the configdb json would be provided instead of via minigraph. \r\n"
     },
     {
@@ -33779,7 +33779,7 @@
         "number": 25447,
         "repo": "sonic-mgmt",
         "comment_at": "2026-07-03T00:30:29Z",
-        "comment_author": "eddieruan-alibaba",
+        "comment_author": "eddieruan-sonic",
         "comment_body": "> @eddieruan-alibaba did you test this change on a regular sonic DUT?\r\n\r\nCurrent PR test would run regular SONiC DUT, right? \r\n\r\nThis check has already been added in this file for skipping mininet configuration when init_cfg_profile is used. \r\n\r\nhttps://github.com/sonic-net/sonic-mgmt/blob/master/ansible/config_sonic_basedon_testbed.yml#L635\r\n\r\nhttps://github.com/sonic-net/sonic-mgmt/blob/master/ansible/config_sonic_basedon_testbed.yml#L767"
     },
     {
@@ -33793,7 +33793,7 @@
         "number": 25447,
         "repo": "sonic-mgmt",
         "comment_at": "2026-07-08T22:52:01Z",
-        "comment_author": "eddieruan-alibaba",
+        "comment_author": "eddieruan-sonic",
         "comment_body": "> **AI review \u2014 Changes requested**\r\n> \r\n> ### Blocking\r\n> 1. ansible/config_sonic_basedon_testbed.yml, chrony sync block guard (diff hunk at line 1181; block spans ~lines 1158-1181 in the full source). The `when:` is changed to `chrony_service.status.LoadState != \"not-found\" and init_cfg_profile is not defined`. This block contains operational time-sync steps: `service: name=chrony state=started` (with retry/until), `chronyc burst 4/4`, `chronyc waitsync`, and `chronyc makestep`. None of these mutate `config_db.json`. Skipping them for init_cfg_profile topologies leaves the DUT clock unsynchronized on exactly the topologies the PR targets (vms-kvm-force10-7nodes, vms-kvm-ciscovs-7nodes, vms-kvm-ciscovs-5nodes), which can silently break TLS/cert validation, log correlation, TACACS timing, and any test relying on wall-clock ordering. Recommended fix: split the block so only config-DB mutation is gated on `init_cfg_profile is not defined`, and let chrony start + `chronyc burst`/`waitsync`/`makestep` still run whenever chrony is present. At minimum, please state in the PR description why these three topologies do not need chrony time-step, and prefer scoping the guard to a narrower symptom rather than the whole block.\r\n> \r\n> ### Grounded nits\r\n> * ansible/config_sonic_basedon_testbed.yml line 933: combined condition is now `enable_macsec is not defined and init_cfg_profile is not defined`. If a future topology combines macsec with init_cfg_profile, this task is permanently skipped for that combination. Not a blocker for the three targeted topologies, but worth a short inline comment documenting intent so a future reader doesn't have to reconstruct it.\r\n> * ansible/config_sonic_basedon_testbed.yml lines 933 and 1181: both use bare `is not defined`. If `init_cfg_profile` is ever defined but empty/null (e.g. `-e init_cfg_profile=`), the skip still fires. If \"profile explicitly set to empty\" should mean \"not in init_cfg_profile mode\", use `init_cfg_profile | default('') | length > 0` (or a derived boolean, see below) to make skip semantics explicit.\r\n> * ansible/config_sonic_basedon_testbed.yml line 1181: the `when:` is now a fairly long inline expression. YAML list-form `when:` (one condition per line) would read better; purely stylistic.\r\n> \r\n> Reviewed by AI agent on behalf of Ying.\r\n\r\n@yxieca  For  chrony_service.status.LoadState != \"not-found\", it is implicitly assuming it is via minigraph, which is conflicting with the topology files using init_cfg_profile as configuration. \r\n\r\n\"name: Wait for chrony.service restart after reload minigraph\"\r\n\r\nTherefore I would like to skip it when init_cfg_profile is not used. "
     },
     {
