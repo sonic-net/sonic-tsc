@@ -23281,6 +23281,20 @@
     {
         "number": 28063,
         "repo": "sonic-mgmt",
+        "comment_at": "2026-11-24T13:04:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "This PR requests backports for branch(es): 202608, but is missing required test information.\n\n**Update the PR description, not a PR comment:**\n1. List each requested branch under **Backport**.\n2. After testing on each branch, tick its checkbox (`- [x]`) under **Tested branch**. An unchecked box (`- [ ]`) does not count.\n3. Under **Test result**, start a separate entry with each branch number, followed by its test evidence on the same line or the following lines, such as a test-run link or a summary with logs. A branch number alone, placeholders, and results for another branch do not count.\n\nPlease make sure you have done all three steps above.\nExample format for the branches above (replace every placeholder with your actual test evidence; only check branches you have tested):\n```markdown\n### Backport\n202608\n\n### Tested branch\n- [x] 202608\n\n### Test result\n202608: <link to test results or summary with logs>\n```\n\nKeep this information outside HTML comments (`<!-- ... -->`) so it can be read.\nAfter you save the PR description, I will check it again and add the matching `Tested for <branch> Branch` labels first, then the `Request for <branch> Branch` labels. Request labels remain blocked until their matching tested labels are present.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 28063,
+        "repo": "sonic-mgmt",
+        "comment_at": "2026-11-24T13:04:59Z",
+        "comment_author": "aaronber0614",
+        "comment_body": "@weiguo-nvidia The 202608 backport is open at https://github.com/Azure/sonic-mgmt.msft/pull/1551.\n\nIt now includes only the topology-independent clock compatibility and recovery fixes. The upstream `t1-lag-vpp` allowlist addition is intentionally excluded; there are no CI configuration changes. The clock implementation and focused tests remain unchanged from this merged PR.\n\nLocal validation: 111 focused clock tests passed on the initial backport, and all 50 release impacted-area tests passed again after removing the allowlist entry. DUT/PTF validation on 202608 is still pending. The configured Azure PR pipeline skips 202608, so its skipped check does not validate the backport; the Tested branch checkbox remains unchecked.\n\nThe backport request is updated, and @yxieca has been requested for release review."
+    },
+    {
+        "number": 28063,
+        "repo": "sonic-mgmt",
         "review_at": "2026-09-21T20:11:13Z",
         "review_author": "github-advanced-security"
     },
