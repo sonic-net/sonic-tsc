@@ -1,5 +1,150 @@
 [
     {
+        "number": 294,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2026-11-24T03:02:18Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 294,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2026-11-24T03:02:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 294,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2026-11-24T03:02:36Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 292,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2026-11-21T23:53:21Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 292,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2026-11-21T23:53:31Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 292,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2026-11-21T23:53:40Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 292,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2026-11-23T21:33:46Z",
+        "comment_author": "bhouse-nexthop",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 292,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2026-11-23T21:33:58Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 292,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2026-11-24T02:05:07Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**4 of 4 changed files have qualified approval** for head commit `38838d03db51534d9407e729601a88d604f1be2a`.\n\n**All changed folders have qualified approval.** The `Qualified-approval` label indicates this PR meets the qualified-approval requirement for auto-merge.\n\nOther merge conditions, including required checks, branch protection, draft state, and mergeability, still apply. The bot does not enable auto-merge or merge the PR.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: @qiluo-msft.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/</code> | 2 | <code>/</code> | Approved | - | 0 | - |\n| <code>/patches/</code> | 2 | <code>/patches/</code> | Approved | - | 0 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-mgmt-common/pr_reviewer-by-files.yml)\nCODEOWNERS: not available.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 292,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2026-11-24T02:05:09Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-merge-risk-assessment:38838d03db51534d9407e729601a88d604f1be2a -->\nMerge risk assessment requested for head commit `38838d03db51534d9407e729601a88d604f1be2a`. This confirms submission only, not completion or approval to merge."
+    },
+    {
+        "number": 292,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2026-11-24T02:13:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- elastictest-merge-risk:6b04f0d4023080bc2a398072:38838d03db51534d9407e729601a88d604f1be2a -->\n\n## Merge-risk assessment\n\n**Medium merge risk; Validate before merge** for [PR #292](https://github.com/sonic-net/sonic-mgmt-common/pull/292) at [head `38838d03db51534d9407e729601a88d604f1be2a`](https://github.com/sonic-net/sonic-mgmt-common/commit/38838d03db51534d9407e729601a88d604f1be2a), against [base `151344241c5445306baf60ea5f60ac6f1c7fb176`](https://github.com/sonic-net/sonic-mgmt-common/commit/151344241c5445306baf60ea5f60ac6f1c7fb176).\n\n- The four-file diff switches the shared `sonic-mgmt-common` Go build from the 2016 glog replacement to v1.2.5, removes the obsolete vendor patch, and updates checksums. It is a bounded production dependency/package change used by CVL and translib; no forwarding, configuration, boot, hardware-protection, or log-analyzer suppression code changes were found.\n- The API surface used by this repository remains compatible, and upstream v1.2.5 creates log files with `O_EXCL` ([upstream source](https://github.com/golang/glog/blob/v1.2.5/glog_file.go)). The remaining intentional behavior change is pre-`flag.Parse` logging: early records can also reach the log file, while errors still reach stderr.\n- The prior candidate pipeline [build 1283523](https://dev.azure.com/mssonic/be1b070f-be15-4154-aade-b1d3bfb17054/_build/results?buildId=1283523) built merge commit [`93588a39db82bcc02b0d78c338096a79bafbcf17`](https://github.com/sonic-net/sonic-mgmt-common/commit/93588a39db82bcc02b0d78c338096a79bafbcf17), which explicitly merges this head into the base; the build task passed, but its sanity task had one Redis pool-stat failure. The current [Azure check](https://dev.azure.com/mssonic/be1b070f-be15-4154-aade-b1d3bfb17054/_build/results?buildId=1285443) is green, but pipeline metadata/log access did not provide an independently inspectable source/artifact chain for that rerun.\n- Downstream integration is not yet complete: [sonic-mgmt-framework PR #197](https://github.com/sonic-net/sonic-mgmt-framework/pull/197) still carries the old glog pin, and [build 1283524](https://dev.azure.com/mssonic/be1b070f-be15-4154-aade-b1d3bfb17054/_build/results?buildId=1283524) failed when `patches/apply.sh` tried to apply `glog.patch` to glog v1.2.5. Current [sonic-buildimage master](https://github.com/sonic-net/sonic-buildimage/commit/8be89ca3bb5b62b1da51157449f2732b6626aa9e) still pins `src/sonic-mgmt-common` to the base revision, so no candidate image-level validation was established.\n\n**Before merge:** merge this dependency fix first, rerun the dependent framework build, then validate an installed buildimage containing the candidate component with the CVL/translib build and runtime/sanity checks plus the stated OSV vulnerability check. The risk category is medium because the shared production dependency and downstream build ordering have bounded but non-isolated blast radius; no high-risk operational path was identified.\n\nMERGE_RISK=medium"
+    },
+    {
+        "number": 292,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2026-11-24T02:04:46Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 292,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2026-11-24T02:04:46Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 291,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2026-11-21T16:22:37Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 291,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2026-11-21T16:22:46Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 291,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2026-11-21T16:22:55Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 291,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2026-11-24T02:05:13Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**12 of 12 changed files have qualified approval** for head commit `53bb2f2f8ac55692381d738ad992865ca4573c29`.\n\n**All changed folders have qualified approval.** The `Qualified-approval` label indicates this PR meets the qualified-approval requirement for auto-merge.\n\nOther merge conditions, including required checks, branch protection, draft state, and mergeability, still apply. The bot does not enable auto-merge or merge the PR.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: @qiluo-msft.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/</code> | 2 | <code>/</code> | Approved | - | 0 | - |\n| <code>/cvl/</code> | 5 | <code>/cvl/</code> | Approved | - | 0 | - |\n| <code>/cvl/custom_validation/</code> | 1 | <code>/cvl/</code> | Approved | - | 0 | - |\n| <code>/cvl/internal/util/</code> | 2 | <code>/cvl/internal/</code> | Approved | - | 0 | - |\n| <code>/cvl/tests/</code> | 2 | <code>/cvl/</code> | Approved | - | 0 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-mgmt-common/pr_reviewer-by-files.yml)\nCODEOWNERS: not available.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 291,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2026-11-24T02:05:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-merge-risk-assessment:53bb2f2f8ac55692381d738ad992865ca4573c29 -->\nMerge risk assessment requested for head commit `53bb2f2f8ac55692381d738ad992865ca4573c29`. This confirms submission only, not completion or approval to merge."
+    },
+    {
+        "number": 291,
+        "repo": "sonic-mgmt-common",
+        "comment_at": "2026-11-24T02:13:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- elastictest-merge-risk:6b04f0db6708a5add452f44c:53bb2f2f8ac55692381d738ad992865ca4573c29 -->\n## Merge-risk assessment\n\n**Medium merge risk \u2014 Validate before merge** for [head `53bb2f2`](https://github.com/sonic-net/sonic-mgmt-common/commit/53bb2f2f8ac55692381d738ad992865ca4573c29) against [base `1513442`](https://github.com/sonic-net/sonic-mgmt-common/commit/151344241c5445306baf60ea5f60ac6f1c7fb176).\n\n- The change migrates CVL's production Redis client from go-redis v7 to v9, including schema loading, custom validation, and Lua execution. Because CVL constructs a zero-valued `redis.Options` without overriding `MaxRetries`, the migration changes the default failed-command behavior from no retries in v7 to three retries in v9. This is bounded to management/config validation, but can change Redis-error latency and handling.\n- Revision-matched [Azure CI](https://github.com/sonic-net/sonic-mgmt-common/runs/136911721869) succeeded on the generated merge commit. It compiled and ran CVL, db, translib, transformer, and testapp suites; logs contain 1,932 PASS markers (including subtests), five final suite PASS markers, and no FAIL markers. The immediately preceding exact-base control had the same counts.\n- [sonic-buildimage master](https://github.com/sonic-net/sonic-buildimage/commit/8be89ca3bb5b62b1da51157449f2732b6626aa9e) still pins the base mgmt-common revision, so no provenance-linked candidate package/image or management-framework/gNMI runtime test establishes installed-image behavior.\n\nValidate Redis disconnect/reconnect and timeout behavior through the CVL consumer path, decide whether the new retry default is intended (or explicitly preserve the prior policy), and validate a candidate buildimage package/image before merging.\n\n\ud83d\udfe2 **High confidence:** pinned source and exact-merge CI establish the bounded change and its direct default-policy difference; candidate-image integration remains unverified.\n\nMERGE_RISK=medium"
+    },
+    {
+        "number": 291,
+        "repo": "sonic-mgmt-common",
+        "review_at": "2026-11-24T02:04:47Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 291,
+        "repo": "sonic-mgmt-common",
+        "latestReview_at": "2026-11-24T02:04:47Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 282,
         "repo": "sonic-mgmt-common",
         "comment_at": "2026-11-17T03:27:28Z",
