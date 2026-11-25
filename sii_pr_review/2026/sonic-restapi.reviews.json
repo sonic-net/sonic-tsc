@@ -1,5 +1,81 @@
 [
     {
+        "number": 207,
+        "repo": "sonic-restapi",
+        "comment_at": "2026-11-24T03:02:58Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 207,
+        "repo": "sonic-restapi",
+        "comment_at": "2026-11-24T03:03:07Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 207,
+        "repo": "sonic-restapi",
+        "comment_at": "2026-11-24T03:03:16Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 205,
+        "repo": "sonic-restapi",
+        "comment_at": "2026-11-21T16:22:43Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 205,
+        "repo": "sonic-restapi",
+        "comment_at": "2026-11-21T16:22:52Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 205,
+        "repo": "sonic-restapi",
+        "comment_at": "2026-11-21T16:23:02Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 205,
+        "repo": "sonic-restapi",
+        "comment_at": "2026-11-24T02:05:20Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**3 of 3 changed files have qualified approval** for head commit `204a936616de844b39000a0f2b88e3a506100449`.\n\n**All changed folders have qualified approval.** The `Qualified-approval` label indicates this PR meets the qualified-approval requirement for auto-merge.\n\nOther merge conditions, including required checks, branch protection, draft state, and mergeability, still apply. The bot does not enable auto-merge or merge the PR.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: @qiluo-msft.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/go-server-server/</code> | 2 | <code>/</code> | Approved | - | 0 | - |\n| <code>/go-server-server/go/</code> | 1 | <code>/</code> | Approved | - | 0 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-restapi/pr_reviewer-by-files.yml)\nCODEOWNERS: not available.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 205,
+        "repo": "sonic-restapi",
+        "comment_at": "2026-11-24T02:05:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-merge-risk-assessment:204a936616de844b39000a0f2b88e3a506100449 -->\nMerge risk assessment requested for head commit `204a936616de844b39000a0f2b88e3a506100449`. This confirms submission only, not completion or approval to merge."
+    },
+    {
+        "number": 205,
+        "repo": "sonic-restapi",
+        "comment_at": "2026-11-24T02:23:30Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- elastictest-merge-risk:6b04f0e1a664af5da815e443:204a936616de844b39000a0f2b88e3a506100449 -->\n**Merge risk: medium. Recommendation: Validate before merge. \ud83d\udfe2 Confidence: High.** The complete component diff, dependency source, and revision-matched CI establish a bounded REST-service change; production-mode recovery and installed-image validation remain unverified.\n\nAssessed [head `204a9366`](https://github.com/sonic-net/sonic-restapi/commit/204a936616de844b39000a0f2b88e3a506100449) against [base `a5009b06`](https://github.com/sonic-net/sonic-restapi/commit/a5009b06b3c99a45e3e924283d58544b3fdbcd7b) on `master`. Evidence cutoff: **2026-11-24 02:05:32.170 UTC**; history: preceding 14 days.\n\n### Decisive findings\n- This is not only an import/context rewrite. Unset options inherit [v9.23.0 defaults](https://github.com/redis/go-redis/blob/6f2b2639e563b11709e06f42bc0addbfb5a1abb6/options.go#L685-L776): RESP3 negotiation, three retries for eligible failures, and a 5-second read timeout, versus no retries and 3 seconds in [v7.4.1](https://github.com/redis/go-redis/blob/03a86486eabb98988220415834dc9da06abb7d6d/options.go). The existing [global request mutex](https://github.com/sonic-net/sonic-restapi/blob/204a936616de844b39000a0f2b88e3a506100449/go-server-server/go/routers.go#L21-L38) makes Redis-failure latency relevant to other REST requests.\n- The database numbers, keys, explicit `SELECT` transactions, and SWSS mutation interfaces remain unchanged. No actionable regression was found in the inspected diff/results, and no assertions, selection rules, or log-analyzer suppressions change. The behavior/dependency change is broader than a low-risk equivalent refactor, but evidence does not establish a critical forwarding or persistent-state regression.\n\n### Existing validation\n[Build 1283382](https://dev.azure.com/mssonic/be1b070f-be15-4154-aade-b1d3bfb17054/_build/results?buildId=1283382) checked out [CI merge `51cc352f`](https://github.com/sonic-net/sonic-restapi/commit/51cc352fd0bceeca69a8f2e2eefd09cc46610466), which records the exact assessed head and base. It compiled the real native dependencies and amd64 package, installed that package into the test container, and executed the REST API suite.\n\n| Lane | First-attempt / final passes | Independent builds |\n|---|---:|---:|\n| Assessed revision | 109/109 / 109/109 | 1 |\n| Exact base, same builder-image digest | 327/327 / 327/327 | 3 |\n| Additional exact-base runs, different builder-image digests | 327/327 / 327/327 | 3 |\n\nAll seven builds ran the same 109 testcase identities with no testcase retries or skips. They used Redis 8.0.2, the same Debian base digest, and pytest 9.2.0; downloaded native-package provenance is not fully immutable. Candidate diff coverage was **18/18 executable lines**. These are component-container results, not installed SONiC image or hardware results. The [reviewer's Redis 6.0.16 comparison](https://github.com/sonic-net/sonic-restapi/pull/205#pullrequestreview-6032539928) is useful corroboration, but its raw execution evidence was not independently available.\n\n### Remaining validation\nValidate a package/image containing this exact revision in production mode over `/var/run/redis/redis.sock`, using the deployed Redis version: cold start and real process restart with `RESTAPI_DB`/DB 8 reset GUID/time/status preserved, mixed database reads and route CRUD, plus Redis disconnect/timeout/reconnect behavior under the new defaults. The current component fixture uses TCP, flushes DB 7 rather than DB 8, and its `/v1/config/restartdb` helper only rebuilds the VNET map; it does not establish reset-cache persistence across process restart. Confirm acceptable failure latency or explicitly preserve the intended client defaults.\n\nThe inspected [buildimage integration revision](https://github.com/sonic-net/sonic-buildimage/commit/8be89ca3bb5b62b1da51157449f2732b6626aa9e) still pins the pre-change REST component. No revision-linked installed-image run was located; that is a validation gap, not evidence of failure. No tests were run or rerun by this assessment, and this comment is not merge approval.\n\nMERGE_RISK=medium"
+    },
+    {
+        "number": 205,
+        "repo": "sonic-restapi",
+        "review_at": "2026-11-24T02:04:48Z",
+        "review_author": "qiluo-msft"
+    },
+    {
+        "number": 205,
+        "repo": "sonic-restapi",
+        "latestReview_at": "2026-11-24T02:04:48Z",
+        "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 203,
         "repo": "sonic-restapi",
         "comment_at": "2026-11-17T03:49:19Z",
@@ -45,6 +121,89 @@
         "repo": "sonic-restapi",
         "latestReview_at": "2026-11-17T21:06:19Z",
         "latestReview_author": "qiluo-msft",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 199,
+        "repo": "sonic-restapi",
+        "comment_at": "2026-11-15T23:53:34Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 199,
+        "repo": "sonic-restapi",
+        "comment_at": "2026-11-15T23:53:44Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 199,
+        "repo": "sonic-restapi",
+        "comment_at": "2026-11-15T23:53:54Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 199,
+        "repo": "sonic-restapi",
+        "comment_at": "2026-11-23T21:48:59Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**2 of 2 changed files have qualified approval** for head commit `207d1dfea79a7ff4d1c0c59a83d95caa83767c29`.\n\n**All changed folders have qualified approval.** The `Qualified-approval` label indicates this PR meets the qualified-approval requirement for auto-merge.\n\nOther merge conditions, including required checks, branch protection, draft state, and mergeability, still apply. The bot does not enable auto-merge or merge the PR.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: -.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/.github/workflows/</code> | 2 | <code>/</code> | Approved | @bhouse-nexthop | 0.6065 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-restapi/pr_reviewer-by-files.yml)\nCODEOWNERS: not available.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 199,
+        "repo": "sonic-restapi",
+        "comment_at": "2026-11-23T21:49:01Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-merge-risk-assessment:207d1dfea79a7ff4d1c0c59a83d95caa83767c29 -->\nMerge risk assessment requested for head commit `207d1dfea79a7ff4d1c0c59a83d95caa83767c29`. This confirms submission only, not completion or approval to merge."
+    },
+    {
+        "number": 199,
+        "repo": "sonic-restapi",
+        "comment_at": "2026-11-23T21:54:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- elastictest-merge-risk:6b04b4cca664af5da815e3b8:207d1dfea79a7ff4d1c0c59a83d95caa83767c29 -->\n## Elastictest merge-risk assessment\n\n**Low merge risk \u2014 Ready based on available evidence.** \ud83d\udfe2 Confidence: High.\n\nAssessed [head `207d1dfea79a7ff4d1c0c59a83d95caa83767c29`](https://github.com/sonic-net/sonic-restapi/commit/207d1dfea79a7ff4d1c0c59a83d95caa83767c29) against [base `91e4ceec9e0e02f09a4d9a9d4b95e24f0edf027a`](https://github.com/sonic-net/sonic-restapi/commit/91e4ceec9e0e02f09a4d9a9d4b95e24f0edf027a); the generated [merge commit `0f779edf158f73a4566000c041431b18f618f593`](https://github.com/sonic-net/sonic-restapi/commit/0f779edf158f73a4566000c041431b18f618f593) contains that exact pair.\n\n- The two-line diff only repins `actions/checkout` from v3 to the immutable v7.0.1 SHA in [CodeQL](https://github.com/sonic-net/sonic-restapi/blob/207d1dfea79a7ff4d1c0c59a83d95caa83767c29/.github/workflows/codeql-analysis.yml#L28-L31) and [Semgrep](https://github.com/sonic-net/sonic-restapi/blob/207d1dfea79a7ff4d1c0c59a83d95caa83767c29/.github/workflows/semgrep.yml#L16-L17). It does not alter shipped REST API code, build/package recipes, test selection, workflow permissions, or log-analyzer behavior.\n- The pinned [checkout v7.0.1 commit](https://github.com/actions/checkout/commit/3d3c42e5aac5ba805825da76410c181273ba90b1) uses Node 24 and adds a safer fork-PR guard. Both jobs use GitHub-hosted `ubuntu-latest`; the upstream implementation explicitly exempts the default self-checkout used here from the new guard.\n- The exact-head [Semgrep job](https://github.com/sonic-net/sonic-restapi/actions/runs/43777226691/job/133006157251) passed in its container. The PR's `pull_request_target` CodeQL jobs use the base workflow, so they do not directly exercise this workflow edit; however, the same v7 default checkout in SONiC's equivalent `pull_request_target` CodeQL workflow passed after adoption in [sonic-buildimage PR #30999](https://github.com/sonic-net/sonic-buildimage/actions/runs/45239230699/job/137919060848), and its Semgrep job also passed.\n- The exact merge's [Azure component check](https://github.com/sonic-net/sonic-restapi/runs/133012668749) passed build and test stages; retained results show `109/109` tests passed with no retries or failures.\n\n**Residual gap:** this PR cannot directly execute its changed CodeQL workflow before merge because `pull_request_target` loads the target-branch workflow. Upstream source/tests plus the post-adoption SONiC comparison bound that gap and do not indicate a merge blocker. Monitor the first `master` CodeQL run after merge as routine confirmation.\n\nMERGE_RISK=low"
+    },
+    {
+        "number": 199,
+        "repo": "sonic-restapi",
+        "comment_at": "2026-11-24T21:47:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 199,
+        "repo": "sonic-restapi",
+        "comment_at": "2026-11-24T21:47:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-merge-risk-assessment:49c7905638ee6bf7d2566190fb7ab12cf0bc0d33 -->\nMerge risk assessment requested for head commit `49c7905638ee6bf7d2566190fb7ab12cf0bc0d33`. This confirms submission only, not completion or approval to merge."
+    },
+    {
+        "number": 199,
+        "repo": "sonic-restapi",
+        "comment_at": "2026-11-24T21:47:18Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 199,
+        "repo": "sonic-restapi",
+        "comment_at": "2026-11-24T21:49:53Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- elastictest-merge-risk:6b0605d9023080bc2a398340:49c7905638ee6bf7d2566190fb7ab12cf0bc0d33 -->\n## Elastictest merge-risk assessment\n\n**Low merge risk \u2014 Validate before merge.** \ud83d\udfe2 Confidence: High.\n\nAssessed [head `49c7905638ee6bf7d2566190fb7ab12cf0bc0d33`](https://github.com/sonic-net/sonic-restapi/commit/49c7905638ee6bf7d2566190fb7ab12cf0bc0d33) against [base `e016a64fa1e53dbaa2db07cadc27fa0756107d1d`](https://github.com/sonic-net/sonic-restapi/commit/e016a64fa1e53dbaa2db07cadc27fa0756107d1d) on [`master`](https://github.com/sonic-net/sonic-restapi/tree/master).\n\n- The two-file diff only repins `actions/checkout` from v3 to the immutable [v7.0.1 commit](https://github.com/actions/checkout/commit/3d3c42e5aac5ba805825da76410c181273ba90b1) in [CodeQL](https://github.com/sonic-net/sonic-restapi/blob/49c7905638ee6bf7d2566190fb7ab12cf0bc0d33/.github/workflows/codeql-analysis.yml#L28-L31) and [Semgrep](https://github.com/sonic-net/sonic-restapi/blob/49c7905638ee6bf7d2566190fb7ab12cf0bc0d33/.github/workflows/semgrep.yml#L16-L17). It changes no shipped REST API code, package/build rules, workflow permissions, test selection, or log-analyzer behavior.\n- Upstream v7 uses Node 24 and adds opt-in fork-PR checkout protection. Both changed jobs use the default checkout with no custom `ref` or `repository`, and run on GitHub-hosted `ubuntu-latest`; no unsafe-checkout path is enabled by this diff.\n- The exact-head [Semgrep job](https://github.com/sonic-net/sonic-restapi/actions/runs/45494512342/job/138801302198) passed, and all four current [CodeQL Analyze jobs](https://github.com/sonic-net/sonic-restapi/actions/runs/45494509686) passed. CodeQL is triggered by `pull_request_target`, so those checks use the base workflow and do not directly exercise this workflow edit.\n- The current [Azure component check](https://github.com/sonic-net/sonic-restapi/runs/138801568697) was still queued at the assessment cutoff. A prior exact merge revision [`0f779edf158f73a4566000c041431b18f618f593`](https://github.com/sonic-net/sonic-restapi/commit/0f779edf158f73a4566000c041431b18f618f593) completed the component pipeline and its 109/109 test cases passed, but that older revision is contextual evidence rather than current-head proof.\n\nNo actionable code findings were identified. Validate the queued exact-head component check and confirm the first post-merge CodeQL run; the remaining gap is validation completeness, not a credible broad regression path.\n\nMERGE_RISK=low"
+    },
+    {
+        "number": 199,
+        "repo": "sonic-restapi",
+        "review_at": "2026-11-23T21:48:44Z",
+        "review_author": "bhouse-nexthop"
+    },
+    {
+        "number": 199,
+        "repo": "sonic-restapi",
+        "latestReview_at": "2026-11-23T21:48:44Z",
+        "latestReview_author": "bhouse-nexthop",
         "latestReview_state": "APPROVED"
     },
     {
