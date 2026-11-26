@@ -6,6 +6,10 @@ parameters:
   displayName: 'Repositories (all, or space-separated owner/repo names)'
   type: string
   default: all
+- name: initializeReviewers
+  displayName: 'Initialize reviewers (overwrites availability for selected repos)'
+  type: boolean
+  default: false
 
 schedules:
 - cron: '0 0 * * 0'
@@ -66,6 +70,13 @@ jobs:
         done
         generator_args=(-r "${selected_repos[*]}")
       fi
+      if [[ "${INITIALIZE_REVIEWERS,,}" == "true" ]]; then
+        if [ "$REVIEWER_REPOS" = "all" ]; then
+          echo "Reviewer initialization requires explicit repository names, not 'all'." >&2
+          exit 1
+        fi
+        generator_args+=(-I)
+      fi
 
       git reset origin/master --hard
       cd pr_reviewer
@@ -82,3 +93,4 @@ jobs:
     env:
       GITHUB_API_TOKENS: $(GITHUB-TOKEN)
       REVIEWER_REPOS: ${{ parameters.repos }}
+      INITIALIZE_REVIEWERS: ${{ parameters.initializeReviewers }}

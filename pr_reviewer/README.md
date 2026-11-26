@@ -22,6 +22,19 @@ still change and activity eligibility remains organization-wide. Scheduled runs
 use `all`. The pipeline continues to generate from `origin/master` and publish
 to the existing `data/pr-reviewer` branch; the parameter does not isolate
 concurrent runs.
+To repair a contributor cache left unavailable by a previously failed first run,
+select explicit repositories (for example `sonic-net/sonic-utilities`) and enable
+**Initialize reviewers** for that run. It defaults to **false**, and the pipeline
+rejects initialization with `all`. Initialization sets availability to true for
+resolved human accounts and false for bot/unresolved accounts in the selected
+repositories, **overwriting intentional opt-outs there**. Leave it off for normal
+runs. The equivalent manual command is
+`./generate_pr_reviewer.sh -r "sonic-net/sonic-utilities" -I`.
+
+New repositories initialize automatically. Contributor caches are staged in the
+temporary workspace and published only after score generation and activity
+filtering succeed, so failures cannot leave a partially initialized persistent
+cache. Normal runs preserve existing availability settings.
 Each `codeowners-cli` invocation is retried up to four times with exponential backoff when GitHub API or other transient failures occur.
 
 On every run, [filter_inactive_reviewers.py](filter_inactive_reviewers.py) excludes
