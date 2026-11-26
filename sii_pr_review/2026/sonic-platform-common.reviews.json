@@ -1,5 +1,122 @@
 [
     {
+        "number": 825,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-25T06:41:31Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 825,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-25T06:41:40Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 825,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-25T06:41:50Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 825,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-25T06:53:27Z",
+        "comment_author": "ArthurMicas",
+        "comment_body": "Hi @bgallagher-nexthop  @zili11720, can you review this one. Added \r\n\r\nget_platform_specific_info_format_map() \r\nget_platform_specific_dom_format_map()\r\n\r\n It's a small one as our corresponding discussion in [cposhow](https://github.com/sonic-net/SONiC/pull/2636#pullrequestreview-5936057931)"
+    },
+    {
+        "number": 825,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-25T09:20:38Z",
+        "comment_author": "zili11720",
+        "comment_body": "Hi @ArthurMicas \r\nlooks good\r\nWhy you did not add an API for specific **statu**s map as well?"
+    },
+    {
+        "number": 825,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-25T09:29:12Z",
+        "comment_author": "ArthurMicas",
+        "comment_body": "> Hi [@ArthurMicas](https://github.com/ArthurMicas) looks good Why you did not add an API for specific **statu**s map as well?\r\n\r\nThe reason is I think the status here it referes to CMIS status, it should only return the CMIS status such as ModuleReady/ModulePwrUp, it's not a complex information display command. For data path state we should reach per-lane status. Other than that, the module status should be placed in DOM(Digital Optical Monitoring) I suppose."
+    },
+    {
+        "number": 825,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-25T09:46:38Z",
+        "comment_author": "zili11720",
+        "comment_body": "> > Hi [@ArthurMicas](https://github.com/ArthurMicas) looks good Why you did not add an API for specific **statu**s map as well?\r\n> \r\n> The reason is I think the status here it referes to CMIS status, it should only return the CMIS status such as ModuleReady/ModulePwrUp, it's not a complex information display command. For data path state we should reach per-lane status. Other than that, the module status should be placed in DOM(Digital Optical Monitoring) I suppose.\r\n\r\nFor cpoutil I agree. but for the future \"show int transceiver status\" command we need to display all status/flag fields including vendor specific (from TRANSCEIVER_STATUS/FLAG / TRANSCEIVER_ELS_STATUS/FLAG). So we should include the API here as an infrastructure for the future CLI."
+    },
+    {
+        "number": 825,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-25T16:33:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 825,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-25T16:33:34Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 825,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-25T17:51:05Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**2 of 2 changed files have qualified approval** for head commit `42f2b4aee225b70a75ed6ccc324880d5325197ff`.\n\n**All changed folders have qualified approval.** The `Qualified-approval` label indicates this PR meets the qualified-approval requirement for auto-merge.\n\nOther merge conditions, including required checks, branch protection, draft state, and mergeability, still apply. The bot does not enable auto-merge or merge the PR.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: -.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/sonic_platform_base/sonic_xcvr/cpo/</code> | 1 | <code>/sonic_platform_base/sonic_xcvr/cpo/</code> | Approved | @bgallagher-nexthop | 0.8729 | - |\n| <code>/tests/sonic_xcvr/</code> | 1 | <code>/tests/sonic_xcvr/</code> | Approved | @bgallagher-nexthop | 0.6715 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-platform-common/pr_reviewer-by-files.yml)\nCODEOWNERS: not available.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 825,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-25T18:09:11Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-merge-risk-assessment:42f2b4aee225b70a75ed6ccc324880d5325197ff -->\nMerge risk assessment requested for head commit `42f2b4aee225b70a75ed6ccc324880d5325197ff`. This confirms submission only, not completion or approval to merge."
+    },
+    {
+        "number": 825,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-25T18:26:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- elastictest-merge-risk:6b07244779e860bbd60a81a9:42f2b4aee225b70a75ed6ccc324880d5325197ff -->\n## Elastictest merge-risk assessment\n\n**Low merge risk. \ud83d\udfe2 Confidence: High. Recommendation: Ready based on available evidence.**\n\nAssessed [head `42f2b4aee225b70a75ed6ccc324880d5325197ff`](https://github.com/sonic-net/sonic-platform-common/commit/42f2b4aee225b70a75ed6ccc324880d5325197ff) against `master` base `2618e8ac14cd4aabfd1c27f5aadef8a5d7f947a0`, with evidence cut off at 2026-11-25 18:18 UTC.\n\n- **Scope:** The change is additive: `CpoBase` gains a static metadata map and one lookup method for `info`, `dom`, and `status`, split by `oe`/`els`. Defaults remain empty, existing control/data paths are untouched, and the hook performs no hardware reads.\n- **Callers and compatibility:** No existing consumer or platform override of this new API was found at the cutoff, so current runtime behavior remains unchanged until a platform and CLI explicitly adopt it. The default empty-map behavior is backward compatible.\n- **Validation:** All five current-head checks passed, including the Azure component/coverage jobs, static analysis, and DCO. The focused test covers each category/endpoint, unknown keys, empty defaults, and verifies that OE/ELS mocks receive no calls; the PR also reports 72 focused unit tests passing.\n- **Integration provenance:** Current `sonic-buildimage` master (`5b3369f34fb341b9abaa49433af63520c74620e1`) pins `src/sonic-platform-common` to `71e8d866494d1eae5d5310963301356c7bccc185`, an ancestor seven commits behind this head. There is therefore no integrated image/CLI consumer yet, but that is a future adoption gap rather than a regression in existing behavior.\n\nNo actionable defect was found. The eventual consumer should validate its schema and rendered CLI output when it adopts the hook.\n\nMERGE_RISK=low"
+    },
+    {
+        "number": 825,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-25T19:11:33Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**2 of 2 changed files have qualified approval** for head commit `42f2b4aee225b70a75ed6ccc324880d5325197ff`.\n\n**All changed folders have qualified approval.** The `Qualified-approval` label indicates this PR meets the qualified-approval requirement for auto-merge.\n\nOther merge conditions, including required checks, branch protection, draft state, and mergeability, still apply. The bot does not enable auto-merge or merge the PR.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: -.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/sonic_platform_base/sonic_xcvr/cpo/</code> | 1 | <code>/sonic_platform_base/sonic_xcvr/cpo/</code> | Approved | @bgallagher-nexthop | 0.8729 | - |\n| <code>/tests/sonic_xcvr/</code> | 1 | <code>/tests/sonic_xcvr/</code> | Approved | @bgallagher-nexthop | 0.6715 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-platform-common/pr_reviewer-by-files.yml)\nCODEOWNERS: not available.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 825,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-11-25T17:50:57Z",
+        "review_author": "bgallagher-nexthop"
+    },
+    {
+        "number": 825,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-11-25T19:11:26Z",
+        "review_author": "zili11720"
+    },
+    {
+        "number": 825,
+        "repo": "sonic-platform-common",
+        "latestReview_at": "2026-11-25T19:11:26Z",
+        "latestReview_author": "zili11720",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 825,
+        "repo": "sonic-platform-common",
+        "latestReview_at": "2026-11-25T17:50:57Z",
+        "latestReview_author": "bgallagher-nexthop",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 823,
         "repo": "sonic-platform-common",
         "comment_at": "2026-11-24T03:02:33Z",
@@ -541,6 +658,116 @@
         "number": 804,
         "repo": "sonic-platform-common",
         "latestReview_at": "2026-11-17T17:02:30Z",
+        "latestReview_author": "bhouse-nexthop",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 803,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-11T03:41:30Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 803,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-11T03:41:40Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 803,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-11T03:41:50Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 803,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-24T21:47:15Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 803,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-24T21:47:27Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 803,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-25T02:41:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**0 of 1 changed files have qualified approval** for head commit `f869434ad04acac8dfb906dc3f8f9a91741748c2`.\n\nThis PR does not yet meet the qualified-approval requirement for auto-merge. The `Qualified-approval` label is applied only when all changed folders have qualified approval.\n\nOther merge conditions, including required checks, branch protection, draft state, and mergeability, still apply. The bot does not enable auto-merge or merge the PR.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: -.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/.github/workflows/</code> | 1 | <code>/.github/</code> | Awaiting qualified approval | - | 0 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-platform-common/pr_reviewer-by-files.yml)\nCODEOWNERS: not available.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 803,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-11-25T02:40:50Z",
+        "review_author": "bhouse-nexthop"
+    },
+    {
+        "number": 803,
+        "repo": "sonic-platform-common",
+        "latestReview_at": "2026-11-25T02:40:50Z",
+        "latestReview_author": "bhouse-nexthop",
+        "latestReview_state": "APPROVED"
+    },
+    {
+        "number": 802,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-11T03:41:18Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 802,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-11T03:41:27Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 802,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-11T03:41:37Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 802,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-24T21:47:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 802,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-24T21:47:19Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 802,
+        "repo": "sonic-platform-common",
+        "comment_at": "2026-11-25T02:40:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**0 of 2 changed files have qualified approval** for head commit `2cc386fa357cb7fec6811eef68c21cf188790b56`.\n\nThis PR does not yet meet the qualified-approval requirement for auto-merge. The `Qualified-approval` label is applied only when all changed folders have qualified approval.\n\nOther merge conditions, including required checks, branch protection, draft state, and mergeability, still apply. The bot does not enable auto-merge or merge the PR.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: -.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/.github/workflows/</code> | 2 | <code>/.github/</code> | Awaiting qualified approval | - | 0 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-platform-common/pr_reviewer-by-files.yml)\nCODEOWNERS: not available.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 802,
+        "repo": "sonic-platform-common",
+        "review_at": "2026-11-25T02:40:48Z",
+        "review_author": "bhouse-nexthop"
+    },
+    {
+        "number": 802,
+        "repo": "sonic-platform-common",
+        "latestReview_at": "2026-11-25T02:40:48Z",
         "latestReview_author": "bhouse-nexthop",
         "latestReview_state": "APPROVED"
     },

@@ -1,5 +1,133 @@
 [
     {
+        "number": 348,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-24T03:45:46Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 348,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-24T03:45:54Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 348,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-24T03:46:04Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 348,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-24T03:57:25Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 348,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-24T03:57:36Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 348,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-24T04:09:34Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 348,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-24T04:09:40Z",
+        "comment_author": "lolyu",
+        "comment_body": "Addressed the \"previously missed issue\" from the second Copilot review (multicast NS/NA targets) in 2dc1778. Rather than add RFC 4861 checks one at a time, the ND bypass now applies every receiver check in RFC 4861 \u00a76.1 and \u00a77.1 except the ICMP checksum and the options:\n\n- an RA must come from a link-local address;\n- an NS or NA target must not be multicast;\n- an NS from `::` must go to a solicited-node group;\n- an NA to a multicast group must have the Solicited flag clear.\n\n`test_only_valid_nd_bypasses_acl` has a regression case for each rejection, and `test_nd_bypasses_acl` adds an unsolicited NA to all nodes and a DAD NS, which must still pass. With the previous commit's checks, the new cases fail because the frames are punted past the ACL. With 2dc1778 the plugin suite passes (293 tests)."
+    },
+    {
+        "number": 348,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-24T04:09:45Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 348,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-24T19:28:49Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**4 of 4 changed files have qualified approval** for head commit `2dc1778bb8ef4f9554e19b6b81916e9fb4357c22`.\n\n**All changed folders have qualified approval.** The `Qualified-approval` label indicates this PR meets the qualified-approval requirement for auto-merge.\n\nOther merge conditions, including required checks, branch protection, draft state, and mergeability, still apply. The bot does not enable auto-merge or merge the PR.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: -.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/rules/</code> | 1 | <code>/rules/</code> | Approved | @yue-fred-gao | 1 | - |\n| <code>/vppbld/plugins/src/sonic_ext/</code> | 2 | <code>/vppbld/plugins/src/sonic_ext/</code> | Approved | @yue-fred-gao | 1 | - |\n| <code>/vppbld/plugins/tests/sonic_ext/</code> | 1 | <code>/vppbld/plugins/tests/sonic_ext/</code> | Approved | @yue-fred-gao | 1 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-platform-vpp/pr_reviewer-by-files.yml)\nCODEOWNERS: not available.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 348,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-24T19:28:51Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-merge-risk-assessment:2dc1778bb8ef4f9554e19b6b81916e9fb4357c22 -->\nMerge risk assessment requested for head commit `2dc1778bb8ef4f9554e19b6b81916e9fb4357c22`. This confirms submission only, not completion or approval to merge."
+    },
+    {
+        "number": 348,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-24T19:47:23Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- elastictest-merge-risk:6b05e572ab1cb479891aa3f0:2dc1778bb8ef4f9554e19b6b81916e9fb4357c22 -->\n## Elastictest merge-risk assessment\n\n**High merge risk; Changes required. \ud83d\udfe2 Confidence: High.** Assessed at head [`2dc1778bb8ef4f9554e19b6b81916e9fb4357c22`](https://github.com/sonic-net/sonic-platform-vpp/commit/2dc1778bb8ef4f9554e19b6b81916e9fb4357c22) against base [`b29a596107692acb6c368922c8a77f0ee04f858d`](https://github.com/sonic-net/sonic-platform-vpp/commit/b29a596107692acb6c368922c8a77f0ee04f858d). Direct source and consumer evidence supports the ACL-escape path; an exact-head image test is still missing.\n\n### Blocking finding\n\n- The new branch sends every accepted RS/RA/NS/NA directly to `l2-input-feat-arc-end`, skipping the ingress ACL while normal L2 forwarding continues; the code explicitly notes that ND addressed to another host reaches that host ([source](https://github.com/sonic-net/sonic-platform-vpp/blob/2dc1778bb8ef4f9554e19b6b81916e9fb4357c22/vppbld/plugins/src/sonic_ext/ip2me_node.c#L90-L93), [decision](https://github.com/sonic-net/sonic-platform-vpp/blob/2dc1778bb8ef4f9554e19b6b81916e9fb4357c22/vppbld/plugins/src/sonic_ext/ip2me_node.c#L301-L307)).\n- That is broader than SONiC's hardware behavior: `neigh_discovery` uses a `copy` CoPP action ([configuration](https://github.com/sonic-net/sonic-buildimage/blob/b67bc6562ffee79b3977ec745e08f2a36d18c9fe/files/image_config/copp/copp_cfg.j2#L23-L25), [trap mapping](https://github.com/sonic-net/sonic-buildimage/blob/b67bc6562ffee79b3977ec745e08f2a36d18c9fe/files/image_config/copp/copp_cfg.j2#L117-L120)), so the CPU receives a copy while the original remains subject to the later ACL. The VPP path can instead forward multicast or peer-addressed RA/NA/NS through a deny-bound port, risking isolation bypass and neighbor/router-state disruption.\n- The feature is enabled on any VPP interface with an ingress ACL containing a deny, not only standby mux ports ([consumer](https://github.com/sonic-net/sonic-sairedis/blob/9488623cddb23f3fb8e054bc0178f5ebca2fd817/vslib/vpp/SwitchVppAcl.cpp#L2443-L2488)).\n- The new tests create only the ingress member and BVI, with the second interface acting as the host tap; they do not include a peer bridge member that could reveal forwarded ND leakage ([setup](https://github.com/sonic-net/sonic-platform-vpp/blob/2dc1778bb8ef4f9554e19b6b81916e9fb4357c22/vppbld/plugins/tests/sonic_ext/test_sonic_ext_ip2me.py#L54-L74), [expectation](https://github.com/sonic-net/sonic-platform-vpp/blob/2dc1778bb8ef4f9554e19b6b81916e9fb4357c22/vppbld/plugins/tests/sonic_ext/test_sonic_ext_ip2me.py#L179-L190)).\n\n### Validation\n\n- The current-head component pipeline passed both VPP build/test jobs and SAI-VPP UT ([run](https://github.com/sonic-net/sonic-platform-vpp/runs/138689569518)); the author also reports 293/293 plugin-related tests.\n- Retained `dualtor-vpp` history corroborates the intended regression: the pre-change official image passed 18/18 first attempts, while the image with the new sairedis ACL translation and old VPP plugin had 0/89 passes (88 failures, 1 xfail) across 57 plans and 53 harness revisions.\n- No retained Elastictest plan or `sonic-buildimage` integration PR contains this exact component head; current buildimage still pins [`a44889e`](https://github.com/sonic-net/sonic-platform-vpp/commit/a44889e3e6e4b92a5c9efb3d9341c73cfa55a950).\n\n### Required before merge\n\nPreserve hardware-equivalent copy/punt semantics so the CPU receives valid ND while the original frame remains ACL-enforced, or otherwise prove peer forwarding is impossible. Add a bridge-peer regression matrix for unicast and multicast RS/RA/NS/NA, including invalid-checksum traffic, then integrate the exact head into a revision-pinned `sonic-vpp` image and rerun `dualtor-vpp` neighbor recovery plus ingress-drop coverage.\n\nMERGE_RISK=high"
+    },
+    {
+        "number": 348,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-24T20:18:17Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@sonic-net/sonic-platform-vpp-maintainer, this Qualified-approval PR has high merge risk and will not be automatically merged. Please review and merge manually.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 348,
+        "repo": "sonic-platform-vpp",
+        "review_at": "2026-11-24T03:49:55Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 348,
+        "repo": "sonic-platform-vpp",
+        "review_at": "2026-11-24T03:57:29Z",
+        "review_author": "lolyu"
+    },
+    {
+        "number": 348,
+        "repo": "sonic-platform-vpp",
+        "review_at": "2026-11-24T04:01:48Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 348,
+        "repo": "sonic-platform-vpp",
+        "review_at": "2026-11-24T04:12:28Z",
+        "review_author": "copilot-pull-request-reviewer"
+    },
+    {
+        "number": 348,
+        "repo": "sonic-platform-vpp",
+        "review_at": "2026-11-24T19:28:42Z",
+        "review_author": "yue-fred-gao"
+    },
+    {
+        "number": 348,
+        "repo": "sonic-platform-vpp",
+        "latestReview_at": "2026-11-24T04:12:28Z",
+        "latestReview_author": "copilot-pull-request-reviewer",
+        "latestReview_state": "COMMENTED"
+    },
+    {
+        "number": 348,
+        "repo": "sonic-platform-vpp",
+        "latestReview_at": "2026-11-24T19:28:42Z",
+        "latestReview_author": "yue-fred-gao",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 347,
         "repo": "sonic-platform-vpp",
         "comment_at": "2026-11-24T03:02:41Z",
