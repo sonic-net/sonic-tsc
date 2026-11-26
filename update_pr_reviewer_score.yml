@@ -1,6 +1,12 @@
 trigger: none
 pr: none
 
+parameters:
+- name: repos
+  displayName: 'Repositories (all, or space-separated owner/repo names)'
+  type: string
+  default: all
+
 schedules:
 - cron: '0 0 * * 0'
   always: true
@@ -41,9 +47,29 @@ jobs:
   - bash: |
       set -ex
 
+      generator_args=()
+      if [ "$REVIEWER_REPOS" != "all" ]; then
+        if [[ "$REVIEWER_REPOS" == *$'\n'* || "$REVIEWER_REPOS" == *$'\r'* ]]; then
+          echo "Repositories must be a single space-separated line." >&2
+          exit 1
+        fi
+        read -r -a selected_repos <<< "$REVIEWER_REPOS"
+        if [ ${#selected_repos[@]} -eq 0 ]; then
+          echo "Specify 'all' or at least one owner/repo name." >&2
+          exit 1
+        fi
+        for repo in "${selected_repos[@]}"; do
+          if [[ ! "$repo" =~ ^[A-Za-z0-9][A-Za-z0-9_.-]*/[A-Za-z0-9][A-Za-z0-9_.-]*$ ]]; then
+            echo "Invalid repository name: $repo (expected owner/repo)." >&2
+            exit 1
+          fi
+        done
+        generator_args=(-r "${selected_repos[*]}")
+      fi
+
       git reset origin/master --hard
       cd pr_reviewer
-      ./generate_pr_reviewer.sh
+      ./generate_pr_reviewer.sh "${generator_args[@]}"
       git add .
       git commit -m "[data] Update PR reviewer score data." || exit 0
       git push sonicbld HEAD:refs/heads/data/pr-reviewer -f
@@ -55,3 +81,4 @@ jobs:
     displayName: update PR reviewer scores
     env:
       GITHUB_API_TOKENS: $(GITHUB-TOKEN)
+      REVIEWER_REPOS: ${{ parameters.repos }}
