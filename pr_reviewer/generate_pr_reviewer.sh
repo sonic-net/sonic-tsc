@@ -8,6 +8,7 @@ half_life_days=180
 min_score=0.1
 min_raw=50
 use_reviews=1
+initialize_reviewers=0
 
 help(){
     echo "Use:"
@@ -18,6 +19,7 @@ help(){
     echo "    -s    # drop owners with final score below this, default $min_score (0 keeps all)"
     echo "    -w    # drop owners with raw decayed change weight below this, default $min_raw (0 ignores)"
     echo "    -R    # skip approval history (change score only)"
+    echo "    -I    # initialize resolved human reviewers (overwrites availability for selected repos)"
     echo "Set GITHUB_API_TOKENS (comma separated) to avoid API rate limits."
 }
 
@@ -31,6 +33,7 @@ do
         -s) min_score=$2; shift ;;
         -w) min_raw=$2; shift ;;
         -R) use_reviews=0 ;;
+        -I) initialize_reviewers=1 ;;
         *) help; exit 1 ;;
     esac
     shift
@@ -79,22 +82,34 @@ do
     # Full history is required to count contributions.
     git clone -q https://github.com/$repo $work/$name || { echo "clone $repo failed"; continue; }
 
-    args=(--repo $work/$name --contributors_file $out/contributors.yaml --max_owners $max_owners --full_tree --half_life_days $half_life_days)
+    contributors=$work/$name.contributors.yaml
+    if [ -f "$out/contributors.yaml" ]; then
+        cp "$out/contributors.yaml" "$contributors" || exit 1
+    fi
+    args=(--repo $work/$name --contributors_file $contributors --max_owners $max_owners --full_tree --half_life_days $half_life_days)
     [ -f $out/folder_presets.yaml ] && args+=(--folder_presets_file $out/folder_presets.yaml)
 
-    # New contributors default to available_to_review: false. On the first run for
-    # a repo, enable every resolved GitHub user, then rerun; later edits are kept.
-    if [ ! -f $out/contributors.yaml ]; then
+    # Discover contributors before initializing new or explicitly selected caches.
+    # Staged caches are published only after generation and activity filtering succeed.
+    if [ ! -f "$contributors" ] || [ "$initialize_reviewers" = 1 ]; then
         run_codeowners /dev/null "${args[@]}" || { echo "codeowners-cli failed for $repo"; rm -rf $work/$name; continue; }
-        $work/venv/bin/python - $out/contributors.yaml <<'PY'
+        $work/venv/bin/python - "$contributors" <<'PY'
 import sys, yaml
 path = sys.argv[1]
-data = yaml.safe_load(open(path)) or []
+with open(path) as stream:
+    data = yaml.safe_load(stream)
+if not isinstance(data, list):
+    raise ValueError(f"{path}: expected a contributor list")
+enabled = 0
 for c in data:
-    if c.get("github_id", -1) > 0:
-        c["available_to_review"] = True
-yaml.safe_dump(data, open(path, "w"), allow_unicode=True)
+    eligible = c.get("github_id", -1) > 0 and bool(c.get("github_login")) and not c["github_login"].casefold().endswith("[bot]")
+    c["available_to_review"] = eligible
+    enabled += eligible
+with open(path, "w") as stream:
+    yaml.safe_dump(data, stream, allow_unicode=True)
+print(f"Initialized {enabled} resolved human reviewers in {path}", file=sys.stderr)
 PY
+        [ $? -eq 0 ] || exit 1
     fi
 
     # raw_change_weights.yml: decayed changed lines; raw_review_weights.yml: decayed approval counts;
@@ -120,6 +135,7 @@ if [ ${#reviewer_files[@]} -gt 0 ]; then
         --cache "$base/activity_cache.json" "${reviewer_files[@]}" || exit 1
     for name in "${generated_repos[@]}"; do
         out=$base/$name
+        mv "$work/$name.contributors.yaml" "$out/contributors.yaml" || exit 1
         mv "$work/$name.raw.yaml" "$out/raw_change_weights.yml"
         mv "$work/$name.yaml" "$out/pr_reviewer-by-files.yml"
         if [ -f "$work/$name.rv.yaml" ]; then

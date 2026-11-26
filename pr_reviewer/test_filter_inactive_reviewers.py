@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 import os
+from itertools import product
 import re
 import shutil
 import subprocess
@@ -196,15 +197,21 @@ class ActivityTests(unittest.TestCase):
 
     def test_generator_publishes_only_after_successful_filter(self):
         source = Path(__file__).parent
-        for fail in (False, True):
-            with self.subTest(activity_lookup_fails=fail), tempfile.TemporaryDirectory() as directory:
+        for failure, mode in product(("none", "activity", "generation"), ("existing", "new", "repair")):
+            with self.subTest(failure=failure, mode=mode), tempfile.TemporaryDirectory() as directory:
                 root = Path(directory)
                 for name in ("generate_pr_reviewer.sh", "filter_inactive_reviewers.py"):
                     shutil.copyfile(source / name, root / name)
                 (root / "repos").write_text("sonic-net/example\n")
                 output = root / "example"
                 output.mkdir()
-                (output / "contributors.yaml").write_text("[]\n")
+                original_contributors = [
+                    {"github_id": 1, "github_login": "active", "available_to_review": False},
+                    {"github_id": 2, "github_login": "dependabot[bot]", "available_to_review": True},
+                    {"github_id": -1, "github_login": "unknown", "available_to_review": True},
+                ]
+                if mode != "new":
+                    (output / "contributors.yaml").write_text(yaml.safe_dump(original_contributors))
                 original = "/: {existing: 1}\n"
                 for name in ("pr_reviewer-by-files.yml", "raw_change_weights.yml", "raw_review_weights.yml"):
                     (output / name).write_text(original)
@@ -222,8 +229,22 @@ fi
                     "git": """#!/bin/bash
 mkdir -p "${@: -1}"
 """,
-                    "codeowners-cli": """#!/bin/bash
-printf '/: {Active: 0.6, inactive: 0.4}\\n'
+                    "sleep": """#!/bin/bash
+exit 0
+""",
+                    "codeowners-cli": f"""#!{sys.executable}
+from pathlib import Path
+import os
+import sys
+import yaml
+path = Path(sys.argv[sys.argv.index("--contributors_file") + 1])
+if not path.exists():
+    path.write_text(yaml.safe_dump({original_contributors!r}))
+if os.environ["TEST_GENERATION_FAIL"] == "1":
+    path.write_text("[]\\n")
+    print("generation failed after cache write", file=sys.stderr)
+    sys.exit(1)
+print("/: {{Active: 0.6, inactive: 0.4}}")
 """,
                     "gh": f"""#!{sys.executable}
 import json
@@ -256,19 +277,31 @@ else:
                     "PATH": f"{bin_dir}:{os.environ['PATH']}",
                     "TEST_PYTHON": sys.executable,
                     "TEST_CODEOWNERS": str(bin_dir / "codeowners-cli"),
-                    "TEST_ACTIVITY_FAIL": str(int(fail)),
+                    "TEST_ACTIVITY_FAIL": str(int(failure == "activity")),
+                    "TEST_GENERATION_FAIL": str(int(failure == "generation")),
                     "PYTHONDONTWRITEBYTECODE": "1",
                 }
                 result = subprocess.run(
-                    ["bash", str(root / "generate_pr_reviewer.sh"), "-t", str(root), "-R"],
+                    ["bash", str(root / "generate_pr_reviewer.sh"), "-t", str(root), "-R"]
+                    + (["-I"] if mode == "repair" else []),
                     env=env, capture_output=True, text=True,
                 )
-                if fail:
-                    self.assertNotEqual(result.returncode, 0, result.stderr)
-                    self.assertIn("activity API unavailable", result.stderr)
+                if failure != "none":
+                    if failure == "activity":
+                        self.assertNotEqual(result.returncode, 0, result.stderr)
+                        self.assertIn("activity API unavailable", result.stderr)
+                    else:
+                        self.assertIn("generation failed after cache write", result.stderr)
                     for name in ("pr_reviewer-by-files.yml", "raw_change_weights.yml", "raw_review_weights.yml"):
                         self.assertEqual((output / name).read_text(), original)
                     self.assertFalse((root / "activity_cache.json").exists())
+                    if mode == "new":
+                        self.assertFalse((output / "contributors.yaml").exists())
+                    else:
+                        self.assertEqual(
+                            yaml.safe_load((output / "contributors.yaml").read_text()),
+                            original_contributors,
+                        )
                 else:
                     self.assertEqual(result.returncode, 0, result.stderr)
                     self.assertEqual(
@@ -280,6 +313,14 @@ else:
                         {"/": {"Active": 0.6, "inactive": 0.4}},
                     )
                     self.assertEqual((output / "raw_review_weights.yml").read_text(), original)
+                    contributors = yaml.safe_load((output / "contributors.yaml").read_text())
+                    if mode == "existing":
+                        self.assertEqual(contributors, original_contributors)
+                    else:
+                        self.assertEqual(
+                            [row["available_to_review"] for row in contributors],
+                            [True, False, False],
+                        )
                     self.assertEqual(
                         activity.load_cache(root / "activity_cache.json", datetime.now(timezone.utc))["viewer"],
                         "automation",
