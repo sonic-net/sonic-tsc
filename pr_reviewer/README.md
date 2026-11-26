@@ -1,4 +1,4 @@
-# Code owners data
+# PR reviewer data
 
 Per-repo code owner data generated with
 [sonic-pipelines/scripts/code-owners](https://github.com/sonic-net/sonic-pipelines/tree/main/scripts/code-owners).
