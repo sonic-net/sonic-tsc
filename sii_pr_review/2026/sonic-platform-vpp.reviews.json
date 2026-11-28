@@ -183,6 +183,375 @@
         "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
     },
     {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-19T07:49:09Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<!-- AzurePipelinesStatusComment -->\n<samp>\nAzure Pipelines:<br>\r\nThere may be pipelines that require an authorized user to comment /azp run to run.<br>\r\n\n</samp>"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-19T07:49:18Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-19T07:49:29Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-19T18:00:46Z",
+        "comment_author": "bhouse-nexthop",
+        "comment_body": "Thanks for this. It lines up with something I've been tracking on the sonic-buildimage side, and the data may help with scoping.\n\nSince sonic-net/sonic-buildimage#30732, which bumped `platform/vpp` from `7ef12b7` to `6685f23` (bringing in #322, #335, #340 and #341), the `kvmtest-t0-vpp` PR checker has become flaky across unrelated buildimage PRs. I split about 215 t0-vpp results since Nov 10 by the buildimage master commit each PR image was built on:\n\n| Image built on master\u2026 | t0-vpp pass rate |\n|---|---|\n| before sonic-buildimage#30732 | 30/33 (91%) |\n| including sonic-buildimage#30732 | 37/72 (51%) |\n\nThe only other commit in the gap is a macsec CLI change, and no sonic-mgmt merge lines up with the drop. Since early Nov 19, almost no t0-vpp run has passed.\n\n`iface_loopback_action/test_iface_loopback_action.py` is the most common single failure (12 runs), so this PR likely covers a real share of it. The other failures after the bump are spread out, which looks like more than the TAP race:\n- `everflow/test_everflow_ipv6.py`, `test_everflow_testbed.py` and `test_everflow_per_interface.py`: about 21 runs, and the main failure since Nov 18\n- `srv6/test_srv6_dataplane.py`: 11\n- `fdb/test_fdb_mac_move.py`: 10\n- `arp/test_neighbor_mac_aging.py` and `test_neighbor_mac_noptf.py`: 14\n- test plans that hung and hit `TEST_PLAN_TIMEOUT`: 14\n\nDo you know whether the TAP race is new in this range? For example, did #341's VPP version update change the linux-cp timing, or was it always there and just exposed now? And would any of the other failures above share the same root cause?\n\nTo confirm the attribution, I've opened sonic-net/sonic-buildimage#30911 (draft, do not merge). It sets `platform/vpp` back to `7ef12b7` and changes nothing else. I'll post the t0-vpp results here once there are enough runs to tell.\n"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-19T22:32:39Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-19T22:32:50Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-20T01:09:21Z",
+        "comment_author": "yue-fred-gao",
+        "comment_body": "I am not sure about the root cause analysis. There is no LCP tap interface change for a very long time. There has been tons of cold start and this never came as the issue. It is hard to say if some change exposes it. What are root cause of the other failures @bhouse-nexthop pointed? "
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-20T01:14:33Z",
+        "comment_author": "yue-fred-gao",
+        "comment_body": "\r\n> * `everflow/test_everflow_ipv6.py`, `test_everflow_testbed.py` and `test_everflow_per_interface.py`: about 21 runs, and the main failure since Nov 18\r\n> * `srv6/test_srv6_dataplane.py`: 11\r\n> * `fdb/test_fdb_mac_move.py`: 10\r\n> * `arp/test_neighbor_mac_aging.py` and `test_neighbor_mac_noptf.py`: 14\r\n> * test plans that hung and hit `TEST_PLAN_TIMEOUT`: 14\r\n> \r\n> Do you know whether the TAP race is new in this range? For example, did #341's VPP version update change the linux-cp timing, or was it always there and just exposed now? And would any of the other failures above share the same root cause?\r\n> \r\n> To confirm the attribution, I've opened [sonic-net/sonic-buildimage#30911](https://github.com/sonic-net/sonic-buildimage/pull/30911) (draft, do not merge). It sets `platform/vpp` back to `7ef12b7` and changes nothing else. I'll post the t0-vpp results here once there are enough runs to tell.\r\n\r\nI doubt sonic-net/sonic-buildimage#30911 can help. Above tests are enabled very recent. The change in sonic for those tests were committed much earlier. Probably the tests are not stable enough.\r\n\r\nWhat does 21 runs mean in `everflow/test_everflow_ipv6.py`, `test_everflow_testbed.py` and `test_everflow_per_interface.py`: about 21 runs, and the main failure since Nov 18? 21 failures?"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-20T01:48:54Z",
+        "comment_author": "bhouse-nexthop",
+        "comment_body": "Thanks, fair points. Answers and a correction:\n\n**Correction:** I was wrong about #341. It only bumps the package suffix (`0.19` \u2192 `0.20`) to force a rebuild, not the upstream VPP version, so it can't have changed linux-cp timing. Agreed that nothing in this range touches linux-cp directly.\n\n**\"21 runs\":** 21 test plans whose first failing module was one of the everflow modules. Elastictest stops a plan at its first failing module, so each run counts toward exactly one module. It's not 21 test-case failures.\n\n**Recently enabled tests:** fair for `fdb/test_fdb_mac_move.py`. It was added to t0-vpp on Nov 16 (sonic-net/sonic-mgmt#29158), after this bump, so I'll drop it from the attribution. The others predate the bump:\n- everflow \u00d73: added Nov 9\n- `srv6/test_srv6_dataplane.py` and `iface_loopback_action`: added Nov 10\n- `arp/test_neighbor_mac_aging.py`, `test_neighbor_mac_noptf.py` and `ip/test_ip_packet.py`: in the list well before Sep\n\nI checked the test lists in the pre-bump runs: they include everflow, srv6, iface_loopback_action and the arp tests, and those runs passed 30/33. Post-bump images were already failing on Nov 15\u201316, before the FDB tests existed: srv6 five times, plus iface_loopback_action, acl and crm. In the same time window (Nov 14 18:00 to Nov 15 12:00 UTC), with identical test lists and sonic-mgmt, images without the bump passed 8/8 and images with it passed 8/13. The samples are small, but it points the same way.\n\nThat's why I think sonic-net/sonic-buildimage#30911 can tell us something. It keeps the tests and sonic-mgmt the same and changes only `platform/vpp`. If the tests are simply unstable, it will fail at the same rate as master. I'll leave out failures in tests added after the bump.\n\nOn the TAP race: since `iface_loopback_action` passed consistently from Nov 10 until the bump and failed 12 times after it, I wonder whether #322, #335 or #340 changed timing enough to expose an old race, rather than causing it. That's speculation on my part.\n"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-20T14:40:17Z",
+        "comment_author": "yue-fred-gao",
+        "comment_body": "@bhouse-nexthop and @sakshamkhurana21 , can you please share some failed runs? I checked one failure in test_everflow_ipv6 in https://elastictest.org/scheduler/publictestplan/6b0009a8023080bc2a39752f. 3 retries points to the same commit https://github.com/sonic-net/sonic-mgmt/pull/29204. It gives 60 seconds for orchagent to settle down, which may not be enough for vpp running in azure because the cpu could be oversubscribed. But this PR is only merged yesterday. "
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-20T15:06:57Z",
+        "comment_author": "yue-fred-gao",
+        "comment_body": "I was wrong about https://github.com/sonic-net/sonic-mgmt/pull/29204. The orchagent check exists before that. Here is the same failure in Nov 16 run: https://elastictest.org/scheduler/publictestplan/6afa49feb1bb6ac7d0c6c8e6.\r\n\r\nIs there any test environment change to make cpu more oversubscribed? It could also be some change in vpp that slows down route add/remove."
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-20T16:28:55Z",
+        "comment_author": "yue-fred-gao",
+        "comment_body": "The issue fixed by this PR also points to oversubscription that makes LCP creation takes longer to allow the race condition to happen. In a dedicated platform, vpp main thread that handles API calls should have its own core."
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-20T16:42:24Z",
+        "comment_author": "bhouse-nexthop",
+        "comment_body": "Following up on sonic-net/sonic-buildimage#30911: both t0-vpp runs with `platform/vpp` reverted to `7ef12b7` showed the same flaky modules as master (everflow, srv6, acl, crm, arp, iface_loopback_action), mostly passing on retry, with `route_perf` failing all retries ([6affaf04ab1cb479891a9492](https://elastictest.org/scheduler/publictestplan/6affaf04ab1cb479891a9492), [6b002d1b977b5bca4b5bd65a](https://elastictest.org/scheduler/publictestplan/6b002d1b977b5bca4b5bd65a)). So I was wrong to attribute this to the VPP bump. Your oversubscription explanation fits better. I'm going to ask for t0-vpp to be made optional until it stabilizes.\n"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-20T18:06:31Z",
+        "comment_author": "yue-fred-gao",
+        "comment_body": "Instead of make it optional, can we skip the flaky tests with conditional marker? I am worried making it optional would open a floodgate for issues to come in"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-20T18:12:46Z",
+        "comment_author": "yue-fred-gao",
+        "comment_body": "@sakshamkhurana21 , please add UT with a diff attached to the same patch. You can see how it is done in other patches."
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-20T19:32:35Z",
+        "comment_author": "bhouse-nexthop",
+        "comment_body": "Fair concern. I'm fine with the conditional-mark route as a first step. I'd put the skips in `tests_mark_conditions_sonic_vpp.yaml`, scoped to `asic_type in ['vpp'] and topo_name == 't0'`, each with a reason linking a tracking issue:\n- `route/test_route_perf.py`: fails all retries, including with `platform/vpp` reverted\n- the modules that fail most often and usually pass on retry: everflow (ipv6, testbed, per_interface), `srv6/test_srv6_dataplane.py`, `iface_loopback_action`\n\nTwo caveats. The flaky set is wide (acl, crm, arp neighbor aging and fdb_mac_move also show up), so skipping only the top offenders may not be enough, and skipping all of them removes most of t0-vpp's dataplane coverage. Also, about 1 in 5 failures are infrastructure problems that skips don't address: plans hitting `TEST_PLAN_TIMEOUT`, sanity-check failures, and testbed setup failures. If the pass rate is still low after the skips land, I'd come back to making the job optional until the branch point. Does that work for you?\n"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-20T20:26:26Z",
+        "comment_author": "yue-fred-gao",
+        "comment_body": "> Fair concern. I'm fine with the conditional-mark route as a first step. I'd put the skips in `tests_mark_conditions_sonic_vpp.yaml`, scoped to `asic_type in ['vpp'] and topo_name == 't0'`, each with a reason linking a tracking issue:\r\n> \r\n> * `route/test_route_perf.py`: fails all retries, including with `platform/vpp` reverted\r\n> * the modules that fail most often and usually pass on retry: everflow (ipv6, testbed, per_interface), `srv6/test_srv6_dataplane.py`, `iface_loopback_action`\r\n> \r\n> Two caveats. The flaky set is wide (acl, crm, arp neighbor aging and fdb_mac_move also show up), so skipping only the top offenders may not be enough, and skipping all of them removes most of t0-vpp's dataplane coverage. Also, about 1 in 5 failures are infrastructure problems that skips don't address: plans hitting `TEST_PLAN_TIMEOUT`, sanity-check failures, and testbed setup failures. If the pass rate is still low after the skips land, I'd come back to making the job optional until the branch point. Does that work for you?\r\n\r\nWith the skips, I am also hoping it can bring down the load and alleviate the issue. There are quite a few new tests turned on in November. I am not sure if that's the trigger. I am also investigating if we can change vpp worker thread to interrupt or adaptive mode from pull mode to bring down cpu usage. "
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-20T20:32:08Z",
+        "comment_author": "yue-fred-gao",
+        "comment_body": "@sakshamkhurana21 , please help to investigate if there is any change in the elastictest environment aggravating cpu oversubscription. Is there histogram of cpu load in the host? How vms per host?\r\n"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-20T20:55:23Z",
+        "comment_author": "bhouse-nexthop",
+        "comment_body": "Opened sonic-net/sonic-mgmt#29439 with the skips, tracked in sonic-net/sonic-mgmt#29438. They apply only when `asic_type in ['vpp'] and topo_name == 't0'` and lift when the issue closes. Modules: everflow (ipv6, testbed, per_interface), arp (neighbor_mac_aging, neighbor_mac_noptf), iface_loopback_action, fdb_mac_move, srv6_dataplane and route_perf. I included all of them because a run stops at the first failing module, so skipping only the top few would just move the failure to the next one. Happy to adjust the list. Its own t0-vpp run will show whether this is enough.\n"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-21T03:27:05Z",
+        "comment_author": "sakshamkhurana21",
+        "comment_body": "@yue-fred-gao, here are representative public master/t0-vpp failed runs beyond the TAP-readiness assertion. \r\n\r\n1. **Orchagent CPU readiness:** https://elastictest.org/scheduler/publictestplan/6b0009a8023080bc2a39752f (sonic-buildimage PR #30917, build 1281597). This is the example you already inspected. `everflow/test_everflow_ipv6.py`, base run and retries 1-2 (10:00-10:41), failed in fixture setup after eBGP shutdown because orchagent did not satisfy the CPU-readiness threshold of 10.\r\n\r\n2. **Route installation, SRv6 forwarding and ARP aging:** https://elastictest.org/scheduler/publictestplan/6b008bb7023080bc2a3976ac (sonic-buildimage PR #30425, build 1279456).\r\n   - `route/test_route_perf.py`, base run and retries 1-2 (20:15-21:11): expected routes were not installed into ASIC state.\r\n   - `srv6/test_srv6_dataplane.py`, retry 1, `test_srv6_dataplane_after_config_reload` (22:28): the expected packet was not received on PTF port 28. This is distinct from the base run's post-reboot port-readiness failure.\r\n   - `arp/test_neighbor_mac_aging.py`, base run, `testNeighborMacAgingAfterIntfDown` (21:09): the ARP/Redis entry did not age out after interface shutdown.\r\n\r\n3. **BGP route removal and MAC-move guard:** https://elastictest.org/scheduler/publictestplan/6b009632f6f698c1f6c1fb3d (sonic-buildimage PR #30927, build 1281950).\r\n   - `arp/test_neighbor_mac_noptf.py`, base run (22:38): fixture setup failed with `BGP Shutdown Timeout: BGP route removal exceeded 120 seconds.`\r\n   - `fdb/test_fdb_mac_move.py`, base run, `test_fdb_mac_move_guard_disable_port` (22:32): MAC_MOVE_GUARD did not disable either Ethernet4 or Ethernet8 within 300 seconds.\r\n   - `everflow/test_everflow_per_interface.py`, base run and retry 1 (22:30 and 22:43): fixture setup failed the orchagent CPU-readiness check after eBGP shutdown.\r\n\r\n"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-21T04:08:03Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-21T04:08:13Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-21T13:28:37Z",
+        "comment_author": "bhouse-nexthop",
+        "comment_body": "The t0-vpp skips are now in sonic-mgmt master (sonic-net/sonic-mgmt#29439, tracked in sonic-net/sonic-mgmt#29438). `crm/test_crm.py` also failed every retry in a couple of runs, so I'll add it in a follow-up if it keeps showing up."
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-21T23:55:48Z",
+        "comment_author": "bhouse-nexthop",
+        "comment_body": "Follow-up: sonic-net/sonic-mgmt#29453 adds three more t0-vpp skips under the same condition. After sonic-net/sonic-mgmt#29439 merged, runs still failed on `ip/test_ip_packet.py` and `crm/test_crm.py`, which failed every retry, and `ssh/test_ssh_stress.py`, which left the DUT failing the sanity check and cancelled the rest of the plan."
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-24T15:02:40Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**3 of 3 changed files have qualified approval** for head commit `41a2362c5b70732d93dcd04c2b8d628d1f8ff1ee`.\n\n**All changed folders have qualified approval.** The `Qualified-approval` label indicates this PR meets the qualified-approval requirement for auto-merge.\n\nOther merge conditions, including required checks, branch protection, draft state, and mergeability, still apply. The bot does not enable auto-merge or merge the PR.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: -.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/rules/</code> | 1 | <code>/rules/</code> | Approved | @yue-fred-gao | 1 | - |\n| <code>/vppbld/patches/</code> | 2 | <code>/vppbld/patches/</code> | Approved | @yue-fred-gao | 1 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-platform-vpp/pr_reviewer-by-files.yml)\nCODEOWNERS: not available.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-24T15:02:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-merge-risk-assessment:41a2362c5b70732d93dcd04c2b8d628d1f8ff1ee -->\nMerge risk assessment requested for head commit `41a2362c5b70732d93dcd04c2b8d628d1f8ff1ee`. This confirms submission only, not completion or approval to merge."
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-24T15:02:58Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-merge-risk-assessment:bede2dea0bc11cdb427262640db6384dac4a225d -->\nMerge risk assessment requested for head commit `bede2dea0bc11cdb427262640db6384dac4a225d`. This confirms submission only, not completion or approval to merge."
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-24T15:03:06Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-24T15:03:17Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-24T15:21:42Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- elastictest-merge-risk:6b05a711a664af5da815e604:bede2dea0bc11cdb427262640db6384dac4a225d -->\n## Merge-risk assessment: high\n\n**Pinned revision:** [`bede2dea0bc11cdb427262640db6384dac4a225d`](https://github.com/sonic-net/sonic-platform-vpp/commit/bede2dea0bc11cdb427262640db6384dac4a225d) on base [`b29a596107692acb6c368922c8a77f0ee04f858d`](https://github.com/sonic-net/sonic-platform-vpp/commit/b29a596107692acb6c368922c8a77f0ee04f858d). The originally requested head `41a2362c5b70732d93dcd04c2b8d628d1f8ff1ee` was superseded by a merge from `master`; the TAP patch itself is unchanged.\n\n**Recommendation: Changes required.** \ud83d\udfe2 Confidence: High.\n\n### Blocking finding\n\n- The rebase removed this change's unique package cache key. The current PR changes only `vppbld/patches/0029-linux-cp-publish-initially-down-taps-after-setup.patch` and `vppbld/patches/series`, while [`master` already assigned `VPP_VERSION=2606-0.27`](https://github.com/sonic-net/sonic-platform-vpp/commit/a44889e3e6e4b92a5c9efb3d9341c73cfa55a950#diff-6c0711223f5e54e0b73d22e40ca5902127e3cb4d5fb00be1c2a1ed8c14617ff5) to another VPP change. The live head still reports [`0.27`](https://github.com/sonic-net/sonic-platform-vpp/blob/bede2dea0bc11cdb427262640db6384dac4a225d/rules/vpp.mk#L15-L16).\n- [`vppbld/Makefile`](https://github.com/sonic-net/sonic-platform-vpp/blob/bede2dea0bc11cdb427262640db6384dac4a225d/vppbld/Makefile#L15-L16) downloads VPP debs by that version and builds locally only when the download fails. [`sonic-buildimage` master currently pins `platform/vpp` to `a44889e`](https://github.com/sonic-net/sonic-buildimage/tree/ea06d9d64b40ab92a5d897312b6942ffb4808bf5/platform/vpp), which owns the existing `0.27` package contents. Advancing the gitlink to this PR without another suffix can therefore reuse cached `0.27` packages that omit patch `0029`.\n- That source/artifact mismatch can silently preserve the cold-boot TAP ordering defect and leave front-panel ports down or at the wrong MTU, while source-based component CI remains green. This makes the runtime and validation outcome misleading and meets the high-risk threshold.\n\n### Validation considered\n\n- The superseded requested head was tested by CI merge [`102d1c52cb4148394550388b6a6eca02542ba6c1`](https://github.com/sonic-net/sonic-platform-vpp/commit/102d1c52cb4148394550388b6a6eca02542ba6c1) in [build `1282996`](https://dev.azure.com/mssonic/be1b070f-be15-4154-aade-b1d3bfb17054/_build/results?buildId=1282996). Bookworm and trixie both built from source and completed the full VPP suite; all three new TAP-publication tests passed in both lanes. The SAI overlay retained all 38 stable-baseline passes with zero regressions, although 42 known non-baseline non-passes remained.\n- Historical `t0-vpp` evidence confirms the target readiness symptom is real but flaky: the two public build-`1279107` plans ([run 1](https://elastictest.org/scheduler/publictestplan/6afcf1c2c3baa6dca8b80304), [run 2](https://elastictest.org/scheduler/publictestplan/6afcf1c4312e6b703ed8ddf9)) passed the case, while earlier runs of the same image recorded the stated port-readiness failure. This does not prove that a downstream image built from the live head contains the patch.\n- [Current-head build `1286386`](https://dev.azure.com/mssonic/be1b070f-be15-4154-aade-b1d3bfb17054/_build/results?buildId=1286386) was still running at the assessment cutoff, and its source build cannot validate the colliding downstream package key.\n\n### Required before merge\n\nAdvance `VPP_VERSION` to the next unused suffix, rerun current-head component CI, then validate a `sonic-buildimage` artifact whose recorded `platform/vpp` pin and installed VPP package provenance both include this head. Re-run the cold `test_loopback_action_reload` selector on that integrated image.\n\nMERGE_RISK=high"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-24T15:41:47Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- elastictest-merge-risk:6b05a721977b5bca4b5be246:bede2dea0bc11cdb427262640db6384dac4a225d -->\n## Merge-risk assessment: high\n\n**Pinned revision:** [head `bede2dea0bc11cdb427262640db6384dac4a225d`](https://github.com/sonic-net/sonic-platform-vpp/commit/bede2dea0bc11cdb427262640db6384dac4a225d) on [base `b29a596107692acb6c368922c8a77f0ee04f858d`](https://github.com/sonic-net/sonic-platform-vpp/commit/b29a596107692acb6c368922c8a77f0ee04f858d), targeting [`master`](https://github.com/sonic-net/sonic-platform-vpp/tree/master).\n\n**Recommendation: Changes required.** \ud83d\udfe0 Confidence: Medium \u2014 the package-key collision is directly established, but the exact cached artifact and a current installed-image result are not.\n\n### Blocking finding\n\nThe [patch](https://github.com/sonic-net/sonic-platform-vpp/blob/bede2dea0bc11cdb427262640db6384dac4a225d/vppbld/patches/0029-linux-cp-publish-initially-down-taps-after-setup.patch#L31-L102) changes initially-down LCP TAP publication during cold start. However, both the current base and head still set `VPP_VERSION` to `2606-0.27` ([base](https://github.com/sonic-net/sonic-platform-vpp/blob/b29a596107692acb6c368922c8a77f0ee04f858d/rules/vpp.mk#L4-L16), [head](https://github.com/sonic-net/sonic-platform-vpp/blob/bede2dea0bc11cdb427262640db6384dac4a225d/rules/vpp.mk#L4-L16)); this PR changes only the patch and patch series. The [build recipe](https://github.com/sonic-net/sonic-platform-vpp/blob/bede2dea0bc11cdb427262640db6384dac4a225d/vppbld/Makefile#L19-L62) downloads VPP debs by that version and builds locally only if the download fails. Current [sonic-buildimage master](https://github.com/sonic-net/sonic-buildimage/commit/ea06d9d64b40ab92a5d897312b6942ffb4808bf5) pins [pre-patch VPP commit `a44889e`](https://github.com/sonic-net/sonic-platform-vpp/commit/a44889e3e6e4b92a5c9efb3d9341c73cfa55a950), also using `.27`. An existing `.27` artifact can therefore omit patch `0029` while source-based CI passes, leaving cold-boot ports at the prior behavior and making image validation misleading.\n\n### Validation and required action\n\nAt the `2026-11-24T15:28:57Z` cutoff, exact-head [Bookworm](https://github.com/sonic-net/sonic-platform-vpp/runs/138540216937) and [Trixie](https://github.com/sonic-net/sonic-platform-vpp/runs/138540208793) checks were still running. The PR description reports a patched `t0-vpp` run, but does not establish current `.27` package provenance through an installed image. Bump to a unique suffix relative to current master, complete exact-head VPP tests, then validate an image whose platform pin and installed package source/digest include this head; repeat the cold `test_loopback_action_reload` selector and verify admin-up ports and MTU.\n\nMERGE_RISK=high"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-24T16:19:09Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "@sonic-net/sonic-platform-vpp-maintainer, this Qualified-approval PR has high merge risk and will not be automatically merged. Please review and merge manually.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-25T15:21:32Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-25T15:21:46Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-25T15:24:39Z",
+        "comment_author": "yue-fred-gao",
+        "comment_body": "@sakshamkhurana21 , can you please update the PR? the change to vpp.mk got subsumed by merging the base branch"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-25T16:20:52Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- elastictest-merge-risk:6b0708440f3cf781f457010c:18bc419f60cf242d45d20424e031db207b280fa0 -->\n## Merge-risk assessment: high\n\n**Pinned revision:** [head `18bc419f60cf242d45d20424e031db207b280fa0`](https://github.com/sonic-net/sonic-platform-vpp/commit/18bc419f60cf242d45d20424e031db207b280fa0) on [base `b3e80b8a612c3c1ffcc6f3854c6e4f214c5b92d3`](https://github.com/sonic-net/sonic-platform-vpp/commit/b3e80b8a612c3c1ffcc6f3854c6e4f214c5b92d3), with current [merge ref `2f150629fbbc4f30a1395530252d8ef3ba82283d`](https://github.com/sonic-net/sonic-platform-vpp/commit/2f150629fbbc4f30a1395530252d8ef3ba82283d).\n\n**Recommendation: Changes required.** \ud83d\udfe2 Confidence: High.\n\n### Blocking finding\n\n- This PR changes [`vppbld/patches/0029-linux-cp-publish-initially-down-taps-after-setup.patch`](https://github.com/sonic-net/sonic-platform-vpp/blob/18bc419f60cf242d45d20424e031db207b280fa0/vppbld/patches/0029-linux-cp-publish-initially-down-taps-after-setup.patch#L31-L102) and the patch series, but the current [base](https://github.com/sonic-net/sonic-platform-vpp/blob/b3e80b8a612c3c1ffcc6f3854c6e4f214c5b92d3/rules/vpp.mk#L4-L16) and [head](https://github.com/sonic-net/sonic-platform-vpp/blob/18bc419f60cf242d45d20424e031db207b280fa0/rules/vpp.mk#L4-L16) both use `VPP_VERSION=2606-0.28`.\n- `rules/vpp.mk` explicitly defines that suffix as the package cache key and requires a bump whenever the patch series changes. [`vppbld/Makefile`](https://github.com/sonic-net/sonic-platform-vpp/blob/18bc419f60cf242d45d20424e031db207b280fa0/vppbld/Makefile#L35-L62) downloads matching prebuilt debs first and builds locally only when a download fails. A downstream `sonic-buildimage` pin advance can therefore install an existing `.28` package built from the base and omit patch `0029` while source-based component CI remains green. The maintainer has also [called out that the `vpp.mk` change was subsumed by the rebase](https://github.com/sonic-net/sonic-platform-vpp/pull/345#issuecomment-7166799112).\n- That source/artifact mismatch can preserve the cold-boot race and leave front-panel ports down or at the wrong MTU. It affects startup ordering and traffic availability and can make validation misleading, meeting the high-risk threshold.\n\n### Validation considered\n\n- Earlier [CI merge `102d1c52cb4148394550388b6a6eca02542ba6c1`](https://github.com/sonic-net/sonic-platform-vpp/commit/102d1c52cb4148394550388b6a6eca02542ba6c1) tested the unchanged TAP patch in [build `1282996`](https://dev.azure.com/mssonic/be1b070f-be15-4154-aade-b1d3bfb17054/_build/results?buildId=1282996): Bookworm and Trixie source builds passed the full VPP suite, all three new TAP-publication tests passed in both lanes, and the SAI matrix retained 38/38 stable-baseline passes with zero regressions. This does not validate the current rebased head or a downstream package resolved by the colliding `.28` key.\n- On the unchanged VPP image, the exact cold reload case passed 4/8 first attempts and failed 4/8 with `Not all ports that are admin up on are operationally up`; there were no retries. The current-head [build `1287550`](https://dev.azure.com/mssonic/be1b070f-be15-4154-aade-b1d3bfb17054/_build/results?buildId=1287550) was still running at the fixed assessment cutoff, and source CI cannot prove installed-image package provenance.\n\nAdvance `VPP_VERSION` to the next unused suffix, complete current-head component CI, then build and test a `sonic-buildimage` artifact whose `platform/vpp` pin and installed VPP package provenance both include this head. Re-run the cold `test_loopback_action_reload` selector and verify admin-up ports and MTU after reload.\n\nMERGE_RISK=high"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-25T17:11:00Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-merge-risk-assessment:18bc419f60cf242d45d20424e031db207b280fa0 -->\nMerge risk assessment requested for head commit `18bc419f60cf242d45d20424e031db207b280fa0`. This confirms submission only, not completion or approval to merge."
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-25T17:34:22Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- elastictest-merge-risk:6b0716a492c4587cae164555:18bc419f60cf242d45d20424e031db207b280fa0 -->\n## Merge-risk assessment: high\n\n**Pinned revision:** [head `18bc419f60cf242d45d20424e031db207b280fa0`](https://github.com/sonic-net/sonic-platform-vpp/commit/18bc419f60cf242d45d20424e031db207b280fa0) on [base `b3e80b8a612c3c1ffcc6f3854c6e4f214c5b92d3`](https://github.com/sonic-net/sonic-platform-vpp/commit/b3e80b8a612c3c1ffcc6f3854c6e4f214c5b92d3), with [CI merge `2f150629fbbc4f30a1395530252d8ef3ba82283d`](https://github.com/sonic-net/sonic-platform-vpp/commit/2f150629fbbc4f30a1395530252d8ef3ba82283d).\n\n**Recommendation: Changes required.** \ud83d\udfe2 Confidence: Extra high.\n\n### Blocking finding\n\n- This PR changes the [LCP TAP patch](https://github.com/sonic-net/sonic-platform-vpp/blob/18bc419f60cf242d45d20424e031db207b280fa0/vppbld/patches/0029-linux-cp-publish-initially-down-taps-after-setup.patch#L31-L102) and patch series, but both [base](https://github.com/sonic-net/sonic-platform-vpp/blob/b3e80b8a612c3c1ffcc6f3854c6e4f214c5b92d3/rules/vpp.mk#L1-L16) and [head](https://github.com/sonic-net/sonic-platform-vpp/blob/18bc419f60cf242d45d20424e031db207b280fa0/rules/vpp.mk#L1-L16) retain `VPP_VERSION=2606-0.28`. The file explicitly requires a unique suffix whenever the patch series changes because that version is the package cache key.\n- [`vppbld/Makefile` downloads matching prebuilt debs first and builds locally only if the download fails](https://github.com/sonic-net/sonic-platform-vpp/blob/18bc419f60cf242d45d20424e031db207b280fa0/vppbld/Makefile#L35-L62). A downstream `sonic-buildimage` pin advance can therefore install an existing `.28` package built from the base, silently omit patch `0029`, and still pass source-based component CI. A maintainer independently [confirmed that the `vpp.mk` change was subsumed by the rebase](https://github.com/sonic-net/sonic-platform-vpp/pull/345#issuecomment-7166799112).\n- That source/artifact mismatch can preserve the cold-boot race, leaving front-panel ports down or at the wrong MTU while validation appears green. This affects startup ordering and traffic availability and meets the high-risk threshold.\n\n### Validation considered\n\n- Earlier [build `1282996`](https://dev.azure.com/mssonic/be1b070f-be15-4154-aade-b1d3bfb17054/_build/results?buildId=1282996) tested the unchanged TAP patch from source at CI merge [`102d1c52cb4148394550388b6a6eca02542ba6c1`](https://github.com/sonic-net/sonic-platform-vpp/commit/102d1c52cb4148394550388b6a6eca02542ba6c1): Bookworm and Trixie package builds and full VPP suites succeeded, and all three new TAP-publication tests passed in both lanes. The SAI stable baseline retained 38 passes. This does not validate downstream resolution of the colliding `.28` package key.\n- On the unchanged VPP image, the cold `test_loopback_action_reload` case passed 4/8 first attempts and failed 4/8 with `Not all ports that are admin up on are operationally up`; there were no retries. Current-head [build `1287550`](https://dev.azure.com/mssonic/be1b070f-be15-4154-aade-b1d3bfb17054/_build/results?buildId=1287550) was still running at the fixed cutoff, and no provenance-linked integrated image proves that installed VPP packages contain this head.\n\nAdvance `VPP_VERSION` to the next unused suffix, complete current-head component CI, then build and test a `sonic-buildimage` artifact whose `platform/vpp` pin and installed VPP package provenance both include this head. Re-run the cold reload selector and verify admin-up ports and MTU after reload.\n\nMERGE_RISK=high"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-26T19:59:11Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-26T19:59:21Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-26T20:03:24Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-qualified-approval-coverage -->\n## Qualified approval coverage\n\n**3 of 3 changed files have qualified approval** for head commit `c3e9b39cfc88330801ac14da1e8e742d8b9acbea`.\n\n**All changed folders have qualified approval.** The `Qualified-approval` label indicates this PR meets the qualified-approval requirement for auto-merge.\n\nOther merge conditions, including required checks, branch protection, draft state, and mergeability, still apply. The bot does not enable auto-merge or merge the PR.\n\nA folder qualifies when the sum of its mapped active approvers' scores is **at least 0.4**. Each approver counts once per folder; a total of exactly 0.4 qualifies.\nAlternatively, a file qualifies through approval by a matching CODEOWNER (including team members).\nAn active current-head approval from a repository administrator qualifies all changed paths.\nApproving repository administrators: -.\n\n| Changed folder | Files | Reviewer mapping | Status | Mapped approvers | Approval score | Approving code owners |\n|---|---:|---|---|---|---:|---|\n| <code>/rules/</code> | 1 | <code>/rules/</code> | Approved | @yue-fred-gao | 1 | - |\n| <code>/vppbld/patches/</code> | 2 | <code>/vppbld/patches/</code> | Approved | @yue-fred-gao | 1 | - |\n\n[Reviewer mapping](https://github.com/sonic-net/sonic-tsc/blob/master/pr_reviewer/sonic-platform-vpp/pr_reviewer-by-files.yml)\nCODEOWNERS: not available.\n\n<div align=\"right\"><sub>---Powered by SONiC BuildBot</sub></div>"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-26T20:09:09Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- sonic-merge-risk-assessment:c3e9b39cfc88330801ac14da1e8e742d8b9acbea -->\nMerge risk assessment requested for head commit `c3e9b39cfc88330801ac14da1e8e742d8b9acbea`. This confirms submission only, not completion or approval to merge."
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-26T20:28:41Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "<!-- elastictest-merge-risk:6b0891e5985f6a0b06bbfc2e:c3e9b39cfc88330801ac14da1e8e742d8b9acbea -->\n## Merge-risk assessment: high\n\n**Pinned revision:** [head `c3e9b39cfc88330801ac14da1e8e742d8b9acbea`](https://github.com/sonic-net/sonic-platform-vpp/commit/c3e9b39cfc88330801ac14da1e8e742d8b9acbea) on [base `b3e80b8a612c3c1ffcc6f3854c6e4f214c5b92d3`](https://github.com/sonic-net/sonic-platform-vpp/commit/b3e80b8a612c3c1ffcc6f3854c6e4f214c5b92d3), with current [merge ref `c47e2f7e9ee2785108b2d27960d6b72d5c6b7b07`](https://github.com/sonic-net/sonic-platform-vpp/commit/c47e2f7e9ee2785108b2d27960d6b72d5c6b7b07).\n\n**Recommendation: Validate before merge.** \ud83d\udfe2 Confidence: High \u2014 the code path, completed component CI, and exact-image failure history directly establish the classification; the remaining gap is current-head package/image integration.\n\n### Why this is high risk\n\nThe patch changes cold-start publication for every initially-down physical LCP TAP on the VPP platform: it stages the TAP under an automatic name, suppresses the generic initial-up write, applies MTU, then publishes the requested name and avoids rewriting it down. TUNs, subinterfaces, initially-up parents, and ordinary TAP callers remain gated off. A regression can still prevent pair creation or leave front-panel ports down or at the wrong MTU, causing broad VPP forwarding loss after cold boot.\n\nNo actionable defect was found in the pinned implementation. The final commit also fixes the earlier package-cache blocker by advancing [`VPP_VERSION` from `2606-0.28` to unique suffix `2606-0.29`](https://github.com/sonic-net/sonic-platform-vpp/blob/c3e9b39cfc88330801ac14da1e8e742d8b9acbea/rules/vpp.mk#L12-L16).\n\n### Validation considered\n\n- [Build `1287550`](https://dev.azure.com/mssonic/be1b070f-be15-4154-aade-b1d3bfb17054/_build/results?buildId=1287550) tested merge [`2f150629fbbc4f30a1395530252d8ef3ba82283d`](https://github.com/sonic-net/sonic-platform-vpp/commit/2f150629fbbc4f30a1395530252d8ef3ba82283d), which has the same target base and byte-identical runtime/test patch; the only later source change is the package suffix. Bookworm and Trixie both built from source and each executed 3,010 VPP tests with zero failures. All three new TAP-publication tests passed on first attempt in both lanes. The SAI overlay preserved 38/38 stable-baseline passes with zero regressions.\n- On unchanged image build `1279107`, the cold `test_loopback_action_reload` case passed 4/8 first attempts and failed 4/8 with `Not all ports that are admin up on are operationally up`; all had attempt `0`. One [failed run](https://elastictest.org/scheduler/publictestplan/6afc92f900a0ae92e3aab94e) and one [passing run](https://elastictest.org/scheduler/publictestplan/6afcf1c2c3baa6dca8b80304) confirm the signature is intermittent. The PR reports one passing coherent patched-runtime selector, but not an immutable full image from the current head.\n- At the fixed `2026-11-26T20:22:39Z` cutoff, current [build `1288888`](https://dev.azure.com/mssonic/be1b070f-be15-4154-aade-b1d3bfb17054/_build/results?buildId=1288888) still had both source-build lanes in progress. Component CI intentionally packages VPP as `1.0.0`, so even a green result does not validate downstream resolution of `2606-0.29+b1sonic1`.\n- [`sonic-buildimage` master](https://github.com/sonic-net/sonic-buildimage/commit/0372ec9dbe4ae9e52e0360673936095ca17ff6cb) still pins `platform/vpp` to [`b29a596107692acb6c368922c8a77f0ee04f858d`](https://github.com/sonic-net/sonic-platform-vpp/commit/b29a596107692acb6c368922c8a77f0ee04f858d), and no companion integration PR was found. A direct pin advance would also import target-branch commit [`b3e80b8a`](https://github.com/sonic-net/sonic-platform-vpp/commit/b3e80b8a612c3c1ffcc6f3854c6e4f214c5b92d3).\n\n### Required before merge\n\nBuild a clean `sonic-vpp` image from this exact head, retain the `platform/vpp` pin plus installed `2606-0.29+b1sonic1` package digests, and repeat the cold reload selector enough times to cover the observed intermittence while verifying port admin/oper state, team attachment, MTU, and traffic. If the consumer advances directly from its current pin, also retain dualtor-vpp IPv6-ND coverage for the imported target-branch change.\n\nMERGE_RISK=high"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-27T03:10:27Z",
+        "comment_author": "yue-fred-gao",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-27T03:10:38Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-27T08:06:40Z",
+        "comment_author": "yejianquan",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-27T08:06:51Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-27T14:10:50Z",
+        "comment_author": "mssonicbld",
+        "comment_body": "/azp run"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-27T14:11:01Z",
+        "comment_author": "azure-pipelines",
+        "comment_body": "<samp>\nAzure Pipelines:<br>\r\nSuccessfully started running 1 pipeline(s).<br>\r\n\n</samp>"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "comment_at": "2026-11-27T14:37:48Z",
+        "comment_author": "yue-fred-gao",
+        "comment_body": "Force merged because the azure queue is stuck and this PR has passed CI successfully before."
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "review_at": "2026-11-24T15:02:34Z",
+        "review_author": "yue-fred-gao"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "review_at": "2026-11-26T20:03:19Z",
+        "review_author": "yue-fred-gao"
+    },
+    {
+        "number": 345,
+        "repo": "sonic-platform-vpp",
+        "latestReview_at": "2026-11-26T20:03:19Z",
+        "latestReview_author": "yue-fred-gao",
+        "latestReview_state": "APPROVED"
+    },
+    {
         "number": 341,
         "repo": "sonic-platform-vpp",
         "comment_at": "2026-11-13T14:32:35Z",
